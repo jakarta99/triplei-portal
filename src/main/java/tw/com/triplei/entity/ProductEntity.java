@@ -32,18 +32,20 @@ public class ProductEntity {
 	@JoinColumn(name="INSURER_ID")
 	private InsurerEntity insurer;
 	
-	@Column(name = "CODE")
-	private String code;
-	
-	@Column(name = "YEAR_CODE")
-	private String yearCode;
-	
 	@Column(name = "LOCAL_NAME")
 	private String localName;
 	
+	@Column(name = "CODE")
+	private String code; // 商品代碼
+	
+	@Column(name = "YEAR_CODE")
+	private String yearCode; // 年度代碼
+	
+	@Column(name = "YEAR")
+	private int year; // 年期
+	
 	@Column(name = "DECLARE_INTEREST_RATE")
 	private BigDecimal declareInterestRate; // 宣告利率
-	
 	
 	@Column(name = "PREDICT_INTEREST_RATE")
 	private BigDecimal predictInterestRate; // 預定利率

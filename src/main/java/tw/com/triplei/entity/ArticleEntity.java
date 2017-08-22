@@ -31,6 +31,9 @@ public class ArticleEntity {
 
 	@Column(name = "TITLE")
 	private String title;
+	
+	@Column(name = "INTRODUCTION")
+	private boolean introduction; // 文章簡介
 
 	@Column(name = "CONTENT")
 	private String content;
@@ -52,9 +55,6 @@ public class ArticleEntity {
 	
 	@Column(name = "HOT_ARTICLE")
 	private boolean hotArticle; // 分類熱門
-	
-	@Column(name = "INTRODUCTION")
-	private boolean introduction; // 分類熱門
 
 	@Override
 	public String toString() {

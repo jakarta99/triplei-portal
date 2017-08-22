@@ -45,7 +45,7 @@ public class GiftEntity {
 	private String image3;
 
 	@Column(name = "BONUS")
-	private int bonus; // 兌換點數
+	private int bonus; // 商品兌換點數
 
 	@Column(name = "EXCHANGE_COUNT")
 	private int exchangeCount; // 累積兌換次數
@@ -61,8 +61,6 @@ public class GiftEntity {
 	
 	@Column(name = "REMARKS")
 	private String remarks; // 備註
-	
-
 
 	@Override
 	public String toString() {

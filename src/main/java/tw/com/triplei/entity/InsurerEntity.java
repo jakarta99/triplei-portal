@@ -20,15 +20,15 @@ public class InsurerEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
+	
+	@Column(name = "LOGO")
+	private String logo;
 
 	@Column(name = "NAME")
 	private String name;
 
 	@Column(name = "INFORMATION")
 	private String information;
-
-	@Column(name = "LOGO")
-	private String logo;
 	
 	@Column(name = "SORT_BY_STROKES")
 	private int sortByStrokes; // 公司名稱筆畫 依此排序
