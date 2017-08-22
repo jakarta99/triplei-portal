@@ -5,3 +5,4 @@
 
 <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.js' />"></script>
 <script type="text/javascript" src='<c:url value="/resources/jquery/jquery-ui-1.10.4.js" />'></script>
+<script type="text/javascript" src='<c:url value="/resources/bootstrap-3.3.7/dist/js/bootstrap.min.js" />'></script>
