@@ -8,11 +8,13 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
+
 </head>
 
 <body>
 
 	<div class="container-fluid">
+		
 
 		<div class="col-lg-4" style="height:100vh;display: table;table-layout: fixed;">
 			<div style="display:table-cell;vertical-align:middle;">
