@@ -2,7 +2,6 @@ package tw.com.triplei.entity;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.Currency;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import tw.com.triplei.enums.Currency;
 
 /**
  * 保險商品

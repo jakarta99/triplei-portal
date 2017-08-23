@@ -9,8 +9,9 @@
 		</encoder>
 	</appender>
 
-	<root level="INFO">
+	<root level="debug">
 		<appender-ref ref="STDOUT" />
 	</root>
 	<logger name="org.springframework.web" level="DEBUG" />
+	<logger name="tw.com.triplei" level="DEBUG" />
 </configuration>
