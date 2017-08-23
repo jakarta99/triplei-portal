@@ -30,11 +30,15 @@ public abstract class GenericService<T extends GenericEntity> {
 	
 	public abstract List<Message> validateInsert(T entity);
 	
-	public abstract T handleInsert(T entity);
+	public T handleInsert(T entity) {
+		return entity;
+	}
 	
 	public abstract List<Message> validateUpdate(T entity);
 	
-	public abstract T handleUpdate(T entity);
+	public T handleUpdate(T entity) {
+		return entity;
+	}
 	
 	@Transactional
 	public T insert(T entity) {

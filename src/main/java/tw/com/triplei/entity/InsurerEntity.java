@@ -6,11 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
 import tw.com.triplei.commons.GenericEntity;
 
 /**
  * 保險公司
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "INSURER")
 public class InsurerEntity extends GenericEntity {
