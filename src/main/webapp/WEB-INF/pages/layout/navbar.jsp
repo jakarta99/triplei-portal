@@ -20,7 +20,7 @@
 					<li><a href="/product/list">商品專區</a></li>
 					<li><a href="/gift/list">績點專區</a></li>
 					<li><a href="/article/list">文章專欄</a></li>
-					<li><a href="#">登入</a></li>
+					<li><a href="/login">登入</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
