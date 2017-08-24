@@ -90,6 +90,7 @@
 					
 					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
 				}
+
 			</script>
 
 		</div>
