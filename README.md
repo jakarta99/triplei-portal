@@ -16,14 +16,18 @@
 	* JUnit
 	* Apache commons BeanUtils/Collections
 	* Lombok
+	* SLF4j + logback
 * Spring Framework
 * Spring Boot
 * Spring Data JPA
+	* Hibernate ORM
+	* JPA specification
 * HTML/CSS/Javascript
-* jQuery
 * Bootstrap
-* [jsGrid](http://js-grid.com/) 
-* [sweetalert](https://limonte.github.io/sweetalert2/)
+* Javascript Libs
+	* jQuery
+	* [jsGrid](http://js-grid.com/) 
+	* [sweetalert](https://limonte.github.io/sweetalert2/)
 
 
 
