@@ -22,7 +22,10 @@
 			<br/><br/><br/>
 			
 			<h3>保險公司管理</h3>
-			
+			<div>
+          		<a href="<c:url value='/admin/insurer/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
+            	<span class="glyphicon glyphicon-plus"></span>新增</a>
+      		</div>
 			<div id="jsGrid"></div>
 			
 			<script>
@@ -32,9 +35,9 @@
 			        width: "100%",
 			        height: "500px",
 			 
-			        inserting: true,
-			        editing: true,
-			        sorting: true,
+			        inserting: false,
+			        editing: false,
+			        sorting: false,
 			        paging: true,
 			        pageIndex: 1,
 			        pageSize: 10,
@@ -55,14 +58,36 @@
 			        
 			 
 			        fields: [
-						
+			            { name: 'btns', width:40, itemTemplate:btns },
+						{ name: "id", visible: false},
 			            { title: '代碼', name: "code", type: "text", width: 20, validate: "required" },
-			            { title: '公司全名', name: "name", type: "number", width: 150 },
+			            { title: '公司全名', name: "name", type: "text", width: 150 },
 			            { title: '公司簡稱', name: "shortName", type: "text", width: 200 },
 			            
-			            { type: "control" }
+			            
 			        ]
 			    });
+			    
+			    function btns(value, row) {
+					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
+					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+					
+					$delBtn.click(function() {
+						if (confirm('Are You Sure Want to Delete?')) {
+							$delBtn.button('loading');
+							$.delete_(BASE_URL+ "/" + row.id, function() {
+								$delBtn.button('reset');
+								$("#slGrid").trigger('reloadGrid');
+							});
+						}
+					});
+					
+					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
+					$editBtn.attr("href", BASE_URL + "/" + row.id);
+					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+					
+					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
+				}
 			</script>
 
 		</div>

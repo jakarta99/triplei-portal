@@ -8,16 +8,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.InsurerSpecification;
+import tw.com.triplei.commons.AjaxResponse;
+import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.service.InsurerService;
 
+@Slf4j
 @Controller
 @RequestMapping("/admin/insurer")
 public class AdminInsurerController {
@@ -84,5 +90,62 @@ public class AdminInsurerController {
 		return new GridResponse<>(page);
 	}
 	
-	
+	@PostMapping
+	@ResponseBody
+	public AjaxResponse<InsurerEntity> insert(final Model model, @RequestBody final InsurerEntity form) {
+		
+		AjaxResponse<InsurerEntity> response = new AjaxResponse<InsurerEntity>();
+		
+		try {
+			
+			final InsurerEntity insertResult = insurerService.insert(form);
+			response.setData(insertResult);
+		
+		} catch (final ApplicationException ex) {
+			response.addMessages(ex.getMessages());
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
+	public AjaxResponse<InsurerEntity> update(final Model model, @RequestBody final InsurerEntity form) {
+		
+		log.debug("{}", form);
+
+		final AjaxResponse<InsurerEntity> response = new AjaxResponse<InsurerEntity>();
+		
+		try {
+			
+			final InsurerEntity updateResult = insurerService.update(form);
+			response.setData(updateResult);
+			
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+
+		return response;
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public AjaxResponse<InsurerEntity> delete(@PathVariable(value = "id") final long id) {
+		
+		log.debug("{}", id);
+		
+		final AjaxResponse<InsurerEntity> response = new AjaxResponse<InsurerEntity>();
+		
+		try {			
+			insurerService.delete(id);
+		
+			
+		} catch (final Exception e) {
+			return new AjaxResponse<>(e);
+		}
+		return response;
+		
+				
+	}
 }
