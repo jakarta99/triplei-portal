@@ -1,10 +1,12 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
@@ -77,7 +79,7 @@
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
 								$delBtn.button('reset');
-								$("#slGrid").trigger('reloadGrid');
+								$("#jsGrid").jsGrid("reset");
 							});
 						}
 					});

@@ -2,6 +2,10 @@
  * jQuery plugin extention
  */
 ;
+var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
+var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+var csrfToken = $("meta[name='_csrf']").attr("content");
+;
 (function(window, $) {
 	function _ajax_request(url, formId, success, complete, type, method) {
 		if (!!$log) {
@@ -46,15 +50,19 @@
 		$form.find("*").removeClass("has-error has-success");
 		$form.find("label").css("color", "black");
 
+		
+		
 		return jQuery.ajax({
 			url: url,
 			type: method,
 			contentType: 'application/json; charset=utf-8',
-			// beforeSend: function (XMLHttpRequest) {
-			// if (!!jQuery("#AllocateJavaClass").val()) {
-			// XMLHttpRequest.setRequestHeader('AllocateJavaClass', jQuery("#AllocateJavaClass").val());
-			// }
-			// },
+			
+			beforeSend: function(XMLHttpRequest) {
+				log.debug(csrfToken);
+				XMLHttpRequest.setRequestHeader('X-CSRF-Token', csrfToken);
+			},
+			
+			
 			dataType: type,
 			data: data,
 			success: success,
