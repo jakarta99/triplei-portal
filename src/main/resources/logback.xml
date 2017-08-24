@@ -12,7 +12,7 @@
 	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>
-	<logger name="org.springframework.web" level="DEBUG" />
-	<logger name="org.springframework.security" level="DEBUG" />
+	<logger name="org.springframework.web" level="info" />
+	<logger name="org.springframework.security" level="info" />
 	<logger name="tw.com.triplei" level="DEBUG" />
 </configuration>

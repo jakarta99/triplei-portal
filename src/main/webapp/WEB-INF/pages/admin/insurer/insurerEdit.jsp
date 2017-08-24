@@ -22,6 +22,7 @@
 		
 		<div>
 			<br/><br/><br/>
+			<h3>保險公司管理</h3>
 			
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -29,14 +30,14 @@
 					<input type="hidden" id="id" name="id" value="${entity.id}"/>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								<h4><span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>保險公司管理</strong></h4>
+								<h4><span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>保險公司修改</strong></h4>
 							</div>
 							<div class="panel-body">
 							
 								<div class="form-group required">
 			    					<label for="code" class="col-md-2 control-label">公司代碼</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="code" name="code" placeholder="code" value="${entity.code}"/>
+			    						<span class="control-label">${entity.code}</span>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>	
@@ -94,7 +95,6 @@ $(function() {
 			$.put("<c:url value='/admin/insurer'/>", "dataForm",
 					function(data) {
 						if (data.messages.length==0) {
-							$("#dataForm").trigger("reset");
 							//swal("SUCCESS", "保險公司資料更新成功", "success");
 							alert("SUCCESS");
 							$btn.button("reset");

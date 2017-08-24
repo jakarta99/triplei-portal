@@ -6,13 +6,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.com.triplei.commons.ApplicationException;
+import com.google.common.collect.Lists;
+
+import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.GenericDao;
 import tw.com.triplei.commons.GenericService;
 import tw.com.triplei.commons.Message;
 import tw.com.triplei.dao.InsurerDao;
 import tw.com.triplei.entity.InsurerEntity;
 
+@Slf4j
 @Service
 public class InsurerService extends GenericService<InsurerEntity> {
 
@@ -27,29 +30,34 @@ public class InsurerService extends GenericService<InsurerEntity> {
 	@Override
 	public List<Message> validateInsert(InsurerEntity entity) {
 
+		List<Message> messages = Lists.newArrayList();
+		
 		InsurerEntity dbEntity = dao.findByCode(entity.getCode());
 		
 		if(dbEntity != null) {
-			ApplicationException aex = new ApplicationException();
-			aex.addMessage(Message.builder().code("code").value("代號不得重複").build());
-			throw aex;
+			messages.add(Message.builder().code("code").value("代號不得重複").build());
 		}
 		
-		return null;
+		log.debug("{}", messages);
+		
+		return messages;
 	}
 
 
 	@Override
 	public List<Message> validateUpdate(InsurerEntity entity) {
+		
+		List<Message> messages = Lists.newArrayList();
+		
 		InsurerEntity dbEntity = dao.findOne(entity.getId());
 		
 		if(dbEntity == null) {
-			ApplicationException aex = new ApplicationException();
-			aex.addMessage(Message.builder().code("id").value("ID 不存在").build());
-			throw aex;
+			messages.add(Message.builder().code("id").value("ID 不存在").build());
 		}
 		
-		return null;
+		log.debug("{}", messages);
+		
+		return messages;
 	}
 
 	@Override

@@ -102,10 +102,14 @@ public class AdminInsurerController {
 			response.setData(insertResult);
 		
 		} catch (final ApplicationException ex) {
+			ex.printStackTrace();
 			response.addMessages(ex.getMessages());
 		} catch (final Exception e) {
 			response.addException(e);
 		}
+		
+		log.debug("{}", response);
+		
 		return response;
 	}
 

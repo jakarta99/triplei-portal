@@ -19,13 +19,14 @@
 		
 		<div>
 			<br/><br/><br/>
+			<h3>保險公司管理</h3>
 			
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								<h4><span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>保險公司管理</strong></h4>
+								<h4><span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>保險公司新增</strong></h4>
 							</div>
 							<div class="panel-body">
 							
@@ -89,10 +90,9 @@ $(function() {
 			
 			$.post("<c:url value='/admin/insurer'/>", "dataForm",
 				function(data) {
-					console.log(data.messages.length);
-					if (data.messages.length==0) { // data.messageEmpty
+					if (data.messages.length == 0) {
 						$("#dataForm").trigger("reset");
-						//swal("SUCCESS", "保險公司資料新增成功！", "success");
+						//swal("SUCCESS", "資料新增成功！", "success");
 						alert("SUCCESS");
 						$btn.button("reset");
 					}

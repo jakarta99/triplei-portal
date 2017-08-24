@@ -6,9 +6,11 @@ import java.util.List;
 
 import org.assertj.core.util.Lists;
 
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@ToString
 public class AjaxResponse<T extends Serializable> {
 	
 	private T data;
@@ -47,15 +49,17 @@ public class AjaxResponse<T extends Serializable> {
 	
 	
 	public void addMessage(Message message) {
-		messages.add(message);
+		this.messages.add(message);
 	}
 	
 	public void addMessages(List<Message> messages) {
-		messages.addAll(messages);
+		this.messages.addAll(messages);
 	}
 	
 	public void addException(Throwable t) {
 		Message message = new Message("EXCEPTION", t.getMessage());
-		messages.add(message);
+		this.messages.add(message);
 	}
+	
+	
 }

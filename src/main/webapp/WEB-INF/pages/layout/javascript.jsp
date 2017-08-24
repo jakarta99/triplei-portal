@@ -19,4 +19,9 @@ log.addAppender(appender);
 log.debug("Current page is <c:out value='${pageContext.request.servletPath}' />");
 
 window.$log = log;
+
+
+function alertMessage(message) {
+	alert(message);
+}
 </script>
