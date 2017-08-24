@@ -2,7 +2,8 @@ package tw.com.triplei.commons;
 
 import java.util.List;
 
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
+
 
 public class ApplicationException extends RuntimeException {
 	

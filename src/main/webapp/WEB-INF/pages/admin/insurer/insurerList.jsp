@@ -60,7 +60,7 @@
 			        
 			 
 			        fields: [
-			            { name: 'btns', width:40, itemTemplate:btns },
+			            { name: 'btns', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
 			            { title: '代碼', name: "code", type: "text", width: 20, validate: "required" },
 			            { title: '公司全名', name: "name", type: "text", width: 150 },
