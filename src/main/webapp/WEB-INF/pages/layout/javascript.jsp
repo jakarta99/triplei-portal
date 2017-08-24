@@ -9,7 +9,7 @@
 <script type="text/javascript" src='<c:url value="/resources/jsgrid-1.5.3/jsgrid.min.js" />'></script>
 <script type="text/javascript" src='<c:url value="/resources/log/log4javascript.js" />'></script>
 <script type="text/javascript" src='<c:url value="/resources/softleader/jquery.softleader.js" />'></script>
-
+<script type="text/javascript" src='<c:url value="/resources/assets/json/form2js.js" />'></script>
 
 
 <script>
