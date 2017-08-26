@@ -45,14 +45,95 @@
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
+								
 			  					<div class="form-group required">
 			    					<label for="shortName" class="col-md-2 control-label">公司簡稱</label>
 			    					<div class="col-md-10">
 			      						<input type="text" class="form-control" id="shortName" name="shortName" placeholder="short name" value=""/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
+								</div>
+								
+								<div class="form-group required">
+			    					<label for="sortNo" class="col-md-2 control-label">公司名稱筆畫</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="sortNo" name="sortNo" placeholder="sortNo(顯示順序依此排序)" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
 								</div>	
-							
+								
+								<div class="form-group required">								  					
+			    					<label for="bisRatio" class="col-md-2 control-label">資本適足率</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="bisRatio" name="bisRatio" placeholder="bisRatio(-500%~500%)" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="persistencyRatio" class="col-md-2 control-label">保單繼續率</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="persistencyRatio" name="persistencyRatio" placeholder="persistencyRatio(80％~99%)" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="litigationRatio" class="col-md-2 control-label">訴訟率</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="litigationRatio" name="litigationRatio" placeholder="litigationRatio(0％~0.008%)" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="complaintRatio" class="col-md-2 control-label">投訴率</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="complaintRatio" name="complaintRatio" placeholder="complaintRatio" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="appealRatio" class="col-md-2 control-label">申訴率</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="appealRatio" name="appealRatio" placeholder="appealRatio(0％~0.12%)" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="insuranceGuarantyFund" class="col-md-2 control-label">保險安定基金</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="insuranceGuarantyFund" name="insuranceGuarantyFund" placeholder="insuranceGuarantyFund" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="credit_rating" class="col-md-2 control-label">信用評等</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="credit_rating" name="credit_rating" placeholder="credit_rating" value=""/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="description" class="col-md-2 control-label">公司簡介</label>
+			    					<div class="col-md-10">
+			      						<textarea class="form-control" id="description" name="description" placeholder="description(100字以下)" value=""/></textarea>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="logo;" class="col-md-2 control-label">公司Logo</label>
+			    					<div class="col-md-10">
+			      						<input type="file" class="form-control" id="logo;" name="logo"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
 							</div>
 						</div>	
 		 			</form>

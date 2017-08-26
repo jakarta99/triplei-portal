@@ -22,4 +22,5 @@ public class InsurerController {
 		
 		return "/insurer/list";
 	}
+	
 }

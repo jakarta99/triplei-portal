@@ -11,14 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import tw.com.triplei.commons.GenericEntity;
 import tw.com.triplei.enums.ArticleType;
 
 /**
  * 文章
+ * 
+ *
+ *author Joe
  */
 @Entity
 @Table(name = "ARTICLE")
-public class ArticleEntity {
+public class ArticleEntity extends GenericEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
