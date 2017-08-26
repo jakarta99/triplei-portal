@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import tw.com.triplei.commons.GenericEntity;
 import tw.com.triplei.enums.GiftType;
 
 /**
@@ -18,13 +19,13 @@ import tw.com.triplei.enums.GiftType;
  */
 @Entity
 @Table(name = "GIFT")
-public class GiftEntity {
-	
+public class GiftEntity extends GenericEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "GIFT_TYPE")
 	private GiftType giftType;
@@ -52,13 +53,13 @@ public class GiftEntity {
 
 	@Column(name = "EXCHANGE_PERSON_MAX")
 	private int exchangePersonMax; // 最大購買數量
-	
+
 	@Column(name = "EXCHANGE_DATE")
 	private LocalDateTime exchangeDate; // 兌換日期
-	
+
 	@Column(name = "HOT_GIFT")
 	private boolean hotGift; // 熱門積點商品
-	
+
 	@Column(name = "REMARKS")
 	private String remarks; // 備註
 
