@@ -15,10 +15,12 @@
 	background-color: #030033;
 }
 </style>
+
+
 </head>
 
 <body>
-	
+
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div>
@@ -31,15 +33,16 @@
 			<div class="col-lg-8 bg-info"
 				style="height: 100vh; display: table; table-layout: fixed;">
 
-					<div style="display: table-cell; vertical-align: middle;">
+				<div style="display: table-cell; vertical-align: middle;">
 
-						<c:forEach items="${models}" var="model">
-						${model.id}, ${model.shortName}, ${model.name} <br/>
-						</c:forEach>
-					</div>
+					<c:forEach items="${models}" var="model">
+						${model.id},${model.shortName}, ${model.name}<br />
+					</c:forEach>
+				</div>
 			</div>
 
 		</div>
 	</div>
+
 </body>
 </html>
