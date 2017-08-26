@@ -55,7 +55,7 @@
 						<ul class="dropdown-menu">
 							
 							<li><a href="#">訂單管理</a></li>
-							<li><a href="#">積點商品上架</a></li>
+							<li><a href="/admin/gift/list">積點商品上架</a></li>
 							<li><a href="#">許願池查詢</a></li>
 							<li><a href="#">XXXX</a></li>
 						</ul>
