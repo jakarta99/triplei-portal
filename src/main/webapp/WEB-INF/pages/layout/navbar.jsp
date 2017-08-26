@@ -39,7 +39,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">客服管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">問題回覆</a></li>
+							<li><a href="/question/list">問題回覆</a></li>							
 							
 						</ul>
 					</li>

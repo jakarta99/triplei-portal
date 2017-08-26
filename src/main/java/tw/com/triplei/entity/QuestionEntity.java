@@ -11,14 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import tw.com.triplei.commons.GenericEntity;
 import tw.com.triplei.enums.QuestionType;
 
 /**
  * 我要提問
  */
+
 @Entity
 @Table(name = "QUESTION")
-public class QuestionEntity {
+public class QuestionEntity extends GenericEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
