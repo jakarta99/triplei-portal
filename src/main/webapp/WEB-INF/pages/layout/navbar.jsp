@@ -66,8 +66,8 @@
 							
 							<li><a href="/article/getArticles">文章列表</a></li>
 							<li><a href="/article/insertArticle">新增文章</a></li>
-							<li><a href="/article/updateDeleteArticle">修改／刪除文章</a></li>
-							<li><a href="/article/articleCarousel">輪播篩選</a></li>
+<!-- 							<li><a href="/article/updateDeleteArticle">修改／刪除文章</a></li> -->
+<!-- 							<li><a href="/article/articleCarousel">輪播篩選</a></li> -->
 						</ul>
 					</li>
 				</sec:authorize>

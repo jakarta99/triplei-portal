@@ -37,7 +37,7 @@ public class ArticleEntity extends GenericEntity {
 	private String title;
 	
 	@Column(name = "INTRODUCTION")
-	private boolean introduction; // 文章簡介
+	private String introduction; // 文章簡介
 
 	@Column(name = "CONTENT")
 	private String content;
@@ -148,11 +148,11 @@ public class ArticleEntity extends GenericEntity {
 		this.hotArticle = hotArticle;
 	}
 
-	public boolean isIntroduction() {
+	public String isIntroduction() {
 		return introduction;
 	}
 
-	public void setIntroduction(boolean introduction) {
+	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
 

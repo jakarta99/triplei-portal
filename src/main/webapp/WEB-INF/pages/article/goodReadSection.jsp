@@ -12,36 +12,17 @@
 <title>Triple i</title>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom:4%">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 	</div>
-	<br/><br/><br/>
-	<div id="wrap">
-		<div class="container">
-			<section class="well">
-				<h1>文章專欄</h1>
-			</section>
-			
-			
-			<br/>
-			<br/>
-			<br/>
-			
-			<ul>
-				<li><a href='/insurer/list'>各公司資訊</a></li>
-				<li><a href='/product/list'>商品專區</a></li>
-				<li><a href='/gift/list'>積點專區</a></li>
-				<li><a href='/article/list'>文章專欄</a></li>
-				<li><a href='/login'>登入</a></li>
-			</ul>
-			<br/>
-			<br/>
-			<br/>
-			<a href='/qa'>線上客服</a>
+<div>
+		<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
 		</div>
-	</div>
 	<!-- Testing inserting images -->
-	<div class="container" style="border: blue 1px solid">
+<div class="col-lg-8 bg-info"
+				style="height: 100vh; display: table; table-layout: fixed;float:right;padding:0;">
+
+				<div style="display: table-cell; vertical-align: middle;">
 	<h2>小資族必讀</h2>
 		<div>
 			<a href="/article/readArticle">
@@ -64,7 +45,7 @@
 				<h6>存錢，先養好觀念</h6> 
 			</a> <span>${article}</span>
 		</div>
-		
+		</div>
 	</div>
 	<!-- Testing ends here -->
 </body>

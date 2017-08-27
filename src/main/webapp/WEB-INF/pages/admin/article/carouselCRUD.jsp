@@ -16,11 +16,12 @@
 </head>
 
 <body>
-	
+	  
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
 		<div>
+		<!--
 			<br/><br/><br/>
 			
 			<h3>保險公司管理</h3>
@@ -92,11 +93,10 @@
 				}
 
 			</script>
-
+-->
 		</div>
 	</div>
-	
-	
+
 	
 </body>
 </html>

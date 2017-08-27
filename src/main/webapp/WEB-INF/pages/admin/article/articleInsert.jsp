@@ -10,6 +10,8 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
+
 <title>Triple i</title>
 </head>
 
@@ -31,12 +33,11 @@
 									<span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>新增文章</strong>
 								</h4>
 							</div>
+							
 							<div class="panel-body">
-
 								<div class="form-group required">
 									<label for="articleType" class="col-md-2 control-label">文章類別</label>
 									<div class="col-md-10">
-										<!-- 			      						<input type="text" class="form-control" id="code" name="code" placeholder="code" value=""/> -->
 										<select class="form-control" id="articleType"
 											name="articleType" style="width: 120px">
 											<option value="EDITOR_CHOICE">編輯精選</option>
@@ -59,11 +60,9 @@
 								<div class="form-group required">
 									<label for="introduction" class="col-md-2 control-label">文章簡介</label>
 									<div class="col-md-10">
-										<select class="form-control" id="introduction"
-											name="introduction" style="width: 70px">
-											<option value="false">false</option>
-											<option value="true">true</option>
-										</select> <span class="help-block"><div class="text-danger"></div></span>
+										<input class="form-control" id="introduction" name="introduction"
+											placeholder="50字以內"></input>
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 
@@ -87,9 +86,11 @@
 
 								<div class="form-group required">
 									<label for="bannerImage" class="col-md-2 control-label">廣告圖</label>
-									<div class="col-md-10">
-										<input type="file"> <span class="help-block">
-											<div class="text-danger"></div>
+									<div class="col-md-10" >
+										<input type="file" class="form-control" id="bannerImage" name="bannerImage"> 
+										<span class="help-block">
+											<div class="text-danger">
+											</div>
 										</span>
 									</div>
 								</div>
@@ -151,10 +152,12 @@
 				$btn.button("loading");
 
 				$.post("<c:url value='/article'/>", "dataForm", function(data) {
+					var publishTime = data.data.publishTime;
 					if (data.messages.length == 0) {
-// 						alert(data.data.publistTime);
+// 							alert(moment({publishTime}));
+// 							alert(data.data.bannerImage);
 						$("#dataForm").trigger("reset");
-						//swal("SUCCESS", "資料新增成功！", "success");
+// 						swal("SUCCESS", "資料新增成功！", "success");
 						alert("SUCCESS");
 						$btn.button("reset");
 					}

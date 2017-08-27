@@ -109,6 +109,14 @@ public class ArticleController {
 	@RequestMapping("/getArticles")
 	public String getArticles(Model model){
 		
+//		try{
+//			if(id!=null){
+//		ArticleEntity article = articleService.getOne(id);
+//		model.addAttribute("articleEntity",article);
+//			}
+//		}catch(NullPointerException e){
+//			log.error("/getArticles-->NullPointerException");
+//		}
 		return "/admin/article/articleList";
 	}
 	
@@ -124,13 +132,6 @@ public class ArticleController {
 	public String updateDeleteArticle(){
 		
 		return "/admin/article/articleUpdate";
-	}
-	
-	/*管理者點入到文章聯播管理頁面*/
-	@RequestMapping("/articleCarousel")
-	public String articleCarousel(Model model){
-		
-		return "/admin/article/carouselCRUD";
 	}
 	
 	/*管理者在文章列表選修改文章需重拉資訊的方法，並轉到修改頁面*/
@@ -150,8 +151,6 @@ public class ArticleController {
 		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
 		
 		Page<ArticleEntity> page;
-
-		System.out.println(form.getPublishTime());
 		
 		try {
 
@@ -193,6 +192,35 @@ public class ArticleController {
 		AjaxResponse<ArticleEntity> response = new AjaxResponse<ArticleEntity>();
 		
 		try {
+			System.out.println(form.getBannerImage());
+//			BufferedOutputStream stream = null;
+//			if(!file.isEmpty()){
+//				try{
+//				byte[] bytes= file.getBytes();
+//				
+//				String rootPath = System.getProperty("catalina.home");
+//				File dir = new File(rootPath + File.separator + "tmpFiles");
+//				
+//				if(!dir.exists())
+//					dir.mkdirs();
+//					
+//					File serverFile = new File(dir.getAbsolutePath()
+//							+ File.separator + form.getTitle());
+//					stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+//					stream.write(bytes);
+//
+//					log.info("Server File Location="
+//							+ serverFile.getAbsolutePath());
+//
+//					System.out.println("You successfully uploaded file=" + form.getTitle());
+//				} catch (Exception e) {
+//					System.out.println("You failed to upload " +form.getTitle() + " => " + e.getMessage());
+//				}finally{
+//					stream.close();}
+//			} else {
+//				System.out.println("You failed to upload " + form.getTitle()+ " because the file was empty.");
+//			}
+			
 			LocalDateTime publishTime = LocalDateTime.now();
 //			publishTime.format(DateTimeFormatter.BASIC_ISO_DATE);
 			form.setPublishTime(publishTime);
@@ -251,6 +279,24 @@ public class ArticleController {
 		return response;
 		
 				
+	}
+	
+	/*頁面文章點擊積分*/
+	@RequestMapping("/count")
+	public void count(final ArticleEntity article){
+		try{
+		if(article.getId()!=null){
+			ArticleEntity plus = articleService.getOne(article.getId());
+			int count = plus.getClickCount();
+			count++;
+			plus.setClickCount(count);
+			articleService.update(plus);
+		}else{
+			log.error("/Count --> Article not found");
+		}
+		}catch(NullPointerException e){
+			log.error("/Count --> NullPointerException");
+		}
 	}
 	
 }

@@ -18,58 +18,52 @@
 
 <style>
 .articleSections{
-margin-bottom:20%;
-}
+width:99%;
+} 
 .articleSections a{
-margin:15%;
 
 }
+.articleSections img{
+width:85%;
+margin-left:8%;
+}
 .articleSections p{
-margin-left:15%;
-width:70%;
+margin-left:8%;
+width:85%;
 text-align:justify;
 }
 .articleSections h2{
-margin-left:7%;
-margin-bottom:1%;
+margin:3% auto 2% 4%;
 text-decoration:underline;
+}
+.articlesRight{
+float:right;
+width:50%;
+}
+.articlesLeft{
+float:left;
+width:50%;
 }
 
 </style>
 </head>
 
 <body>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom:4%">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 	</div>
-	<br/><br/><br/>
-	<div id="wrap">
-		<div class="container">
-			<section class="well">
-				<h1>文章專欄</h1>
-			</section>
-			
-			
-			<br/>
-			<br/>
-			<br/>
-			
-			<ul>
-				<li><a href='/insurer/list'>各公司資訊</a></li>
-				<li><a href='/product/list'>商品專區</a></li>
-				<li><a href='/gift/list'>積點專區</a></li>
-				<li><a href='/article/list'>文章專欄</a></li>
-				<li><a href='/login'>登入</a></li>
-			</ul>
-			<br/>
-			<br/>
-			<br/>
-			<a href='/qa'>線上客服</a>
+
+		<div>
+		<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
 		</div>
-	</div>
+
 			
 	<!-- Articles Carousel -->
-	<div id="ArticleCarousel" class="container" style="width:100%;">
+	<div class="col-lg-8 bg-info"
+				style="height: 100vh; display: table; table-layout: fixed;float:right;padding:0;">
+
+				<div style="display: table-cell; vertical-align: middle;">
+	<div id="ArticleCarousel" style="width:100%;margin:none;">
 		<div>
 			<a href="${carousel1Url}"><img src="${carousel1ImagePath}" alt="${carousel1Title}"></a>
 		</div>
@@ -83,20 +77,20 @@ text-decoration:underline;
 	<!-- Carousel ends here -->
 	
 	<!-- Testing inserting images -->
-	<div class="container">
+	<div>
 		<div class="articleSections" title="EditorChoice">
 		<h2>編輯精選</h2>
-		<div class="articlesLeft" style="float:left;width:50%">
+		<div class="articlesLeft">
 			<a href="/article/editorChoice">
 				 <img src="/resources/logo/google-logo.png" alt="編輯精選"
-				class="rounded float-left" width="70%" height="5%" >
+				class="rounded float-left">
 			</a> 
 						<p>${editorChoice}</p>
 			</div>
-			<div class="articlesRight" style="float:right;width:50%">
+			<div class="articlesRight">
 			<a href="/article/editorChoice">
 				 <img src="/resources/logo/google-logo.png" alt="編輯精選"
-				class="rounded float-left" width="70%" height="5%" >
+				class="rounded float-left" >
 			</a> 
 						<p>${editorChoice}</p>
 			</div>
@@ -104,17 +98,17 @@ text-decoration:underline;
 		
 		<div class="articleSections" title="News">
 		<h2>新聞專區</h2> 
-		<div class="articlesLeft" style="float:left;width:50%">
+		<div class="articlesLeft">
 			<a href="/article/news" >
 				<img src="/resources/logo/google-logo.png" alt="新聞專區"
-				class="rounded float-right" width="70%" >
+				class="rounded float-right" >
 			</a> 
 						<p>${news}</p>
 			</div>
-			<div class="articlesRight" style="float:right;width:50%">
+			<div class="articlesRight">
 			<a href="/article/news" >
 				<img src="/resources/logo/google-logo.png" alt="新聞專區"
-				class="rounded float-right" width="70%" >
+				class="rounded float-right">
 			</a> 
 						<p>${news}</p>
 			</div>
@@ -122,17 +116,17 @@ text-decoration:underline;
 		
 		<div class="articleSections" title="GoodRead">
 		<h2>小資組必讀</h2>
-		<div class="articlesLeft" style="float:left;width:50%">
+		<div class="articlesLeft">
 			<a href="/article/goodRead">
 				 <img src="/resources/logo/google-logo.png" alt="小資組必讀"
-				class="rounded float-left" width="70%" >
+				class="rounded float-left" >
 			</a> 
 						<p>${goodRead}</p>
 			</div>
-			<div class="articlesRight" style="float:right;width:50%">
+			<div class="articlesRight">
 			<a href="/article/goodRead">
 				 <img src="/resources/logo/google-logo.png" alt="小資組必讀"
-				class="rounded float-left" width="70%" >
+				class="rounded float-left" >
 			</a> 
 						<p>${goodRead}</p>
 			</div>
@@ -140,17 +134,17 @@ text-decoration:underline;
 		
 		<div class="articleSections" title="InvestmentTips">
 		<h2>理財觀念</h2>
-		<div class="articlesLeft" style="float:left;width:50%">
+		<div class="articlesLeft">
 			<a href="/article/investmentTips">
 				 <img src="/resources/logo/google-logo.png" alt="理財觀念"
-				class="rounded float-right" width="70%">
+				class="rounded float-right">
 			</a> 
 						<p>${investmentTips}</p>
 			</div>
-			<div class="articlesRight" style="float:right;width:50%">
+			<div class="articlesRight">
 			<a href="/article/investmentTips">
 				 <img src="/resources/logo/google-logo.png" alt="理財觀念"
-				class="rounded float-right" width="70%">
+				class="rounded float-right">
 			</a> 
 						<p>${investmentTips}</p>
 			</div>
@@ -158,7 +152,8 @@ text-decoration:underline;
 	</div>
 	<!-- Testing ends here -->
 
-	
+	</div>
+	</div>
 	
 	<script type="text/javascript">
 		$(document).ready(function() {

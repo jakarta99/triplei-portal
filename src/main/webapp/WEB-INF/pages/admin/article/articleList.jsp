@@ -9,6 +9,7 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
 <title>Triple i</title>
 </head>
 <body>
@@ -28,57 +29,6 @@
 
 	<script>
 	
-	
-	var MyDateField = function(config) {
-	    jsGrid.Field.call(this, config);
-	};
-	 
-	MyDateField.prototype = new jsGrid.Field({
-	 
-	    sorter: function(date1, date2) {
-	        return new Date(date1) - new Date(date2);
-	    },
-	 
-	    itemTemplate: function(value) {
-	        return new Date(value).toDateString();
-	    },
-	 
-// 	    insertTemplate: function(value) {
-// 	        return this._insertPicker = $("<input class="date-picker">").datepicker({ defaultDate: new Date() });
-// 	    },
-	    
-	    insertTemplate: function (value) {
-	        return this._insertPicker = $("<input class='date-picker'>").datetimepicker();
-	    },
-	 
-// 	    editTemplate: function(value) {
-// 	        return this._editPicker = $("<input class="date-picker">").datepicker().datepicker("setDate", new Date(value));
-// 	    },
-	    
-	    editTemplate: function (value) {
-	        return this._editPicker = $("<input class='date-picker'>").datetimepicker();
-	    },
-	 
-// 	    insertValue: function() {
-// 	        return this._insertPicker.datepicker("getDate").toISOString();
-// 	    },
-	    
-	    insertValue: function () {
-	        return this._insertPicker.data("DateTimePicker").useCurrent();
-	    },
-	 
-// 	    editValue: function() {
-// 	        return this._editPicker.datepicker("getDate").toISOString();
-// 	    }
-	    
-		editValue: function () {
-		    return this._editPicker.data("DateTimePicker").useCurrent();
-		}
-	});
-	 
-	jsGrid.fields.date = MyDateField;
-	
-		
 			    var BASE_URL = "${pageContext.request.contextPath}/article";
 			 
 			    $("#jsGrid").jsGrid({
@@ -111,16 +61,16 @@
 			        fields: [
 			            { name: '刪／修', width:45, itemTemplate:btns },
 						{ name: "id", visible: true, width:10},
-			            { title: '文章類別', name: "articleType", type: "text", width: 70},
-			            { title: '標題', name: "title", type: "text", width: 120 },
-			            { title: '文章簡介', name: "introduction", type: "text", width: 30 },
+			            { title: '文章類別', name: "articleType", type: "text", width: 60},
+			            { title: '標題', name: "title", type: "text", width: 70 },
+			            { title: '文章簡介', name: "introduction", type: "text", width: 130 },
 			            { title: '文章內容', name: "content", type: "text", width: 200 },
-			            { title: '作者', name: "author", type: "text", width: 60 },
-			            { title: '廣告圖', name: "bannerImage", type: "text", width: 50 },
-			            { title: '發布時間', name: "publishTime", type:"date", width: 50 },
+			            { title: '作者', name: "author", type: "text", width: 50 },
+			            { title: '廣告圖', name: "bannerImage",width: 85,  itemTemplate: function(val) {return $("<img>").attr("src", val).css({ height: 80, width: 80}) }},
+			            { title: '發布時間', name: "publishTime", width: 55, itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString();}},
 			            { title: '點閱率', name: "clickCount", type: "text", width: 20 },
-			            { title: '輪播', name: "bannerRotation", type: "text", width: 30 },
-			            { title: '熱門分類', name: "hotArticle", width: 30, type:"text",edittype:'select', formatter:'select', editoptions:{value:"false:False;true:True"}},
+			            { title: '輪播', name: "bannerRotation", type: "checkbox", width: 25 },
+			            { title: '熱門分類', name: "hotArticle", width: 25, type:"checkbox"},
 			        ]
 			    });
 			    
@@ -130,6 +80,7 @@
 					
 					$delBtn.click(function() {
 						if (confirm('確定要刪除嗎?')) {
+							
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
 								$delBtn.button('reset');
