@@ -22,8 +22,8 @@
 
 <body>
 
-	<div id="wrap">
-
+	<div id="wrap" style="margin-top:30px;">
+		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div class="container">
 			<section class="well">
 				<h1>積點專區</h1>
@@ -41,31 +41,101 @@
 			</ul>
 			<br /> <br /> <br /> <a href='/qa'>線上客服</a>
 		</div>
-		<div class="col-lg-8 bg-info"
-			style="height: 100vh; display: table; table-layout: fixed;">
+		<div
+			style="height: 100vh; display: table; table-layout: fixed; border: 1px solid; width: 1400px; margin-left: 20px">
 
-			<div style="display: table-cell; vertical-align: middle;">
-				<table style="border:2px solid;back ">
+			<div style="display: table-cell; height: 500px; width: 1300px;">
+				<table style="border: 2px solid; margin-left: 200px;">
+					<h3 style="margin-left: 200px;">熱門兌換:</h3>
 					<tr>
-						<td>積點商品名稱</td>
-						<td>品牌</td>
-						<td>商品兌換點數</td>
-						<td>累積兌換次數</td>
-						<td>最大購買數量</td>
-					</tr>
-					<c:forEach items="${models}" var="model">
-						<tr>
-							<td>${model.name}</td>
-							<td>${model.brand}</td>
-							<td>${model.bonus}</td>
-							<td>${model.exchangeCount}</td>
-							<td>${model.exchangePersonMax}</td>
-						</tr>
-					</c:forEach>
+						<c:forEach items="${models}" var="model">
+							<td style="border: 1px solid; margin-left: 5px"><div
+									style="height: 300px; width: 300px;">
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">積點商品名稱:${model.name}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">品牌:${model.brand}</p>
+									</div>
+									<div style="height: 200px; width: 300px;">
+										<p style="text-align: center;">圖片:${model.image1}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">商品兌換點數:${model.bonus}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">累積兌換次數:${model.exchangeCount}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">最大購買數量:${model.exchangePersonMax}</p>
+									</div>
+								</div></td>
+						</c:forEach>
 				</table>
+				<span style="margin-left: 1130px"><a src="#">查看更多...</a></span>
+				<table style="border: 2px solid; margin-left: 200px;">
+					<h3 style="margin-left: 200px;">家電兌換:</h3>
+					<tr>
+						<c:forEach items="${models}" var="model">
+							<td style="border: 1px solid; margin-left: 5px"><div
+									style="height: 300px; width: 300px;">
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">積點商品名稱:${model.name}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">品牌:${model.brand}</p>
+									</div>
+									<div style="height: 200px; width: 300px;">
+										<p style="text-align: center;">圖片:${model.image1}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">商品兌換點數:${model.bonus}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">累積兌換次數:${model.exchangeCount}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">最大購買數量:${model.exchangePersonMax}</p>
+									</div>
+								</div></td>
+						</c:forEach>
+				</table>
+				<span style="margin-left: 1130px"><a src="#">查看更多...</a></span>
+				<table
+					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
+					<h3 style="margin-left: 200px;">禮卷兌換:</h3>
+					<tr>
+						<c:forEach items="${models}" var="model">
+							<td style="border: 1px solid; margin-left: 5px"><div
+									style="height: 300px; width: 300px;">
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">積點商品名稱:${model.name}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">品牌:${model.brand}</p>
+									</div>
+									<div style="height: 200px; width: 300px;">
+										<p style="text-align: center;">圖片:${model.image1}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">商品兌換點數:${model.bonus}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">累積兌換次數:${model.exchangeCount}</p>
+									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">最大購買數量:${model.exchangePersonMax}</p>
+									</div>
+								</div></td>
+						</c:forEach>
+					</tr>
+
+				</table>
+				<span style="margin-left: 1130px"><a src="#">查看更多...</a></span>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>
 

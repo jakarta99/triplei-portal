@@ -14,7 +14,5 @@ public class TripleIApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TripleIApplication.class, args);
-
 	}
-
 }

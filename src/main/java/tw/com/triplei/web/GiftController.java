@@ -22,7 +22,4 @@ public class GiftController {
 		return "/gift/list";
 	}
 	
-	
-	
-	
 }
