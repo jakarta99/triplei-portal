@@ -8,9 +8,6 @@
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/slick/slick.min.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
 
@@ -63,9 +60,9 @@ width:50%;
 				style="height: 100vh; display: table; table-layout: fixed;float:right;padding:0;">
 
 				<div style="display: table-cell; vertical-align: middle;">
-	<div id="ArticleCarousel" style="width:100%;margin:none;">
+	<div id="ArticleCarousel" style="width:100%;">
 		<div>
-			<a href="${carousel1Url}"><img src="${carousel1ImagePath}" alt="${carousel1Title}"></a>
+			<a href="${carousel1Url}"><img src="${carousel1ImagePath}" alt="${carousel1Title}" ></a>
 		</div>
 		<div>
 			<a href="${carousel2Url}"><img src="${carousel2ImagePath}" alt="${carousel2Title}"></a>
