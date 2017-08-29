@@ -9,12 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+import tw.com.triplei.commons.GenericEntity;
+
 /**
  * 許願池
  */
 @Entity
-@Table(name = "Wish")
-public class WishEntity {
+@Table(name = "WISH")
+public class WishEntity extends GenericEntity  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,60 +49,6 @@ public class WishEntity {
 				+ brand + ", weekUseCount=" + weekUseCount + ", wishTime=" + wishTime + "]";
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getImage1() {
-		return image1;
-	}
-
-	public void setImage1(String image1) {
-		this.image1 = image1;
-	}
-
-	public String getWishType() {
-		return wishType;
-	}
-
-	public void setWishType(String wishType) {
-		this.wishType = wishType;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public int getWeekUseCount() {
-		return weekUseCount;
-	}
-
-	public void setWeekUseCount(int weekUseCount) {
-		this.weekUseCount = weekUseCount;
-	}
-
-	public LocalDateTime getWishTime() {
-		return wishTime;
-	}
-
-	public void setWishTime(LocalDateTime wishTime) {
-		this.wishTime = wishTime;
-	}
+	
 
 }
