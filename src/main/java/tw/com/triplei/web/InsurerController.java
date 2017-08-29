@@ -23,4 +23,12 @@ public class InsurerController {
 		return "/insurer/list";
 	}
 	
+	@RequestMapping("/filt")
+	public String filt(Model model) {
+		
+		model.addAttribute("models", insurerService.getAll());
+		
+		return "/insurer/filt";
+	}
+	
 }
