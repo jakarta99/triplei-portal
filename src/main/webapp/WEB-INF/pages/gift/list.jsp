@@ -57,7 +57,7 @@
 									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">品牌:${model.brand}</p>
 									</div>
-									<div style="height: 200px; width: 300px;">
+									<div style="height: 180px; width: 300px;">
 										<p style="text-align: center;">圖片:${model.image1}</p>
 									</div>
 									<div style="height: 20px; width: 300px;">
@@ -69,10 +69,13 @@
 									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">最大購買數量:${model.exchangePersonMax}</p>
 									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">類別:${model.giftType}</p>
+									</div>
 								</div></td>
 						</c:forEach>
 				</table>
-				<span style="margin-left: 1130px"><a src="#">查看更多...</a></span>
+				<span style="margin-left: 1130px"><a href="#">查看更多...</a></span>
 				<table style="border: 2px solid; margin-left: 200px;">
 					<h3 style="margin-left: 200px;">家電兌換:</h3>
 					<tr>
@@ -85,7 +88,7 @@
 									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">品牌:${model.brand}</p>
 									</div>
-									<div style="height: 200px; width: 300px;">
+									<div style="height: 180px; width: 300px;">
 										<p style="text-align: center;">圖片:${model.image1}</p>
 									</div>
 									<div style="height: 20px; width: 300px;">
@@ -97,10 +100,13 @@
 									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">最大購買數量:${model.exchangePersonMax}</p>
 									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">類別:${model.giftType}</p>
+									</div>
 								</div></td>
 						</c:forEach>
 				</table>
-				<span style="margin-left: 1130px"><a src="#">查看更多...</a></span>
+				<span style="margin-left: 1130px"><a href="#">查看更多...</a></span>
 				<table
 					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
 					<h3 style="margin-left: 200px;">禮卷兌換:</h3>
@@ -114,7 +120,7 @@
 									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">品牌:${model.brand}</p>
 									</div>
-									<div style="height: 200px; width: 300px;">
+									<div style="height: 180px; width: 300px;">
 										<p style="text-align: center;">圖片:${model.image1}</p>
 									</div>
 									<div style="height: 20px; width: 300px;">
@@ -126,12 +132,14 @@
 									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">最大購買數量:${model.exchangePersonMax}</p>
 									</div>
+									<div style="height: 20px; width: 300px;">
+										<p style="text-align: center;">類別:${model.giftType}</p>
+									</div>
 								</div></td>
 						</c:forEach>
 					</tr>
-
 				</table>
-				<span style="margin-left: 1130px"><a src="#">查看更多...</a></span>
+				<span style="margin-left: 1130px"><a href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a></span>
 			</div>
 		</div>
 	</div>

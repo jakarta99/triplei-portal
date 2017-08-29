@@ -65,6 +65,7 @@
 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 200 },
 			            { title: '累積兌換次數', name: "exchangeCount", type: "text", width: 200 },
 			            { title: '最大購買數量', name: "exchangePersonMax", type: "text", width: 200 },
+			            { title: '類別', name: "giftType", type: "text", width: 200 }
      
 			        ]
 			    });

@@ -62,7 +62,6 @@ public class AdminGiftController {
 
 			// final List<AzaleaCriterion> criterions = Lists.newArrayList();
 			//
-			//
 			// if (!Strings.isNullOrEmpty(form.getAccount())) {
 			// criterions.add(new AzaleaCriterion(QueryOpType.LIKE, "account",
 			// form.getAccount() + "%"));
@@ -77,7 +76,7 @@ public class AdminGiftController {
 			// criterions.add(new AzaleaCriterion(QueryOpType.EQ, "status",
 			// form.getStatus()));
 			// }
-
+			//
 			// adminRole 可以管理所有的通路和使用者，userAdminRole 僅可以管理自己 ROOT_ID 之下的通路和使用者
 			// if (!RoleUtil.isHaveAdminRoles()) {
 			// final SecUser loginUser = (SecUser)

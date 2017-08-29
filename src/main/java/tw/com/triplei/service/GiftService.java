@@ -15,11 +15,12 @@ import tw.com.triplei.commons.GenericService;
 import tw.com.triplei.commons.Message;
 import tw.com.triplei.dao.GiftDao;
 import tw.com.triplei.entity.GiftEntity;
-import tw.com.triplei.entity.InsurerEntity;
+import tw.com.triplei.enums.GiftType;
 
 @Slf4j
 @Service
 public class GiftService extends GenericService<GiftEntity> {
+
 
 	@Autowired
 	private GiftDao giftDao;
@@ -27,6 +28,10 @@ public class GiftService extends GenericService<GiftEntity> {
 	@Override
 	public GenericDao<GiftEntity> getDao() {
 		return giftDao;
+	}
+	
+	public List<GiftEntity> getType(GiftType giftType){
+		return giftDao.getType(giftType);
 	}
 
 

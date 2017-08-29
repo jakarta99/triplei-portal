@@ -19,9 +19,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<br />
-			<br />
-			<br />
+			<br /> <br /> <br />
 			<h3>積點商品管理</h3>
 
 			<div class="panel panel-default">
@@ -47,32 +45,48 @@
 									<label for="brand" class="col-md-2 control-label">品牌</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" id="brand"
-											name="brand" placeholder="Brand" value="${entity.brand}" /> <span
-											class="help-block"><div class="text-danger"></div></span>
+											name="brand" placeholder="Brand" value="${entity.brand}" />
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 								<div class="form-group required">
 									<label for="bonus" class="col-md-2 control-label">商品兌換點數</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" id="bonus"
-											name="bonus" placeholder="bonus" value="${entity.bonus}" /> <span
-											class="help-block"><div class="text-danger"></div></span>
+											name="bonus" placeholder="bonus" value="${entity.bonus}" />
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 								<div class="form-group required">
 									<label for="exchangeCount" class="col-md-2 control-label">累積兌換次數</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" id="exchangeCount"
-											name="exchangeCount" placeholder="exchangeCount" value="${entity.exchangeCount}" /> <span
-											class="help-block"><div class="text-danger"></div></span>
+											name="exchangeCount" placeholder="exchangeCount"
+											value="${entity.exchangeCount}" /> <span class="help-block"><div
+												class="text-danger"></div></span>
 									</div>
 								</div>
 								<div class="form-group required">
 									<label for="exchangePersonMax" class="col-md-2 control-label">最大購買數量</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" id="exchangePersonMax"
-											name="exchangePersonMax" placeholder="exchangePersonMax" value="${entity.exchangePersonMax}" /> <span
+											name="exchangePersonMax" placeholder="exchangePersonMax"
+											value="${entity.exchangePersonMax}" /> <span
 											class="help-block"><div class="text-danger"></div></span>
+									</div>
+								</div>
+								<div class="form-group required">
+									<label for="giftType" class="col-md-2 control-label">類別</label>
+									<div class="col-md-10">
+										<select class="form-control" id="giftType" name="giftType">
+											<option value="VOUCHERS">禮劵</option>
+											<option value="FURNITURES">家居，廚具</option>
+											<option value="ELETRONICS">3C家電</option>
+											<option value="OUTDOOR">戶外運動</option>
+											<option value="WOMAN">女仕用品</option>
+											<option value="MAN">男仕用品</option>
+											<option value="OTHERS">其他</option>
+										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 
