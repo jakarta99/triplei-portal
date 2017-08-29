@@ -95,6 +95,8 @@
 				
 			</div>
 		</div>
+<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
+		<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 	</div>
 </body>
 </html>

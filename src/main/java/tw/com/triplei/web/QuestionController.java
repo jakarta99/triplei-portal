@@ -20,4 +20,9 @@ public class QuestionController {
 		
 		return "/question/list";
 	}
+	@RequestMapping("/askQuestion")
+	public String askQuestion() {
+		
+		return "/question/questionAdd";
+	}
 }

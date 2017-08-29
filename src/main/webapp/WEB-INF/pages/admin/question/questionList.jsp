@@ -62,7 +62,7 @@
 			        fields: [
 			            { name: 'btns', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '問題分類1', name: "questionType", type: "text", width: 20, validate: "required" },
+			            { title: '問題分類1', name: "questionType", type: "text", width: 150, validate: "required" },
 			            { title: '問題分類2', name: "questionType2", type: "text", width: 150 },
 			            { title: 'Email', name: "askerEmail", type: "text", width: 200 },
 			            { title: '問題內容', name: "content", type: "text", width: 200 },
