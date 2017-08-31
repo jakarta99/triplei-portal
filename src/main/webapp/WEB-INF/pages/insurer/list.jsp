@@ -56,7 +56,7 @@
 			    height: "auto",
 			    width: 400,
 			    modal: true,
-			    
+
 			});
 		});
 	});

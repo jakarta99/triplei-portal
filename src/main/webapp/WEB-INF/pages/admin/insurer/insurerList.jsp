@@ -11,12 +11,8 @@
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
 
-
-
 </head>
-
 <body>
-	
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
@@ -71,7 +67,7 @@
 			            { title: '訴訟率', name: "litigationRatio", type: "text", width: 200 },
 			            { title: '投訴率', name: "scomplaintRatio", type: "text", width: 200 },
 			            { title: '申訴率', name: "appealRatio", type: "text", width: 200 },
-			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "text", width: 200 },
+			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "radio", width: 200 },
 			            { title: '信用評等', name: "credit_rating", type: "text", width: 200 },
 			            { title: '公司簡介', name: "description", type: "textarea", width: 200 },
 			            { title: '公司Logo', name: "logo;", type: "file", width: 200 },

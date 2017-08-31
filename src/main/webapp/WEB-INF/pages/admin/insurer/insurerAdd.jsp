@@ -10,6 +10,15 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style type="text/css">
+*{
+	font-family: 微軟正黑體;
+}
+</style>
 </head>
 
 <body>
@@ -65,7 +74,7 @@
 								<div class="form-group required">								  					
 			    					<label for="bisRatio" class="col-md-2 control-label">資本適足率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="bisRatio" name="bisRatio" placeholder="bisRatio(-500%~500%)" value=""/>
+			      						<input type="text" class="form-control" id="bisRatio" name="bisRatio" placeholder="bisRatio" value=""/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -73,7 +82,7 @@
 								<div class="form-group required">								  					
 			    					<label for="persistencyRatio" class="col-md-2 control-label">保單繼續率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="persistencyRatio" name="persistencyRatio" placeholder="persistencyRatio(80％~99%)" value=""/>
+			      						<input type="text" class="form-control" id="persistencyRatio" name="persistencyRatio" placeholder="persistencyRatio" value=""/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -81,7 +90,7 @@
 								<div class="form-group required">								  					
 			    					<label for="litigationRatio" class="col-md-2 control-label">訴訟率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="litigationRatio" name="litigationRatio" placeholder="litigationRatio(0％~0.008%)" value=""/>
+			      						<input type="text" class="form-control" id="litigationRatio" name="litigationRatio" placeholder="litigationRatio" value=""/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -97,7 +106,7 @@
 								<div class="form-group required">								  					
 			    					<label for="appealRatio" class="col-md-2 control-label">申訴率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="appealRatio" name="appealRatio" placeholder="appealRatio(0％~0.12%)" value=""/>
+			      						<input type="text" class="form-control" id="appealRatio" name="appealRatio" placeholder="appealRatio" value=""/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -105,7 +114,8 @@
 								<div class="form-group required">								  					
 			    					<label for="insuranceGuarantyFund" class="col-md-2 control-label">保險安定基金</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="insuranceGuarantyFund" name="insuranceGuarantyFund" placeholder="insuranceGuarantyFund" value=""/>
+			      						<input type="radio" id="insuranceGuarantyFund" name="insuranceGuarantyFund" placeholder="insuranceGuarantyFund" value="true" checked/>true
+			      						<input type="radio" id="insuranceGuarantyFund" name="insuranceGuarantyFund" placeholder="insuranceGuarantyFund" value="false"/>false
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -121,7 +131,7 @@
 								<div class="form-group required">								  					
 			    					<label for="description" class="col-md-2 control-label">公司簡介</label>
 			    					<div class="col-md-10">
-			      						<textarea class="form-control" id="description" name="description" placeholder="description(100字以下)" value=""/></textarea>
+			      						<textarea class="form-control" id="description" name="description" placeholder="description" value=""/></textarea>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -133,7 +143,20 @@
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
-								
+								<div class="dailogcheck" title="請確認輸入資料無誤">
+									<h5 id="checkcode">公司代碼:<span></span></h5>
+									<h5 id="checkname">公司全名:<span></span></h5>
+									<h5 id="checkshort">公司簡稱:<span></span></h5>
+									<h5 id="checksortno">公司名稱筆畫:<span></span></h5>
+									<h5 id="checkbis">資本適足率:<span></span>%</h5>
+									<h5 id="checkpersistency">保單繼續率:<span>%</span></h5>
+									<h5 id="checklitigation">訴訟率:<span></span>%</h5>
+									<h5 id="checkcomplaint">投訴率:<span></span>%</h5>
+									<h5 id="checkappeal">申訴率:<span></span>%</h5>
+									<h5 id="checkigf">保險安定基金:<span></span></h5>
+									<h5 id="checkcredit">信用評等:<span></span></h5>
+									<h5 id="checkdescrip">公司簡介:<span></span></h5>
+								</div>
 							</div>
 						</div>	
 		 			</form>
@@ -153,17 +176,39 @@
 				</div>
 			</div>
 
-
 		</div>
 	</div>
-	
 	
 	
 </body>
 </html>
 <script type="text/javascript">
-$(function() {
-	//<!-- Save -->	
+	$(function() {
+		$('.dailogcheck').hide();
+		$('#saveButton').click(function(){
+			$('#checkcode span').text($('#code').val());
+		 	$('#checkname span').text($('#name').val());
+			$('#checkshort span').text($('#shortName').val());
+			$('#checksortno span').text($('#sortNo').val());
+			$('#checkbis span').text($('#bisRatio').val());
+			$('#checkpersistency span').text($('#persistencyRatio').val());
+		 	$('#checklitigation span').text($('#litigationRatio').val());
+		 	$('#checkcomplaint span').text($('#complaintRatio').val());
+		 	$('#checkappeal span').text($('#appealRatio').val());
+		 	$('#checkigf span').text($('#insuranceGuarantyFund:checked').val());
+		 	$('#checkcredit span').text($('#credit_rating').val());
+		 	$('#checkdescrip span').text($('#description').val());
+		$('.dailogcheck').dialog({
+		    height: "auto",
+		    width: 400,
+		    modal: true,
+		    buttons: { 
+				<!-- Save -->	
+	            "Ok": function() { $(this).click();}, 
+	            "Cancel": function() { $(this).dialog("close"); }
+	        }
+		})
+	});
 	$("#saveButton").bind("click",
 		function() {
 		var $btn = $(this);
@@ -185,4 +230,3 @@ $(function() {
 		});	
 	});
 </script>
-

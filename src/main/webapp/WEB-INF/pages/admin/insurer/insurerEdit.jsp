@@ -10,9 +10,10 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-
-
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -68,7 +69,7 @@
 								<div class="form-group required">								  					
 			    					<label for="bisRatio" class="col-md-2 control-label">資本適足率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="bisRatio" name="bisRatio" placeholder="bisRatio(-500%~500%)" value="${entity.bisRatio}"/>
+			      						<input type="text" class="form-control" id="bisRatio" name="bisRatio" placeholder="bisRatio" value="${entity.bisRatio}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -76,7 +77,7 @@
 								<div class="form-group required">								  					
 			    					<label for="persistencyRatio" class="col-md-2 control-label">保單繼續率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="persistencyRatio" name="persistencyRatio" placeholder="persistencyRatio(80％~99%)" value="${entity.persistencyRatio}"/>
+			      						<input type="text" class="form-control" id="persistencyRatio" name="persistencyRatio" placeholder="persistencyRatio" value="${entity.persistencyRatio}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -84,7 +85,7 @@
 								<div class="form-group required">								  					
 			    					<label for="litigationRatio" class="col-md-2 control-label">訴訟率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="litigationRatio" name="litigationRatio" placeholder="litigationRatio(0％~0.008%)" value="${entity.litigationRatio}"/>
+			      						<input type="text" class="form-control" id="litigationRatio" name="litigationRatio" placeholder="litigationRatio" value="${entity.litigationRatio}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -100,7 +101,7 @@
 								<div class="form-group required">								  					
 			    					<label for="appealRatio" class="col-md-2 control-label">申訴率</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="appealRatio" name="appealRatio" placeholder="appealRatio(0％~0.12%)" value="${entity.appealRatio}"/>
+			      						<input type="text" class="form-control" id="appealRatio" name="appealRatio" placeholder="appealRatio" value="${entity.appealRatio}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -124,7 +125,7 @@
 								<div class="form-group required">								  					
 			    					<label for="description" class="col-md-2 control-label">公司簡介</label>
 			    					<div class="col-md-10">
-			      						<textarea class="form-control" id="description" name="description" placeholder="description(100字以下)" value="${entity.description}"/></textarea>
+			      						<textarea class="form-control" id="description" name="description" placeholder="description" value="${entity.description}"/></textarea>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
