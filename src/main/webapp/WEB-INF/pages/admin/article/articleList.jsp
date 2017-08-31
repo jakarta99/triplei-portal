@@ -28,22 +28,21 @@
 			<div id="jsGrid"></div>
 
 	<script>
-	
 			    var BASE_URL = "${pageContext.request.contextPath}/article";
 			 
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
 			        height: "500px",
-			 
+			        
 			        inserting: false,
 			        editing: false,
-			        sorting: false,
 			        paging: true,
 			        pageIndex: 1,
 			        pageSize: 10,
 			        pageLoading: true,
 			        autoload: true,
 			        filter:true,
+			        sorting:true,
 			 
 			        controller: {
 			            loadData: function (filter) {
@@ -60,17 +59,33 @@
 			 
 			        fields: [
 			            { name: '刪／修', width:45, itemTemplate:btns },
-						{ name: "id", visible: true, width:10},
-			            { title: '文章類別', name: "articleType", type: "text", width: 60},
+						{ name: "id", visible: false, width:10},
+			            { title: '文章類別', name: "articleType", type: "text", width: 55, 
+							itemTemplate:function(value){
+								if(value=="EDITOR_CHOICE"){
+									return $("<span></span>").text("編輯精選");	
+								}else if(value=="NEWS"){
+									return $("<span></span>").text("新聞專區");
+								}else if(value=="GOODREAD"){
+									return $("<span></span>").text("小資族必讀");
+								}else if(value=="INVESTMENT_TIPS"){
+									return $("<span></span>").text("理財觀念");
+								}	
+							}
+			            },
 			            { title: '標題', name: "title", type: "text", width: 70 },
-			            { title: '文章簡介', name: "introduction", type: "text", width: 130 },
+			            { title: '文章簡介', name: "introduction", type: "text", width: 130},
 			            { title: '文章內容', name: "content", type: "text", width: 200 },
 			            { title: '作者', name: "author", type: "text", width: 50 },
-			            { title: '廣告圖', name: "bannerImage",width: 85,  itemTemplate: function(val) {return $("<img>").attr("src", val).css({ height: 80, width: 80}) }},
-			            { title: '發布時間', name: "publishTime", width: 55, itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString();}},
+			            { title: '廣告圖', name: "bannerImage",width: 80,  itemTemplate: function(val) {return $("<img>").attr("src", val).css({ height: 80, width: 80}) }},
+			            { title: '發布時間', name: "publishTime", width: 55, 
+
+			            	itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD HH:mm").toString();}
+			            },
 			            { title: '點閱率', name: "clickCount", type: "text", width: 20 },
 			            { title: '輪播', name: "bannerRotation", type: "checkbox", width: 25 },
 			            { title: '熱門分類', name: "hotArticle", width: 25, type:"checkbox"},
+			            { title: '文章上架', name: "storeShelves", width: 25, type:"checkbox"},
 			        ]
 			    });
 			    
@@ -93,7 +108,7 @@
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
+					return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
 				}
 			    
 

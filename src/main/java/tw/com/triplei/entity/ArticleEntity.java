@@ -151,7 +151,7 @@ public class ArticleEntity extends GenericEntity {
 		this.hotArticle = hotArticle;
 	}
 
-	public String isIntroduction() {
+	public String getIntroduction() {
 		return introduction;
 	}
 
@@ -159,4 +159,12 @@ public class ArticleEntity extends GenericEntity {
 		this.introduction = introduction;
 	}
 
+	public boolean isStoreShelves() {
+		return storeShelves;
+	}
+
+	public void setStoreShelves(boolean storeShelves) {
+		this.storeShelves = storeShelves;
+	}
+	
 }

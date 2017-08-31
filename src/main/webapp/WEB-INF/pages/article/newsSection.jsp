@@ -24,30 +24,84 @@
 				style="height: 100vh; display: table; table-layout: fixed;float:right;padding:0;">
 				<div style="display: table-cell; vertical-align: middle;">
 	<h2>新聞專區</h2>
-		<div>
-			<a href="/article/readArticle">
-				<img src="/resources/logo/google-logo.png" alt="#"
-				class="rounded float-right" width="20%" height="5%">
-				<h6>存錢，先養好觀念</h6> 
-			</a> <span>${article}</span>
-		</div>
-		<div>
-			<a href="/article/readArticle">
-				<img src="/resources/logo/google-logo.png" alt="#"
-				class="rounded float-right" width="20%" height="5%">
-				<h6>存錢，先養好觀念</h6> 
-			</a> <span>${article}</span>
-		</div>
-		<div>
-			<a href="/article/readArticle">
-				<img src="/resources/logo/google-logo.png" alt="#"
-				class="rounded float-right" width="20%" height="5%">
-				<h6>存錢，先養好觀念</h6> 
-			</a> <span>${article}</span>
-		</div>
+		<div id="jsGrid"></div>
 		</div>
 	</div>
 	<!-- Testing ends here -->
+	
+			
+			<!-- <script>
+			    var BASE_URL = "${pageContext.request.contextPath}/admin/insurer";
+			 
+			    $("#jsGrid").jsGrid({
+			        width: "100%",
+			        height: "500px",
+			 
+			        inserting: false,
+			        editing: false,
+			        sorting: false,
+			        paging: true,
+			        pageIndex: 1,
+			        pageSize: 10,
+			        pageLoading: true,
+			        autoload: true,
+			 
+			        controller: {
+			            loadData: function (filter) {
+			                return $.ajax({
+			                    type: "GET",
+			                    url: BASE_URL,
+			                    data: filter,
+			                    dataType: "json",
+			                    cache: false
+			                });
+			            },
+			        },
+			        
+			 
+			        fields: [
+			            { name: 'btns', width:60, itemTemplate:btns },
+						{ name: "id", visible: false},
+			            { title: '代碼', name: "code", type: "text", width: 20, validate: "required" },
+			            { title: '公司全名', name: "name", type: "text", width: 150 },
+			            { title: '公司簡稱', name: "shortName", type: "text", width: 200 },
+			            { title: '公司名稱筆畫', name: "sortNo", type: "text", width: 200 },
+			            { title: '資本適足率', name: "bisRatio", type: "text", width: 200 },
+			            { title: '保單繼續率', name: "persistencyRatio", type: "text", width: 200 },
+			            { title: '訴訟率', name: "litigationRatio", type: "text", width: 200 },
+			            { title: '投訴率', name: "scomplaintRatio", type: "text", width: 200 },
+			            { title: '申訴率', name: "appealRatio", type: "text", width: 200 },
+			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "text", width: 200 },
+			            { title: '信用評等', name: "credit_rating", type: "text", width: 200 },
+			            { title: '公司簡介', name: "description", type: "textarea", width: 200 },
+			            { title: '公司Logo', name: "logo;", type: "file", width: 200 },
+			            
+			            
+			        ]
+			    });
+			    
+			    function btns(value, row) {
+					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
+					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+					
+					$delBtn.click(function() {
+						if (confirm('Are You Sure Want to Delete?')) {
+							$delBtn.button('loading');
+							$.delete_(BASE_URL+ "/" + row.id, function() {
+								$delBtn.button('reset');
+								$("#jsGrid").jsGrid("reset");
+							});
+						}
+					});
+					
+					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
+					$editBtn.attr("href", BASE_URL + "/" + row.id);
+					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+					
+					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
+				}
+
+			</script> -->
 </body>
 </html>
 

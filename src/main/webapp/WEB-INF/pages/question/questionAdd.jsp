@@ -45,13 +45,13 @@
 			    					</div>
 								</div>	
 															
-								<div class="form-group required">								  					
-			    					<label for="questionType2" class="col-md-2 control-label">問題分類2</label>
-			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="questionType2" name="questionType2" placeholder="問題分類2" value=""/>
-			      						<span class="help-block"><div class="text-danger"></div></span>
-			    					</div>
-								</div>
+<!-- 								<div class="form-group required">								  					 -->
+<!-- 			    					<label for="questionType2" class="col-md-2 control-label">問題分類2</label> -->
+<!-- 			    					<div class="col-md-10"> -->
+<!-- 			      						<input type="text" class="form-control" id="questionType2" name="questionType2" placeholder="問題分類2" value=""/> -->
+<!-- 			      						<span class="help-block"><div class="text-danger"></div></span> -->
+<!-- 			    					</div> -->
+<!-- 								</div> -->
 								
 			  					<div class="form-group required">
 			    					<label for="email" class="col-md-2 control-label">Email</label>
@@ -93,7 +93,7 @@
 				</div>
 				<div class="col-md-6">
 					<div>
-						<a href="<c:url value='/admin/question/list'/>" class="btn btn-lg btn-primary btn-warning btn-block" data-loading-text="Loading">返回</a>
+						<a href="<c:url value='/index'/>" class="btn btn-lg btn-primary btn-warning btn-block" data-loading-text="Loading">返回</a>
 					</div>
 				</div>
 			</div>
@@ -114,7 +114,7 @@ $(function() {
 		var $btn = $(this);
 			$btn.button("loading");
 			
-			$.post("<c:url value='/admin/question'/>", "dataForm",
+			$.post("<c:url value='/question'/>", "dataForm",
 				function(data) {
 					if (data.messages.length == 0) {
 						$("#dataForm").trigger("reset");

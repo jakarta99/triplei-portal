@@ -25,21 +25,21 @@
 				<div style="display: table-cell; vertical-align: middle;">
 	<h2>小資族必讀</h2>
 		<div>
-			<a href="/article/readArticle">
+			<a id="${article.id}" class="toArticle">
 				<img src="/resources/logo/google-logo.png" alt="#"
 				class="rounded float-right" width="20%" height="5%">
 				<h6>存錢，先養好觀念</h6> 
 			</a> <span>${article}</span>
 		</div>
 		<div>
-			<a href="/article/readArticle">
+			<a id="${article.id}" class="toArticle">
 				<img src="/resources/logo/google-logo.png" alt="#"
 				class="rounded float-right" width="20%" height="5%">
 				<h6>存錢，先養好觀念</h6> 
-			</a> <span>${article}</span>
+			</a> <span>${article.title}</span>
 		</div>
 		<div>
-			<a href="/article/readArticle">
+			<a id="${article.id}" class="toArticle">
 				<img src="/resources/logo/google-logo.png" alt="#"
 				class="rounded float-right" width="20%" height="5%">
 				<h6>存錢，先養好觀念</h6> 
@@ -48,6 +48,15 @@
 		</div>
 	</div>
 	<!-- Testing ends here -->
+<!-- 	<script>
+	var BASE_URL = "${pageContext.request.contextPath}/article/readArticle";
+	
+	$(".toArticle").on("click",function(){
+		var articleID = $(this).attr("id");
+		alert(articleID);
+		$(this).attr("href",BASE_URL+"/read/"+articleID);
+	})
+	</script> -->
 </body>
 </html>
 

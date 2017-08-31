@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ArticleSpecification;
@@ -99,9 +100,10 @@ public class ArticleController {
 	}
 	
 	/*用戶從某文章類別專區點入到文章 */
-	@RequestMapping("/readArticle")
-	public String readArticle(Model model){
-		
+	@RequestMapping(value = "/readArticle/read/{id}",method=RequestMethod.GET)
+	public String readArticle(@PathVariable("id") final Long id, Model model){
+		ArticleEntity article = articleService.getOne(id);
+		model.addAttribute("article",article);
 		return "/article/readArticle";
 	}
 	
@@ -222,10 +224,11 @@ public class ArticleController {
 //			}
 			
 			LocalDateTime publishTime = LocalDateTime.now();
-//			publishTime.format(DateTimeFormatter.BASIC_ISO_DATE);
+			System.out.println(publishTime);
 			form.setPublishTime(publishTime);
 			final ArticleEntity insertResult = articleService.insert(form);
 			response.setData(insertResult);
+			System.out.println(insertResult.getPublishTime());
 		
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
