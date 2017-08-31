@@ -66,6 +66,9 @@ public class ProductEntity {
 	@OneToMany
 	@JoinColumn(name = "PRODUCT_ID")
 	private Collection<ProductCancelRatio> cancelRatios; // 解約金費率
+	
+	@Column(name = "PAYMENT_METHOD")
+	private String paymentMethod; // 繳費方式
 
 	@Override
 	public String toString() {
