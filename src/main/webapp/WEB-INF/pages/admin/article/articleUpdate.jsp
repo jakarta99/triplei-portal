@@ -60,20 +60,17 @@
 								<div class="form-group required">
 									<label for="introduction" class="col-md-2 control-label">文章簡介</label>
 									<div class="col-md-10">
-										<select class="form-control" id="introduction"
-											name="introduction" style="width: 70px">
-											<option value="false">false</option>
-											<option value="true">true</option>
-										</select> <span class="help-block"><div class="text-danger"></div></span>
+										<input class="form-control" id="introduction" name="introduction"
+											placeholder="50字以內" value="${entity.introduction}"/>
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 
 								<div class="form-group required">
 									<label for="content" class="col-md-2 control-label">文章內容</label>
 									<div class="col-md-10">
-										<textarea class="form-control" id="content"
-											name="content" placeholder="200字以內" >${entity.content}</textarea> <span
-											class="help-block"><div class="text-danger"></div></span>
+										<textarea class="form-control" id="content" name="content" placeholder="200字以內" >${entity.content}</textarea> 
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 
@@ -100,8 +97,8 @@
 									<div class="col-md-10">
 										<select class="form-control" id="bannerRotation"
 											name="bannerRotation" style="width: 70px">
-											<option value="false">false</option>
-											<option value="true">true</option>
+											<option value="false">不要</option>
+											<option value="true">要</option>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
@@ -111,8 +108,19 @@
 									<div class="col-md-10">
 										<select class="form-control" id="hotArticle" name="hotArticle"
 											style="width: 70px">
-											<option value="false">false</option>
-											<option value="true">true</option>
+											<option value="false">不要</option>
+											<option value="true">要</option>
+										</select> <span class="help-block"><div class="text-danger"></div></span>
+									</div>
+								</div>
+								
+								<div class="form-group required">
+									<label for="storeShelves" class="col-md-2 control-label">文章上架</label>
+									<div class="col-md-10">
+										<select class="form-control" id="storeShelves" name="storeShelves"
+											style="width: 70px">
+											<option value="false">不要</option>
+											<option value="true">要</option>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
@@ -165,24 +173,6 @@ $(function() {
 			
 			$btn.button("reset");
 		});
-	
-	
-	var intro = document.getElementById("mySelect").selectedIndex = ${entity.introduction};
-// 	$("#articleType").val(${entity.articleType}); 
-// 	$("#introduction").val(${entity.introduction}); 
-// 	$("#introduction option[value="${entity.introduction}"]").props("selected",true);
-// 	$("#introduction").find(${entity.introduction}).props("selected","selected");
-// 	$("#bannerRotation").val(${entity.bannerRotation}); 
-// 	$("#hotArticle").val(${entity.hotArticle}); 
-// 	var type = ${entity.articleType}
-// 	$("#articleType option[value=type]").attr('selected','selected');
-// 	$('#articleType').find(${entity.articleType}).attr('selected', true);
-// 	$('#introduction').find(${entity.introduction}).attr('selected', true);
-// 	var introduction = ${entity.introduction}
-// 	$("#introduction option:contains introduction+"]").attr('selected', 'selected');
-// 	$("#introduction").options[value=${entity.introduction}].selected==true;
-	("select#introduction option[value='${entity.introduction}']").attr("selected", "selected");
-// 	$('select[name^="introduction"] option[value="${entity.introduction}""]').props("selected","selected");
 	});
 </script>
 	
