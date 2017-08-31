@@ -59,6 +59,9 @@ public class ArticleEntity extends GenericEntity {
 	
 	@Column(name = "HOT_ARTICLE")
 	private boolean hotArticle; // 分類熱門
+	
+	@Column(name = "STORE_SHELVES")
+	private boolean storeShelves; // 文章上架
 
 	@Override
 	public String toString() {

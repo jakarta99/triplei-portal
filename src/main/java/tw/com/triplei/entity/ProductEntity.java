@@ -66,6 +66,18 @@ public class ProductEntity {
 	@OneToMany
 	@JoinColumn(name = "PRODUCT_ID")
 	private Collection<ProductCancelRatio> cancelRatios; // 解約金費率
+	
+	@Column(name = "PAYMENT_METHOD")
+	private String paymentMethod; // 繳費方式
+	
+	@Column(name = "INSURE_AMOUNT")
+	private BigDecimal insureAmount; // 保額
+	
+	@Column(name = "PREMIUM")
+	private BigDecimal premium; // 保費
+	
+	@Column(name = "CV")
+	private BigDecimal cv; // 解約金   (暫定名稱)
 
 	@Override
 	public String toString() {

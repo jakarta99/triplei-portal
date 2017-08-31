@@ -30,9 +30,12 @@ public class GiftEntity extends GenericEntity {
 	@Column(name = "GIFT_TYPE")
 	private GiftType giftType;
 
+	@Column(name = "CODE")
+	private String code; // 商品代碼: brand id + name id + color id + 流水號
+	
 	@Column(name = "NAME")
 	private String name;
-
+	
 	@Column(name = "BRAND")
 	private String brand;
 
@@ -65,6 +68,9 @@ public class GiftEntity extends GenericEntity {
 
 	@Column(name = "REMARKS")
 	private String remarks; // 備註
+	
+	@Column(name = "COLOR")
+	private String color; // 顏色
 
 	@Column(name = "GIFT_NUMBER")
 	private String giftNumber; // 備註
