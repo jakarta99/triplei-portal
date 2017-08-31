@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import net.fckeditor.connector.ConnectorServlet;
 
 @Configuration
 @PropertySource("classpath:ArticleContent/ArticleList.properties")
