@@ -19,35 +19,22 @@
 
 	<!-- Additional lines to be added here... -->
 	<dependencies>
-<<<<<<< HEAD
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-=======
 		<dependency>
 			<groupId>net.fckeditor</groupId>
 			<artifactId>java-core</artifactId>
 			<version>2.6</version>
 		</dependency>
->>>>>>> 6f94a96f8c7a3233528fdc54f54ee10119305b2a
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
 		</dependency>
-<<<<<<< HEAD
-
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-=======
->>>>>>> 6f94a96f8c7a3233528fdc54f54ee10119305b2a
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 6f94a96f8c7a3233528fdc54f54ee10119305b2a
 		<dependency>
 			<groupId>net.sargue</groupId>
 			<artifactId>java-time-jsptags</artifactId>
