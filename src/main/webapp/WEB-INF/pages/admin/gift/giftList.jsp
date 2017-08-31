@@ -60,12 +60,18 @@
 			        fields: [
 			            { name: 'btns', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
+			            { title: '品牌', name: "brand", type: "text", width: 150 },
 			            { title: '積點商品名稱', name: "name", type: "text", width: 150 },
-			            { title: '品牌', name: "brand", type: "text", width: 200 },
-			            { title: '商品兌換點數', name: "bonus", type: "text", width: 200 },
-			            { title: '累積兌換次數', name: "exchangeCount", type: "text", width: 200 },
-			            { title: '最大購買數量', name: "exchangePersonMax", type: "text", width: 200 },
-			            { title: '類別', name: "giftType", type: "text", width: 200 }
+			            { title: '顏色/花樣', name: "colorAndType", type: "text", width: 150 },
+			            { title: '商品編號', name: "giftNumber", type: "text", width: 150 },
+			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
+			            { title: '照片一', name: "image1", type: "text", width: 150 },
+			            { title: '照片二', name: "image2", type: "text", width: 150 },
+			            { title: '照片三', name: "image3", type: "text", width: 150 },
+			            { title: '類別', name: "giftType", type: "text", width: 150 },
+			            { title: '熱門商品', name: "hotGift", type: "text", width: 150 },
+			            { title: '兌換日期', name: "exchangeDate", type: "text", width: 150 },
+			            { title: '備註', name: "remarks", type: "text", width: 150 }
      
 			        ]
 			    });
