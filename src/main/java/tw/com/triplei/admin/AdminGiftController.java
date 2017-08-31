@@ -1,5 +1,10 @@
 package tw.com.triplei.admin;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -96,14 +101,26 @@ public class AdminGiftController {
 
 	@PostMapping
 	@ResponseBody
-	public AjaxResponse<GiftEntity> insert(final Model model, @RequestBody final GiftEntity form) {
+	public AjaxResponse<GiftEntity> insert(final Model model,@RequestBody final GiftEntity form) {
 
 		AjaxResponse<GiftEntity> response = new AjaxResponse<GiftEntity>();
 
 		try {
-
+			String brandnum = form.getBrand().substring(form.getBrand().length()-3);
+			String giftnum = form.getName().substring(form.getName().length()-3);
+			String colorAndType = form.getColorAndType().substring(form.getColorAndType().length()-2);
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//			Date date = sdf.parse(exchangeDate);
+//			System.out.println(date);
+//			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
+//			form.setExchangeDate(localDateTime);
 			final GiftEntity insertResult = giftService.insert(form);
-			response.setData(insertResult);
+			String formatStr = "%05d";
+			String formatAns = String.format(formatStr,insertResult.getId());
+			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
+			form.setGiftNumber(giftNumber);
+			final GiftEntity insertResultFinal = giftService.update(form);
+			response.setData(insertResultFinal);
 
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
@@ -117,6 +134,7 @@ public class AdminGiftController {
 		return response;
 	}
 
+
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public AjaxResponse<GiftEntity> update(final Model model, @RequestBody final GiftEntity form) {
@@ -126,7 +144,13 @@ public class AdminGiftController {
 		final AjaxResponse<GiftEntity> response = new AjaxResponse<GiftEntity>();
 
 		try {
-
+			String brandnum = form.getBrand().substring(form.getBrand().length()-3);
+			String giftnum = form.getName().substring(form.getName().length()-3);
+			String colorAndType = form.getColorAndType().substring(form.getColorAndType().length()-2);
+			String formatStr = "%05d";
+			String formatAns = String.format(formatStr,form.getId());
+			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
+			form.setGiftNumber(giftNumber);
 			final GiftEntity updateResult = giftService.update(form);
 			response.setData(updateResult);
 
@@ -141,7 +165,7 @@ public class AdminGiftController {
 	@ResponseBody
 	public AjaxResponse<GiftEntity> delete(@PathVariable(value = "id") final long id) {
 
-		log.debug("{}", id);
+		log.debug("{}", id); 
 
 		final AjaxResponse<GiftEntity> response = new AjaxResponse<GiftEntity>();
 

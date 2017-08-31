@@ -34,6 +34,14 @@
 							<div class="panel-body">
 
 								<div class="form-group required">
+									<label for="brand" class="col-md-2 control-label">品牌</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" id="brand"
+											name="brand" placeholder="Brand" value="${entity.brand}" />
+										<span class="help-block"><div class="text-danger"></div></span>
+									</div>
+								</div>
+								<div class="form-group required">
 									<label for="name" class="col-md-2 control-label">積點商品名稱</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" id="name" name="name"
@@ -42,11 +50,12 @@
 									</div>
 								</div>
 								<div class="form-group required">
-									<label for="brand" class="col-md-2 control-label">品牌</label>
+									<label for="colorAndType" class="col-md-2 control-label">顏色/花樣</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="brand"
-											name="brand" placeholder="Brand" value="${entity.brand}" />
-										<span class="help-block"><div class="text-danger"></div></span>
+										<input type="text" class="form-control" id="colorAndType"
+											name="colorAndType" placeholder="colorAndType"
+											value="${entity.colorAndType}" /> <span class="help-block"><div
+												class="text-danger"></div></span>
 									</div>
 								</div>
 								<div class="form-group required">
@@ -58,62 +67,84 @@
 									</div>
 								</div>
 								<div class="form-group required">
-									<label for="exchangeCount" class="col-md-2 control-label">累積兌換次數</label>
+									<label for="image1" class="col-md-2 control-label">選擇圖片</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="exchangeCount"
-											name="exchangeCount" placeholder="exchangeCount"
-											value="${entity.exchangeCount}" /> <span class="help-block"><div
-												class="text-danger"></div></span>
+										<input type="file" class="form-control" id="image1"
+											name="image1" placeholder="照片一" value="" /> <input
+											type="file" class="form-control" id="image2" name="image2"
+											placeholder="照片二" value="" /> <input type="file"
+											class="form-control" id="image3" name="image3"
+											placeholder="照片三" value="" />
+										<div class="text-danger"></div>
+										<div class="text-danger"></div>
 									</div>
 								</div>
-								<div class="form-group required">
-									<label for="exchangePersonMax" class="col-md-2 control-label">最大購買數量</label>
-									<div class="col-md-10">
-										<input type="text" class="form-control" id="exchangePersonMax"
-											name="exchangePersonMax" placeholder="exchangePersonMax"
-											value="${entity.exchangePersonMax}" /> <span
-											class="help-block"><div class="text-danger"></div></span>
-									</div>
+							</div>
+							<div class="form-group required">
+								<label for="remarks" class="col-md-2 control-label">備註</label>
+								<div class="col-md-10">
+									<input type="text" class="form-control" id="remarks"
+										name="remarks" placeholder="remarks" value="${entity.remarks}" />
+									<span class="help-block"><div class="text-danger"></div></span>
 								</div>
-								<div class="form-group required">
-									<label for="giftType" class="col-md-2 control-label">類別</label>
-									<div class="col-md-10">
-										<select class="form-control" id="giftType" name="giftType">
-											<option value="VOUCHERS">禮劵</option>
-											<option value="FURNITURES">家居，廚具</option>
-											<option value="ELETRONICS">3C家電</option>
-											<option value="OUTDOOR">戶外運動</option>
-											<option value="WOMAN">女仕用品</option>
-											<option value="MAN">男仕用品</option>
-											<option value="OTHERS">其他</option>
-										</select> <span class="help-block"><div class="text-danger"></div></span>
-									</div>
+							</div>
+							<div class="form-group required">
+								<label for="giftType" class="col-md-2 control-label">類別</label>
+								<div class="col-md-10">
+									<select class="form-control" id="giftType" name="giftType">
+										<option value="VOUCHERS">禮劵</option>
+										<option value="FURNITURES">家居，廚具</option>
+										<option value="ELETRONICS">3C家電</option>
+										<option value="OUTDOOR">戶外運動</option>
+										<option value="WOMAN">女仕用品</option>
+										<option value="MAN">男仕用品</option>
+										<option value="OTHERS">其他</option>
+									</select> <span class="help-block"><div class="text-danger"></div></span>
 								</div>
-
+							</div>
+							<div class="form-group required">
+								<label for="hotGift" class="col-md-2 control-label">熱門商品</label>
+								<div class="col-md-10">
+									<input type="checkbox" class="form-control" id="hotGift"
+										name="hotGift" placeholder="hotGift" value="${entity.hotGift}"
+										onclick="CBSelectedValueToTrue(this);" /> <span
+										class="help-block"><div class="text-danger"></div></span>
+								</div>
+							</div>
+							<div class="form-group required">
+								<label for="exchangeDate" class="col-md-2 control-label">兌換日期</label>
+								<div class="col-md-10">
+									<input type="text" class="form-control" id="exchangeDate"
+										name="exchangeDate" placeholder="exchangeDate"
+										value="${entity.exchangeDate}" /> <span class="help-block"><div
+											class="text-danger"></div></span>
+								</div>
 							</div>
 						</div>
 					</form>
 				</div>
+
 			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-					<div>
-						<a href="#" class="btn btn-lg btn-primary btn-block"
-							data-loading-text="Loading" id="saveButton">儲存</a>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div>
-						<a href="<c:url value='/admin/gift/list'/>"
-							class="btn btn-lg btn-primary btn-warning btn-block"
-							data-loading-text="Loading">返回</a>
-					</div>
-				</div>
-			</div>
-
-
 		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div>
+					<a href="#" class="btn btn-lg btn-primary btn-block"
+						data-loading-text="Loading" id="saveButton">儲存</a>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div>
+					<a href="<c:url value='/admin/gift/list'/>"
+						class="btn btn-lg btn-primary btn-warning btn-block"
+						data-loading-text="Loading">返回</a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
 	</div>
 
 
@@ -142,4 +173,11 @@
 		});
 	});
 </script>
-
+<
+<script type="text/javascript">
+	function CBSelectedValueToTrue(cb) {
+		if (cb.checked) {
+			cb.value = "true";
+		}
+	}
+</script>
