@@ -48,7 +48,7 @@
 
 				<table
 					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
-					<h3 style="margin-left: 200px;">禮卷兌換:</h3>
+					<h3 style="margin-left: 200px;">更多商品</h3>
 					<tr>
 						<c:forEach items="${models}" var="model">
 							<td style="border: 1px solid; margin-left: 5px"><div
@@ -77,12 +77,10 @@
 								</div></td>
 						</c:forEach>
 					</tr>
-
 				</table>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
 

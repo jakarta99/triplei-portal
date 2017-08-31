@@ -64,16 +64,11 @@ public class GiftEntity extends GenericEntity {
 	private boolean hotGift; // 熱門積點商品
 	
 	@Column(name = "COLOR_AND_TYPE")
-	private String colorAndType; // 備註
+	private String colorAndType; // 顏色/花樣
 
 	@Column(name = "REMARKS")
 	private String remarks; // 備註
-	
-	@Column(name = "COLOR")
-	private String color; // 顏色
 
-	@Column(name = "GIFT_NUMBER")
-	private String giftNumber; // 備註
 	
 	@Override
 	public String toString() {
@@ -195,12 +190,13 @@ public class GiftEntity extends GenericEntity {
 		this.remarks = remarks;
 	}
 
-	public String getGiftNumber() {
-		return giftNumber;
+	public String getCode() {
+		return code;
 	}
 
-	public void setGiftNumber(String giftNumber) {
-		this.giftNumber = giftNumber;
+	public void setCode(String code) {
+		this.code = code;
 	}
+
 
 }

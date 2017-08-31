@@ -172,7 +172,6 @@
 		});
 	});
 </script>
-<
 <script type="text/javascript">
 	function CBSelectedValueToTrue(cb) {
 		if (cb.checked) {

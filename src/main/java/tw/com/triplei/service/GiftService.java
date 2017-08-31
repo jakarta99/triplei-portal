@@ -30,8 +30,20 @@ public class GiftService extends GenericService<GiftEntity> {
 		return giftDao;
 	}
 	
-	public List<GiftEntity> getType(GiftType giftType){
-		return giftDao.getType(giftType);
+	public List<GiftEntity> getType(String giftType){
+		return giftDao.findByGiftType(giftType);
+	}
+	
+	public List<GiftEntity> getTypeTop3(GiftType giftType){
+		return giftDao.findTop3ByGiftTypeOrderByBonus(giftType);
+	}
+	
+	public List<GiftEntity> getTypeHot(boolean hotGift){
+		return giftDao.findByHotGift(hotGift);
+	}
+	
+	public List<GiftEntity> getTypeTop3Hot(boolean hotGift){
+		return giftDao.findTop3ByHotGift(hotGift);
 	}
 
 

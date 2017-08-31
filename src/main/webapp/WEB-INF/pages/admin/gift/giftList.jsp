@@ -63,7 +63,7 @@
 			            { title: '品牌', name: "brand", type: "text", width: 150 },
 			            { title: '積點商品名稱', name: "name", type: "text", width: 150 },
 			            { title: '顏色/花樣', name: "colorAndType", type: "text", width: 150 },
-			            { title: '商品編號', name: "giftNumber", type: "text", width: 150 },
+			            { title: '商品代碼', name: "code", type: "code", width: 150 },
 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
 			            { title: '照片一', name: "image1", type: "text", width: 150 },
 			            { title: '照片二', name: "image2", type: "text", width: 150 },

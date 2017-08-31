@@ -118,7 +118,7 @@ public class AdminGiftController {
 			String formatStr = "%05d";
 			String formatAns = String.format(formatStr,insertResult.getId());
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
-			form.setGiftNumber(giftNumber);
+			form.setCode(giftNumber);
 			final GiftEntity insertResultFinal = giftService.update(form);
 			response.setData(insertResultFinal);
 
@@ -150,7 +150,7 @@ public class AdminGiftController {
 			String formatStr = "%05d";
 			String formatAns = String.format(formatStr,form.getId());
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
-			form.setGiftNumber(giftNumber);
+			form.setCode(giftNumber);
 			final GiftEntity updateResult = giftService.update(form);
 			response.setData(updateResult);
 
