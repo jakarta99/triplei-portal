@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -26,7 +27,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" id="dataForm">
+					<form class="form-horizontal" id="dataForm" enctype="multipart/form-data">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -100,8 +101,8 @@
 									<div class="col-md-10">
 										<select class="form-control" id="bannerRotation"
 											name="bannerRotation" style="width: 70px">
-											<option value="false">false</option>
-											<option value="true">true</option>
+											<option value="false">不要</option>
+											<option value="true">要</option>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
@@ -111,8 +112,19 @@
 									<div class="col-md-10">
 										<select class="form-control" id="hotArticle" name="hotArticle"
 											style="width: 70px">
-											<option value="false">false</option>
-											<option value="true">true</option>
+											<option value="false">不要</option>
+											<option value="true">要</option>
+										</select> <span class="help-block"><div class="text-danger"></div></span>
+									</div>
+								</div>
+								
+								<div class="form-group required">
+									<label for="storeShelves" class="col-md-2 control-label">文章上架</label>
+									<div class="col-md-10">
+										<select class="form-control" id="storeShelves" name="storeShelves"
+											style="width: 70px">
+											<option value="false">不要</option>
+											<option value="true">要</option>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>

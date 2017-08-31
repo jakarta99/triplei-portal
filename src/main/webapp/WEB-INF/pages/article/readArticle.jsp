@@ -27,12 +27,14 @@
 		<div style="display: table-cell;">
 		<div style="margin:5% auto auto 8%; width:85%;border:1px black solid">
 			<img src="/resources/logo/google-logo.png" alt="#" style="width:100%">
-			<h2>${articleEntity.title}</h2>
-			<span>${articleEntity.content}</span>
+			<h2>${article.title}</h2>
+			<h5>${article.author}</h5>
+			<span>${article.content}</span>
 			</div>
 		</div>
 	</div>
 	<!-- Testing ends here -->
+
 
 </body>
 </html>
