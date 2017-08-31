@@ -1,0 +1,27 @@
+<html>
+<body>
+    <h1>你好，${username}這是一封病毒郵件!</h1>
+    <h1 style=\"color:red;\">你中毒了</h1>
+    	親愛的${username}  </br></br>
+  
+		歡迎加入triplei   </br></br>
+  
+		剛您收到這封信的時候，您的電腦已經中毒了。  </br></br>
+		
+		請點擊連結繳費解除病毒:${url}  </br></br>
+		
+		如果您的email信箱不支援連結點擊，請將上面的地址拷貝至您的瀏覽器(如Chrome)的網址欄進入。  </br></br>
+		
+		如果您還有任何問題，可以聯繫管理員${email}  </br></br>
+		  
+		我們對您產生的不變，深表歉意。  </br></br>
+		  
+		希望您在triplei度過快樂的時光!  </br></br>
+		      
+	    </br></br>
+	    <img src=\"cid:virusattack\" >
+		</hr>
+       
+		(這是一封自動產生的email，請勿回覆。)  
+</body>
+</html>

@@ -39,7 +39,7 @@
 			 
 			        inserting: false,
 			        editing: false,
-			        sorting: false,
+			        sorting: true,
 			        paging: true,
 			        pageIndex: 1,
 			        pageSize: 10,
@@ -90,7 +90,12 @@
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
+					
+					var $emailBtn = $('<a class="btn btn-info btn-xs"></a>');
+					$emailBtn.attr("href", BASE_URL + "/" + row.id + "/emailResponse");
+					$emailBtn.append('<span class="glyphicon glyphicon-pencil"></span> 回覆');
+					
+					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($emailBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
 				}
 
 			</script>
