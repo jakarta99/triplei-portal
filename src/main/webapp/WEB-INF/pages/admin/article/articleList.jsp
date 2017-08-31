@@ -59,7 +59,7 @@
 			 
 			        fields: [
 			            { name: '刪／修', width:45, itemTemplate:btns },
-						{ name: "id", visible: true, width:10},
+						{ name: "id", visible: false, width:10},
 			            { title: '文章類別', name: "articleType", type: "text", width: 55, 
 							itemTemplate:function(value){
 								if(value=="EDITOR_CHOICE"){
