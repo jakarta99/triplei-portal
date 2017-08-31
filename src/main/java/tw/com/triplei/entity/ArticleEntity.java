@@ -148,7 +148,7 @@ public class ArticleEntity extends GenericEntity {
 		this.hotArticle = hotArticle;
 	}
 
-	public String isIntroduction() {
+	public String getIntroduction() {
 		return introduction;
 	}
 
