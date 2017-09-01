@@ -39,18 +39,33 @@ public class InsurerEntity extends GenericEntity {
 	
 	@Column(name = "COMPLAINT_RATIO")
 	private BigDecimal complaintRatio; // 投訴率
+	
+	@Column(name = "COMPLAINT_RATIO_DESC")
+	private String complaintRatioDesc; // 投訴率介紹
 
 	@Column(name = "BIS_RATIO")
 	private BigDecimal bisRatio; // 資本適足率 Bank of International Settlement ratio
 	
+	@Column(name = "bisRatio_DESC")
+	private String bisRatioDesc; // 資本適足率介紹
+	
 	@Column(name = "PERSISTENCY_RATIO")
 	private BigDecimal persistencyRatio; // 保單繼續率
+	
+	@Column(name = "PERSISTENCY_RATIO_DESC")
+	private String persistencyRatioDesc; // 保單繼續率介紹
 	
 	@Column(name = "LITIGATION_RATIO")
 	private BigDecimal litigationRatio; // 訴訟率
 	
+	@Column(name = "LITIGATION_RATIO_DESC")
+	private String litigationRatioDesc; // 訴訟率介紹
+	
 	@Column(name = "APPEAL_RATIO")
 	private BigDecimal appealRatio; // 申訴率
+	
+	@Column(name = "APPEAL_RATIO_DESC")
+	private String appealRatioDesc; // 申訴率介紹
 	
 	@Column(name = "INSURANCE_GUARANTY_FUND")
 	private Boolean insuranceGuarantyFund; // 保險安定基金
