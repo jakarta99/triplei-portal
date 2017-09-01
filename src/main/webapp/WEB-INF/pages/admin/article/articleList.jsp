@@ -78,10 +78,7 @@
 			            { title: '文章內容', name: "content", type: "text", width: 200 },
 			            { title: '作者', name: "author", type: "text", width: 50 },
 			            { title: '廣告圖', name: "bannerImage",width: 80,  itemTemplate: function(val) {return $("<img>").attr("src", val).css({ height: 80, width: 80}) }},
-			            { title: '發布時間', name: "publishTime", width: 55, 
-
-			            	itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD HH:mm").toString();}
-			            },
+			            { title: '發布時間', name: "publishTime", width: 55, itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD HH:mm").toString();}},
 			            { title: '點閱率', name: "clickCount", type: "text", width: 20 },
 			            { title: '輪播', name: "bannerRotation", type: "checkbox", width: 25 },
 			            { title: '熱門分類', name: "hotArticle", width: 25, type:"checkbox"},
