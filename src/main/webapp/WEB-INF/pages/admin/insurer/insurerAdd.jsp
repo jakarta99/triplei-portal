@@ -7,15 +7,13 @@
 <html lang="en">
 <head>
 <sec:csrfMetaTags />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style type="text/css">
-*{
+.dailogcheck{
 	font-family: 微軟正黑體;
 }
 </style>
@@ -149,13 +147,14 @@
 									<h5 id="checkshort">公司簡稱:<span></span></h5>
 									<h5 id="checksortno">公司名稱筆畫:<span></span></h5>
 									<h5 id="checkbis">資本適足率:<span></span>%</h5>
-									<h5 id="checkpersistency">保單繼續率:<span>%</span></h5>
+									<h5 id="checkpersistency">保單繼續率:<span></span>%</h5>
 									<h5 id="checklitigation">訴訟率:<span></span>%</h5>
 									<h5 id="checkcomplaint">投訴率:<span></span>%</h5>
 									<h5 id="checkappeal">申訴率:<span></span>%</h5>
 									<h5 id="checkigf">保險安定基金:<span></span></h5>
 									<h5 id="checkcredit">信用評等:<span></span></h5>
 									<h5 id="checkdescrip">公司簡介:<span></span></h5>
+									<button id="ok">OK</button>
 								</div>
 							</div>
 						</div>	
@@ -202,18 +201,13 @@
 		    height: "auto",
 		    width: 400,
 		    modal: true,
-		    buttons: { 
-				<!-- Save -->	
-	            "Ok": function() { $(this).click();}, 
-	            "Cancel": function() { $(this).dialog("close"); }
-	        }
+			})
 		})
-	});
-	$("#saveButton").bind("click",
+		
+	$("#ok").bind("click",
 		function() {
 		var $btn = $(this);
 			$btn.button("loading");
-			
 			$.post("<c:url value='/admin/insurer'/>", "dataForm",
 				function(data) {
 					if (data.messages.length == 0) {
@@ -225,7 +219,6 @@
 				}, function(data, textStatus, jqXHR) {
 					$btn.button("reset");
 				});
-			
 				$btn.button("reset");
 		});	
 	});

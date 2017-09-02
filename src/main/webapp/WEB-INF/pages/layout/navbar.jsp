@@ -48,7 +48,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">保險商品管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">保險商品管理</a></li>
+							<li><a href="/admin/product/list">保險商品管理</a></li>
 							<li><a href="/admin/insurer/list">保險公司管理</a></li>
 						</ul>
 					</li>

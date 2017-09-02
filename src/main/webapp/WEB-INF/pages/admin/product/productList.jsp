@@ -19,15 +19,19 @@
 		<div>
 			<br/><br/><br/>
 			
-			<h3>保險公司管理</h3>
+			<h3>保險商品管理</h3>
 			<div>
-          		<a href="<c:url value='/admin/insurer/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
-            	<span class="glyphicon glyphicon-plus"></span>新增</a>
+          		<a href="<c:url value='/admin/product/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
+            	<span class="glyphicon glyphicon-plus"></span>上傳</a>
+            	<form action="/admin/product/productAdd.jsp" method="post"	enctype="multipart/form-data">
+					<input type="file" name="file">
+					<input type="submit" value="文件上傳">
+				</form>
       		</div>
 			<div id="jsGrid"></div>
 			
 			<script>
-			    var BASE_URL = "${pageContext.request.contextPath}/admin/insurer";
+			    var BASE_URL = "${pageContext.request.contextPath}/admin/product";
 			 
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
@@ -58,19 +62,21 @@
 			        fields: [
 			            { name: 'btns', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '代碼', name: "code", type: "text", width: 50, validate: "required" },
-			            { title: '公司全名', name: "name", type: "text", width: 150 },
-			            { title: '公司簡稱', name: "shortName", type: "text", width: 100 },
-			            { title: '公司名稱筆畫', name: "sortNo", type: "text", width: 100 },
-			            { title: '資本適足率', name: "bisRatio", type: "text", width: 90 },
-			            { title: '保單繼續率', name: "persistencyRatio", type: "text", width: 90 },
-			            { title: '訴訟率', name: "litigationRatio", type: "text", width: 80 },
-			            { title: '投訴率', name: "scomplaintRatio", type: "text", width: 80 },
-			            { title: '申訴率', name: "appealRatio", type: "text", width: 80 },
-			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "radio", width: 100 },
-			            { title: '信用評等', name: "credit_rating", type: "text", width: 200 },
-			            { title: '公司簡介', name: "description", type: "textarea", width: 200 },
-			            { title: '公司Logo', name: "logo;", type: "file", width: 150 },
+			            { title: '公司ID', name: "insurer", type: "text", width: 60 },
+			            { title: '產品名稱', name: "localName", type: "text", width: 200 },
+			            { title: '商品代碼', name: "code", type: "text", width: 75 , validate: "required" },
+			            { title: '年度代碼', name: "yearCode", type: "text", width: 75 },
+			            { title: '年期', name: "year", type: "text", width: 50 },
+			            { title: '宣告利率', name: "declareInterestRate", type: "text", width: 75 },
+			            { title: '預定利率', name: "predictInterestRate", type: "text", width: 75 },
+			            { title: '幣別', name: "curr", type: "text", width: 50 },
+			            { title: '高保費率', name: "highDiscountRatios", type: "text", width: 75 },
+			            { title: '基本費率', name: "premiumRatios", type: "radio", width: 75 },
+			            { title: '解約金費率', name: "cancelRatios", type: "text", width: 85 },
+			            { title: '繳費方式', name: "paymentMethod", type: "textarea", width: 75 },
+			            { title: '保額', name: "insureAmount", type: "file", width: 100 },
+			            { title: '保費', name: "premium", type: "file", width: 100 },
+			            { title: '解約金', name: "cv;", type: "file", width: 100 },
 			        ]
 			    });
 			    
@@ -94,8 +100,10 @@
 					
 					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
 				}
+			    
 			</script>
 		</div>
 	</div>
+
 </body>
 </html>
