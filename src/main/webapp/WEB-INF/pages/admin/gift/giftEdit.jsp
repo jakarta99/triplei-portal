@@ -115,15 +115,6 @@
 										class="help-block"><div class="text-danger"></div></span>
 								</div>
 							</div>
-							<div class="form-group required">
-								<label for="exchangeDate" class="col-md-2 control-label">兌換日期</label>
-								<div class="col-md-10">
-									<input type="text" class="form-control" id="exchangeDate"
-										name="exchangeDate" placeholder="exchangeDate"
-										value="${entity.exchangeDate}" /> <span class="help-block"><div
-											class="text-danger"></div></span>
-								</div>
-							</div>
 						</div>
 					</form>
 				</div>
@@ -160,7 +151,6 @@
 
 			$.put("<c:url value='/admin/gift'/>", "dataForm", function(data) {
 				if (data.messages.length == 0) {
-					//swal("SUCCESS", "保險公司資料更新成功", "success");
 					alert("SUCCESS");
 					$btn.button("reset");
 				}

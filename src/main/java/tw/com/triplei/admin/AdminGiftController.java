@@ -1,6 +1,5 @@
 package tw.com.triplei.admin;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -109,17 +108,19 @@ public class AdminGiftController {
 			String brandnum = form.getBrand().substring(form.getBrand().length()-3);
 			String giftnum = form.getName().substring(form.getName().length()-3);
 			String colorAndType = form.getColorAndType().substring(form.getColorAndType().length()-2);
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//			Date date = sdf.parse(exchangeDate);
-//			System.out.println(date);
-//			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
-//			form.setExchangeDate(localDateTime);
+			
 			final GiftEntity insertResult = giftService.insert(form);
 			String formatStr = "%05d";
 			String formatAns = String.format(formatStr,insertResult.getId());
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
 			form.setCode(giftNumber);
+
+			LocalDateTime localDateTime = LocalDateTime.now();
+			form.setExchangeDate(localDateTime);
+			
 			final GiftEntity insertResultFinal = giftService.update(form);
+			System.out.println(insertResultFinal.getExchangeDate());
+			
 			response.setData(insertResultFinal);
 
 		} catch (final ApplicationException ex) {
@@ -151,6 +152,11 @@ public class AdminGiftController {
 			String formatAns = String.format(formatStr,form.getId());
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
 			form.setCode(giftNumber);
+			
+			Date date = new Date();
+			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
+			form.setExchangeDate(localDateTime);
+			
 			final GiftEntity updateResult = giftService.update(form);
 			response.setData(updateResult);
 
