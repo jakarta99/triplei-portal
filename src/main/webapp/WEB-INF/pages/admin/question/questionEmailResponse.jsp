@@ -35,7 +35,7 @@
 							<div class="panel-body">
 							
 								<div class="form-group required">								  					
-			    					<label for="name" class="col-md-2 control-label">問題分類1</label>
+			    					<label for="name" class="col-md-2 control-label">問題分類</label>
 			    					<div class="col-md-10">
 			      						<input type="text" class="form-control" id="questionType" name="questionType" placeholder="questionType" value="${entity.questionType}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
@@ -50,13 +50,13 @@
 			    					</div>
 								</div>	
 								
-								<div class="form-group required">								  					
-			    					<label for="bisRatio" class="col-md-2 control-label">問題內容</label>
-			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="content" name="content" placeholder="content" value="${entity.content}"/>
-			      						<span class="help-block"><div class="text-danger"></div></span>
-			    					</div>
-								</div>
+<!-- 								<div class="form-group required">								  					 -->
+<!-- 			    					<label for="bisRatio" class="col-md-2 control-label">問題內容</label> -->
+<!-- 			    					<div class="col-md-10"> -->
+<%-- 			      						<textarea type="text" class="form-control" id="content" name="content"  rows="8" value="${entity.content}"/></textarea> --%>
+<!-- 			      						<span class="help-block"><div class="text-danger"></div></span> -->
+<!-- 			    					</div> -->
+<!-- 								</div> -->
 								
 <!-- 								<div class="form-group required">								  					 -->
 <!-- 			    					<label for="bisRatio" class="col-md-2 control-label">問題回覆</label> -->
@@ -68,7 +68,7 @@
 								<div class="form-group required">
 			    					<label for="content" class="col-md-2 control-label">問題回覆</label>
 			    					<div class="col-md-10">
-			      						<textarea id="emailreply" name="emailreply" class="form-control" rows="8" ></textarea>
+			      						<textarea id="emailreply" name="emailreply" class="form-control" rows="8" value="${entity.content}" ></textarea>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>	

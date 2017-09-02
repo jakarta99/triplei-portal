@@ -25,19 +25,20 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;  
 	
-	@RequestMapping("/list")
-	public String list(Model model) {
-		model.addAttribute("questions", questionService.getAll());
-		
-		return "/question/list";
-	}
+//	@RequestMapping("/list")
+//	public String list(Model model) {
+//		model.addAttribute("questions", questionService.getAll());
+//		
+//		return "/question/list";
+//	}
+	
 	@RequestMapping("/askQuestion")
 	public String askQuestion() {
 		
 		return "/question/questionAdd";
 	}
 	
-	/*管理者在新增文章的方法*/
+	/*新增問題*/
 	@PostMapping
 	@ResponseBody
 	public AjaxResponse<QuestionEntity> insert(final Model model, @RequestBody QuestionEntity form) {
@@ -46,9 +47,10 @@ public class QuestionController {
 		
 		try {
 			
-			LocalDateTime publishTime = LocalDateTime.now();
-			form.setPostTime(publishTime);
+			LocalDateTime posttime = LocalDateTime.now();
+			form.setPostTime(posttime);
 			final QuestionEntity insertResult = questionService.insert(form);
+			System.out.println("測試時間 = " +  insertResult.getPostTime());
 			response.setData(insertResult);
 		
 		} catch (final ApplicationException ex) {
