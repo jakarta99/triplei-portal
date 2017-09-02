@@ -77,8 +77,11 @@ public class ProductEntity extends GenericEntity{
 	@Column(name = "PREMIUM")
 	private BigDecimal premium; // 保費
 	
-	@Column(name = "CV")
-	private BigDecimal cv; // 解約金   (暫定名稱)
+	@Column(name = "CASHVALUE")
+	private BigDecimal cashValue; // 解約金  
+	
+	@Column(name = "STORE_SHELVES")
+	private Boolean storeShelves; // 商品上架
 
 	@Override
 	public String toString() {
