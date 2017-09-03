@@ -22,7 +22,7 @@ public class InsurerService extends GenericService<InsurerEntity> {
 
 	@Autowired
 	private InsurerDao dao;
-	
+
 	@Override
 	public GenericDao<InsurerEntity> getDao() {
 		return dao;
@@ -32,42 +32,41 @@ public class InsurerService extends GenericService<InsurerEntity> {
 	public List<Message> validateInsert(InsurerEntity entity) {
 
 		List<Message> messages = Lists.newArrayList();
-		
+
 		InsurerEntity dbEntity = dao.findByCode(entity.getCode());
-		
-		if(dbEntity != null) {
+
+		if (dbEntity != null) {
 			messages.add(Message.builder().code("code").value("代號不得重複").build());
 		}
-		
+
 		log.debug("{}", messages);
-		
+
 		return messages;
 	}
 
-
 	@Override
 	public List<Message> validateUpdate(InsurerEntity entity) {
-		
+
 		List<Message> messages = Lists.newArrayList();
-		
+
 		InsurerEntity dbEntity = dao.findOne(entity.getId());
-		
-		if(dbEntity == null) {
+
+		if (dbEntity == null) {
 			messages.add(Message.builder().code("id").value("ID 不存在").build());
 		}
-		
+
 		log.debug("{}", messages);
-		
+
 		return messages;
 	}
 
 	@Override
 	public InsurerEntity handleUpdate(InsurerEntity entity) {
 		InsurerEntity dbEntity = dao.findOne(entity.getId());
-		
+
 		// 以資料庫資料為主, 忽略不得修改的欄位
-		BeanUtils.copyProperties(entity, dbEntity, new String[]{"id","code","createdBy","createdTime"});
-		
+		BeanUtils.copyProperties(entity, dbEntity, new String[] { "id", "code", "createdBy", "createdTime" });
+
 		return dbEntity;
 	}
 

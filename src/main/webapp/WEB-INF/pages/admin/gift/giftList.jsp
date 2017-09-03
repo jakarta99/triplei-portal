@@ -10,7 +10,7 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
+
 </head>
 
 <body>
@@ -70,9 +70,7 @@
 			            { title: '照片三', name: "image3", type: "text", width: 150 },
 			            { title: '類別', name: "giftType", type: "text", width: 150 },
 			            { title: '熱門商品', name: "hotGift", type: "text", width: 150 },
-			            { title: '兌換日期', name: "exchangeDate", width: 150 ,itemTemplate:function(xxx){
- 			            	return moment({xxx}).format("YYYY/MM/DD").toString();
-			            }},
+			            { title: '兌換日期', name: "exchangeDate", type: "text", width: 150 },
 			            { title: '備註', name: "remarks", type: "text", width: 150 }
      
 			        ]

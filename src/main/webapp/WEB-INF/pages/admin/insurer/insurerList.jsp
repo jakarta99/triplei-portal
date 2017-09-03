@@ -58,21 +58,19 @@
 			        fields: [
 			            { name: 'btns', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '代碼', name: "code", type: "text", width: 20, validate: "required" },
+			            { title: '代碼', name: "code", type: "text", width: 50, validate: "required" },
 			            { title: '公司全名', name: "name", type: "text", width: 150 },
-			            { title: '公司簡稱', name: "shortName", type: "text", width: 200 },
-			            { title: '公司名稱筆畫', name: "sortNo", type: "text", width: 200 },
-			            { title: '資本適足率', name: "bisRatio", type: "text", width: 200 },
-			            { title: '保單繼續率', name: "persistencyRatio", type: "text", width: 200 },
-			            { title: '訴訟率', name: "litigationRatio", type: "text", width: 200 },
-			            { title: '投訴率', name: "scomplaintRatio", type: "text", width: 200 },
-			            { title: '申訴率', name: "appealRatio", type: "text", width: 200 },
-			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "radio", width: 200 },
+			            { title: '公司簡稱', name: "shortName", type: "text", width: 100 },
+			            { title: '公司名稱筆畫', name: "sortNo", type: "text", width: 100 },
+			            { title: '資本適足率', name: "bisRatio", type: "text", width: 90 },
+			            { title: '保單繼續率', name: "persistencyRatio", type: "text", width: 90 },
+			            { title: '訴訟率', name: "litigationRatio", type: "text", width: 80 },
+			            { title: '投訴率', name: "scomplaintRatio", type: "text", width: 80 },
+			            { title: '申訴率', name: "appealRatio", type: "text", width: 80 },
+			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "radio", width: 100 },
 			            { title: '信用評等', name: "credit_rating", type: "text", width: 200 },
 			            { title: '公司簡介', name: "description", type: "textarea", width: 200 },
-			            { title: '公司Logo', name: "logo;", type: "file", width: 200 },
-			            
-			            
+			            { title: '公司Logo', name: "logo;", type: "file", width: 150 },
 			        ]
 			    });
 			    
@@ -96,13 +94,8 @@
 					
 					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
 				}
-
 			</script>
-
 		</div>
 	</div>
-	
-	
-	
 </body>
 </html>

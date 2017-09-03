@@ -43,41 +43,39 @@
 											<option value="WOMAN">女仕用品</option>
 											<option value="MAN">男仕用品</option>
 											<option value="OTHERS">其他</option>
-										</select> <span class="help-block"><div class="text-danger"></div></span>
+										</select> 
 									</div>
 								</div>
 								<div class="form-group required">
 									<label for="name" class="col-md-2 control-label">商品名稱</label>
 									<div class="col-md-10">
 										<input type="text" class="form-control" id="name" name="name"
-											placeholder="Name" value="${entity.name}" /> <span
-											class="help-block"><div class="text-danger"></div></span>
+											placeholder="Name" value="${entity.name}" /> 
 									</div>
 								</div>
 								<div class="form-group required">
 									<label for="brand" class="col-md-2 control-label">品牌</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="brand"
-											name="brand" placeholder="brand" value="${entity.brand}" />
-										<span class="help-block"><div class="text-danger"></div></span>
+										<input type="text" class="form-control" id="brand" name="brand"
+											placeholder="brand" value="${entity.brand}" />
 									</div>
 								</div>
-								<div class="form-group required">
-									<label for="bonus" class="col-md-2 control-label">許願池剩餘使用次數</label>
-									<div class="col-md-10">
-										<span>${entity.weekUseCount}</span> <span class="help-block"><div
-												class="text-danger"></div></span>
-									</div>
-								</div>
-								<div class="form-group required">
-									<label for="bannerImage" class="col-md-2 control-label">商品圖片</label>
-									<div class="col-md-10">
-										<input type="file" class="form-control" id="bannerImage"
-											name="bannerImage"> <span class="help-block">
-											<div class="text-danger"></div>
-										</span>
-									</div>
-								</div>
+<!-- 								<div class="form-group required"> -->
+<!-- 									<label for="bonus" class="col-md-2 control-label">許願池剩餘使用次數</label> -->
+<!-- 									<div class="col-md-10"> -->
+<%-- 										<span>${entity.weekUseCount}</span> <span class="help-block"><div --%>
+<!-- 												class="text-danger"></div></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 								<div class="form-group required"> -->
+<!-- 									<label for="bannerImage" class="col-md-2 control-label">商品圖片</label> -->
+<!-- 									<div class="col-md-10"> -->
+<!-- 										<input type="file" class="form-control" id="bannerImage" -->
+<!-- 											name="bannerImage"> <span class="help-block"> -->
+<!-- 											<div class="text-danger"></div> -->
+<!-- 										</span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 					</form>
@@ -115,7 +113,7 @@
 			var $btn = $(this);
 			$btn.button("loading");
 
-			$.post("<c:url value='/admin/gift'/>", "dataForm", function(data) {
+			$.post("<c:url value='/admin/wish'/>", "dataForm", function(data) {
 				if (data.messages.length == 0) {
 					$("#dataForm").trigger("reset");
 					//swal("SUCCESS", "許願成功！", "success");

@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import tw.com.triplei.commons.GenericEntity;
 import tw.com.triplei.enums.ArticleType;
 
@@ -62,6 +64,9 @@ public class ArticleEntity extends GenericEntity {
 	
 	@Column(name = "STORE_SHELVES")
 	private boolean storeShelves; // 文章上架
+	
+	@Column(name = "FILE")
+	private byte[] file;
 
 	@Override
 	public String toString() {
@@ -166,5 +171,16 @@ public class ArticleEntity extends GenericEntity {
 	public void setStoreShelves(boolean storeShelves) {
 		this.storeShelves = storeShelves;
 	}
+
+	public byte[] getFile() {
+		return file;
+	}
+
+	public void setFile(byte[] file) {
+		this.file = file;
+	}
+
+
+	
 	
 }

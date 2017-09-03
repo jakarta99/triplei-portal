@@ -7,13 +7,11 @@
 <html lang="en">
 <head>
 <sec:csrfMetaTags />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -137,7 +135,9 @@
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
-								
+								<div class="dailogcheck" title="請確認修改資訊">
+									<button id="ok">OK</button>
+								</div>
 							</div>
 						</div>	
 		 			</form>
@@ -167,8 +167,28 @@
 </html>
 <script type="text/javascript">
 $(function() {
+	$('.dailogcheck').hide();
+	$('#saveButton').click(function(){
+		$('#checkcode span').text($('#code').val());
+	 	$('#checkname span').text($('#name').val());
+		$('#checkshort span').text($('#shortName').val());
+		$('#checksortno span').text($('#sortNo').val());
+		$('#checkbis span').text($('#bisRatio').val());
+		$('#checkpersistency span').text($('#persistencyRatio').val());
+	 	$('#checklitigation span').text($('#litigationRatio').val());
+	 	$('#checkcomplaint span').text($('#complaintRatio').val());
+	 	$('#checkappeal span').text($('#appealRatio').val());
+	 	$('#checkigf span').text($('#insuranceGuarantyFund:checked').val());
+	 	$('#checkcredit span').text($('#credit_rating').val());
+	 	$('#checkdescrip span').text($('#description').val());
+	$('.dailogcheck').dialog({
+	    height: "auto",
+	    width: 400,
+	    modal: true,
+		})
+	})
 	//<!-- Save -->	
-	$("#saveButton").bind("click",
+	$("#ok").bind("click",
 		function() {
 		var $btn = $(this);
 			$btn.button("loading");

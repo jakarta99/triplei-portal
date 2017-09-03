@@ -43,14 +43,10 @@ public class QuestionEntity extends GenericEntity{
 	@Column(name = "POST_TIME")
 	private LocalDateTime postTime;
 
-	@Column(name = "REPLY_STATUS")
-	private Boolean replyStatus; // 回覆狀態 
-
 	@Override
 	public String toString() {
 		return "QuestionEntity [id=" + id + ", askerEmail=" + askerEmail + ", content=" + content + ", questionType="
-				+ questionType + ", questionType2=" + questionType2 + ", postTime=" + postTime + ", replyStatus="
-				+ replyStatus + "]";
+				+ questionType + ", questionType2=" + questionType2 + ", postTime=" + postTime + "]";
 	}
 
 	public Long getId() {
@@ -99,14 +95,6 @@ public class QuestionEntity extends GenericEntity{
 
 	public void setPostTime(LocalDateTime postTime) {
 		this.postTime = postTime;
-	}
-
-	public Boolean getReplyStatus() {
-		return replyStatus;
-	}
-
-	public void setReplyStatus(Boolean replyStatus) {
-		this.replyStatus = replyStatus;
 	}
 
 }

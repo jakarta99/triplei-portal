@@ -24,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		).permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .headers().frameOptions().sameOrigin()
+                .and()
             .formLogin()
                 .loginPage("/login")
                 .permitAll()

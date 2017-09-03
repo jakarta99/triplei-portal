@@ -16,6 +16,8 @@ import tw.com.triplei.commons.GenericEntity;
 /**
  * 許願池
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "WISH")
 public class WishEntity extends GenericEntity  {
