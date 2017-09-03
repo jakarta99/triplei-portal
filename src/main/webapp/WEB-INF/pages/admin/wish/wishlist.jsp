@@ -11,13 +11,12 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
-<%-- <script type="text/javascript" src="<c:url value="/resources/jsgrid-1.5.3/jsgrid.js"/>"></script> --%>
-<script type="text/javascript" src="<c:url value="/resources/jsgrid-1.5.3/jsgrid.core.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/jsgrid-1.5.3/jsgrid.load-indicator.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/jsgrid-1.5.3/jsgrid.load-strategies.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/jsgrid-1.5.3/jsgrid.sort-strategies.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/jsgrid-1.5.3/jsgrid.field.js"/>"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/jquery/moment.js"/>"></script>
+	
+	
+	
+	
 <style>
 .sort-panel {
 	padding: 10px;
@@ -35,9 +34,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<br />
-			<br />
-			<br />
+			<br /> <br /> <br />
 
 			<h3>許願池商品管理</h3>
 			<div>
@@ -45,19 +42,6 @@
 					class="btn btn-sm btn-primary" data-loading-text="Loading"> <span
 					class="glyphicon glyphicon-plus"></span>許願池測試
 				</a>
-			</div>
-			<div class="sort-panel">
-				<label>Sorting Field: <select id="sortingField">
-						<option>id</option>
-						<option value="name">商品名稱</option>
-						<option value="brand">品牌</option>
-						<option value="wishType">商品類型</option>
-						<option value="wishTime">許願時間</option>
-						
-						
-				</select>
-					<button type="button" id="sort">Sort</button>
-				</label>
 			</div>
 			<div id="jsGrid"></div>
 
@@ -71,6 +55,7 @@
 
 					
 
+					autoload : true,
 			        filtering: true,
 	                selecting: false,
 					inserting : false,
@@ -78,10 +63,9 @@
 					sorting : true,
 					paging : true,
 					pageIndex : 1,
-					pageSize : 10,
+					pageSize : 2,
 			        pageButtonCount: 5,
 					pageLoading : true,
-					autoload : true,
 
 					controller : {
 						loadData : function(filter) {
@@ -102,17 +86,18 @@
 						{title : '商品名稱',name : "name",type : "text",width : 400},
 // 						{title : '許願時間',name : "wishTime",type : "text",width : 200},
 						
-						{ title: '許願時間', name: "created_time", width: 200 ,itemTemplate:function(xxx){ 
-			                 return moment({xxx}).format("YYYY/MM/DD"); 
-			               }},
+						{ title: '許願時間', name: "wishTime",type : "text", width: 200}
+// 							{ title: '許願時間', name: "created_time", width: 200 ,itemTemplate:function(xxx){ 
+// 				                 return moment({xxx}).format("YYYY/MM/DD"); 
+// 				               }},
 						
 
 					]
 				});
-				$("#sort").click(function() {
-					var field = $("#sortingField").val();
-					$("#jsGrid").jsGrid("sort", field);
-				});
+// 				$("#sort").click(function() {
+// 					var field = $("#sortingField").val();
+// 					$("#jsGrid").jsGrid("sort", field);
+// 				});
 			</script>
 
 		</div>

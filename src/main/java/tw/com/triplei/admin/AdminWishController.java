@@ -54,11 +54,20 @@ public class AdminWishController {
 		AjaxResponse<WishEntity> response = new AjaxResponse<WishEntity>();
 
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			Date date = new Date();
-			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
-			form.setWishTime(localDateTime);
-			System.out.println(form.getWishTime());
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//			Date date = new Date();
+//			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
+//			form.setWishTime(localDateTime);
+//			System.out.println(form.getWishTime());
+			
+//			form.setWishTime(System.currentTimeMillis());
+//			System.out.println(form.getWishTime());
+			
+			String date = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
+			System.out.println(date);
+			form.setWishTime(date);
+			
+			
 			final WishEntity insertResult = wishService.insert(form);
 			response.setData(insertResult);
 			

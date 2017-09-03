@@ -36,13 +36,13 @@
 									<label for="wishType" class="col-md-2 control-label">商品類別</label>
 									<div class="col-md-10">
 										<select class="form-control" id="wishType" name="wishType">
-											<option value="VOUCHERS">禮劵</option>
-											<option value="FURNITURES">家居，廚具</option>
-											<option value="ELETRONICS">3C家電</option>
-											<option value="OUTDOOR">戶外運動</option>
-											<option value="WOMAN">女仕用品</option>
-											<option value="MAN">男仕用品</option>
-											<option value="OTHERS">其他</option>
+											<option value="禮劵">禮劵</option>
+											<option value="家居，廚具">家居，廚具</option>
+											<option value="3C家電">3C家電</option>
+											<option value="戶外運動">戶外運動</option>
+											<option value="女仕用品">女仕用品</option>
+											<option value="男仕用品">男仕用品</option>
+											<option value="其他">其他</option>
 										</select> 
 									</div>
 								</div>
