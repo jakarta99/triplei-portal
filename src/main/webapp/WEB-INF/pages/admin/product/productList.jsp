@@ -23,10 +23,7 @@
 			<div>
           		<a href="<c:url value='/admin/product/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
             	<span class="glyphicon glyphicon-plus"></span>上傳</a>
-            	<form action="/admin/product/productAdd.jsp" method="post"	enctype="multipart/form-data">
-					<input type="file" name="file">
-					<input type="submit" value="文件上傳">
-				</form>
+            	
       		</div>
 			<div id="jsGrid"></div>
 			

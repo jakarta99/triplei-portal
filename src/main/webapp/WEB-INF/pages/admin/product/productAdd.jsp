@@ -33,6 +33,10 @@
 							</div>
 						</div>
 					</form>
+					<form action="/admin/product/productAdd.jsp" method="post"	enctype="multipart/form-data">
+						<input type="file" name="file">
+<!-- 						<input type="submit" value="文件上傳"> -->
+					</form>
 				</div>
 			</div>
 		</div>

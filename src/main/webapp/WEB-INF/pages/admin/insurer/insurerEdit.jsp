@@ -123,7 +123,7 @@
 								<div class="form-group required">								  					
 			    					<label for="description" class="col-md-2 control-label">公司簡介</label>
 			    					<div class="col-md-10">
-			      						<textarea class="form-control" id="description" name="description" placeholder="description" value="${entity.description}"/></textarea>
+			      						<input class="form-control" id="description" name="description" placeholder="description" value="${entity.description}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -136,6 +136,18 @@
 			    					</div>
 								</div>
 								<div class="dailogcheck" title="請確認修改資訊">
+									<h5 id="checkcode">公司代碼:<span></span></h5>
+									<h5 id="checkname">公司全名:<span></span></h5>
+									<h5 id="checkshort">公司簡稱:<span></span></h5>
+									<h5 id="checksortno">公司名稱筆畫:<span></span></h5>
+									<h5 id="checkbis">資本適足率:<span></span>%</h5>
+									<h5 id="checkpersistency">保單繼續率:<span></span>%</h5>
+									<h5 id="checklitigation">訴訟率:<span></span>%</h5>
+									<h5 id="checkcomplaint">投訴率:<span></span>%</h5>
+									<h5 id="checkappeal">申訴率:<span></span>%</h5>
+									<h5 id="checkigf">保險安定基金:<span></span></h5>
+									<h5 id="checkcredit">信用評等:<span></span></h5>
+									<h5 id="checkdescrip">公司簡介:<span></span></h5>
 									<button id="ok">OK</button>
 								</div>
 							</div>
