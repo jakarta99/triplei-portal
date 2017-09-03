@@ -191,7 +191,7 @@ public class ArticleController {
 	@PostMapping
 //	@RequestMapping(value="/new",method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse<ArticleEntity> insert(final Model model, @RequestBody ArticleEntity form, @ModelAttribute("bannerImage") MultipartFile file) {
+	public AjaxResponse<ArticleEntity> insert(final Model model, @RequestBody ArticleEntity form) {
 		
 		AjaxResponse<ArticleEntity> response = new AjaxResponse<ArticleEntity>();
 		
