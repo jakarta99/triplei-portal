@@ -56,7 +56,7 @@
 					
 
 					autoload : true,
-			        filtering: true,
+// 			        filtering: true,
 	                selecting: false,
 					inserting : false,
 					editing : false,
