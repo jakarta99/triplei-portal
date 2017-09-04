@@ -92,7 +92,7 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('確定要刪除嗎?')) {
+						if (confirm('你確定要刪除這筆資料?')) {
 							
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {

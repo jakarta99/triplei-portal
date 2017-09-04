@@ -25,16 +25,11 @@
 
 		<div>
 			<br /> <br /> <br />
-
-			<h3 style="text-align: center;">問題一覽</h3>
-			<br/>
-			<br/><br/><br/>
-			
 			<h3>問題一覽</h3>
-			<div>
-          		<a href="<c:url value='/admin/question/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
-            	<span class="glyphicon glyphicon-plus"></span>新增</a>
-      		</div>
+<!-- 			<div> -->
+<%--           		<a href="<c:url value='/admin/question/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading"> --%>
+<!--             	<span class="glyphicon glyphicon-plus"></span>新增</a> -->
+<!--       		</div> -->
 			<div id="jsGrid"></div>
 			<div id="dialog" title="Basic dialog">
   <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
@@ -71,12 +66,24 @@
 			        fields: [
 			            { name: 'btns', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '問題分類1', name: "questionType", type: "text", width: 150, validate: "required" },
+			            { title: '問題分類1', name: "questionType", width: 95, validate: "required", itemTemplate:function(data){
+			            	if(data=="ARTICLE"){
+								return $("<span></span>").text("文章問題");	
+							}else if(data=="POLICY"){
+								return $("<span></span>").text("保單類問題");
+							}else if(data=="CLAIMS"){
+								return $("<span></span>").text("理賠問題");
+							}else if(data=="WEBUSE"){
+								return $("<span></span>").text("網站使用及問題回報");
+							}else if(data=="SALES"){
+								return $("<span></span>").text("業務人員問題");
+							}
+			            } },
 			            { title: '問題分類2', name: "questionType2", type: "text", width: 150 },
 			            { title: 'Email', name: "askerEmail", type: "text", width: 200 },
 // 			            itemTemplate: function(value) {return $("<a class='email'></a>")}
 			            { title: '問題內容', name: "content", type: "text", width: 200 },
-			            { title: '提問時間', name: "postTime", type: "text", width: 200 },
+			            { title: '提問時間', name: "postTime", width: 70,itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString()} },
 			            
 			            
 			        ]
@@ -87,7 +94,7 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('Are You Sure Want to Delete?')) {
+						if (confirm('你確定要刪除這筆資料?')) {
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
 								$delBtn.button('reset');
@@ -96,16 +103,16 @@
 						}
 					});
 					
-					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
-					$editBtn.attr("href", BASE_URL + "/" + row.id);
-					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+// 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
+// 					$editBtn.attr("href", BASE_URL + "/" + row.id);
+// 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
 					
 					var $emailBtn = $('<a class="btn btn-info btn-xs"></a>');
 					$emailBtn.attr("href", BASE_URL + "/" + row.id + "/emailResponse");
 					$emailBtn.append('<span class="glyphicon glyphicon-pencil"></span> 回覆');
 					
-					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($emailBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
+					return $("<div></div>").append($emailBtn).append($delBtn);
 				}
 
 			    
