@@ -95,25 +95,20 @@ public class AdminQuestionController {
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+			
 			helper.setFrom("triplei5432@gmail.com");
-			helper.setTo("triplei5432@gmail.com");
+			helper.setTo(form.getAskerEmail());
 			helper.setSubject("主題:回覆Email");
 			helper.setText(
 					"<html>\r\n" + 
 					"<body>\r\n" + 
-					"    <h1>你好，${username}這是一封病毒郵件!</h1>\r\n" + 
-					"    <h1 style=\\\"color:red;\\\">你中毒了</h1>\r\n" + 
-					"    	親愛的${username}  </br></br>\r\n" + 
+					"    <h1>你好,</h1>\r\n" + 
 					"  \r\n" + 
 					"		歡迎加入triplei   </br></br>\r\n" + 
-					"  \r\n" + 
-					"		剛您收到這封信的時候，您的電腦已經中毒了。  </br></br>\r\n" + 
-					"		\r\n" + 
-					"		請點擊連結繳費解除病毒:${url}  </br></br>\r\n" + 
 					"		\r\n" + 
 					"		如果您的email信箱不支援連結點擊，請將上面的地址拷貝至您的瀏覽器(如Chrome)的網址欄進入。  </br></br>\r\n" + 
 					"		\r\n" + 
-					"		如果您還有任何問題，可以聯繫管理員${email}  </br></br>\r\n" + 
+					"		如果您還有任何問題，可以聯繫管理員(EMAIL) </br></br>\r\n" + 
 					"		  \r\n" + 
 					"		我們對您產生的不變，深表歉意。  </br></br>\r\n" + 
 					"		  \r\n" + 

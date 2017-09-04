@@ -33,9 +33,9 @@
 			<div class="col-lg-8 bg-info"
 				style="height: 100vh; display: table; table-layout: fixed;">
 
-				<div class = "insurerzone" style="display: table-cell; vertical-align: middle;">
+				<div  style="display: table-cell; vertical-align: middle;">
 					<c:forEach items="${models}" var="model">
-					<a onclick = "showDetails(${model.id})">${model.id}, ${model.shortName}, ${model.name}</a><br/>
+					<a class = "insurerzone" onclick = "showDetails(${model.id})">${model.id}, ${model.shortName}, ${model.name}</a><br/>
 					</c:forEach>
 				</div>
 				<div class="descriptionzone" title="Insurer Description">
@@ -56,7 +56,14 @@
 			    height: "auto",
 			    width: 400,
 			    modal: true,
-
+			    show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				}
 			});
 		});
 	});

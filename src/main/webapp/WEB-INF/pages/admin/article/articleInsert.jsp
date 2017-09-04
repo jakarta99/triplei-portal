@@ -174,11 +174,9 @@
 				//alert(FCKeditorAPI.GetInstance('content').GetHTML());
 				var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
 				$("#content").val(contentVal);
-
+				alert(contentVal);
 				$.post("<c:url value='/article'/>", "dataForm", function(data) {
-					var publishTime = data.data.publishTime;
 					if (data.messages.length == 0) {
-					// alert(moment({publishTime}));
 					// alert(data.data.bannerImage);
 					$("#dataForm").trigger("reset");
 					// swal("SUCCESS", "資料新增成功！", "success");

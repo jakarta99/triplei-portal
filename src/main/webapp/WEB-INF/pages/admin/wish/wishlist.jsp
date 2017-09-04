@@ -37,12 +37,12 @@
 			<br /> <br /> <br />
 
 			<h3>許願池商品管理</h3>
-			<div>
-				<a href="<c:url value='/admin/wish/add'/>"
-					class="btn btn-sm btn-primary" data-loading-text="Loading"> <span
-					class="glyphicon glyphicon-plus"></span>許願池測試
-				</a>
-			</div>
+<!-- 			<div> -->
+<%-- 				<a href="<c:url value='/admin/wish/add'/>" --%>
+<!-- 					class="btn btn-sm btn-primary" data-loading-text="Loading"> <span -->
+<!-- 					class="glyphicon glyphicon-plus"></span>許願池測試 -->
+<!-- 				</a> -->
+<!-- 			</div> -->
 			<div id="jsGrid"></div>
 
 			<script>
