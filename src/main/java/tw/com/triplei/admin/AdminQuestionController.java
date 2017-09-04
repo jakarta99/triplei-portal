@@ -84,7 +84,7 @@ public class AdminQuestionController {
 
 		try {
 			
-			form.setReplyStatus(true);
+//			form.setReplyStatus(true);
 			final QuestionEntity updateResult = questionService.update(form);
 			response.setData(updateResult);
 

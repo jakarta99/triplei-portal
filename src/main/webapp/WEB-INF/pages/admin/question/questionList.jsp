@@ -27,7 +27,14 @@
 			<br /> <br /> <br />
 
 			<h3 style="text-align: center;">問題一覽</h3>
-			</br>
+			<br/>
+			<br/><br/><br/>
+			
+			<h3>問題一覽</h3>
+			<div>
+          		<a href="<c:url value='/admin/question/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
+            	<span class="glyphicon glyphicon-plus"></span>新增</a>
+      		</div>
 			<div id="jsGrid"></div>
 			<div id="dialog" title="Basic dialog">
   <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
@@ -47,7 +54,6 @@
 			        pageSize: 10,
 			        pageLoading: true,
 			        autoload: true,
-			        filter:true,
 			 
 			        controller: {
 			            loadData: function (filter) {
@@ -63,14 +69,14 @@
 			        
 			 
 			        fields: [
-			            { name: '編輯', width:60, itemTemplate:btns },
+			            { name: 'btns', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
 			            { title: '問題分類1', name: "questionType", type: "text", width: 150, validate: "required" },
 			            { title: '問題分類2', name: "questionType2", type: "text", width: 150 },
 			            { title: 'Email', name: "askerEmail", type: "text", width: 200 },
 // 			            itemTemplate: function(value) {return $("<a class='email'></a>")}
 			            { title: '問題內容', name: "content", type: "text", width: 200 },
-			            { title: '提問時間', name: "postTime", type: "text", width: 200 , itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD HH:mm").toString();}},
+			            { title: '提問時間', name: "postTime", type: "text", width: 200 },
 			            
 			            
 			        ]
@@ -81,7 +87,7 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('確定要刪除嗎?')) {
+						if (confirm('Are You Sure Want to Delete?')) {
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
 								$delBtn.button('reset');
