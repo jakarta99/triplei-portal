@@ -1,7 +1,8 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -9,18 +10,24 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<script type="text/javascript"
+	src="<c:url value="/resources/jquery/moment.js"/>"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>Triple i</title>
-
 
 
 </head>
 
 <body>
-	
+
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		
+
 		<div>
+			<br /> <br /> <br />
+
+			<h3 style="text-align: center;">問題一覽</h3>
+			<br/>
 			<br/><br/><br/>
 			
 			<h3>問題一覽</h3>
@@ -29,7 +36,9 @@
             	<span class="glyphicon glyphicon-plus"></span>新增</a>
       		</div>
 			<div id="jsGrid"></div>
-			
+			<div id="dialog" title="Basic dialog">
+  <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
 			<script>
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/question";
 			 
@@ -65,6 +74,7 @@
 			            { title: '問題分類1', name: "questionType", type: "text", width: 150, validate: "required" },
 			            { title: '問題分類2', name: "questionType2", type: "text", width: 150 },
 			            { title: 'Email', name: "askerEmail", type: "text", width: 200 },
+// 			            itemTemplate: function(value) {return $("<a class='email'></a>")}
 			            { title: '問題內容', name: "content", type: "text", width: 200 },
 			            { title: '提問時間', name: "postTime", type: "text", width: 200 },
 			            
@@ -98,12 +108,36 @@
 					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($emailBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
 				}
 
+			    
+			    
+			    
+			    $(function() {
+			      $("#dialog").dialog({
+			        autoOpen: false,
+			        show: {
+			          effect: "blind",
+			          duration: 1000
+			        },
+			        hide: {
+			          effect: "blind",
+			          duration: 1000
+			        }
+			      });
+			   
+			      $(".email").on("click",function() {
+			        $("#dialog").dialog("open");
+			      });
+			    } );
+			   
+			    
+
+			    
 			</script>
 
 		</div>
 	</div>
-	
-	
-	
+
+
+
 </body>
 </html>
