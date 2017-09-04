@@ -48,7 +48,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">保險商品管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">保險商品管理</a></li>
+							<li><a href="/admin/product/list">保險商品管理</a></li>
 							<li><a href="/admin/insurer/list">保險公司管理</a></li>
 						</ul>
 					</li>
@@ -79,7 +79,6 @@
 				<li><a href="/product/list">商品專區</a></li>
 				<li><a href="/gift/list">績點專區</a></li>
 				<li><a href="/article/list">文章專欄</a></li>
-				<li><a href="/question/askQuestion">聯絡客服</a></li>				
 				<li><a href="/login">登入</a></li>
 			</ul>
 		</div>

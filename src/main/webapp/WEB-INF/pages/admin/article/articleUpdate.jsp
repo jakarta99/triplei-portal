@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="/WEB-INF/FCKeditor.tld" prefix="FCK"%>
 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -11,7 +12,7 @@
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
 
-
+<script type="text/javascript" src="<c:url value="/fckeditor/fckeditor.js"/>"></script>
 
 </head>
 
@@ -37,7 +38,6 @@
 								<div class="form-group required">
 									<label for="articleType" class="col-md-2 control-label">文章類別</label>
 									<div class="col-md-10">
-										<!-- 			      						<input type="text" class="form-control" id="code" name="code" placeholder="code" value=""/> -->
 										<select class="form-control" id="articleType"
 											name="articleType" style="width: 120px">
 											<option value="EDITOR_CHOICE">編輯精選</option>
@@ -69,7 +69,7 @@
 								<div class="form-group required">
 									<label for="content" class="col-md-2 control-label">文章內容</label>
 									<div class="col-md-10">
-										<textarea class="form-control" id="content" name="content" placeholder="200字以內" >${entity.content}</textarea> 
+										<textarea class="form-control" id="content" name="content">${entity.content}</textarea> 
 										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
@@ -154,11 +154,21 @@
 	
 	<script type="text/javascript">
 $(function() {
+	
+	var oFCKeditor = new FCKeditor("content");
+	oFCKeditor.BasePath = "/fckeditor/";
+	oFCKeditor.Height = 400;
+	oFCKeditor.ToolbarSet = "Article" ;
+	oFCKeditor.ReplaceTextarea();
+	
 	//<!-- Save -->	
 	$("#saveButton").on("click",
 		function() {
 		var $btn = $(this);
 			$btn.button("loading");
+			
+			var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
+			$("#content").val(contentVal);
 	
 			$.put("<c:url value='/article'/>", "dataForm",
 					function(data) {

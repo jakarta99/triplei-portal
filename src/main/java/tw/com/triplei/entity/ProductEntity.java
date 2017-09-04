@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import tw.com.triplei.commons.GenericEntity;
 import tw.com.triplei.enums.Currency;
 
 /**
@@ -22,7 +23,7 @@ import tw.com.triplei.enums.Currency;
  */
 @Entity
 @Table(name = "PRODUCT")
-public class ProductEntity {
+public class ProductEntity extends GenericEntity{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

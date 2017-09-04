@@ -7,13 +7,11 @@
 <html lang="en">
 <head>
 <sec:csrfMetaTags />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -125,7 +123,7 @@
 								<div class="form-group required">								  					
 			    					<label for="description" class="col-md-2 control-label">公司簡介</label>
 			    					<div class="col-md-10">
-			      						<textarea class="form-control" id="description" name="description" placeholder="description" value="${entity.description}"/></textarea>
+			      						<input class="form-control" id="description" name="description" placeholder="description" value="${entity.description}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -137,7 +135,21 @@
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
-								
+								<div class="dailogcheck" title="請確認修改資訊">
+									<h5 id="checkcode">公司代碼:<span></span></h5>
+									<h5 id="checkname">公司全名:<span></span></h5>
+									<h5 id="checkshort">公司簡稱:<span></span></h5>
+									<h5 id="checksortno">公司名稱筆畫:<span></span></h5>
+									<h5 id="checkbis">資本適足率:<span></span>%</h5>
+									<h5 id="checkpersistency">保單繼續率:<span></span>%</h5>
+									<h5 id="checklitigation">訴訟率:<span></span>%</h5>
+									<h5 id="checkcomplaint">投訴率:<span></span>%</h5>
+									<h5 id="checkappeal">申訴率:<span></span>%</h5>
+									<h5 id="checkigf">保險安定基金:<span></span></h5>
+									<h5 id="checkcredit">信用評等:<span></span></h5>
+									<h5 id="checkdescrip">公司簡介:<span></span></h5>
+									<button id="ok">OK</button>
+								</div>
 							</div>
 						</div>	
 		 			</form>
@@ -167,8 +179,28 @@
 </html>
 <script type="text/javascript">
 $(function() {
+	$('.dailogcheck').hide();
+	$('#saveButton').click(function(){
+		$('#checkcode span').text($('#code').val());
+	 	$('#checkname span').text($('#name').val());
+		$('#checkshort span').text($('#shortName').val());
+		$('#checksortno span').text($('#sortNo').val());
+		$('#checkbis span').text($('#bisRatio').val());
+		$('#checkpersistency span').text($('#persistencyRatio').val());
+	 	$('#checklitigation span').text($('#litigationRatio').val());
+	 	$('#checkcomplaint span').text($('#complaintRatio').val());
+	 	$('#checkappeal span').text($('#appealRatio').val());
+	 	$('#checkigf span').text($('#insuranceGuarantyFund:checked').val());
+	 	$('#checkcredit span').text($('#credit_rating').val());
+	 	$('#checkdescrip span').text($('#description').val());
+	$('.dailogcheck').dialog({
+	    height: "auto",
+	    width: 400,
+	    modal: true,
+		})
+	})
 	//<!-- Save -->	
-	$("#saveButton").bind("click",
+	$("#ok").bind("click",
 		function() {
 		var $btn = $(this);
 			$btn.button("loading");

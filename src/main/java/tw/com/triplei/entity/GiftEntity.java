@@ -68,9 +68,6 @@ public class GiftEntity extends GenericEntity {
 
 	@Column(name = "REMARKS")
 	private String remarks; // 備註
-	
-	@Column(name = "STORE_SHELVES")
-	private Boolean storeShelves; // 積點商品上架
 
 	
 	@Override

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ArticleSpecification;
@@ -188,6 +189,7 @@ public class ArticleController {
 	
 	/*管理者在新增文章的方法*/
 	@PostMapping
+//	@RequestMapping(value="/new",method=RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse<ArticleEntity> insert(final Model model, @RequestBody ArticleEntity form) {
 		
@@ -195,40 +197,13 @@ public class ArticleController {
 		
 		try {
 			System.out.println(form.getBannerImage());
-//			BufferedOutputStream stream = null;
-//			if(!file.isEmpty()){
-//				try{
-//				byte[] bytes= file.getBytes();
-//				
-//				String rootPath = System.getProperty("catalina.home");
-//				File dir = new File(rootPath + File.separator + "tmpFiles");
-//				
-//				if(!dir.exists())
-//					dir.mkdirs();
-//					
-//					File serverFile = new File(dir.getAbsolutePath()
-//							+ File.separator + form.getTitle());
-//					stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-//					stream.write(bytes);
-//
-//					log.info("Server File Location="
-//							+ serverFile.getAbsolutePath());
-//
-//					System.out.println("You successfully uploaded file=" + form.getTitle());
-//				} catch (Exception e) {
-//					System.out.println("You failed to upload " +form.getTitle() + " => " + e.getMessage());
-//				}finally{
-//					stream.close();}
-//			} else {
-//				System.out.println("You failed to upload " + form.getTitle()+ " because the file was empty.");
-//			}
-			
+			System.out.println(form.getFile());
+			System.out.println(form.getContent());
+
 			LocalDateTime publishTime = LocalDateTime.now();
-			System.out.println(publishTime);
 			form.setPublishTime(publishTime);
 			final ArticleEntity insertResult = articleService.insert(form);
 			response.setData(insertResult);
-			System.out.println(insertResult.getPublishTime());
 		
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();

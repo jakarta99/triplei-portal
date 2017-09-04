@@ -1,6 +1,7 @@
 package tw.com.triplei.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import tw.com.triplei.commons.GenericEntity;
 /**
  * 許願池
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "WISH")
 public class WishEntity extends GenericEntity  {
@@ -41,7 +44,7 @@ public class WishEntity extends GenericEntity  {
 	private int weekUseCount; // 累積許願池使用次數
 	
 	@Column(name = "WISH_TIME")
-	private LocalDateTime wishTime; // 許願日期
+	private String wishTime; // 許願日期
 
 	@Override
 	public String toString() {

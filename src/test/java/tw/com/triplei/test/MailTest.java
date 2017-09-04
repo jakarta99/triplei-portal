@@ -23,18 +23,18 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 public class MailTest {
 	@Autowired
 	private JavaMailSender mailSender;
-	@Autowired
-	private VelocityEngine velocityEngine;
+//	@Autowired
+//	private VelocityEngine velocityEngine;
 	
-//	@Test
-//	public void sendSimpleMail() throws Exception {
-//		SimpleMailMessage message = new SimpleMailMessage();
-//		message.setFrom("triplei5432@gmail.com");
-//		message.setTo("dunk800034@gmail.com");
-//		message.setSubject("主題:測試郵件");
-//		message.setText("測試郵件內容");
-//		mailSender.send(message);
-//	}
+	@Test
+	public void sendSimpleMail() throws Exception {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("triplei5432@gmail.com");
+		message.setTo("dunk800034@gmail.com");
+		message.setSubject("主題:測試郵件");
+		message.setText("測試郵件內容");
+		mailSender.send(message);
+	}
 	
 	
 //	@Test
@@ -67,21 +67,21 @@ public class MailTest {
 //	}
 	
 	
-	@Test
-	public void sendTemplateMail() throws Exception {
-		MimeMessage mimeMessage = mailSender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-		helper.setFrom("triplei5432@gmail.com");
-		helper.setTo("triplei5432@gmail.com");
-		helper.setSubject("主題:模板郵件");
-		Map<String, Object> model = new HashedMap();
-		model.put("username", "abc");
-		String text = VelocityEngineUtils.mergeTemplateIntoString(
-				velocityEngine, "template.vm", "UTF-8", model);
-		FileSystemResource file = new FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
-		helper.addInline("virusattack", file);
-		helper.setText(text, true);
-		mailSender.send(mimeMessage);
-	}
+//	@Test
+//	public void sendTemplateMail() throws Exception {
+//		MimeMessage mimeMessage = mailSender.createMimeMessage();
+//		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+//		helper.setFrom("triplei5432@gmail.com");
+//		helper.setTo("triplei5432@gmail.com");
+//		helper.setSubject("主題:模板郵件");
+//		Map<String, Object> model = new HashedMap();
+//		model.put("username", "abc");
+//		String text = VelocityEngineUtils.mergeTemplateIntoString(
+//				velocityEngine, "template.vm", "UTF-8", model);
+//		FileSystemResource file = new FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
+//		helper.addInline("virusattack", file);
+//		helper.setText(text, true);
+//		mailSender.send(mimeMessage);
+//	}
 	
 }
