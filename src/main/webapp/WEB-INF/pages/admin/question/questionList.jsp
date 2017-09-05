@@ -14,8 +14,29 @@
 	src="<c:url value="/resources/jquery/moment.js"/>"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>Triple i</title>
-
-
+<style>
+.ui-dialog{
+border:1px black solid;
+}
+.ui-widget-header{
+	background-color:#D7D9D8;
+	border-radius:5px;
+}
+.ui-widget-content{
+	background-color:white;
+	border-radius:5px;
+}
+.ui-dialog-titlebar {
+    padding: 0.1em .5em;
+    position: relative;
+    font-size: 120%;
+}
+.ui-dialog-titlebar-close{
+	position:relative;
+	float:right;
+	font-size:70%;
+}
+</style>
 </head>
 
 <body>
@@ -31,10 +52,11 @@
 <!--             	<span class="glyphicon glyphicon-plus"></span>新增</a> -->
 <!--       		</div> -->
 			<div id="jsGrid"></div>
-			<div id="dialog" title="Basic dialog">
-  <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-</div>
-			<script>
+			<div id="detailsDialog">
+			<span id="content"></span>
+			</div>
+			<script type="text/javascript">
+
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/question";
 			 
 			    $("#jsGrid").jsGrid({
@@ -49,6 +71,10 @@
 			        pageSize: 10,
 			        pageLoading: true,
 			        autoload: true,
+			        dialogClass: 'detailsDialog',
+			        rowDoubleClick: function(args) {
+			            showDetailsDialog("內容",args.item);
+			        },
 			 
 			        controller: {
 			            loadData: function (filter) {
@@ -64,7 +90,7 @@
 			        
 			 
 			        fields: [
-			            { name: 'btns', width:60, itemTemplate:btns },
+			            { name: '刪／修', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
 			            { title: '問題分類1', name: "questionType", width: 95, validate: "required", itemTemplate:function(data){
 			            	if(data=="ARTICLE"){
@@ -80,13 +106,30 @@
 							}
 			            } },
 			            { title: '問題分類2', name: "questionType2", type: "text", width: 150 },
-			            { title: 'Email', name: "askerEmail", type: "text", width: 200 },
-// 			            itemTemplate: function(value) {return $("<a class='email'></a>")}
-			            { title: '問題內容', name: "content", type: "text", width: 200 },
+			            { title: 'Email', name: "askerEmail", width: 200,type:"text"},
+			            { title: '問題內容', name: "content",type:"text",visible:false},
 			            { title: '提問時間', name: "postTime", width: 70,itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString()} },
-			            
-			            
+
 			        ]
+			    });
+			    
+			    var showDetailsDialog = function(dialogType, values) {
+			    	$("#content").text(values.content);
+			        $("#detailsDialog").dialog("option","title",dialogType).dialog("open");
+			    };
+			    
+			    $("#detailsDialog").dialog({
+			    	autoOpen: false,
+			        width:400,
+			        modal:true,
+			        show: {
+			          effect: "blind",
+			          duration: 500
+			        },
+			        hide: {
+			          effect: "blind",
+			          duration: 500
+			        }
 			    });
 			    
 			    function btns(value, row) {
@@ -95,49 +138,26 @@
 					
 					$delBtn.click(function() {
 						if (confirm('你確定要刪除這筆資料?')) {
-							$delBtn.button('loading');
+// 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
-								$delBtn.button('reset');
+// 								$delBtn.button('reset');
 								$("#jsGrid").jsGrid("reset");
 							});
 						}
 					});
 					
-// 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
-// 					$editBtn.attr("href", BASE_URL + "/" + row.id);
-// 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
+					$editBtn.attr("href", BASE_URL + "/" + row.id);
+					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
 					
 					var $emailBtn = $('<a class="btn btn-info btn-xs"></a>');
 					$emailBtn.attr("href", BASE_URL + "/" + row.id + "/emailResponse");
 					$emailBtn.append('<span class="glyphicon glyphicon-pencil"></span> 回覆');
 					
-					return $("<div></div>").append($emailBtn).append($delBtn);
+					return $("<div></div>").append($editBtn).append("<br/>").append($emailBtn).append("<br/>").append($delBtn);
 				}
-
 			    
-			    
-			    
-			    $(function() {
-			      $("#dialog").dialog({
-			        autoOpen: false,
-			        show: {
-			          effect: "blind",
-			          duration: 1000
-			        },
-			        hide: {
-			          effect: "blind",
-			          duration: 1000
-			        }
-			      });
-			   
-			      $(".email").on("click",function() {
-			        $("#dialog").dialog("open");
-			      });
-			    } );
-			   
-			    
-
 			    
 			</script>
 

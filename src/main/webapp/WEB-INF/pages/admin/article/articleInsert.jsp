@@ -174,7 +174,7 @@
 				//alert(FCKeditorAPI.GetInstance('content').GetHTML());
 				var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
 				$("#content").val(contentVal);
-				alert(contentVal);
+// 				alert(contentVal);
 				$.post("<c:url value='/article'/>", "dataForm", function(data) {
 					if (data.messages.length == 0) {
 					// alert(data.data.bannerImage);

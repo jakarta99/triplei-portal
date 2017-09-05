@@ -101,12 +101,7 @@
 
 		</div>
 	</div>
-	
-	
-	
-</body>
-</html>
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function() {
 	//<!-- Save -->	
 	$("#saveButton").bind("click",
@@ -129,5 +124,61 @@ $(function() {
 				$btn.button("reset");
 		});	
 	});
+	
+//<!-- Email 驗證-->
+
+// function validateEmail(email) {
+// 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+// 	return re.test(email);
+// }
+
+// function checkEmail() {
+// 	$("#checkemail").text("");
+// 	var email = $("#askerEmail").val();
+// 	if (validateEmail(email)) {
+// 		$("#checkemail").text(email + " is valid :)");
+// 		$("#checkemail").css("color", "green");
+// 		return true;
+// 	} else {
+// 		$("#checkemail").text(email + " is not valid :(");
+// 		$("#checkemail").css("color", "red");
+// 	}
+// 	return false;
+// }
+
+// $("#askerEmail").bind("blur", checkEmail);
+
+//<!-- 文章字數限制驗證 -->
+//	$(function() {
+//		$("#content").keyup(function() {
+//			checklength("content", 50);
+//		});
+//	});
+//	function checklength(content, maxlength) {
+//		if ($("#" + content).text().length > maxlength) {
+//			$("#" + content).text(
+//					$("#" + content).text().substring(0, maxlength));
+//			alert("已超過最大長度!");
+//			return false;
+//		}
+//		return true;
+//	}
+// function checklength() {
+// 	if ($("#content").text().length > 50) {
+// 		$("#content").text(
+// 				$("#content").text().substring(0, 50));
+// 		alert("已超過最大長度!");
+// 		return false;
+// 	}
+// 	return true;
+// }
+
+// $("#content").bind( "keyup" , checklength)
+
 </script>
 
+	
+	
+	
+</body>
+</html>

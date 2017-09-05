@@ -93,7 +93,7 @@
 				</div>
 				<div class="col-md-6">
 					<div>
-						<a href="<c:url value='/index'/>" class="btn btn-lg btn-primary btn-warning btn-block" data-loading-text="Loading">返回</a>
+						<a href="<c:url value='/admin/question/index'/>" class="btn btn-lg btn-primary btn-warning btn-block" data-loading-text="Loading">返回</a>
 					</div>
 				</div>
 			</div>

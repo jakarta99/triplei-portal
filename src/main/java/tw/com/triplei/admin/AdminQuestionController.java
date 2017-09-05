@@ -48,6 +48,11 @@ public class AdminQuestionController {
 	public String listPage(Model model) {
 		return "/admin/question/questionList";
 	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String returnIndex(Model model) {
+		return "/index";
+	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {

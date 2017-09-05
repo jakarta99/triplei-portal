@@ -112,7 +112,7 @@
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($editBtn).append($delBtn);
+					return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
 				}
 
 			</script>
