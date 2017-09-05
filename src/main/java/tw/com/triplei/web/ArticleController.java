@@ -227,7 +227,7 @@ public class ArticleController {
 		final AjaxResponse<ArticleEntity> response = new AjaxResponse<ArticleEntity>();
 		
 		try {
-			
+			form.setPublishTime(LocalDateTime.now());
 			final ArticleEntity updateResult = articleService.update(form);
 			response.setData(updateResult);
 			

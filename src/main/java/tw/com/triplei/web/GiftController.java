@@ -32,7 +32,7 @@ public class GiftController {
 		model.addAttribute("modelh",giftService.getTypeTop3Hot(true));
 		model.addAttribute("modelv", giftService.getTypeTop3(GiftType.VOUCHERS));
 		model.addAttribute("modelf", giftService.getTypeTop3(GiftType.FURNITURES));
-		model.addAttribute("modele", giftService.getTypeTop3(GiftType.ELETRONICS));
+		model.addAttribute("modele", giftService.getTypeTop3(GiftType.ELECTRONICS));
 		model.addAttribute("modelod", giftService.getTypeTop3(GiftType.OUTDOOR));
 		model.addAttribute("modelw", giftService.getTypeTop3(GiftType.WOMAN));
 		model.addAttribute("modelm", giftService.getTypeTop3(GiftType.MAN));

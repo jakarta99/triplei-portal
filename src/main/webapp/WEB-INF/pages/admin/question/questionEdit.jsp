@@ -10,9 +10,6 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-
-
-
 </head>
 
 <body>
@@ -37,8 +34,8 @@
 								<div class="form-group required">								  					
 			    					<label for="name" class="col-md-2 control-label">問題分類1</label>
 			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="questionType" name="questionType" placeholder="questionType" value="${entity.questionType}"/>
-			      						<span class="help-block"><div class="text-danger"></div></span>
+										<span class="form-control" id="questionType">${entity.questionType}</span>
+										<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
 			  					<div class="form-group required">
@@ -98,11 +95,7 @@
 		</div>
 	</div>
 	
-	
-	
-</body>
-</html>
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function() {
 	//<!-- Save -->	
 	$("#saveButton").bind("click",
@@ -125,4 +118,8 @@ $(function() {
 		});	
 	});
 </script>
+	
+</body>
+</html>
+
 

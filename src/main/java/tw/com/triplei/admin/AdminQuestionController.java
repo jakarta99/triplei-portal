@@ -48,6 +48,11 @@ public class AdminQuestionController {
 	public String listPage(Model model) {
 		return "/admin/question/questionList";
 	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String returnIndex(Model model) {
+		return "/index";
+	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
@@ -74,14 +79,17 @@ public class AdminQuestionController {
 
 	@RequestMapping(value = "/emailReply", method = RequestMethod.PUT)
 	@ResponseBody
-	public AjaxResponse<QuestionEntity> emailReply(final Model model, @RequestBody final QuestionEntity form) {
-
+	public AjaxResponse<QuestionEntity> emailReply(final Model model, @RequestBody final QuestionEntity form ) {
+//		@RequestParam("emailreply") String emailreply
 		log.debug("{}", form);
-
+		
+//		System.out.println("測試問題回覆 = " + emailreply);
+		
 		final AjaxResponse<QuestionEntity> response = new AjaxResponse<QuestionEntity>();
 
 		try {
-
+			
+//			form.setReplyStatus(true);
 			final QuestionEntity updateResult = questionService.update(form);
 			response.setData(updateResult);
 
@@ -92,40 +100,35 @@ public class AdminQuestionController {
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+			
 			helper.setFrom("triplei5432@gmail.com");
-			helper.setTo("triplei5432@gmail.com");
-			helper.setSubject("主題:嵌入靜態資源");
+			helper.setTo(form.getAskerEmail());
+			helper.setSubject("主題:回覆Email");
 			helper.setText(
 					"<html>\r\n" + 
 					"<body>\r\n" + 
-					"    <h1>你好，${username}這是一封病毒郵件!</h1>\r\n" + 
-					"    <h1 style=\\\"color:red;\\\">你中毒了</h1>\r\n" + 
-					"    	親愛的${username}  </br></br>\r\n" + 
+					"    <h1>你好,</h1>\r\n" + 
 					"  \r\n" + 
 					"		歡迎加入triplei   </br></br>\r\n" + 
-					"  \r\n" + 
-					"		剛您收到這封信的時候，您的電腦已經中毒了。  </br></br>\r\n" + 
-					"		\r\n" + 
-					"		請點擊連結繳費解除病毒:${url}  </br></br>\r\n" + 
 					"		\r\n" + 
 					"		如果您的email信箱不支援連結點擊，請將上面的地址拷貝至您的瀏覽器(如Chrome)的網址欄進入。  </br></br>\r\n" + 
 					"		\r\n" + 
-					"		如果您還有任何問題，可以聯繫管理員${email}  </br></br>\r\n" + 
+					"		如果您還有任何問題，可以聯繫管理員(EMAIL) </br></br>\r\n" + 
 					"		  \r\n" + 
 					"		我們對您產生的不變，深表歉意。  </br></br>\r\n" + 
 					"		  \r\n" + 
 					"		希望您在triplei度過快樂的時光!  </br></br>\r\n" + 
 					"		      \r\n" + 
 					"	    </br></br>\r\n" + 
-					"	    <img src=\\\"cid:virusattack\\\" >\r\n" + 
+//					"	    <img src=\\\"cid:virusattack\\\" >\r\n" + 
 					"		</hr>\r\n" + 
 					"       \r\n" + 
 					"		(這是一封自動產生的email，請勿回覆。)  \r\n" + 
 					"</body>\r\n" + 
 					"</html>",
 					true);
-			FileSystemResource file = new FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
-			helper.addInline("virusattack", file);
+//			FileSystemResource file = new FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
+//			helper.addInline("virusattack", file);
 			mailSender.send(mimeMessage);
 		} catch (MailException e) {
 			response.addException(e);

@@ -96,7 +96,7 @@
 									<label for="bannerRotation" class="col-md-2 control-label">輪播</label>
 									<div class="col-md-10">
 										<select class="form-control" id="bannerRotation"
-											name="bannerRotation" style="width: 70px">
+											name="bannerRotation" style="width:90px">
 											<option value="false">不要</option>
 											<option value="true">要</option>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
@@ -107,7 +107,7 @@
 									<label for="hotArticle" class="col-md-2 control-label">熱門分類</label>
 									<div class="col-md-10">
 										<select class="form-control" id="hotArticle" name="hotArticle"
-											style="width: 70px">
+											style="width:90px">
 											<option value="false">不要</option>
 											<option value="true">要</option>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
@@ -118,7 +118,7 @@
 									<label for="storeShelves" class="col-md-2 control-label">文章上架</label>
 									<div class="col-md-10">
 										<select class="form-control" id="storeShelves" name="storeShelves"
-											style="width: 70px">
+											style="width:90px">
 											<option value="false">不要</option>
 											<option value="true">要</option>
 										</select> <span class="help-block"><div class="text-danger"></div></span>

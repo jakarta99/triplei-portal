@@ -56,18 +56,18 @@
 			        
 			 
 			        fields: [
-			            { name: 'btns', width:60, itemTemplate:btns },
+			            { name: '刪／修', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
 			            { title: '代碼', name: "code", type: "text", width: 50, validate: "required" },
-			            { title: '公司全名', name: "name", type: "text", width: 150 },
+			            { title: '公司全名', name: "name", type: "text", width: 170 },
 			            { title: '公司簡稱', name: "shortName", type: "text", width: 100 },
 			            { title: '公司名稱筆畫', name: "sortNo", type: "text", width: 100 },
-			            { title: '資本適足率', name: "bisRatio", type: "text", width: 90 },
-			            { title: '保單繼續率', name: "persistencyRatio", type: "text", width: 90 },
-			            { title: '訴訟率', name: "litigationRatio", type: "text", width: 80 },
-			            { title: '投訴率', name: "scomplaintRatio", type: "text", width: 80 },
-			            { title: '申訴率', name: "appealRatio", type: "text", width: 80 },
-			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "radio", width: 100 },
+			            { title: '資本適足率', name: "bisRatio", type: "number", width: 90 },
+			            { title: '保單繼續率', name: "persistencyRatio", type: "number", width: 90 },
+			            { title: '訴訟率', name: "litigationRatio", type: "number", width: 80 },
+			            { title: '投訴率', name: "complaintRatio", type: "number", width: 80 },
+			            { title: '申訴率', name: "appealRatio", type: "number", width: 80 },
+			            { title: '保險安定基金', name: "insuranceGuarantyFund", type: "checkbox", width: 100 },
 			            { title: '信用評等', name: "credit_rating", type: "text", width: 200 },
 			            { title: '公司簡介', name: "description", type: "textarea", width: 200 },
 			            { title: '公司Logo', name: "logo;", type: "file", width: 150 },
@@ -79,7 +79,7 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('Are You Sure Want to Delete?')) {
+						if (confirm('你確定要刪除這筆資料?')) {
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
 								$delBtn.button('reset');
@@ -92,7 +92,7 @@
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($editBtn).append("&nbsp;&nbsp;&nbsp;").append($delBtn);
+					return $("<div></div>").append("<br/>").append($editBtn).append("<br/>").append($delBtn);
 				}
 			</script>
 		</div>

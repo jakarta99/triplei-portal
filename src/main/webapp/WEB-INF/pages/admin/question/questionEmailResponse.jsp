@@ -120,6 +120,7 @@ $(function() {
 					});
 			
 			$btn.button("reset");
+// 			$("#emailreply").value("");
 		});	
 	});
 </script>

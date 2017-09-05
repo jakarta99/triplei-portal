@@ -104,12 +104,18 @@
 			    					</div>
 								</div>
 								
-								<div class="form-group required">								  					
-			    					<label for="insuranceGuarantyFund" class="col-md-2 control-label">保險安定基金</label>
-			    					<div class="col-md-10">
-			      						<input type="text" class="form-control" id="insuranceGuarantyFund" name="insuranceGuarantyFund" placeholder="insuranceGuarantyFund" value="${entity.insuranceGuarantyFund}"/>
-			      						<span class="help-block"><div class="text-danger"></div></span>
-			    					</div>
+								<div class="form-group required">
+									<label for="insuranceGuarantyFund"
+										class="col-md-2 control-label">保險安定基金</label>
+									<div class="col-md-10">
+										<input type="radio" id="insuranceGuarantyFund"
+											name="insuranceGuarantyFund"
+											placeholder="insuranceGuarantyFund" value="true" checked />有
+										<input type="radio" id="insuranceGuarantyFund"
+											name="insuranceGuarantyFund"
+											placeholder="insuranceGuarantyFund" value="false" />沒有 <span
+											class="help-block"><div class="text-danger"></div></span>
+									</div>
 								</div>
 								
 								<div class="form-group required">								  					
@@ -135,7 +141,7 @@
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
-								<div class="dailogcheck" title="請確認修改資訊">
+								<div class="dialogcheck" title="請確認修改資訊">
 									<h5 id="checkcode">公司代碼:<span></span></h5>
 									<h5 id="checkname">公司全名:<span></span></h5>
 									<h5 id="checkshort">公司簡稱:<span></span></h5>
@@ -148,7 +154,7 @@
 									<h5 id="checkigf">保險安定基金:<span></span></h5>
 									<h5 id="checkcredit">信用評等:<span></span></h5>
 									<h5 id="checkdescrip">公司簡介:<span></span></h5>
-									<button id="ok">OK</button>
+									<button id="ok">上傳</button>
 								</div>
 							</div>
 						</div>	
@@ -173,13 +179,23 @@
 		</div>
 	</div>
 	
-	
-	
-</body>
-</html>
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function() {
-	$('.dailogcheck').hide();
+	$('.dialogcheck').hide();
+	var dialog1 = $('.dialogcheck').dialog({
+		autoOpen:false,
+		height : "auto",
+		width : 400,
+		modal : true,
+		show : {
+			effect : "blind",
+			duration : 500
+		},
+		hide : {
+			effect : "blind",
+			duration : 500
+		},
+		})
 	$('#saveButton').click(function(){
 		$('#checkcode span').text($('#code').val());
 	 	$('#checkname span').text($('#name').val());
@@ -190,14 +206,17 @@ $(function() {
 	 	$('#checklitigation span').text($('#litigationRatio').val());
 	 	$('#checkcomplaint span').text($('#complaintRatio').val());
 	 	$('#checkappeal span').text($('#appealRatio').val());
-	 	$('#checkigf span').text($('#insuranceGuarantyFund:checked').val());
+
+	 	if ($('#insuranceGuarantyFund:checked').val() == "true") {
+			$('#checkigf span').text("有");
+		} else {
+			$('#checkigf span').text("沒有");
+		}
+	 	
 	 	$('#checkcredit span').text($('#credit_rating').val());
 	 	$('#checkdescrip span').text($('#description').val());
-	$('.dailogcheck').dialog({
-	    height: "auto",
-	    width: 400,
-	    modal: true,
-		})
+	 	dialog1.dialog("open");
+	
 	})
 	//<!-- Save -->	
 	$("#ok").bind("click",
@@ -211,6 +230,7 @@ $(function() {
 							//swal("SUCCESS", "保險公司資料更新成功", "success");
 							alert("SUCCESS");
 							$btn.button("reset");
+							dialog1.dialog("close");
 						}
 					}, function(data, textStatus, jqXHR) {
 						$btn.button("reset");
@@ -221,3 +241,7 @@ $(function() {
 	});
 </script>
 
+	
+	
+</body>
+</html>
