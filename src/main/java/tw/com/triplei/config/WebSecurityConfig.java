@@ -20,7 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/insurer/**", 
                 		"/product/**", 
                 		"/gift/**", 
-                		"/article/**"
+                		"/article/**",
+                		"/jolokia/**"
                 		).permitAll()
                 .anyRequest().authenticated()
                 .and()
