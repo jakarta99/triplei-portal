@@ -1,22 +1,12 @@
 package tw.com.triplei.test;
 
-import java.io.File;
-import java.util.Map;
-
-import javax.mail.internet.MimeMessage;
-
-import org.apache.commons.collections.map.HashedMap;
-import org.apache.velocity.app.VelocityEngine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.ui.velocity.VelocityEngineUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest

@@ -34,7 +34,6 @@
 			    					<label for="questionType" class="col-md-2 control-label">問題分類1</label>
 			    					<div class="col-md-10">
 			    					<select id="questionType" name="questionType" class="form-control" >
-			    					<option value="" disabled selected>Select your question</option>
 			    					<option  value="ARTICLE">文章類問題</option>
 			    					<option  value="POLICY">保單類問題</option>
 			    					<option  value="CLAIMS">理賠問題</option>

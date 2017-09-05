@@ -53,7 +53,7 @@ border:1px black solid;
 <!--       		</div> -->
 			<div id="jsGrid"></div>
 			<div id="detailsDialog">
-			<span id="content"></span>
+			<span id="content" style="word-wrap:break-word"></span>
 			</div>
 			<script type="text/javascript">
 
@@ -90,7 +90,7 @@ border:1px black solid;
 			        
 			 
 			        fields: [
-			            { name: '刪／修', width:60, itemTemplate:btns },
+			            { name: '刪／修', width:40, itemTemplate:btns },
 						{ name: "id", visible: false},
 			            { title: '問題分類1', name: "questionType", width: 95, validate: "required", itemTemplate:function(data){
 			            	if(data=="ARTICLE"){

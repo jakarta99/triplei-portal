@@ -58,7 +58,7 @@
 			        
 			 
 			        fields: [
-			            { name: 'btns', width:60, itemTemplate:btns },
+			            { name: '刪／修', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
 			            { title: '品牌', name: "brand", type: "text", width: 150 },
 			            { title: '積點商品名稱', name: "name", type: "text", width: 150 },
@@ -87,7 +87,7 @@
 							}
 			            }
 			            },
-			            { title: '熱門商品', name: "hotGift", type: "text", width: 150 },
+			            { title: '熱門商品', name: "hotGift", type: "checkbox", width: 150 },
 			            { title: '兌換日期', name: "exchangeDate", type: "text", width: 150 },
 			            { title: '備註', name: "remarks", type: "text", width: 150 }
      
@@ -112,7 +112,7 @@
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
+					return $("<div></div>").append($editBtn).append("<br/>").append($delBtn);
 				}
 
 			</script>

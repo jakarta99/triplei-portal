@@ -8,7 +8,6 @@
 <html lang="en">
 <head>
 <sec:csrfMetaTags />
- <link rel="stylesheet" href="code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 
