@@ -146,7 +146,7 @@
 				</div>
 				<div class="col-md-6">
 					<div>
-						<a href="<c:url value='/article/getArticles'/>"
+						<a href="<c:url value='/admin/article/getArticles'/>"
 							class="btn btn-lg btn-primary btn-warning btn-block"
 							data-loading-text="Loading">返回</a>
 					</div>
@@ -175,7 +175,7 @@
 				var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
 				$("#content").val(contentVal);
 // 				alert(contentVal);
-				$.post("<c:url value='/article'/>", "dataForm", function(data) {
+				$.post("<c:url value='/admin/article'/>", "dataForm", function(data) {
 					if (data.messages.length == 0) {
 					// alert(data.data.bannerImage);
 					$("#dataForm").trigger("reset");
