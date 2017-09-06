@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,21 +70,19 @@ public class AdminQuestionController {
 		return "/admin/question/questionEmailResponse";
 	}
 
-	@RequestMapping(value = "/emailReply", method = RequestMethod.PUT)
+	@RequestMapping(value = "/emailReply/{emailreply}", method = RequestMethod.PUT)
 	@ResponseBody
 	public AjaxResponse<QuestionEntity> emailReply(final Model model, @RequestBody final QuestionEntity form , 
-			 String emailreply ) {
+			@PathVariable("emailreply") String emailreply ) {
 //		@RequestParam("emailreply") String emailreply
+
 		log.debug("{}", form);
-		
-		System.out.println("測試問題回覆 = " + model.toString());
-		System.out.println("測試問題回覆 = " + form);
-		
-		
-		System.out.println("測試問題回覆 = " + emailreply);
+		System.out.println("問題Error檢查 = " + model.toString());
+		System.out.println("問題回覆個資 = " + form);
+		System.out.println("問題回覆文字 = " + emailreply);
 		
 		
-		emailservice.sendEmail(form.getAskerEmail(), "virus attack! virus attack! virus attack! virus attack!virus attack! virus attack!virus attack! virus attack!");
+		emailservice.sendEmail(form.getAskerEmail(), "REPLY TEXT HERE");
 		
 		final AjaxResponse<QuestionEntity> response = new AjaxResponse<QuestionEntity>();
 
@@ -153,7 +152,7 @@ public class AdminQuestionController {
 		final AjaxResponse<QuestionEntity> response = new AjaxResponse<QuestionEntity>();
 
 		try {
-
+			System.out.println(form);
 			final QuestionEntity updateResult = questionService.update(form);
 			response.setData(updateResult);
 
