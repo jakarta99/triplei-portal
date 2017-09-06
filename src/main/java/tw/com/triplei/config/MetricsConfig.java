@@ -35,7 +35,7 @@ public class MetricsConfig  {
 
 //	@Bean
 //	@ExportMetricWriter
-//	public MetricWriter metricWriter() {
+//	public MetricWr```iter metricWriter() {
 //		log.info("register metricWriter");
 //		return new LoggingMetricWriter();
 //	}
