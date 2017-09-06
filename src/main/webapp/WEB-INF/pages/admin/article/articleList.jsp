@@ -21,14 +21,14 @@
 			<br/><br/><br/>
 			<h3>文章列表</h3>
 			<div>
-				<a href="<c:url value='/article/insertArticle'/>"
+				<a href="<c:url value='/admin/article/insertArticle'/>"
 					class="btn btn-sm btn-primary" data-loading-text="Loading"> 
 					<span class="glyphicon glyphicon-plus"></span>新增</a>
 			</div>
 			<div id="jsGrid"></div>
 
 	<script>
-			    var BASE_URL = "${pageContext.request.contextPath}/article";
+			    var BASE_URL = "${pageContext.request.contextPath}/admin/article";
 			    var url = "${pageContext.request.contextPath}";
 			 
 			    $("#jsGrid").jsGrid({

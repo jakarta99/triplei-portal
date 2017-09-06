@@ -140,7 +140,7 @@
 				</div>
 				<div class="col-md-6">
 					<div>
-						<a href="<c:url value='/article/getArticles'/>"
+						<a href="<c:url value='/admin/article/getArticles'/>"
 							class="btn btn-lg btn-primary btn-warning btn-block"
 							data-loading-text="Loading">返回</a>
 					</div>
@@ -170,7 +170,7 @@ $(function() {
 			var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
 			$("#content").val(contentVal);
 	
-			$.put("<c:url value='/article'/>", "dataForm",
+			$.put("<c:url value='/admin/article'/>", "dataForm",
 					function(data) {
 						if (data.messages.length==0) {
 							//swal("SUCCESS", "保險公司資料更新成功", "success");
