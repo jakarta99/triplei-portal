@@ -39,12 +39,12 @@ public class AdminWishController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage(Model model) {
-		return "/admin/wish/wishlist";
+		return "/admin/wish/wishList";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
-		return "/admin/wish/wishadd";
+		return "/admin/wish/wishAdd";
 	}
 	
 	@PostMapping
