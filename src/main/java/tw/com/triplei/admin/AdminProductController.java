@@ -8,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ProductSpecification;
+import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.service.ProductService;
@@ -91,6 +94,16 @@ public class AdminProductController {
 		return new GridResponse<>(page);
 	}
 
+	@PostMapping("/upload")
+	@ResponseBody
+	public AjaxResponse<String> insert(final Model model, @RequestParam("file") MultipartFile file) {
+		AjaxResponse<String> response = new AjaxResponse<String>();
+		
+		log.debug("{}", file);
+		
+		return response;
+	}
+	
 
 	//// 以下新刪修 (9/2還用不到)
 	// @PostMapping

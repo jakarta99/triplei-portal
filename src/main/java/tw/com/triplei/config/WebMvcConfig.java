@@ -13,11 +13,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-
 @Configuration
 @PropertySource("classpath:ArticleContent/ArticleList.properties")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-	
+
 	@Bean
 	public ViewResolver getViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -26,26 +25,26 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		resolver.setViewClass(JstlView.class);
 		return resolver;
 	}
-	
-	 @Bean(name="multipartResolver") 
-	    public CommonsMultipartResolver getResolver() throws IOException{
-	        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-	        resolver.setMaxUploadSizePerFile(5242880);//5MB
-	         
-	        return resolver;
-	    }
+
+//	@Bean(name = "multipartResolver")
+//	public CommonsMultipartResolver getResolver() throws IOException {
+//		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+//		resolver.setMaxUploadSizePerFile(5242880);// 5MB
+//
+//		return resolver;
+//	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-		
+
 	}
-	
-	
+
 	@Override
-    public void addViewControllers(final ViewControllerRegistry registry) {
-        super.addViewControllers(registry);
-        registry.addViewController("/login").setViewName("login");;
+	public void addViewControllers(final ViewControllerRegistry registry) {
+		super.addViewControllers(registry);
+		registry.addViewController("/login").setViewName("login");
+		;
 	}
 
 }

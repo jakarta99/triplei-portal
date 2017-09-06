@@ -33,9 +33,10 @@
 							</div>
 						</div>
 					</form>
-					<form action="/admin/product/productAdd.jsp" method="post"	enctype="multipart/form-data">
+					<form action="/admin/product/upload" method="post"	enctype="multipart/form-data">
 						<input type="file" name="file">
-<!-- 						<input type="submit" value="文件上傳"> -->
+						<input type="submit" value="文件上傳">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
 				</div>
 			</div>
