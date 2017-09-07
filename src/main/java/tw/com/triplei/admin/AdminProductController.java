@@ -1,5 +1,13 @@
 package tw.com.triplei.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -98,13 +106,26 @@ public class AdminProductController {
 	@ResponseBody
 	public AjaxResponse<String> insert(final Model model, @RequestParam("file") MultipartFile file) {
 		AjaxResponse<String> response = new AjaxResponse<String>();
+
+		if (!file.isEmpty()) {
+			try {
+				boolean upload= productService.ProductUpload(file);
+				if(upload) {
+					response.setData("Sucesss");
+				}else {
+					response.setData("Fail");
+				}
+			} catch (final Exception e) {
+				response.addException(e);
+			}
+		}
 		
 		log.debug("{}", file);
-		
+
 		return response;
 	}
-	
 
+	
 	//// 以下新刪修 (9/2還用不到)
 	// @PostMapping
 	// @ResponseBody
