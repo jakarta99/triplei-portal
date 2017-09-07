@@ -21,7 +21,6 @@
 		<div>
 			<br /> <br /> <br />
 			<h3>聯繫客服</h3>
-<h1>aaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
