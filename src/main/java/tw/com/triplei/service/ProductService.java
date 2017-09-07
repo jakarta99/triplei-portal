@@ -109,16 +109,15 @@ public class ProductService extends GenericService<ProductEntity> {
 		byte[] bytes;
 		try {
 			bytes = file.getBytes();
-			String xxx = "src/main/resources/files";
-			File dir = new File(xxx);
+			String path = "src/main/resources/files";
+			File dir = new File(path);
 			if (!dir.exists())
 				dir.mkdirs();
 
 			String date = DateTimeFormatter.ofPattern("MM-dd_HHmmss").format(LocalDateTime.now());
 			File serverFile = new File(dir.getAbsolutePath() + File.separator + date + file.getOriginalFilename());
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-			url = xxx+"/"+date+file.getOriginalFilename();
-			System.out.println(url);
+			url = path+"/"+date+file.getOriginalFilename();
 			stream.write(bytes);
 			stream.close();
 			
@@ -136,7 +135,6 @@ public class ProductService extends GenericService<ProductEntity> {
 		Workbook book;
 		try {
 			book = Workbook.getWorkbook(new File(url));
-			System.out.println(url);
 			sheet = book.getSheet(0);//取得第一頁的資料
 			for(int i=2;i<3;i++){//從第3排開始往下讀
 				Collection<ProductPremiumRatio> productPremiumRatioList = new ArrayList<ProductPremiumRatio>();
