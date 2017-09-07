@@ -24,7 +24,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" id="dataForm">
+					<form class="form-horizontal" id="dataForm" action="/admin/product/upload" method="post" enctype="multipart/form-data">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -32,22 +32,14 @@
 								</h4>
 							</div>
 						</div>
-					</form>
-					<form action="/admin/product/upload" method="post"	enctype="multipart/form-data">
 						<input type="file" name="file">
-						<input type="submit" value="文件上傳">
+						<input type="submit" value="文件上傳" id="uploadbutton">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
-				<div>
-					<a href="#" class="btn btn-lg btn-primary btn-block"
-						data-loading-text="Loading" id="saveButton">儲存</a>
-				</div>
-			</div>
 			<div class="col-md-6">
 				<div>
 					<a href="<c:url value='/admin/product/list'/>"
@@ -61,10 +53,10 @@
 </body>
 </html>
 <script type="text/javascript">
-	$(function() {
+	$(function() {	
 		//<!-- Save -->	
 
-		$("#saveButton").bind(
+		$("#uploadbutton").bind(
 				"click",
 				function() {
 					var $btn = $(this);
@@ -74,6 +66,7 @@
 							function(data) {
 								if (data.messages.length == 0) {
 									$("#dataForm").trigger("reset");
+
 									//swal("SUCCESS", "資料新增成功！", "success");
 									alert("SUCCESS");
 									$btn.button("reset");
