@@ -98,7 +98,6 @@ public class AdminProductController {
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
 		}
-
 		return new GridResponse<>(page);
 	}
 
@@ -114,6 +113,12 @@ public class AdminProductController {
 					response.setData("Sucesss");
 				}else {
 					response.setData("Fail");
+				}
+				boolean insert = productService.insertXlsToDB();
+				if(insert) {
+					response.setData("insertSucesss");
+				}else {
+					response.setData("insertFail");
 				}
 			} catch (final Exception e) {
 				response.addException(e);

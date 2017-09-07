@@ -25,7 +25,7 @@ public class ProductHighDiscountRatio {
 	private Long productId;
 	
 	@Column(name = "MIN_VALUE")
-	private Integer minValue; // 下限
+	private BigDecimal minValue; // 下限
 	
 	@Column(name = "MAX_VALUE")
 	private Integer maxValue; //上限
@@ -55,11 +55,11 @@ public class ProductHighDiscountRatio {
 		this.productId = productId;
 	}
 
-	public Integer getMinValue() {
+	public BigDecimal getMinValue() {
 		return minValue;
 	}
 
-	public void setMinValue(Integer minValue) {
+	public void setMinValue(BigDecimal minValue) {
 		this.minValue = minValue;
 	}
 
