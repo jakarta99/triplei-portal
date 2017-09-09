@@ -31,7 +31,7 @@ public class ProductHighDiscountRatio {
 	private Integer maxValue; //上限
 	
 	@Column(name = "DISCOUNT_RATIO")
-	private BigDecimal discountRatio; // 高保費率
+	private BigDecimal discountRatio; // 折扣趴數
 
 	@Override
 	public String toString() {

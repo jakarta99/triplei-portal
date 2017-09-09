@@ -114,7 +114,7 @@ public class AdminProductController {
 				}else {
 					response.setData("Fail");
 				}
-				boolean insert = productService.insertXlsToDB();
+				boolean insert = productService.insertXlsxToDB();
 				if(insert) {
 					response.setData("insertSucesss");
 				}else {
@@ -129,7 +129,6 @@ public class AdminProductController {
 
 		return response;
 	}
-
 	
 	//// 以下新刪修 (9/2還用不到)
 	// @PostMapping

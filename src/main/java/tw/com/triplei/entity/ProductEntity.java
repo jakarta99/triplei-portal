@@ -45,8 +45,6 @@ public class ProductEntity extends GenericEntity{
 	
 	@Column(name = "YEAR")
 	private int year; // 年期
-	
-	
 
 	@Column(name = "DECLARE_INTEREST_RATE")
 	private BigDecimal declareInterestRate; // 宣告利率
@@ -84,6 +82,9 @@ public class ProductEntity extends GenericEntity{
 	
 	@Column(name = "STORE_SHELVES")
 	private Boolean storeShelves; // 商品上架
+	
+	@Column(name = "BONUS_POINT")
+	private BigDecimal bonusPoint; //點數趴數
 
 	@Override
 	public String toString() {
@@ -227,6 +228,14 @@ public class ProductEntity extends GenericEntity{
 
 	public void setStoreShelves(Boolean storeShelves) {
 		this.storeShelves = storeShelves;
+	}
+
+	public BigDecimal getBonusPoint() {
+		return bonusPoint;
+	}
+
+	public void setBonusPoint(BigDecimal bonusPoint) {
+		this.bonusPoint = bonusPoint;
 	}
 
 

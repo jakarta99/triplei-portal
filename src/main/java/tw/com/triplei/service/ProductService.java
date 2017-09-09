@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
 
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.GenericDao;
 import tw.com.triplei.commons.GenericService;
@@ -130,120 +129,168 @@ public class ProductService extends GenericService<ProductEntity> {
 		
 	}
 	
-	public boolean insertXlsToDB(){
-		Sheet sheet;
-		Workbook book;
+	
+	public boolean insertXlsxToDB() throws Exception{
+		org.apache.poi.ss.usermodel.Sheet sheet;
+		org.apache.poi.ss.usermodel.Workbook wb = null;
 		try {
-			book = Workbook.getWorkbook(new File(url));
-			sheet = book.getSheet(0);//取得第一頁的資料
-			for(int i=2;i<3;i++){//從第3排開始往下讀
+			if(url.endsWith(".xlsx")){
+				wb = new org.apache.poi.xssf.usermodel.XSSFWorkbook(new File(url));
+			}else if(url.endsWith(".xls")){
+				POIFSFileSystem fs = new POIFSFileSystem(new File(url));
+				wb = new org.apache.poi.hssf.usermodel.HSSFWorkbook(fs);
+			};
+
+			
+			sheet = wb.getSheetAt(0);//取得第一頁的資料
+
+			//從第3排開始往下讀
+			for(int i=2;i<=sheet.getLastRowNum();i++){
+				Row rowi = sheet.getRow(i);
+				if(rowi.getCell(0).getStringCellValue()==""){
+					break;
+				}
+				
 				Collection<ProductPremiumRatio> productPremiumRatioList = new ArrayList<ProductPremiumRatio>();
 				Collection<ProductHighDiscountRatio> productHighDiscountRatioList = new ArrayList<ProductHighDiscountRatio>();
-				Collection<ProductCancelRatio> productCancelRatioList = new ArrayList<ProductCancelRatio>();
+				Collection<ProductCancelRatio> productCancelRatioList = new ArrayList<ProductCancelRatio>();		
 				
 				ProductEntity product = new ProductEntity();
-				ProductHighDiscountRatio productHighDiscountRatio = new ProductHighDiscountRatio();
-				
-				InsurerEntity insurer = insurerDao.findByShortName(sheet.getCell(0, i).getContents());
 
 				//保險公司
+				String insurerName = rowi.getCell(0).getStringCellValue();
+				InsurerEntity insurer = insurerDao.findByShortName(insurerName);
 				product.setInsurer(insurer);
 				//商品名稱
-				product.setLocalName(sheet.getCell(1, i).getContents());
+				product.setLocalName(rowi.getCell(1).getStringCellValue());
 				//年期
-				product.setYear(Integer.parseInt(sheet.getCell(2, i).getContents()));
+				product.setYear((int)rowi.getCell(2).getNumericCellValue());
 				//商品年度
-				product.setYearCode(sheet.getCell(3, i).getContents());
+				product.setYearCode((int)rowi.getCell(3).getNumericCellValue()+"");
 				//商品代碼
-				product.setCode(sheet.getCell(4, i).getContents());
+				product.setCode(rowi.getCell(4).getStringCellValue());
 				//幣別
-				if("美元".equals(sheet.getCell(5, i).getContents())){
+				if("美元".equals(rowi.getCell(5).getStringCellValue())){
 					product.setCurr(Currency.USD);
-				}else if("新台幣".equals(sheet.getCell(5, i).getContents())){
+				}else if("新台幣".equals(rowi.getCell(5).getStringCellValue())){
 					product.setCurr(Currency.TWD);
 				};		
 				//預定利率
-				if("NON".equals(sheet.getCell(6, i).getContents())){
-					product.setPredictInterestRate(null);
-				}else{
-					product.setPredictInterestRate(BigDecimal.valueOf(Double.parseDouble(sheet.getCell(6, i).getContents())));
-				};
+				product.setPredictInterestRate(BigDecimal.valueOf(rowi.getCell(6).getNumericCellValue()));
+
 				//宣告利率
-				if("NON".equals(sheet.getCell(7, i).getContents())){
-					product.setDeclareInterestRate(null);
-				}else{
-					product.setDeclareInterestRate(BigDecimal.valueOf(Double.parseDouble(sheet.getCell(7, i).getContents().substring(0, sheet.getCell(7, i).getContents().length()-1))/100));
-				};		
+				product.setPredictInterestRate(BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()));
+
 				//繳費方式
-				product.setPaymentMethod(sheet.getCell(8, i).getContents());	
+				product.setPaymentMethod(rowi.getCell(8).getStringCellValue());	
+
+				//點數趴數
+				product.setBonusPoint(BigDecimal.valueOf(rowi.getCell(9).getNumericCellValue()));
+				
 				//寫進資料庫
 				ProductEntity productEntity = dao.save(product);
-				//切換換第二頁 (基本保費)
-				sheet = book.getSheet(1);
-				//第三排開始往下讀
-				for(int j=2;j<154;j++){
-					ProductPremiumRatio productPremiumRatio = new ProductPremiumRatio();
-					//設定商品ID
-					productPremiumRatio.setProductId(productEntity.getId());
-					//設定性別
-					productPremiumRatio.setGender(sheet.getCell(7, j).getContents());
-					//設定年紀
-					productPremiumRatio.setInsAge(Integer.parseInt(sheet.getCell(8, j).getContents()));
-					//設定費率
-					productPremiumRatio.setPremiumRatio(BigDecimal.valueOf(Double.parseDouble(sheet.getCell(9, j).getContents())));
-					//寫進基本費率 table
-					productPremiumRatioDao.save(productPremiumRatio);
-					
-					productPremiumRatioList.add(productPremiumRatio);
-				}
-				productEntity.setPremiumRatios(productPremiumRatioList);
 				
-				//切換至第三頁 (違約金費率)
-				sheet = book.getSheet(2);
-				for(int k=2;k<154;k++){
-					ProductCancelRatio productCancelRatio = new ProductCancelRatio();
-					//設定商品ID
-					productCancelRatio.setProductId(productEntity.getId());
-					//違約金投保年齡
-					if(sheet.getCell(8, k).getContents().substring(0,1)=="0"){
-						productCancelRatio.setInsAge(Integer.parseInt(sheet.getCell(8, k).getContents().substring(1)));
-					}else{
-						productCancelRatio.setInsAge(Integer.parseInt(sheet.getCell(8, k).getContents()));						
-					};
-					//違約金性別
-					productCancelRatio.setGender(sheet.getCell(7, k).getContents());
-					//寫進違約金table
-					productCancelRatioDao.save(productCancelRatio);
+				//切換換第二頁 (基本保費)
+				org.apache.poi.ss.usermodel.Sheet sheet1 = wb.getSheetAt(1);
+				//第三排開始往下讀
+				for(int j=2;j<=sheet1.getLastRowNum();j++){
+					Row rowj = sheet1.getRow(j);					
 					
-					productCancelRatioList.add(productCancelRatio);
+					if(rowj.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName()) &&
+						rowj.getCell(1).getStringCellValue().equals(productEntity.getLocalName()) &&
+						(int)(rowj.getCell(2).getNumericCellValue()) == productEntity.getYear() &&
+						(int)(rowj.getCell(4).getNumericCellValue()) == Integer.parseInt(productEntity.getYearCode()) &&
+						rowj.getCell(5).getStringCellValue().equals(productEntity.getCode()) &&
+						rowj.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())
+							){
+						ProductPremiumRatio productPremiumRatio = new ProductPremiumRatio();
+						//設定商品ID
+						productPremiumRatio.setProductId(productEntity.getId());
+						//設定性別
+						productPremiumRatio.setGender(rowj.getCell(7).getStringCellValue());
+						//設定投保年齡
+						productPremiumRatio.setInsAge((int)(rowj.getCell(8).getNumericCellValue()));
+						//設定費率
+						productPremiumRatio.setPremiumRatio(BigDecimal.valueOf(rowj.getCell(9).getNumericCellValue()));
+
+						//寫進基本費率 table
+						productPremiumRatioDao.save(productPremiumRatio);
+						productPremiumRatioList.add(productPremiumRatio);
+					}else{
+						break;
+					}
+				}
+
+				productEntity.setPremiumRatios(productPremiumRatioList);
+//----------------------------------------------------------------------------------------------------				
+				//切換至第三頁 (違約金費率)
+				org.apache.poi.ss.usermodel.Sheet sheet2 = wb.getSheetAt(2);
+				for(int k=2;k<=sheet2.getLastRowNum();k++){
+					Row rowk = sheet2.getRow(k);
+					if(rowk.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName()) &&
+						rowk.getCell(1).getStringCellValue().equals(productEntity.getLocalName()) &&
+						(int)(rowk.getCell(2).getNumericCellValue()) == productEntity.getYear() &&
+						(int)(rowk.getCell(4).getNumericCellValue()) == Integer.parseInt(productEntity.getYearCode()) &&
+						rowk.getCell(5).getStringCellValue().equals(productEntity.getCode()) &&
+						rowk.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())
+							){
+						ProductCancelRatio productCancelRatio = new ProductCancelRatio();
+						
+						//設定商品ID
+						productCancelRatio.setProductId(productEntity.getId());
+						//違約金投保年齡
+						productCancelRatio.setInsAge((int)rowk.getCell(8).getNumericCellValue());
+						//違約金性別
+						productCancelRatio.setGender(rowk.getCell(7).getStringCellValue());
+						
+						//寫進違約金table
+						productCancelRatioDao.save(productCancelRatio);
+						
+						productCancelRatioList.add(productCancelRatio);
+					
+					}			
+					
 				}
 				productEntity.setCancelRatios(productCancelRatioList);
 				//更新product table
+//				dao.save(productEntity);
+//-------------------------------------------------------------------------------------------------
+				//切換至第四頁 (高保費率)
+				org.apache.poi.ss.usermodel.Sheet sheet3 = wb.getSheetAt(3);
+				
+				for(int m = 2;m<=sheet3.getLastRowNum();m++){
+					Row rowm = sheet3.getRow(m);
+					if(rowm.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName()) &&
+							rowm.getCell(1).getStringCellValue().equals(productEntity.getLocalName()) &&
+							(int)(rowm.getCell(2).getNumericCellValue()) == productEntity.getYear() &&
+							(int)(rowm.getCell(4).getNumericCellValue()) == Integer.parseInt(productEntity.getYearCode()) &&
+							rowm.getCell(5).getStringCellValue().equals(productEntity.getCode()) &&
+							rowm.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())
+								){
+						ProductHighDiscountRatio productHighDiscountRatio = new ProductHighDiscountRatio();
+						//高保費率商品ID
+						productHighDiscountRatio.setProductId(productEntity.getId());
+						//折扣趴數
+						productHighDiscountRatio.setDiscountRatio(BigDecimal.valueOf(rowm.getCell(7).getNumericCellValue()));
+						//下限
+						productHighDiscountRatio.setMinValue(BigDecimal.valueOf(rowm.getCell(8).getNumericCellValue()));
+						//上限
+						productHighDiscountRatio.setMaxValue((int)rowm.getCell(9).getNumericCellValue());
+						
+						
+						//寫入高保費table
+						productHighDiscountRatioDao.save(productHighDiscountRatio);
+						
+						productHighDiscountRatioList.add(productHighDiscountRatio);
+					}
+				}
+
+				productEntity.setHighDiscountRatios(productHighDiscountRatioList);
 				dao.save(productEntity);
-				//高保費率開始
-				//高保費率商品ID
-//				productHighDiscountRatio.setProductId(productEntity.getId());
-//				
-//				//折扣趴數???????
-////				sheet.getCell(14, i).getContents();
-//				
-				//下限
-//				productHighDiscountRatio.setMinValue(BigDecimal.valueOf(Double.parseDouble(sheet.getCell(15, i).getContents())));
-				//上限
-//				productHighDiscountRatio.setMaxValue(Integer.parseInt(sheet.getCell(16, i).getContents()));
-				//寫入高保費table
-//				productHighDiscountRatioDao.save(productHighDiscountRatio);
-//				
-//				productHighDiscountRatioList.add(productHighDiscountRatio);
-//				
-//				productEntity.setHighDiscountRatios(productHighDiscountRatioList);
 			}
 			
 			return true;
 			
-		} catch (BiffException e) {
-			e.printStackTrace();
-			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
