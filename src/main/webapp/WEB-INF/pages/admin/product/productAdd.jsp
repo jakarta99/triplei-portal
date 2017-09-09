@@ -52,33 +52,7 @@
 
 </body>
 </html>
-<script type="text/javascript">
-	$(function() {	
-		//<!-- Save -->	
 
-		$("#uploadbutton").bind(
-				"click",
-				function() {
-					var $btn = $(this);
-					$btn.button("loading");
-
-					$.post("<c:url value='/admin/product'/>", "dataForm",
-							function(data) {
-								if (data.messages.length == 0) {
-									$("#dataForm").trigger("reset");
-
-									//swal("SUCCESS", "資料新增成功！", "success");
-									alert("SUCCESS");
-									$btn.button("reset");
-								}
-							}, function(data, textStatus, jqXHR) {
-								$btn.button("reset");
-							});
-
-					$btn.button("reset");
-				});
-	});
-</script>
 <script type="text/javascript">
 	function CBSelectedValueToTrue(cb) {
 		if (cb.checked) {
