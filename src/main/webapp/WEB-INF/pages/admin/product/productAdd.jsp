@@ -24,7 +24,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" id="dataForm" action="/admin/product/upload" method="post" enctype="multipart/form-data">
+					<form class="form-horizontal" action="/admin/product" method="post" enctype="multipart/form-data">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -32,22 +32,14 @@
 								</h4>
 							</div>
 						</div>
-						<input type="file" name="file">
-						<input type="submit" value="文件上傳" id="uploadbutton">
+						<input type="file" name="file[]" multiple="multiple">
+						<input type="submit" value="文件上傳">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div>
-					<a href="<c:url value='/admin/product/list'/>"
-						class="btn btn-lg btn-primary btn-warning btn-block"
-						data-loading-text="Loading">返回</a>
-				</div>
-			</div>
-		</div>
+
 	</div>
 
 </body>
