@@ -1,13 +1,5 @@
 package tw.com.triplei.admin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ProductSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.service.ProductService;
 
@@ -129,6 +123,7 @@ public class AdminProductController {
 
 		return response;
 	}
+
 	
 	//// 以下新刪修 (9/2還用不到)
 	// @PostMapping
@@ -195,4 +190,25 @@ public class AdminProductController {
 	// }
 	// return response;
 	// }
+
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public AjaxResponse<ProductEntity> delete(@PathVariable(value = "id") final long id) {
+		
+		log.debug("{}", id);
+		
+		final AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
+		
+		try {			
+			productService.delete(id);
+		
+			
+		} catch (final Exception e) {
+			return new AjaxResponse<>(e);
+		}
+		return response;
+				
+	}
+
 }
