@@ -73,7 +73,7 @@ public class UserService extends GenericService<UserEntity>{
 		
 		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
 		dbUserEntity.setEmail(entity.getEmail());
-		dbUserEntity.setActive(entity.getActive());
+		dbUserEntity.setEnabled(entity.getEnabled());
 		
 		dbUserEntity.getRoles().clear();
 		

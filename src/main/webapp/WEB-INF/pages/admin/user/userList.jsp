@@ -53,23 +53,36 @@
 			        
 			 
 			        fields: [
-			            { name: '修改', width:30, itemTemplate:btns },
+			            { name: '修/刪', width:30, itemTemplate:btns },
 						{ name: "id", visible: false},
-						{ title: '會員帳號', name: "accountNumber", type: "text", width: 100 },
+						{ title: '會員帳號', name: "accountNumber", type: "text", width: 50 },
 						{ title: '會員密碼', visible: false },
-						{ title: '會員姓名', name: "name", type: "text", width: 100 },
-						{ title: '會員email', visible: false },
-						{ title: '狀態', visible: false } // 目前顯示異常
+						{ title: '會員姓名', name: "name", type: "text", width: 50 },
+						{ title: '會員email', name: "email", type: "text", width: 100 },
+						{ title: '狀態', name: "enabled", type: "checkbox", width: 30} 
 			        ]
 			    });
 			    
 			    function btns(value, row) {
+					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
+					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+					
+					$delBtn.click(function() {
+						if (confirm('你確定要刪除這筆資料?')) {
+							$delBtn.button('loading');
+							$.delete_(BASE_URL+ "/" + row.id, function() {
+								$delBtn.button('reset');
+								$("#jsGrid").jsGrid("reset");
+							});
+						}
+					});
 					
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($editBtn);
+					// return $("<div></div>").append($editBtn);
+					return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
 				}
 			</script>
 			

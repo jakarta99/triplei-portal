@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.UserSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.RoleEntity;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.service.RoleService;
@@ -86,6 +87,23 @@ public class AdminUserController {
 		} catch (final Exception e) {
 			response.addException(e);
 		}		
+		return response;
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public AjaxResponse<InsurerEntity> delete(@PathVariable(value = "id") final long id) {
+		
+		log.debug("{}", id);
+		
+		final AjaxResponse<InsurerEntity> response = new AjaxResponse<InsurerEntity>();
+		
+		try {			
+			userService.delete(id);
+			
+		} catch (final Exception e) {
+			return new AjaxResponse<>(e);
+		}
 		return response;
 	}
 	

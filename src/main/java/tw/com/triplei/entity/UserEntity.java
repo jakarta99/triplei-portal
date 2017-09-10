@@ -44,8 +44,8 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	@Column(name = "EMAIL")
 	private String email; 
 	
-	@Column(name = "ACTIVE")
-	private String active;
+	@Column(name = "enabled")
+	private Boolean enabled;
 	
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
@@ -88,14 +88,16 @@ public class UserEntity extends GenericEntity implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return enabled;
 	}
 
 	@Override
 	public String toString() {
 		return "UserEntity [accountNumber=" + accountNumber + ", password=" + password + ", name=" + name + ", email="
-				+ email + ", active=" + active + ", roles=" + roles + "]";
+				+ email + ", enabled=" + enabled + ", roles=" + roles + "]";
 	}
+
+	
 
 
 }

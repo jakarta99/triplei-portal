@@ -58,14 +58,13 @@
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>	
-								
-								
+																
 								<div class="form-group required">
-									<label for="active" class="col-md-2 control-label">狀態</label>
+									<label for="enabled" class="col-md-2 control-label">狀態 ${entity.enabled}</label>
 									<div class="col-md-8">
-										<select id="active" name=active class="form-control">
-											<option value="true" ${entity.active == 'true'? 'selected': ''}>使用</option>
-											<option value="false" ${entity.active == 'false'? 'selected': ''}>停用</option>
+										<select id="enabled" name=enabled class="form-control">
+											<option value="true" ${entity.enabled == true ? 'selected': ''}>使用</option>
+											<option value="false" ${entity.enabled == false ? 'selected': ''}>停用</option>
 										</select>		
 									</div>
 								</div>

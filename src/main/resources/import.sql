@@ -40,14 +40,14 @@ INSERT INTO WISH (BRAND, NAME, WISH_TIME, WISH_TYPE,WEEK_USE_COUNT) VALUES ('舒
 INSERT INTO WISH (BRAND, NAME, WISH_TIME, WISH_TYPE,WEEK_USE_COUNT) VALUES ('DYSON','吹風機','2017/09/02 07:43:12','3C家電',1);
 --SECURITY
 --USERMEMBER
-INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user001', 'user001@gmail.com', '測試使用者1號-一般', 'user001', 'true');
-INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user002', 'user002@gmail.com', '測試使用者2號-下單', 'user002', 'true');
-INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user003', 'user003@gmail.com', '測試使用者3號-工讀', 'user003', 'true');
-INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user004', 'user004@gmail.com', '測試使用者4號-業務員', 'user004', 'true');
-INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user005', 'user005@gmail.com', '測試使用者5號-客服', 'user005', 'true');
-INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user006', 'user006@gmail.com', '測試使用者6號-文章', 'user006', 'true');
-INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user007', 'user007@gmail.com', '測試使用者7號-管理', 'user007', 'true');
---INSERT INTO USERMEMBER (account_Number, email, name ,password, active) VALUES ('user008', 'user008@gmail.com', '測試使用者8號-停用', 'user008', 'false');
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user001', 'user001@gmail.com', '測試使用者1號-一般', 'user001', true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user002', 'user002@gmail.com', '測試使用者2號-下單', 'user002', true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user003', 'user003@gmail.com', '測試使用者3號-工讀', 'user003', true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user004', 'user004@gmail.com', '測試使用者4號-業務員', 'user004', true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user005', 'user005@gmail.com', '測試使用者5號-客服', 'user005', true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user006', 'user006@gmail.com', '測試使用者6號-文章', 'user006', true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user007', 'user007@gmail.com', '測試使用者7號-管理', 'user007', true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user008', 'user008@gmail.com', '測試使用者8號-管理', 'user008', false);
 --ROLE
 INSERT INTO ROLE (code, name) VALUES ('ROLE_NORMAL', '一般會員');
 INSERT INTO ROLE (code, name) VALUES ('ROLE_ORDER', '下單會員');
@@ -65,6 +65,8 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (5,5);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (6,6);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (7,7);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (8,7);
+
+
 
 
 
