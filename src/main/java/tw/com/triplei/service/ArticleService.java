@@ -77,7 +77,7 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		return dbEntity;
 	}
 	
-	public String iamgeUpload(MultipartFile file) {
+	public String imageUpload(MultipartFile file) {
 		byte[] bytes;
 		try {
 			bytes = file.getBytes();
