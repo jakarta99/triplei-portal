@@ -52,9 +52,6 @@
 					width : "100%",
 					height : "500px",
 
-
-					
-
 					autoload : true,
 // 			        filtering: true,
 	                selecting: false,
@@ -63,9 +60,13 @@
 					sorting : true,
 					paging : true,
 					pageIndex : 1,
-					pageSize : 2,
+					pageSize :10,
 			        pageButtonCount: 5,
 					pageLoading : true,
+					pageNextText:"下一頁",
+			        pagePrevText:"上一頁",
+			        pageFirstText:"第一頁",
+			        pageLastText:"最後一頁",
 
 					controller : {
 						loadData : function(filter) {

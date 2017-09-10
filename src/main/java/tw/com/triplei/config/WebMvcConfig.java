@@ -1,11 +1,13 @@
 package tw.com.triplei.config;
 
-import java.io.IOException;
+import javax.servlet.ServletContext;
 
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.connector.Connector;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -14,7 +16,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@PropertySource("classpath:ArticleContent/ArticleList.properties")
+@PropertySources({
+@PropertySource("classpath:ArticleContent/ArticleList.properties"),
+@PropertySource("classpath:ArticleContent/fckeditor.properties")
+})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
@@ -33,7 +38,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 //
 //		return resolver;
 //	}
-
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");

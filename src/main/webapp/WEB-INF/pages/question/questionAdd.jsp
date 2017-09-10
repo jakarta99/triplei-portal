@@ -151,11 +151,11 @@
 		$("#checkemail").text("");
 		var email = $("#askerEmail").val();
 		if (validateEmail(email)) {
-			$("#checkemail").text(email + " is valid :)");
+			$("#checkemail").text(email + "可以使用");
 			$("#checkemail").css("color", "green");
 			return true;
 		} else {
-			$("#checkemail").text(email + " is not valid :(");
+			$("#checkemail").text(email + " 請輸入正確的Email");
 			$("#checkemail").css("color", "red");
 		}
 		return false;

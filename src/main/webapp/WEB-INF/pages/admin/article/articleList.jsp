@@ -30,7 +30,7 @@
 	<script>
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/article";
 			    var url = "${pageContext.request.contextPath}";
-			 
+			    
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
 			        height: "500px",
@@ -39,21 +39,26 @@
 			        editing: false,
 			        paging: true,
 			        pageIndex: 1,
-			        pageSize: 10,
+			        pageSize: 5,
 			        pageLoading: true,
 			        autoload: true,
-			        filter:true,
 			        sorting:true,
+			        pageNextText:"下一頁",
+			        pagePrevText:"上一頁",
+			        pageFirstText:"第一頁",
+			        pageLastText:"最後一頁",
+			        pagerFormat: "&nbsp;&nbsp; {first} {prev} {pages} {next} {last} &nbsp;&nbsp;&nbsp; 總共： {pageCount} 頁 ／ {itemCount} 筆",
 			 
 			        controller: {
 			            loadData: function (filter) {
-			                return $.ajax({
+			            	return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
 			                    data: filter,
 			                    dataType: "json",
 			                    cache: false
 			                });
+			                
 			            },
 			        },
 			        
@@ -76,11 +81,11 @@
 			            },
 			            { title: '標題', name: "title", type: "text", width: 70 },
 			            { title: '文章簡介', name: "introduction", type: "text", width: 130},
-			            { title: '文章內容', name: "content", type: "text", width: 200 },
+			            { title: '文章內容', name: "content", type: "text", width: 200,visibile:false },
 			            { title: '作者', name: "author", type: "text", width: 50 },
 			            { title: '廣告圖', name: "bannerImage",width: 80,  itemTemplate: function(val) {return $("<img>").attr("src", val).css({ height: 80, width: 80}) }},
 			            { title: '發布時間', name: "publishTime", width: 55, itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString();}},
-			            { title: '點閱率', name: "clickCount", type: "text", width: 20 },
+			            { title: '點閱率', name: "clickCount", type: "number", width: 20 },
 			            { title: '輪播', name: "bannerRotation", type: "checkbox", width: 25 },
 			            { title: '熱門分類', name: "hotArticle", width: 25, type:"checkbox"},
 			            { title: '文章上架', name: "storeShelves", width: 25, type:"checkbox"},
@@ -88,6 +93,7 @@
 			    });
 			    
 			    function btns(value, row) {
+			    	
 					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
@@ -108,7 +114,6 @@
 					
 					return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
 				}
-			    
 
 			</script>
 		</div>
