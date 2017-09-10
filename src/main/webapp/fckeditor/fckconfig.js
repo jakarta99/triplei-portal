@@ -80,7 +80,7 @@ FCKConfig.EMailProtection = 'none' ; // none | encode | function
 FCKConfig.EMailProtectionFunction = 'mt(NAME,DOMAIN,SUBJECT,BODY)' ;
 
 FCKConfig.StartupFocus	= true ;
-FCKConfig.ForcePasteAsPlainText	= false ;
+FCKConfig.ForcePasteAsPlainText	= true ;
 FCKConfig.AutoDetectPasteFromWord = true ;	// IE only.
 FCKConfig.ShowDropDialog = true ;
 FCKConfig.ForceSimpleAmpersand	= false ;
@@ -99,7 +99,7 @@ FCKConfig.TemplateReplaceCheckbox = true ;
 FCKConfig.ToolbarLocation = 'In' ;
 
 FCKConfig.ToolbarSets["Article"] = [
-	['Source','Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+	['Source','Undo','Redo','-','Cut','Copy','-','Paste','Find','Replace','-','SelectAll','RemoveFormat'],
 	['Form','Checkbox','Radio','TextField','Textarea','Select','Button'],
 	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
 	['Outdent','Indent','Blockquote','CreateDiv'],

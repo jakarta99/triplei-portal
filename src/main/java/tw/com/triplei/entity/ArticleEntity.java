@@ -41,7 +41,7 @@ public class ArticleEntity extends GenericEntity {
 	@Column(name = "INTRODUCTION")
 	private String introduction; // 文章簡介
 
-	@Column(name = "CONTENT")
+	@Column(name = "CONTENT", columnDefinition="TEXT")
 	private String content;
 
 	@Column(name = "AUTHOR")
