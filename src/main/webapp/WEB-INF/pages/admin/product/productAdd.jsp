@@ -24,7 +24,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" id="dataForm">
+					<form class="form-horizontal" action="/admin/product" method="post" enctype="multipart/form-data">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -32,60 +32,19 @@
 								</h4>
 							</div>
 						</div>
-					</form>
-					<form action="/admin/product/upload" method="post"	enctype="multipart/form-data">
-						<input type="file" name="file">
+						<input type="file" name="file[]" multiple="multiple">
 						<input type="submit" value="文件上傳">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div>
-					<a href="#" class="btn btn-lg btn-primary btn-block"
-						data-loading-text="Loading" id="saveButton">儲存</a>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div>
-					<a href="<c:url value='/admin/product/list'/>"
-						class="btn btn-lg btn-primary btn-warning btn-block"
-						data-loading-text="Loading">返回</a>
-				</div>
-			</div>
-		</div>
+
 	</div>
 
 </body>
 </html>
-<script type="text/javascript">
-	$(function() {
-		//<!-- Save -->	
 
-		$("#saveButton").bind(
-				"click",
-				function() {
-					var $btn = $(this);
-					$btn.button("loading");
-
-					$.post("<c:url value='/admin/product'/>", "dataForm",
-							function(data) {
-								if (data.messages.length == 0) {
-									$("#dataForm").trigger("reset");
-									//swal("SUCCESS", "資料新增成功！", "success");
-									alert("SUCCESS");
-									$btn.button("reset");
-								}
-							}, function(data, textStatus, jqXHR) {
-								$btn.button("reset");
-							});
-
-					$btn.button("reset");
-				});
-	});
-</script>
 <script type="text/javascript">
 	function CBSelectedValueToTrue(cb) {
 		if (cb.checked) {

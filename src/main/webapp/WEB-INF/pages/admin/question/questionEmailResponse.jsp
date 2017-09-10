@@ -55,15 +55,7 @@
 									</div>
 								</div>
 
-								<div class="form-group required">
-									<label for="name" class="col-md-2 control-label">問題分類2</label>
-									<div class="col-md-10">
-										<input type="text" class="form-control" id="questionType2"
-											name="questionType2" placeholder="questionType2"
-											value="${entity.questionType2}" /> <span class="help-block"><div
-												class="text-danger"></div></span>
-									</div>
-								</div>
+			
 
 								<div class="form-group required">
 									<label for="sortNo" class="col-md-2 control-label">發問人Email</label>

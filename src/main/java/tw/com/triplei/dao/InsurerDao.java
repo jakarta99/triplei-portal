@@ -6,4 +6,6 @@ import tw.com.triplei.entity.InsurerEntity;
 public interface InsurerDao extends GenericDao<InsurerEntity> {
 
 	public InsurerEntity findByCode(String code);
+	
+	public InsurerEntity findByShortName(String shortName);
 }

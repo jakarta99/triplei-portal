@@ -71,6 +71,10 @@ border:1px black solid;
 			        pageSize: 10,
 			        pageLoading: true,
 			        autoload: true,
+			        pageNextText:"下一頁",
+			        pagePrevText:"上一頁",
+			        pageFirstText:"第一頁",
+			        pageLastText:"最後一頁",
 			        dialogClass: 'detailsDialog',
 			        rowDoubleClick: function(args) {
 			            showDetailsDialog("內容",args.item);

@@ -15,7 +15,6 @@
 	src="<c:url value="/resources/jquery/moment.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/fckeditor/fckeditor.js"/>"></script>
-
 <title>Triple i</title>
 </head>
 
@@ -27,7 +26,6 @@
 		<div>
 			<br /> <br /> <br />
 			<h3>文章管理</h3>
-
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm"
@@ -75,7 +73,9 @@
 									<label for="content" class="col-md-2 control-label">文章內容</label>
 									<div class="col-md-10">
 										<textarea class="form-control" name="content" id="content"></textarea>
-										<span class="help-block"><div class="text-danger"></div></span>
+										<input type="hidden" name="${_csrf.parameterName}"
+											value="${_csrf.token}" /> <span class="help-block"><div
+												class="text-danger"></div></span>
 									</div>
 								</div>
 
@@ -130,7 +130,6 @@
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</form>
@@ -167,27 +166,28 @@
 			oFCKeditor.ReplaceTextarea();
 
 			//<!-- Save -->	
-			$("#saveButton").on("click", function() {
-				var $btn = $(this);
-				$btn.button("loading");
+			$("#saveButton").on("click",function() {
+								var $btn = $(this);
+								$btn.button("loading");
 
-				//alert(FCKeditorAPI.GetInstance('content').GetHTML());
-				var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
-				$("#content").val(contentVal);
-// 				alert(contentVal);
-				$.post("<c:url value='/admin/article'/>", "dataForm", function(data) {
-					if (data.messages.length == 0) {
-					// alert(data.data.bannerImage);
-					$("#dataForm").trigger("reset");
-					// swal("SUCCESS", "資料新增成功！", "success");
-					alert("SUCCESS");
-					$btn.button("reset");
-					}
-					}, function(data, textStatus, jqXHR) {
-					$btn.button("reset");
-					});
-				$btn.button("reset");
-			});
+								var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
+								$("#content").val(contentVal);
+										
+								$.post("<c:url value='/admin/article'/>","dataForm",
+												function(data) {
+													if (data.messages.length == 0) {
+														$("#dataForm").trigger(
+																"reset");
+														// swal("SUCCESS", "資料新增成功！", "success");
+														alert("SUCCESS");
+														$btn.button("reset");
+													}
+												}, function(data, textStatus,
+														jqXHR) {
+													$btn.button("reset");
+												});
+								$btn.button("reset");
+							});
 		});
 	</script>
 </body>

@@ -82,7 +82,7 @@ public class AdminQuestionController {
 		System.out.println("問題回覆文字 = " + emailreply);
 		
 		
-		emailservice.sendEmail(form.getAskerEmail(), "REPLY TEXT HERE");
+		emailservice.sendEmail(form.getAskerEmail(), emailreply);
 		
 		final AjaxResponse<QuestionEntity> response = new AjaxResponse<QuestionEntity>();
 

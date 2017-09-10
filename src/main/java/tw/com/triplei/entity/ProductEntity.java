@@ -45,7 +45,7 @@ public class ProductEntity extends GenericEntity{
 	
 	@Column(name = "YEAR")
 	private int year; // 年期
-	
+
 	@Column(name = "DECLARE_INTEREST_RATE")
 	private BigDecimal declareInterestRate; // 宣告利率
 	
@@ -82,6 +82,9 @@ public class ProductEntity extends GenericEntity{
 	
 	@Column(name = "STORE_SHELVES")
 	private Boolean storeShelves; // 商品上架
+	
+	@Column(name = "BONUS_POINT")
+	private BigDecimal bonusPoint; //點數趴數
 
 	@Override
 	public String toString() {
@@ -177,6 +180,62 @@ public class ProductEntity extends GenericEntity{
 
 	public void setCancelRatios(Collection<ProductCancelRatio> cancelRatios) {
 		this.cancelRatios = cancelRatios;
+	}
+	
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public BigDecimal getInsureAmount() {
+		return insureAmount;
+	}
+
+	public void setInsureAmount(BigDecimal insureAmount) {
+		this.insureAmount = insureAmount;
+	}
+
+	public BigDecimal getPremium() {
+		return premium;
+	}
+
+	public void setPremium(BigDecimal premium) {
+		this.premium = premium;
+	}
+
+	public BigDecimal getCashValue() {
+		return cashValue;
+	}
+
+	public void setCashValue(BigDecimal cashValue) {
+		this.cashValue = cashValue;
+	}
+
+	public Boolean getStoreShelves() {
+		return storeShelves;
+	}
+
+	public void setStoreShelves(Boolean storeShelves) {
+		this.storeShelves = storeShelves;
+	}
+
+	public BigDecimal getBonusPoint() {
+		return bonusPoint;
+	}
+
+	public void setBonusPoint(BigDecimal bonusPoint) {
+		this.bonusPoint = bonusPoint;
 	}
 
 

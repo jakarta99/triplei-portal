@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ProductSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.service.ProductService;
 
@@ -90,84 +92,55 @@ public class AdminProductController {
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
 		}
-
 		return new GridResponse<>(page);
 	}
 
-	@PostMapping("/upload")
-	@ResponseBody
-	public AjaxResponse<String> insert(final Model model, @RequestParam("file") MultipartFile file) {
+	@PostMapping
+	public String insert(final Model model, @RequestParam("file[]") MultipartFile file) {
 		AjaxResponse<String> response = new AjaxResponse<String>();
+
+		if (!file.isEmpty()) {
+			try {
+				boolean upload= productService.ProductUpload(file);
+				if(upload) {
+					response.setData("Sucesss");
+				}else {
+					response.setData("Fail");
+				}
+				boolean insert = productService.insertXlsxToDB();
+				if(insert) {
+					response.setData("insertSucesss");
+				}else {
+					response.setData("insertFail");
+				}
+			} catch (final Exception e) {
+				response.addException(e);
+			}
+		}
 		
 		log.debug("{}", file);
-		
-		return response;
-	}
-	
 
-	//// 以下新刪修 (9/2還用不到)
-	// @PostMapping
-	// @ResponseBody
-	// public AjaxResponse<ProductEntity> insert(final Model model, @RequestBody
-	//// final ProductEntity form) {
-	//
-	// AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
-	//
-	// try {
-	//
-	// final ProductEntity insertResult = productService.insert(form);
-	// response.setData(insertResult);
-	//
-	// } catch (final ApplicationException ex) {
-	// ex.printStackTrace();
-	// response.addMessages(ex.getMessages());
-	// } catch (final Exception e) {
-	// response.addException(e);
-	// }
-	//
-	// log.debug("{}", response);
-	//
-	// return response;
-	// }
-	//
-	// @RequestMapping(method = RequestMethod.PUT)
-	// @ResponseBody
-	// public AjaxResponse<ProductEntity> update(final Model model, @RequestBody
-	//// final ProductEntity form) {
-	//
-	// log.debug("{}", form);
-	//
-	// final AjaxResponse<ProductEntity> response = new
-	//// AjaxResponse<ProductEntity>();
-	//
-	// try {
-	//
-	// final ProductEntity updateResult = productService.update(form);
-	// response.setData(updateResult);
-	//
-	// } catch (final Exception e) {
-	// response.addException(e);
-	// }
-	//
-	// return response;
-	// }
-	//
-	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	// @ResponseBody
-	// public AjaxResponse<ProductEntity> delete(@PathVariable(value = "id") final
-	//// long id) {
-	//
-	// log.debug("{}", id);
-	//
-	// final AjaxResponse<ProductEntity> response = new
-	//// AjaxResponse<ProductEntity>();
-	//
-	// try {
-	// productService.delete(id);
-	//
-	// } catch (final Exception e) {
-	// return new AjaxResponse<>(e);
-	// }
-	// return response;
-	// }
+		return "/admin/product/productList";
+	}
+
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public AjaxResponse<ProductEntity> delete(@PathVariable(value = "id") final long id) {
+		
+		log.debug("{}", id);
+		
+		final AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
+		
+		try {			
+			productService.delete(id);
+		
+			
+		} catch (final Exception e) {
+			return new AjaxResponse<>(e);
+		}
+		return response;
+				
+	}
+
 }
