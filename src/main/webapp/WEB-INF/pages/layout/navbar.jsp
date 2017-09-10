@@ -26,16 +26,18 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<sec:authorize access="hasRole('ADMIN')">
+				<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
+
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">系統管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">使用者管理</a></li>
-							<li><a href="#">會員管理</a></li>
-							
-							
+							<li><a href="/admin/user/list">會員管理</a></li>
 						</ul>
 					</li>
+				</sec:authorize>	
+					
+				
+				<sec:authorize access="hasAnyRole('ADMIN', 'ARTICLE', 'SERVICE', 'PARTTIME')">
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">客服管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
