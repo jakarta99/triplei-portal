@@ -120,7 +120,7 @@ public class AdminProductController {
 		
 		log.debug("{}", files);
 
-		return "/admin/product/productList";
+		return "redirect:/admin/product/list";
 	}
 
 	

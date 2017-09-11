@@ -149,7 +149,6 @@ public class ProductService extends GenericService<ProductEntity> {
 						POIFSFileSystem fs = new POIFSFileSystem(new File(url));
 						wb = new org.apache.poi.hssf.usermodel.HSSFWorkbook(fs);
 					}
-					;
 
 					sheet = wb.getSheetAt(0);// 取得第一頁的資料
 
@@ -157,7 +156,7 @@ public class ProductService extends GenericService<ProductEntity> {
 					for (int i = 2; i <= sheet.getLastRowNum(); i++) {
 						Row rowi = sheet.getRow(i);
 						if (rowi.getCell(0).getStringCellValue() == "") {
-							break;
+							continue;
 						}
 
 						Collection<ProductPremiumRatio> productPremiumRatioList = new ArrayList<ProductPremiumRatio>();
@@ -184,13 +183,20 @@ public class ProductService extends GenericService<ProductEntity> {
 						} else if ("新台幣".equals(rowi.getCell(5).getStringCellValue())) {
 							product.setCurr(Currency.TWD);
 						}
-						;
+						
 						// 預定利率
 						product.setPredictInterestRate(BigDecimal.valueOf(rowi.getCell(6).getNumericCellValue()));
 
 						// 宣告利率
-						product.setPredictInterestRate(BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()));
-
+						product.setDeclareInterestRate(BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()));
+						
+						//利率別
+						if(rowi.getCell(6).getNumericCellValue()!=0){
+							product.setInterestRateType("預定利率");
+						}else if(rowi.getCell(7).getNumericCellValue()!=0){
+							product.setInterestRateType("宣告利率");
+						}
+						
 						// 繳費方式
 						product.setPaymentMethod(rowi.getCell(8).getStringCellValue());
 
@@ -209,6 +215,7 @@ public class ProductService extends GenericService<ProductEntity> {
 							if (rowj.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
 									&& rowj.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
 									&& (int) (rowj.getCell(2).getNumericCellValue()) == productEntity.getYear()
+									&& rowj.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
 									&& (int) (rowj.getCell(4).getNumericCellValue()) == Integer
 											.parseInt(productEntity.getYearCode())
 									&& rowj.getCell(5).getStringCellValue().equals(productEntity.getCode())
@@ -229,7 +236,7 @@ public class ProductService extends GenericService<ProductEntity> {
 								productPremiumRatioDao.save(productPremiumRatio);
 								productPremiumRatioList.add(productPremiumRatio);
 							} else {
-								break;
+								continue;
 							}
 						}
 
@@ -242,6 +249,7 @@ public class ProductService extends GenericService<ProductEntity> {
 							if (rowk.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
 									&& rowk.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
 									&& (int) (rowk.getCell(2).getNumericCellValue()) == productEntity.getYear()
+									&& rowk.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
 									&& (int) (rowk.getCell(4).getNumericCellValue()) == Integer
 											.parseInt(productEntity.getYearCode())
 									&& rowk.getCell(5).getStringCellValue().equals(productEntity.getCode())
@@ -612,6 +620,7 @@ public class ProductService extends GenericService<ProductEntity> {
 							if (rowm.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
 									&& rowm.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
 									&& (int) (rowm.getCell(2).getNumericCellValue()) == productEntity.getYear()
+									&& rowm.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
 									&& (int) (rowm.getCell(4).getNumericCellValue()) == Integer
 											.parseInt(productEntity.getYearCode())
 									&& rowm.getCell(5).getStringCellValue().equals(productEntity.getCode())
@@ -633,6 +642,8 @@ public class ProductService extends GenericService<ProductEntity> {
 								productHighDiscountRatioDao.save(productHighDiscountRatio);
 
 								productHighDiscountRatioList.add(productHighDiscountRatio);
+							}else{
+								continue;
 							}
 						}
 
@@ -647,6 +658,6 @@ public class ProductService extends GenericService<ProductEntity> {
 			}
 			return true;
 		}
-		return false;
+			return false;
 	}
 }
