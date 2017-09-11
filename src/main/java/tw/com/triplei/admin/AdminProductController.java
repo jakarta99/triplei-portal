@@ -96,18 +96,18 @@ public class AdminProductController {
 	}
 
 	@PostMapping
-	public String insert(final Model model, @RequestParam("file[]") MultipartFile file) {
+	public String insert(final Model model, @RequestParam("files") MultipartFile[] files) {
 		AjaxResponse<String> response = new AjaxResponse<String>();
 
-		if (!file.isEmpty()) {
+		if (files.length > 0) {
 			try {
-				boolean upload= productService.ProductUpload(file);
+				boolean upload= productService.ProductUpload(files);
 				if(upload) {
 					response.setData("Sucesss");
 				}else {
 					response.setData("Fail");
 				}
-				boolean insert = productService.insertXlsxToDB();
+				boolean insert = productService.insertXlsxToDB(files);
 				if(insert) {
 					response.setData("insertSucesss");
 				}else {
@@ -118,7 +118,7 @@ public class AdminProductController {
 			}
 		}
 		
-		log.debug("{}", file);
+		log.debug("{}", files);
 
 		return "/admin/product/productList";
 	}

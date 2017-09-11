@@ -32,12 +32,12 @@
 								</h4>
 							</div>
 						</div>
-						<input type="file" name="file[]" multiple="multiple">
+						<input type="file" name="files" multiple="multiple">
 						<input type="submit" value="文件上傳">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
 				</div>
-			</div>
+				</div>
 		</div>
 
 	</div>
