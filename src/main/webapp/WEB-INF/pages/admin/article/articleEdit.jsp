@@ -97,8 +97,14 @@
 									<div class="col-md-10">
 										<select class="form-control" id="bannerRotation"
 											name="bannerRotation" style="width:90px">
+											<c:if test="${entity.bannerRotation=='true'}">
 											<option value="false">不要</option>
+											<option value="true" selected="selected">要</option>
+											</c:if>
+											<c:if test="${entity.bannerRotation=='false'}">
+											<option value="false" selected="selected">不要</option>
 											<option value="true">要</option>
+											</c:if>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
@@ -108,8 +114,14 @@
 									<div class="col-md-10">
 										<select class="form-control" id="hotArticle" name="hotArticle"
 											style="width:90px">
+											<c:if test="${entity.hotArticle=='true'}">
 											<option value="false">不要</option>
+											<option value="true" selected="selected">要</option>
+											</c:if>
+											<c:if test="${entity.hotArticle=='false'}">
+											<option value="false" selected="selected">不要</option>
 											<option value="true">要</option>
+											</c:if>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
@@ -119,8 +131,14 @@
 									<div class="col-md-10">
 										<select class="form-control" id="storeShelves" name="storeShelves"
 											style="width:90px">
+											<c:if test="${entity.storeShelves=='true'}">
 											<option value="false">不要</option>
+											<option value="true" selected="selected">要</option>
+											</c:if>
+											<c:if test="${entity.storeShelves=='false'}">
+											<option value="false" selected="selected">不要</option>
 											<option value="true">要</option>
+											</c:if>
 										</select> <span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
@@ -154,7 +172,6 @@
 	
 	<script type="text/javascript">
 $(function() {
-	
 	var oFCKeditor = new FCKeditor("content");
 	oFCKeditor.BasePath = "/fckeditor/";
 	oFCKeditor.Height = 400;
