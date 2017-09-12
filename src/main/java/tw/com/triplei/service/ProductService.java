@@ -49,11 +49,24 @@ public class ProductService extends GenericService<ProductEntity> {
 	@Autowired
 	private ProductPremiumRatioDao productPremiumRatioDao;
 
+
 	@Autowired
 	private ProductCancelRatioDao productCancelRatioDao;
 
 	@Autowired
 	private ProductHighDiscountRatioDao productHighDiscountRatioDao;
+
+	public ProductPremiumRatioDao getProductPremiumRatioDao() {
+		return productPremiumRatioDao;
+	}
+	
+	public ProductCancelRatioDao getProductCancelRatioDao() {
+		return productCancelRatioDao;
+	}
+	
+	public ProductHighDiscountRatioDao getProductHighDiscountRatioDao() {
+		return productHighDiscountRatioDao;
+	}
 
 	private String url;
 	

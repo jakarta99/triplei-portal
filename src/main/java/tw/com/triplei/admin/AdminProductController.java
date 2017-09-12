@@ -48,7 +48,42 @@ public class AdminProductController {
 
 		return "/admin/product/productEdit";
 	}
+	
+	@RequestMapping(value = "/highDiscountRatios/{id}", method = RequestMethod.GET)
+	public String highDiscountRatiosPage(@PathVariable("id") final Long id, Model model) {
 
+		return "/admin/product/highDiscountRatios";
+	}
+	
+	@RequestMapping(value = "/premiumRatios/{id}", method = RequestMethod.GET)
+	public String premiumRatiosPage(@PathVariable("id") final Long id, Model model) {
+
+		return "/admin/product/premiumRatios";
+	}
+	
+	@RequestMapping(value = "/cancelRatios/{id}", method = RequestMethod.GET)
+	public String cancelRatiosPage(@PathVariable("id") final Long id, Model model) {
+		
+		return "/admin/product/cancelRatios";
+	}
+
+	@GetMapping("/load")
+	@ResponseBody
+	public GridResponse<ProductEntity> find(final Model model, final ProductEntity form,
+			@RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
+		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
+
+		Page<ProductEntity> page;
+
+		try {
+			page = productService.getAll(new ProductSpecification(), pageable);
+
+		} catch (final Exception e) {
+			return new GridResponse<>(e);
+		}
+		return new GridResponse<>(page);
+	}
+	
 	@GetMapping
 	@ResponseBody
 	public GridResponse<ProductEntity> query(final Model model, final ProductEntity form,

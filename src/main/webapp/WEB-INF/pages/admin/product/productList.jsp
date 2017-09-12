@@ -67,9 +67,9 @@
 			            { title: '宣告利率', name: "declareInterestRate", type: "text", width: 75 },
 			            { title: '預定利率', name: "predictInterestRate", type: "text", width: 75 },
 			            { title: '幣別', name: "curr", type: "text", width: 50 },
-			            { title: '高保費率', name: "highDiscountRatios", type: "text", width: 75 , visible:false},
-			            { title: '基本費率', name: "premiumRatios", width: 75  ,itemTemplate: function(val) {return $.each(val,function(index,value){ $("<span></span>").text("性別:"+value.gender+": 年齡"+value.insAge+": 基本費率"+value.premiumRatio)})}, visible:false},
-			            { title: '解約金費率', name: "cancelRatios", type: "text", width: 85 , visible:false},
+			            { title: '高保費率', name: "highDiscountRatios", width: 75 ,itemTemplate: function(val,row) {return $("<a></a>").append("<button id='CR' style='font-size:10px'>檢視</button>")}},
+			            { title: '基本費率', name: "premiumRatios", width: 75 ,itemTemplate: function(val,row) {return $("<a></a>").append("<button id='CR' style='font-size:10px'>檢視</button>")}},
+			            { title: '解約金費率', name: "cancelRatios", width: 80 ,itemTemplate: function(val,row) {return $("<a></a>").append("<button id='CR' style='font-size:10px'>檢視</button>")}},
 			            { title: '繳費方式', name: "paymentMethod", type: "textarea", width: 75 },
 			            { title: '保額', name: "insureAmount", visible: false},
 			            { title: '保費', name: "premium", visible: false},
@@ -111,6 +111,6 @@
 			</script>
 		</div>
 	</div>
-
+<!-- attr("href",BASE_URL+"/cancelRatios/" + row.id). -->
 </body>
 </html>
