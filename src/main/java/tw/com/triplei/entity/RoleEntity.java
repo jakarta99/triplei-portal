@@ -9,7 +9,10 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +26,7 @@ import tw.com.triplei.commons.GenericEntity;
 @Setter
 @Entity
 @Table(name = "ROLE")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class RoleEntity extends GenericEntity implements GrantedAuthority{
 
 	@Column(name = "NAME")
@@ -31,7 +35,7 @@ public class RoleEntity extends GenericEntity implements GrantedAuthority{
 	@Column(name = "CODE")
 	private String code; // 角色代碼
 	
-	@JsonIgnore
+	
 	@ManyToMany(mappedBy="roles")
 	private Set<UserEntity> users; // 會員
 
@@ -41,8 +45,9 @@ public class RoleEntity extends GenericEntity implements GrantedAuthority{
 		return code;
 	}
 
+	// 避免循環呼叫，toString()不放 roles
 	@Override
 	public String toString() {
-		return "RoleEntity [name=" + name + ", code=" + code + ", users=" + users + "]";
+		return "RoleEntity [name=" + name + ", code=" + code +"]";
 	}
 }

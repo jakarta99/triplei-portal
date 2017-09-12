@@ -15,7 +15,9 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.common.collect.Lists;
 
 import lombok.Getter;
@@ -30,6 +32,7 @@ import tw.com.triplei.commons.GenericEntity;
 @Getter
 @Setter
 @Table(name = "USERMEMBER")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class UserEntity extends GenericEntity implements UserDetails{
 	
 	@Column(name = "ACCOUNT_NUMBER")
@@ -96,6 +99,7 @@ public class UserEntity extends GenericEntity implements UserDetails{
 		return "UserEntity [accountNumber=" + accountNumber + ", password=" + password + ", name=" + name + ", email="
 				+ email + ", enabled=" + enabled + ", roles=" + roles + "]";
 	}
+
 
 	
 
