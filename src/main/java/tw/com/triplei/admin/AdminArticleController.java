@@ -115,19 +115,21 @@ public class AdminArticleController {
 	/*管理者在新增文章的方法*/
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
-//	public AjaxResponse<ArticleEntity> insert(final Model model,@RequestBody ArticleEntity form) {
-	public AjaxResponse<ArticleEntity> insert(@RequestParam("upload-file") MultipartFile file, 
-			@RequestParam("articleType")ArticleType articleType, @RequestParam("title") String title,
-			@RequestParam("introduction")String introduction,@RequestParam("content")String content,
-			@RequestParam("author")String author,@RequestParam("bannerRotation")Boolean bannerRotation,
-			@RequestParam("hotArticle")Boolean hotArticle,@RequestParam("storeShelves")Boolean storeShevles,
+	public AjaxResponse<ArticleEntity> insert(@RequestParam(value = "upload-file") MultipartFile file, 
+			@RequestParam(value="articleType",required=false)ArticleType articleType, @RequestParam(value="title",required=false) String title,
+			@RequestParam(value="introduction",required=false)String introduction,@RequestParam(value="content",required=false)String content,
+			@RequestParam(value="author",required=false)String author,@RequestParam(value="bannerRotation",required=false)Boolean bannerRotation,
+			@RequestParam(value="hotArticle",required=false)Boolean hotArticle,@RequestParam(value="storeShelves",required=false)Boolean storeShevles,
 			ArticleEntity articleEntity){
 		AjaxResponse<ArticleEntity> response = new AjaxResponse<ArticleEntity>();
 		
 		try {
-			String bannerImage= articleService.imageUpload(file);
-			System.out.println(bannerImage);
-			articleEntity.setBannerImage(bannerImage);
+			if(!file.isEmpty()){
+				String bannerImage= articleService.imageUpload(file);
+				articleEntity.setBannerImage(bannerImage);
+				}else{
+					articleEntity.setBannerImage("");
+				}
 			articleEntity.setArticleType(articleType);
 			articleEntity.setAuthor(author);
 			articleEntity.setBannerRotation(bannerRotation);
@@ -158,7 +160,7 @@ public class AdminArticleController {
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public AjaxResponse<ArticleEntity> update(
-			@RequestParam("upload-file") MultipartFile file, @RequestParam("id")String id,
+			@RequestParam(value= "upload-file") MultipartFile file, @RequestParam("id")String id,
 			@RequestParam("articleType")ArticleType articleType, @RequestParam("title") String title,
 			@RequestParam("introduction")String introduction,@RequestParam("content")String content,
 			@RequestParam("author")String author,@RequestParam("bannerRotation")Boolean bannerRotation,
@@ -168,9 +170,12 @@ public class AdminArticleController {
 		final AjaxResponse<ArticleEntity> response = new AjaxResponse<ArticleEntity>();
 		
 		try {
+			if(!file.isEmpty()){
 			String bannerImage= articleService.imageUpload(file);
-			System.out.println(bannerImage);
 			articleEntity.setBannerImage(bannerImage);
+			}else{
+				articleEntity.setBannerImage("");
+			}
 			Long newId= Long.parseLong(id);
 			articleEntity.setId(newId);
 			articleEntity.setArticleType(articleType);

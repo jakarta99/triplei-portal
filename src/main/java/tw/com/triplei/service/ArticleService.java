@@ -79,6 +79,7 @@ public class ArticleService extends GenericService<ArticleEntity> {
 	
 	public String imageUpload(MultipartFile file) {
 		byte[] bytes;
+		if(file.toString()!=""){
 		try {
 			bytes = file.getBytes();
 			String path = "src/main/webapp/userfiles/bannerImage";
@@ -99,6 +100,8 @@ public class ArticleService extends GenericService<ArticleEntity> {
 			e.printStackTrace();
 			return "Upload Fail";
 		}
+		}
+			return "";
 	}
 	
 }

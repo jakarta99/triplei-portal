@@ -86,8 +86,10 @@
 								<div class="form-group required">
 									<label for="bannerImage" class="col-md-2 control-label">廣告圖</label>
 									<div class="col-md-10">
-										<input type="file" class="form-control" id="bannerImage"
-											name="bannerImage"> <span class="help-block">
+										<input type="file" class="form-control" id="bannerImage" name="bannerImage">
+											<input type="file" id="hiddenImage" value="${entity.bannerImage}">
+											<img src="${entity.bannerImage}">
+											<span class="help-block">
 											<div class="text-danger"></div>
 										</span>
 									</div>
@@ -173,6 +175,8 @@
 	
 	<script type="text/javascript">
 $(function() {
+	$("#hiddenImage").hide();
+	
 	var oFCKeditor = new FCKeditor("content");
 	oFCKeditor.BasePath = "/fckeditor/";
 	oFCKeditor.Height = 400;
@@ -198,8 +202,11 @@ $(function() {
 			formData.append('bannerRotation',$("#bannerRotation").val());
 			formData.append('hotArticle',$("#hotArticle").val());
 			formData.append('storeShelves',$("#storeShelves").val());
+			if("#bannerImage"==null){
+				$("#bannerImage").val($("#hiddenImage").val());
+			}else{
 			$.each($("input[type='file']")[0].files, function (i, file) { 
-				formData.append('upload-file', file); }); 
+				formData.append('upload-file', file); }); }
 			$.ajax({ 
 				url: "<c:url value='/admin/article'/>", 
 				method: "PUT", 

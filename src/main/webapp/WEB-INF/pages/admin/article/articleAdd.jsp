@@ -178,6 +178,7 @@
 				formData.append('bannerRotation', $("#bannerRotation").val());
 				formData.append('hotArticle', $("#hotArticle").val());
 				formData.append('storeShelves', $("#storeShelves").val());
+
 				$.each($("input[type='file']")[0].files, function(i, file) {
 					formData.append('upload-file', file);
 				});
@@ -192,19 +193,6 @@
 						alert("SUCCESS");
 					}
 				})
-
-				// 								$.post("<c:url value='/admin/article'/>","dataForm",function(data) {
-				// 													if (data.messages.length == 0) {
-				// 														$("#dataForm").trigger("reset");
-				// 														// swal("SUCCESS", "資料新增成功！", "success");
-				// 														alert("SUCCESS");
-				// 														$btn.button("reset");
-				// 													}
-				// 												}, function(data, textStatus,
-				// 														jqXHR) {
-				// 													$btn.button("reset");
-				// 												});
-
 				$btn.button("reset");
 			});
 		});
