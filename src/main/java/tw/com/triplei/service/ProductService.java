@@ -56,6 +56,9 @@ public class ProductService extends GenericService<ProductEntity> {
 	private ProductHighDiscountRatioDao productHighDiscountRatioDao;
 
 	private String url;
+	
+
+
 
 	@Override
 	public GenericDao<ProductEntity> getDao() {
@@ -107,41 +110,32 @@ public class ProductService extends GenericService<ProductEntity> {
 		return dbEntity;
 	}
 
-	public boolean ProductUpload(MultipartFile[] files) {
-		int i = files.length;
-		while (i > 0) {
-			for (MultipartFile uploadFiles : files) {
+	public boolean ProductUpload(MultipartFile file) throws Exception {
+		BufferedOutputStream stream = null; 
 				byte[] bytes;
 				try {
-					bytes = uploadFiles.getBytes();
+					bytes = file.getBytes();
 					String path = "src/main/resources/files";
 					File dir = new File(path);
 					if (!dir.exists())
 						dir.mkdirs();
 					String date = DateTimeFormatter.ofPattern("MM-dd_HHmmss").format(LocalDateTime.now());
 					File serverFile = new File(
-							dir.getAbsolutePath() + File.separator + date + uploadFiles.getOriginalFilename());
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-					url = path + "/" + date + uploadFiles.getOriginalFilename();
+							dir.getAbsolutePath() + File.separator + date + file.getOriginalFilename());
+					stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+					url = path + "/" + date + file.getOriginalFilename();
 					stream.write(bytes);
 					stream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
+					return false;
 				}
-				i--;
-			}
 			return true;
-		}
-		return false;
 	}
 
-	public boolean insertXlsxToDB(MultipartFile[] files) throws Exception {
+	public boolean insertXlsxToDB(MultipartFile file) throws Exception {
 		org.apache.poi.ss.usermodel.Sheet sheet;
 		org.apache.poi.ss.usermodel.Workbook wb = null;
-
-		int a = files.length;
-		while (a > 0) {
-			for (MultipartFile uploadFiles : files) {
 				try {
 					if (url.endsWith(".xlsx")) {
 						wb = new org.apache.poi.xssf.usermodel.XSSFWorkbook(new File(url));
@@ -244,6 +238,7 @@ public class ProductService extends GenericService<ProductEntity> {
 						// ----------------------------------------------------------------------------------------------------
 						// 切換至第三頁 (違約金費率)
 						org.apache.poi.ss.usermodel.Sheet sheet2 = wb.getSheetAt(2);
+						
 						for (int k = 2; k <= sheet2.getLastRowNum(); k++) {
 							Row rowk = sheet2.getRow(k);
 							if (rowk.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
@@ -256,7 +251,6 @@ public class ProductService extends GenericService<ProductEntity> {
 									&& rowk.getCell(6).getStringCellValue()
 											.equals(rowi.getCell(5).getStringCellValue())) {
 								ProductCancelRatio productCancelRatio = new ProductCancelRatio();
-
 								// 設定商品ID
 								productCancelRatio.setProductId(productEntity.getId());
 								// 違約金投保年齡
@@ -365,7 +359,7 @@ public class ProductService extends GenericService<ProductEntity> {
 								// 第33年違約金費率
 								productCancelRatio
 										.setCancelRatio_33(BigDecimal.valueOf(rowk.getCell(42).getNumericCellValue()));
-								// 第34年違約金費率
+								//第34年違約金費率
 								productCancelRatio
 										.setCancelRatio_34(BigDecimal.valueOf(rowk.getCell(43).getNumericCellValue()));
 								// 第35年違約金費率
@@ -605,12 +599,12 @@ public class ProductService extends GenericService<ProductEntity> {
 
 								productCancelRatioList.add(productCancelRatio);
 
+							}else{
+								continue;
 							}
 
 						}
 						productEntity.setCancelRatios(productCancelRatioList);
-						// 更新product table
-						// dao.save(productEntity);
 						// -------------------------------------------------------------------------------------------------
 						// 切換至第四頁 (高保費率)
 						org.apache.poi.ss.usermodel.Sheet sheet3 = wb.getSheetAt(3);
@@ -646,18 +640,16 @@ public class ProductService extends GenericService<ProductEntity> {
 								continue;
 							}
 						}
-
 						productEntity.setHighDiscountRatios(productHighDiscountRatioList);
+						
+						// 更新product table
 						dao.save(productEntity);
 					}
 
 				} catch (IOException e) {
 					e.printStackTrace();
-					a--;
+					return false;
 				}
-			}
 			return true;
-		}
-			return false;
 	}
 }
