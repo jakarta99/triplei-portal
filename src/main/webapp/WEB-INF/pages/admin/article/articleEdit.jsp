@@ -86,7 +86,8 @@
 								<div class="form-group required">
 									<label for="bannerImage" class="col-md-2 control-label">廣告圖</label>
 									<div class="col-md-10">
-										<input type="file"> <span class="help-block">
+										<input type="file" class="form-control" id="bannerImage"
+											name="bannerImage"> <span class="help-block">
 											<div class="text-danger"></div>
 										</span>
 									</div>
@@ -187,16 +188,29 @@ $(function() {
 			var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
 			$("#content").val(contentVal);
 	
-			$.put("<c:url value='/admin/article'/>", "dataForm",
-					function(data) {
-						if (data.messages.length==0) {
-							//swal("SUCCESS", "保險公司資料更新成功", "success");
-							alert("SUCCESS");
-							$btn.button("reset");
-						}
-					}, function(data, textStatus, jqXHR) {
-						$btn.button("reset");
-					});
+			var formData = new FormData(); 
+			formData.append('id',$("#id").val());
+			formData.append('articleType',$("#articleType").val());
+			formData.append('title',$("#title").val());
+			formData.append('introduction',$("#introduction").val());
+			formData.append('content',$("#content").val());
+			formData.append('author',$("#author").val());
+			formData.append('bannerRotation',$("#bannerRotation").val());
+			formData.append('hotArticle',$("#hotArticle").val());
+			formData.append('storeShelves',$("#storeShelves").val());
+			$.each($("input[type='file']")[0].files, function (i, file) { 
+				formData.append('upload-file', file); }); 
+			$.ajax({ 
+				url: "<c:url value='/admin/article'/>", 
+				method: "PUT", 
+				data: formData, 
+				enctype:"multipart/form-data",
+				processData: false, 
+				contentType: false,
+				success:function(data){
+					alert("SUCCESS");
+				}
+			})
 			
 			$btn.button("reset");
 		});
