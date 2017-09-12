@@ -73,9 +73,7 @@
 									<label for="content" class="col-md-2 control-label">文章內容</label>
 									<div class="col-md-10">
 										<textarea class="form-control" name="content" id="content"></textarea>
-										<input type="hidden" name="${_csrf.parameterName}"
-											value="${_csrf.token}" /> <span class="help-block"><div
-												class="text-danger"></div></span>
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 
@@ -154,8 +152,6 @@
 
 		</div>
 	</div>
-
-
 	<script type="text/javascript">
 		$(function() {
 
@@ -166,28 +162,51 @@
 			oFCKeditor.ReplaceTextarea();
 
 			//<!-- Save -->	
-			$("#saveButton").on("click",function() {
-								var $btn = $(this);
-								$btn.button("loading");
+			$("#saveButton").on("click", function() {
+				var $btn = $(this);
+				$btn.button("loading");
 
-								var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
-								$("#content").val(contentVal);
-										
-								$.post("<c:url value='/admin/article'/>","dataForm",
-												function(data) {
-													if (data.messages.length == 0) {
-														$("#dataForm").trigger(
-																"reset");
-														// swal("SUCCESS", "資料新增成功！", "success");
-														alert("SUCCESS");
-														$btn.button("reset");
-													}
-												}, function(data, textStatus,
-														jqXHR) {
-													$btn.button("reset");
-												});
-								$btn.button("reset");
-							});
+				var contentVal = FCKeditorAPI.GetInstance('content').GetHTML();
+				$("#content").val(contentVal);
+
+				var formData = new FormData();
+				formData.append('articleType', $("#articleType").val());
+				formData.append('title', $("#title").val());
+				formData.append('introduction', $("#introduction").val());
+				formData.append('content', $("#content").val());
+				formData.append('author', $("#author").val());
+				formData.append('bannerRotation', $("#bannerRotation").val());
+				formData.append('hotArticle', $("#hotArticle").val());
+				formData.append('storeShelves', $("#storeShelves").val());
+				$.each($("input[type='file']")[0].files, function(i, file) {
+					formData.append('upload-file', file);
+				});
+				$.ajax({
+					url : "<c:url value='/admin/article'/>",
+					method : "POST",
+					data : formData,
+					enctype : "multipart/form-data",
+					processData : false,
+					contentType : false,
+					success : function(data) {
+						alert("SUCCESS");
+					}
+				})
+
+				// 								$.post("<c:url value='/admin/article'/>","dataForm",function(data) {
+				// 													if (data.messages.length == 0) {
+				// 														$("#dataForm").trigger("reset");
+				// 														// swal("SUCCESS", "資料新增成功！", "success");
+				// 														alert("SUCCESS");
+				// 														$btn.button("reset");
+				// 													}
+				// 												}, function(data, textStatus,
+				// 														jqXHR) {
+				// 													$btn.button("reset");
+				// 												});
+
+				$btn.button("reset");
+			});
 		});
 	</script>
 </body>

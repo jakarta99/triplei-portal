@@ -1,6 +1,5 @@
 package tw.com.triplei.admin;
 
-import java.io.File;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ArticleSpecification;
@@ -24,6 +23,7 @@ import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.ArticleEntity;
+import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.service.ArticleService;
 
 @Slf4j
@@ -113,26 +113,33 @@ public class AdminArticleController {
 	}
 	
 	/*管理者在新增文章的方法*/
-	@PostMapping
-//	@RequestMapping(value="/new",method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse<ArticleEntity> insert(final Model model, @RequestBody ArticleEntity form) {
-		
+//	public AjaxResponse<ArticleEntity> insert(final Model model,@RequestBody ArticleEntity form) {
+	public AjaxResponse<ArticleEntity> insert(@RequestParam("upload-file") MultipartFile file, 
+			@RequestParam("articleType")ArticleType articleType, @RequestParam("title") String title,
+			@RequestParam("introduction")String introduction,@RequestParam("content")String content,
+			@RequestParam("author")String author,@RequestParam("bannerRotation")Boolean bannerRotation,
+			@RequestParam("hotArticle")Boolean hotArticle,@RequestParam("storeShelves")Boolean storeShevles,
+			ArticleEntity articleEntity){
 		AjaxResponse<ArticleEntity> response = new AjaxResponse<ArticleEntity>();
 		
 		try {
-//			if(!form.getBannerImage().isEmpty()){
-//				System.out.println(form.getBannerImage());
-//				System.out.println(form.getFile());
-//				System.out.println(form.getContent());
-//				File file = new File(form.getBannerImage());
-//				
-//				System.out.print(file);					
-//			}
-
+			String bannerImage= articleService.imageUpload(file);
+			System.out.println(bannerImage);
+			articleEntity.setBannerImage(bannerImage);
+			articleEntity.setArticleType(articleType);
+			articleEntity.setAuthor(author);
+			articleEntity.setBannerRotation(bannerRotation);
+			articleEntity.setContent(content);
+			articleEntity.setHotArticle(hotArticle);
+			articleEntity.setIntroduction(introduction);
+			articleEntity.setStoreShelves(storeShevles);
+			articleEntity.setTitle(title);
+		
 			LocalDateTime publishTime = LocalDateTime.now();
-			form.setPublishTime(publishTime);
-			final ArticleEntity insertResult = articleService.insert(form);
+			articleEntity.setPublishTime(publishTime);
+			final ArticleEntity insertResult = articleService.insert(articleEntity);
 			response.setData(insertResult);
 		
 		} catch (final ApplicationException ex) {
@@ -150,21 +157,40 @@ public class AdminArticleController {
 	 /*管理者在修改文章的方法*/
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public AjaxResponse<ArticleEntity> update(final Model model, @RequestBody final ArticleEntity form) {
-		
-		log.debug("{}", form);
+	public AjaxResponse<ArticleEntity> update(
+			@RequestParam("upload-file") MultipartFile file, @RequestParam("id")String id,
+			@RequestParam("articleType")ArticleType articleType, @RequestParam("title") String title,
+			@RequestParam("introduction")String introduction,@RequestParam("content")String content,
+			@RequestParam("author")String author,@RequestParam("bannerRotation")Boolean bannerRotation,
+			@RequestParam("hotArticle")Boolean hotArticle,@RequestParam("storeShelves")Boolean storeShevles,
+			ArticleEntity articleEntity) {
 
 		final AjaxResponse<ArticleEntity> response = new AjaxResponse<ArticleEntity>();
 		
 		try {
-			form.setPublishTime(LocalDateTime.now());
-			final ArticleEntity updateResult = articleService.update(form);
-			response.setData(updateResult);
+			String bannerImage= articleService.imageUpload(file);
+			System.out.println(bannerImage);
+			articleEntity.setBannerImage(bannerImage);
+			Long newId= Long.parseLong(id);
+			articleEntity.setId(newId);
+			articleEntity.setArticleType(articleType);
+			articleEntity.setAuthor(author);
+			articleEntity.setBannerRotation(bannerRotation);
+			articleEntity.setContent(content);
+			articleEntity.setHotArticle(hotArticle);
+			articleEntity.setIntroduction(introduction);
+			articleEntity.setStoreShelves(storeShevles);
+			articleEntity.setTitle(title);
+		
+			LocalDateTime publishTime = LocalDateTime.now();
+			articleEntity.setPublishTime(publishTime);
+			final ArticleEntity insertResult = articleService.update(articleEntity);
+			response.setData(insertResult);
 			
 		} catch (final Exception e) {
 			response.addException(e);
 		}
-
+		log.debug("{}", response);
 		return response;
 	}
 	

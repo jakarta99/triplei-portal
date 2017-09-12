@@ -81,7 +81,8 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		byte[] bytes;
 		try {
 			bytes = file.getBytes();
-			String path = "src/main/resources/ArticleContent/bannerImage";
+			String path = "src/main/webapp/userfiles/bannerImage";
+			String path1 = "/userfiles/bannerImage";
 			File dir = new File(path);
 			if (!dir.exists())
 				dir.mkdirs();
@@ -89,7 +90,7 @@ public class ArticleService extends GenericService<ArticleEntity> {
 			String date = DateTimeFormatter.ofPattern("MM-dd_HHmmss").format(LocalDateTime.now());
 			File serverFile = new File(dir.getAbsolutePath() + File.separator + date + file.getOriginalFilename());
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-			String url = path+"/"+date+file.getOriginalFilename();
+			String url = path1+"/"+date+file.getOriginalFilename();
 			stream.write(bytes);
 			stream.close();
 			
