@@ -52,6 +52,9 @@ public class ProductEntity extends GenericEntity{
 	@Column(name = "PREDICT_INTEREST_RATE")
 	private BigDecimal predictInterestRate; // 預定利率
 	
+	@Column(name = "TYPE_INTEREST_RATE")
+	private String interestRateType; //利率別
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "CURRENCY")
 	private Currency curr; // 幣別
@@ -148,6 +151,14 @@ public class ProductEntity extends GenericEntity{
 
 	public void setPredictInterestRate(BigDecimal predictInterestRate) {
 		this.predictInterestRate = predictInterestRate;
+	}
+
+	public String getInterestRateType() {
+		return interestRateType;
+	}
+
+	public void setInterestRateType(String interestRateType) {
+		this.interestRateType = interestRateType;
 	}
 
 	public Currency getCurr() {
