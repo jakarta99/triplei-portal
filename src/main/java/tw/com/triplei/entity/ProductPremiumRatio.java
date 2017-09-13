@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import tw.com.triplei.commons.GenericEntity;
+
 /**
  * 查表: 基本費率
  */
 @Entity
 @Table(name = "PRODUCT_PREMIUM_RATIO")
-public class ProductPremiumRatio {
+public class ProductPremiumRatio extends GenericEntity{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

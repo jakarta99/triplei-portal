@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import tw.com.triplei.commons.GenericEntity;
+
 /**
  * 高保費率
  */
 @Entity
 @Table(name = "PRODUCT_HIGH_DISCOUNT_RATIO")
-public class ProductHighDiscountRatio {
+public class ProductHighDiscountRatio extends GenericEntity{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

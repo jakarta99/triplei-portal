@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
+import tw.com.triplei.admin.spec.ProductCancelRatioSpecification;
+import tw.com.triplei.admin.spec.ProductHighDiscountRatioSpecification;
+import tw.com.triplei.admin.spec.ProductPremiumRatioSpecification;
 import tw.com.triplei.admin.spec.ProductSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
+import tw.com.triplei.entity.ProductHighDiscountRatio;
+import tw.com.triplei.entity.ProductPremiumRatio;
 import tw.com.triplei.service.ProductService;
 
 @Slf4j
@@ -49,39 +55,77 @@ public class AdminProductController {
 		return "/admin/product/productEdit";
 	}
 	
-	@RequestMapping(value = "/highDiscountRatios/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/highDiscountRatio/{id}", method = RequestMethod.GET)
 	public String highDiscountRatiosPage(@PathVariable("id") final Long id, Model model) {
 
-		return "/admin/product/highDiscountRatios";
+		return "/admin/product/highDiscountRatio";
 	}
 	
-	@RequestMapping(value = "/premiumRatios/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/premiumRatio/{id}", method = RequestMethod.GET)
 	public String premiumRatiosPage(@PathVariable("id") final Long id, Model model) {
 
-		return "/admin/product/premiumRatios";
+		return "/admin/product/premiumRatio";
 	}
 	
-	@RequestMapping(value = "/cancelRatios/{id}", method = RequestMethod.GET)
-	public String cancelRatiosPage(@PathVariable("id") final Long id, Model model) {
+	@RequestMapping(value = "/cancelRatio/{id}", method = RequestMethod.GET)
+	public String cancelRatioPage(@PathVariable("id") final Long id, Model model) {
 		
-		return "/admin/product/cancelRatios";
+		return "/admin/product/cancelRatio";
 	}
 
-	@GetMapping("/load")
+	@GetMapping("/cancelRatio/load/{id}")
 	@ResponseBody
-	public GridResponse<ProductEntity> find(final Model model, final ProductEntity form,
-			@RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
+	public GridResponse<ProductCancelRatio> findCancelRatio(@RequestParam("pageIndex")int pageIndex,@RequestParam("pageSize")int pageSize,final Model model, ProductCancelRatio form,@PathVariable("id") Long id) {
+		
 		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
 
-		Page<ProductEntity> page;
+		Page<ProductCancelRatio> page;
 
 		try {
-			page = productService.getAll(new ProductSpecification(), pageable);
+			page = productService.getProductCancelRatioDao().findAll(new ProductCancelRatioSpecification(), pageable);
+//			Collection<ProductCancelRatio> col = productService.getOne(id).getCancelRatios();
+//			productService.getProductCancelRatioDao().findOne(new ProductCancelRatioSpecification());
+//			page = productService.getProductCancelRatioDao().findByProductId(id, new ProductCancelRatioSpecification(), pageable);
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
 		}
 		return new GridResponse<>(page);
+	}
+	
+	@GetMapping("/highDiscountRatio/load/{id}")
+	@ResponseBody
+	public GridResponse<ProductHighDiscountRatio> findHighDiscountRatio(@RequestParam("pageIndex")int pageIndex,@RequestParam("pageSize")int pageSize,final Model model, ProductHighDiscountRatio form,@PathVariable("id") Long id) {
+		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
+		
+		Page<ProductHighDiscountRatio> page;
+		
+		try {
+			page = productService.getProductHighDiscountRatioDao().findAll(new ProductHighDiscountRatioSpecification(),pageable);
+			
+		} catch (final Exception e) {
+			return new GridResponse<>(e);
+		}
+		return new GridResponse<>(page);
+	}
+	
+	@GetMapping("/premiumRatio/load/{id}")
+	@ResponseBody
+	public GridResponse<ProductPremiumRatio> findProductPremiumRatio(@RequestParam("pageIndex")int pageIndex,@RequestParam("pageSize")int pageSize,final Model model, ProductPremiumRatio form,@PathVariable("id") Long id) {
+		
+		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
+		
+		Page<ProductPremiumRatio> page;
+		
+		try {
+			
+			page = productService.getProductPremiumRatioDao().findAll(new ProductPremiumRatioSpecification(),pageable);
+			
+		} catch (final Exception e) {
+			return new GridResponse<>(e);
+		}
+		return new GridResponse<>(page);
+		
 	}
 	
 	@GetMapping
