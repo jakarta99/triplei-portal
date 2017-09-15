@@ -23,7 +23,15 @@ import tw.com.triplei.service.QuestionService;
 public class QuestionController {
 	
 	@Autowired
-	private QuestionService questionService;  
+	private QuestionService questionService;  	
+	
+	@RequestMapping("/test")
+	public String test(Model model) {
+		
+		
+		return "/question/test";
+	}
+	
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
