@@ -1,5 +1,8 @@
 package tw.com.triplei.admin;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -114,6 +117,7 @@ public class AdminGiftController {
 			String formatAns = String.format(formatStr,insertResult.getId());
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
 			form.setCode(giftNumber);
+			form.setCreatedTime(new Timestamp(new Date().getTime()));
 			final GiftEntity insertResultFinal = giftService.update(form);
 			response.setData(insertResultFinal);
 
@@ -146,6 +150,7 @@ public class AdminGiftController {
 			String formatAns = String.format(formatStr,form.getId());
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
 			form.setCode(giftNumber);
+			form.setModifiedTime(new Timestamp(new Date().getTime()));
 			final GiftEntity updateResult = giftService.update(form);
 			response.setData(updateResult);
 

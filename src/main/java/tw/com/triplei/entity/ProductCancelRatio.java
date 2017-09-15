@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import tw.com.triplei.commons.GenericEntity;
+
 /**
  * 查表: 解約金費率
  */
 @Entity
 @Table(name = "PRODUCT_CANCEL_RATIO")
-public class ProductCancelRatio {
+public class ProductCancelRatio extends GenericEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

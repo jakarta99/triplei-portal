@@ -92,7 +92,7 @@
 				文章 <br/>
 				文章 <br/>
 				文章 <br/>
-				
+				<a href="/question/test">test</a>
 			</div>
 		</div>
 <!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
