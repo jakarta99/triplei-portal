@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
-import tw.com.triplei.admin.spec.ProductCancelRatioSpecification;
 import tw.com.triplei.admin.spec.ProductHighDiscountRatioSpecification;
 import tw.com.triplei.admin.spec.ProductPremiumRatioSpecification;
 import tw.com.triplei.admin.spec.ProductSpecification;
@@ -82,10 +81,8 @@ public class AdminProductController {
 		Page<ProductCancelRatio> page;
 
 		try {
-			page = productService.getProductCancelRatioDao().findAll(new ProductCancelRatioSpecification(), pageable);
-//			Collection<ProductCancelRatio> col = productService.getOne(id).getCancelRatios();
-//			productService.getProductCancelRatioDao().findOne(new ProductCancelRatioSpecification());
-//			page = productService.getProductCancelRatioDao().findByProductId(id, new ProductCancelRatioSpecification(), pageable);
+			
+			page = productService.getProductCancelRatioDao().findByProductId(id, pageable);
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
@@ -96,12 +93,14 @@ public class AdminProductController {
 	@GetMapping("/highDiscountRatio/load/{id}")
 	@ResponseBody
 	public GridResponse<ProductHighDiscountRatio> findHighDiscountRatio(@RequestParam("pageIndex")int pageIndex,@RequestParam("pageSize")int pageSize,final Model model, ProductHighDiscountRatio form,@PathVariable("id") Long id) {
+		
 		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
 		
 		Page<ProductHighDiscountRatio> page;
 		
 		try {
-			page = productService.getProductHighDiscountRatioDao().findAll(new ProductHighDiscountRatioSpecification(),pageable);
+			
+			page = productService.getProductHighDiscountRatioDao().findByProductId(id, pageable);
 			
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
@@ -119,7 +118,7 @@ public class AdminProductController {
 		
 		try {
 			
-			page = productService.getProductPremiumRatioDao().findAll(new ProductPremiumRatioSpecification(),pageable);
+			page = productService.getProductPremiumRatioDao().findByProductId(id, pageable);
 			
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
@@ -137,33 +136,6 @@ public class AdminProductController {
 		Page<ProductEntity> page;
 
 		try {
-
-			// final List<AzaleaCriterion> criterions = Lists.newArrayList();
-			//
-			//
-			// if (!Strings.isNullOrEmpty(form.getAccount())) {
-			// criterions.add(new AzaleaCriterion(QueryOpType.LIKE, "account",
-			// form.getAccount() + "%"));
-			// }
-			//
-			// if (!Strings.isNullOrEmpty(form.getLocalName())) {
-			// criterions.add(new AzaleaCriterion(QueryOpType.LIKE, "localName", "%" +
-			// form.getLocalName() + "%"));
-			// }
-			//
-			// if (form.getStatus() != null) {
-			// criterions.add(new AzaleaCriterion(QueryOpType.EQ, "status",
-			// form.getStatus()));
-			// }
-
-			// adminRole 可以管理所有的通路和使用者，userAdminRole 僅可以管理自己 ROOT_ID 之下的通路和使用者
-			// if (!RoleUtil.isHaveAdminRoles()) {
-			// final SecUser loginUser = (SecUser)
-			// SecurityUtils.getSubject().getPrincipal();
-			// criterions.add(new AzaleaCriterion(QueryOpType.EQ, "rootId",
-			// loginUser.getRootChannelId()));
-			// }
-
 			page = productService.getAll(new ProductSpecification(), pageable);
 
 		} catch (final Exception e) {
