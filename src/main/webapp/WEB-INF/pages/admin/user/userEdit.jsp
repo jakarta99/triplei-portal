@@ -60,7 +60,7 @@
 								</div>	
 																
 								<div class="form-group required">
-									<label for="enabled" class="col-md-2 control-label">狀態 ${entity.enabled}</label>
+									<label for="enabled" class="col-md-2 control-label">狀態 </label>
 									<div class="col-md-8">
 										<select id="enabled" name=enabled class="form-control">
 											<option value="true" ${entity.enabled == true ? 'selected': ''}>使用</option>

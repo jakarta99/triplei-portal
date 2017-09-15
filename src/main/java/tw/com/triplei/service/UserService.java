@@ -1,13 +1,13 @@
 package tw.com.triplei.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.GenericDao;
@@ -27,6 +27,7 @@ public class UserService extends GenericService<UserEntity>{
 	
 	@Autowired
 	private RoleDao roleDao;
+	
 	
 	@Override
 	public GenericDao<UserEntity> getDao() {
@@ -64,7 +65,24 @@ public class UserService extends GenericService<UserEntity>{
 		return messages;
 	}
 	
+	//@Transactional
+	@org.springframework.transaction.annotation.Transactional
+	@Override
+	public UserEntity handleInsert(final UserEntity entity) {
+		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
+		entity.setEnabled(false);  // 預設新註冊的會員不啟用
+		entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
+		
+		final Set<RoleEntity> RoleEntity = new HashSet<>();
+		//XXX
+		final RoleEntity roleDefault = roleDao.findOne(1L);  // 預設權限為一般會員
+		RoleEntity.add(roleDefault);
+		
+		entity.setRoles(RoleEntity);
 	
+		return entity;
+	}
+
 	//@Transactional
 	@org.springframework.transaction.annotation.Transactional
 	@Override

@@ -47,8 +47,14 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	@Column(name = "EMAIL")
 	private String email; 
 	
+	@Column(name = "GENDER")
+	private String gender; // 會員性別 
+	
 	@Column(name = "enabled")
-	private Boolean enabled;
+	private Boolean enabled; // 啟用
+	
+	@Column(name = "REGISTERED_CODE")
+	private String registeredCode; // 會員驗證碼 
 	
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
