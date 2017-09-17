@@ -210,6 +210,7 @@ background-color:#5C8DEC;
 			</div>
 			<div class="col-sm-12" style="text-align:right;">
 			<input type="button" class="btn btn-secondary iWantToBuy" style="color:white;background-color:#5C8DEC;" value="我要購買">
+			<a href="/recipient/add/1">我要購買</a>
 			</div>
 			</div>
 		</div>

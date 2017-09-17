@@ -82,7 +82,7 @@
 												class="help-block"></span>
 										</div>
 									</div>
-									
+
 									<div class="form-group required">
 										<label for="gender" class="col-md-2 control-label">姓別</label>
 										<div class="col-md-10">
@@ -137,39 +137,32 @@
 									</div>
 
 									<div class="form-group required">
-										<label for="address" class="col-md-2 control-label">地址</label>
+										<label for="userName" class="col-md-2 control-label">選擇業務員</label>
 										<div class="col-md-10">
-											<input type="text" readonly="readonly" class="form-control"
-												id="address" name="address" placeholder="地址"
-												value="${entity.address}" /> <span class="help-block"></span>
+											<select class="form-control" id="userName" name="userName">
+												<option value="測試使用者1號-一般">測試使用者1號-一般</option>
+												<option value="測試使用者2號-下單">測試使用者2號-下單</option>
+												<option value="測試使用者3號-工讀">測試使用者3號-工讀</option>
+												<option value="測試使用者4號-業務員">測試使用者4號-業務員</option>
+												<option value="測試使用者5號-客服">測試使用者5號-客服</option>
+												<option value="測試使用者6號-文章">測試使用者6號-文章</option>
+											</select> <span class="help-block"></span>
 										</div>
 									</div>
-																	<div class="form-group required">
-									<label for="userName" class="col-md-2 control-label">選擇業務員</label>
-									<div class="col-md-10">
-										<select class="form-control" id="userName" name="userName">
-											<option value="測試使用者1號-一般">測試使用者1號-一般</option>
-											<option value="測試使用者2號-下單">測試使用者2號-下單</option>
-											<option value="測試使用者3號-工讀">測試使用者3號-工讀</option>
-											<option value="測試使用者4號-業務員">測試使用者4號-業務員</option>
-											<option value="測試使用者5號-客服">測試使用者5號-客服</option>
-											<option value="測試使用者6號-文章">測試使用者6號-文章</option>
-										</select> <span class="help-block"></span>
+									<div class="form-group required">
+										<label for="orderStatus" class="col-md-2 control-label">選擇階段</label>
+										<div class="col-md-10">
+											<select class="form-control" id="orderStatus"
+												name="orderStatus">
+												<option value="第一階段">第一階段</option>
+												<option value="第二階段">第二階段</option>
+												<option value="第三階段">第三階段</option>
+												<option value="第四階段">第四階段</option>
+												<option value="第五階段">第五階段</option>
+												<option value="第六階段">第六階段</option>
+											</select> <span class="help-block"></span>
+										</div>
 									</div>
-								</div>
-								<div class="form-group required">
-									<label for="orderStatus" class="col-md-2 control-label">選擇階段</label>
-									<div class="col-md-10">
-										<select class="form-control" id="orderStatus" name="orderStatus">
-											<option value="第一階段">第一階段</option>
-											<option value="第二階段">第二階段</option>
-											<option value="第三階段">第三階段</option>
-											<option value="第四階段">第四階段</option>
-											<option value="第五階段">第五階段</option>
-											<option value="第六階段">第六階段</option>
-										</select> <span class="help-block"></span>
-									</div>
-								</div>
 								</div>
 							</div>
 					</form>
