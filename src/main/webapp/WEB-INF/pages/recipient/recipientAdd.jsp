@@ -246,7 +246,7 @@
 				formData.append('bonusPoint', $("#bonusPoint").val());
 
 				$.ajax({
-					url : "<c:url value='/admin/recipient1'/>",
+					url : "<c:url value='/admin/recipient'/>",
 					method : "POST",
 					data : formData,
 					processData : false,

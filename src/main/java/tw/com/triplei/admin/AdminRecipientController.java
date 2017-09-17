@@ -31,7 +31,7 @@ import tw.com.triplei.service.RecipientService;
 
 @Slf4j
 @Controller
-@RequestMapping("/admin/recipient1")
+@RequestMapping("/admin/recipient")
 public class AdminRecipientController {
 	
 	@Autowired
@@ -112,7 +112,6 @@ public class AdminRecipientController {
 		
 		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 		try {
-			System.out.println("!!!!!!!!!!!!!!!!!"+gender);
 			RecipientEntity form = new RecipientEntity();
 			ProductEntity productEntity = productService.getOne(pid);
 			System.out.println(productEntity);
@@ -142,7 +141,7 @@ public class AdminRecipientController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public AjaxResponse<RecipientEntity> update(final Model model,@RequestParam("pid")long pid,@RequestParam("address") String address,@RequestParam(name="userName") String userName,@RequestBody final RecipientEntity form) {
+	public AjaxResponse<RecipientEntity> update(final Model model,@RequestParam("pid")long pid,@RequestParam(name="userName") String userName,@RequestBody final RecipientEntity form) {
 		
 		log.debug("{}", form);
 		final AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
@@ -150,10 +149,8 @@ public class AdminRecipientController {
 		try {
 			ProductEntity productEntity = productService.getOne(pid);
 			UserEntity user = userDao.findByName(userName);
-			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			form.setUser(user);
 			form.setProduct(productEntity);
-			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			System.out.println(form);
 			final RecipientEntity updateResult = recipientService.update(form);
 
