@@ -39,10 +39,10 @@ public class UserService extends GenericService<UserEntity>{
 	public List<Message> validateInsert(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
 
-		UserEntity dbEntity = userDao.findByAccountNumber(entity.getAccountNumber());
+		UserEntity dbEntity = userDao.findByEmail(entity.getEmail()); // email 不得重複註冊
 
 		if (dbEntity != null) {
-			messages.add(Message.builder().code("accountNumber").value("帳號不得重複").build());
+			messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
 		}
 
 		log.debug("{}", messages);

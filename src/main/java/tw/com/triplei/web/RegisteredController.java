@@ -90,10 +90,9 @@ public class RegisteredController {
 		AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
 		
 		try {
-			// TODO 帳號不得重複註冊
+
 			final UserEntity insertResult = userService.insert(form);
 			response.setData(insertResult);
-			
 			emailservice.sendRegisteredEmail(insertResult); // 發送註冊信
 			
 		} catch (final ApplicationException ex) {

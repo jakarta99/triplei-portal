@@ -30,15 +30,22 @@ font-size:95%;
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
-
+				
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">系統管理<span class="caret"></span></a>
+						<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">會員管理<span class="caret"></span></a>
+						</sec:authorize>	
 						<ul class="dropdown-menu">
-							<li><a href="/admin/user/list">會員管理</a></li>
+							<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
+								<li><a href="/admin/user/list">會員管理</a></li>
+							</sec:authorize>
+							
+							<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
+								<li><a href="/user/edit">會員設定</a></li>
+							</sec:authorize>	
 						</ul>
 					</li>
-				</sec:authorize>	
+					
 					
 				
 				<sec:authorize access="hasAnyRole('ADMIN', 'ARTICLE', 'SERVICE', 'PARTTIME')">
