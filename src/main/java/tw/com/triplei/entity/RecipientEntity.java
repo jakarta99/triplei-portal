@@ -42,8 +42,8 @@ public class RecipientEntity extends GenericEntity {
 	@Column(name = "BOOKED_TIME_3")
 	private String bookedTime_3; // 預定時間3
 	
-	@Column(name="ADDRESS")
-	private String address; //超商地點
+	@Column(name="CONVENIENCESTORE")
+	private ConvenienceStoreEntity convenienceStoreEntity; //超商
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
@@ -54,12 +54,14 @@ public class RecipientEntity extends GenericEntity {
 	
 	@Column(name="ORDERNO")
 	private String orderNo; //訂單號碼
-	
+
 	@Override
 	public String toString() {
-		return "RecipientEntity [product=" + product + ", name=" + name + ", tel=" + tel + ", bookedTime_1="
-				+ bookedTime_1 + ", bookedTime_2=" + bookedTime_2 + ", bookedTime_3=" + bookedTime_3 + ", address="
-				+ address + ", user=" + user + ", orderStatus=" + orderStatus + ", orderNo=" + orderNo + "]";
+		return "RecipientEntity [product=" + product + ", name=" + name + ", gender=" + gender + ", tel=" + tel
+				+ ", bookedTime_1=" + bookedTime_1 + ", bookedTime_2=" + bookedTime_2 + ", bookedTime_3=" + bookedTime_3
+				+ ", convenienceStoreEntity=" + convenienceStoreEntity + ", user=" + user + ", orderStatus="
+				+ orderStatus + ", orderNo=" + orderNo + "]";
 	}
+	
 	
 }

@@ -7,4 +7,6 @@ public interface ConvenienceStoreDao extends GenericDao<ConvenienceStoreEntity>{
 
 	public ConvenienceStoreEntity findById(Long id);
 	
+	public ConvenienceStoreEntity findByAddress(String address);
+	
 }

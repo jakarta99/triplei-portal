@@ -73,7 +73,6 @@
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
 			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
-			            { title: '便利超商地址', name: "address", type: "text", width: 90 },
 			            { title: '業務員', name: "user.name", type: "text", width: 80 },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
 			            { title: '訂單編號', name: "orderNo", type: "text", width: 80 },

@@ -220,6 +220,7 @@ background-color:#5C8DEC;
 			<a href="/product/buyProduct/" id="iWantToBuy">
 			<input type="button" class="btn btn-secondary iWantToBuy" style="color:white;background-color:#5C8DEC;" value="我要購買">
 			</a>
+			<a href="/recipient/add/1">我要購買</a>
 			</div>
 			</div>
 		</div>

@@ -47,10 +47,11 @@ font-size:100%;
 		<!--  -->
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding:0;width:100%;height:100%;color:white;">
-			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;">
+			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
 			<div style="margin:7% auto 0 auto; display:table;width:70%;">
 				<br/><br/>
 				<h1>商品專區</h1>
+				<br/>
 				<form id="input1">
 				<div>
 				<span>性別</span>
@@ -133,14 +134,14 @@ font-size:100%;
 			<c:forEach var="p" begin="1" end="3">
 			<div style="display:table;background-color:white;width:100%;height:1em;">
 			</div>
-			<div class="container"  style="display:table;background-color:#FAF7F7;width:100%;" >
-			<div>
+			<div class="col-sm-12"  style="display:table;background-color:#FAF7F7;width:100%;" >
+			<div class="col-sm-12">
 			<div  style="padding-top:2%">
-			<div class="col-sm-10">
+			<div class="col-sm-10" style="border:1px red solid">
 			<img src="#">
 			<span>--公司名稱--</span>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2" style="border:1px black solid">
 			<a href="/product/1" id="interested">
 			<input class="btn btn-secondary float-right" name="interested" type="button" value="我有興趣" style="background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;">
 			</a>
@@ -148,15 +149,15 @@ font-size:100%;
 			</div>
 			<br/>
 			<div style="margin-top:2%">
-			<div class="col-sm-3">
+			<div class="col-sm-3" style="border:1px green solid">
 			<span>--商品名稱--</span><br/>
 			<span style="color:#5C8DEC">可獲得點數：XXXX</span>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2" style="border:1px red solid">
 			<span>總繳金額</span><br/>
 			<span>$$$$$</span>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2" style="border:1px blue solid">
 			<span>領回金額</span><br/>
 			<span>$$$$$</span>
 			</div>
@@ -238,19 +239,38 @@ font-size:100%;
 	$(".infoToggle").hide();
 	$(".moreInfo").on("click",function(){
 		var moreInfoBtn = $(this).parent().siblings(".infoToggle");
-		moreInfoBtn.toggle();
+		moreInfoBtn.toggle("drop",500);
 	})
 	
-	$(".products").hide();
+// 	$(".products").hide();
 	$(".productFilter").on("click",function(){
-		$(".products").show();
-		$.get("/product/getProduct/"+$('input[name="gender"]:checked').val()
-				+"/"+$('#bDate').val()+"/"+$("#currency option:selected").val()
-				+"/"+$("#paymentMethod option:selected").val()+"/"+$("#interestRateType option:selected").val()
-				+"/"+$("#premium").val()+"/"+$("#year option:selected").val()+"/"+$("#yearCode").val(),function(value){
-			alert(value);
-			alert("SUCCESS");
-		})
+		if($('input[name="gender"]:checked').val()==null){
+			alert("請輸入您的性別");
+		}else if($('#bDate').val()==""){
+			alert("請輸入您的生日");
+		}else if($("#premium").val()==""){
+			alert("請輸入您的繳費金額");
+		}else if(isNaN($("#premium").val())){
+			alert("輸入的繳費金額必須是數字");
+		}else if(($("#premium").val()).indexOf('.') > -1){
+			alert("輸入的繳費金額必須是整數");
+		}else if($("#yearCode").val()==""){
+			alert("請輸入您的預計領回時間");
+		}else if(isNaN($("#yearCode").val())){
+			alert("輸入的預計領回時間必須是數字");
+		}else if(($("#yearCode").val()).indexOf('.') > -1){
+			alert("輸入的預計領回時間必須是整數");
+		}else if($('input[name="gender"]:checked').val()!=null && $('#bDate').val()!="" && $("#premium").val()!="" &&$("#yearCode").val()!=""){
+			$(".products").show();
+			$.get("/product/getProduct/"+$('input[name="gender"]:checked').val()
+					+"/"+$('#bDate').val()+"/"+$("#currency option:selected").val()
+					+"/"+$("#paymentMethod option:selected").val()+"/"+$("#interestRateType option:selected").val()
+					+"/"+$("#premium").val()+"/"+$("#year option:selected").val()+"/"+$("#yearCode").val(),function(value){
+				alert(value);
+			})	
+			
+		}
+		
 	})
 	
 	</script>

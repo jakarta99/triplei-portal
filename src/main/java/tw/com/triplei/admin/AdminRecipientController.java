@@ -20,7 +20,9 @@ import tw.com.triplei.admin.spec.RecipientSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.dao.ConvenienceStoreDao;
 import tw.com.triplei.dao.UserDao;
+import tw.com.triplei.entity.ConvenienceStoreEntity;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.RecipientEntity;
 import tw.com.triplei.entity.UserEntity;
@@ -34,6 +36,9 @@ public class AdminRecipientController {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private ConvenienceStoreDao convenienceStoreDao;
 	
 	@Autowired
 	private ProductService productService;
@@ -95,15 +100,30 @@ public class AdminRecipientController {
 	}
 	
 	@PostMapping
-	@ResponseBody
-	public AjaxResponse<RecipientEntity> insert(final Model model,@RequestParam("pid") long pid, @RequestBody final RecipientEntity form) {
+	public AjaxResponse<RecipientEntity> insert(final Model model
+			,@RequestParam("name") String name,@RequestParam("gender") String gender
+			,@RequestParam("tel") String tel,@RequestParam("date_1_1") String date_1_1
+			,@RequestParam("date_1_2") String date_1_2,@RequestParam("date_1_3") String date_1_3
+			,@RequestParam("date_2_1") String date_2_1,@RequestParam("date_2_2") String date_2_2
+			,@RequestParam("date_2_3") String date_2_3,@RequestParam("date_3_1") String date_3_1
+			,@RequestParam("date_3_2") String date_3_2,@RequestParam("date_3_3") String date_3_3
+			,@RequestParam("address") String address,@RequestParam("shops") String shops
+			,@RequestParam("pid") long pid) {
 		
 		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 		try {
-			System.out.println(pid);
+			RecipientEntity form = new RecipientEntity();
 			ProductEntity productEntity = productService.getOne(pid);
-			System.out.println("============"+productEntity);
+			System.out.println(productEntity);
+			form.setName(name);
+			form.setGender(gender);
+			form.setTel(tel);
+			form.setBookedTime_1(date_1_1+" "+date_1_2+" "+date_1_3);
+			form.setBookedTime_2(date_2_1+" "+date_2_2+" "+date_2_3);
+			form.setBookedTime_3(date_3_1+" "+date_3_2+" "+date_3_3);
 			form.setProduct(productEntity);
+			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
+			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			final RecipientEntity insertResult = recipientService.insert(form);
 			response.setData(insertResult);
 		
