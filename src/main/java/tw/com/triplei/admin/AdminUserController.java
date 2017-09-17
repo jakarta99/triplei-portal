@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.UserSpecification;
 import tw.com.triplei.commons.AjaxResponse;
+import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.RoleEntity;
@@ -41,7 +43,7 @@ public class AdminUserController {
 	public String listPage(Model model) {
 		return "/admin/user/userList";
 	}
-	
+		
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String editPage(@PathVariable("id") final Long id, Model model) {
 		

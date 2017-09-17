@@ -93,9 +93,10 @@ form[role=login] {
 					<input type="password" name="password" placeholder="Password" required class="form-control input-lg" />
 					<button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
 					<div>
-						<a href="#">Create account</a> or <a href="#">reset password</a>
+						<a href="/registered/add">Create account</a> or <a href="#">reset password</a>
 					</div>
 				</form>
+
 				<div class="form-links">
 					<a href="${pageContext.request.contextPath}/">www.triple-i.com.tw</a>
 					<div class="bg-danger">

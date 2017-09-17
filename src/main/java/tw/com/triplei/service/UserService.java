@@ -1,13 +1,14 @@
 package tw.com.triplei.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.GenericDao;
@@ -28,6 +29,7 @@ public class UserService extends GenericService<UserEntity>{
 	@Autowired
 	private RoleDao roleDao;
 	
+	
 	@Override
 	public GenericDao<UserEntity> getDao() {
 		return userDao;
@@ -37,10 +39,10 @@ public class UserService extends GenericService<UserEntity>{
 	public List<Message> validateInsert(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
 
-		UserEntity dbEntity = userDao.findByAccountNumber(entity.getAccountNumber());
+		UserEntity dbEntity = userDao.findByEmail(entity.getEmail()); // email 不得重複註冊
 
 		if (dbEntity != null) {
-			messages.add(Message.builder().code("accountNumber").value("帳號不得重複").build());
+			messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
 		}
 
 		log.debug("{}", messages);
@@ -64,7 +66,28 @@ public class UserService extends GenericService<UserEntity>{
 		return messages;
 	}
 	
+	//@Transactional
+	@org.springframework.transaction.annotation.Transactional
+	@Override
+	public UserEntity handleInsert(final UserEntity entity) {
+		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
+		entity.setEnabled(false);  // 預設新註冊的會員不啟用
+		entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
+		
+		LocalDateTime now = LocalDateTime.now();
+		Timestamp timestamp = Timestamp.valueOf(now);
+		entity.setCreatedTime(timestamp);
+		
+		final Set<RoleEntity> RoleEntity = new HashSet<>();
+		//XXX
+		final RoleEntity roleDefault = roleDao.findOne(1L);  // 預設權限為一般會員
+		RoleEntity.add(roleDefault);
+		
+		entity.setRoles(RoleEntity);
 	
+		return entity;
+	}
+
 	//@Transactional
 	@org.springframework.transaction.annotation.Transactional
 	@Override
@@ -74,6 +97,7 @@ public class UserService extends GenericService<UserEntity>{
 		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
 		dbUserEntity.setEmail(entity.getEmail());
 		dbUserEntity.setEnabled(entity.getEnabled());
+		dbUserEntity.setCreatedTime(entity.getCreatedTime());
 		
 		dbUserEntity.getRoles().clear();
 		
