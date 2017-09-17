@@ -1,10 +1,11 @@
 package tw.com.triplei.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,6 +74,10 @@ public class UserService extends GenericService<UserEntity>{
 		entity.setEnabled(false);  // 預設新註冊的會員不啟用
 		entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
 		
+		LocalDateTime now = LocalDateTime.now();
+		Timestamp timestamp = Timestamp.valueOf(now);
+		entity.setCreatedTime(timestamp);
+		
 		final Set<RoleEntity> RoleEntity = new HashSet<>();
 		//XXX
 		final RoleEntity roleDefault = roleDao.findOne(1L);  // 預設權限為一般會員
@@ -92,6 +97,7 @@ public class UserService extends GenericService<UserEntity>{
 		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
 		dbUserEntity.setEmail(entity.getEmail());
 		dbUserEntity.setEnabled(entity.getEnabled());
+		dbUserEntity.setCreatedTime(entity.getCreatedTime());
 		
 		dbUserEntity.getRoles().clear();
 		

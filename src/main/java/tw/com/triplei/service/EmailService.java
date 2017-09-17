@@ -68,7 +68,7 @@ public class EmailService {
 		userService.update(entity);
 		log.debug("{}", entity);
 		
-		String url = "http://localhost:8080/registered/checked?=" + registeredCode;
+		String url = "http://localhost:8080/registered/checked?uid=" + registeredCode;
 		
 		StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
