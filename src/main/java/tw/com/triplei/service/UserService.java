@@ -80,7 +80,7 @@ public class UserService extends GenericService<UserEntity>{
 		
 		final Set<RoleEntity> RoleEntity = new HashSet<>();
 		//XXX
-		final RoleEntity roleDefault = roleDao.findOne(1L);  // 預設權限為一般會員
+		final RoleEntity roleDefault = roleDao.findByCode("ROLE_NORMAL"); // 預設權限為一般會員
 		RoleEntity.add(roleDefault);
 		
 		entity.setRoles(RoleEntity);
