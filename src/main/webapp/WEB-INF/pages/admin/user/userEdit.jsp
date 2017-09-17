@@ -26,7 +26,6 @@
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
 					<input type="hidden" id="id" name="id" value="${entity.id}"/>
-					<input type="hidden" id="password" name="password" value="${entity.password}"/>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4><span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>會員權限修改</strong></h4>
