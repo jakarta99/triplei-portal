@@ -72,6 +72,9 @@ public class InsurerEntity extends GenericEntity {
 	
 	@Column(name = "CREDIT_RATING")
 	private String credit_rating; // 信用評等
+	
+	@Column(name = "IMG_SRC")
+	private String imgsrc;
 
 	@Override
 	public String toString() {

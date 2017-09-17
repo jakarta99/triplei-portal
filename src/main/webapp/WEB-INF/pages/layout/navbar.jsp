@@ -9,6 +9,9 @@
 	border-color: #333333;
 	background-color: #030033;
 }
+ul{
+font-size:95%;
+}
 </style>
 
 <!-- Fixed navbar -->
@@ -23,6 +26,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="/">Triple-I</a>
+<!-- 				<img class="navbar-brand" src="/resources/pic/logo-white.png" style="width:85%;height:auto;margin:0;"> -->
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -51,6 +55,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="/admin/product/list">保險商品管理</a></li>
 							<li><a href="/admin/insurer/list">保險公司管理</a></li>
+							<li><a href="/admin/recipient/list">訂單管理</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -72,8 +77,8 @@
 						</ul>
 					</li>
 				</sec:authorize>
-
-
+<!-- </ul> -->
+<!-- <ul class="nav navbar-nav navbar-right"  style="border:1px white solid"> -->
 				<li><a href="/insurer/list">各公司資訊</a></li>
 				<li><a href="/product/list">商品專區</a></li>
 				<li><a href="/gift/list">績點專區</a></li>

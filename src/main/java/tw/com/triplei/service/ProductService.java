@@ -187,6 +187,10 @@ public class ProductService extends GenericService<ProductEntity> {
 					product.setCurr(Currency.USD);
 				} else if ("新台幣".equals(rowi.getCell(5).getStringCellValue())) {
 					product.setCurr(Currency.TWD);
+				} else if ("人民幣".equals(rowi.getCell(5).getStringCellValue())) {
+					product.setCurr(Currency.RMB);
+				} else if ("澳幣".equals(rowi.getCell(5).getStringCellValue())) {
+					product.setCurr(Currency.AUD);
 				}
 
 				// 預定利率
