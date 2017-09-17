@@ -32,7 +32,7 @@ import tw.com.triplei.service.RecipientService;
 @Slf4j
 @Controller
 @RequestMapping("/admin/recipient1")
-public class AdminRecipientController2 {
+public class AdminRecipientController {
 	
 	@Autowired
 	private UserDao userDao;
