@@ -6,11 +6,13 @@
 <html lang="en">
 <head>
 <link rel="stylesheet" href="/resources/jquery/jquery-ui.1.11.2.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
 <script type="text/javascript" src='<c:url value="/resources/jquery/localization/jquery.ui.datepicker-zh-TW1.js" />'></script>
-<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <style>
 label{
 padding:0;
@@ -45,10 +47,10 @@ background-color:#5C8DEC;
 <body>
 
 	<div id="wrap">
-		<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
+		<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0;">
 		<!--  -->
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div style="padding:0;width:100%;height:100%;color:white;">
+		<div class="col-sm-12" style="padding:0;width:100%;height:100%;color:white;">
 			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
 			<div style="margin:7% auto 0 auto; display:table;width:70%;">
 				<br/><br/>
@@ -100,7 +102,7 @@ background-color:#5C8DEC;
 			<span style="font-size:150%">可獲得點數</span>
 			<br/>
 			<div>
-			<img src="/resources/pic/積點專區/點數(小).png" width="17%" style="margin-top:7%;margin-right:5%;float:left">
+			<img src="/resources/pic/積點專區/點數(小).png" width="25em" style="margin-top:3%;margin-right:3%;float:left">
 			<span style="font-size:200%;font-weight:bold">XXXX</span>
 			</div>
 			</div>
@@ -169,8 +171,8 @@ background-color:#5C8DEC;
 			<div class="col-sm-10">
 			<span>簡易試算表</span>
 			</div>
-			<div class="col-sm-2">
-			<input id="tableExpand" type="button" value="+" class="btn btn-secondary" style="background-color:white">
+			<div class="col-sm-2" style="text-align:right;">
+			<input id="tableExpand" type="button" value="+" class="btn btn-secondary" style="background-color:white;">
 			</div>
 			<div class="col-sm-12 text-center">
 			<div id="simpleTable">
@@ -199,26 +201,26 @@ background-color:#5C8DEC;
 			</table>
 			</div>
 			</div>
-			<br/>
 			</div>
 			<div class="col-sm-12">
 			<hr/><br/>
 			<div class="col-sm-10">
 			<span>IRR走勢圖</span>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2" style="text-align:right">
 			<input type="button" id="IRRExpand" value="+" class="btn btn-secondary" style="background-color:white;" >
 			</div>
-			<div id="IRRgraph"  class="col-sm-12">
-			<div id="chartContainer" class="col-sm-12" style="width:100%;display:block;"></div>
+			<div id="IRRgraph">
+			<div id="chartContainer" style="height:300px;width:100%"></div>
 			</div>
-			<br/><hr/>
+			</div>
+			<hr/><br/>
 			</div>
 			<br/>
-			</div>
 			<div class="col-sm-12" style="text-align:right;">
+			<br/>
 			<a href="/product/buyProduct/" id="iWantToBuy">
-			<input type="button" class="btn btn-secondary iWantToBuy" style="color:white;background-color:#5C8DEC;" value="我要購買">
+			<input type="button" id="iWantToBuy" class="btn btn-secondary iWantToBuy" style="color:white;background-color:#5C8DEC;" value="我要購買">
 			</a>
 			<a href="/recipient/add/1">我要購買</a>
 			</div>
@@ -228,6 +230,30 @@ background-color:#5C8DEC;
 	</div>
 	
 	<script>
+	new Morris.Line({
+		  element: 'chartContainer',
+		  data: [
+			  	{ y: '0', a: 50, b: 70 },
+			  	{ y: '1', a: 100, b: 90 },
+			    { y: '2', a: 75,  b: 85 },
+			    { y: '3', a: 50,  b: 40 },
+			    { y: '4', a: 75,  b: 55 },
+			    { y: '5', a: 50,  b: 50 },
+			    { y: '6', a: 75,  b: 65 },
+			    { y: '7', a: 100, b: 110 },
+			    { y: '8', a: 50,  b: 40 },
+			    { y: '9', a: 75,  b: 85 },
+			    { y: '10', a: 95,  b: 90 },
+			    { y: '11', a: 75,  b: 120 },
+		  ],
+		  xkey: 'y',
+		  ykeys: ['a', 'b'],
+		  labels: ['IRR', '解約金'],
+		  numLines:'5',
+		  resize:true,
+		  parseTime:false,
+		});
+	
 	$.datepicker.setDefaults($.datepicker.regional['zh-TW']);
 	$("#bDate").datepicker({
 		changeMonth : true,
@@ -263,40 +289,15 @@ background-color:#5C8DEC;
 		$("#IRRgraph").toggle("drop",1000);
 	})
 	
-	/*CanvasJS free license, Search for another charts plugin */
-	var options = {
-		title: {
-			text: "IRR走勢圖"
-		},
-                animationEnabled: true,
-		data: [
-		{
-			type: "spline",  
-	        name: "IRR",        
-	        showInLegend: true,
-	        dataPoints: [
-	        {label: "1" , y: 20} ,     
-	        {label:"2", y: 13} ,     
-	        {label: "3", y: 13} ,     
-	        {label: "4", y: 16} ,     
-	        {label: "5", y: 11}              
-	        ]
-		},{        
-	        type: "spline",  
-	        name: "解約金",        
-	        showInLegend: true,
-	        dataPoints: [
-	        {label: "1" , y: 7} ,     
-	        {label:"2", y: 8} ,     
-	        {label: "3", y: 9} ,     
-	        {label: "4", y: 13} ,     
-	        {label: "5", y: 13}              
-	        ]
-	      },
-		]
-	};
-
-	$("#chartContainer").CanvasJSChart(options);
+// 	$("#iWantToBuy").on("click",function(){
+// 		$.ajax({
+// 			url:"",
+// 			type:"GET",
+			
+			
+// 		})
+		
+// 	})
 
 	</script>
 </body>

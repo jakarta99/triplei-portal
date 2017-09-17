@@ -8,6 +8,7 @@
 #mainNavbar {
 	border-color: #333333;
 	background-color: #030033;
+	margin-bottom:0;
 }
 ul{
 font-size:95%;
@@ -15,7 +16,8 @@ font-size:95%;
 </style>
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top" id="mainNavbar">
+<nav class="navbar navbar-default" id="mainNavbar">
+<!--  style="navbar-fixed-top" -->
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -77,8 +79,8 @@ font-size:95%;
 						</ul>
 					</li>
 				</sec:authorize>
-<!-- </ul> -->
-<!-- <ul class="nav navbar-nav navbar-right"  style="border:1px white solid"> -->
+</ul>
+<ul class="nav navbar-nav navbar-right">
 				<li><a href="/insurer/list">各公司資訊</a></li>
 				<li><a href="/product/list">商品專區</a></li>
 				<li><a href="/gift/list">績點專區</a></li>

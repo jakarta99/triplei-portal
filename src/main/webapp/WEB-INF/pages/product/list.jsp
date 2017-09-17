@@ -44,7 +44,6 @@ font-size:100%;
 
 	<div id="wrap">
 		<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
-		<!--  -->
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding:0;width:100%;height:100%;color:white;">
 			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
@@ -137,11 +136,11 @@ font-size:100%;
 			<div class="col-sm-12"  style="display:table;background-color:#FAF7F7;width:100%;" >
 			<div class="col-sm-12">
 			<div  style="padding-top:2%">
-			<div class="col-sm-10" style="border:1px red solid">
+			<div class="col-sm-10">
 			<img src="#">
 			<span>--公司名稱--</span>
 			</div>
-			<div class="col-sm-2" style="border:1px black solid">
+			<div class="col-sm-2">
 			<a href="/product/1" id="interested">
 			<input class="btn btn-secondary float-right" name="interested" type="button" value="我有興趣" style="background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;">
 			</a>
@@ -149,15 +148,15 @@ font-size:100%;
 			</div>
 			<br/>
 			<div style="margin-top:2%">
-			<div class="col-sm-3" style="border:1px green solid">
+			<div class="col-sm-3">
 			<span>--商品名稱--</span><br/>
 			<span style="color:#5C8DEC">可獲得點數：XXXX</span>
 			</div>
-			<div class="col-sm-2" style="border:1px red solid">
+			<div class="col-sm-2">
 			<span>總繳金額</span><br/>
 			<span>$$$$$</span>
 			</div>
-			<div class="col-sm-2" style="border:1px blue solid">
+			<div class="col-sm-2">
 			<span>領回金額</span><br/>
 			<span>$$$$$</span>
 			</div>

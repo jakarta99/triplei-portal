@@ -1,5 +1,8 @@
 package tw.com.triplei.web;
 
+import java.math.BigDecimal;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +16,19 @@ import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.RecipientEntity;
+import tw.com.triplei.enums.Currency;
+import tw.com.triplei.service.ProductService;
 
 @Slf4j
 @Controller
 @RequestMapping("/product")
 public class ProductController {
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private Currency curr;
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -44,11 +55,21 @@ public class ProductController {
 			@PathVariable("paymentMethod") String paymentMethod,
 			@PathVariable("interestRateType") String interestRateType, @PathVariable("premium") String premium,
 			@PathVariable("year") String year, @PathVariable("yearCode") String yearCode,
-			ProductEntity pe, RecipientEntity re) {
+			ProductEntity pe, RecipientEntity re,BigDecimal bigDecimal) {
 		AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 		try {
-			System.out.println(gender);
-			System.out.println(premium);
+//			curr= productService.stringToCurrency(currency);
+			pe.setCurr(curr);
+			pe.setPaymentMethod(paymentMethod);
+			int yearINT = productService.stringToInt(year);
+			pe.setYear(yearINT);
+			pe.setYearCode(yearCode);
+			bigDecimal = productService.stringToBigDecimal(premium);
+			pe.setPremium(bigDecimal);
+			pe.setInterestRateType(interestRateType);
+			re.setGender(gender);
+			//setbirthday
+			
 
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
