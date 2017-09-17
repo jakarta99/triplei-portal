@@ -35,7 +35,7 @@ td{
 border:1px black solid;
 
 }
-th{
+#simpleTable th{
 border:1px black solid;
 background-color:#5C8DEC;
 }
@@ -49,10 +49,11 @@ background-color:#5C8DEC;
 		<!--  -->
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding:0;width:100%;height:100%;color:white;">
-			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;">
+			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
 			<div style="margin:7% auto 0 auto; display:table;width:70%;">
 				<br/><br/>
 				<h1>商品專區</h1>
+				<br/>
 				<form id="input1">
 				<div>
 				<span>性別</span>
@@ -83,24 +84,31 @@ background-color:#5C8DEC;
 				</div>
 			</div>
 			
-			<div class="col-sm-7" style="height:100%;padding:3%;color:black;overflow-y:scroll">
+			<div class="col-sm-8" style="height:100%;padding:3%;color:black;overflow-y:scroll">
 			<br/><br/><br/>
 			<div id="productDetails" class="productDetails">
+			<div class="col-sm-12">
 			<div class="col-sm-2">
-			<img src="companyIMG">
+			<img src="/resources/pic/保險公司logo/三商美邦人壽.png" width="100%">
 			</div>
 			<div class="col-sm-7">
-			<span>保險公司名稱</span>
-			<br/>
-			<span>保險商品代號+全名</span>
+			<span style="font-size:120%">保險公司名稱</span>
+			<br/><br/>
+			<span style="font-weight:bold;font-size:150%">保險商品代號+全名</span>
 			</div>
 			<div class="col-sm-3" style="color:#5C8DEC">
-			<span>可獲得點數</span>
+			<span style="font-size:150%">可獲得點數</span>
 			<br/>
-			<img src="點數icon">
-			<span>XXXX</span>
+			<div>
+			<img src="/resources/pic/積點專區/點數(小).png" width="17%" style="margin-top:7%;margin-right:5%;float:left">
+			<span style="font-size:200%;font-weight:bold">XXXX</span>
 			</div>
-			<div class="col-sm-12">
+			</div>
+			<br/><br/><br/><br/>
+			</div>
+		
+			<div class="col-sm-12" style="background-color:#5C8DEC;padding-bottom:2%" align="center">
+			<br/>
 			<div class="col-sm-3">
 			<span>總繳金額</span>
 			<br/>
@@ -121,36 +129,36 @@ background-color:#5C8DEC;
 			<br/>
 			<span>X.XX%</span>
 			</div>
-			<br/>
+			<br/><br/>
 			</div>
 			
 			<div class="col-sm-12">
 			<hr/><br/>
-			<div class="col-sm-2">
+			<div class="col-sm-3">
 			<span>保額：XX</span>
 			</div>
 			<div class="col-sm-4">
 			<span>保費折扣：X%</span>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 			<span>首年保費：XX,XXX</span>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-3">
 			<span>繳別：年繳</span>
 			</div>
 			<div class="col-sm-4">
 			<span>折扣前年繳保費：XX,XXX</span>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 			<span>續年保費：XX,XXX</span>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-3">
 			<span>宣告利率：X.X%</span>
 			</div>
 			<div class="col-sm-4">
 			<span>折扣後年繳保費：XX,XXX</span>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-5">
 			<span>繳費方式：匯款或金融機構轉帳(1%折扣)</span>
 			</div>
 			<br/>
@@ -199,7 +207,7 @@ background-color:#5C8DEC;
 			<span>IRR走勢圖</span>
 			</div>
 			<div class="col-sm-2">
-			<input type="button" id="IRRExpand" value="+" class="btn btn-secondary" style="background-color:white">
+			<input type="button" id="IRRExpand" value="+" class="btn btn-secondary" style="background-color:white;" >
 			</div>
 			<div id="IRRgraph"  class="col-sm-12">
 			<div id="chartContainer" class="col-sm-12" style="width:100%;display:block;"></div>
@@ -209,7 +217,9 @@ background-color:#5C8DEC;
 			<br/>
 			</div>
 			<div class="col-sm-12" style="text-align:right;">
+			<a href="/product/buyProduct/" id="iWantToBuy">
 			<input type="button" class="btn btn-secondary iWantToBuy" style="color:white;background-color:#5C8DEC;" value="我要購買">
+			</a>
 			</div>
 			</div>
 		</div>
@@ -286,7 +296,6 @@ background-color:#5C8DEC;
 	};
 
 	$("#chartContainer").CanvasJSChart(options);
-	
 
 	</script>
 </body>
