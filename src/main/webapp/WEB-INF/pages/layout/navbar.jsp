@@ -92,11 +92,11 @@ font-size:95%;
 				<li><a href="/article/list">文章專欄</a></li>
 				<li><a href="/question/askQuestion">聯絡客服</a></li>
 				
-				<sec:authorize access="!hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
+				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
 				<li><a href="/login">登入</a></li>
 				</sec:authorize>
 				
-				<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
+				<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
 					<li><a href="#" onclick="$('#logout').submit();"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
 					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
