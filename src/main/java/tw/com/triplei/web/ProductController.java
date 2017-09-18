@@ -1,8 +1,11 @@
 package tw.com.triplei.web;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.entity.ProductEntity;
-import tw.com.triplei.entity.RecipientEntity;
+import tw.com.triplei.entity.ProductHighDiscountRatio;
 import tw.com.triplei.enums.Currency;
 import tw.com.triplei.service.IRRCaculator;
 import tw.com.triplei.service.ProductService;
@@ -27,6 +30,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private IRRCaculator iRRCaculator;
 	
 	@Autowired
 	private IRRCaculator irrCaculator;
@@ -95,35 +101,92 @@ public class ProductController {
 
 	@RequestMapping(value = "getProduct/{gender}/{bDate}/{currency}/{paymentMethod}/{interestRateType}/{premium}/{year}/{yearCode}", method = RequestMethod.GET)
 	@ResponseBody
-	public AjaxResponse<ProductEntity> getProduct(@PathVariable("gender") String gender,
-			@PathVariable("bDate") String bDate, @PathVariable("currency") String currency,
-			@PathVariable("paymentMethod") String paymentMethod,
-			@PathVariable("interestRateType") String interestRateType, @PathVariable("premium") String premium,
-			@PathVariable("year") String year, @PathVariable("yearCode") String yearCode,
-			ProductEntity pe, RecipientEntity re,BigDecimal bigDecimal) {
+	public String getProduct(@PathVariable("gender") String gender, @PathVariable("bDate") String bDate,
+			@PathVariable("currency") String currency1, @PathVariable("paymentMethod") String paymentMethod,
+			@PathVariable("interestRateType") String interestRateType, @PathVariable("premium") String premium1,
+			@PathVariable("year") String year, @PathVariable("yearCode") String yearCode, Model model) {
 		AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 		try {
-			if(currency.equals("新台幣")){
-				pe.setCurr(Currency.TWD);
-			}else if(currency.equals("美金")){
-				pe.setCurr(Currency.USD);
-			}else if(currency.equals("人民幣")){
-				pe.setCurr(Currency.RMB);
-			}else if(currency.equals("澳幣")){
-				pe.setCurr(Currency.AUD);
+			Currency currency = null;
+			if (currency1.equals("TWD")) {
+				currency = Currency.TWD;
+			} else if (currency1.equals("USD")) {
+				currency = Currency.USD;
+			} else if (currency1.equals("RMB")) {
+				currency = Currency.RMB;
+			} else if (currency1.equals("AUD")) {
+				currency = Currency.AUD;
 			}
-			pe.setPaymentMethod(paymentMethod);
-			int yearINT = productService.stringToInt(year);
-			pe.setYear(yearINT);
-			pe.setYearCode(yearCode);
-			bigDecimal = productService.stringToBigDecimal(premium);
-			pe.setPremium(bigDecimal);
-			pe.setInterestRateType(interestRateType);
-			re.setGender(gender);
-			//setbirthday
-			int age = productService.bDateToInt(bDate);
-			System.out.println("!!!!!!!!!age="+age);
-			
+			if (gender.equals("Male")) {
+				gender = "M";
+			} else {
+				gender = "F";
+			}
+			int yearINT = productService.stringToInt(year);//繳費年期
+			int insAge = productService.bDateToInt(bDate);//年齡
+			int yearCodeInt = productService.stringToInt(yearCode);//預計領回時間
+			double costPerYear = Double.parseDouble(premium1);//年繳多少錢
+			if (interestRateType.equals("declareInterestRate")) {
+				interestRateType = "宣告利率";
+			} else {
+				interestRateType = "預定利率";
+			}
+			System.out.println("yearINT= "+yearINT);
+			System.out.println("insAge= "+insAge);
+			System.out.println("gender= "+gender);
+			List<ProductEntity> products = productService.search(gender, insAge, currency, interestRateType, yearINT);
+			List<ProductEntity> productss = new ArrayList<>();
+			for (ProductEntity product : products) {
+				double premiumRatio = productService.getPremiumRatio(product);
+				BigDecimal insureAmount = BigDecimal.valueOf(costPerYear / premiumRatio);
+				if (product.getCurr() == Currency.TWD) {
+					insureAmount = insureAmount.setScale(0, BigDecimal.ROUND_HALF_UP);// 4捨5入到整數
+					System.out.println("insureAmount= "+insureAmount);
+				} else if (product.getCurr() == Currency.USD || product.getCurr() == Currency.AUD) {
+					insureAmount = insureAmount.setScale(1, BigDecimal.ROUND_HALF_UP);// 4捨5入到小數點後一位
+					System.out.println("insureAmount= "+insureAmount);
+				} else if (product.getCurr() == Currency.RMB) {
+					insureAmount = insureAmount.setScale(2, BigDecimal.ROUND_HALF_UP);// 4捨5入到小數點後二位
+					System.out.println("insureAmount= "+insureAmount);
+				}
+				product.setInsureAmount(insureAmount);// 算出保額
+				for (ProductHighDiscountRatio productHighDiscountRatio:product.getHighDiscountRatios()) {
+					product.getHighDiscountRatios().iterator().next();
+					double min = productHighDiscountRatio.getMinValue().doubleValue();
+					double max = productHighDiscountRatio.getMaxValue();
+					double percentOff = productHighDiscountRatio.getDiscountRatio().doubleValue();
+					System.out.println("min= "+min);
+					System.out.println("max= "+max);
+					if (insureAmount.doubleValue() >= min && insureAmount.doubleValue() <= max) {
+						product.setPremium(//計算保費
+								BigDecimal.valueOf(insureAmount.doubleValue() * premiumRatio * (1 - percentOff)).setScale(0, BigDecimal.ROUND_HALF_UP));
+						System.out.println("premium= "+product.getPremium().doubleValue());
+						break;
+					}
+				}
+				double cancelRatio = productService.toCancelRatio(yearCodeInt, product).doubleValue() * insureAmount.doubleValue();
+				System.out.println("cancelRatio= "+cancelRatio);
+				product.setCashValue(BigDecimal.valueOf(cancelRatio));//解約金
+				
+				double getPoint = product.getBonusPoint().doubleValue()*product.getPremium().doubleValue();
+				product.setGetPoint(BigDecimal.valueOf(getPoint).setScale(0,BigDecimal.ROUND_DOWN));//獲得點數 保費*點數趴數
+				
+				double period =(double)yearINT;
+				double times = (double)yearCodeInt;
+				double premium = product.getPremium().doubleValue();
+				double expired = product.getCashValue().doubleValue();
+				double irr = iRRCaculator.getIRR(period,times,premium,expired);
+				product.setIrr(irr);
+				
+				System.out.println("irr="+irr);
+				if (product.getPremium() == null) {//如果保額不在上下限範圍之內 則不顯示這張表單
+					product = new ProductEntity();
+					continue;
+				}
+				
+				productss.add(product);
+			}
+			model.addAttribute("models", productss);
 
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
@@ -134,7 +197,7 @@ public class ProductController {
 
 		log.debug("{}", response);
 
-		return response;
+		return "/product/hahaha";
 	}
 
 }
