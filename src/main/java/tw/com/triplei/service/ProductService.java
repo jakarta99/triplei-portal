@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -94,6 +95,66 @@ public class ProductService extends GenericService<ProductEntity> {
 //		}	
 //		return currency;
 //	}
+	
+	public int bDateToInt(String bDate){
+		String[] bDates = bDate.split("-");
+		Date date= new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String nowDate = sdf.format(date);
+		String[] nowDates = nowDate.split("-");
+		int bDate0 = Integer.parseInt(bDates[0]);
+		int bDate1 = Integer.parseInt(bDates[1]);
+		int bDate2 = Integer.parseInt(bDates[2]);
+		int nowDate0 = Integer.parseInt(nowDates[0]);
+		int nowDate1 = Integer.parseInt(nowDates[1]);
+		int nowDate2 = Integer.parseInt(nowDates[2]);
+		if(nowDate0-bDate0<0){ //年份相減 未來人年紀為-1
+			return -1;
+		}else if(nowDate0-bDate0==0){//同年出生 
+			if(nowDate1-bDate1<0){ //同年出生，月份比現在大，未來人
+				return -1;
+			}else if(nowDate1-bDate1>6){//同年出生，出生超過6個月，年齡算1歲
+				return nowDate0-bDate0+1;
+			}else if(nowDate1-bDate1==6){//同年出生，差6個月，比較日期
+				if(nowDate2-bDate2<=0){//不足6個月
+					return nowDate0-bDate0;
+				}else{//滿6個月又1天 +1歲
+					return nowDate0-bDate0+1;
+				}
+			}else if(nowDate1-bDate1==0){//同月份 比較日期
+				if(nowDate2-bDate2<0){
+					return -1;//未來人
+				}else{
+					return nowDate0-bDate0;
+				}
+			}else{//相差6個月內
+				return nowDate0-bDate0;
+			}
+		}else{  //已出生
+			if(nowDate1-bDate1<6 && nowDate1-bDate1>-6){
+				return nowDate0-bDate0;
+			}else if(nowDate1-bDate1<-6){
+				return nowDate0-bDate0-1;
+			}else if(nowDate1-bDate1>6){//滿6個月，歲數+1
+				return nowDate0-bDate0+1;
+			}else if(nowDate1-bDate1==6){
+				if(nowDate2-bDate2<=0){
+					return nowDate0-bDate0;
+				}else{
+					return nowDate0-bDate0+1;
+				}
+			}else{
+				if(nowDate2-bDate2<=0){
+					return nowDate0-bDate0-1;
+				}else{
+					return nowDate0-bDate0;
+				}
+			}
+		}	
+	}
+	
+	
+	
 	
 	public int stringToInt(String string){
 		int number = Integer.parseInt(string);
