@@ -197,7 +197,7 @@ public class ProductController {
 
 		log.debug("{}", response);
 
-		return "/product/hahaha";
+		return "/product/list";
 	}
 
 }
