@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -36,7 +39,6 @@ import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.ProductHighDiscountRatio;
 import tw.com.triplei.entity.ProductPremiumRatio;
-import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.enums.Currency;
 
 @Slf4j
@@ -57,6 +59,11 @@ public class ProductService extends GenericService<ProductEntity> {
 
 	@Autowired
 	private ProductHighDiscountRatioDao productHighDiscountRatioDao;
+	
+//	@Autowired
+//	private Currency currency;
+	
+	private BigDecimal bigDecimal;
 
 	public ProductPremiumRatioDao getProductPremiumRatioDao() {
 		return productPremiumRatioDao;
@@ -68,6 +75,48 @@ public class ProductService extends GenericService<ProductEntity> {
 
 	public ProductHighDiscountRatioDao getProductHighDiscountRatioDao() {
 		return productHighDiscountRatioDao;
+	}
+	
+	public int stringToAge(String string){
+		int number = Integer.parseInt(string);
+		return number;
+	}
+	
+//	public Currency stringToCurrency(String curr){
+//		if(curr=="AUD"){
+//			return currency.AUD;
+//		}else if(curr=="USD"){
+//			return currency.USD;
+//		}else if (curr=="RMB"){
+//			return currency.RMB;
+//		}else if(curr=="TWD"){
+//			return currency.TWD;
+//		}	
+//		return currency;
+//	}
+	
+	public int stringToInt(String string){
+		int number = Integer.parseInt(string);
+		return number;
+	}
+	
+	public BigDecimal stringToBigDecimal(String number){
+		
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		symbols.setGroupingSeparator(',');
+		symbols.setDecimalSeparator('.');
+		String pattern = "#,##0.0#";
+		DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+		decimalFormat.setParseBigDecimal(true);
+
+		try {
+			bigDecimal = (BigDecimal) decimalFormat.parse(number);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		
+		return bigDecimal;
 	}
 
 	private String url;
@@ -187,6 +236,10 @@ public class ProductService extends GenericService<ProductEntity> {
 					product.setCurr(Currency.USD);
 				} else if ("新台幣".equals(rowi.getCell(5).getStringCellValue())) {
 					product.setCurr(Currency.TWD);
+				} else if ("人民幣".equals(rowi.getCell(5).getStringCellValue())) {
+					product.setCurr(Currency.RMB);
+				} else if ("澳幣".equals(rowi.getCell(5).getStringCellValue())) {
+					product.setCurr(Currency.AUD);
 				}
 
 				// 預定利率

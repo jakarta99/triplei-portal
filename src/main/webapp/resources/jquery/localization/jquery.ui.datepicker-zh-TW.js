@@ -1,6 +1,6 @@
 /* Chinese initialisation for the jQuery UI date picker plugin. */
 /* Written by Ressol (ressol@gmail.com). */
-jQuery(function($) {
+jQuery(function(a) {
 	$.datepicker.regional['zh-TW'] = {
 		closeText : '關閉',
 		prevText : '&#x3C;上月',
@@ -14,7 +14,7 @@ jQuery(function($) {
 		dayNamesShort : [ '周日', '周一', '周二', '周三', '周四', '周五', '周六' ],
 		dayNamesMin : [ '日', '一', '二', '三', '四', '五', '六' ],
 		weekHeader : '周',
-		dateFormat : 'yy-mm-dd',
+		dateFormat : 'yyyy-mm-dd',
 		firstDay : 1,
 		isRTL : false,
 		showMonthAfterYear : true,
@@ -94,6 +94,6 @@ jQuery(function($) {
 			};
 			return (y) +'-'+ fm(m) +'-'+ fm(d);
 		}
-	};
+	}a.datepicker.setDefaults(a.datepicker.regional["zh-TW"])
 
 });

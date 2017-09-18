@@ -8,6 +8,7 @@
 #mainNavbar {
 	border-color: #333333;
 	background-color: #030033;
+	margin-bottom:0;
 }
 ul{
 font-size:95%;
@@ -15,7 +16,8 @@ font-size:95%;
 </style>
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top" id="mainNavbar">
+<nav class="navbar navbar-default" id="mainNavbar">
+<!--  style="navbar-fixed-top" -->
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -30,15 +32,22 @@ font-size:95%;
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
-
+				
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">系統管理<span class="caret"></span></a>
+						<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">會員管理<span class="caret"></span></a>
+						</sec:authorize>	
 						<ul class="dropdown-menu">
-							<li><a href="/admin/user/list">會員管理</a></li>
+							<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
+								<li><a href="/admin/user/list">會員管理</a></li>
+							</sec:authorize>
+							
+							<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
+								<li><a href="#">會員設定</a></li>
+							</sec:authorize>	
 						</ul>
 					</li>
-				</sec:authorize>	
+					
 					
 				
 				<sec:authorize access="hasAnyRole('ADMIN', 'ARTICLE', 'SERVICE', 'PARTTIME')">
@@ -55,6 +64,7 @@ font-size:95%;
 						<ul class="dropdown-menu">
 							<li><a href="/admin/product/list">保險商品管理</a></li>
 							<li><a href="/admin/insurer/list">保險公司管理</a></li>
+							<li><a href="/admin/recipient/list">訂單管理</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -76,8 +86,8 @@ font-size:95%;
 						</ul>
 					</li>
 				</sec:authorize>
-<!-- </ul> -->
-<!-- <ul class="nav navbar-nav navbar-right"  style="border:1px white solid"> -->
+</ul>
+<ul class="nav navbar-nav navbar-right">
 				<li><a href="/insurer/list">各公司資訊</a></li>
 				<li><a href="/product/list">商品專區</a></li>
 				<li><a href="/gift/list">績點專區</a></li>

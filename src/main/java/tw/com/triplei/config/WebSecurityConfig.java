@@ -30,7 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/product/**", 
                 		"/gift/**", 
                 		"/article/**",
-                		"/jolokia/**"
+                		"/jolokia/**",
+                		"/registered/**"
                 		).permitAll().anyRequest().authenticated()
             .and().headers().frameOptions().sameOrigin()
             .and().formLogin().loginPage("/login").permitAll()
