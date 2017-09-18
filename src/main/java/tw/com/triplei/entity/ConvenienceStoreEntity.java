@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
 import tw.com.triplei.commons.GenericEntity;
 
 /*
@@ -15,10 +17,12 @@ import tw.com.triplei.commons.GenericEntity;
  * 
  * 
  */
-
+@Getter
+@Setter
 @Entity
 @Table(name = "CONVENIENCE_STORE")
 public class ConvenienceStoreEntity extends GenericEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -42,4 +46,9 @@ public class ConvenienceStoreEntity extends GenericEntity {
 	@Column(name = "ADDRESS")
 	private String address;
 
+	@Override
+	public String toString() {
+		return "ConvenienceStoreEntity [id=" + id + ", manufacturer=" + manufacturer + ", storeName=" + storeName
+				+ ", city=" + city + ", region=" + region + ", street=" + street + ", address=" + address + "]";
+	}
 }

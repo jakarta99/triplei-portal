@@ -65,6 +65,7 @@ font-size:95%;
 							<li><a href="/admin/product/list">保險商品管理</a></li>
 							<li><a href="/admin/insurer/list">保險公司管理</a></li>
 							<li><a href="/admin/recipient/list">訂單管理</a></li>
+							<li><a href="/admin/convenienceStore/list">超商管理</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
