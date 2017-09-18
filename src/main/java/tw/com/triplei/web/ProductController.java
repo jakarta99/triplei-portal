@@ -17,6 +17,7 @@ import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.RecipientEntity;
 import tw.com.triplei.enums.Currency;
+import tw.com.triplei.service.IRRCaculator;
 import tw.com.triplei.service.ProductService;
 
 @Slf4j
@@ -27,6 +28,9 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private IRRCaculator irrCaculator;
+	
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/product/list";
@@ -35,6 +39,50 @@ public class ProductController {
 	@GetMapping("/{id}")
 	public String detailInfo(@PathVariable("id") String id, Model model) {
 		return "/product/detailInfo";
+	}
+	
+	@RequestMapping("/irr")
+	public String irr(Model model) {
+		return "/product/irr";
+	}
+
+	@GetMapping("/calculationofirr/{premium}/{times}/{period}/{expired}")
+	@ResponseBody
+	public String getirr(@PathVariable("period")double period,@PathVariable("times") double times,
+			@PathVariable("premium")double premium,@PathVariable("expired")double expired, Model model) {
+		
+		AjaxResponse<String> response = new AjaxResponse<String>();
+		double i = irrCaculator.getIRR(period, times, premium, expired);
+
+		String irr = String.valueOf(i*100).substring(0, String.valueOf(i*100).indexOf(".") + 3); //先乘100後取小數點後兩位
+		
+		return irr;
+	}
+	
+	@GetMapping("/calculationofremuneration/{premium}/{times}/{period}/{expired}")
+	@ResponseBody
+	public String getremuneration(@PathVariable("period")double period,@PathVariable("times") double times,
+			@PathVariable("premium")double premium,@PathVariable("expired")double expired, Model model) {
+		
+		AjaxResponse<String> response = new AjaxResponse<String>();
+		double i = irrCaculator.getRemuneration(period, times, premium, expired);
+		
+		String remuneration = String.valueOf(i);
+		
+		return remuneration;
+	}
+	
+	@GetMapping("/calculationoftotal/{premium}/{times}/{period}")
+	@ResponseBody
+	public String gettotal(@PathVariable("period")double period,@PathVariable("times") double times,
+			@PathVariable("premium")double premium,Model model) {
+		
+		AjaxResponse<String> response = new AjaxResponse<String>();
+		double i = irrCaculator.getTotal(period, times, premium);
+		
+		String total = String.valueOf(i);
+		
+		return total;
 	}
 	
 	@GetMapping("buyProduct/{currency}/{insureAmount}/{premium}/{points}")

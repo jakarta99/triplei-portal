@@ -90,7 +90,13 @@ font-size:95%;
 </ul>
 <ul class="nav navbar-nav navbar-right">
 				<li><a href="/insurer/list">各公司資訊</a></li>
-				<li><a href="/product/list">商品專區</a></li>
+				<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">商品專區<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/product/list">商品列表</a></li>
+							<li><a href="/product/irr">IRR計算機</a></li>
+						</ul>
+					</li>
 				<li><a href="/gift/list">績點專區</a></li>
 				<li><a href="/article/list">文章專欄</a></li>
 				<li><a href="/question/askQuestion">聯絡客服</a></li>
