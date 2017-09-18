@@ -27,9 +27,6 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-//	@Autowired
-//	private Currency curr;
-	
 	@RequestMapping("/list")
 	public String list(Model model) {
 		return "/product/list";
@@ -58,8 +55,15 @@ public class ProductController {
 			ProductEntity pe, RecipientEntity re,BigDecimal bigDecimal) {
 		AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 		try {
-//			curr= productService.stringToCurrency(currency);
-//			pe.setCurr(curr);
+			if(currency.equals("新台幣")){
+				pe.setCurr(Currency.TWD);
+			}else if(currency.equals("美金")){
+				pe.setCurr(Currency.USD);
+			}else if(currency.equals("人民幣")){
+				pe.setCurr(Currency.RMB);
+			}else if(currency.equals("澳幣")){
+				pe.setCurr(Currency.AUD);
+			}
 			pe.setPaymentMethod(paymentMethod);
 			int yearINT = productService.stringToInt(year);
 			pe.setYear(yearINT);
@@ -69,6 +73,8 @@ public class ProductController {
 			pe.setInterestRateType(interestRateType);
 			re.setGender(gender);
 			//setbirthday
+			int age = productService.bDateToInt(bDate);
+			System.out.println("!!!!!!!!!age="+age);
 			
 
 		} catch (final ApplicationException ex) {
