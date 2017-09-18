@@ -86,8 +86,8 @@ font-size:95%;
 						</ul>
 					</li>
 				</sec:authorize>
-</ul>
-<ul class="nav navbar-nav navbar-right">
+<!-- </ul> -->
+<!-- <ul class="nav navbar-nav navbar-right"> -->
 				<li><a href="/insurer/list">各公司資訊</a></li>
 				<li><a href="/product/list">商品專區</a></li>
 				<li><a href="/gift/list">績點專區</a></li>
