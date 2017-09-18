@@ -241,7 +241,7 @@ font-size:100%;
 		moreInfoBtn.toggle("drop",500);
 	})
 	
-// 	$(".products").hide();
+	$(".products").hide();
 	$(".productFilter").on("click",function(){
 		if($('input[name="gender"]:checked').val()==null){
 			alert("請輸入您的性別");

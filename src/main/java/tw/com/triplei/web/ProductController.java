@@ -27,8 +27,8 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@Autowired
-	private Currency curr;
+//	@Autowired
+//	private Currency curr;
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -59,7 +59,7 @@ public class ProductController {
 		AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 		try {
 //			curr= productService.stringToCurrency(currency);
-			pe.setCurr(curr);
+//			pe.setCurr(curr);
 			pe.setPaymentMethod(paymentMethod);
 			int yearINT = productService.stringToInt(year);
 			pe.setYear(yearINT);
