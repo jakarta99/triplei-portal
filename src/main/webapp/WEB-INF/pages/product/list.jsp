@@ -55,10 +55,10 @@ font-size:100%;
 				<div>
 				<span>性別</span>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Female"><img class="genderImage female" alt="女" name="female" src="/resources/pic/product/female.png">
+				<input type="radio" class="gender" name="gender" value="Female"><img class="genderImage female" data-toggle="tooltip" title="女生" alt="女" name="female" src="/resources/pic/product/female.png">
 				</label>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男"  name="male" src="/resources/pic/product/male.png">
+				<input type="radio" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男" data-toggle="tooltip" title="男生"  name="male" src="/resources/pic/product/male.png">
 				</label>
 				</div >
 				<div>
@@ -215,11 +215,15 @@ font-size:100%;
 		changeYear : true,
 		dateFormat : "yy-mm-dd"
 	});
+	$("#bDate").datepicker('setDate',new Date());
+	
+	
 	
 	$(".gender").hide();
 	var gender;
 	$(".genderImage").hover(function(){
 		gender = $(this).attr("name");
+		$('[data-toggle="tooltip"]').tooltip(); 
 		$(this).attr("src","/resources/pic/product/"+gender+"-hover.png");
 	},function(){
 		$(this).attr("src","/resources/pic/product/"+gender+".png");
@@ -227,7 +231,10 @@ font-size:100%;
 	$(".genderImage").on("click",function(){
 		var gender = $(this).attr("name");
 		$(".genderImage").off();
+		
+		$('[data-toggle="tooltip"]').tooltip("hide");
 		$(".genderImage").on("click",function(){
+			
 			$(".male").attr("src","/resources/pic/product/male.png");
 			$(".female").attr("src","/resources/pic/product/female.png");
 			$(this).attr("src","/resources/pic/product/"+$(this).attr("name")+"-hover.png");
