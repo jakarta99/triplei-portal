@@ -112,9 +112,11 @@ font-size:100%;
 			<span>繳費年期(年)</span><br/>
 			<select id="year">
 			<option value="1">1</option>
-			<c:forEach var="i" begin="5" end="30" step="5">
-			<option value="${i}">${i}</option>
-			</c:forEach>
+<%-- 			<c:forEach var="i" begin="5" end="30" step="5"> --%>
+<%-- 			<option value="${i}">${i}</option> --%>
+<%-- 			</c:forEach> --%>
+			<option value="6">6</option>
+			<option value="7">7</option>
 			</select>
 			</div>
 			<div class="col-sm-4">
@@ -271,12 +273,17 @@ font-size:100%;
 			$.get("/product/getProduct/"+$('input[name="gender"]:checked').val()
 					+"/"+$('#bDate').val()+"/"+$("#currency option:selected").val()
 					+"/"+$("#paymentMethod option:selected").val()+"/"+$("#interestRateType option:selected").val()
-					+"/"+$("#premium").val()+"/"+$("#year option:selected").val()+"/"+$("#yearCode").val(),function(value){
+					+"/"+$("#premium").val()+"/"+$("#year option:selected").val()+"/"+$("#yearCode").val(),function(content){
 // 				$.each(value,function(xxx){
 // 					alert(xxx.code);
 // 				alert(JSON.stringify(value));
-					alert(value);
 // 				})
+				$.each(content,function(index,value){
+					console.log(index);
+					$.each(value,function(index,val){
+						console.log(val);
+					})
+				})
 			})	
 			
 		}

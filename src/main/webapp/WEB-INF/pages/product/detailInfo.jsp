@@ -219,7 +219,7 @@ background-color:#5C8DEC;
 			<br/>
 			<div class="col-sm-12" style="text-align:right;">
 			<br/>
-			<a href="/product/buyProduct/" id="iWantToBuy">
+			<a href="/product/buyProduct/TWD/1/1/1" id="iWantToBuy">
 			<input type="button" id="iWantToBuy" class="btn btn-secondary iWantToBuy" style="color:white;background-color:#5C8DEC;" value="我要購買">
 			</a>
 			<a href="/recipient/add/1">我要購買</a>
@@ -260,6 +260,7 @@ background-color:#5C8DEC;
 		changeYear : true,
 		dateFormat : "yy-mm-dd"
 	});
+	$("#bDate").datepicker('setDate',new Date());
 	
 	$(".gender").hide();
 	var gender;
@@ -289,16 +290,15 @@ background-color:#5C8DEC;
 		$("#IRRgraph").toggle("drop",1000);
 	})
 	
+// 		var currency = $().val();
+// 		var insureAmount = $().val();
+// 		var premium = $().val();
+// 		var points = $().val();
+// 		var url = "/product/buyProduct/"+currency+"/"+insureAmount+"/"+premium+"/"+points;
+	
 // 	$("#iWantToBuy").on("click",function(){
-// 		$.ajax({
-// 			url:"",
-// 			type:"GET",
-			
-			
-// 		})
-		
-// 	})
-
+// 		$.get("/product/buyProduct/TWD/1/1/1");		
+// 	});
 	</script>
 </body>
 </html>
