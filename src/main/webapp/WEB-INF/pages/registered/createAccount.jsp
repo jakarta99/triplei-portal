@@ -116,8 +116,10 @@
 								function(data) {
 									if (data.messages.length == 0) {
 										$("#dataForm").trigger("reset");
+										
+										//alert(data.data.email);
 										//alert("SUCCESS!! 已寄認證信至您的信箱，請開啟信件連結以啟用會員");
-										location.href = '/registered/checkLetter'
+										location.href = '/registered/checkLetter?email=' + data.data.email
 										
 										$btn.button("reset");
 										dialog1.dialog("close");
