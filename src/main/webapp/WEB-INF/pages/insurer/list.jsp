@@ -60,7 +60,7 @@
 							<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><!-- 每一個logo -->
 								<div class="text-center">
 										<img class="insurerzone" src="${model.imgsrc}" alt="${model.shortName}"
-										width="150" height="150" name="${model.id}">
+										width="125" height="125" name="${model.id}">
 								</div>
 								<br>
 								<div class="text-center">
