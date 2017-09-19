@@ -93,8 +93,8 @@ font-size:100%;
 			<div class="col-sm-4">
 			<span>存款方式</span><br/>
 			<select id="paymentMethod">
-			<option value="1">躉繳</option>
-			<option value="#">年繳</option>
+			<option value="once">躉繳</option>
+			<option value="many">年繳</option>
 			</select>
 			</div>
 			<div class="col-sm-4">
