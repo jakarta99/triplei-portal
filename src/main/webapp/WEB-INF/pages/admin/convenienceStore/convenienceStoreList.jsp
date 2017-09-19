@@ -45,14 +45,11 @@
 
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-
 		<div>
-			<br /> <br /> <br />
 			<h3>超商一覽</h3>
 			<div>
-				
 					<a href="/admin/convenienceStore/insertPage"
 						class="btn btn-sm btn-primary" data-loading-text="Loading"> <span
 						class="glyphicon glyphicon-plus"></span>檔案新增

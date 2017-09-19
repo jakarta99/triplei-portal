@@ -13,12 +13,10 @@
 
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
 		<div>
-			<br/><br/><br/>
-			
 			<h3>訂單管理</h3>
 			<div id="jsGrid"></div>
 			
@@ -50,12 +48,6 @@
 			                    data: filter,
 			                    dataType: "json",
 			                    cache: false,
-			                    success : function(data){
-			                 		alert(data);
-			                    },
-			                    error:function(){
-			                    	alert("error");
-			                    },
 			                });
 			            },
 			        },

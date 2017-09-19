@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -107,7 +106,6 @@ public class ProductController {
 			@PathVariable("paymentMethod") String paymentMethod,
 			@PathVariable("interestRateType") String interestRateType, @PathVariable("premium") String premium1,
 			@PathVariable("year") String year, @PathVariable("yearCode") String yearCode) {
-		AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 		Collection<AjaxResponse<ProductEntity>> responses = new ArrayList<>();
 
 		Currency currency = null;
@@ -126,6 +124,11 @@ public class ProductController {
 			gender = "F";
 		}
 		int yearINT = productService.stringToInt(year);// 繳費年期
+		if(paymentMethod.equals("once")){
+			yearINT=1;
+		}else if(paymentMethod.equals("many")){
+			yearINT = productService.stringToInt(year);
+		}
 		int insAge = productService.bDateToInt(bDate);// 年齡
 		int yearCodeInt = productService.stringToInt(yearCode);// 預計領回時間
 		double costPerYear = Double.parseDouble(premium1);// 年繳多少錢
@@ -138,12 +141,13 @@ public class ProductController {
 		System.out.println("insAge= " + insAge);
 		System.out.println("gender= " + gender);
 		List<ProductEntity> products = productService.search(gender, insAge, currency, interestRateType, yearINT);
-		System.out.println("2222");
+		System.out.println("productsproductsproducts");
 		for (ProductEntity product : products) {
+			AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 			try {
-				System.out.println("2~product" + product);
+				System.out.println("id = "+product.getId());
 				double premiumRatio = productService.getPremiumRatio(product);
-				System.out.println("premiumRatio"+premiumRatio);
+				System.out.println("premiumRatio= "+premiumRatio);
 				BigDecimal insureAmount = BigDecimal.valueOf(costPerYear / premiumRatio);
 				if (product.getCurr() == Currency.TWD) {
 					insureAmount = insureAmount.setScale(0, BigDecimal.ROUND_HALF_UP);// 4捨5入到整數
@@ -169,6 +173,8 @@ public class ProductController {
 										.setScale(0, BigDecimal.ROUND_HALF_UP));
 						System.out.println("premium= " + product.getPremium().doubleValue());
 						break;
+					}else{
+						product.setPremium(null);
 					}
 				}
 				double cancelRatio = productService.toCancelRatio(yearCodeInt, product).doubleValue()
@@ -182,19 +188,25 @@ public class ProductController {
 
 				double period = (double) yearINT;
 				double times = (double) yearCodeInt;
-				double premium = product.getPremium().doubleValue();
+				double premium;
+				if(product.getPremium()!=null){
+					premium = product.getPremium().doubleValue();
+				}
 				double expired = product.getCashValue().doubleValue();
-				double irr = iRRCaculator.getIRR(period, times, premium, expired);
-				product.setIrr(irr);
-
-				System.out.println("irr=" + irr);
-				if (product.getPremium() == null) {// 如果保額不在上下限範圍之內 則不顯示這張表單
-					product = new ProductEntity();
-					continue;
+				if(product.getPremium()!=null){
+					premium = product.getPremium().doubleValue();
+					double irr = iRRCaculator.getIRR(period, times, premium, expired);
+					product.setIrr(irr);					
+					System.out.println("irr=" + irr);
 				}
 
-				response.setData(product);
-				System.out.println(product);
+				if (product.getPremium() == null) {// 如果保額不在上下限範圍之內 則不顯示這張表單
+					System.out.println("NO product.getPremium()!!!");
+					continue;
+				}else{
+					response.setData(product);
+					System.out.println(product);
+				}
 				log.debug("{}", response);
 			} catch (final ApplicationException ex) {
 				ex.printStackTrace();
@@ -203,6 +215,7 @@ public class ProductController {
 				response.addException(e);
 			}
 			responses.add(response);
+			
 		}
 
 		System.out.println(responses);

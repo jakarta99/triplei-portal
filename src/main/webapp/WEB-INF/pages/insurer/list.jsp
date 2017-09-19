@@ -23,6 +23,11 @@
 	font-size: 1.5em;
 	padding-top: 10px;
 }
+.ui-widget-header {
+	 border: 0px solid #e78f08; 
+	background-color: white;
+}
+ 
 </style>
 </head>
 <body>
@@ -71,8 +76,10 @@
 
 					
 						<c:forEach items="${models}" var="model">
-						<div class="descriptionzone" title="${model.shortName}" id="${model.id}" n>
-							<a href="${model.description}" target="_blank">${model.description}</a>
+						<div class="descriptionzone" id="${model.id}">
+						<img src="${model.imgsrc}" alt="${model.shortName}"
+										width="50" height="50" name="${model.id}" style="margin-left: 10%;margin-bottom: 5%;"><a style="font-size: 25px; padding-left: 5%;font-weight:bold;">${model.shortName}</a><br>
+							<a href="${model.description}" target="_blank" style="padding-left: 13%">${model.description}</a>
 							</div>
 						</c:forEach>
 					

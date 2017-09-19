@@ -55,10 +55,10 @@ font-size:100%;
 				<div>
 				<span>性別</span>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Female"><img class="genderImage female" alt="女" name="female" src="/resources/pic/product/female.png">
+				<input type="radio" class="gender" name="gender" value="Female"><img class="genderImage female" data-toggle="tooltip" title="女生" alt="女" name="female" src="/resources/pic/product/female.png">
 				</label>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男"  name="male" src="/resources/pic/product/male.png">
+				<input type="radio" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男" data-toggle="tooltip" title="男生"  name="male" src="/resources/pic/product/male.png">
 				</label>
 				</div >
 				<div>
@@ -93,8 +93,8 @@ font-size:100%;
 			<div class="col-sm-4">
 			<span>存款方式</span><br/>
 			<select id="paymentMethod">
-			<option value="1">躉繳</option>
-			<option value="#">年繳</option>
+			<option value="once">躉繳</option>
+			<option value="many">年繳</option>
 			</select>
 			</div>
 			<div class="col-sm-4">
@@ -112,9 +112,11 @@ font-size:100%;
 			<span>繳費年期(年)</span><br/>
 			<select id="year">
 			<option value="1">1</option>
-			<c:forEach var="i" begin="5" end="30" step="5">
-			<option value="${i}">${i}</option>
-			</c:forEach>
+<%-- 			<c:forEach var="i" begin="5" end="30" step="5"> --%>
+<%-- 			<option value="${i}">${i}</option> --%>
+<%-- 			</c:forEach> --%>
+			<option value="6">6</option>
+			<option value="7">7</option>
 			</select>
 			</div>
 			<div class="col-sm-4">
@@ -215,11 +217,15 @@ font-size:100%;
 		changeYear : true,
 		dateFormat : "yy-mm-dd"
 	});
+	$("#bDate").datepicker('setDate',new Date());
+	
+	
 	
 	$(".gender").hide();
 	var gender;
 	$(".genderImage").hover(function(){
 		gender = $(this).attr("name");
+		$('[data-toggle="tooltip"]').tooltip(); 
 		$(this).attr("src","/resources/pic/product/"+gender+"-hover.png");
 	},function(){
 		$(this).attr("src","/resources/pic/product/"+gender+".png");
@@ -227,7 +233,10 @@ font-size:100%;
 	$(".genderImage").on("click",function(){
 		var gender = $(this).attr("name");
 		$(".genderImage").off();
+		
+		$('[data-toggle="tooltip"]').tooltip("hide");
 		$(".genderImage").on("click",function(){
+			
 			$(".male").attr("src","/resources/pic/product/male.png");
 			$(".female").attr("src","/resources/pic/product/female.png");
 			$(this).attr("src","/resources/pic/product/"+$(this).attr("name")+"-hover.png");
@@ -264,12 +273,17 @@ font-size:100%;
 			$.get("/product/getProduct/"+$('input[name="gender"]:checked').val()
 					+"/"+$('#bDate').val()+"/"+$("#currency option:selected").val()
 					+"/"+$("#paymentMethod option:selected").val()+"/"+$("#interestRateType option:selected").val()
-					+"/"+$("#premium").val()+"/"+$("#year option:selected").val()+"/"+$("#yearCode").val(),function(value){
+					+"/"+$("#premium").val()+"/"+$("#year option:selected").val()+"/"+$("#yearCode").val(),function(content){
 // 				$.each(value,function(xxx){
 // 					alert(xxx.code);
 // 				alert(JSON.stringify(value));
-					alert(value);
 // 				})
+				$.each(content,function(index,value){
+					console.log(index);
+					$.each(value,function(index,val){
+						console.log(val);
+					})
+				})
 			})	
 			
 		}
