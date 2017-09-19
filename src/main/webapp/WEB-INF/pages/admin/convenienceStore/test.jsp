@@ -22,9 +22,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<br />
-			<br />
-			<br />
+			<br /> <br /> <br />
 			<h3>超商查詢</h3>
 
 
@@ -40,68 +38,68 @@
 							</div>
 							<div class="panel-body">
 
-							
-<div class="col-md-4" style=" border : solid 3px ; color: gray;">
-								<div class="form-group required">
-									<label for="sortNo" class="col-md-2 control-label">縣市</label>
-									<div class="col-md-10">
-										<select id="city" class="form-control">
-										<option value="台北市" selected>請選擇</option>
-										<option value="台北市">台北市</option>
-										<option value="桃園">桃園</option>
-										<option value="台中">台中</option>
-										<option value="台南">台南</option>
-										<option value="高雄">高雄</option>
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group required">
-									<label for="sortNo" class="col-md-2 control-label">區域</label>
-									<div class="col-md-10">
-										<select id="region" class="form-control" >
-										<option value="aaa">aaa</option>
-										<option value="bbb">bbb</option>
-										<option value="ccc">ccc</option>
-										<option value="ddd">ddd</option>
-										<option value="eee">eee</option>
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group required">
-									<label for="sortNo" class="col-md-2 control-label">街道</label>
-									<div class="col-md-10">
-										<select id="street" class="form-control" >
-										<option value="aaa">aaa</option>
-										<option value="bbb">bbb</option>
-										<option value="ccc">ccc</option>
-										<option value="ddd">ddd</option>
-										<option value="eee">eee</option>
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group required">
-									<label for="sortNo" class="col-md-2 control-label">超商</label>
-									<div class="col-md-10">
-										<select id="store" class="form-control" >
-										<option value="aaa">aaa</option>
-										<option value="bbb">bbb</option>
-										<option value="ccc">ccc</option>
-										<option value="ddd">ddd</option>
-										<option value="eee">eee</option>
-										</select>
-									</div>
-								</div>
 
-								
-</div>
+								<div class="col-md-4" style="border: solid 3px; color: gray;">
+									<div class="form-group required">
+										<label for="sortNo" class="col-md-2 control-label">縣市</label>
+										<div class="col-md-10">
+											<select id="city" class="form-control">
+												<option value="台北市" selected>請選擇</option>
+												<option value="台北市">台北市</option>
+												<option value="桃園">桃園</option>
+												<option value="台中">台中</option>
+												<option value="台南">台南</option>
+												<option value="高雄">高雄</option>
+											</select>
+										</div>
+									</div>
 
-<div class="col-md-8" style=" border : solid 3px ; color: gray;">
+									<div class="form-group required">
+										<label for="sortNo" class="col-md-2 control-label">區域</label>
+										<div class="col-md-10">
+											<select id="region" class="form-control">
+												<option value="aaa">aaa</option>
+												<option value="bbb">bbb</option>
+												<option value="ccc">ccc</option>
+												<option value="ddd">ddd</option>
+												<option value="eee">eee</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group required">
+										<label for="sortNo" class="col-md-2 control-label">街道</label>
+										<div class="col-md-10">
+											<select id="street" class="form-control">
+												<option value="aaa">aaa</option>
+												<option value="bbb">bbb</option>
+												<option value="ccc">ccc</option>
+												<option value="ddd">ddd</option>
+												<option value="eee">eee</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group required">
+										<label for="sortNo" class="col-md-2 control-label">超商</label>
+										<div class="col-md-10">
+											<select id="store" class="form-control">
+												<option value="aaa">aaa</option>
+												<option value="bbb">bbb</option>
+												<option value="ccc">ccc</option>
+												<option value="ddd">ddd</option>
+												<option value="eee">eee</option>
+											</select>
+										</div>
+									</div>
 
 
-</div>
+								</div>
+
+								<div class="col-md-8" style="border: solid 3px; color: gray;">
+
+
+								</div>
 
 
 
@@ -131,28 +129,28 @@
 		</div>
 	</div>
 
-<script type="text/javascript">
-var city = $('#city').val();
-console.log(city);
+	<script type="text/javascript">
+		$('#city').on("change", function() {
+			var datas = {};
+			var city = $('#city').val();
+			console.log(city);
+			datas.city = city;
 
-	$('#city').on(
-			"change",
-			function() {
 			$.ajax({
-				type:"GET",
-				url:"<c:url value='/admin/convenienceStore/searchRegion'/>", 
-				dataType:"json",
-				data:city,
-				success:function(data){
-	 		    		alert(data);
-					},
-				error:function(data){
+				type : "GET",
+				url : "<c:url value='/admin/convenienceStore/searchRegion'/>",
+				dataType : "json",
+				data : datas,
+				success : function(data) {
+					alert(data);
+				},
+				error : function(data) {
 					alert("error");
 				}
-			
+
 			});
-			});
-</script>
+		});
+	</script>
 </body>
 </html>
 
