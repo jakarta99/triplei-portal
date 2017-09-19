@@ -88,13 +88,33 @@ public class ProductEntity extends GenericEntity{
 	
 	@Column(name = "BONUS_POINT")
 	private BigDecimal bonusPoint; //點數趴數
+	
+	@Column(name="GET_POINT")
+	private BigDecimal getPoint; //獲得點數
+	
+	@Column(name="IRR")
+	private double irr;  //IRR
+
+
+
 
 	@Override
 	public String toString() {
-		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", code=" + code + ", yearCode=" + yearCode
-				+ ", localName=" + localName + ", declareInterestRate=" + declareInterestRate + ", predictInterestRate="
-				+ predictInterestRate + ", curr=" + curr + ", highDiscountRatios=" + highDiscountRatios
-				+ ", premiumRatios=" + premiumRatios + ", cancelRatios=" + cancelRatios + "]";
+		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", localName=" + localName + ", code=" + code
+				+ ", yearCode=" + yearCode + ", year=" + year + ", declareInterestRate=" + declareInterestRate
+				+ ", predictInterestRate=" + predictInterestRate + ", interestRateType=" + interestRateType + ", curr="
+				+ curr + ", highDiscountRatios=" + highDiscountRatios + ", premiumRatios=" + premiumRatios
+				+ ", cancelRatios=" + cancelRatios + ", paymentMethod=" + paymentMethod + ", insureAmount="
+				+ insureAmount + ", premium=" + premium + ", cashValue=" + cashValue + ", storeShelves=" + storeShelves
+				+ ", bonusPoint=" + bonusPoint + ", getPoint=" + getPoint + ", irr=" + irr + "]";
+	}
+
+	public double getIrr() {
+		return irr;
+	}
+
+	public void setIrr(double irr) {
+		this.irr = irr;
 	}
 
 	public Long getId() {
@@ -247,6 +267,14 @@ public class ProductEntity extends GenericEntity{
 
 	public void setBonusPoint(BigDecimal bonusPoint) {
 		this.bonusPoint = bonusPoint;
+	}
+
+	public BigDecimal getGetPoint() {
+		return getPoint;
+	}
+
+	public void setGetPoint(BigDecimal getPoint) {
+		this.getPoint = getPoint;
 	}
 
 

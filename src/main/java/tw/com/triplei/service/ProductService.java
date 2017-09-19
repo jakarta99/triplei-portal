@@ -6,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,6 +21,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,7 +41,6 @@ import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.ProductHighDiscountRatio;
 import tw.com.triplei.entity.ProductPremiumRatio;
-import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.enums.Currency;
 
 @Slf4j
@@ -46,6 +50,8 @@ public class ProductService extends GenericService<ProductEntity> {
 	@Autowired
 	private ProductDao dao;
 
+	
+	
 	@Autowired
 	private InsurerDao insurerDao;
 
@@ -57,6 +63,11 @@ public class ProductService extends GenericService<ProductEntity> {
 
 	@Autowired
 	private ProductHighDiscountRatioDao productHighDiscountRatioDao;
+	
+//	@Autowired
+//	private Currency currency;
+	
+	private BigDecimal bigDecimal;
 
 	public ProductPremiumRatioDao getProductPremiumRatioDao() {
 		return productPremiumRatioDao;
@@ -68,6 +79,919 @@ public class ProductService extends GenericService<ProductEntity> {
 
 	public ProductHighDiscountRatioDao getProductHighDiscountRatioDao() {
 		return productHighDiscountRatioDao;
+	}
+	
+	public int stringToAge(String string){
+		int number = Integer.parseInt(string);
+		return number;
+	}
+	
+//	public Currency stringToCurrency(String curr){
+//		if(curr=="AUD"){
+//			return currency.AUD;
+//		}else if(curr=="USD"){
+//			return currency.USD;
+//		}else if (curr=="RMB"){
+//			return currency.RMB;
+//		}else if(curr=="TWD"){
+//			return currency.TWD;
+//		}	
+//		return currency;
+//	}
+	
+	public int bDateToInt(String bDate){
+		String[] bDates = bDate.split("-");
+		Date date= new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String nowDate = sdf.format(date);
+		String[] nowDates = nowDate.split("-");
+		int bDate0 = Integer.parseInt(bDates[0]);
+		int bDate1 = Integer.parseInt(bDates[1]);
+		int bDate2 = Integer.parseInt(bDates[2]);
+		int nowDate0 = Integer.parseInt(nowDates[0]);
+		int nowDate1 = Integer.parseInt(nowDates[1]);
+		int nowDate2 = Integer.parseInt(nowDates[2]);
+		if(nowDate0-bDate0<0){ //年份相減 未來人年紀為-1
+			return -1;
+		}else if(nowDate0-bDate0==0){//同年出生 
+			if(nowDate1-bDate1<0){ //同年出生，月份比現在大，未來人
+				return -1;
+			}else if(nowDate1-bDate1>6){//同年出生，出生超過6個月，年齡算1歲
+				return nowDate0-bDate0+1;
+			}else if(nowDate1-bDate1==6){//同年出生，差6個月，比較日期
+				if(nowDate2-bDate2<=0){//不足6個月
+					return nowDate0-bDate0;
+				}else{//滿6個月又1天 +1歲
+					return nowDate0-bDate0+1;
+				}
+			}else if(nowDate1-bDate1==0){//同月份 比較日期
+				if(nowDate2-bDate2<0){
+					return -1;//未來人
+				}else{
+					return nowDate0-bDate0;
+				}
+			}else{//相差6個月內
+				return nowDate0-bDate0;
+			}
+		}else{  //已出生
+			if(nowDate1-bDate1<6 && nowDate1-bDate1>-6){
+				return nowDate0-bDate0;
+			}else if(nowDate1-bDate1<-6){
+				return nowDate0-bDate0-1;
+			}else if(nowDate1-bDate1>6){//滿6個月，歲數+1
+				return nowDate0-bDate0+1;
+			}else if(nowDate1-bDate1==6){
+				if(nowDate2-bDate2<=0){
+					return nowDate0-bDate0;
+				}else{
+					return nowDate0-bDate0+1;
+				}
+			}else{
+				if(nowDate2-bDate2<=0){
+					return nowDate0-bDate0-1;
+				}else{
+					return nowDate0-bDate0;
+				}
+			}
+		}	
+	}
+	
+//	public List<ProductEntity> search(String gender,int insAge,Currency currency,String interestRateType,int year){
+//		return dao.search(gender, insAge, currency, interestRateType, year);
+//	}
+	
+	public double getPremiumRatio(ProductEntity product){
+		return product.getPremiumRatios().iterator().next().getPremiumRatio().doubleValue();
+	}
+	
+	
+	
+	public List<ProductEntity> search(String gender,int insAge,Currency currency,String interestRateType,int year){
+		List<ProductEntity> products = dao.findByCurrAndInterestRateTypeAndYear(currency, interestRateType, year);
+		List<ProductEntity> productss = new ArrayList<>();
+		for(ProductEntity product:products){
+			product.setPremiumRatios(productPremiumRatioDao.findByProductIdAndInsAgeAndGender(product.getId(), insAge, gender));
+			product.setHighDiscountRatios(productHighDiscountRatioDao.findByProductId(product.getId()));
+			product.setCancelRatios(productCancelRatioDao.findByProductIdAndInsAgeAndGender(product.getId(), insAge, gender));
+			productss.add(product);
+		}
+		return productss;
+	}
+	
+	public BigDecimal toCancelRatio(int yearCode,ProductEntity product){
+		if(yearCode==0){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_0()!=null){
+				return productCancelRatio.getCancelRatio_0();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==1){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_1()!=null){
+				return productCancelRatio.getCancelRatio_1();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==2){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_2()!=null){
+				return productCancelRatio.getCancelRatio_2();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==3){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_3()!=null){
+				return productCancelRatio.getCancelRatio_3();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==4){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_4()!=null){
+				return productCancelRatio.getCancelRatio_4();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==5){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_5()!=null){
+				return productCancelRatio.getCancelRatio_5();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==6){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_6()!=null){
+				return productCancelRatio.getCancelRatio_6();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==7){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_7()!=null){
+				return productCancelRatio.getCancelRatio_7();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==8){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_8()!=null){
+				return productCancelRatio.getCancelRatio_8();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==9){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_9()!=null){
+				return productCancelRatio.getCancelRatio_9();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==10){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_10()!=null){
+				return productCancelRatio.getCancelRatio_10();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==11){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_11()!=null){
+				return productCancelRatio.getCancelRatio_11();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==12){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_12()!=null){
+				return productCancelRatio.getCancelRatio_12();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==13){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_13()!=null){
+				return productCancelRatio.getCancelRatio_13();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==14){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_14()!=null){
+				return productCancelRatio.getCancelRatio_14();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==15){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_15()!=null){
+				return productCancelRatio.getCancelRatio_15();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==16){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_16()!=null){
+				return productCancelRatio.getCancelRatio_16();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==17){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_17()!=null){
+				return productCancelRatio.getCancelRatio_17();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==18){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_18()!=null){
+				return productCancelRatio.getCancelRatio_18();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==19){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_19()!=null){
+				return productCancelRatio.getCancelRatio_19();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==20){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_20()!=null){
+				return productCancelRatio.getCancelRatio_20();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==21){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_21()!=null){
+				return productCancelRatio.getCancelRatio_21();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==22){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_22()!=null){
+				return productCancelRatio.getCancelRatio_22();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==23){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_23()!=null){
+				return productCancelRatio.getCancelRatio_23();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==24){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_24()!=null){
+				return productCancelRatio.getCancelRatio_24();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==25){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_25()!=null){
+				return productCancelRatio.getCancelRatio_25();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==26){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_26()!=null){
+				return productCancelRatio.getCancelRatio_26();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==27){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_27()!=null){
+				return productCancelRatio.getCancelRatio_27();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==28){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_28()!=null){
+				return productCancelRatio.getCancelRatio_28();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==29){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_29()!=null){
+				return productCancelRatio.getCancelRatio_29();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==30){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_30()!=null){
+				return productCancelRatio.getCancelRatio_30();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==31){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_31()!=null){
+				return productCancelRatio.getCancelRatio_31();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==32){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_32()!=null){
+				return productCancelRatio.getCancelRatio_32();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==33){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_33()!=null){
+				return productCancelRatio.getCancelRatio_33();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==34){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_34()!=null){
+				return productCancelRatio.getCancelRatio_34();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==35){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_35()!=null){
+				return productCancelRatio.getCancelRatio_35();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==36){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_36()!=null){
+				return productCancelRatio.getCancelRatio_36();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==37){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_37()!=null){
+				return productCancelRatio.getCancelRatio_37();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==38){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_38()!=null){
+				return productCancelRatio.getCancelRatio_38();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==39){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_39()!=null){
+				return productCancelRatio.getCancelRatio_39();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==40){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_40()!=null){
+				return productCancelRatio.getCancelRatio_40();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==41){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_41()!=null){
+				return productCancelRatio.getCancelRatio_41();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==42){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_42()!=null){
+				return productCancelRatio.getCancelRatio_42();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==43){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_43()!=null){
+				return productCancelRatio.getCancelRatio_43();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==44){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_44()!=null){
+				return productCancelRatio.getCancelRatio_44();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==45){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_45()!=null){
+				return productCancelRatio.getCancelRatio_45();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==46){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_46()!=null){
+				return productCancelRatio.getCancelRatio_46();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==47){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_47()!=null){
+				return productCancelRatio.getCancelRatio_47();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==48){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_48()!=null){
+				return productCancelRatio.getCancelRatio_48();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==49){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_49()!=null){
+				return productCancelRatio.getCancelRatio_49();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==50){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_50()!=null){
+				return productCancelRatio.getCancelRatio_50();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==51){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_51()!=null){
+				return productCancelRatio.getCancelRatio_51();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==52){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_52()!=null){
+				return productCancelRatio.getCancelRatio_52();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==53){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_53()!=null){
+				return productCancelRatio.getCancelRatio_53();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==54){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_54()!=null){
+				return productCancelRatio.getCancelRatio_54();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==55){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_55()!=null){
+				return productCancelRatio.getCancelRatio_55();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==56){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_56()!=null){
+				return productCancelRatio.getCancelRatio_56();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==57){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_57()!=null){
+				return productCancelRatio.getCancelRatio_57();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==58){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_58()!=null){
+				return productCancelRatio.getCancelRatio_58();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==59){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_59()!=null){
+				return productCancelRatio.getCancelRatio_59();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==60){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_60()!=null){
+				return productCancelRatio.getCancelRatio_60();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==61){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_61()!=null){
+				return productCancelRatio.getCancelRatio_61();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==62){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_62()!=null){
+				return productCancelRatio.getCancelRatio_62();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==63){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_63()!=null){
+				return productCancelRatio.getCancelRatio_63();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==64){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_64()!=null){
+				return productCancelRatio.getCancelRatio_64();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==65){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_65()!=null){
+				return productCancelRatio.getCancelRatio_65();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==66){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_66()!=null){
+				return productCancelRatio.getCancelRatio_66();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==67){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_67()!=null){
+				return productCancelRatio.getCancelRatio_67();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==68){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_68()!=null){
+				return productCancelRatio.getCancelRatio_68();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==69){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_69()!=null){
+				return productCancelRatio.getCancelRatio_69();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==70){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_70()!=null){
+				return productCancelRatio.getCancelRatio_70();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==71){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_71()!=null){
+				return productCancelRatio.getCancelRatio_71();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==72){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_72()!=null){
+				return productCancelRatio.getCancelRatio_72();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==73){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_73()!=null){
+				return productCancelRatio.getCancelRatio_73();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==74){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_74()!=null){
+				return productCancelRatio.getCancelRatio_74();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==75){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_75()!=null){
+				return productCancelRatio.getCancelRatio_75();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==76){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_76()!=null){
+				return productCancelRatio.getCancelRatio_76();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==77){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_77()!=null){
+				return productCancelRatio.getCancelRatio_77();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==78){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_78()!=null){
+				return productCancelRatio.getCancelRatio_78();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==79){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_79()!=null){
+				return productCancelRatio.getCancelRatio_79();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==80){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_80()!=null){
+				return productCancelRatio.getCancelRatio_80();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==81){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_81()!=null){
+				return productCancelRatio.getCancelRatio_81();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==82){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_82()!=null){
+				return productCancelRatio.getCancelRatio_82();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==83){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_83()!=null){
+				return productCancelRatio.getCancelRatio_83();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==84){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_84()!=null){
+				return productCancelRatio.getCancelRatio_84();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==85){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_85()!=null){
+				return productCancelRatio.getCancelRatio_85();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==86){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_86()!=null){
+				return productCancelRatio.getCancelRatio_86();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==87){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_87()!=null){
+				return productCancelRatio.getCancelRatio_87();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==88){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_88()!=null){
+				return productCancelRatio.getCancelRatio_88();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==89){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_89()!=null){
+				return productCancelRatio.getCancelRatio_89();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==90){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_90()!=null){
+				return productCancelRatio.getCancelRatio_90();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==91){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_91()!=null){
+				return productCancelRatio.getCancelRatio_91();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==92){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_92()!=null){
+				return productCancelRatio.getCancelRatio_92();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==93){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_93()!=null){
+				return productCancelRatio.getCancelRatio_93();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==94){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_94()!=null){
+				return productCancelRatio.getCancelRatio_94();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==95){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_95()!=null){
+				return productCancelRatio.getCancelRatio_95();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==96){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_96()!=null){
+				return productCancelRatio.getCancelRatio_96();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==97){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_97()!=null){
+				return productCancelRatio.getCancelRatio_97();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==98){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_98()!=null){
+				return productCancelRatio.getCancelRatio_98();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==99){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_99()!=null){
+				return productCancelRatio.getCancelRatio_99();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==100){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_100()!=null){
+				return productCancelRatio.getCancelRatio_100();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==101){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_101()!=null){
+				return productCancelRatio.getCancelRatio_101();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==102){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_102()!=null){
+				return productCancelRatio.getCancelRatio_102();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==103){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_103()!=null){
+				return productCancelRatio.getCancelRatio_103();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==104){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_104()!=null){
+				return productCancelRatio.getCancelRatio_104();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==105){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_105()!=null){
+				return productCancelRatio.getCancelRatio_105();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==106){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_106()!=null){
+				return productCancelRatio.getCancelRatio_106();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==107){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_107()!=null){
+				return productCancelRatio.getCancelRatio_107();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==108){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_108()!=null){
+				return productCancelRatio.getCancelRatio_108();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==109){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_109()!=null){
+				return productCancelRatio.getCancelRatio_109();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==110){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_110()!=null){
+				return productCancelRatio.getCancelRatio_110();				
+			}else{
+				return null;
+			}
+		}else if(yearCode==111){
+			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+			if(productCancelRatio.getCancelRatio_111()!=null){
+				return productCancelRatio.getCancelRatio_111();				
+			}else{
+				return null;
+			}
+		}else 
+			return null;
+	}
+	
+	
+	
+	
+	public int stringToInt(String string){
+		int number = Integer.parseInt(string);
+		return number;
+	}
+	
+	public BigDecimal stringToBigDecimal(String number){
+		
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		symbols.setGroupingSeparator(',');
+		symbols.setDecimalSeparator('.');
+		String pattern = "#,##0.0#";
+		DecimalFormat decimalFormat = new DecimalFormat(pattern, symbols);
+		decimalFormat.setParseBigDecimal(true);
+
+		try {
+			bigDecimal = (BigDecimal) decimalFormat.parse(number);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}
+		
+		return bigDecimal;
 	}
 
 	private String url;

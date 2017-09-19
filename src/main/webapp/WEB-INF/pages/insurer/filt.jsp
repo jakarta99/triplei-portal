@@ -20,32 +20,69 @@
 </style>
 </head>
 <body>
-	<div class="container-fluid">
+
+
+
+
+<div class="container-fluid"
+		style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div>
-			<div class="col-lg-4" style="height: 100vh; display: table; table-layout: fixed;">
-				<div style="display: table-cell; vertical-align: middle;">
-					<h1>保險公司</h1>
-					<h3><a href="/insurer/list">保險公司</a></h3>
-					<h3><a href="/insurer/filt">各別項目查詢</a></h3>
+			<div class="col-xs-12 col-sm-4"
+				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;"><!--左半藍 -->
+				<div
+					style="display: table-cell; vertical-align: top; padding-top: 20vh; text-align: center;">
+					<h1 style="color: rgb(254, 249, 246); font-size: 2 em;">保險公司</h1>
+					<h3>
+						<a href="/insurer/list"
+							style="color: rgb(254, 249, 246); opacity: 0.6; font-size: 1em;">各公司列表</a>
+					</h3>
+					<h3>
+						<a href="/insurer/filt"
+							style="color: rgb(254, 249, 246); opacity: 0.6; font-size: 1em;">各別項目查詢</a>
+					</h3>
 				</div>
 			</div>
-			<div class="col-lg-8 bg-info" style="height: 100vh; display: table; table-layout: fixed;">
-			<a class="filterbutton" style="display: table-cell; vertical-align: middle;">篩選保險公司</a>
-				<div class = "insurerfilter" style="display: table-cell; vertical-align: middle;">
+			<div class="col-xs-12 col-sm-8"
+				style="height: 100vh; display: table; table-layout: fixed; background-color: #FAF7F7;"><!--右半白 -->
+				<div 
+					style="height: 100vh; position: relative; padding-top: 24vh;"><!--選擇框 -->
+				
+				<div class="col-xs-2 col-sm-1" style="height: 100%;"></div>
+				<button id="btn" style="background-color: white; color: #5C8DEC; 
+				border:1px #5C8DEC solid;width: 10em">篩選保險公司</button><br>
+				<div class="col-xs-8 col-sm-7 col-md-4" id="insurerfilter" style="background-color:#5C8DEC;
+				padding-left: 0px;padding-right: 0px;display: none">
+					<p class="col-xs-12 col-sm-12"><input type="checkbox" id="checkall">全選</p>
 					<c:forEach items="${models}" var="model">
-					<input type="checkbox" name="insurer">${model.shortName}</br>
+					<p class="col-xs-6 col-sm-6">
+					<input type="checkbox" name="${model.shortName}">${model.shortName}
+					</p>
 					</c:forEach>
+					<p class="col-xs-6 col-sm-6"><button>開始比較</button></p>
+					<button  style=" visibility:hidden;">開始比較</button>
+				</div>
+				<div class="col-xs-2 col-sm-4 col-md-7"></div>
+				
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<script type="text/javascript">
-	$(document).ready(function(){
-		$('.insurerfilter').hide();
-		$('.filterbutton').click(function(){
-			$('.insurerfilter').show()
+	$(function(){
+// 		$('#insurerfilter').toggle(0);
+		$('#btn').click(function(){
+			$('#insurerfilter').toggle(1000);
+		})
+		$('#checkall').change(function(){
+			var b = $(this).prop('checked')
+	        $(':checkbox').prop('checked',b)
+	            //切換所有checkbox的勾選狀態        	
+	        	
+			
+			
+			
 		})
 	});
 	</script>

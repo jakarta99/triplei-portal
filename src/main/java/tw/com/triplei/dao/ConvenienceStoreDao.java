@@ -9,4 +9,9 @@ public interface ConvenienceStoreDao extends GenericDao<ConvenienceStoreEntity>{
 	
 	public ConvenienceStoreEntity findByAddress(String address);
 	
+	public ConvenienceStoreEntity findByCity(String city);
+
+	public ConvenienceStoreEntity findByCityAndRegion(String city, String region);
+
+	public ConvenienceStoreEntity findByCityAndRegionAndStreet(String city, String region, String street);
 }
