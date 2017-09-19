@@ -16,7 +16,6 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<br /> <br /> <br />
 			<h3>免費註冊</h3>
 
 			<div class="panel panel-default">

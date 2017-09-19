@@ -19,9 +19,6 @@
 </head>
 </head>
 <body>
-	<br>
-	<br>
-	<br>
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
