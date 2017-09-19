@@ -87,8 +87,8 @@ font-size:95%;
 						</ul>
 					</li>
 				</sec:authorize>
-</ul>
-<ul class="nav navbar-nav navbar-right">
+<!-- </ul> -->
+<!-- <ul class="nav navbar-nav navbar-right"> -->
 				<li><a href="/insurer/list">各公司資訊</a></li>
 				<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">商品專區<span class="caret"></span></a>
