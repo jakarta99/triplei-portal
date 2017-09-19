@@ -272,7 +272,11 @@ font-size:100%;
 					+"/"+$('#bDate').val()+"/"+$("#currency option:selected").val()
 					+"/"+$("#paymentMethod option:selected").val()+"/"+$("#interestRateType option:selected").val()
 					+"/"+$("#premium").val()+"/"+$("#year option:selected").val()+"/"+$("#yearCode").val(),function(value){
-				alert(value);
+// 				$.each(value,function(xxx){
+// 					alert(xxx.code);
+// 				alert(JSON.stringify(value));
+					alert(value);
+// 				})
 			})	
 			
 		}
