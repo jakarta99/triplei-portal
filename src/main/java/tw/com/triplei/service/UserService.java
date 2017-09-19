@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ import tw.com.triplei.entity.UserEntity;
 @Slf4j
 @Service
 public class UserService extends GenericService<UserEntity>{
+	
+//	@Autowired
+//	private static PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserDao userDao;
@@ -40,9 +44,18 @@ public class UserService extends GenericService<UserEntity>{
 		List<Message> messages = new ArrayList<Message>();
 
 		UserEntity dbEntity = userDao.findByEmail(entity.getEmail()); // email 不得重複註冊
+		
+		if (StringUtils.isBlank(entity.getName())) {
+			messages.add(Message.builder().code("name").value("會員姓名為必填欄位").build());
+		}
 
 		if (dbEntity != null) {
 			messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
+		}
+		
+		if (!entity.getPassword().equals(entity.getCheckPassword())){
+			messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
+			messages.add(Message.builder().code("checkpassword").value("輸入的密碼不相同，請重新輸入").build());
 		}
 
 		log.debug("{}", messages);
@@ -70,7 +83,10 @@ public class UserService extends GenericService<UserEntity>{
 	@org.springframework.transaction.annotation.Transactional
 	@Override
 	public UserEntity handleInsert(final UserEntity entity) {
-		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
+		
+//		entity.setPassword(encodePasswrod(entity.getPassword()));
+		entity.setPassword(entity.getPassword());
+		entity.setPassword(entity.getCheckPassword());
 		entity.setEnabled(false);  // 預設新註冊的會員不啟用
 		entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
 		
@@ -79,8 +95,7 @@ public class UserService extends GenericService<UserEntity>{
 		entity.setCreatedTime(timestamp);
 		
 		final Set<RoleEntity> RoleEntity = new HashSet<>();
-		//XXX
-		final RoleEntity roleDefault = roleDao.findOne(1L);  // 預設權限為一般會員
+		final RoleEntity roleDefault = roleDao.findByCode("ROLE_NORMAL"); // 預設權限為一般會員
 		RoleEntity.add(roleDefault);
 		
 		entity.setRoles(RoleEntity);
@@ -94,7 +109,9 @@ public class UserService extends GenericService<UserEntity>{
 	public UserEntity handleUpdate(final UserEntity entity) {
 		final UserEntity dbUserEntity = userDao.findOne(entity.getId());
 		
-		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
+//		dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
+		dbUserEntity.setPassword(entity.getPassword());
+		dbUserEntity.setPassword(entity.getCheckPassword());
 		dbUserEntity.setEmail(entity.getEmail());
 		dbUserEntity.setEnabled(entity.getEnabled());
 		dbUserEntity.setCreatedTime(entity.getCreatedTime());
@@ -109,5 +126,10 @@ public class UserService extends GenericService<UserEntity>{
 		
 		return dbUserEntity;
 	}
+	
+//	public String encodePasswrod(final String rawPassword) {
+//		return passwordEncoder.encode(rawPassword);
+//	}
+	
 
 }

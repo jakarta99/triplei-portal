@@ -19,28 +19,18 @@
 </head>
 </head>
 <body>
-	<br>
-	<br>
-	<br>
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form class="form-horizontal" id="dataForm">
-						<div class="panel panel-primary">
+		<br>
+		<div style="text-align:center;">
+		<h1>恭喜您註冊成功!!</h1>
+		<img class="registeredSuccess" name="registeredSuccess"
+			src="/resources/pic/registered/registeredSuccess.png" width="40%">
+		<h3>於右上角登入後即可開始使用</h3>
+		</div>
 
-							<div class="panel-body">
-							<h1>
-								<div class="alert alert-success">恭喜您註冊成功!!</div>
-							</h1>
-							<h3>於右上角登入後即可開始使用</h3>
 
-						</div>
-						</div>
-					</form>
-				</div>
-			</div>
 	</div>
 </body>
 </html>

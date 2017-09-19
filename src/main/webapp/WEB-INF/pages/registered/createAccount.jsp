@@ -16,8 +16,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<br /> <br /> <br />
-			<h3>註冊</h3>
+			<h3>免費註冊</h3>
 
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -55,10 +54,20 @@
 									<label for="password" class="col-md-2 control-label">設定密碼</label>
 									<div class="col-md-8">
 										<input type="password" class="form-control" id="password"
-											name="password" placeholder="password" value="" /> <span
-											class="help-block"><div class="text-danger"></div></span>
+											name="password" placeholder="password" value="" /> 
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
+								
+								<div class="form-group required">
+									<label for="checkPassword" class="col-md-2 control-label">確認密碼</label>
+									<div class="col-md-8">
+										<input type="password" class="form-control" id="checkPassword"
+											name="checkPassword" placeholder="checkPassword" value="" /> 
+										<span class="help-block"><div class="text-danger"></div></span>
+									</div>
+								</div>
+								
 
 								<div class="form-group required">
 									<label for="gender" class="col-md-2 control-label">性別</label>
@@ -81,7 +90,7 @@
 				<div class="col-md-6">
 					<div>
 						<a href="#" class="btn btn-lg btn-primary btn-block"
-							data-loading-text="Loading" id="saveButton">儲存</a>
+							data-loading-text="Loading" id="saveButton">註冊</a>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -102,13 +111,14 @@
 					function() {
 						var $btn = $(this);
 						$btn.button("loading");
-
+						
 						$.post("<c:url value='/registered'/>", "dataForm",
 								function(data) {
 									if (data.messages.length == 0) {
 										$("#dataForm").trigger("reset");
-										//swal("SUCCESS", "資料新增成功！", "success");
-										alert("SUCCESS!! 已寄認證信至您的信箱，請開啟信件連結以啟用會員");
+										//alert("SUCCESS!! 已寄認證信至您的信箱，請開啟信件連結以啟用會員");
+										location.href = '/registered/checkLetter'
+										
 										$btn.button("reset");
 										dialog1.dialog("close");
 									}
