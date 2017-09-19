@@ -22,7 +22,7 @@ jQuery(function(a) {
 		yearSuffix : '',
  		changeMonth : true,
  		changeYear : true,
- 		yearRange : '-77:+13',
+ 		yearRange : '-77:c',
 		formatDate: function (format, value, settings) {
 			if (!!!value) {
 				return "";

@@ -75,7 +75,7 @@ font-size:95%;
 							<li><a href="#">訂單管理</a></li>
 							<li><a href="/admin/gift/list">積點商品上架</a></li>
 							<li><a href="/admin/wish/list">許願池查詢</a></li>
-							<li><a href="#">XXXX</a></li>
+<!-- 							<li><a href="#">XXXX</a></li> -->
 						</ul>
 					</li>
 					<li class="dropdown">
