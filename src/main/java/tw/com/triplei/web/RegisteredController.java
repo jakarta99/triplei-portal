@@ -55,12 +55,17 @@ public class RegisteredController {
 	}
 	
 	@RequestMapping(value = "/checkLetter", method = RequestMethod.GET)
-	public String checkLetterPage() {
+	public String checkLetterPage(final Model model, @RequestParam(value="email", required = true) String email) {
+		UserEntity userEntity = userDao.findByEmail(email);
+		model.addAttribute("resendInfo", userEntity);
+		
+		emailservice.sendRegisteredEmail(userEntity); // 發送註冊信
 		return "/registered/checkLetter";
 	}
 	
+	
 	@RequestMapping(value = "/checked")
-	public String checkedPage(Model model, @RequestParam(value="uid", required = false) String uid) {
+	public String checkedPage(Model model, @RequestParam(value="uid", required = true) String uid) {
 		// 正向
 		log.debug("checkedPage uid = {}",uid);
 		UserEntity userEntity = userDao.findByRegisteredCode(uid);
@@ -108,7 +113,6 @@ public class RegisteredController {
 
 			final UserEntity insertResult = userService.insert(form);
 			response.setData(insertResult);
-			emailservice.sendRegisteredEmail(insertResult); // 發送註冊信
 			
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();

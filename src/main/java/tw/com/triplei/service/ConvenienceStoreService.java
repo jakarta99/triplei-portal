@@ -197,15 +197,15 @@ public class ConvenienceStoreService extends GenericService<ConvenienceStoreEnti
 	}
 
 	
-	public ConvenienceStoreEntity findByCity(String city) {
+	public List<ConvenienceStoreEntity> findByCity(String city) {
 		return convenienceStoreDao.findByCity(city);
 		
 	}
-	public ConvenienceStoreEntity findByCityAndRegion(String city, String region) {
+	public List<ConvenienceStoreEntity> findByCityAndRegion(String city, String region) {
 		return convenienceStoreDao.findByCityAndRegion(city, region);
 		
 	}
-	public ConvenienceStoreEntity findByCityAndRegionAndStreet(String city, String region, String street) {
+	public List<ConvenienceStoreEntity> findByCityAndRegionAndStreet(String city, String region, String street) {
 		return convenienceStoreDao.findByCityAndRegionAndStreet(city, region, street);
 		
 	}

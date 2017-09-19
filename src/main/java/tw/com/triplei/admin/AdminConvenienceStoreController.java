@@ -1,5 +1,9 @@
 package tw.com.triplei.admin;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +26,6 @@ import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.ConvenienceStoreEntity;
-import tw.com.triplei.entity.QuestionEntity;
 import tw.com.triplei.service.ConvenienceStoreService;
 
 @Slf4j
@@ -94,20 +97,29 @@ public class AdminConvenienceStoreController {
 	}
 	
 	@RequestMapping(value = "/searchRegion" , method = RequestMethod.GET)
-	public AjaxResponse<ConvenienceStoreEntity> searchRegion(final Model model, String city){
+	public Map<String,Object> searchRegion(final Model model, String city){
 		log.debug("{}", city);
 		
 		System.out.println("this city is = " +  city);
 		
-		final AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
+//		final AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
 		
-		ConvenienceStoreEntity data = convenienceStoreService.findByCity(city);
+		List<ConvenienceStoreEntity> data = convenienceStoreService.findByCity(city);
+		
+		Map<String,Object> resultMap = new HashMap<String, Object>();
 		
 		System.out.println(data);
 		
-		response.setData(data);
+		for(int i = 1 ; i <= data.size() ; i++ ) {
+			while( data.iterator().hasNext()) {
+				ConvenienceStoreEntity entity =  data.iterator().next();
+				 resultMap.put("city" + i , entity );
+			}
+			
+		}
+//		response.setData(data);
 		
-		return response;
+		return resultMap;
 	}
 	
 	@GetMapping
