@@ -17,7 +17,6 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
 		<div>
-			<br/><br/><br/>
 			
 			<h3>會員管理</h3>
 

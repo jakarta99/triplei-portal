@@ -75,7 +75,7 @@ font-size:95%;
 							<li><a href="#">訂單管理</a></li>
 							<li><a href="/admin/gift/list">積點商品上架</a></li>
 							<li><a href="/admin/wish/list">許願池查詢</a></li>
-							<li><a href="#">XXXX</a></li>
+<!-- 							<li><a href="#">XXXX</a></li> -->
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -87,14 +87,30 @@ font-size:95%;
 						</ul>
 					</li>
 				</sec:authorize>
-</ul>
-<ul class="nav navbar-nav navbar-right">
+<!-- </ul> -->
+<!-- <ul class="nav navbar-nav navbar-right"> -->
 				<li><a href="/insurer/list">各公司資訊</a></li>
-				<li><a href="/product/list">商品專區</a></li>
+				<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">商品專區<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/product/list">商品列表</a></li>
+							<li><a href="/product/irr">IRR計算機</a></li>
+						</ul>
+					</li>
 				<li><a href="/gift/list">績點專區</a></li>
 				<li><a href="/article/list">文章專欄</a></li>
 				<li><a href="/question/askQuestion">聯絡客服</a></li>
+				
+				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
 				<li><a href="/login">登入</a></li>
+				</sec:authorize>
+				
+				<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
+					<li><a href="#" onclick="$('#logout').submit();"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
+					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					</form>
+				</sec:authorize>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

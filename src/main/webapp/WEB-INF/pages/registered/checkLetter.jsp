@@ -24,16 +24,12 @@
 		
 		<br>
 		<div style="text-align:center;">
-		<h1>驗證失敗 請重新註冊!!</h1>
-		<img class="registeredSuccess" name="registeredSuccess"
-			src="/resources/pic/registered/registeredSuccess.png" width="40%">
-			<h3>
-				失敗的可能原因:<br />
-				<li>您驗證帳號的時間離註冊的時間已超過三天，驗證連結已失效</li>
-				<li>您的會員帳號已被開通，驗證連結已無法使用</li>
-			</h3>
+		<h1>請至您的信箱點擊確認信連結</h1>
+		<img class="checkLetter" name="checkLetter"
+			src="/resources/pic/registered/checkLetter.png" width="40%">
 		</div>
-		
+
+
 	</div>
 </body>
 </html>

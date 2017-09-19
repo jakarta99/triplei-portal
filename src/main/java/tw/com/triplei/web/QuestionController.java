@@ -45,7 +45,6 @@ public class QuestionController {
 		return "/question/questionAdd";
 	}
 	
-	/*管理者在新增文章的方法*/
 	@PostMapping
 	@ResponseBody
 	public AjaxResponse<QuestionEntity> insert(final Model model, @RequestBody QuestionEntity form) {

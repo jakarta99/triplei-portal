@@ -30,12 +30,10 @@
 
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<br /> <br /> <br />
-
 			<h3>許願池商品管理</h3>
 <!-- 			<div> -->
 <%-- 				<a href="<c:url value='/admin/wish/add'/>" --%>

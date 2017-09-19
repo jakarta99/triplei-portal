@@ -19,7 +19,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<h3>問題管理</h3>
+			<h3>便利商店修改</h3>
 
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -28,62 +28,64 @@
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
-									<span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>問題修改</strong>
+									<span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>便利商店修改</strong>
 								</h4>
 							</div>
 							<div class="panel-body">
 
 								<div class="form-group required">
-									<label for="name" class="col-md-2 control-label">問題分類1</label>
+									<label for="manufacturer" class="col-md-2 control-label">廠商</label>
 									<div class="col-md-10">
-									<span class="form-control">
-												<c:if test="${entity.questionType=='ARTICLE'}">文章類問題</c:if>
-												<c:if test="${entity.questionType=='POLICY'}">保單類問題</c:if>
-												<c:if test="${entity.questionType=='CLAIMS'}">理賠問題</c:if>
-												<c:if test="${entity.questionType=='WEBUSE'}">網站使用及問題回報</c:if>
-												<c:if test="${entity.questionType=='SALES'}">業務員問題</c:if>
-												</span>
-										<input type="text" class="form-control" id="questionType"
-											name="questionType" value="${entity.questionType}"> <span
+										<input type="text" class="form-control" id="manufacturer"
+											name="manufacturer" value="${entity.manufacturer}"> <span
 											class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 								<div class="form-group required">
-									<label for="shortName" class="col-md-2 control-label">問題分類2</label>
+									<label for="storeName" class="col-md-2 control-label">店名</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="questionType2"
-											name="questionType2" placeholder="questionType2"
-											value="${entity.questionType2}" /> <span class="help-block"><div
+										<input type="text" class="form-control" id="storeName"
+											name="storeName" placeholder="storeName"
+											value="${entity.storeName}" /> <span class="help-block"><div
 												class="text-danger"></div></span>
 									</div>
 								</div>
 
 								<div class="form-group required">
-									<label for="sortNo" class="col-md-2 control-label">Email</label>
+									<label for="city" class="col-md-2 control-label">縣市</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="askerEmail"
-											name="askerEmail" placeholder="askerEmail"
-											value="${entity.askerEmail}" /> <span class="help-block"><div
+										<input type="text" class="form-control" id="city"
+											name="city" placeholder="city"
+											value="${entity.city}" /> <span class="help-block"><div
 												class="text-danger"></div></span>
 									</div>
 								</div>
 
 								<div class="form-group required">
-									<label for="bisRatio" class="col-md-2 control-label">問題內容</label>
+									<label for="region" class="col-md-2 control-label">區域</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="content"
-											name="content" placeholder="content"
-											value="${entity.content}" /> <span class="help-block"><div
+										<input type="text" class="form-control" id="region"
+											name="region" placeholder="region"
+											value="${entity.region}" /> <span class="help-block"><div
 												class="text-danger"></div></span>
 									</div>
 								</div>
 
 								<div class="form-group required">
-									<label for="persistencyRatio" class="col-md-2 control-label">提問時間</label>
+									<label for="street" class="col-md-2 control-label">路名</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="postTime"
-											name="postTime" placeholder="postTime"
-											value="${entity.postTime}" /> <span class="help-block"><div
+										<input type="text" class="form-control" id="street"
+											name="street" placeholder="street"
+											value="${entity.street}" /> <span class="help-block"><div
+												class="text-danger"></div></span>
+									</div>
+								</div>
+								<div class="form-group required">
+									<label for="address" class="col-md-2 control-label">地址</label>
+									<div class="col-md-10">
+										<input type="text" class="form-control" id="address"
+											name="address" placeholder="address"
+											value="${entity.address}" /> <span class="help-block"><div
 												class="text-danger"></div></span>
 									</div>
 								</div>
@@ -105,7 +107,7 @@
 				</div>
 				<div class="col-md-6">
 					<div>
-						<a href="<c:url value='/admin/question/list'/>"
+						<a href="<c:url value='/admin/convenienceStore/list'/>"
 							class="btn btn-lg btn-primary btn-warning btn-block"
 							data-loading-text="Loading">返回</a>
 					</div>
@@ -126,7 +128,7 @@
 						var $btn = $(this);
 						$btn.button("loading");
 
-						$.put("<c:url value='/admin/question'/>", "dataForm",
+						$.put("<c:url value='/admin/convenienceStore'/>", "dataForm",
 								function(data) {
 									if (data.messages.length == 0) {
 										//swal("SUCCESS", "問題資料更新成功", "success");
