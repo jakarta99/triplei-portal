@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import tw.com.triplei.commons.GenericEntity;
 import tw.com.triplei.enums.Currency;
@@ -59,16 +60,19 @@ public class ProductEntity extends GenericEntity{
 	@Column(name = "CURRENCY")
 	private Currency curr; // 幣別
 	
-	@OneToMany
-	@JoinColumn(name = "PRODUCT_ID")
+//	@OneToMany
+//	@JoinColumn(name = "PRODUCT_ID")
+	@Transient
 	private Collection<ProductHighDiscountRatio> highDiscountRatios; // 高保費率
 	
-	@OneToMany
-	@JoinColumn(name = "PRODUCT_ID")
+//	@OneToMany
+//	@JoinColumn(name = "PRODUCT_ID")
+	@Transient
 	private Collection<ProductPremiumRatio> premiumRatios; // 基本費率
 	
-	@OneToMany
-	@JoinColumn(name = "PRODUCT_ID")
+//	@OneToMany
+//	@JoinColumn(name = "PRODUCT_ID")
+	@Transient
 	private Collection<ProductCancelRatio> cancelRatios; // 解約金費率
 	
 	@Column(name = "PAYMENT_METHOD")

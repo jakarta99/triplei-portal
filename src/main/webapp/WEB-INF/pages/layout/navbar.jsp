@@ -18,7 +18,7 @@ font-size:95%;
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default" id="mainNavbar">
 <!--  style="navbar-fixed-top" -->
-	<div class="container">
+	<div class="container" >
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
@@ -27,7 +27,7 @@ font-size:95%;
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">Triple-I</a>
+			<a class="navbar-brand" href="/"  style="color:white">Triple-I</a>
 <!-- 				<img class="navbar-brand" src="/resources/pic/logo-white.png" style="width:85%;height:auto;margin:0;"> -->
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
@@ -35,7 +35,7 @@ font-size:95%;
 				
 					<li class="dropdown">
 						<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">會員管理<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="color:white">會員管理<span class="caret"></span></a>
 						</sec:authorize>	
 						<ul class="dropdown-menu">
 							<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
@@ -52,7 +52,7 @@ font-size:95%;
 				
 				<sec:authorize access="hasAnyRole('ADMIN', 'ARTICLE', 'SERVICE', 'PARTTIME')">
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">客服管理<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="color:white">客服管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/admin/question/list">問題一覽</a></li>							
 <!-- 							<li><a href="/question/list">問題回覆</a></li>							 -->
@@ -60,7 +60,7 @@ font-size:95%;
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">保險商品管理<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="color:white">保險商品管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/admin/product/list">保險商品管理</a></li>
 							<li><a href="/admin/insurer/list">保險公司管理</a></li>
@@ -69,7 +69,7 @@ font-size:95%;
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">禮品訂單管理<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="color:white">禮品訂單管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							
 							<li><a href="#">訂單管理</a></li>
@@ -79,7 +79,7 @@ font-size:95%;
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">文章管理<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="color:white">文章管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							
 							<li><a href="/admin/article/getArticles">文章列表</a></li>
@@ -89,24 +89,24 @@ font-size:95%;
 				</sec:authorize>
 <!-- </ul> -->
 <!-- <ul class="nav navbar-nav navbar-right"> -->
-				<li><a href="/insurer/list">各公司資訊</a></li>
+				<li><a href="/insurer/list"  style="color:white">各公司資訊</a></li>
 				<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">商品專區<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="color:white">商品專區<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/product/list">商品列表</a></li>
 							<li><a href="/product/irr">IRR計算機</a></li>
 						</ul>
 					</li>
-				<li><a href="/gift/list">績點專區</a></li>
-				<li><a href="/article/list">文章專欄</a></li>
-				<li><a href="/question/askQuestion">聯絡客服</a></li>
+				<li><a href="/gift/list"  style="color:white">績點專區</a></li>
+				<li><a href="/article/list"  style="color:white">文章專欄</a></li>
+				<li><a href="/question/askQuestion"  style="color:white">聯絡客服</a></li>
 				
 				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
-				<li><a href="/login">登入</a></li>
+				<li><a href="/login"  style="color:white">登入</a></li>
 				</sec:authorize>
 				
 				<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
-					<li><a href="#" onclick="$('#logout').submit();"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
+					<li><a href="#" onclick="$('#logout').submit();"  style="color:white"><span class="glyphicon glyphicon-log-out"  style="color:white"></span>登出</a></li>
 					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
