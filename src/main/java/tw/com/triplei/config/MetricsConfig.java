@@ -5,6 +5,7 @@ import org.springframework.boot.actuate.endpoint.MetricsEndpoint;
 import org.springframework.boot.actuate.endpoint.MetricsEndpointMetricReader;
 import org.springframework.boot.actuate.metrics.jmx.JmxMetricWriter;
 import org.springframework.boot.actuate.metrics.writer.MetricWriter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jmx.export.MBeanExporter;
@@ -40,6 +41,7 @@ public class MetricsConfig  {
 //		return new LoggingMetricWriter();
 //	}
 
+	@ConditionalOnBean(MBeanExporter.class)
 	@Bean
 	@ExportMetricWriter
 	public MetricWriter metricWriter(MBeanExporter exporter) {
