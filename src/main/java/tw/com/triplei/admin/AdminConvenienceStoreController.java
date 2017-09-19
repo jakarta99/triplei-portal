@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ConvenienceStoreSpecification;
 import tw.com.triplei.commons.AjaxResponse;
+import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.ConvenienceStoreEntity;
 import tw.com.triplei.entity.QuestionEntity;
@@ -46,6 +49,20 @@ public class AdminConvenienceStoreController {
 		
 		return "/admin/convenienceStore/convenienceStoreAdd" ;
 	}
+	
+	@RequestMapping(value = "/addPage", method = RequestMethod.GET)
+	public String addPage(Model model) {
+		return "/admin/convenienceStore/convenienceStoreGridAdd";
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String editPage(@PathVariable("id") final Long id, Model model) {
+
+		ConvenienceStoreEntity dbEntity = convenienceStoreService.getOne(id);
+		model.addAttribute("entity", dbEntity);
+
+		return "/admin/convenienceStore/convenienceStoreEdit";
+	}
 		
 	@RequestMapping(value = "/insertFile" , method = RequestMethod.POST)
 	public String inert (final Model model, @RequestParam("files") MultipartFile[] files) {
@@ -73,12 +90,14 @@ public class AdminConvenienceStoreController {
 		}
 		log.debug("{}", files);
 		
-		return "redirect:/admin/convenienceStore/test" ;
+		return "redirect:/admin/convenienceStore/list" ;
 	}
 	
-	@RequestMapping(value = "/searchRegion/{city}" , method = RequestMethod.GET)
-	public AjaxResponse<ConvenienceStoreEntity> searchRegion(final Model model,@PathVariable("city") String city){
+	@RequestMapping(value = "/searchRegion" , method = RequestMethod.GET)
+	public AjaxResponse<ConvenienceStoreEntity> searchRegion(final Model model, String city){
 		log.debug("{}", city);
+		
+		System.out.println("this city is = " +  city);
 		
 		final AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
 		
@@ -109,6 +128,52 @@ public class AdminConvenienceStoreController {
 
 		return new GridResponse<>(page);
 	}
+	
+	
+	@PostMapping
+	@ResponseBody
+	public AjaxResponse<ConvenienceStoreEntity> insert(final Model model, @RequestBody ConvenienceStoreEntity form) {
+		
+		AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
+		
+		try {
+			
+			final ConvenienceStoreEntity insertResult = convenienceStoreService.insert(form);
+			response.setData(insertResult);
+		
+		} catch (final ApplicationException ex) {
+			ex.printStackTrace();
+			response.addMessages(ex.getMessages());
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+		
+		log.debug("{}", response);
+		
+		return response;
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
+	public AjaxResponse<ConvenienceStoreEntity> update(final Model model, @RequestBody final ConvenienceStoreEntity form) {
+
+		log.debug("{}", form);
+
+		final AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
+
+		try {
+			System.out.println(form);
+			final ConvenienceStoreEntity updateResult = convenienceStoreService.update(form);
+			response.setData(updateResult);
+
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+
+		return response;
+	}
+
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
