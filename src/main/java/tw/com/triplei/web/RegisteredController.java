@@ -44,6 +44,21 @@ public class RegisteredController {
 		return "/registered/createAccount";
 	}
 	
+	@RequestMapping(value = "/checkedSuccess", method = RequestMethod.GET)
+	public String successPage() {
+		return "/registered/checkedSuccess";
+	}
+	
+	@RequestMapping(value = "/checkedFailure", method = RequestMethod.GET)
+	public String failurePage() {
+		return "/registered/checkedFailure";
+	}
+	
+	@RequestMapping(value = "/checkLetter", method = RequestMethod.GET)
+	public String checkLetterPage() {
+		return "/registered/checkLetter";
+	}
+	
 	@RequestMapping(value = "/checked")
 	public String checkedPage(Model model, @RequestParam(value="uid", required = false) String uid) {
 		// 正向
