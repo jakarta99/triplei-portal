@@ -1,6 +1,7 @@
 package tw.com.triplei.admin;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -97,27 +98,26 @@ public class AdminConvenienceStoreController {
 	}
 	
 	@RequestMapping(value = "/searchRegion" , method = RequestMethod.GET)
+	@ResponseBody
 	public Map<String,Object> searchRegion(final Model model, String city){
 		log.debug("{}", city);
 		
-		System.out.println("this city is = " +  city);
+		log.debug("this city is = {}", city);
 		
 //		final AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
-		
 		List<ConvenienceStoreEntity> data = convenienceStoreService.findByCity(city);
-		
 		Map<String,Object> resultMap = new HashMap<String, Object>();
+		log.debug("{}", "hahaha="+data);
+		log.debug("{}", "hahaha="+data.size());
 		
-		System.out.println(data);
-		
-		for(int i = 1 ; i <= data.size() ; i++ ) {
-			while( data.iterator().hasNext()) {
-				ConvenienceStoreEntity entity =  data.iterator().next();
-				 resultMap.put("city" + i , entity );
-			}
-			
-		}
-//		response.setData(data);
+		int counter = 1;
+		Iterator<ConvenienceStoreEntity> iter =  data.iterator();
+		while (iter.hasNext()) {
+			ConvenienceStoreEntity entity = iter.next();
+			resultMap.put("city" + counter++, entity);
+			log.debug("{}", "hahaha=" + entity);
+		}		
+		log.debug("{}","while finished-------------------------------------------------");		
 		
 		return resultMap;
 	}

@@ -61,38 +61,7 @@ public class AdminGiftController {
 
 		Page<GiftEntity> page;
 
-		try {
-
-			// final List<AzaleaCriterion> criterions = Lists.newArrayList();
-			//
-			// if (!Strings.isNullOrEmpty(form.getAccount())) {
-			// criterions.add(new AzaleaCriterion(QueryOpType.LIKE, "account",
-			// form.getAccount() + "%"));
-			// }
-			//
-			// if (!Strings.isNullOrEmpty(form.getLocalName())) {
-			// criterions.add(new AzaleaCriterion(QueryOpType.LIKE, "localName",
-			// "%" + form.getLocalName() + "%"));
-			// }
-			//
-			// if (form.getStatus() != null) {
-			// criterions.add(new AzaleaCriterion(QueryOpType.EQ, "status",
-			// form.getStatus()));
-			// }
-			//
-			// adminRole 可以管理所有的通路和使用者，userAdminRole 僅可以管理自己 ROOT_ID 之下的通路和使用者
-			// if (!RoleUtil.isHaveAdminRoles()) {
-			// final SecUser loginUser = (SecUser)
-			// SecurityUtils.getSubject().getPrincipal();
-			// criterions.add(new AzaleaCriterion(QueryOpType.EQ, "rootId",
-			// loginUser.getRootChannelId()));
-			// }
-
 			page = giftService.getAll(new GiftSpecification(), pageable);
-
-		} catch (final Exception e) {
-			return new GridResponse<>(e);
-		}
 
 		return new GridResponse<>(page);
 	}
