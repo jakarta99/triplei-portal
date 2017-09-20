@@ -162,6 +162,7 @@ public class ProductService extends GenericService<ProductEntity> {
 	public double getPremiumRatio(ProductEntity product) {
 		double premiumRatio = 0;
 		try {
+			log.debug("{}",product);
 			premiumRatio = product.getPremiumRatios().iterator().next().getPremiumRatio().doubleValue();
 		} catch (Exception e) {
 			System.out.println("NOOOO");
@@ -171,9 +172,12 @@ public class ProductService extends GenericService<ProductEntity> {
 	}
 
 	public List<ProductEntity> search(String gender, int insAge, Currency currency, String interestRateType, int year) {
+		
 		List<ProductEntity> products = dao.findByCurrAndInterestRateTypeAndYear(currency, interestRateType, year);
+		log.debug("products{}",products);
 		List<ProductEntity> productss = new ArrayList<>();
 		for (ProductEntity product : products) {
+			log.debug("productID{},Age{},Gender{}",product.getId(),insAge,gender);
 			product.setPremiumRatios(
 					productPremiumRatioDao.findByProductIdAndInsAgeAndGender(product.getId(), insAge, gender));
 			product.setHighDiscountRatios(productHighDiscountRatioDao.findByProductId(product.getId()));

@@ -133,8 +133,8 @@
 		$('#city').on("change", function() {
 			var datas = {};
 			var city = $('#city').val();
-			console.log(city);
 			datas.city = city;
+			console.log(datas);
 
 			$.ajax({
 				type : "GET",
@@ -142,7 +142,17 @@
 				dataType : "json",
 				data : datas,
 				success : function(data) {
-					alert(data);
+					console.log("data.length = "+data.length);
+					console.log("hahaha="+data.city24.region);
+					
+					for (var i = 0; i < data.length; i++) {
+						
+						alert(data.city[i].region);
+					$("#region").append($("<option></option>").attr("value", data.city[i].region).text(data.city[i].region));
+					
+					
+					}
+					
 				},
 				error : function(data) {
 					alert("error");
