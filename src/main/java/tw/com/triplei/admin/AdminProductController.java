@@ -151,7 +151,7 @@ public class AdminProductController {
 		if (files.length > 0) {
 			for(MultipartFile file:files){
 				try {
-					boolean upload= productService.ProductUpload(file);
+					boolean upload= productService.productUpload(file);
 					if(upload) {
 						response.setData("Sucesss");
 					}else {

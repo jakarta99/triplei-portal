@@ -1054,7 +1054,7 @@ public class ProductService extends GenericService<ProductEntity> {
 		return dbEntity;
 	}
 
-	public boolean ProductUpload(MultipartFile file) throws Exception {
+	public boolean productUpload(MultipartFile file) throws Exception {
 		BufferedOutputStream stream = null;
 		byte[] bytes;
 		try {

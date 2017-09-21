@@ -38,6 +38,23 @@ public class IRRCaculator {
 		return total;
 		
 	}
+	
+	
+	/* *
+	 * IRR計算機-計算概念
+	 * 
+	 * 由四個變數可計算 : 繳費年期、領回時間、年繳保費、期滿領回
+	 * 
+	 * EX : 每年存1000，繳費期間3年，第3年末可領回5000
+	 * 計算公式	5000=1000*(1+irr)^3+(1+irr)^2+(1+irr)^1
+	 * 			5000=1000*[(1+irr)^3+(1+irr)^2+(1+irr)^1]
+	 * 			5/1=(1+irr)^3+(1+irr)^2+(1+irr)^1
+	 * 
+	 * Step.1  判斷民眾輸入之變數如何做最適當之處置
+	 * Step.2  使用for迴圈長出降冪次方疊加
+	 * Step.3 irr以0先帶入公式計算出一數(程式碼中以result呈現)，若不大於5/1此移項數字(程式碼中以fraction代表)即加萬分之一繼續計算
+	 * 
+	 * */
 
 	public double getIRR(double period, double times, double premium, double expired) {
 
@@ -47,7 +64,7 @@ public class IRRCaculator {
 		// 期滿領回 : expired
 
 		double remuneration = expired - (period * premium); // 淨報酬
-		double irr = 0.0; // IRR起始(暴力加)
+		double irr = 0.0; // IRR起始
 		double result = 0.0; //
 		double fraction = (expired / premium);
 
@@ -66,7 +83,7 @@ public class IRRCaculator {
 
 			while (fraction > result) {
 
-				result = 0.0; // 歸0避免壘加
+				result = 0.0;
 				result += Math.pow(irr, times);
 				irr += 0.00001;
 			}
@@ -77,7 +94,7 @@ public class IRRCaculator {
 
 			while (fraction > result) {
 
-				result = 0.0; // 歸0避免壘加
+				result = 0.0;
 				for (double i = times; i > (times - period); i--) {
 					result += Math.pow(1 + irr, i);
 				}
@@ -90,7 +107,7 @@ public class IRRCaculator {
 
 			while (fraction > result) {
 
-				result = 0.0; // 歸0避免壘加
+				result = 0.0;
 				for (double i = times; i > (times - period); i--) {
 					result += Math.pow(irr, i);
 				}
@@ -103,7 +120,7 @@ public class IRRCaculator {
 
 			while (fraction > result) {
 
-				result = 0.0; // 歸0避免壘加
+				result = 0.0;
 				for (double i = times; i > 0; i--) {
 					result += Math.pow(1 + irr, i);
 				}
@@ -116,7 +133,7 @@ public class IRRCaculator {
 
 			while (fraction > result) {
 
-				result = 0.0; // 歸0避免壘加
+				result = 0.0;
 				for (double i = times; i > 0; i--) {
 					result += Math.pow(irr, i);
 				}
