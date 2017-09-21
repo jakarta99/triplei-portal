@@ -137,7 +137,4 @@ function showTooltip(x, y, color, contents) {
 }
 
 
-
-
-
 </script>
