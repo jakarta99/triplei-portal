@@ -59,8 +59,9 @@ public class ProductController {
 
 		AjaxResponse<String> response = new AjaxResponse<String>();
 		double i = irrCaculator.getIRR(period, times, premium, expired);
-
-		String irr = String.valueOf(i * 100).substring(0, String.valueOf(i * 100).indexOf(".") + 3); // 先乘100後取小數點後兩位
+		String j = new BigDecimal(i).multiply(new BigDecimal("100")).toString();
+		String irr = String.valueOf(j).substring(0, String.valueOf(j).indexOf(".") + 3); // 先乘100後取小數點後兩位
+		log.debug("irr{}",irr);
 
 		return irr;
 	}
