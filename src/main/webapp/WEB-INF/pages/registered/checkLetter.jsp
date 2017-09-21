@@ -48,6 +48,7 @@
 </html>
 <script type="text/javascript">
 $(function(){
+	var $count = 0;
 	window.onload=sendLetter;
 	function sendLetter(){
 		$("#resendButton").click();
@@ -62,7 +63,10 @@ $(function(){
 				function(data) {
 					
 					if (data.messages.length==0){
-						alert("SUCCESS");
+						$count = $count + 1;  
+						if($count>1){
+							alert("SUCCESS");	
+						}
 						$btn.button("reset");
 					}	
 				}, function(data, textStatus, jqXHR) {
