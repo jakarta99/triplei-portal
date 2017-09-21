@@ -43,7 +43,7 @@ font-size:95%;
 							</sec:authorize>
 							
 							<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
-								<li><a href="#">會員設定</a></li>
+								<li><a href="/user/own">會員設定</a></li>
 							</sec:authorize>	
 						</ul>
 					</li>

@@ -77,7 +77,7 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	@JsonIgnore
 	@Override
 	public String getUsername() {
-		return name;  // can not return null
+		return accountNumber;  // can not return null
 	}
 
 	@JsonIgnore

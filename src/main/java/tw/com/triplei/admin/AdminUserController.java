@@ -26,7 +26,7 @@ import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.RoleEntity;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.service.RoleService;
-import tw.com.triplei.service.UserService;
+import tw.com.triplei.service.AdminUserService;
 
 @Slf4j
 @Controller
@@ -37,7 +37,7 @@ public class AdminUserController {
 	private RoleService roleService;
 	
 	@Autowired
-	private UserService userService;
+	private AdminUserService userService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage(Model model) {
