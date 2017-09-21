@@ -17,13 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.GiftSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.entity.ArticleEntity;
 import tw.com.triplei.entity.GiftEntity;
+import tw.com.triplei.enums.ArticleType;
+import tw.com.triplei.enums.GiftType;
 import tw.com.triplei.service.GiftService;
 
 @Slf4j
@@ -68,26 +72,45 @@ public class AdminGiftController {
 
 	@PostMapping
 	@ResponseBody
-	public AjaxResponse<GiftEntity> insert(final Model model,@RequestBody final GiftEntity form) {
+	public AjaxResponse<GiftEntity> insert(@RequestParam(value = "upload-file") MultipartFile file, 
+			@RequestParam(value="brand",required=false)String brand, @RequestParam(value="name",required=false) String name,
+			@RequestParam(value="colorAndType",required=false)String colorAndType1,@RequestParam(value="bonus",required=false)Integer bonus,
+			@RequestParam(value="remarks",required=false)String remarks,@RequestParam(value="giftType",required=false)GiftType giftType,
+			@RequestParam(value="hotGift",required=false)Boolean hotGift, GiftEntity giftEntity) {
 
 		AjaxResponse<GiftEntity> response = new AjaxResponse<GiftEntity>();
 
 		try {
-			String brandnum = form.getBrand().substring(form.getBrand().length()-3);
-			String giftnum = form.getName().substring(form.getName().length()-3);
-			String colorAndType = form.getColorAndType().substring(form.getColorAndType().length()-2);
+			String brandnum = brand.substring(brand.length()-3);
+			String giftnum = name.substring(name.length()-3);
+			String colorAndType = colorAndType1.substring(colorAndType1.length()-2);
+			
+			if(!file.isEmpty()){
+				String imagePath= giftService.imageUpload(file);
+				giftEntity.setImage1(imagePath);
+				}else{
+					giftEntity.setImage1("");
+				}
+			
+			giftEntity.setBonus(bonus);
+			giftEntity.setBrand(brand);
+			giftEntity.setColorAndType(colorAndType1);
+			giftEntity.setName(name);
+			giftEntity.setRemarks(remarks);
+			giftEntity.setGiftType(giftType);
+			giftEntity.setHotGift(hotGift);
 //			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 //			Date date = sdf.parse(exchangeDate);
 //			System.out.println(date);
 //			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
 //			form.setExchangeDate(localDateTime);
-			final GiftEntity insertResult = giftService.insert(form);
+			final GiftEntity insertResult = giftService.insert(giftEntity);
 			String formatStr = "%05d";
 			String formatAns = String.format(formatStr,insertResult.getId());
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
-			form.setCode(giftNumber);
-			form.setCreatedTime(new Timestamp(new Date().getTime()));
-			final GiftEntity insertResultFinal = giftService.update(form);
+			giftEntity.setCode(giftNumber);
+			giftEntity.setCreatedTime(new Timestamp(new Date().getTime()));
+			final GiftEntity insertResultFinal = giftService.update(giftEntity);
 			response.setData(insertResultFinal);
 
 		} catch (final ApplicationException ex) {
