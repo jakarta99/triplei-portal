@@ -2,6 +2,9 @@ package tw.com.triplei.service;
 
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class IRRCaculator {
 
@@ -87,7 +90,7 @@ public class IRRCaculator {
 				result += Math.pow(irr, times);
 				irr += 0.00001;
 			}
-
+			log.debug("RRRRRRR{}",irr);
 			return irr - 1;
 
 		} else if (times >= period && remuneration >= 0) { // 正常情況下的IRR(期滿領回或期滿過後才領回)
@@ -111,6 +114,7 @@ public class IRRCaculator {
 				for (double i = times; i > (times - period); i--) {
 					result += Math.pow(irr, i);
 				}
+
 				irr += 0.00001;
 			}
 
