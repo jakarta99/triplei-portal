@@ -106,7 +106,7 @@
 								<label for="hotGift" class="col-md-2 control-label">熱門商品</label>
 								<div class="col-md-10">
 									<input type="checkbox" class="form-control" id="hotGift"
-										name="hotGift" placeholder="hotGift" value="${entity.hotGift}"
+										name="hotGift" placeholder="hotGift" value="false"
 										onclick="CBSelectedValueToTrue(this);" /> <span
 										class="help-block"><div class="text-danger"></div></span>
 								</div>
@@ -148,9 +148,6 @@
 	</div>
 
 
-
-</body>
-</html>
 <script type="text/javascript">
 	$(function() {
 		//<!-- Save -->	
@@ -165,11 +162,21 @@
 			formData.append('bonus', $("#bonus").val());
 			formData.append('remarks', $("#remarks").val());
 			formData.append('giftType', $("#giftType").val());
-			formData.append('hotGift', $("#hotGift").val());
-// 			formData.append('exchangeDate', $("#exchangeDate").val());
+			if($("#hotGift").val()){		
+				formData.append('hotGift', $("#hotGift").val());
+			}else{
+				formData.append('hotGift', $("#hotGift").val("false"));
+			}
+			// 			formData.append('exchangeDate', $("#exchangeDate").val());
 
 			$.each($("input[type='file']")[0].files, function(i, file) {
 				formData.append('upload-file', file);
+			});
+			$.each($("input[type='file']")[1].files, function(i, file) {
+				formData.append('upload-file1', file);
+			});
+			$.each($("input[type='file']")[2].files, function(i, file) {
+				formData.append('upload-file2', file);
 			});
 			$.ajax({
 				url : "<c:url value='/admin/gift'/>",
@@ -186,10 +193,15 @@
 		});
 	});
 </script>
+</body>
+</html>
+
 <script type="text/javascript">
 	function CBSelectedValueToTrue(cb) {
 		if (cb.checked) {
 			cb.value = "true";
+		}else{
+			cb.value = "false";
 		}
 	}
 </script>

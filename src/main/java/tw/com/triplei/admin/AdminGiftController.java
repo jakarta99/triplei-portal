@@ -72,7 +72,7 @@ public class AdminGiftController {
 
 	@PostMapping
 	@ResponseBody
-	public AjaxResponse<GiftEntity> insert(@RequestParam(value = "upload-file") MultipartFile file, 
+	public AjaxResponse<GiftEntity> insert(@RequestParam(value = "upload-file",required=false) MultipartFile file, @RequestParam(value = "upload-file1",required=false) MultipartFile file1,@RequestParam(value = "upload-file2",required=false) MultipartFile file2,
 			@RequestParam(value="brand",required=false)String brand, @RequestParam(value="name",required=false) String name,
 			@RequestParam(value="colorAndType",required=false)String colorAndType1,@RequestParam(value="bonus",required=false)Integer bonus,
 			@RequestParam(value="remarks",required=false)String remarks,@RequestParam(value="giftType",required=false)GiftType giftType,
@@ -91,6 +91,18 @@ public class AdminGiftController {
 				}else{
 					giftEntity.setImage1("");
 				}
+			if(!file1.isEmpty()){
+				String imagePath= giftService.imageUpload(file1);
+				giftEntity.setImage2(imagePath);
+			}else{
+				giftEntity.setImage2("");
+			}
+			if(!file2.isEmpty()){
+				String imagePath= giftService.imageUpload(file2);
+				giftEntity.setImage3(imagePath);
+			}else{
+				giftEntity.setImage3("");
+			}
 			
 			giftEntity.setBonus(bonus);
 			giftEntity.setBrand(brand);

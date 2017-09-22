@@ -23,73 +23,68 @@
 <body>
 
 	<div id="wrap" style="margin-top: 30px;">
+	<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div class="container">
-			<section class="well">
-				<h1>積點專區</h1>
-			</section>
-
-
-			<br /> <br /> <br />
-
-			<ul>
-				<li><a href='/insurer/list'>各公司資訊</a></li>
-				<li><a href='/product/list'>商品專區</a></li>
-				<li><a href='/gift/list'>積點專區</a></li>
-				<li><a href='/article/list'>文章專欄</a></li>
-				<li><a href='#'>登入</a></li>
-			</ul>
-			<br /> <br /> <br /> <a href='/qa'>線上客服</a>
-		</div>
+		<div style="padding:0;width:100%;height:100%;color:white;">
+			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
+			<div style="margin:7% auto 0 auto; display:table;width:70%;">
+				<br/><br/>
+				<h1>商品專區</h1>
+				<br/>				
+				<div id="container-fluid" style="height:100%;position:relative;">
+				<div >
+				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;">
+				</div>
+				<div >
+				<img src="/resources/pic/product/商品專區動畫/images/img_0.png" width="100%" style="width:30%;position:absolute;margin:23% auto auto 50%;">
+				</div>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-8" style="height:100%;padding:3%;color:black;overflow-y:scroll">
 		<div
-			style="height: 100vh; display: table; table-layout: fixed; border: 1px solid; width: 1400px; margin-left: 20px">
+			style="height: 100vh; display: table; table-layout: fixed; width: 1400px;">
 
 			<div style="display: table-cell; height: 500px; width: 1300px;">
-				<table style="border: 2px solid; margin-left: 200px;">
-					<h3 style="margin-left: 200px;">熱門兌換:</h3>
+				<table style="border: 2px solid; margin-left: 20px;">
+					<h3 style="margin-left: 20px;">熱門兌換:</h3>
 					<tr>
 						<c:forEach items="${modelh}" var="modelh">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
+										<p style="text-align: center;">圖片:<img src="${modelh.image1}"></p>
+									</div>
+									<div>
+									<div class = "col-md-8" style="height: 20px; ">
 										<p style="text-align: center;">積點商品名稱:${modelh.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modelh.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
-										<p style="text-align: center;">圖片:${modelh.image1}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">商品兌換點數:${modelh.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modelh.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+									<p style="text-align: center;">商品兌換點數:${modelh.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
 				</table>
 				<span style="margin-left: 1130px"><a href="${pageContext.request.contextPath}/gift/true">查看更多...</a></span>
-				<table style="border: 2px solid; margin-left: 200px;">
-					<h3 style="margin-left: 200px;">家電兌換:</h3>
+				<table style="border: 2px solid; margin-left: 20px;">
+					<h3 style="margin-left: 20px;">家電兌換:</h3>
 					<tr>
 						<c:forEach items="${modele}" var="modele">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">積點商品名稱:${modele.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modele.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
 										<p style="text-align: center;">圖片:${modele.image1}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
+									<div>
+									<div class = "col-md-8" style="height: 20px; ">
+										<p style="text-align: center;">積點商品名稱:${modele.name}</p>
 										<p style="text-align: center;">商品兌換點數:${modele.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modele.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+										<p style="text-align: center;">商品兌換點數:${modele.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
@@ -97,26 +92,23 @@
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/ELETRONICS">查看更多...</a></span>
 				<table
-					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
-					<h3 style="margin-left: 200px;">禮卷兌換:</h3>
+					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+					<h3 style="margin-left: 20px;">禮卷兌換:</h3>
 					<tr>
 						<c:forEach items="${modelv}" var="modelv">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
+										<p style="text-align: center;">圖片:<img src="${modelv.image1}"></p>
+									</div>
+									<div>
+									<div class = "col-md-8" style="height: 20px;">
 										<p style="text-align: center;">積點商品名稱:${modelv.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modelv.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
-										<p style="text-align: center;">圖片:${modelv.image1}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
 										<p style="text-align: center;">商品兌換點數:${modelv.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modelv.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+										<p style="text-align: center;">商品兌換點數:${modelv.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
@@ -125,26 +117,23 @@
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a></span>
 				<table
-					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
-					<h3 style="margin-left: 200px;">家居、廚具兌換:</h3>
+					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+					<h3 style="margin-left: 20px;">家居、廚具兌換:</h3>
 					<tr>
 						<c:forEach items="${modelf}" var="modelf">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">積點商品名稱:${modelf.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modelf.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
 										<p style="text-align: center;">圖片:${modelf.image1}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
+									<div>
+									<div class = "col-md-8" style="height: 20px; ">
+										<p style="text-align: center;">積點商品名稱:${modelf.name}</p>
 										<p style="text-align: center;">商品兌換點數:${modelf.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modelf.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+										<p style="text-align: center;">商品兌換點數:${modelf.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
@@ -153,26 +142,23 @@
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/FURNITURES">查看更多...</a></span>
 				<table
-					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
-					<h3 style="margin-left: 200px;">戶外運動商品兌換:</h3>
+					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+					<h3 style="margin-left: 20px;">戶外運動商品兌換:</h3>
 					<tr>
 						<c:forEach items="${modelod}" var="modelod">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">積點商品名稱:${modelod.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modelod.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
 										<p style="text-align: center;">圖片:${modelod.image1}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
+									<div>
+									<div class = "col-md-8" style="height: 20px; ">
+										<p style="text-align: center;">積點商品名稱:${modelod.name}</p>
 										<p style="text-align: center;">商品兌換點數:${modelod.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modelod.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+										<p style="text-align: center;">商品兌換點數:${modelod.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
@@ -181,26 +167,23 @@
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/OUTDOOR">查看更多...</a></span>
 				<table
-					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
-					<h3 style="margin-left: 200px;">女仕用品兌換:</h3>
+					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+					<h3 style="margin-left: 20px;">女仕用品兌換:</h3>
 					<tr>
 						<c:forEach items="${modelw}" var="modelw">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">積點商品名稱:${modelw.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modelw.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
 										<p style="text-align: center;">圖片:${modelw.image1}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
+									<div>
+									<div class = "col-md-8" style="height: 20px; ">
+										<p style="text-align: center;">積點商品名稱:${modelw.name}</p>
 										<p style="text-align: center;">商品兌換點數:${modelw.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modelw.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+										<p style="text-align: center;">商品兌換點數:${modelw.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
@@ -209,26 +192,23 @@
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/WOMAN">查看更多...</a></span>
 				<table
-					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
-					<h3 style="margin-left: 200px;">男仕用品兌換:</h3>
+					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+					<h3 style="margin-left: 20px;">男仕用品兌換:</h3>
 					<tr>
 						<c:forEach items="${modelm}" var="modelm">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">積點商品名稱:${modelm.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modelm.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
 										<p style="text-align: center;">圖片:${modelm.image1}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
+									<div>
+									<div class = "col-md-8" style="height: 20px; ">
+										<p style="text-align: center;">積點商品名稱:${modelm.name}</p>
 										<p style="text-align: center;">商品兌換點數:${modelm.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modelm.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+										<p style="text-align: center;">商品兌換點數:${modelm.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
@@ -237,26 +217,23 @@
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/MAN">查看更多...</a></span>
 				<table
-					style="border: 2px solid; margin-left: 200px; cellpadding: 10px">
-					<h3 style="margin-left: 200px;">其他商品兌換:</h3>
+					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+					<h3 style="margin-left: 20px;">其他商品兌換:</h3>
 					<tr>
 						<c:forEach items="${modelot}" var="modelot">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">積點商品名稱:${modelot.name}</p>
-									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">品牌:${modelot.brand}</p>
-									</div>
-									<div style="height: 180px; width: 300px;">
+									<div style="height: 240px; width: 300px;">
 										<p style="text-align: center;">圖片:${modelot.image1}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
+									<div>
+									<div class = "col-md-8" style="height: 20px; ">
+										<p style="text-align: center;">積點商品名稱:${modelot.name}</p>
 										<p style="text-align: center;">商品兌換點數:${modelot.bonus}</p>
 									</div>
-									<div style="height: 20px; width: 300px;">
-										<p style="text-align: center;">類別:${modelot.giftType}</p>
+									<div class = "col-md-4" style="height: 20px; ">
+										<p style="text-align: center;">商品兌換點數:${modelot.bonus}</p>
+									</div>
 									</div>
 								</div></td>
 						</c:forEach>
@@ -267,7 +244,9 @@
 			</div>
 		</div>
 	</div>
-
+	</div>
+	</div>
+</div>
 </body>
 </html>
 
