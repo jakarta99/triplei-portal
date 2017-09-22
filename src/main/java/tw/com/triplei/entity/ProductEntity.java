@@ -102,8 +102,33 @@ public class ProductEntity extends GenericEntity{
 	
 	@Column(name="IRR")
 	private double irr;  //IRR
+	
+	@Column(name="DISCOUNT") //折扣趴數
+	private BigDecimal discount;
+	
+	@Column(name="NET")
+	private BigDecimal net; //淨賺
+	
+	@Column(name="TOTAL_PAY")
+	private BigDecimal totalPay; //總繳金額
 
 
+
+	public BigDecimal getNet() {
+		return net;
+	}
+
+	public void setNet(BigDecimal net) {
+		this.net = net;
+	}
+
+	public BigDecimal getTotalPay() {
+		return totalPay;
+	}
+
+	public void setTotalPay(BigDecimal totalPay) {
+		this.totalPay = totalPay;
+	}
 
 	public BigDecimal getPremiumAfterDiscount() {
 		return premiumAfterDiscount;
@@ -281,6 +306,14 @@ public class ProductEntity extends GenericEntity{
 		this.getPoint = getPoint;
 	}
 
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", localName=" + localName + ", code=" + code
@@ -290,9 +323,11 @@ public class ProductEntity extends GenericEntity{
 				+ ", cancelRatios=" + cancelRatios + ", paymentMethod=" + paymentMethod + ", insureAmount="
 				+ insureAmount + ", premium=" + premium + ", premiumAfterDiscount=" + premiumAfterDiscount
 				+ ", cashValue=" + cashValue + ", storeShelves=" + storeShelves + ", bonusPoint=" + bonusPoint
-				+ ", getPoint=" + getPoint + ", irr=" + irr + "]";
+				+ ", getPoint=" + getPoint + ", irr=" + irr + ", discount=" + discount + ", net=" + net + ", totalPay="
+				+ totalPay + "]";
 	}
 
+	
 
 
 }

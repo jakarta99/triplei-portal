@@ -1,10 +1,12 @@
 package tw.com.triplei.web;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang3.reflect.MethodUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
+import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.ProductHighDiscountRatio;
+import tw.com.triplei.entity.ProductPremiumRatio;
 import tw.com.triplei.enums.Currency;
 import tw.com.triplei.service.IRRCaculator;
 import tw.com.triplei.service.ProductService;
@@ -98,7 +102,7 @@ public class ProductController {
 	@ResponseBody
 	public Collection<Integer> getYear() {
 		List<ProductEntity> products = productService.getAll();
-		Collection<Integer> years = null;
+		Collection<Integer> years = new ArrayList<>();
 		for (ProductEntity product : products) {
 			int year = product.getYear();
 			if (!years.contains(year)) {
@@ -162,6 +166,70 @@ public class ProductController {
 		return "/product/buyProduct";
 	}
 
+	@GetMapping("/Adjustment/{gender}/{bDate}/{insureAmount}/{id}/{yearCode}")
+	@ResponseBody
+	public ProductEntity insureAmountAndYearAndGenderAdjustment(@PathVariable("gender") String gender,
+			@PathVariable("bDate") String bDate, @PathVariable("insureAmount") String insureAmountS,
+			@PathVariable("id") String idS,@PathVariable("yearCode") String yearCode) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+		long id = Integer.parseInt(idS);
+		log.debug("id{}",id);
+		BigDecimal insureAmount = BigDecimal.valueOf(Double.parseDouble(insureAmountS));
+		log.debug("insureAmount{}",insureAmount);
+		int age = productService.bDateToInt(bDate);
+		log.debug("age{}",age);
+		int yearMoneyBack =  Integer.parseInt(yearCode);
+		log.debug("yearMoneyBack{}",yearMoneyBack);
+		ProductEntity product = productService.getOneAll(id);
+		log.debug("product{}",product);
+		product.setInsureAmount(insureAmount);
+		while (product.getPremiumRatios().iterator().hasNext()) {
+			ProductPremiumRatio productPremiumRatio = product.getPremiumRatios().iterator().next();
+			if (productPremiumRatio.getInsAge() == age && productPremiumRatio.getGender().equals(gender)) {
+				log.debug("age{}",age);
+				log.debug("productPremiumRatio.getInsAge(){}",productPremiumRatio.getInsAge());
+				log.debug("gender{}",gender);
+				log.debug("productPremiumRatio.getGender(){}",productPremiumRatio.getGender());
+				while(product.getHighDiscountRatios().iterator().hasNext()){
+					ProductHighDiscountRatio productHighDiscountRatio = product.getHighDiscountRatios().iterator().next();
+					if(insureAmount.doubleValue()>=productHighDiscountRatio.getMinValue().doubleValue()&&insureAmount.doubleValue()<=productHighDiscountRatio.getMaxValue().doubleValue()){
+						//保費
+						product.setPremium(BigDecimal.valueOf(insureAmount.doubleValue()*productPremiumRatio.getPremiumRatio().doubleValue()));
+						//折扣後保費
+						product.setPremiumAfterDiscount(BigDecimal.valueOf(insureAmount.doubleValue()*productPremiumRatio.getPremiumRatio().doubleValue()*productHighDiscountRatio.getDiscountRatio().doubleValue()));
+						//折扣趴數
+						product.setDiscount(productHighDiscountRatio.getDiscountRatio());
+						//可獲點數
+						product.setGetPoint(BigDecimal.valueOf(insureAmount.doubleValue()*productPremiumRatio.getPremiumRatio().doubleValue()*productHighDiscountRatio.getDiscountRatio().doubleValue()*product.getBonusPoint().doubleValue()));
+						
+						while(product.getCancelRatios().iterator().hasNext()){
+							ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+							if(productCancelRatio.getInsAge() == age && productCancelRatio.getGender().equals(gender)){
+								BigDecimal cancelRatio=(BigDecimal)MethodUtils.invokeMethod(productCancelRatio, "getCancelRatio_"+yearMoneyBack,null);
+								//違約金
+								product.setCashValue(BigDecimal.valueOf(cancelRatio.doubleValue()*insureAmount.doubleValue()));
+								double irr = irrCaculator.getIRR(product.getYear(), yearMoneyBack, insureAmount.doubleValue()*productPremiumRatio.getPremiumRatio().doubleValue()*productHighDiscountRatio.getDiscountRatio().doubleValue(), cancelRatio.doubleValue());
+								//IRR
+								product.setIrr(irr);
+								log.debug("irr{}",irr);
+							}
+						}
+						break;
+					}else{
+						product.setDiscount(null);
+					}
+				}
+				if(product.getDiscount()==null){
+					product = new ProductEntity();
+					break;
+				}
+				break;
+			}
+			
+		}
+
+		return product;
+	}
+
 	@RequestMapping(value = "getProduct/{gender}/{bDate}/{currency}/{paymentMethod}/{interestRateType}/{premium}/{year}/{yearCode}", method = RequestMethod.GET)
 	@ResponseBody
 	public Collection<ProductEntity> getProduct(@PathVariable("gender") String gender,
@@ -204,7 +272,6 @@ public class ProductController {
 		System.out.println("insAge= " + insAge);
 		System.out.println("gender= " + gender);
 		List<ProductEntity> products = productService.search(gender, insAge, currency, interestRateType, yearINT);
-		System.out.println("productsproductsproducts");
 		for (ProductEntity product : products) {
 			try {
 				System.out.println("id = " + product.getId());
@@ -230,10 +297,20 @@ public class ProductController {
 					System.out.println("min= " + min);
 					System.out.println("max= " + max);
 					if (insureAmount.doubleValue() >= min && insureAmount.doubleValue() <= max) {
-						product.setPremium(// 計算保費
+						product.setPremium(// 計算原本保費
+								BigDecimal.valueOf(insureAmount.doubleValue() * premiumRatio)
+										.setScale(0, BigDecimal.ROUND_HALF_UP));
+						product.setPremiumAfterDiscount(// 計算折扣後保費
 								BigDecimal.valueOf(insureAmount.doubleValue() * premiumRatio * (1 - percentOff))
 										.setScale(0, BigDecimal.ROUND_HALF_UP));
+						product.setDiscount(BigDecimal.valueOf(percentOff));
+						if(yearCodeInt>=yearINT){
+							product.setTotalPay(BigDecimal.valueOf(insureAmount.doubleValue() * premiumRatio * (1 - percentOff) * yearINT));							
+						}else{
+							product.setTotalPay(BigDecimal.valueOf(insureAmount.doubleValue() * premiumRatio * (1 - percentOff) * yearCodeInt));
+						}
 						System.out.println("premium= " + product.getPremium().doubleValue());
+						log.debug("總額:{}",product.getTotalPay().doubleValue());
 						break;
 					} else {
 						product.setPremium(null);
@@ -243,7 +320,8 @@ public class ProductController {
 						* insureAmount.doubleValue();
 				System.out.println("cancelRatio= " + cancelRatio);
 				product.setCashValue(BigDecimal.valueOf(cancelRatio));// 解約金
-
+				product.setNet(BigDecimal.valueOf(cancelRatio-product.getTotalPay().doubleValue()));//淨賺
+				log.debug("淨賺:{}",cancelRatio-product.getTotalPay().doubleValue());
 				double getPoint = product.getBonusPoint().doubleValue() * product.getPremium().doubleValue();
 				product.setGetPoint(BigDecimal.valueOf(getPoint).setScale(0, BigDecimal.ROUND_DOWN));// 獲得點數
 																										// 保費*點數趴數

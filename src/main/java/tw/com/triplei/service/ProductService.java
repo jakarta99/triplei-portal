@@ -516,4 +516,13 @@ public class ProductService extends GenericService<ProductEntity> {
 		}
 		return true;
 	}
+	
+	public ProductEntity getOneAll(long id){
+		ProductEntity product = dao.findOne(id);
+		product.setPremiumRatios(productPremiumRatioDao.findByProductId(id));
+		product.setHighDiscountRatios(productHighDiscountRatioDao.findByProductId(id));
+		product.setCancelRatios(productCancelRatioDao.findByProductId(id));		
+		return product;
+	}
+	
 }
