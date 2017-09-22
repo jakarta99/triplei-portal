@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +26,7 @@ import tw.com.triplei.admin.spec.GiftSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
-import tw.com.triplei.entity.ArticleEntity;
 import tw.com.triplei.entity.GiftEntity;
-import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.enums.GiftType;
 import tw.com.triplei.service.GiftService;
 
@@ -110,6 +110,9 @@ public class AdminGiftController {
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
 			giftEntity.setCode(giftNumber);
 			giftEntity.setCreatedTime(new Timestamp(new Date().getTime()));
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}",userDetails);
+			giftEntity.setCreatedBy(userDetails.getUsername());
 			final GiftEntity insertResultFinal = giftService.update(giftEntity);
 			response.setData(insertResultFinal);
 
@@ -143,6 +146,9 @@ public class AdminGiftController {
 			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
 			form.setCode(giftNumber);
 			form.setModifiedTime(new Timestamp(new Date().getTime()));
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}",userDetails);
+			form.setModifiedBy(userDetails.getUsername());
 			final GiftEntity updateResult = giftService.update(form);
 			response.setData(updateResult);
 

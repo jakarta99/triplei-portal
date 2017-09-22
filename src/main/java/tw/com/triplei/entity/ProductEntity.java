@@ -82,8 +82,12 @@ public class ProductEntity extends GenericEntity{
 	private BigDecimal insureAmount; // 保額
 	
 	@Column(name = "PREMIUM")
-	private BigDecimal premium; // 保費
+	private BigDecimal premium; // 原本保費
 	
+	@Column(name = "PREMIUM_AFTER_DISCOUNT")
+	private BigDecimal premiumAfterDiscount; // 折扣後保費
+	
+
 	@Column(name = "CASHVALUE")
 	private BigDecimal cashValue; // 解約金  
 	
@@ -101,16 +105,12 @@ public class ProductEntity extends GenericEntity{
 
 
 
-
-	@Override
-	public String toString() {
-		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", localName=" + localName + ", code=" + code
-				+ ", yearCode=" + yearCode + ", year=" + year + ", declareInterestRate=" + declareInterestRate
-				+ ", predictInterestRate=" + predictInterestRate + ", interestRateType=" + interestRateType + ", curr="
-				+ curr + ", highDiscountRatios=" + highDiscountRatios + ", premiumRatios=" + premiumRatios
-				+ ", cancelRatios=" + cancelRatios + ", paymentMethod=" + paymentMethod + ", insureAmount="
-				+ insureAmount + ", premium=" + premium + ", cashValue=" + cashValue + ", storeShelves=" + storeShelves
-				+ ", bonusPoint=" + bonusPoint + ", getPoint=" + getPoint + ", irr=" + irr + "]";
+	public BigDecimal getPremiumAfterDiscount() {
+		return premiumAfterDiscount;
+	}
+	
+	public void setPremiumAfterDiscount(BigDecimal premiumAfterDiscount) {
+		this.premiumAfterDiscount = premiumAfterDiscount;
 	}
 
 	public double getIrr() {
@@ -279,6 +279,18 @@ public class ProductEntity extends GenericEntity{
 
 	public void setGetPoint(BigDecimal getPoint) {
 		this.getPoint = getPoint;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", localName=" + localName + ", code=" + code
+				+ ", yearCode=" + yearCode + ", year=" + year + ", declareInterestRate=" + declareInterestRate
+				+ ", predictInterestRate=" + predictInterestRate + ", interestRateType=" + interestRateType + ", curr="
+				+ curr + ", highDiscountRatios=" + highDiscountRatios + ", premiumRatios=" + premiumRatios
+				+ ", cancelRatios=" + cancelRatios + ", paymentMethod=" + paymentMethod + ", insureAmount="
+				+ insureAmount + ", premium=" + premium + ", premiumAfterDiscount=" + premiumAfterDiscount
+				+ ", cashValue=" + cashValue + ", storeShelves=" + storeShelves + ", bonusPoint=" + bonusPoint
+				+ ", getPoint=" + getPoint + ", irr=" + irr + "]";
 	}
 
 

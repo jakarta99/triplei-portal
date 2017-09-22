@@ -43,8 +43,63 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public String detailInfo(@PathVariable("id") String id, Model model) {
+	public String detailInfo(@PathVariable("id") String id, Model model)
+			throws Exception {
+//		log.debug("form : ",form);
+//		model.addAttribute("modelf", form);
+//		List<double[]> totalCancelRatio = new ArrayList<>();
+//		long idLong = Integer.parseInt(id);//抓那個商品的ID
+//		ProductEntity product = productService.findProduct(idLong);
+//		log.debug("商品 : ",product);
+//		ProductCancelRatio productCancelRatiof = form.getCancelRatios().iterator().next();
+//		while (product.getCancelRatios().iterator().hasNext()) {
+//			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+//			if (productCancelRatio.getGender().equals(form.getCancelRatios().iterator().next().getGender())
+//					&& productCancelRatio.getInsAge() == productCancelRatiof.getInsAge()) {
+//				
+//				log.debug("性別 : ",productCancelRatio.getGender());
+//				log.debug("投保年齡 : ",productCancelRatio.getInsAge());
+//				for (int i = 0; i <= 111; i++) {
+//					MethodUtils methodUtils = new MethodUtils();
+//					double cancelRatio = form.getInsureAmount().doubleValue()//每年解約金
+//							* ((BigDecimal) methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + i, null))
+//									.doubleValue();
+//					log.debug("每年解約金={}",cancelRatio);
+//					
+//					if (i <= product.getYear()) {//[年,共繳多少保費,解約可獲得保費,irr]
+//						double[] data = { (double) i, i * form.getPremiumAfterDiscount().doubleValue(), cancelRatio,
+//								iRRCaculator.getIRR((double) form.getYear(), (double) i,
+//										form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+//						totalCancelRatio.add(data);
+//						log.debug("每年={}",data);
+//					} else {
+//						double[] data = { (double) i, product.getYear() * form.getPremiumAfterDiscount().doubleValue(),
+//								cancelRatio, iRRCaculator.getIRR((double) form.getYear(), (double) i,
+//										form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+//						totalCancelRatio.add(data);
+//						log.debug("每年={}",data);
+//					}
+//
+//				}
+//				model.addAttribute("totalCancelRatio", totalCancelRatio);
+//				log.debug("total資料={}",totalCancelRatio);
+//			}
+//		}
 		return "/product/detailInfo";
+	}
+	
+	@GetMapping("/getYear")
+	public Collection<Integer> getYear(){
+		List<ProductEntity> products = productService.getAll();
+		Collection<Integer> years = null;
+		for(ProductEntity product:products){
+			int year = product.getYear();
+			if(!years.contains(year)){
+				years.add(year);
+			}
+		}
+		log.debug("year= ",years);
+		return years;
 	}
 
 	@RequestMapping("/irr")

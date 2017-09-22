@@ -183,7 +183,8 @@ public class AdminProductController {
 		final AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 		
 		try {			
-			productService.delete(id);
+			boolean result = productService.deleteAll(id);
+			log.debug("result = "+result);
 		
 			
 		} catch (final Exception e) {
