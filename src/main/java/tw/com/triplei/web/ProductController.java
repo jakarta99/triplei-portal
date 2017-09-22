@@ -43,62 +43,69 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public String detailInfo(@PathVariable("id") String id, Model model)
-			throws Exception {
-//		log.debug("form : ",form);
-//		model.addAttribute("modelf", form);
-//		List<double[]> totalCancelRatio = new ArrayList<>();
-//		long idLong = Integer.parseInt(id);//抓那個商品的ID
-//		ProductEntity product = productService.findProduct(idLong);
-//		log.debug("商品 : ",product);
-//		ProductCancelRatio productCancelRatiof = form.getCancelRatios().iterator().next();
-//		while (product.getCancelRatios().iterator().hasNext()) {
-//			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
-//			if (productCancelRatio.getGender().equals(form.getCancelRatios().iterator().next().getGender())
-//					&& productCancelRatio.getInsAge() == productCancelRatiof.getInsAge()) {
-//				
-//				log.debug("性別 : ",productCancelRatio.getGender());
-//				log.debug("投保年齡 : ",productCancelRatio.getInsAge());
-//				for (int i = 0; i <= 111; i++) {
-//					MethodUtils methodUtils = new MethodUtils();
-//					double cancelRatio = form.getInsureAmount().doubleValue()//每年解約金
-//							* ((BigDecimal) methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + i, null))
-//									.doubleValue();
-//					log.debug("每年解約金={}",cancelRatio);
-//					
-//					if (i <= product.getYear()) {//[年,共繳多少保費,解約可獲得保費,irr]
-//						double[] data = { (double) i, i * form.getPremiumAfterDiscount().doubleValue(), cancelRatio,
-//								iRRCaculator.getIRR((double) form.getYear(), (double) i,
-//										form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
-//						totalCancelRatio.add(data);
-//						log.debug("每年={}",data);
-//					} else {
-//						double[] data = { (double) i, product.getYear() * form.getPremiumAfterDiscount().doubleValue(),
-//								cancelRatio, iRRCaculator.getIRR((double) form.getYear(), (double) i,
-//										form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
-//						totalCancelRatio.add(data);
-//						log.debug("每年={}",data);
-//					}
-//
-//				}
-//				model.addAttribute("totalCancelRatio", totalCancelRatio);
-//				log.debug("total資料={}",totalCancelRatio);
-//			}
-//		}
+	public String detailInfo(@PathVariable("id") String id, Model model) throws Exception {
+		// log.debug("form : ",form);
+		// model.addAttribute("modelf", form);
+		// List<double[]> totalCancelRatio = new ArrayList<>();
+		// long idLong = Integer.parseInt(id);//抓那個商品的ID
+		// ProductEntity product = productService.findProduct(idLong);
+		// log.debug("商品 : ",product);
+		// ProductCancelRatio productCancelRatiof =
+		// form.getCancelRatios().iterator().next();
+		// while (product.getCancelRatios().iterator().hasNext()) {
+		// ProductCancelRatio productCancelRatio =
+		// product.getCancelRatios().iterator().next();
+		// if
+		// (productCancelRatio.getGender().equals(form.getCancelRatios().iterator().next().getGender())
+		// && productCancelRatio.getInsAge() == productCancelRatiof.getInsAge())
+		// {
+		//
+		// log.debug("性別 : ",productCancelRatio.getGender());
+		// log.debug("投保年齡 : ",productCancelRatio.getInsAge());
+		// for (int i = 0; i <= 111; i++) {
+		// MethodUtils methodUtils = new MethodUtils();
+		// double cancelRatio = form.getInsureAmount().doubleValue()//每年解約金
+		// * ((BigDecimal) methodUtils.invokeMethod(productCancelRatio,
+		// "getCancelRatio_" + i, null))
+		// .doubleValue();
+		// log.debug("每年解約金={}",cancelRatio);
+		//
+		// if (i <= product.getYear()) {//[年,共繳多少保費,解約可獲得保費,irr]
+		// double[] data = { (double) i, i *
+		// form.getPremiumAfterDiscount().doubleValue(), cancelRatio,
+		// iRRCaculator.getIRR((double) form.getYear(), (double) i,
+		// form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+		// totalCancelRatio.add(data);
+		// log.debug("每年={}",data);
+		// } else {
+		// double[] data = { (double) i, product.getYear() *
+		// form.getPremiumAfterDiscount().doubleValue(),
+		// cancelRatio, iRRCaculator.getIRR((double) form.getYear(), (double) i,
+		// form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+		// totalCancelRatio.add(data);
+		// log.debug("每年={}",data);
+		// }
+		//
+		// }
+		// model.addAttribute("totalCancelRatio", totalCancelRatio);
+		// log.debug("total資料={}",totalCancelRatio);
+		// }
+		// }
 		return "/product/detailInfo";
 	}
-	
+
 	@GetMapping("/getYear")
-	public Collection<Integer> getYear(){
+	@ResponseBody
+	public Collection<Integer> getYear() {
 		List<ProductEntity> products = productService.getAll();
 		Collection<Integer> years = null;
-		for(ProductEntity product:products){
+		for (ProductEntity product : products) {
 			int year = product.getYear();
-			if(!years.contains(year)){
+			if (!years.contains(year)) {
 				years.add(year);
 			}
 		}
-		log.debug("year= ",years);
+		log.debug("year{}", years);
 		return years;
 	}
 
@@ -116,7 +123,7 @@ public class ProductController {
 		double i = irrCaculator.getIRR(period, times, premium, expired);
 		String j = new BigDecimal(i).multiply(new BigDecimal("100")).toString();
 		String irr = String.valueOf(j).substring(0, String.valueOf(j).indexOf(".") + 3); // 先乘100後取小數點後兩位
-		log.debug("irr{}",irr);
+		log.debug("irr{}", irr);
 
 		return irr;
 	}
@@ -157,12 +164,12 @@ public class ProductController {
 
 	@RequestMapping(value = "getProduct/{gender}/{bDate}/{currency}/{paymentMethod}/{interestRateType}/{premium}/{year}/{yearCode}", method = RequestMethod.GET)
 	@ResponseBody
-	public Collection<AjaxResponse<ProductEntity>> getProduct(@PathVariable("gender") String gender,
+	public Collection<ProductEntity> getProduct(@PathVariable("gender") String gender,
 			@PathVariable("bDate") String bDate, @PathVariable("currency") String currency1,
 			@PathVariable("paymentMethod") String paymentMethod,
 			@PathVariable("interestRateType") String interestRateType, @PathVariable("premium") String premium1,
 			@PathVariable("year") String year, @PathVariable("yearCode") String yearCode) {
-		Collection<AjaxResponse<ProductEntity>> responses = new ArrayList<>();
+		Collection<ProductEntity> productss = new ArrayList<>();
 
 		Currency currency = null;
 		if (currency1.equals("TWD")) {
@@ -180,9 +187,9 @@ public class ProductController {
 			gender = "F";
 		}
 		int yearINT = productService.stringToInt(year);// 繳費年期
-		if(paymentMethod.equals("once")){
-			yearINT=1;
-		}else if(paymentMethod.equals("many")){
+		if (paymentMethod.equals("once")) {
+			yearINT = 1;
+		} else if (paymentMethod.equals("many")) {
 			yearINT = productService.stringToInt(year);
 		}
 		int insAge = productService.bDateToInt(bDate);// 年齡
@@ -199,11 +206,10 @@ public class ProductController {
 		List<ProductEntity> products = productService.search(gender, insAge, currency, interestRateType, yearINT);
 		System.out.println("productsproductsproducts");
 		for (ProductEntity product : products) {
-			AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 			try {
-				System.out.println("id = "+product.getId());
+				System.out.println("id = " + product.getId());
 				double premiumRatio = productService.getPremiumRatio(product);
-				System.out.println("premiumRatio= "+premiumRatio);
+				System.out.println("premiumRatio= " + premiumRatio);
 				BigDecimal insureAmount = BigDecimal.valueOf(costPerYear / premiumRatio);
 				if (product.getCurr() == Currency.TWD) {
 					insureAmount = insureAmount.setScale(0, BigDecimal.ROUND_HALF_UP);// 4捨5入到整數
@@ -229,7 +235,7 @@ public class ProductController {
 										.setScale(0, BigDecimal.ROUND_HALF_UP));
 						System.out.println("premium= " + product.getPremium().doubleValue());
 						break;
-					}else{
+					} else {
 						product.setPremium(null);
 					}
 				}
@@ -245,38 +251,32 @@ public class ProductController {
 				double period = (double) yearINT;
 				double times = (double) yearCodeInt;
 				double premium;
-				if(product.getPremium()!=null){
+				if (product.getPremium() != null) {
 					premium = product.getPremium().doubleValue();
 				}
 				double expired = product.getCashValue().doubleValue();
-				if(product.getPremium()!=null){
+				if (product.getPremium() != null) {
 					premium = product.getPremium().doubleValue();
 					double irr = iRRCaculator.getIRR(period, times, premium, expired);
-					product.setIrr(irr);					
+					product.setIrr(irr);
 					System.out.println("irr=" + irr);
 				}
 
 				if (product.getPremium() == null) {// 如果保額不在上下限範圍之內 則不顯示這張表單
 					System.out.println("NO product.getPremium()!!!");
 					continue;
-				}else{
-					response.setData(product);
-					System.out.println(product);
+				} else {
+					productss.add(product);
+					System.out.println(productss);
 				}
-				log.debug("{}", response);
 			} catch (final ApplicationException ex) {
 				ex.printStackTrace();
-				response.addMessages(ex.getMessages());
 			} catch (final Exception e) {
-				response.addException(e);
+				e.printStackTrace();
 			}
-			responses.add(response);
-			
+
 		}
-
-		System.out.println(responses);
-
-		return responses;
+		return productss;
 	}
 
 }
