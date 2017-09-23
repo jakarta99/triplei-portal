@@ -54,13 +54,9 @@ public class ProductController {
 		List<double[]> totalCancelRatio = new ArrayList<>();
 		List<double[]> totalIrrAndCancelRatio = new ArrayList<>();
 		long idLong = Integer.parseInt(id);// 抓那個商品的ID
-		log.debug("商品ID:{}", idLong);
 		int age = productService.bDateToInt(bDate);
-		log.debug("年齡:{}", age);
 		int premiumPerYear = Integer.parseInt(premium);
-		log.debug("大約年繳保費:{}", premiumPerYear);
 		int yearMoneyBack = Integer.parseInt(yearCode);
-		log.debug("第幾年領回:{}", yearMoneyBack);
 		ProductEntity form = productService.findProduct(idLong);
 		log.debug("form{}", form);
 		log.debug("商品ID:{}", idLong);
@@ -284,13 +280,20 @@ public class ProductController {
 
 	@GetMapping("/Adjustment/{gender}/{bDate}/{insureAmount}/{id}/{yearCode}")
 	@ResponseBody
-	public Model insureAmountAndYearAndGenderAdjustment(@PathVariable("gender") String gender,
+	public Model insureAmountAndYearAndGenderAdjustment(@PathVariable("gender") String gender1,
 			@PathVariable("bDate") String bDate, @PathVariable("insureAmount") String insureAmountS,
 			@PathVariable("id") String idS, @PathVariable("yearCode") String yearCode, Model model)// 這裡yearCode指的是
 																									// 領回時間
 			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		List<double[]> totalForm = new ArrayList<>();
 		List<double[]> totalIrrAndCancelRatio = new ArrayList<>();
+		String gender;
+		if(gender1.equals("Male")){
+			gender = "M";
+		}else{
+			gender = "F";
+		}
+		log.debug("gender{}", gender);
 		long id = Integer.parseInt(idS);
 		log.debug("id{}", id);
 		BigDecimal insureAmount = BigDecimal.valueOf(Double.parseDouble(insureAmountS));
@@ -302,25 +305,26 @@ public class ProductController {
 		ProductEntity product = productService.getOneAll(id);
 		log.debug("product{}", product);
 		product.setInsureAmount(insureAmount);
-		while (product.getPremiumRatios().iterator().hasNext()) {
-			ProductPremiumRatio productPremiumRatio = product.getPremiumRatios().iterator().next();
+		Iterator ip = product.getPremiumRatios().iterator();
+		while (ip.hasNext()) {
+			ProductPremiumRatio productPremiumRatio = (ProductPremiumRatio) ip.next();
 			if (productPremiumRatio.getInsAge() == age && productPremiumRatio.getGender().equals(gender)) {
-				log.debug("age{}", age);
 				log.debug("productPremiumRatio.getInsAge(){}", productPremiumRatio.getInsAge());
-				log.debug("gender{}", gender);
 				log.debug("productPremiumRatio.getGender(){}", productPremiumRatio.getGender());
-				while (product.getHighDiscountRatios().iterator().hasNext()) {
-					ProductHighDiscountRatio productHighDiscountRatio = product.getHighDiscountRatios().iterator()
-							.next();
+				Iterator ih = product.getHighDiscountRatios().iterator();
+				while (ih.hasNext()) {
+					ProductHighDiscountRatio productHighDiscountRatio = (ProductHighDiscountRatio) ih.next();
 					if (insureAmount.doubleValue() >= productHighDiscountRatio.getMinValue().doubleValue()
 							&& insureAmount.doubleValue() <= productHighDiscountRatio.getMaxValue().doubleValue()) {
 						// 保費
 						product.setPremium(BigDecimal.valueOf(
-								insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()));
+								insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()).setScale(0,BigDecimal.ROUND_HALF_UP));
+						log.debug("保費{}", product.getPremium());
 						// 折扣後保費
 						product.setPremiumAfterDiscount(BigDecimal.valueOf(
 								insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()
-										* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())));
+										* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())).setScale(0,BigDecimal.ROUND_HALF_UP));
+						log.debug("折扣後保費{}", product.getPremiumAfterDiscount());
 						// 折扣趴數
 						product.setDiscount(productHighDiscountRatio.getDiscountRatio());
 						// 可獲點數
@@ -331,9 +335,11 @@ public class ProductController {
 												* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())
 												* product.getBonusPoint().doubleValue())
 										.setScale(0, BigDecimal.ROUND_FLOOR));
-
-						while (product.getCancelRatios().iterator().hasNext()) {
-							ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+						log.debug("可獲點數{}", product.getGetPoint());
+						
+						Iterator ic = product.getCancelRatios().iterator();
+						while (ic.hasNext()) {
+							ProductCancelRatio productCancelRatio = (ProductCancelRatio) ic.next();
 							if (productCancelRatio.getInsAge() == age
 									&& productCancelRatio.getGender().equals(gender)) {
 								for (int i = 0; i <= 111; i++) {
@@ -346,8 +352,8 @@ public class ProductController {
 											insureAmount.doubleValue()
 													* productPremiumRatio.getPremiumRatio().doubleValue()
 													* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue()),
-											cancelRatio.doubleValue());
-									double[] irrAndCancelRatio = { cancelRatioPerYear, irr };
+													cancelRatioPerYear);
+									double[] irrAndCancelRatio = {(double) i, BigDecimal.valueOf(cancelRatioPerYear).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(), BigDecimal.valueOf(irr).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
 									totalIrrAndCancelRatio.add(irrAndCancelRatio);
 
 									// 各年總繳金額
@@ -367,16 +373,17 @@ public class ProductController {
 								}
 								BigDecimal cancelRatio = (BigDecimal) MethodUtils.invokeMethod(productCancelRatio,
 										"getCancelRatio_" + yearMoneyBack, null);
-								// 違約金
+								// 第n年解約金額
 								product.setCashValue(
 										BigDecimal.valueOf(cancelRatio.doubleValue() * insureAmount.doubleValue()));
+								log.debug("第n年解約金額{}", product.getCashValue());
 								double irr = irrCaculator.getIRR(product.getYear(), yearMoneyBack,
 										insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()
 												* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue()),
 										cancelRatio.doubleValue());
 								// IRR
 								product.setIrr(BigDecimal.valueOf(irr).setScale(4, BigDecimal.ROUND_HALF_UP));
-								log.debug("irr{}", irr);
+								log.debug("irr{}", product.getIrr());
 							}
 						}
 						break;
