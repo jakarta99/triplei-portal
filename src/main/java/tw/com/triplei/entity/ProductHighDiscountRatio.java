@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 
 import tw.com.triplei.commons.GenericEntity;
 
@@ -26,12 +27,15 @@ public class ProductHighDiscountRatio extends GenericEntity{
 	@Column(name = "PRODUCT_ID")
 	private Long productId;
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name = "MIN_VALUE")
 	private BigDecimal minValue; // 下限
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name = "MAX_VALUE")
 	private Integer maxValue; //上限
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name = "DISCOUNT_RATIO")
 	private BigDecimal discountRatio; // 折扣趴數
 

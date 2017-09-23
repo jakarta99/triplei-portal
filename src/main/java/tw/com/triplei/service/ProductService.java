@@ -23,6 +23,8 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,9 +86,9 @@ public class ProductService extends GenericService<ProductEntity> {
 		int number = Integer.parseInt(string);
 		return number;
 	}
-	
-	public boolean deleteAll(long id){
-		if(this.findProduct(id)!=null){
+
+	public boolean deleteAll(long id) {
+		if (this.findProduct(id) != null) {
 			productPremiumRatioDao.deleteByPorductId(id);
 			productCancelRatioDao.deleteByPorductId(id);
 			productHighDiscountRatioDao.deleteByPorductId(id);
@@ -95,8 +97,8 @@ public class ProductService extends GenericService<ProductEntity> {
 		}
 		return false;
 	}
-	
-	public ProductEntity findProduct(long id){
+
+	public ProductEntity findProduct(long id) {
 		ProductEntity product = dao.findOne(id);
 		product.setPremiumRatios(productPremiumRatioDao.findByProductId(id));
 		product.setCancelRatios(productCancelRatioDao.findByProductId(id));
@@ -182,7 +184,7 @@ public class ProductService extends GenericService<ProductEntity> {
 	public double getPremiumRatio(ProductEntity product) {
 		double premiumRatio = 0;
 		try {
-			log.debug("{}",product);
+			log.debug("{}", product);
 			premiumRatio = product.getPremiumRatios().iterator().next().getPremiumRatio().doubleValue();
 		} catch (Exception e) {
 			System.out.println("NOOOO");
@@ -192,12 +194,12 @@ public class ProductService extends GenericService<ProductEntity> {
 	}
 
 	public List<ProductEntity> search(String gender, int insAge, Currency currency, String interestRateType, int year) {
-		
+
 		List<ProductEntity> products = dao.findByCurrAndInterestRateTypeAndYear(currency, interestRateType, year);
-		log.debug("products{}",products);
+		log.debug("products{}", products);
 		List<ProductEntity> productss = new ArrayList<>();
 		for (ProductEntity product : products) {
-			log.debug("productID{},Age{},Gender{}",product.getId(),insAge,gender);
+			log.debug("productID{},Age{},Gender{}", product.getId(), insAge, gender);
 			product.setPremiumRatios(
 					productPremiumRatioDao.findByProductIdAndInsAgeAndGender(product.getId(), insAge, gender));
 			product.setHighDiscountRatios(productHighDiscountRatioDao.findByProductId(product.getId()));
@@ -212,9 +214,9 @@ public class ProductService extends GenericService<ProductEntity> {
 	public BigDecimal toCancelRatio(int yearCode, ProductEntity product) throws Exception {
 		ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
 		MethodUtils methodUtils = new MethodUtils();
-		if(methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_"+yearCode, null) != null){
-			return (BigDecimal)methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_"+yearCode, null);
-		}else{
+		if (methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + yearCode, null) != null) {
+			return (BigDecimal) methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + yearCode, null);
+		} else {
 			return null;
 		}
 	}
@@ -320,6 +322,7 @@ public class ProductService extends GenericService<ProductEntity> {
 	public boolean insertXlsxToDB(MultipartFile file) throws Exception {
 		org.apache.poi.ss.usermodel.Sheet sheet;
 		org.apache.poi.ss.usermodel.Workbook wb = null;
+		double iii = 0D;
 		try {
 			if (url.endsWith(".xlsx")) {
 				wb = new org.apache.poi.xssf.usermodel.XSSFWorkbook(new File(url));
@@ -374,14 +377,16 @@ public class ProductService extends GenericService<ProductEntity> {
 				}
 				// 宣告利率
 				try {
-					product.setDeclareInterestRate(BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()));
+					iii = BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()).doubleValue();
+					product.setDeclareInterestRate(
+							BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()).setScale(3));
 				} catch (Exception e) {
 					product.setDeclareInterestRate(BigDecimal.valueOf(0D));
 				}
 				// 利率別
-				if (!product.getDeclareInterestRate().equals(BigDecimal.valueOf(0D))) {
+				if (!(product.getDeclareInterestRate().doubleValue() == 0)) {
 					product.setInterestRateType("宣告利率");
-				} else if (!product.getPredictInterestRate().equals(BigDecimal.valueOf(0D))) {
+				} else if (!(product.getPredictInterestRate().doubleValue() == 0)) {
 					product.setInterestRateType("預定利率");
 				}
 
@@ -449,14 +454,16 @@ public class ProductService extends GenericService<ProductEntity> {
 						productCancelRatio.setInsAge((int) rowk.getCell(8).getNumericCellValue());
 						// 違約金性別
 						productCancelRatio.setGender(rowk.getCell(7).getStringCellValue());
-						
-						//0~111年的解約金費率
-						for(int x=0;x<=111;x++){
+
+						// 0~111年的解約金費率
+						for (int x = 0; x <= 111; x++) {
 							MethodUtils methodUtils = new MethodUtils();
 							try {
-							methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_"+x, BigDecimal.valueOf(rowk.getCell(x+9).getNumericCellValue()));
-							}catch (Exception e) {
-								methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_"+x, BigDecimal.valueOf(0D));
+								methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_" + x,
+										BigDecimal.valueOf(rowk.getCell(x + 9).getNumericCellValue()));
+							} catch (Exception e) {
+								methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_" + x,
+										BigDecimal.valueOf(0D));
 							}
 						}
 						// 寫進違約金table
@@ -507,6 +514,9 @@ public class ProductService extends GenericService<ProductEntity> {
 
 				// 更新product table
 				productEntity.setCreatedTime(new Timestamp(new Date().getTime()));
+				UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				log.debug("userDetails: {}",userDetails);
+				productEntity.setCreatedBy(userDetails.getUsername());
 				dao.save(productEntity);
 			}
 
@@ -516,4 +526,13 @@ public class ProductService extends GenericService<ProductEntity> {
 		}
 		return true;
 	}
+
+	public ProductEntity getOneAll(long id) {
+		ProductEntity product = dao.findOne(id);
+		product.setPremiumRatios(productPremiumRatioDao.findByProductId(id));
+		product.setHighDiscountRatios(productHighDiscountRatioDao.findByProductId(id));
+		product.setCancelRatios(productCancelRatioDao.findByProductId(id));
+		return product;
+	}
+
 }

@@ -69,15 +69,10 @@
 			            { title: '基本費率', name: "premiumRatios", width: 75 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/premiumRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
 			            { title: '解約金費率', name: "cancelRatios", width: 80 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/cancelRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
 			            { title: '繳費方式', name: "paymentMethod", type: "textarea", width: 75 },
+			            { title: '點數趴數', name: "bonusPoint", type: "text", width: 75 },
 			            { title: '保額', name: "insureAmount", visible: false},
 			            { title: '保費', name: "premium", visible: false},
 			            { title: '解約金', name: "cv;", visible: false},
-// 			            { title: '性別', name: "premiumRatios.gender", type: "text", width: 100 },
-// 			            { title: '年齡', name: "premiumRatios.insAge", type: "text", width: 100 },
-// 			            { title: '基本費率', name: "premiumRatios.premiumRatio", type: "text", width: 100 },
-// 			            { title: '下限', name: "highDiscountRatios.minValue", type: "text", width: 100 },
-// 			            { title: '上限', name: "highDiscountRatios.maxValue", type: "text", width: 100 },
-// 			            { title: '高保費率', name: "highDiscountRatios.discountRatio", type: "text", width: 100 },
 
 			        ]
 			    });
