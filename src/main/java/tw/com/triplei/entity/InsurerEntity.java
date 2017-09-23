@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -43,24 +44,28 @@ public class InsurerEntity extends GenericEntity {
 	@Column(name = "COMPLAINT_RATIO_DESC")
 	private String complaintRatioDesc; // 投訴率介紹
 
+	@Digits(integer=15,fraction=4)
 	@Column(name = "BIS_RATIO")
 	private BigDecimal bisRatio; // 資本適足率 Bank of International Settlement ratio
 	
 	@Column(name = "bisRatio_DESC")
 	private String bisRatioDesc; // 資本適足率介紹
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name = "PERSISTENCY_RATIO")
 	private BigDecimal persistencyRatio; // 保單繼續率
 	
 	@Column(name = "PERSISTENCY_RATIO_DESC")
 	private String persistencyRatioDesc; // 保單繼續率介紹
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name = "LITIGATION_RATIO")
 	private BigDecimal litigationRatio; // 訴訟率
 	
 	@Column(name = "LITIGATION_RATIO_DESC")
 	private String litigationRatioDesc; // 訴訟率介紹
 	
+	@Digits(integer=12,fraction=7)
 	@Column(name = "APPEAL_RATIO")
 	private BigDecimal appealRatio; // 申訴率
 	
@@ -76,6 +81,19 @@ public class InsurerEntity extends GenericEntity {
 	@Column(name = "IMG_SRC")
 	private String imgsrc;
 
+	@Digits(integer=14,fraction=5)
+	@Column(name = "RETURN_ON_ASSETS")
+	private BigDecimal returnonAssets;//資產報酬率
+
+	@Column(name = "DESCRIPTION2")
+	private String description2;
+
+	@Column(name = "DESCRIPTION3")
+	private String description3;
+
+	@Column(name = "DESCRIPTION4")
+	private String description4;
+	
 	@Override
 	public String toString() {
 		return "InsurerEntity [code=" + code + ", name=" + name + ", shortName=" + shortName + ", description="

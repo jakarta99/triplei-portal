@@ -1,37 +1,73 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<!-- <script type="text/javascript" src="/resources/flot/jquery-1.8.3.min.js"></script> -->
+<script type="text/javascript" src="/resources/flot/jquery-1.8.3.min.js"></script>
 <!-- [if lte IE 8]><script language="javascript" type="text/javascript" src="/js/flot/excanvas.min.js"></script><![endif] -->
+
 <script type="text/javascript" src="/resources/flot/jquery.flot.min.js"></script>
-<script type="text/javascript" src="/resources/flot/jquery.flot.time.js"></script>    
-<!-- <script type="text/javascript" src="/resources/flot/jshashtable-2.1.js"></script>     -->
-<!-- <script type="text/javascript" src="/resources/flot/jquery.numberformatter-1.2.3.min.js"></script> -->
-<script type="text/javascript" src="/resources/flot/jquery.flot.symbol.js"></script>
-<!-- <script type="text/javascript" src="/resources/flot/jquery.flot.axislabels.js"></script> -->
+<script type="text/javascript" src="/resources/flot/jquery.flot.time.js"></script>
+
+<script type="text/javascript" src="/resources/flot/jshashtable-2.1.js"></script>
+<script type="text/javascript"
+	src="/resources/flot/jquery.numberformatter-1.2.3.min.js"></script>
+<script type="text/javascript"
+	src="/resources/flot/jquery.flot.symbol.js"></script>
+
+<script type="text/javascript"
+	src="/resources/flot/jquery.flot.axislabels.js"></script>
 
 
 
 
 <script>
-var rawData = new Array(${fn:length(models)});
-var i = 0;
+
+
+
+
+
+		var rawData = [];
+		var ticks = [];
+
+var numbercollection = new Array(${fn:length(models)});
+var iiii = 0;
 <c:forEach items="${models}" var="model">
-rawData[i]=[${model.persistencyRatio},i];
-i++;
+numbercollection[iiii]=[${model.persistencyRatio}];
+iiii++;
 </c:forEach>
+// window.document.write(${models});
 
-
-
-var ticks = new Array(${fn:length(models)});
-var x = 0;
+var namecollection = new Array(${fn:length(models)});
+var xxxx = 0;
 <c:forEach items="${models}" var="model">
-ticks[x]=[x,"${model.shortName}"];
-x++;
+namecollection[xxxx]=["${model.shortName}"];
+xxxx++;
 </c:forEach>
+// window.document.write(namecollection)
+
+function DoToggling() {
+
+	rawData.length = 0;
+	ticks.length = 0;
+			
+			var yy = 0;
+			$("#insurerfilter").find("input[id!='checkall']").each(function() {
+				if ($(this).is(":checked")) {
+
+					var position = $(this).attr("id");
+					position = (position).substr(3) - 1;
+					rawData.push([numbercollection[position],yy]);
+					ticks.push([yy,namecollection[position]]);
+					yy++;
+				}
+			})
+			$('#flot-placeholder').css("height",(rawData.length*4)+"vh");
+// 			$.plot($("#flot-placeholder"), dataSet, options);
+		}
+		
 
 
 var dataSet = [
@@ -42,12 +78,14 @@ var dataSet = [
 
 var options = {
     series: {
-        bars: {
-            show: true
+    	bars: {
+            show: true,
+            dataLabels: true
         }
     },
     bars: {
-        align: "center",
+    	show: true,
+    	align: "center",
         barWidth: 0.3,
         horizontal: true,
         fillColor: { colors: [{ opacity: 0.5 }, { opacity: 1}] },
@@ -71,21 +109,23 @@ var options = {
         axisLabelPadding: 3,
         tickColor: "#FAF7F7",        
         ticks: ticks, 
-        color:"black"
+        color:"black",
     },
     legend: {
         noColumns: 0,
         labelBoxBorderColor: "white",
-        position: "ne"
+        position: "ne",
+        sorted:"reverse", 
     },
     grid: {
-        hoverable: true,  
         borderWidth: 0,      
-    }
+    },
+    valueLabels: {
+        show: true
+       }
 };
 
 $(document).ready(function () {
-    $.plot($("#flot-placeholder"), dataSet, options);    
     $("#flot-placeholder").UseTooltip();
 });
 
@@ -106,8 +146,6 @@ $.fn.UseTooltip = function () {
                 var y = item.datapoint[1];
 
                 var color = item.series.color;
-                //alert(color)
-                //console.log(item.series.xaxis.ticks[x].label);                
                 
                 showTooltip(item.pageX,
                         item.pageY,
@@ -120,21 +158,6 @@ $.fn.UseTooltip = function () {
     });
 };
 
-function showTooltip(x, y, color, contents) {
-    $('<div id="tooltip">' + contents + '</div>').css({
-        position: 'absolute',
-        display: 'none',
-        top: y - 10,
-        left: x + 10,
-        border: '2px solid ' + color,
-        padding: '3px',
-        'font-size': '9px',
-        'border-radius': '5px',
-        'background-color': '#fff',
-        'font-family': 'Verdana, Arial, Helvetica, Tahoma, sans-serif',
-        opacity: 0.9
-    }).appendTo("body").fadeIn(200);
-}
 
 
 </script>

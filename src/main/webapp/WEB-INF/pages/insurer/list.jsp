@@ -35,25 +35,29 @@
 		style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div>
-			<div class="col-xs-12 col-sm-4"
+			<div class="col-xs-12 col-sm-3"
 				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;"><!--左半藍 -->
-				<div
-					style="display: table-cell; vertical-align: top; padding-top: 20vh; text-align: center;">
-					<h1 style="color: rgb(254, 249, 246); font-size: 2 em;">保險公司</h1>
-					<h3>
+ 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
+				<div class="col-xs-6 col-sm-12"
+					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
+					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">保險公司</h1>
+					<h4>
 						<a href="/insurer/list"
-							style="color: rgb(254, 249, 246); opacity: 0.6; font-size: 1em;">各公司列表</a>
-					</h3>
-					<h3>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各公司列表</a>
+					</h4>
+					<h4>
 						<a href="/insurer/filt"
-							style="color: rgb(254, 249, 246); opacity: 0.6; font-size: 1em;">各別項目查詢</a>
-					</h3>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
+					</h4>
+					<img alt="" src="/resources/pic/各公司資訊/images/img_1.png"
+							style="width: 80% ;padding-top: 8vh">
 				</div>
+				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
-			<div class="col-sm-8"
+			<div class="col-sm-9"
 				style="height: 100vh; display: table; table-layout: fixed; background-color: #FAF7F7;"><!--右半白 -->
 				<div
-					style="height: 100vh; overflow: auto; position: relative; padding-top: 20vh;">
+					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;">
 					<div class="col-xs-1 col-sm-1"></div>
 					<div class="col-xs-10 col-sm-10">
 						<c:forEach items="${models}" var="model">
@@ -77,9 +81,18 @@
 					
 						<c:forEach items="${models}" var="model">
 						<div class="descriptionzone" id="${model.id}">
-						<img src="${model.imgsrc}" alt="${model.shortName}"
-										width="50" height="50" name="${model.id}" style="margin-left: 10%;margin-bottom: 5%;"><a style="font-size: 25px; padding-left: 5%;font-weight:bold;">${model.shortName}</a><br>
-							<a href="${model.description}" target="_blank" style="padding-left: 13%">${model.description}</a>
+						<img src="${model.imgsrc}" alt="${model.shortName}" width="50" height="50" name="${model.id}" style="margin-left: 10%;margin-bottom: 5%;">
+							<a style="font-size: 25px; padding-left: 5%;font-weight:bold;">${model.shortName}</a><br>
+							<a style="padding-left: 13%">資本適足率　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.bisRatio}" /></a><br>
+							<a style="padding-left: 13%">資產報酬率　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.returnonAssets}" /></a><br>
+							<a style="padding-left: 13%">保單繼續率　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.persistencyRatio}" /></a><br>
+							<a style="padding-left: 13%">訴訟率　　　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.litigationRatio}" /></a><br>
+							<a style="padding-left: 13%">申訴率　　　：<fmt:formatNumber type="percent" minFractionDigits="5" value="${model.appealRatio}" /></a><br>
+							<a style="padding-left: 13%">保險安定基金：<c:if test="${model.insuranceGuarantyFund=true}">已加入</c:if><c:if test="${model.insuranceGuarantyFund=false}">未加入</c:if></a><br>
+							<a style="padding-left: 13%">網址　　　　：<a href="${model.description}" target="_blank">${model.description}</a></a><br>
+							<a style="padding-left: 13%">${model.description2}</a><br>
+							<a style="padding-left: 13%">${model.description3}</a><br>
+							<a style="padding-left: 13%">${model.description4}</a><br>
 							</div>
 						</c:forEach>
 					

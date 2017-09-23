@@ -30,87 +30,109 @@
 		style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div>
-			<div class="col-xs-12 col-sm-4"
+			<div class="col-xs-12 col-sm-3"
 				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;">
 				<!--左半藍 -->
 				<div
-					style="display: table-cell; vertical-align: top; padding-top: 20vh; text-align: center;">
-					<h1 style="color: rgb(254, 249, 246); font-size: 2 em;">保險公司</h1>
-					<h3>
+					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
+					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">保險公司</h1>
+					<h4>
 						<a href="/insurer/list"
-							style="color: rgb(254, 249, 246); opacity: 0.6; font-size: 1em;">各公司列表</a>
-					</h3>
-					<h3>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各公司列表</a>
+					</h4>
+					<h4>
 						<a href="/insurer/filt"
-							style="color: rgb(254, 249, 246); opacity: 0.6; font-size: 1em;">各別項目查詢</a>
-					</h3>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
+					</h4>
+					<img alt="" src="/resources/pic/各公司資訊/images/img_1.png"
+							style="width: 80% ;padding-top: 8vh">
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-8"
+			<div class="col-xs-12 col-sm-9"
 				style="height: 100vh; background-color: #FAF7F7; overflow: auto; position: relative;">
 				<!--右半白 -->
-				<div style="height: 100vh; position: relative; padding-top: 24vh;">
+				<div style="height: 100vh; position: relative; padding-top: 16vh;">
 					<!--選擇框 -->
 
-					<div class="col-xs-2 col-sm-1" style="height: 100%;"></div>
-					<button id="btn"
-						style="background-color: white; color: #5C8DEC; border: 1px #5C8DEC solid; width: 10em">篩選保險公司</button>
+					<div class="col-xs-1 col-sm-1" style="height: 100%;"></div>
+					<button id="btn" style="background-color: white; color: #5C8DEC; border: 1px #5C8DEC solid; width: 10em">篩選保險公司</button><br>
 					<br>
-
-					<div class="col-xs-8 col-sm-7 col-md-4"
+					
+					<div class="col-xs-10 col-sm-7 col-md-4"
 						style="padding-left: 0px; padding-right: 0px;">
 						<div id="insurerfilter"
 							style="background-color: #5C8DEC; display: none;">
 							<p class="col-xs-12 col-sm-12">
-								<input type="checkbox" id="checkall">全選
+								<input type="checkbox" id="checkall" checked="checked">全選
 							</p>
+							<!-- 							<p id="insurerfilter2"> -->
 							<c:forEach items="${models}" var="model">
 								<p class="col-xs-6 col-sm-6">
-									<input type="checkbox" name="${model.shortName}">${model.shortName}
+									<input id="chk${model.id}" type="checkbox" checked="checked"
+										name="${model.shortName}">${model.shortName}
 								</p>
 							</c:forEach>
+							<!-- 							</p> -->
 							<p class="col-xs-6 col-sm-6">
-								<button>開始比較</button>
+								<button id="strcompare">開始比較</button>
 							</p>
-							<button style="visibility: hidden;">開始比較</button>
+							<button style="visibility: hidden;">比較</button>
 						</div>
-						<div id="flot-placeholder" style="width: 450px; height: 100vh;display: none;"></div>
+<!-- 					XX率button區 -->
+					<button id="bisratioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;padding-top: 1vh">資本適足率▽</button><br>
+					<button id="returnonAssetss" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;" >資產報酬率▽</button><br>
+					<button id="persistencyRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">保單繼續率▽</button><br>
+						<div class="col-xs-12">
+						<div id="flot-placeholder" class="col-xs-12"
+							style="width: 60vw; height: 100vh; display: none;"></div>
 					</div>
-					<div class="col-xs-2 col-sm-4 col-md-7"></div>
+					<button id="litigationRatioo" style="background-color: #FAF7F7;  color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">訴訟率▽</button><br>
+					<button id="appealRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">申訴率▽</button><br>
+					</div>
+					<div class="col-xs-1 col-sm-4 col-md-7"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+<%-- 	window.document.write(${models}); --%>
 
 	<script type="text/javascript">
+		
 		$(function() {
-			// 		$('#insurerfilter').toggle(0);
-			$('#btn').one('click',function(){
-				$('#flot-placeholder').toggle(0);
-			})
+// 			$('#btn').one('click', function() {
+// 				$('#flot-placeholder').toggle(0);
+// 			})   先留一下
 			$('#btn').click(function() {
-				$('#insurerfilter').toggle(1000);
-				$('#flot-placeholder').toggle(1000);
+				$('div[id^="flot"]').css("display","none")
+				$('#insurerfilter').toggle(500);
+			})
+			$('#persistencyRatioo').click(function() {
+				$('#flot-placeholder').toggle(500);
 			})
 			$('#checkall').change(function() {
 				var b = $(this).prop('checked')
 				$(':checkbox').prop('checked', b)
 				//切換所有checkbox的勾選狀態        	
-			})
+			});
+			$(':checkbox').click(function() {
+				var c = $(this).prop('checked')
+				if (c==false){
+					$('#checkall').prop('checked', c)
+				}
+// 				window.alert(c);
+				//切換checkall的全選狀態        	
+			});
+			$("#strcompare").click(function() {
+				DoToggling();
+				$('#insurerfilter').toggle(500);
+				$('#flot-placeholder').toggle(500,function(){
+					$.plot($("#flot-placeholder"), dataSet, options);
+				});
+			});
+			window.onresize = function(event) {
+				$.plot($("#flot-placeholder"), dataSet, options);
 
-// 			$("#insurerfilter").change(function() {
-// 				$('#flot-placeholder').attr("display", "none");
-// // 				window.document.write('none');
-// 			}, function() {
-// 				$('#flot-placeholder').attr("display", "block");
-// // 				window.document.write('inline');
-// 			});
-			// 		$("#insurerfilter").change(function(){
-			// 			if($('#insurerfilter').attr("display")=="none"){
-			// 				window.document.write('none');
-			// 			}
-			// 		});
-
+		    }
 		});
 	</script>
 </body>
