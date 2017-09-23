@@ -50,14 +50,28 @@ public class AdminUserService extends GenericService<UserEntity>{
 		if (StringUtils.isBlank(entity.getName())) {
 			messages.add(Message.builder().code("name").value("會員姓名為必填欄位").build());
 		}
+		
+		if (StringUtils.isBlank(entity.getEmail())){
+			messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
+		}
 
 		if (dbEntity != null) {
 			messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
 		}
 		
-		if (!entity.getPassword().equals(entity.getCheckPassword())){
-			messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
-			messages.add(Message.builder().code("checkpassword").value("輸入的密碼不相同，請重新輸入").build());
+		if (StringUtils.isBlank(entity.getPassword())){
+			messages.add(Message.builder().code("password").value("請輸入密碼").build());
+		}
+		
+		if (StringUtils.isBlank(entity.getCheckPassword())){
+			messages.add(Message.builder().code("checkpassword").value("請輸入確認密碼").build());
+		}
+		
+		if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())){
+			if (!entity.getPassword().equals(entity.getCheckPassword())){
+				messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
+				messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
+			}
 		}
 
 		log.debug("{}", messages);
@@ -70,10 +84,10 @@ public class AdminUserService extends GenericService<UserEntity>{
 		
 		List<Message> messages = new ArrayList<Message>();
 
-		UserEntity dbEntity = userDao.findOne(entity.getId());
+//		UserEntity dbEntity = userDao.findOne(entity.getId());
 
-//		if (dbEntity != null) {
-//			messages.add(Message.builder().code("code").value("代號不得重複").build());
+//		if (entity.getEmail() == null) {
+//			messages.add(Message.builder().code("email").value("電子信箱為必填").build());
 //		}
 
 		log.debug("{}", messages);
@@ -87,6 +101,7 @@ public class AdminUserService extends GenericService<UserEntity>{
 	public UserEntity handleInsert(final UserEntity entity) {
 		
 		entity.setPassword(encodePasswrod(entity.getPassword()));
+		entity.setOrgPassword(encodePasswrod(entity.getPassword()));
 		entity.setEnabled(false);  // 預設新註冊的會員不啟用
 		entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
 		
@@ -112,7 +127,9 @@ public class AdminUserService extends GenericService<UserEntity>{
 //		dbUserEntity.setPassword(dbUserEntity.getPassword());
 		dbUserEntity.setEmail(entity.getEmail());
 		dbUserEntity.setEnabled(entity.getEnabled());
-		dbUserEntity.setCreatedTime(entity.getCreatedTime());
+		if(!StringUtils.isBlank(entity.getRegisteredCode())){
+			dbUserEntity.setRegisteredCode(entity.getRegisteredCode());
+		}
 		
 
 		dbUserEntity.getRoles().clear();

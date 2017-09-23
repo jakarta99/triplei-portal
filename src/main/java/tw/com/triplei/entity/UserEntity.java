@@ -38,6 +38,9 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	@Column(name = "ACCOUNT_NUMBER")
 	private String accountNumber; // 會員帳號 
 	
+	@Column(name = "ORG_PASSWORD")
+	private String orgPassword; // 原始密碼
+	
 	@Column(name = "PASSWORD")
 	private String password; // 密碼
 	

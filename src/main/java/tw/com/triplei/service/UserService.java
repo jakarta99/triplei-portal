@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.searchbox.strings.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.GenericDao;
 import tw.com.triplei.commons.GenericService;
@@ -35,14 +36,23 @@ public class UserService extends GenericService<UserEntity> {
 	@Override
 	public List<Message> validateInsert(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
-		
+				
 		return messages;
 	}
 
-	@Transactional
+//	@Transactional
 	@Override
 	public List<Message> validateUpdate(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
+		
+		//UserEntity dbEntity = userDao.findOne(entity.getId());
+		
+//		if (StringUtils.isBlank(entity.getName())) {
+//			messages.add(Message.builder().code("orgPassword").value("原始欄位為必填欄位").build());
+//		}
+		
+		
+		log.debug("{}", messages);
 		
 		return messages;
 	}
@@ -51,23 +61,34 @@ public class UserService extends GenericService<UserEntity> {
 	@Override
 	public UserEntity handleUpdate(final UserEntity entity) {
 		final UserEntity dbUserEntity = userDao.findOne(entity.getId());
-		//XXX 註冊會從adminUserService 跑到這邊 update 一次，已加密過不須再加密
-		//dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
-//		dbUserEntity.setPassword(dbUserEntity.getPassword());
+
+		if(!StringUtils.isBlank(entity.getCheckPassword())){
+			dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
+			dbUserEntity.setOrgPassword(encodePasswrod(entity.getPassword()));
+		}
 
 		
-//		dbUserEntity.setCheckPassword(dbUserEntity.getCheckPassword());
-//		dbUserEntity.setEnabled(dbUserEntity.getEnabled());
-//		dbUserEntity.setRoles(dbUserEntity.getRoles());
+		if(!StringUtils.isBlank(entity.getName())){
+			dbUserEntity.setName(entity.getName());
+		}
 		
-		dbUserEntity.setName(entity.getName());
-		dbUserEntity.setEmail(entity.getEmail());
-		dbUserEntity.setGender(entity.getGender());
+		if(!StringUtils.isBlank(entity.getEmail())){
+			dbUserEntity.setEmail(entity.getEmail());
+		}
+		
+		if(!StringUtils.isBlank(entity.getGender())){
+			dbUserEntity.setGender(entity.getGender());
+		}
+		
 		
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);
 		dbUserEntity.setModifiedTime(timestamp);
-		dbUserEntity.setModifiedBy(entity.getAccountNumber());
+		
+		if(!StringUtils.isBlank(entity.getAccountNumber())){
+			dbUserEntity.setModifiedBy(entity.getAccountNumber());
+		}
+		
 
 		return dbUserEntity;
 	}

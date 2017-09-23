@@ -58,11 +58,12 @@ public class RegisteredController {
 	@RequestMapping(value = "/sendCheckLetter", method = RequestMethod.PUT)
 	@ResponseBody
 	public AjaxResponse<UserEntity> sendCheckLetterPage(final Model model, @RequestBody final UserEntity form) {
-		AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
 		
+		AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
+		log.debug("sendCheckLetterPage");
 		try {
 
-			UserEntity userEntity = userDao.findByEmail(form.getEmail());
+			UserEntity userEntity = userDao.findByEmail(form.getEmail()); // FIXME controller不能直接用Dao
 			model.addAttribute("resendInfo", userEntity);
 			response.setData(userEntity);
 			

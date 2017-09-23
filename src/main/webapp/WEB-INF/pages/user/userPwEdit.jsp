@@ -19,56 +19,52 @@
 		
 		<div>
 			
-			<h3>會員基本資料設定</h3>
-			
+			<h3>重設密碼</h3>
+
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
-					<input type="hidden" id="id" name="id" value="${userDetails.id}"/>
+						<input type="hidden" id="id" name="id" value="${userDetails.id}" />
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								<h4><span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>基本資料修改</strong></h4>
+								<h4>
+									<span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>會員密碼設定</strong>
+								</h4>
 							</div>
 							<div class="panel-body">
-							
+
+
 								<div class="form-group required">
-			    					<label for="accountNumber" class="col-md-2 control-label">會員帳號</label>
-			    					<div class="col-md-8">
-			    						<p class="form-control-static">${userDetails.accountNumber}</p>
-			    						<input type="hidden" class="form-control" id="accountNumber" name="accountNumber" value="${userDetails.accountNumber}"/>
-			    					</div>
-								</div>	
-								
-			  					<div class="form-group required">
-			    					<label for="name" class="col-md-2 control-label">會員姓名</label>
-			    					<div class="col-md-8">
-			      						<input type="text" class="form-control" id="name" name="name" placeholder="name" value="${userDetails.name}"/>
-			    					</div>
-								</div>	
-								
-								<div class="form-group required">
-			    					<label for="email" class="col-md-2 control-label">電子信箱</label>
-			    					<div class="col-md-8">
-			      						<input type="text" class="form-control" id="email" name="email" placeholder="email" value="${userDetails.email}"/>
-			      						<span class="help-block"><div class="text-danger"></div></span>
-			    					</div>
-								</div>	
-							
-								<div class="form-group required">
-									<label for="gender" class="col-md-2 control-label">性別</label>
+									<label for="orgPassword" class="col-md-2 control-label">輸入原始密碼</label>
 									<div class="col-md-8">
-										<select id="gender" name=gender class="form-control">
-											<option value="female" ${userDetails.gender == 'female' ? 'selected': ''}>女性</option>
-											<option value="male" ${userDetails.gender == 'male' ? 'selected': ''}>男性</option>
-										</select>
+										<input type="password" class="form-control" id="orgPassword"
+											name="orgPassword" placeholder="orgPassword" value="" />
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
-								
-								</div>								
+
+								<div class="form-group required">
+									<label for="password" class="col-md-2 control-label">輸入新密碼</label>
+									<div class="col-md-8">
+										<input type="password" class="form-control" id="password"
+											name="password" placeholder="password" value="" /> 
+											<span class="help-block"><div class="text-danger"></div></span>
+									</div>
+								</div>
+
+								<div class="form-group required">
+									<label for="checkPassword" class="col-md-2 control-label">再次輸入密碼</label>
+									<div class="col-md-8">
+										<input type="password" class="form-control" id="checkPassword"
+											name="checkPassword" placeholder="checkPassword" value="" />
+										<span class="help-block"><div class="text-danger"></div></span>
+									</div>
+								</div>
+
 							</div>
-						</div>	
-		 			</form>
-				</div>				
+						</div>
+					</form>
+				</div>
 			</div>
 
 			<div class="row">
@@ -104,6 +100,5 @@ $(function(){
 		
 		$btn.button("reset");			
 	});
-	
 })
 </script>

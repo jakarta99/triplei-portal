@@ -18,7 +18,7 @@ import tw.com.triplei.service.UserService;
 
 @Slf4j
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/reset")
 public class UserController {
 	
 	@Autowired
@@ -28,8 +28,8 @@ public class UserController {
 	private UserDao userDao;
 	
 	
-	@RequestMapping("/own")
-	public String list(Model model) {
+	@RequestMapping("/info")
+	public String infoPage(Model model) {
 		
 		UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		log.debug("details: {}", details.getUsername());
@@ -42,6 +42,21 @@ public class UserController {
 		model.addAttribute("userDetails", entity);
 		
 		return "/user/userEdit";
+	}
+	
+	@RequestMapping("/pw")
+	public String pwPage(Model model) {
+		
+		UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		log.debug("details: {}", details.getUsername());
+		
+		UserEntity entity = userDao.findByAccountNumber(details.getUsername());
+		log.debug("principal user accountNumber: {}" , entity);
+		
+		
+		model.addAttribute("userDetails", entity);
+		
+		return "/user/userPwEdit";
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
