@@ -19,7 +19,6 @@ display:inline;
 .genderImage{
 width:25%;
 border-radius:50%;
-
 }
 .genderImage:hover{
 cursor:pointer;
@@ -36,6 +35,9 @@ height:120%;
 }
 #input2 span{
 font-size:100%;
+}
+span{
+font-size:110%;
 }
 </style>
 </head>
@@ -128,83 +130,7 @@ font-size:100%;
 			<br/>
 			<div style="margin:10%"></div>
 			<div id="products" class="products">
-			
-			
-<%-- 			<c:forEach var="p" begin="1" end="3"> --%>
-<!-- 			<div style="display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;"> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-12"  style="display:table;background-color:#FAF7F7;width:100%;" > -->
-<!-- 			<div class="col-sm-12"  style="padding-top:2%"> -->
-<!-- 			<div class="col-sm-11" style="width:75%;"> -->
-<!-- 			<img width="15%" src="/resources/pic/保險公司logo/遠雄人壽.png"> -->
-<!-- 			<span>--公司名稱--</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-1"> -->
-<!-- 			<a href="/product/1" id="interested"> -->
-<!-- 			<input class="btn btn-secondary float-right" name="interested" type="button" value="我有興趣" style="background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;"> -->
-<!-- 			</a> -->
-<!-- 			</div> -->
-<!-- 			</div> -->
-<!-- 			<br/> -->
-<!-- 			<div class="col-sm-12" style="margin-top:2%"> -->
-<!-- 			<div class="col-sm-3"> -->
-<!-- 			<span>--商品名稱--</span><br/> -->
-<!-- 			<span style="color:#5C8DEC">可獲得點數：XXXX</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-2"> -->
-<!-- 			<span>總繳金額</span><br/> -->
-<!-- 			<span>$$$$$</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-2"> -->
-<!-- 			<span>領回金額</span><br/> -->
-<!-- 			<span>$$$$$</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-2"> -->
-<!-- 			<span>凈報酬</span><br/> -->
-<!-- 			<span>$$$$$</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-2"> -->
-<!-- 			<span>IRR</span><br/> -->
-<!-- 			<span>%%</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-1"> -->
-<!-- 			<input class="btn btn-secondary float-right moreInfo" type="button" name="#id" style="background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;" value="+"> -->
-<!-- 			</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-12 infoToggle"> -->
-<!-- 			<hr/> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>保額：XX</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>繳費折扣：XX</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>續年保費：XX,XXX</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>繳別：年繳</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>折扣後年繳保費：XX,XXX</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>宣告利率：XX%</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>折扣前年繳保費：XX,XXX</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>首年保費：XX,XXX</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-sm-4"> -->
-<!-- 			<span>繳費方式：轉帳</span> -->
-<!-- 			</div> -->
-<!-- 			</div> -->
-<!-- 			</div> -->
-<%-- 			</c:forEach> --%>
-			
-			
+		
 			</div>
 			</div>
 		</div>
@@ -265,7 +191,6 @@ font-size:100%;
 		}
 	})
 	
-// 	$(".products").hide();
 	$(".productFilter").on("click",function(){
 		if($('input[name="gender"]:checked').val()==null){
 			alert("請輸入您的性別");
@@ -307,9 +232,8 @@ font-size:100%;
 					if(row.year!=1){
 						installment="年繳"
 					}
-					$("#products").append("<div style='display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;'></div><div class='col-sm-12'  style='display:table;background-color:#FAF7F7;width:100%;' ><div class='col-sm-12'  style='padding-top:2%'><div class='col-sm-2' style='padding:0'><img width='40%' style='display:block;margin:auto' src='"+row.insurer.imgsrc+"'></div><div class='col-sm-9'><span style='font-size:150%'>"+row.insurer.name+"</span><br/><span style='font-size:125%'>"+row.code+"-"+row.localName+"</span></div><div class='col-sm-1'><a href='/product/"+row.insurer.id+"' id='interested'><input class='btn btn-secondary' name='interested' type='button' value='我有興趣' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;'></a></div></div><br/><div class='col-sm-12' style='margin-top:1%;margin-bottom:1%'><div class='col-sm-3'><span style='color:#5C8DEC'>可獲得點數："+row.getPoint+"</span></div><div class='col-sm-2'><span>總繳金額</span><br/><span>"+row.totalPay+"</span></div><div class='col-sm-2'><span>領回金額</span><br/><span>"+row.cashValue+"</span></div><div class='col-sm-2'><span>凈報酬</span><br/><span>"+row.net+"</span></div><div class='col-sm-2'><span>IRR</span><br/><span>"+parseFloat(row.irr*100).toFixed(2)+"%</span></div><div class='col-sm-1'><input class='btn btn-secondary float-right moreInfo' type='button' name='#id' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;' value='+'></div></div><div class='col-sm-12 infoToggle' style='padding-bottom:1%;'><hr/><div class='col-sm-4'><span>保額："+row.insureAmount+" 萬</span></div><div class='col-sm-4'><span>繳費折扣："+row.discount+"</span></div><div class='col-sm-4'><span>續年保費："+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳別："+installment+"</span></div><div class='col-sm-4'><span>折扣後年繳保費："+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>"+row.interestRateType+"："+parseFloat(row.declareInterestRate*100).toFixed(2)+"%</span></div><div class='col-sm-4'><span>折扣前年繳保費："+row.premium+"</span></div><div class='col-sm-4'><span>首年保費："+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳費方式："+row.paymentMethod+"</span></div></div></div>");
-					
-					
+					$("#products").append("<div style='display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;'></div><div class='col-sm-12'  style='display:table;background-color:#FAF7F7;width:100%;' ><div class='col-sm-12'  style='padding-top:2%'><div class='col-sm-2' style='padding:0'><img width='40%' style='display:block;margin:auto' src='"+row.insurer.imgsrc+"'></div><div class='col-sm-9' style='margin-top:1%'><span style='font-size:150%'>"+row.insurer.name+"</span><br/><span style='font-size:125%'>"+row.code+"-"+row.localName+"</span></div><div class='col-sm-1'><a href='/product/"+row.insurer.id+"/"+$('input[name="gender"]:checked').val()+"/"+$("#bDate").val()+"/"+$('#premium').val()+"/"+$('#yearCode').val()+"' id='interested'><input class='btn btn-secondary' name='interested' type='button' value='我有興趣' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;'></a></div></div><br/><div class='col-sm-12' style='margin-top:1%;margin-bottom:1%'><div class='col-sm-3'><span style='color:#5C8DEC'>可獲得點數："+row.getPoint+"</span></div><div class='col-sm-2'><span>總繳金額</span><br/><span> $"+parseFloat(row.totalPay).toFixed(0)+"</span></div><div class='col-sm-2'><span>領回金額</span><br/><span> $"+parseFloat(row.cashValue).toFixed(0)+"</span></div><div class='col-sm-2'><span>凈報酬</span><br/><span> $"+parseFloat(row.net).toFixed(0)+"</span></div><div class='col-sm-2'><span>IRR</span><br/><span>"+parseFloat(row.irr*100).toFixed(2)+"%</span></div><div class='col-sm-1'><input class='btn btn-secondary float-right moreInfo' type='button' name='#id' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;' value='+'></div></div><div class='col-sm-12 infoToggle' style='padding-bottom:1%;'><hr/><div class='col-sm-4'><span>保額："+row.insureAmount+" 萬</span></div><div class='col-sm-4'><span>繳費折扣：$"+row.discount+"</span></div><div class='col-sm-4'><span>續年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳別："+installment+"</span></div><div class='col-sm-4'><span>折扣後年繳保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>"+row.interestRateType+"："+parseFloat(row.declareInterestRate*100).toFixed(2)+"%</span></div><div class='col-sm-4'><span>折扣前年繳保費：$"+row.premium+"</span></div><div class='col-sm-4'><span>首年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳費方式："+row.paymentMethod+"</span></div></div></div>");
+
 	 				})
 	 				$(".infoToggle").hide();
 		$(".moreInfo").on("click",function(){
@@ -318,12 +242,8 @@ font-size:100%;
 		})
 				}
 			})
-			
 		}
-
 	})
-	
-			
 	
 	</script>
 </body>

@@ -48,7 +48,7 @@ background-color:#5C8DEC;
 
 	<div id="wrap">
 		<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0;">
-		<!--  -->
+
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div class="col-sm-12" style="padding:0;width:100%;height:100%;color:white;">
 			<div class="col-sm-3" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
@@ -86,12 +86,12 @@ background-color:#5C8DEC;
 				</div>
 			</div>
 			
-			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll">
-			<br/><br/><br/>
+			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll;">
+			<br/>
 			<div id="productDetails" class="productDetails">
 			<div class="col-sm-12">
-			<div class="col-sm-2">
-			<img src="/resources/pic/保險公司logo/三商美邦人壽.png" width="100%">
+			<div class="col-sm-2" style="margin-bottom:2%">
+			<img src="/resources/pic/保險公司logo/三商美邦人壽.png" width="80%">
 			</div>
 			<div class="col-sm-7">
 			<span style="font-size:120%">保險公司名稱</span>
