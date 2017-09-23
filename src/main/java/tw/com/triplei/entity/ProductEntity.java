@@ -106,7 +106,7 @@ public class ProductEntity extends GenericEntity{
 	
 	@Digits(integer=15,fraction=4)
 	@Column(name="IRR")
-	private double irr;  //IRR
+	private BigDecimal irr;  //IRR
 	
 	@Digits(integer=15,fraction=4)
 	@Column(name="DISCOUNT") //折扣趴數
@@ -144,11 +144,13 @@ public class ProductEntity extends GenericEntity{
 		this.premiumAfterDiscount = premiumAfterDiscount;
 	}
 
-	public double getIrr() {
+
+
+	public BigDecimal getIrr() {
 		return irr;
 	}
 
-	public void setIrr(double irr) {
+	public void setIrr(BigDecimal irr) {
 		this.irr = irr;
 	}
 
