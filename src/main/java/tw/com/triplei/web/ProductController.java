@@ -47,70 +47,146 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}/{gender}/{bDate}/{premium}/{yearCode}")
-	public String detailInfo(@PathVariable("id") String id,@PathVariable("gender") String gender,
-			@PathVariable("bDate") String bDate,@PathVariable("premium") String premium,
+	public String detailInfo(@PathVariable("id") String id, @PathVariable("gender") String gender,
+			@PathVariable("bDate") String bDate, @PathVariable("premium") String premium,
 			@PathVariable("yearCode") String yearCode, Model model) throws Exception {
-//		long idLong = Integer.parseInt(id);// 抓那個商品的ID
-//		int age = productService.bDateToInt(bDate);
-//		int premiumPerYear = Integer.parseInt(premium);
-//		int yearMoneyBack = Integer.parseInt(yearCode);
-//		ProductEntity form = productService.findProduct(idLong);
-//		while(form.getPremiumRatios().iterator().hasNext()){
-//			ProductPremiumRatio productPremiumRatioff = form.getPremiumRatios().iterator().next();
-//			if(productPremiumRatioff.getInsAge()==age && productPremiumRatioff.getGender().equals(gender)){
-//				premiumPerYear/productPremiumRatioff.getPremiumRatio().doubleValue();//保費
-//			}
-//		}
-//		log.debug("form : ", form);
-//		model.addAttribute("modelf", form);
-//		List<double[]> totalCancelRatio = new ArrayList<>();
-//		List<double[]> totalIrrAndCancelRatio = new ArrayList<>();
-//		ProductEntity product = productService.findProduct(idLong);
-//		log.debug("商品 : ", product);
-//		ProductCancelRatio productCancelRatiof = form.getCancelRatios().iterator().next();
-//		while (product.getCancelRatios().iterator().hasNext()) {
-//			ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
-//			if (productCancelRatio.getGender().equals(form.getCancelRatios().iterator().next().getGender())
-//					&& productCancelRatio.getInsAge() == productCancelRatiof.getInsAge()) {
-//
-//				log.debug("性別 : ", productCancelRatio.getGender());
-//				log.debug("投保年齡 : ", productCancelRatio.getInsAge());
-//				for (int i = 0; i <= 111; i++) {
-//					MethodUtils methodUtils = new MethodUtils();
-//					double cancelRatio = form.getInsureAmount().doubleValue()// 每年解約金
-//							* ((BigDecimal) methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + i, null))
-//									.doubleValue();
-//					log.debug("每年解約金={}", cancelRatio);
-//
-//					if (i <= product.getYear()) {// [年,共繳多少保費,解約可獲得保費,irr]
-//
-//						double[] data = { (double) i, i * form.getPremiumAfterDiscount().doubleValue(), cancelRatio,
-//								iRRCaculator.getIRR((double) form.getYear(), (double) i,
-//										form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
-//						totalCancelRatio.add(data);
-//
-//						double[] irrAndCancelRatio = { cancelRatio, iRRCaculator.getIRR((double) form.getYear(),
-//								(double) i, form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
-//						totalIrrAndCancelRatio.add(irrAndCancelRatio);
-//						log.debug("每年={}", data);
-//					} else {
-//						double[] data = { (double) i, product.getYear() * form.getPremiumAfterDiscount().doubleValue(),
-//								cancelRatio, iRRCaculator.getIRR((double) form.getYear(), (double) i,
-//										form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
-//						totalCancelRatio.add(data);
-//
-//						double[] irrAndCancelRatio = { cancelRatio, iRRCaculator.getIRR((double) form.getYear(),
-//								(double) i, form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
-//						totalIrrAndCancelRatio.add(irrAndCancelRatio);
-//						log.debug("每年={}", data);
-//					}
-//
-//				}
-//				model.addAttribute("totalCancelRatio", totalCancelRatio);
-//				model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
-//				log.debug("total資料={}", totalCancelRatio);
-//			}
-//		}
+		List<double[]> totalCancelRatio = new ArrayList<>();
+		List<double[]> totalIrrAndCancelRatio = new ArrayList<>();
+		long idLong = Integer.parseInt(id);// 抓那個商品的ID
+		log.debug("商品ID:{}",idLong);
+		int age = productService.bDateToInt(bDate);
+		log.debug("年齡:{}",age);
+		int premiumPerYear = Integer.parseInt(premium);
+		log.debug("大約年繳保費:{}",premiumPerYear);
+		int yearMoneyBack = Integer.parseInt(yearCode);
+		log.debug("第幾年領回:{}",yearMoneyBack);
+		ProductEntity form = productService.findProduct(idLong);
+		log.debug("form:{}",form);
+		while (form.getPremiumRatios().iterator().hasNext()) {
+			ProductPremiumRatio productPremiumRatioff = form.getPremiumRatios().iterator().next();
+			if (productPremiumRatioff.getInsAge() == age && productPremiumRatioff.getGender().equals(gender)) {
+				// 保額
+				double insureAmounts = premiumPerYear / productPremiumRatioff.getPremiumRatio().doubleValue();
+				if (form.getCurr() == Currency.USD || form.getCurr() == Currency.AUD) {
+					form.setInsureAmount(BigDecimal.valueOf(insureAmounts).setScale(1, BigDecimal.ROUND_HALF_UP));
+				} else if (form.getCurr() == Currency.TWD) {
+					form.setInsureAmount(BigDecimal.valueOf(insureAmounts).setScale(0, BigDecimal.ROUND_HALF_UP));
+				} else if (form.getCurr() == Currency.RMB) {
+					form.setInsureAmount(BigDecimal.valueOf(insureAmounts).setScale(2, BigDecimal.ROUND_HALF_UP));
+				}
+				log.debug("保額:{}",form.getInsureAmount());
+				// 保費 = 保額 * 費率(折扣前)
+				double productPremiumRatioffp = form.getInsureAmount().doubleValue()
+						* productPremiumRatioff.getPremiumRatio().doubleValue();
+				form.setPremium(BigDecimal.valueOf(productPremiumRatioffp).setScale(0, BigDecimal.ROUND_HALF_UP));
+				log.debug("年繳保費:{}",form.getPremium());
+				while (form.getHighDiscountRatios().iterator().hasNext()) {
+					ProductHighDiscountRatio productHighDiscountRatioff = form.getHighDiscountRatios().iterator()
+							.next();
+					if (productHighDiscountRatioff.getMinValue().doubleValue() <= form.getInsureAmount().doubleValue()
+							&& productHighDiscountRatioff.getMaxValue().doubleValue() >= form.getInsureAmount()
+									.doubleValue()) {
+						// 折扣趴數
+						form.setDiscount(productHighDiscountRatioff.getDiscountRatio());
+						log.debug("折扣趴數:{}",form.getDiscount());
+						// 折扣後保費
+						form.setPremiumAfterDiscount(BigDecimal.valueOf(productPremiumRatioffp
+								* (1 - productHighDiscountRatioff.getDiscountRatio().doubleValue())));
+						log.debug("折扣後保費:{}",form.getPremiumAfterDiscount());
+						// 可獲得點數
+						form.setGetPoint(BigDecimal
+								.valueOf(form.getBonusPoint().doubleValue()
+										* form.getPremiumAfterDiscount().doubleValue())
+								.setScale(0, BigDecimal.ROUND_FLOOR));
+						log.debug("可獲得點數{}",form.getGetPoint());
+
+						// 總繳金額
+						if (yearMoneyBack <= form.getYear()) {
+							form.setTotalPay(BigDecimal.valueOf(productPremiumRatioffp
+									* (1 - productHighDiscountRatioff.getDiscountRatio().doubleValue())
+									* yearMoneyBack));
+							log.debug("總繳金額{}",form.getTotalPay());
+						} else {
+							form.setTotalPay(BigDecimal.valueOf(productPremiumRatioffp
+									* (1 - productHighDiscountRatioff.getDiscountRatio().doubleValue())
+									* form.getYear()));
+							log.debug("總繳金額{}",form.getTotalPay());
+						}
+						while (form.getCancelRatios().iterator().hasNext()) {
+							ProductCancelRatio productCancelRatioff = form.getCancelRatios().iterator().next();
+							if (productCancelRatioff.getInsAge() == age
+									&& productCancelRatioff.getGender().equals(gender)) {
+								// 解約金費率
+								MethodUtils methodUtils = new MethodUtils();
+								BigDecimal productCancelRatioffn = (BigDecimal) methodUtils
+										.invokeMethod(productCancelRatioff, "getCancelRatio_" + yearMoneyBack, null);
+								// 第n年解約金費
+								form.setCashValue(BigDecimal
+										.valueOf(productCancelRatioffn.doubleValue()
+												* form.getInsureAmount().doubleValue())
+										.setScale(0, BigDecimal.ROUND_HALF_UP));
+								log.debug("第n年解約金費",form.getCashValue());
+								// 淨報酬
+								form.setNet(BigDecimal
+										.valueOf(form.getCashValue().doubleValue() - form.getTotalPay().doubleValue()));
+								log.debug("淨報酬",form.getNet());
+								double irr = iRRCaculator.getIRR((double) form.getYear(), (double) yearMoneyBack,
+										form.getPremiumAfterDiscount().doubleValue(),
+										form.getCashValue().doubleValue());
+								form.setIrr(irr);
+								log.debug("{}", irr);
+
+								for (int i = 0; i <= 111; i++) {
+									double cancelRatio = form.getInsureAmount().doubleValue()// 每年解約金
+											* ((BigDecimal) methodUtils.invokeMethod(productCancelRatioff,
+													"getCancelRatio_" + i, null)).doubleValue();
+//									log.debug("第"+i+"年解約金={}", cancelRatio);
+
+									if (i <= form.getYear()) {// [年,共繳多少保費,解約可獲得保費,irr]
+
+										double[] data = { (double) i, i * form.getPremiumAfterDiscount().doubleValue(),
+												cancelRatio, iRRCaculator.getIRR((double) form.getYear(), (double) i,
+														form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+										totalCancelRatio.add(data);
+//										log.debug("第"+i+"年={}", data);
+
+										double[] irrAndCancelRatio = { (double) i, cancelRatio,
+												iRRCaculator.getIRR((double) form.getYear(), (double) i,
+														form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+										totalIrrAndCancelRatio.add(irrAndCancelRatio);
+									} else {
+										double[] data = { (double) i,
+												form.getYear() * form.getPremiumAfterDiscount().doubleValue(),
+												cancelRatio, iRRCaculator.getIRR((double) form.getYear(), (double) i,
+														form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+										totalCancelRatio.add(data);
+//										log.debug("第"+i+"年={}", data);
+										
+										double[] irrAndCancelRatio = { (double) i, cancelRatio,
+												iRRCaculator.getIRR((double) form.getYear(), (double) i,
+														form.getPremiumAfterDiscount().doubleValue(), cancelRatio) };
+										totalIrrAndCancelRatio.add(irrAndCancelRatio);
+									}
+
+								}
+
+							}
+						}
+					}
+				}
+			}
+		}
+		log.debug("form : ", form);
+		model.addAttribute("modelf", form);
+
+		ProductEntity product = productService.findProduct(idLong);
+		log.debug("商品 : ", product);
+
+		model.addAttribute("totalCancelRatio", totalCancelRatio);
+		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
+		log.debug("total資料={}", totalCancelRatio);
+		log.debug("total資料={}", totalIrrAndCancelRatio);
+
 		return "/product/detailInfo";
 	}
 
@@ -184,9 +260,10 @@ public class ProductController {
 
 	@GetMapping("/Adjustment/{gender}/{bDate}/{insureAmount}/{id}/{yearCode}")
 	@ResponseBody
-	public String insureAmountAndYearAndGenderAdjustment(@PathVariable("gender") String gender,
+	public Model insureAmountAndYearAndGenderAdjustment(@PathVariable("gender") String gender,
 			@PathVariable("bDate") String bDate, @PathVariable("insureAmount") String insureAmountS,
-			@PathVariable("id") String idS, @PathVariable("yearCode") String yearCode,Model model)//這裡yearCode指的是 領回時間
+			@PathVariable("id") String idS, @PathVariable("yearCode") String yearCode, Model model)// 這裡yearCode指的是
+																									// 領回時間
 			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 		List<double[]> totalForm = new ArrayList<>();
 		List<double[]> totalIrrAndCancelRatio = new ArrayList<>();
@@ -219,42 +296,51 @@ public class ProductController {
 						// 折扣後保費
 						product.setPremiumAfterDiscount(BigDecimal.valueOf(
 								insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()
-										* (1-productHighDiscountRatio.getDiscountRatio().doubleValue())));
+										* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())));
 						// 折扣趴數
 						product.setDiscount(productHighDiscountRatio.getDiscountRatio());
 						// 可獲點數
-						product.setGetPoint(BigDecimal.valueOf(
-								insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()
-										* (1-productHighDiscountRatio.getDiscountRatio().doubleValue())
-										* product.getBonusPoint().doubleValue()).setScale(0,BigDecimal.ROUND_FLOOR));
+						product.setGetPoint(
+								BigDecimal
+										.valueOf(insureAmount.doubleValue()
+												* productPremiumRatio.getPremiumRatio().doubleValue()
+												* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())
+												* product.getBonusPoint().doubleValue())
+										.setScale(0, BigDecimal.ROUND_FLOOR));
 
 						while (product.getCancelRatios().iterator().hasNext()) {
 							ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
 							if (productCancelRatio.getInsAge() == age
 									&& productCancelRatio.getGender().equals(gender)) {
-								for(int i=0;i<=111;i++){
-									BigDecimal cancelRatio = (BigDecimal)MethodUtils.invokeMethod(productCancelRatio, "getCancelRatio_"+i,null);
-									//各年解約金
+								for (int i = 0; i <= 111; i++) {
+									BigDecimal cancelRatio = (BigDecimal) MethodUtils.invokeMethod(productCancelRatio,
+											"getCancelRatio_" + i, null);
+									// 各年解約金
 									double cancelRatioPerYear = cancelRatio.doubleValue() * insureAmount.doubleValue();
-									//IRR
+									// IRR
 									double irr = irrCaculator.getIRR(product.getYear(), yearMoneyBack,
-											insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()
-											* (1-productHighDiscountRatio.getDiscountRatio().doubleValue()),
+											insureAmount.doubleValue()
+													* productPremiumRatio.getPremiumRatio().doubleValue()
+													* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue()),
 											cancelRatio.doubleValue());
-									double[] irrAndCancelRatio = {cancelRatioPerYear,irr};
+									double[] irrAndCancelRatio = { cancelRatioPerYear, irr };
 									totalIrrAndCancelRatio.add(irrAndCancelRatio);
-									
-									//各年總繳金額
-									if(i<=product.getYear()){
-										double PremiumAfterDiscountPerYear = product.getPremiumAfterDiscount().doubleValue() * i;
-										double[] form = {(double)i,PremiumAfterDiscountPerYear,cancelRatioPerYear,irr};
+
+									// 各年總繳金額
+									if (i <= product.getYear()) {
+										double PremiumAfterDiscountPerYear = product.getPremiumAfterDiscount()
+												.doubleValue() * i;
+										double[] form = { (double) i, PremiumAfterDiscountPerYear, cancelRatioPerYear,
+												irr };
 										totalForm.add(form);
-									}else{
-										double PremiumAfterDiscountPerYear = product.getPremiumAfterDiscount().doubleValue() * product.getYear();
-										double[] form = {(double)i,PremiumAfterDiscountPerYear,cancelRatioPerYear,irr};
+									} else {
+										double PremiumAfterDiscountPerYear = product.getPremiumAfterDiscount()
+												.doubleValue() * product.getYear();
+										double[] form = { (double) i, PremiumAfterDiscountPerYear, cancelRatioPerYear,
+												irr };
 										totalForm.add(form);
 									}
-								}						
+								}
 								BigDecimal cancelRatio = (BigDecimal) MethodUtils.invokeMethod(productCancelRatio,
 										"getCancelRatio_" + yearMoneyBack, null);
 								// 違約金
@@ -262,7 +348,7 @@ public class ProductController {
 										BigDecimal.valueOf(cancelRatio.doubleValue() * insureAmount.doubleValue()));
 								double irr = irrCaculator.getIRR(product.getYear(), yearMoneyBack,
 										insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()
-												* (1-productHighDiscountRatio.getDiscountRatio().doubleValue()),
+												* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue()),
 										cancelRatio.doubleValue());
 								// IRR
 								product.setIrr(irr);
@@ -282,11 +368,11 @@ public class ProductController {
 			}
 
 		}
-		model.addAttribute("product",product);
-		model.addAttribute("totalForm",totalForm);
-		model.addAttribute("totalIrrAndCancelRatio",totalIrrAndCancelRatio);
-		
-		return "Redirect:/product/detailInfo";
+		model.addAttribute("product", product);
+		model.addAttribute("totalForm", totalForm);
+		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
+
+		return model;
 	}
 
 	@RequestMapping(value = "getProduct/{gender}/{bDate}/{currency}/{paymentMethod}/{interestRateType}/{premium}/{year}/{yearCode}", method = RequestMethod.GET)
@@ -335,7 +421,8 @@ public class ProductController {
 			try {
 				System.out.println("id = " + product.getId());
 				double premiumRatio = product.getPremiumRatios().iterator().next().getPremiumRatio().doubleValue();
-//				double premiumRatio = productService.getPremiumRatio(product);
+				// double premiumRatio =
+				// productService.getPremiumRatio(product);
 				System.out.println("premiumRatio= " + premiumRatio);
 				BigDecimal insureAmount = BigDecimal.valueOf(costPerYear / premiumRatio);
 				if (product.getCurr() == Currency.TWD) {
@@ -378,16 +465,19 @@ public class ProductController {
 						product.setPremium(null);
 					}
 				}
-//				double cancelRatio = productService.toCancelRatio(yearCodeInt, product).doubleValue()
-//						* insureAmount.doubleValue();
+				// double cancelRatio =
+				// productService.toCancelRatio(yearCodeInt,
+				// product).doubleValue()
+				// * insureAmount.doubleValue();
 				ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
-				
+
 				MethodUtils methodUtils = new MethodUtils();
-				BigDecimal cancelRatiob = (BigDecimal) methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + yearCodeInt, null);
-				
+				BigDecimal cancelRatiob = (BigDecimal) methodUtils.invokeMethod(productCancelRatio,
+						"getCancelRatio_" + yearCodeInt, null);
+
 				double cancelRatio = cancelRatiob.doubleValue() * insureAmount.doubleValue();
 				System.out.println("cancelRatio= " + cancelRatio);
-				
+
 				product.setCashValue(BigDecimal.valueOf(cancelRatio));// 解約金
 				product.setNet(BigDecimal.valueOf(cancelRatio - product.getTotalPay().doubleValue()));// 淨賺
 				log.debug("淨賺:{}", cancelRatio - product.getTotalPay().doubleValue());
