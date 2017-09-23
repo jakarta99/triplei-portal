@@ -181,17 +181,17 @@ public class ProductService extends GenericService<ProductEntity> {
 	// return dao.search(gender, insAge, currency, interestRateType, year);
 	// }
 
-	public double getPremiumRatio(ProductEntity product) {
-		double premiumRatio = 0;
-		try {
-			log.debug("{}", product);
-			premiumRatio = product.getPremiumRatios().iterator().next().getPremiumRatio().doubleValue();
-		} catch (Exception e) {
-			System.out.println("NOOOO");
-			e.printStackTrace();
-		}
-		return premiumRatio;
-	}
+//	public double getPremiumRatio(ProductEntity product) {
+//		double premiumRatio = 0;
+//		try {
+//			log.debug("{}", product);
+//			premiumRatio = product.getPremiumRatios().iterator().next().getPremiumRatio().doubleValue();
+//		} catch (Exception e) {
+//			System.out.println("NOOOO");
+//			e.printStackTrace();
+//		}
+//		return premiumRatio;
+//	}
 
 	public List<ProductEntity> search(String gender, int insAge, Currency currency, String interestRateType, int year) {
 
@@ -211,15 +211,15 @@ public class ProductService extends GenericService<ProductEntity> {
 		return productss;
 	}
 
-	public BigDecimal toCancelRatio(int yearCode, ProductEntity product) throws Exception {
-		ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
-		MethodUtils methodUtils = new MethodUtils();
-		if (methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + yearCode, null) != null) {
-			return (BigDecimal) methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + yearCode, null);
-		} else {
-			return null;
-		}
-	}
+//	public BigDecimal toCancelRatio(int yearCode, ProductEntity product) throws Exception {
+//		ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+//		MethodUtils methodUtils = new MethodUtils();
+//		if (methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + yearCode, null) != null) {
+//			return (BigDecimal) methodUtils.invokeMethod(productCancelRatio, "getCancelRatio_" + yearCode, null);
+//		} else {
+//			return null;
+//		}
+//	}
 
 	public int stringToInt(String string) {
 		int number = Integer.parseInt(string);
