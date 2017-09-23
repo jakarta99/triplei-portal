@@ -16,7 +16,7 @@ font-size:95%;
 </style>
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-default" id="mainNavbar">
+<nav class="navbar navbar-default" id="mainNavbar"  style="border-radius:0">
 <!--  style="navbar-fixed-top" -->
 	<div class="container" >
 		<div class="navbar-header">
@@ -43,7 +43,8 @@ font-size:95%;
 							</sec:authorize>
 							
 							<sec:authorize access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
-								<li><a href="#">會員設定</a></li>
+								<li><a href="/user/reset/info">基本資料設定</a></li>
+								<li><a href="/user/reset/pw">重設密碼</a></li>
 							</sec:authorize>	
 						</ul>
 					</li>

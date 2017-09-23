@@ -151,7 +151,7 @@ public class AdminProductController {
 		if (files.length > 0) {
 			for(MultipartFile file:files){
 				try {
-					boolean upload= productService.ProductUpload(file);
+					boolean upload= productService.productUpload(file);
 					if(upload) {
 						response.setData("Sucesss");
 					}else {
@@ -183,7 +183,8 @@ public class AdminProductController {
 		final AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
 		
 		try {			
-			productService.delete(id);
+			boolean result = productService.deleteAll(id);
+			log.debug("result = "+result);
 		
 			
 		} catch (final Exception e) {

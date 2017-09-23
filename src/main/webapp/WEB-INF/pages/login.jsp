@@ -83,8 +83,9 @@ form[role=login] {
 </head>
 
 <body>
-
+<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 	<section class="container">
+	
 			<section class="login-form">
 				<form method="post" action="${pageContext.request.contextPath}/login" role="login">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

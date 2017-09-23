@@ -21,7 +21,7 @@ public class EmailService {
 	private JavaMailSender mailSender;
 	
 	@Autowired
-	private UserService userService;
+	private AdminUserService userService;
 
 	public void sendEmail(String email, String replycontent) {
 		

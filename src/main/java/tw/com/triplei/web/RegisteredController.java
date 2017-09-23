@@ -20,7 +20,7 @@ import tw.com.triplei.dao.RoleDao;
 import tw.com.triplei.dao.UserDao;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.service.EmailService;
-import tw.com.triplei.service.UserService;
+import tw.com.triplei.service.AdminUserService;
 
 @Slf4j
 @Controller
@@ -28,7 +28,7 @@ import tw.com.triplei.service.UserService;
 public class RegisteredController {
 	
 	@Autowired
-	private UserService userService;
+	private AdminUserService userService;
 	
 	@Autowired
 	private EmailService emailservice;
@@ -54,14 +54,43 @@ public class RegisteredController {
 		return "/registered/checkedFailure";
 	}
 	
+	
+	@RequestMapping(value = "/sendCheckLetter", method = RequestMethod.PUT)
+	@ResponseBody
+	public AjaxResponse<UserEntity> sendCheckLetterPage(final Model model, @RequestBody final UserEntity form) {
+		
+		AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
+		log.debug("sendCheckLetterPage");
+		try {
+
+			UserEntity userEntity = userDao.findByEmail(form.getEmail()); // FIXME controller不能直接用Dao
+			model.addAttribute("resendInfo", userEntity);
+			response.setData(userEntity);
+			
+			emailservice.sendRegisteredEmail(userEntity); // 發送註冊信
+			
+		} catch (final ApplicationException ex) {
+			ex.printStackTrace();
+			response.addMessages(ex.getMessages());
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+		
+		log.debug("{}", response);
+
+		//return "/registered/checkLetter";
+		return response;
+	}
+	
 	@RequestMapping(value = "/checkLetter", method = RequestMethod.GET)
-	public String checkLetterPage(final Model model, @RequestParam(value="email", required = true) String email) {
+	public String checkLetterPage(final Model model, @RequestParam(value="email", required = false) String email) {
 		UserEntity userEntity = userDao.findByEmail(email);
 		model.addAttribute("resendInfo", userEntity);
 		
-		emailservice.sendRegisteredEmail(userEntity); // 發送註冊信
 		return "/registered/checkLetter";
 	}
+	
+
 	
 	
 	@RequestMapping(value = "/checked")

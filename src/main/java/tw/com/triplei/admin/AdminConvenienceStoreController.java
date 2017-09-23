@@ -99,27 +99,60 @@ public class AdminConvenienceStoreController {
 	
 	@RequestMapping(value = "/searchRegion" , method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> searchRegion(final Model model, String city){
+	public List<ConvenienceStoreEntity> searchRegion(final Model model, String city){
 		log.debug("{}", city);
 		
 		log.debug("this city is = {}", city);
 		
 //		final AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
 		List<ConvenienceStoreEntity> data = convenienceStoreService.findByCity(city);
-		Map<String,Object> resultMap = new HashMap<String, Object>();
+//		Map<String,Object> resultMap = new HashMap<String, Object>();
 		log.debug("{}", "hahaha="+data);
 		log.debug("{}", "hahaha="+data.size());
 		
-		int counter = 1;
-		Iterator<ConvenienceStoreEntity> iter =  data.iterator();
-		while (iter.hasNext()) {
-			ConvenienceStoreEntity entity = iter.next();
-			resultMap.put("city" + counter++, entity);
-			log.debug("{}", "hahaha=" + entity);
-		}		
-		log.debug("{}","while finished-------------------------------------------------");		
+//		int counter = 1;
+//		Iterator<ConvenienceStoreEntity> iter =  data.iterator();
+//		while (iter.hasNext()) {
+//			ConvenienceStoreEntity entity = iter.next();
+//			resultMap.put("city" + counter++, entity);
+//			log.debug("{}", "hahaha=" + entity);
+//		}		
+//		log.debug("{}","while finished-------------------------------------------------");		
+//		
+		return data;
+	}
+	
+	@RequestMapping(value = "/searchStreet" , method = RequestMethod.GET)
+	@ResponseBody
+	public List<ConvenienceStoreEntity> searchStreet(final Model model, String city , String region){
+		log.debug("{}", city);
+		log.debug("{}", region);
 		
-		return resultMap;
+		log.debug("this city is = {}", city);
+		log.debug("this city is = {}", region);
+		
+		List<ConvenienceStoreEntity> data = convenienceStoreService.findByCityAndRegion(city, region);
+		log.debug("{}", "hahaha="+data);
+		log.debug("{}", "hahaha="+data.size());
+
+		return data;
+	}
+	@RequestMapping(value = "/searchAddress" , method = RequestMethod.GET)
+	@ResponseBody
+	public List<ConvenienceStoreEntity> searchAddress(final Model model, String city , String region, String street){
+		log.debug("{}", city);
+		log.debug("{}", region);
+		log.debug("{}", street);
+		
+		log.debug("this city is = {}", city);
+		log.debug("this region is = {}", region);
+		log.debug("this street is = {}", street);
+		
+		List<ConvenienceStoreEntity> data = convenienceStoreService.findByCityAndRegionAndStreet(city, region, street);
+		log.debug("{}", "hahaha="+data);
+		log.debug("{}", "hahaha="+data.size());
+		
+		return data;
 	}
 	
 	@GetMapping

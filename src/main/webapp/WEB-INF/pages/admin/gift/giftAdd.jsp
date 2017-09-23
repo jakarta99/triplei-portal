@@ -23,7 +23,8 @@
 
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" id="dataForm">
+					<form class="form-horizontal" id="dataForm"
+					enctype="multipart/form-data" method="POST">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -105,20 +106,20 @@
 								<label for="hotGift" class="col-md-2 control-label">熱門商品</label>
 								<div class="col-md-10">
 									<input type="checkbox" class="form-control" id="hotGift"
-										name="hotGift" placeholder="hotGift" value="${entity.hotGift}"
+										name="hotGift" placeholder="hotGift" value="false"
 										onclick="CBSelectedValueToTrue(this);" /> <span
 										class="help-block"><div class="text-danger"></div></span>
 								</div>
 							</div>
-							<div class="form-group required">
-								<label for="exchangeDate" class="col-md-2 control-label">兌換日期</label>
-								<div class="col-md-10">
-									<input type="text" class="form-control" id="exchangeDate"
-										name="exchangeDate" placeholder="exchangeDate"
-										value="${entity.exchangeDate}" /> <span class="help-block"><div
-											class="text-danger"></div></span>
-								</div>
-							</div>
+<!-- 							<div class="form-group required"> -->
+<!-- 								<label for="exchangeDate" class="col-md-2 control-label">兌換日期</label> -->
+<!-- 								<div class="col-md-10"> -->
+<!-- 									<input type="text" class="form-control" id="exchangeDate" -->
+<!-- 										name="exchangeDate" placeholder="exchangeDate" -->
+<%-- 										value="${entity.exchangeDate}" /> <span class="help-block"><div --%>
+<!-- 											class="text-danger"></div></span> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 						</div>
 					</form>
 				</div>
@@ -147,35 +148,60 @@
 	</div>
 
 
-
-</body>
-</html>
 <script type="text/javascript">
 	$(function() {
 		//<!-- Save -->	
-		$("#saveButton").bind("click", function() {
+		$("#saveButton").on("click", function() {
 			var $btn = $(this);
 			$btn.button("loading");
 
-			$.post("<c:url value='/admin/gift'/>", "dataForm", function(data) {
-				if (data.messages.length == 0) {
-					$("#dataForm").trigger("reset");
-					//swal("SUCCESS", "資料新增成功！", "success");
-					alert("SUCCESS");
-					$btn.button("reset");
-				}
-			}, function(data, textStatus, jqXHR) {
-				$btn.button("reset");
-			});
+			var formData = new FormData();
+			formData.append('brand', $("#brand").val());
+			formData.append('name', $("#name").val());
+			formData.append('colorAndType', $("#colorAndType").val());
+			formData.append('bonus', $("#bonus").val());
+			formData.append('remarks', $("#remarks").val());
+			formData.append('giftType', $("#giftType").val());
+			if($("#hotGift").val()){		
+				formData.append('hotGift', $("#hotGift").val());
+			}else{
+				formData.append('hotGift', $("#hotGift").val("false"));
+			}
+			// 			formData.append('exchangeDate', $("#exchangeDate").val());
 
+			$.each($("input[type='file']")[0].files, function(i, file) {
+				formData.append('upload-file', file);
+			});
+			$.each($("input[type='file']")[1].files, function(i, file) {
+				formData.append('upload-file1', file);
+			});
+			$.each($("input[type='file']")[2].files, function(i, file) {
+				formData.append('upload-file2', file);
+			});
+			$.ajax({
+				url : "<c:url value='/admin/gift'/>",
+				method : "POST",
+				data : formData,
+				enctype : "multipart/form-data",
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					alert("SUCCESS");
+				}
+			})
 			$btn.button("reset");
 		});
 	});
 </script>
+</body>
+</html>
+
 <script type="text/javascript">
 	function CBSelectedValueToTrue(cb) {
 		if (cb.checked) {
 			cb.value = "true";
+		}else{
+			cb.value = "false";
 		}
 	}
 </script>

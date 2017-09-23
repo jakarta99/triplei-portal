@@ -1,9 +1,14 @@
 package tw.com.triplei.admin;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -124,6 +129,10 @@ public class AdminRecipientController {
 			form.setProduct(productEntity);
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
+			form.setCreatedTime(new Timestamp(new Date().getTime()));
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}",userDetails);
+			form.setCreatedBy(userDetails.getUsername());
 			final RecipientEntity insertResult = recipientService.insert(form);
 			response.setData(insertResult);
 		
@@ -152,6 +161,10 @@ public class AdminRecipientController {
 			form.setUser(user);
 			form.setProduct(productEntity);
 			System.out.println(form);
+			form.setModifiedTime(new Timestamp(new Date().getTime()));
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}",userDetails);
+			form.setModifiedBy(userDetails.getUsername());
 			final RecipientEntity updateResult = recipientService.update(form);
 
 			response.setData(updateResult);

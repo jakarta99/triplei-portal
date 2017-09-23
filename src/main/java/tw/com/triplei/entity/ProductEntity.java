@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
 
 import tw.com.triplei.commons.GenericEntity;
 import tw.com.triplei.enums.Currency;
@@ -47,9 +48,11 @@ public class ProductEntity extends GenericEntity{
 	@Column(name = "YEAR")
 	private int year; // 年期
 
+	@Digits(integer=15,fraction=4)
 	@Column(name = "DECLARE_INTEREST_RATE")
 	private BigDecimal declareInterestRate; // 宣告利率
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name = "PREDICT_INTEREST_RATE")
 	private BigDecimal predictInterestRate; // 預定利率
 	
@@ -82,35 +85,63 @@ public class ProductEntity extends GenericEntity{
 	private BigDecimal insureAmount; // 保額
 	
 	@Column(name = "PREMIUM")
-	private BigDecimal premium; // 保費
+	private BigDecimal premium; // 原本保費
 	
+	@Column(name = "PREMIUM_AFTER_DISCOUNT")
+	private BigDecimal premiumAfterDiscount; // 折扣後保費
+	
+
 	@Column(name = "CASHVALUE")
 	private BigDecimal cashValue; // 解約金  
 	
 	@Column(name = "STORE_SHELVES")
 	private Boolean storeShelves; // 商品上架
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name = "BONUS_POINT")
 	private BigDecimal bonusPoint; //點數趴數
 	
 	@Column(name="GET_POINT")
 	private BigDecimal getPoint; //獲得點數
 	
+	@Digits(integer=15,fraction=4)
 	@Column(name="IRR")
 	private double irr;  //IRR
+	
+	@Digits(integer=15,fraction=4)
+	@Column(name="DISCOUNT") //折扣趴數
+	private BigDecimal discount;
+	
+	@Column(name="NET")
+	private BigDecimal net; //淨賺
+	
+	@Column(name="TOTAL_PAY")
+	private BigDecimal totalPay; //總繳金額
 
 
 
+	public BigDecimal getNet() {
+		return net;
+	}
 
-	@Override
-	public String toString() {
-		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", localName=" + localName + ", code=" + code
-				+ ", yearCode=" + yearCode + ", year=" + year + ", declareInterestRate=" + declareInterestRate
-				+ ", predictInterestRate=" + predictInterestRate + ", interestRateType=" + interestRateType + ", curr="
-				+ curr + ", highDiscountRatios=" + highDiscountRatios + ", premiumRatios=" + premiumRatios
-				+ ", cancelRatios=" + cancelRatios + ", paymentMethod=" + paymentMethod + ", insureAmount="
-				+ insureAmount + ", premium=" + premium + ", cashValue=" + cashValue + ", storeShelves=" + storeShelves
-				+ ", bonusPoint=" + bonusPoint + ", getPoint=" + getPoint + ", irr=" + irr + "]";
+	public void setNet(BigDecimal net) {
+		this.net = net;
+	}
+
+	public BigDecimal getTotalPay() {
+		return totalPay;
+	}
+
+	public void setTotalPay(BigDecimal totalPay) {
+		this.totalPay = totalPay;
+	}
+
+	public BigDecimal getPremiumAfterDiscount() {
+		return premiumAfterDiscount;
+	}
+	
+	public void setPremiumAfterDiscount(BigDecimal premiumAfterDiscount) {
+		this.premiumAfterDiscount = premiumAfterDiscount;
 	}
 
 	public double getIrr() {
@@ -281,6 +312,28 @@ public class ProductEntity extends GenericEntity{
 		this.getPoint = getPoint;
 	}
 
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", localName=" + localName + ", code=" + code
+				+ ", yearCode=" + yearCode + ", year=" + year + ", declareInterestRate=" + declareInterestRate
+				+ ", predictInterestRate=" + predictInterestRate + ", interestRateType=" + interestRateType + ", curr="
+				+ curr + ", highDiscountRatios=" + highDiscountRatios + ", premiumRatios=" + premiumRatios
+				+ ", cancelRatios=" + cancelRatios + ", paymentMethod=" + paymentMethod + ", insureAmount="
+				+ insureAmount + ", premium=" + premium + ", premiumAfterDiscount=" + premiumAfterDiscount
+				+ ", cashValue=" + cashValue + ", storeShelves=" + storeShelves + ", bonusPoint=" + bonusPoint
+				+ ", getPoint=" + getPoint + ", irr=" + irr + ", discount=" + discount + ", net=" + net + ", totalPay="
+				+ totalPay + "]";
+	}
+
+	
 
 
 }

@@ -51,7 +51,7 @@ background-color:#5C8DEC;
 		<!--  -->
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div class="col-sm-12" style="padding:0;width:100%;height:100%;color:white;">
-			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
+			<div class="col-sm-3" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
 			<div style="margin:7% auto 0 auto; display:table;width:70%;">
 				<br/><br/>
 				<h1>商品專區</h1>
@@ -86,7 +86,7 @@ background-color:#5C8DEC;
 				</div>
 			</div>
 			
-			<div class="col-sm-8" style="height:100%;padding:3%;color:black;overflow-y:scroll">
+			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll">
 			<br/><br/><br/>
 			<div id="productDetails" class="productDetails">
 			<div class="col-sm-12">
