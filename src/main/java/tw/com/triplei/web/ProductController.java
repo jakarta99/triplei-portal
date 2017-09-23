@@ -46,6 +46,11 @@ public class ProductController {
 	public String list(Model model) {
 		return "/product/list";
 	}
+	
+	@RequestMapping("/detailInfo")
+	public String detailInfo(Model model) {
+		return "/product/detailInfo";
+	}
 
 	@GetMapping("/{id}/{gender}/{bDate}/{premium}/{yearCode}")
 	public String detailInfo(@PathVariable("id") String id, @PathVariable("gender") String gender1,
@@ -279,8 +284,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/Adjustment/{gender}/{bDate}/{insureAmount}/{id}/{yearCode}")
-	@ResponseBody
-	public Model insureAmountAndYearAndGenderAdjustment(@PathVariable("gender") String gender1,
+	public String insureAmountAndYearAndGenderAdjustment(@PathVariable("gender") String gender1,
 			@PathVariable("bDate") String bDate, @PathVariable("insureAmount") String insureAmountS,
 			@PathVariable("id") String idS, @PathVariable("yearCode") String yearCode, Model model)// 這裡yearCode指的是
 																									// 領回時間
@@ -399,11 +403,10 @@ public class ProductController {
 			}
 
 		}
-		model.addAttribute("product", product);
-		model.addAttribute("totalForm", totalForm);
+		model.addAttribute("modelf", product);
+		model.addAttribute("totalCancelRatio", totalForm);
 		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
-
-		return model;
+		return "redirect:/product/detailInfo";
 	}
 
 	@RequestMapping(value = "getProduct/{gender}/{bDate}/{currency}/{paymentMethod}/{interestRateType}/{premium}/{year}/{yearCode}", method = RequestMethod.GET)
