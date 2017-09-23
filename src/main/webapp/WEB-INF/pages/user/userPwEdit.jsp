@@ -25,6 +25,7 @@
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
 						<input type="hidden" id="id" name="id" value="${userDetails.id}" />
+						<input type="hidden" id="editState" name="editState" value="pw"/>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>

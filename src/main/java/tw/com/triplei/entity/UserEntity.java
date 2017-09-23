@@ -45,7 +45,7 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	private String password; // 密碼
 	
 	@Column(name = "CHECK_PASSWORD")
-	private String checkPassword; // 密碼
+	private String checkPassword; // 確認密碼
 	
 	@Column(name = "NAME")
 	private String name; // 會員姓名
@@ -61,6 +61,9 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	
 	@Column(name = "REGISTERED_CODE")
 	private String registeredCode; // 會員驗證碼 
+	
+	@Column(name = "EDIT_STATE")
+	private String editState; // 修改密碼 pw/ 修改會員資料 info
 	
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})

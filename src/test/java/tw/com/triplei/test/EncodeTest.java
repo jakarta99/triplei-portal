@@ -14,14 +14,13 @@ public class EncodeTest extends BaseTest {
 	
 	@Test
 	public void encodeTest() {
-		System.out.println("hilda" + passwordEncoder.encode("user001"));
-		System.out.println("hilda" + passwordEncoder.encode("user002"));
-		System.out.println("hilda" + passwordEncoder.encode("user003"));
-		System.out.println("hilda" + passwordEncoder.encode("user004"));
-		System.out.println("hilda" + passwordEncoder.encode("user005"));
-		System.out.println("hilda" + passwordEncoder.encode("user006"));
-		System.out.println("hilda" + passwordEncoder.encode("user007"));
-		System.out.println("hilda" + passwordEncoder.encode("user008"));
+		String a = passwordEncoder.encode("user001");
+		String b = passwordEncoder.encode("user001");
+		System.out.println("hilda" + a);
+		System.out.println("hilda" + b);
+		
+		Boolean c = passwordEncoder.matches("user001", a);
+		log.debug("c:{}",c);
 		
 	}
 }

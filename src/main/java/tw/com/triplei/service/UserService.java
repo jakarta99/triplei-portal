@@ -45,11 +45,45 @@ public class UserService extends GenericService<UserEntity> {
 	public List<Message> validateUpdate(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
 		
-		//UserEntity dbEntity = userDao.findOne(entity.getId());
+		UserEntity dbEntity = userDao.findOne(entity.getId());
 		
-//		if (StringUtils.isBlank(entity.getName())) {
-//			messages.add(Message.builder().code("orgPassword").value("原始欄位為必填欄位").build());
-//		}
+		// 更新個人資訊
+		if(entity.getEditState().equals("info")){
+			if(StringUtils.isBlank(entity.getName())){
+				messages.add(Message.builder().code("name").value("會員姓名為必填欄位").build());
+			}
+			
+			if(StringUtils.isBlank(entity.getEmail())){
+				messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
+			}
+		}
+
+		// 更新密碼
+		if(entity.getEditState().equals("pw")){
+			if (StringUtils.isBlank(entity.getOrgPassword())) {
+				messages.add(Message.builder().code("orgPassword").value("原始欄位為必填欄位").build());
+			}
+			
+			if(!passwordEncoder.matches(entity.getOrgPassword(), dbEntity.getPassword())){
+				messages.add(Message.builder().code("orgPassword").value("與原始密碼不符").build());
+			}
+			
+			if (StringUtils.isBlank(entity.getPassword())) {
+				messages.add(Message.builder().code("password").value("請輸入新密碼").build());
+			}
+			
+			if (StringUtils.isBlank(entity.getOrgPassword())) {
+				messages.add(Message.builder().code("checkPassword").value("請輸入確認密碼").build());
+			}
+			
+			
+			if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())){
+				if (!entity.getPassword().equals(entity.getCheckPassword())){
+					messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
+					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
+				}
+			}
+		}
 		
 		
 		log.debug("{}", messages);
@@ -64,7 +98,6 @@ public class UserService extends GenericService<UserEntity> {
 
 		if(!StringUtils.isBlank(entity.getCheckPassword())){
 			dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
-			dbUserEntity.setOrgPassword(encodePasswrod(entity.getPassword()));
 		}
 
 		

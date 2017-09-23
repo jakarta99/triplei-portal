@@ -88,9 +88,13 @@ public class AdminUserController {
 			response.setData(updateResult);
 			
 			
+		}  catch (final ApplicationException ex) {
+			ex.printStackTrace();
+			response.addMessages(ex.getMessages());
+			
 		} catch (final Exception e) {
 			response.addException(e);
-		}		
+		}
 		return response;
 	}
 	

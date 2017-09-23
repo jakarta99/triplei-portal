@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.AjaxResponse;
+import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.dao.UserDao;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.service.UserService;
@@ -68,15 +69,23 @@ public class UserController {
 		final AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
 		
 		try {
+			UserEntity entity = userService.getOne(form.getId());
+			log.debug("{}", entity);
 			
 			final UserEntity updateResult = userService.update(form);
 			log.debug("updateResult {}",updateResult);
 			response.setData(updateResult);
 			
 			
+		} catch (final ApplicationException ex) {
+			ex.printStackTrace();
+			response.addMessages(ex.getMessages());
+			
 		} catch (final Exception e) {
 			response.addException(e);
-		}		
+		}
+		
+		log.debug("response: {}",response);
 		return response;
 	}
 

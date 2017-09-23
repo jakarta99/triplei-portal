@@ -64,9 +64,9 @@ public class AdminUserService extends GenericService<UserEntity>{
 		}
 		
 		if (StringUtils.isBlank(entity.getCheckPassword())){
-			messages.add(Message.builder().code("checkpassword").value("請輸入確認密碼").build());
+			messages.add(Message.builder().code("checkPassword").value("請輸入確認密碼").build());
 		}
-		
+				
 		if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())){
 			if (!entity.getPassword().equals(entity.getCheckPassword())){
 				messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
@@ -101,7 +101,7 @@ public class AdminUserService extends GenericService<UserEntity>{
 	public UserEntity handleInsert(final UserEntity entity) {
 		
 		entity.setPassword(encodePasswrod(entity.getPassword()));
-		entity.setOrgPassword(encodePasswrod(entity.getPassword()));
+		//entity.setOrgPassword(encodePasswrod(entity.getPassword()));
 		entity.setEnabled(false);  // 預設新註冊的會員不啟用
 		entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
 		
