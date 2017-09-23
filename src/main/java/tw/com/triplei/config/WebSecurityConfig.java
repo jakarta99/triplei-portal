@@ -23,6 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@Order(1)
     protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/product/buyProduct/**")
+		.hasAnyRole("ADMIN","USER","NORMAL")
+		.and().formLogin().loginPage("/login").permitAll();
+		
         http.authenticationProvider(daoAuthenticationProvider())
         	.authorizeRequests()
         	.antMatchers(

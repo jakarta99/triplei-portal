@@ -16,7 +16,7 @@ font-size:95%;
 </style>
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-default" id="mainNavbar">
+<nav class="navbar navbar-default" id="mainNavbar"  style="border-radius:0">
 <!--  style="navbar-fixed-top" -->
 	<div class="container" >
 		<div class="navbar-header">
