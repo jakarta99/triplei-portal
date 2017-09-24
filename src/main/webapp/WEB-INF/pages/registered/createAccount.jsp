@@ -117,7 +117,8 @@
 									if (data.messages.length == 0) {
 										//$("#dataForm").trigger("reset");
 										
-										location.href = '/registered/checkLetter?email=' + data.data.email
+										//location.href = '/registered/checkLetter?email=' + data.data.email
+										location.href = '/registered/checkLetter?id=' + data.data.id
 										
 										$btn.button("reset");
 									}

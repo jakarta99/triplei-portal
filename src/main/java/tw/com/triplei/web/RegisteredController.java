@@ -143,7 +143,8 @@ public class RegisteredController {
 		try {
 
 			//UserEntity userEntity = userDao.findByEmail(form.getEmail()); // FIXME controller不能直接用Dao
-			UserEntity userEntity = userService.getByEmail(form.getEmail());
+			//UserEntity userEntity = userService.getByEmail(form.getEmail());
+			UserEntity userEntity = userService.getOne(form.getId());
 			model.addAttribute("resendInfo", userEntity);
 			response.setData(userEntity);
 			
@@ -163,9 +164,10 @@ public class RegisteredController {
 	}
 	
 	@RequestMapping(value = "/checkLetter", method = RequestMethod.GET)
-	public String checkLetterPage(final Model model, @RequestParam(value="email", required = true) String email) {
+	public String checkLetterPage(final Model model, @RequestParam(value="id", required = true) Integer id) {
 		//UserEntity userEntity = userDao.findByEmail(email);
-		UserEntity userEntity = userService.getByEmail(email);
+		//UserEntity userEntity = userService.getByEmail(email);
+		UserEntity userEntity = userService.getOne(id.longValue());
 		model.addAttribute("resendInfo", userEntity);
 		
 		return "/registered/checkLetter";
