@@ -37,7 +37,7 @@ public class WishEntity extends GenericEntity  {
 	@Column(name = "WISH_TYPE")
 	private String wishType;
 
-	@Column(name = "BRAND")
+	@Column(name = "BRAND") //品牌
 	private String brand;
 
 	@Column(name = "WEEK_USE_COUNT")
