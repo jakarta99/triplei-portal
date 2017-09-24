@@ -78,7 +78,7 @@ public class EmailService {
 				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
 				.append("<title></title><meta charset='utf-8' /></head>")
 				.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />")
-				.append("親愛的xxx您好，<br /><br />")
+				.append("親愛的 " + entity.getName() + " 您好，<br/><br/>")
 				.append("恭喜您完成TRILPE I的會員申請，只差最後一步囉！<br />")
 				.append("請點擊下方連結完成認證程序：<br />")
 				//.append("<a href=\"https://www.google.com.tw/\"></a> <br><br>")
@@ -100,6 +100,44 @@ public class EmailService {
 			helper.setFrom("triplei");
 			helper.setTo(entity.getEmail());
 			helper.setSubject("Triple-I會員申請認證信函");
+			helper.setText(content, true);
+			mailSender.send(mimeMessage);
+
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void sendNewPassword(UserEntity entity) {
+		
+		UserEntity userEntity = userService.getOne(entity.getId());
+		log.debug("{}", userEntity);
+		
+		
+		StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
+				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
+				.append("<title></title><meta charset='utf-8' /></head>")
+				.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />")
+				.append("親愛的 " + entity.getName() + " 您好，<br/><br/>")
+				.append("您的臨時密碼為:" + userEntity.getCheckPassword())
+				.append("<br /> 提醒您，使用臨時密碼登入後，請更改您的密碼及基本資料。<br /><br />")
+				.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
+				.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
+				.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+				.append("TRIPLE I<br />")
+				.append("最專業的儲蓄險網站<br /> </div></body></html>");
+		
+	 	String content = sBuffer.toString();
+		
+		
+		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+			helper.setFrom("triplei");
+			helper.setTo(userEntity.getEmail());
+			helper.setSubject("Triple-I會員臨時密碼");
 			helper.setText(content, true);
 			mailSender.send(mimeMessage);
 

@@ -1,7 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -41,6 +40,9 @@ border:1px black solid;
 border:1px black solid;
 background-color:#5C8DEC;
 }
+span{
+font-size:110%;
+}
 </style>
 </head>
 
@@ -60,10 +62,10 @@ background-color:#5C8DEC;
 				<div>
 				<span>性別</span>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Female"><img class="genderImage female" alt="女" name="female" src="/resources/pic/product/female.png">
+				<input type="radio" class="gender FemaleInput" name="gender" value="Female"><img class="genderImage FemaleImg" data-toggle="tooltip" title="女生" alt="女" name="female" src="/resources/pic/product/female.png">
 				</label>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男"  name="male" src="/resources/pic/product/male.png">
+				<input type="radio" class="gender MaleInput" name="gender" value="Male"><img class="genderImage MaleImg" alt="男"data-toggle="tooltip" title="男生"  name="male" src="/resources/pic/product/male.png">
 				</label>
 				</div >
 				<div>
@@ -72,7 +74,10 @@ background-color:#5C8DEC;
 				</div>
 				<div>
 				<span>保額(萬)</span><br/>
-				<input type="text" id="insureAmount" name="insureAmount" placeholder="40" style="width:80%;color:black;">
+				<input type="text" id="insureAmount" name="insureAmount" value="${modelf.insureAmount}" style="width:80%;color:black;">
+				</div>
+				<div style="margin-top:3%;margin-bottom:3%">
+				<input type="button" class="btn btn-secondary" value="更改保額" id="changeAmount" style="border:1px white solid;color:white;background-color:#5C8DEC;">
 				</div>
 				</form>
 				<div id="container-fluid" style="height:100%;position:relative;">
@@ -91,19 +96,19 @@ background-color:#5C8DEC;
 			<div id="productDetails" class="productDetails">
 			<div class="col-sm-12">
 			<div class="col-sm-2" style="margin-bottom:2%">
-			<img src="/resources/pic/保險公司logo/三商美邦人壽.png" width="80%">
+			<img src="${modelf.insurer.imgsrc}" width="80%">
 			</div>
 			<div class="col-sm-7">
-			<span style="font-size:120%">保險公司名稱</span>
+			<span style="font-size:120%">${modelf.insurer.name}</span>
 			<br/><br/>
-			<span style="font-weight:bold;font-size:150%">保險商品代號+全名</span>
+			<span style="font-weight:bold;font-size:150%">${modelf.code}-${modelf.localName}</span>
 			</div>
 			<div class="col-sm-3" style="color:#5C8DEC">
 			<span style="font-size:150%">可獲得點數</span>
 			<br/>
 			<div>
 			<img src="/resources/pic/積點專區/點數(小).png" width="25em" style="margin-top:3%;margin-right:3%;float:left">
-			<span style="font-size:200%;font-weight:bold">XXXX</span>
+			<span style="font-size:200%;font-weight:bold">${modelf.getPoint}</span>
 			</div>
 			</div>
 			<br/><br/><br/><br/>
@@ -114,22 +119,22 @@ background-color:#5C8DEC;
 			<div class="col-sm-3">
 			<span>總繳金額</span>
 			<br/>
-			<span>XXX,XXX</span>
+			<span>$<fmt:formatNumber value="${modelf.totalPay}" maxFractionDigits="0" /></span>
 			</div>
 			<div class="col-sm-3">
 			<span>領回金額</span>
 			<br/>
-			<span>X,XXX,XXX</span>
+			<span>$<fmt:formatNumber value="${modelf.cashValue}" maxFractionDigits="0" /></span>
 			</div>
 			<div class="col-sm-3">
 			<span>凈報酬</span>
 			<br/>
-			<span>XXX,XXX</span>
+			<span>$<fmt:formatNumber value="${modelf.net}" maxFractionDigits="0" /></span>
 			</div>
 			<div class="col-sm-3">
 			<span>IRR</span>
 			<br/>
-			<span>X.XX%</span>
+			<span>${modelf.irr}%</span>
 			</div>
 			<br/><br/>
 			</div>
@@ -137,31 +142,36 @@ background-color:#5C8DEC;
 			<div class="col-sm-12">
 			<hr/><br/>
 			<div class="col-sm-3">
-			<span>保額：XX</span>
+			<span>保額：${modelf.insureAmount} 萬</span>
 			</div>
 			<div class="col-sm-4">
-			<span>保費折扣：X%</span>
+			<span>保費折扣：${modelf.discount}%</span>
 			</div>
 			<div class="col-sm-5">
-			<span>首年保費：XX,XXX</span>
+			<span>首年保費：$${modelf.premiumAfterDiscount}</span>
 			</div>
 			<div class="col-sm-3">
+			<c:if test="${modelf.year!=1}">
 			<span>繳別：年繳</span>
+			</c:if>
+			<c:if test="${modelf.year==1}">
+			<span>繳別：躉繳</span>
+			</c:if>
 			</div>
 			<div class="col-sm-4">
-			<span>折扣前年繳保費：XX,XXX</span>
+			<span>折扣前年繳保費：$${modelf.premium}</span>
 			</div>
 			<div class="col-sm-5">
-			<span>續年保費：XX,XXX</span>
+			<span>續年保費：$${modelf.premiumAfterDiscount}</span>
 			</div>
 			<div class="col-sm-3">
-			<span>宣告利率：X.X%</span>
+			<span>${modelf.interestRateType}：${modelf.declareInterestRate}%</span>
 			</div>
 			<div class="col-sm-4">
-			<span>折扣後年繳保費：XX,XXX</span>
+			<span>折扣後年繳保費：$${modelf.premiumAfterDiscount}</span>
 			</div>
 			<div class="col-sm-5">
-			<span>繳費方式：匯款或金融機構轉帳(1%折扣)</span>
+			<span>繳費方式：${modelf.paymentMethod}</span>
 			</div>
 			<br/>
 			</div>
@@ -228,7 +238,6 @@ background-color:#5C8DEC;
 		</div>
 		</div>
 	</div>
-	
 	<script>
 	new Morris.Line({
 		  element: 'chartContainer',
@@ -254,30 +263,47 @@ background-color:#5C8DEC;
 		  parseTime:false,
 		});
 	
+	var path = window.location.pathname;
+	var yearCode = path.substring(path.lastIndexOf('/')+1);
+	var birth = path.split("/")[4];
+	var sex = path.split("/")[3];
+	var totalInsure = path.split("/")[5];
+	
 	$.datepicker.setDefaults($.datepicker.regional['zh-TW']);
+	var date = new Date(birth);
+	
 	$("#bDate").datepicker({
 		changeMonth : true,
 		changeYear : true,
-		dateFormat : "yy-mm-dd"
-	});
-	$("#bDate").datepicker('setDate',new Date());
+		dateFormat : "yy-mm-dd",
+	}).datepicker('setDate',date);
 	
 	$(".gender").hide();
 	var gender;
 	$(".genderImage").hover(function(){
 		gender = $(this).attr("name");
+		$('[data-toggle="tooltip"]').tooltip(); 
 		$(this).attr("src","/resources/pic/product/"+gender+"-hover.png");
+		if(gender!="male"){
+			$(".MaleImg").attr("src","/resources/pic/product/male.png");
+		}else{
+			$(".FemaleImg").attr("src","/resources/pic/product/female.png");
+		}
 	},function(){
 		$(this).attr("src","/resources/pic/product/"+gender+".png");
 	});
 	$(".genderImage").on("click",function(){
 		var gender = $(this).attr("name");
 		$(".genderImage").off();
+		
+		$('[data-toggle="tooltip"]').tooltip("hide");
 		$(".genderImage").on("click",function(){
-			$(".male").attr("src","/resources/pic/product/male.png");
-			$(".female").attr("src","/resources/pic/product/female.png");
+			
+			$(".MaleImg").attr("src","/resources/pic/product/male.png");
+			$(".FemaleImg").attr("src","/resources/pic/product/female.png");
 			$(this).attr("src","/resources/pic/product/"+$(this).attr("name")+"-hover.png");
 		});
+		
 	})
 	
 	$("#simpleTable").hide();
@@ -290,6 +316,26 @@ background-color:#5C8DEC;
 		$("#IRRgraph").toggle("drop",1000);
 	})
 	
+	$("#changeAmount").on("click",function(){
+		if($('input[name="gender"]:checked').val()!="" && $('#bDate').val()!="" && $("#insureAmount").val()!=""){
+		var url = "/product/Adjustment/"+$('input[name="gender"]:checked').val()+"/"+$('#bDate').val()+"/"+${modelf.insureAmount}+"/"+${modelf.id}+"/"+yearCode;
+		alert(url);
+// 		$.get(url,function(newData){
+			
+// 		})
+		}else{
+			alert("請輸入性別，生日與保額");
+		}
+	})
+	
+	if(sex!="Male"){
+		$(".FemaleInput").prop("checked",true);
+		$(".FemaleImg").attr("src","/resources/pic/product/female-hover.png");
+	}else{
+		$(".MaleInput").prop("checked",true);
+		$(".MaleImg").attr("src","/resources/pic/product/male-hover.png");
+	}
+
 // 		var currency = $().val();
 // 		var insureAmount = $().val();
 // 		var premium = $().val();

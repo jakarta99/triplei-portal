@@ -2,6 +2,8 @@ package tw.com.triplei.web;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
+import tw.com.triplei.commons.Message;
 import tw.com.triplei.dao.RoleDao;
 import tw.com.triplei.dao.UserDao;
 import tw.com.triplei.entity.UserEntity;
@@ -33,11 +36,11 @@ public class RegisteredController {
 	@Autowired
 	private EmailService emailservice;
 	
-	@Autowired
-	private RoleDao roleDao;
-	
-	@Autowired
-	private UserDao userDao;
+//	@Autowired
+//	private RoleDao roleDao;
+//	
+//	@Autowired
+//	private UserDao userDao;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
@@ -54,6 +57,82 @@ public class RegisteredController {
 		return "/registered/checkedFailure";
 	}
 	
+	@RequestMapping(value = "/forgetPassword", method = RequestMethod.GET)
+	public String forgetPasswordPage() {
+		return "/registered/forgetPassword";
+	}
+	
+	@RequestMapping(value = "/sendNewPassword")
+	public String sendNewPasswordPage(final Model model, @RequestParam(value="id") Integer id) {
+		log.debug("form :{}",id);
+		int userId = id;
+		UserEntity entity = userService.getOne(id.longValue());
+		log.debug("entity :{}", entity);
+		
+		model.addAttribute("resendUserEntity", entity);
+		
+		return "/registered/sendNewPassword";
+	}
+	
+	@RequestMapping(value = "/sendNewPasswordEMail")
+	@ResponseBody
+	public AjaxResponse<UserEntity> sendNewPasswordEMail(final Model model, @RequestBody final UserEntity form) {
+		AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
+		log.debug("sendNewPasswordEMail");
+		
+		try{
+			
+			UserEntity entity = userService.getOne(form.getId());
+			log.debug("sendNewPasswordEMail entity {}:", entity);
+			emailservice.sendNewPassword(entity);// 發送忘記密碼的臨時新密碼
+			
+		}catch (final ApplicationException ex) {
+			ex.printStackTrace();
+			response.addMessages(ex.getMessages());
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+		
+		log.debug("{}", response);
+		
+		return response;
+		
+	}
+	
+	@RequestMapping(value="genNewPassword", method = RequestMethod.PUT)
+	@ResponseBody
+	public AjaxResponse<UserEntity> genNewPassword(final Model model, @RequestBody final UserEntity form) {
+		
+		log.debug("{}", form);
+
+		final AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
+		
+		try {
+			UserEntity entity = userService.getByAccountNumber(form.getAccountNumber());
+			List<Message> messages = new ArrayList<Message>();
+			if(entity == null){
+				messages.add(Message.builder().code("accountNumber").value("註冊帳號不存在").build());
+				response.addMessages(messages);
+			}else {
+				final UserEntity updateResult = userService.updateForgetPassword(entity);
+				log.debug("updateResult {}",updateResult);
+				model.addAttribute("resendUserEntity", updateResult);
+				response.setData(updateResult);
+			}
+			
+		} catch (final ApplicationException ex) {
+			ex.printStackTrace();
+			response.addMessages(ex.getMessages());
+			
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+		
+		log.debug("response: {}",response);
+		return response;
+	}
+	
+	
 	
 	@RequestMapping(value = "/sendCheckLetter", method = RequestMethod.PUT)
 	@ResponseBody
@@ -63,7 +142,9 @@ public class RegisteredController {
 		log.debug("sendCheckLetterPage");
 		try {
 
-			UserEntity userEntity = userDao.findByEmail(form.getEmail()); // FIXME controller不能直接用Dao
+			//UserEntity userEntity = userDao.findByEmail(form.getEmail()); // FIXME controller不能直接用Dao
+			//UserEntity userEntity = userService.getByEmail(form.getEmail());
+			UserEntity userEntity = userService.getOne(form.getId());
 			model.addAttribute("resendInfo", userEntity);
 			response.setData(userEntity);
 			
@@ -83,8 +164,10 @@ public class RegisteredController {
 	}
 	
 	@RequestMapping(value = "/checkLetter", method = RequestMethod.GET)
-	public String checkLetterPage(final Model model, @RequestParam(value="email", required = false) String email) {
-		UserEntity userEntity = userDao.findByEmail(email);
+	public String checkLetterPage(final Model model, @RequestParam(value="id", required = true) Integer id) {
+		//UserEntity userEntity = userDao.findByEmail(email);
+		//UserEntity userEntity = userService.getByEmail(email);
+		UserEntity userEntity = userService.getOne(id.longValue());
 		model.addAttribute("resendInfo", userEntity);
 		
 		return "/registered/checkLetter";
@@ -97,7 +180,8 @@ public class RegisteredController {
 	public String checkedPage(Model model, @RequestParam(value="uid", required = true) String uid) {
 		// 正向
 		log.debug("checkedPage uid = {}",uid);
-		UserEntity userEntity = userDao.findByRegisteredCode(uid);
+//		UserEntity userEntity = userDao.findByRegisteredCode(uid);
+		UserEntity userEntity = userService.getByRegisteredCpde(uid);
 		log.debug("userEntity user={}",userEntity);
 		
 		if(userEntity != null){
