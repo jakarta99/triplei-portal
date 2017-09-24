@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,13 +84,6 @@ public class AdminUserService extends GenericService<UserEntity>{
 	public List<Message> validateUpdate(UserEntity entity) {
 		
 		List<Message> messages = new ArrayList<Message>();
-
-//		UserEntity dbEntity = userDao.findOne(entity.getId());
-
-//		if (entity.getEmail() == null) {
-//			messages.add(Message.builder().code("email").value("電子信箱為必填").build());
-//		}
-
 		log.debug("{}", messages);
 		
 		return messages;
@@ -108,6 +102,7 @@ public class AdminUserService extends GenericService<UserEntity>{
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);
 		entity.setCreatedTime(timestamp);
+		entity.setCreatedBy(entity.getAccountNumber());
 		
 		final Set<RoleEntity> RoleEntity = new HashSet<>();
 		final RoleEntity roleDefault = roleDao.findByCode("ROLE_NORMAL"); // 預設權限為一般會員
@@ -156,8 +151,39 @@ public class AdminUserService extends GenericService<UserEntity>{
 		return dbUserEntity;
 	}
 	
+	@Transactional
+	public UserEntity updateForgetPassword(final UserEntity entity) {
+		final UserEntity dbUserEntity = userDao.findOne(entity.getId());
+		
+		String newPassword = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 4);
+		log.debug("newPassword : {}", newPassword);
+		dbUserEntity.setCheckPassword(newPassword); // 要記起未加密的密碼，寄給使用者，在使用者更新密碼後清空
+		dbUserEntity.setPassword(encodePasswrod(newPassword));
+		
+		LocalDateTime now = LocalDateTime.now();
+		Timestamp timestamp = Timestamp.valueOf(now);
+		dbUserEntity.setModifiedTime(timestamp);
+		dbUserEntity.setModifiedBy("forgetPassword");
+		
+		userDao.save(dbUserEntity);
+
+		return dbUserEntity;
+	}
+	
 	public String encodePasswrod(final String rawPassword) {
 		return passwordEncoder.encode(rawPassword);
+	}
+	
+	public UserEntity getByEmail(final String email) {
+		return userDao.findByEmail(email);
+	}
+	
+	public UserEntity getByRegisteredCpde(final String registeredCode) {
+		return userDao.findByRegisteredCode(registeredCode);
+	}
+	
+	public UserEntity getByAccountNumber(final String accountNumber) {
+		return userDao.findByAccountNumber(accountNumber);
 	}
 	
 

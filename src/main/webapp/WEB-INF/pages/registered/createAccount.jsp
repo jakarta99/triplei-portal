@@ -115,12 +115,11 @@
 						$.post("<c:url value='/registered'/>", "dataForm",
 								function(data) {
 									if (data.messages.length == 0) {
-										$("#dataForm").trigger("reset");
+										//$("#dataForm").trigger("reset");
 										
 										location.href = '/registered/checkLetter?email=' + data.data.email
 										
 										$btn.button("reset");
-										dialog1.dialog("close");
 									}
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");
