@@ -57,31 +57,12 @@
 			 
 			        fields: [
 						{ name: "id", visible: false},
-			            { title: '商品代碼', name: "productId", type: "text", width: 25 },
-			            { title: '姓別', name: "gender", type: "text", width: 15 },
-			            { title: '年齡', name: "insAge", type: "text", width: 15 },
-			            { title: '年期', name: "year", type: "text", width: 15 },
-			            { title: '第0年', name: "cancelRatio_0", type: "text", width: 20 },
-			            { title: '第1年', name: "cancelRatio_1", type: "text", width: 20 },
-			            { title: '第2年', name: "cancelRatio_2", type: "text", width: 20 },
-			            { title: '第3年', name: "cancelRatio_3", type: "text", width: 20 },
-			            { title: '第4年', name: "cancelRatio_4", type: "text", width: 20 },
-			            { title: '第5年', name: "cancelRatio_5", type: "text", width: 20 },
-			            { title: '第6年', name: "cancelRatio_6", type: "text", width: 20 },
-			            { title: '第7年', name: "cancelRatio_7", type: "text", width: 20 },
-			            { title: '第8年', name: "cancelRatio_8", type: "text", width: 20 },
-			            { title: '第9年', name: "cancelRatio_9", type: "text", width: 20 },
-			            { title: '第10年', name: "cancelRatio_10", type: "text", width: 20 },
-			            { title: '第11年', name: "cancelRatio_11", type: "text", width: 20 },
-			            { title: '第12年', name: "cancelRatio_12", type: "text", width: 20 },
-			            { title: '第13年', name: "cancelRatio_13", type: "text", width: 20 },
-			            { title: '第14年', name: "cancelRatio_14", type: "text", width: 20 },
-			            { title: '第15年', name: "cancelRatio_15", type: "text", width: 20 },
-			            { title: '第16年', name: "cancelRatio_16", type: "text", width: 20 },
-			            { title: '第17年', name: "cancelRatio_17", type: "text", width: 20 },
-			            { title: '第18年', name: "cancelRatio_18", type: "text", width: 20 },
-			            { title: '第19年', name: "cancelRatio_19", type: "text", width: 20 },
-
+			            { title: '姓別', name: "gender", type: "text", width: 30 },
+			            { title: '年齡', name: "insAge", type: "text", width: 30 },
+			            { title: '年期', name: "year", type: "text", width: 30 },
+			            <c:forEach var="num" begin="0" end="111" step="1"> 
+			            { title: '第'+${num}+'年', name: "cancelRatio_"+${num}, type: "text", width: 50 },
+			            </c:forEach>
 			        ]
 			    })
 			    
