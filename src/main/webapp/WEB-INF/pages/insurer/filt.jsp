@@ -80,14 +80,30 @@
 						</div>
 <!-- 					XX率button區 -->
 					<button id="bisratioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;padding-top: 1vh">資本適足率▽</button><br>
+					<div class="col-xs-12">
+						<div id="flot-bisratioo" class="col-xs-12"
+							style="width: 60vw; height: 100vh; display: none;"></div>
+					</div>
 					<button id="returnonAssetss" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;" >資產報酬率▽</button><br>
+					<div class="col-xs-12">
+						<div id="flot-returnonAssetss" class="col-xs-12"
+							style="width: 60vw; height: 100vh; display: none;"></div>
+					</div>
 					<button id="persistencyRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">保單繼續率▽</button><br>
 						<div class="col-xs-12">
 						<div id="flot-placeholder" class="col-xs-12"
 							style="width: 60vw; height: 100vh; display: none;"></div>
 					</div>
 					<button id="litigationRatioo" style="background-color: #FAF7F7;  color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">訴訟率▽</button><br>
+					<div class="col-xs-12">
+						<div id="flot-litigationRatioo" class="col-xs-12"
+							style="width: 60vw; height: 100vh; display: none;"></div>
+					</div>
 					<button id="appealRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">申訴率▽</button><br>
+					<div class="col-xs-12">
+						<div id="flot-appealRatioo" class="col-xs-12"
+							style="width: 60vw; height: 100vh; display: none;"></div>
+					</div>
 					</div>
 					<div class="col-xs-1 col-sm-4 col-md-7"></div>
 				</div>
@@ -102,19 +118,19 @@
 // 			$('#btn').one('click', function() {
 // 				$('#flot-placeholder').toggle(0);
 // 			})   先留一下
-			$('#btn').click(function() {
-				$('div[id^="flot"]').css("display","none")
+			$('#btn').click(function() {//全部收起再給出checkbox給人家選
+				$('div[id^="flot"]').hide();
 				$('#insurerfilter').toggle(500);
 			})
-			$('#persistencyRatioo').click(function() {
-				$('#flot-placeholder').toggle(500);
-			})
-			$('#checkall').change(function() {
+// 			$('#persistencyRatioo').click(function() {//收起該表格
+// 				$('#flot-placeholder').toggle(500);
+// 			})
+			$('#checkall').change(function() {//全選
 				var b = $(this).prop('checked')
 				$(':checkbox').prop('checked', b)
 				//切換所有checkbox的勾選狀態        	
 			});
-			$(':checkbox').click(function() {
+			$(':checkbox').click(function() {//全選連動勾銷
 				var c = $(this).prop('checked')
 				if (c==false){
 					$('#checkall').prop('checked', c)
@@ -122,17 +138,49 @@
 // 				window.alert(c);
 				//切換checkall的全選狀態        	
 			});
-			$("#strcompare").click(function() {
-				DoToggling();
-				$('#insurerfilter').toggle(500);
-				$('#flot-placeholder').toggle(500,function(){
-					$.plot($("#flot-placeholder"), dataSet, options);
+// 			---------------------------------
+			$("#bisratioo").click(function() {//資本適足率
+				Dobisratioo();
+				$('#flot-bisratioo').toggle(500,function(){
+					$.plot($("#flot-bisratioo"), dataSet, optionbisRatio);
 				});
 			});
-			window.onresize = function(event) {
-				$.plot($("#flot-placeholder"), dataSet, options);
+			$("#returnonAssetss").click(function() {//資產報酬率
+				DoreturnonAssetss();
+				$('#flot-returnonAssetss').toggle(500,function(){
+					$.plot($("#flot-returnonAssetss"), dataSet, optionreturnonAssets);
+				});
+			});
+			$("#persistencyRatioo").click(function() {//保單繼續率
+				DopersistencyRatioo();
+				$('#flot-placeholder').toggle(500,function(){
+					$.plot($("#flot-placeholder"), dataSet, optionpersistencyRatio);
+				});
+			});
+			$("#litigationRatioo").click(function() {//訴訟率
+				DolitigationRatioo();
+				$('#flot-litigationRatioo').toggle(500,function(){
+					$.plot($("#flot-litigationRatioo"), dataSet, optionlitigationRatio);
+				});
+			});
+			$("#appealRatioo").click(function() {//申訴率
+				DoappealRatioo();
+				$('#flot-appealRatioo').toggle(500,function(){
+					$.plot($("#flot-appealRatioo"), dataSet, optionappealRatio);
+				});
+			});
+			$("#strcompare").click(function() {//開始比較按鈕(預設第一出現表格)
+				DopersistencyRatioo();
+				$('#insurerfilter').toggle(500);
+				$('#flot-placeholder').toggle(500,function(){
+					$.plot($("#flot-placeholder"), dataSet, optionpersistencyRatio);
+				});
+			});
+// 			-------------------------------------------
+// 			window.onresize = function(event) {
+// 				$.plot($("#flot-placeholder"), dataSet, optionpersistencyRatio);
 
-		    }
+// 		    }
 		});
 	</script>
 </body>

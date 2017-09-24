@@ -55,7 +55,7 @@
 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
 			<div class="col-sm-9"
-				style="height: 100vh; display: table; table-layout: fixed; background-color: #FAF7F7;"><!--右半白 -->
+				style="height: 100vh; display: table; table-layout: fixed; background-color: #FAF7F7;padding-right: 0px; padding-left: 0px;"><!--右半白 -->
 				<div
 					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;">
 					<div class="col-xs-1 col-sm-1"></div>
