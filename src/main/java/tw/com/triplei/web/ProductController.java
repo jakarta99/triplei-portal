@@ -162,13 +162,17 @@ public class ProductController {
 										double[] data = { (double) i, i * form.getPremiumAfterDiscount().doubleValue(),
 												BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(), BigDecimal.valueOf(iRRCaculator.getIRR((double) form.getYear(), (double) i,
 														form.getPremiumAfterDiscount().doubleValue(), cancelRatio)).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-										totalCancelRatio.add(data);
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+											totalCancelRatio.add(data);											
+										}
 										// log.debug("第"+i+"年={}", data);
 
 										double[] irrAndCancelRatio = { (double) i, BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(),
 												BigDecimal.valueOf(iRRCaculator.getIRR((double) form.getYear(), (double) i,
 														form.getPremiumAfterDiscount().doubleValue(), cancelRatio)).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-										totalIrrAndCancelRatio.add(irrAndCancelRatio);
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+											totalIrrAndCancelRatio.add(irrAndCancelRatio);											
+										}
 									} else {
 										double[] data = { (double) i,
 												form.getYear() * form.getPremiumAfterDiscount().doubleValue(),
@@ -179,14 +183,18 @@ public class ProductController {
 																		form.getPremiumAfterDiscount().doubleValue(),
 																		cancelRatio))
 														.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue() };
-										totalCancelRatio.add(data);
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+											totalCancelRatio.add(data);											
+										}
 										// log.debug("第"+i+"年={}", data);
 
 										double[] irrAndCancelRatio = { (double) i, BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(), BigDecimal
 												.valueOf(iRRCaculator.getIRR((double) form.getYear(), (double) i,
 														form.getPremiumAfterDiscount().doubleValue(), cancelRatio))
 												.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue() };
-										totalIrrAndCancelRatio.add(irrAndCancelRatio);
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+											totalIrrAndCancelRatio.add(irrAndCancelRatio);											
+										}
 									}
 
 								}
@@ -201,14 +209,14 @@ public class ProductController {
 		model.addAttribute("modelf", form);
 		model.addAttribute("totalCancelRatio", totalCancelRatio);
 		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
-//		Iterator itt = totalCancelRatio.iterator();
-//		while (itt.hasNext()) {
-//			log.debug("totalCancelRatio資料={}", itt.next());
-//		}
-//		Iterator ittt = totalIrrAndCancelRatio.iterator();
-//		while (ittt.hasNext()) {
-//			log.debug("totalIrrAndCancelRatio資料={}", ittt.next());
-//		}
+		Iterator itt = totalCancelRatio.iterator();
+		while (itt.hasNext()) {
+			log.debug("totalCancelRatio資料={}", itt.next());
+		}
+		Iterator ittt = totalIrrAndCancelRatio.iterator();
+		while (ittt.hasNext()) {
+			log.debug("totalIrrAndCancelRatio資料={}", ittt.next());
+		}
 
 		return "/product/detailInfo";
 	}

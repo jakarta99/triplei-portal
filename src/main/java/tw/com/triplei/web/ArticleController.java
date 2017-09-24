@@ -1,11 +1,8 @@
 package tw.com.triplei.web;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.entity.ArticleEntity;
+import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.service.ArticleService;
 
 @Slf4j
@@ -22,32 +20,26 @@ import tw.com.triplei.service.ArticleService;
 public class ArticleController {
 	
 	@Autowired
-	private Environment env;
-	
-	@Autowired
 	private ArticleService articleService;
 	
 	/*用戶的從首頁點入到文章專區首頁 */
 	@RequestMapping("/list")
 	public String list(Model model) {
+
+		List<ArticleEntity> list= articleService.getBannerRotationArticles(true);
+		model.addAttribute("bannerRotation",list);
 		
-		Map<String,String>content = new HashMap<>();
-		content.put("editorChoice", env.getProperty("editor.choice"));
-		content.put("news", env.getProperty("news"));
-		content.put("goodRead", env.getProperty("good.read"));
-		content.put("investmentTips", env.getProperty("investment.tips"));
+		List<ArticleEntity> editorChoiceList = articleService.getArticlesByHotArticle(ArticleType.EDITOR_CHOICE, true, true);
+		model.addAttribute("editorChoice", editorChoiceList);
 		
-		content.put("carousel1url", env.getProperty("carousel1.url"));
-		content.put("carousel1ImagePath", env.getProperty("carousel1.imagePath"));
-		content.put("carousel1Title",env.getProperty("carouse1.title"));
-		content.put("carousel2url", env.getProperty("carousel2.url"));
-		content.put("carousel2ImagePath", env.getProperty("carousel2.imagePath"));
-		content.put("carousel2Title",env.getProperty("carouse2.title"));
-		content.put("carousel3url", env.getProperty("carousel3.url"));
-		content.put("carousel3ImagePath", env.getProperty("carousel3.imagePath"));
-		content.put("carousel3Title",env.getProperty("carouse3.title"));
+		List<ArticleEntity> newsList = articleService.getArticlesByHotArticle(ArticleType.NEWS, true, true);
+		model.addAttribute("news", newsList);
 		
-		model.addAllAttributes(content);
+		List<ArticleEntity> goodReadList = articleService.getArticlesByHotArticle(ArticleType.GOODREAD, true, true);
+		model.addAttribute("goodRead", goodReadList);
+		
+		List<ArticleEntity> investmentTipsList = articleService.getArticlesByHotArticle(ArticleType.INVESTMENT_TIPS, true, true);
+		model.addAttribute("investmentTips", investmentTipsList);
 		
 		return "/article/list";
 	}
@@ -55,6 +47,8 @@ public class ArticleController {
 	/*用戶從文章首頁點入到小資族必讀專區 */
 	@RequestMapping("/goodRead")
 	public String goodRead(Model model){
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.GOODREAD);
+		model.addAttribute("articles",articles);
 		
 		return "/article/goodReadSection";
 	}
@@ -62,6 +56,8 @@ public class ArticleController {
 	/*用戶從文章首頁點入到新聞專區 */
 	@RequestMapping("/news")
 	public String news(Model model){
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.NEWS);
+		model.addAttribute("articles",articles);
 		
 		return "/article/newsSection";
 	}
@@ -69,6 +65,8 @@ public class ArticleController {
 	/*用戶從文章首頁點入到理財觀念專區 */
 	@RequestMapping("/investmentTips")
 	public String investmentTips(Model model){
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.INVESTMENT_TIPS);
+		model.addAttribute("articles",articles);
 		
 		return "/article/investmentTipsSection";
 	}
@@ -76,10 +74,7 @@ public class ArticleController {
 	/*用戶從文章首頁點入到編輯精選專區 */
 	@RequestMapping("/editorChoice")
 	public String editorChoice(Model model){
-		
-		List<ArticleEntity> articles= articleService.getAll();
-		
-		
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.EDITOR_CHOICE);
 		model.addAttribute("articles",articles);
 		
 		return "/article/editorChoiceSection";
@@ -88,6 +83,7 @@ public class ArticleController {
 	/*用戶從某文章類別專區點入到文章 */
 	@RequestMapping(value = "/readArticle/read/{id}",method=RequestMethod.GET)
 	public String readArticle(@PathVariable("id") final Long id, Model model){
+		log.debug("id{}",id);
 		ArticleEntity article = articleService.getOne(id);
 		model.addAttribute("article",article);
 		return "/article/readArticle";

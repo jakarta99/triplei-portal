@@ -3,12 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE HTML>
-<html>
 <html lang="en">
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Triple i</title>
+<title>Tripe i</title>
 
 <style>
 #mainNavbar {
@@ -17,56 +16,59 @@
 }
 </style>
 </head>
-</head>
 <body>
+
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-		<!-- 先寄信 -->
+		<!-- 載入後寄信-->
 		<form class="form-horizontal" id="dataForm">
-		<input type="hidden" id="id" name="id" value="${resendInfo.id}" /> 
-		<input type="hidden" id="email" name="email" value="${resendInfo.email}" /><br>
+		<input type="hidden" id="id" name="id" value="${resendUserEntity.id}" /> 
 		<div style="text-align: center;">
-			<h1>請至您的信箱點擊確認信連結</h1>
-			<img class="checkLetter" name="checkLetter"
-				src="/resources/pic/registered/checkLetter.png" width="40%">
+			<img class="forgetPassword" name="forgetPassword"
+				src="/resources/pic/registered/forgetPassword.png" width="35%">
+			
+			<div class="form-group">
+				<h3>已發送新密碼至您的信箱</h3>
+			</div>
+					
+			
 			<div class="row">
 				<div class="col-md-3"></div>
 				<div class="col-md-6">
 					<div>
-						<a href="#"  class="btn btn-lg btn-primary btn-block"
-							data-loading-text="Loading" id="resendButton">重送驗證信</a>
+						<a href=""  class="btn btn-lg btn-primary btn-block"
+							data-loading-text="Loading" id="resendButton">重送臨時密碼</a>
 					</div>
 
 				</div>
 				<div class="col-md-3"></div>
 			</div>
+					
 		</div>
 		</form>
 	</div>
+
 </body>
 </html>
 <script type="text/javascript">
 $(function(){
-	var $count = 0;
 	window.onload=sendLetter;
 	function sendLetter(){
 		$("#resendButton").click();
 	}
 	
-	$("#resendButton").bind("click", function() {
+	$('#resendButton').hide();
 	
+	$("#resendButton").bind("click", function() {
+		
 		var $btn = $(this);
 			$btn.button("loading");
 			
-		$.put("<c:url value='/registered/sendCheckLetter'/>", "dataForm",
+		$.put("<c:url value='/registered/sendNewPasswordEMail'/>", "dataForm",
 				function(data) {
 					
 					if (data.messages.length==0){
-						$count = $count + 1;  
-						if($count>1){
-							alert("SUCCESS");	
-						}
 						$btn.button("reset");
 					}	
 				}, function(data, textStatus, jqXHR) {
@@ -75,6 +77,5 @@ $(function(){
 		
 		$btn.button("reset");			
 	});
-	
 })
 </script>

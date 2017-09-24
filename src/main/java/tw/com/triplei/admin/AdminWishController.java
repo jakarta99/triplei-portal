@@ -1,5 +1,6 @@
 package tw.com.triplei.admin;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +47,7 @@ public class AdminWishController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
-		return "/admin/wish/wishAdd";
+		return "/wish/wishAdd";
 	}
 	
 	@PostMapping
@@ -64,8 +67,12 @@ public class AdminWishController {
 //			System.out.println(form.getWishTime());
 			
 			String date = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
-			System.out.println(date);
 			form.setWishTime(date);
+			log.debug("userDetails: {}",date);
+
+			form.setCreatedTime(new Timestamp(new Date().getTime()));
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			form.setCreatedBy(userDetails.getUsername());
 			
 			
 			final WishEntity insertResult = wishService.insert(form);

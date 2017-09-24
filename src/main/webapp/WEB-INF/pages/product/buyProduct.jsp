@@ -130,10 +130,14 @@ select {
 								<!-- class="col-md-8" -->
 								<div id="map"></div>
 
-								<div class="col-sm-12" align="center" style="margin-top:2%">
-									<img width="80%" id="mapimg"
-										src="https://maps.googleapis.com/maps/api/staticmap?center=%E5%8F%B0%E5%8C%97101&zoom=17&size=600x300&maptype=roadmap&markers=color:red%7C%E5%8F%B0%E5%8C%97101&key=AIzaSyAYD9w-VVl7VwL9mC1SPzvQmMw6Sxk3Ul0" />
-								</div>
+<!-- 								<div class="col-sm-12" align="center" style="margin-top:2%"> -->
+<!-- 									<img width="80%" id="mapimg" -->
+<!-- 										src="https://maps.googleapis.com/maps/api/staticmap?center=%E5%8F%B0%E5%8C%97101&zoom=17&size=600x300&maptype=roadmap&markers=color:red%7C%E5%8F%B0%E5%8C%97101&key=AIzaSyAYD9w-VVl7VwL9mC1SPzvQmMw6Sxk3Ul0" /> -->
+<!-- 								</div> -->
+								<iframe id="googleMapping" width="600" height="450" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAuwYed8DxRGhmTy44R5HGKich9J-dGs9s
+    &q=台北101">
+</iframe>
 							</form>
 						</div>
 					</form>
@@ -427,13 +431,15 @@ select {
 
 							var address = $('#city').val() + $('#region').val()
 									+ $('#address').val();
-							var mapimg = 'https://maps.googleapis.com/maps/api/staticmap?center='
-									+ address
-									+ '&zoom=17&size=600x400&maptype=roadmap&markers=color:red%7C'
-									+ address
-									+ '&key=AIzaSyAYD9w-VVl7VwL9mC1SPzvQmMw6Sxk3Ul0'
-							$('#mapimg').attr("src", mapimg);
-
+// 							var mapimg = 'https://maps.googleapis.com/maps/api/staticmap?center='
+// 									+ address
+// 									+ '&zoom=17&size=600x400&maptype=roadmap&markers=color:red%7C'
+// 									+ address
+// 									+ '&key=AIzaSyAYD9w-VVl7VwL9mC1SPzvQmMw6Sxk3Ul0'
+// 							$('#mapimg').attr("src", mapimg);
+							var fixedAdd = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAuwYed8DxRGhmTy44R5HGKich9J-dGs9s&q="
+    						var locate = fixedAdd+address;
+							$("#googleMapping").attr("src",locate);
 						});
 
 		function initMap() {
