@@ -12,7 +12,7 @@
 <style>
 
 @CHARSET "UTF-8";
-
+/*
 .progress-bar {
     color: #333;
 } 
@@ -37,13 +37,7 @@
 		}
 	}
 
-body {
-	background: url(http://i.imgur.com/GHr12sH.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
+
 
 .login-form {
 	margin-top: 60px;
@@ -79,6 +73,25 @@ form[role=login] {
 	.form-links a {
 		color: #fff;
 	}
+*/	
+#mainNavbar {
+	border-color: #333333;
+	background-color: #030033;
+}
+	form[role=login] input{
+		font-size: 18px;
+		margin: 16px 0;
+	}
+	
+	form[role=login] > div {
+		text-align: center;
+	}
+
+.form-links {
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 50px;
+}
 </style>
 </head>
 
@@ -87,28 +100,74 @@ form[role=login] {
 	<section class="container">
 	
 			<section class="login-form">
-				<form method="post" action="${pageContext.request.contextPath}/login" role="login">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					<img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
-					<input type="text" name="username" placeholder="account" required class="form-control input-lg" />
-					<input type="password" name="password" placeholder="Password" required class="form-control input-lg" />
-					<button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
-					<div>
-						<a href="/registered/add">Create account</a> or <a href="/registered/forgetPassword">forget password</a>
-					</div>
-				</form>
 
-				<div class="form-links">
-					<a href="${pageContext.request.contextPath}/">www.triple-i.com.tw</a>
-					<div class="bg-danger">
-						<ul>
-							<li> admin / admin1234 for Administrator Testing</li>
-							<li> user / user1234 for User Testing </li>
-						</ul>
+			<div class="col-sm-12">
+				</br>
+				</br>
+				
+				<div class="col-sm-6">
+					<div style="height:100%;">
+					<form method="post" action="${pageContext.request.contextPath}/login" role="login">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<h2>會員登入</h2>
+						<br>
+						<!-- <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" /> -->
+						<img class="fb" name="fb" src="/resources/pic/registered/fb.png" width="50%">
+						<br><br>
+						<p align="center"> or </p>
+						<div class="col-sm-12">
+							<input type="text" name="username" placeholder="請輸入您註冊時的 e-mail"
+								required class="form-control input-md" />
+						</div>
+
+						<div class="col-sm-12">
+							<input type="password" name="password" placeholder="密碼" required
+								class="form-control input-md" />
+						</div>
+						</br>
+						
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<a href="/registered/forgetPassword" class="btn btn-lg  btn-block" id="forgetPassword">忘記密碼</a>
+							</div>
+							<div class="col-sm-6">
+								<button type="submit" name="go" class="btn btn-lg btn-primary btn-block">登入</button>
+							</div>
+						</div>
+						
+					</form>
 					</div>
 				</div>
-			</section>
+
+				</br>
+				</br>
+
+				<div class="col-sm-6" style="height:100%;overflow-y:auto;text-align:center">
+					<div>
+						<img class="hotBalloon" name="hotBalloon" src="/resources/pic/registered/registered/images/img_1.png" width="10%">
+						<img class="joinUs" name="joinUs" src="/resources/pic/registered/registered/images/img_2.png" width="30%">
+					</div>
+					<div>
+						<img class="mountain" name="mountain" src="/resources/pic/registered/registered/images/img_0.png" width="60%">
+					</div>
+						
+					</br>
+					<div>
+						<a href="/registered/add" class="btn btn-lg btn-primary btn-block" data-loading-text="Loading" id="registered">免費註冊</a>
+					</div>
+						
+				</div>
+			</div>
+
+		</section>
 	</section>
 
 </body>
 </html>
+<footer>
+<!-- 
+	<div class="form-links">
+		<a href="${pageContext.request.contextPath}/">www.triple-i.com.tw</a>
+	</div>
+ -->	
+</footer>
