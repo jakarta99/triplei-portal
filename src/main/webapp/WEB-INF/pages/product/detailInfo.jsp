@@ -88,7 +88,7 @@ span {
 							</div>
 							<div>
 								<span>保額(萬)</span><br /> <input type="text" id="insureAmount"
-									name="insureAmount" value="${modelf.insureAmount}"
+									name="insureAmount" value="<fmt:formatNumber value="${modelf.insureAmount}" maxFractionDigits="2" />"
 									style="width: 80%; color: black;">
 							</div>
 							<div style="margin-top: 3%; margin-bottom: 3%">
@@ -130,8 +130,8 @@ span {
 								<span style="font-size: 150%">可獲得點數</span> <br />
 								<div>
 									<img src="/resources/pic/積點專區/點數(小).png" width="25em"
-										style="margin-top: 3%; margin-right: 3%; float: left"> <span
-										style="font-size: 200%; font-weight: bold">${modelf.getPoint}</span>
+										style="margin-top: 3%; margin-right: 3%; float: left"> 
+										<span style="font-size: 200%; font-weight: bold">${modelf.getPoint}</span>
 								</div>
 							</div>
 							<br /> <br /> <br /> <br />
@@ -164,10 +164,10 @@ span {
 							<hr />
 							<br />
 							<div class="col-sm-3">
-								<span>保額：${modelf.insureAmount} 萬</span>
+								<span>保額：<fmt:formatNumber value="${modelf.insureAmount}" maxFractionDigits="2" /> 萬</span>
 							</div>
 							<div class="col-sm-4">
-								<span>保費折扣：<fmt:formatNumber value="${modelf.discount}"
+								<span>保費折扣：<fmt:formatNumber value="${modelf.discount*100}"
 										maxFractionDigits="2" />%
 								</span>
 							</div>
@@ -189,10 +189,10 @@ span {
 								<span>續年保費：$${modelf.premiumAfterDiscount}</span>
 							</div>
 							<div class="col-sm-3">
-								<span>${modelf.interestRateType}：${modelf.declareInterestRate}%</span>
+								<span>${modelf.interestRateType}：<fmt:formatNumber value="${modelf.declareInterestRate*100}" maxFractionDigits="2" />%</span>
 							</div>
 							<div class="col-sm-4">
-								<span>折扣後年繳保費：$${modelf.premiumAfterDiscount}</span>
+								<span>折扣後年繳保費：</span><span id="getPremiumAfterDiscount">$${modelf.premiumAfterDiscount}</span>
 							</div>
 							<div class="col-sm-5">
 								<span>繳費方式：${modelf.paymentMethod}</span>
@@ -252,10 +252,9 @@ span {
 								<span>IRR走勢圖</span>
 							</div>
 							<div class="col-sm-2" style="text-align: right">
-								<input type="button" id="IRRExpand" value="+"
-									class="btn btn-secondary" style="background-color: white;">
+								<input type="button" id="IRRExpand" value="+" class="btn btn-secondary" style="background-color: white;">
 							</div>
-							<div id="IRRgraph">
+							<div id="IRRgraph" class="col-sm-12">
 								<div id="chartContainer" style="height: 300px; width: 100%"></div>
 							</div>
 						</div>
@@ -264,7 +263,7 @@ span {
 					</div>
 					<br />
 					<div class="col-sm-12" style="text-align: right;">
-						<br /> <a href="/product/buyProduct/TWD/1/1/1" id="iWantToBuy">
+						<br /> <a href="#" id="iWantToBuy">
 							<input type="button" id="iWantToBuy"
 							class="btn btn-secondary iWantToBuy"
 							style="color: white; background-color: #5C8DEC;" value="我要購買">
@@ -274,6 +273,9 @@ span {
 			</div>
 		</div>
 	</div>
+	<input id="getProductId" value="${modelf.id}" style="visibility:hidden"/>
+	<input id="scorePoints" value="${modelf.getPoint}" style="visibility:hidden"/>
+	<input id="discountedPremium" value="${modelf.premiumAfterDiscount}" style="visibility:hidden"/>
 	<script>
 	new Morris.Line({
 		  element: 'chartContainer',
@@ -371,15 +373,17 @@ span {
 		var url = "/product/Adjustment/"+$('input[name="gender"]:checked').val()+"/"+$('#bDate').val()+"/"+$("#insureAmount").val()+"/"+${modelf.id}+"/"+yearCode;
 	})
 	
-// 		var currency = $().val();
-// 		var insureAmount = $().val();
-// 		var premium = $().val();
-// 		var points = $().val();
-// 		var url = "/product/buyProduct/"+currency+"/"+insureAmount+"/"+premium+"/"+points;
-	
-// 	$("#iWantToBuy").on("click",function(){
-// 		$.get("/product/buyProduct/TWD/1/1/1");		
-// 	});
+	$("#iWantToBuy").on("click",function(){
+		var productID = $("#getProductId").val();
+		var birth = $("#bDate").val();
+		var gender = $('input[name="gender"]:checked').val();
+		var insureAmount = $("#insureAmount").val();
+		var premiumAfterDiscount = $("#discountedPremium").val();
+		var getPoint = $("#scorePoints").val();
+		var url = "/recipient/add/"+productID+"/"+birth+"/"+gender+"/"+insureAmount+"/"+premiumAfterDiscount+"/"+getPoint;
+		alert(url);
+// 		$.get(url);		
+	});
 	</script>
 </body>
 </html>
