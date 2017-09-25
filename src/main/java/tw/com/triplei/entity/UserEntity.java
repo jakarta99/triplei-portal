@@ -1,5 +1,6 @@
 package tw.com.triplei.entity;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Set;
 
@@ -15,9 +16,8 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.common.collect.Lists;
 
 import lombok.Getter;
@@ -55,6 +55,13 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	
 	@Column(name = "GENDER")
 	private String gender; // 會員性別 
+	
+	@Column(name = "TEL")
+	private String tel;  // 電話
+	
+	
+	@Column(name = "BIRTHDATE")
+	private LocalDate birthdate; // 生日
 	
 	@Column(name = "enabled")
 	private Boolean enabled; // 啟用

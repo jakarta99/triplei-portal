@@ -54,6 +54,14 @@
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>	
+								
+								<div class="form-group required">
+			    					<label for="birthdate" class="col-md-2 control-label">生日</label>
+			    					<div class="col-md-8">
+			      						<input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="yyyy-mm-dd" value="${userDetails.birthdate}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>	
 							
 								<div class="form-group required">
 									<label for="gender" class="col-md-2 control-label">性別</label>
@@ -64,6 +72,15 @@
 										</select>
 									</div>
 								</div>
+								
+								<div class="form-group required">
+			    					<label for="tel" class="col-md-2 control-label">電話</label>
+			    					<div class="col-md-8">
+			      						<input type="text" class="form-control" id="tel" name="tel" placeholder="+886" value="${userDetails.tel}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>	
+								
 								
 								</div>								
 							</div>
@@ -87,6 +104,7 @@
 </html>
 <script type="text/javascript">
 $(function(){
+	
 	$("#saveButton").bind("click", function() {
 		
 		var $btn = $(this);
