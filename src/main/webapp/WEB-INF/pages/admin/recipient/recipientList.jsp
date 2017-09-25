@@ -55,19 +55,23 @@
 			 
 			        fields: [
 			            { name: '刪／修', width:60, itemTemplate:btns },
-						{ name: "id", visible: false},
 			            { title: '名字', name: "name", type: "text", width: 50 },
-			            { title: '性別', name: "gender", type: "text", width: 30 },
+			            { title: '性別', name: "gender", type: "text", width: 60 },
+			            { title: '年齡', name: "age", type: "text", width: 30 },
 			            { title: '公司名稱', name: "product.insurer.shortName", type: "text", width: 60 },
 			            { title: '商品代碼', name: "product.code", type: "text", width: 50 },
 			            { title: '商品名稱', name: "product.localName", type: "text", width: 100 },
+			            { title: '保額', name: "product.insureAmount", type: "text", width: 50 },
 			            { title: '電話', name: "tel", type: "text", width: 80 },
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
 			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
+			            { title: '超商名稱', name: "convenienceStoreEntity.storeName", type: "text", width: 80 },
+			            { title: '超商區域', name: "convenienceStoreEntity.region", type: "text", width: 80 },
+			            { title: '超商地址', name: "convenienceStoreEntity.address", type: "text", width: 80 },
 			            { title: '業務員', name: "user.name", type: "text", width: 80 },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
-			            { title: '訂單編號', name: "orderNo", type: "text", width: 80 },
+			            { title: '訂單標號', name: "id", type: "text", width: 80 },
 			        ]
 			    });
 			    

@@ -62,7 +62,7 @@ select {
 								</div>
 								<div class="col-sm-12">
 									<br /> <span>有空時段2</span> <input class="col-sm-12 date"
-										type="text" placeholder="日期"> <br /> <br /> <select
+										id="date2" type="text" placeholder="日期"> <br /> <br /> <select
 										id="session2" class="col-sm-3">
 										<option value="" selected="selected">請選擇</option>
 										<option value="morning">上午</option>
@@ -73,7 +73,7 @@ select {
 								</div>
 								<div class="col-sm-12">
 									<br /> <span>有空時段3</span> <input class="col-sm-12 date"
-										type="text" placeholder="日期"> <br /> <br /> <select
+										id="date3" type="text" placeholder="日期"> <br /> <br /> <select
 										id="session3" class="col-sm-3">
 										<option value="" selected="selected">請選擇</option>
 										<option value="morning">上午</option>
@@ -443,16 +443,16 @@ select {
 			var tel = $("#tel").val();
 
 			var date11 = $("#date1").val();
-			var date12 = $("#session1 option:selected").val();
-			var date13 = $("#shift1 option:selected").val();
+			var date12 = $("#session1 option:selected").text();
+			var date13 = $("#shift1 option:selected").text();
 
 			var date21 = $("#date2").val();
-			var date22 = $("#session2 option:selected").val();
-			var date23 = $("#shift2 option:selected").val();
+			var date22 = $("#session2 option:selected").text();
+			var date23 = $("#shift2 option:selected").text();
 			
 			var date31 = $("#date3").val();
-			var date32 = $("#session3 option:selected").val();
-			var date33 = $("#shift3 option:selected").val();
+			var date32 = $("#session3 option:selected").text();
+			var date33 = $("#shift3 option:selected").text();
 			
 			var pid = <c:out value="${model.id}"/>;
 			var insureAmounts = <c:out value="${model.insureAmount}"/>;
@@ -483,21 +483,21 @@ select {
 			formData.append("insureAmount",insureAmounts);
 			formData.append("premiumAfterDiscount",discountedPremium);
 			formData.append("getPoint",scorePoints);
-			formData.append("address",address);
+			formData.append("address",add);
 			
 			if(name=="" && tel=="" && date11=="" && date12=="" && date13==""){
 				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}else if(name!="" && tel!="" && date11!="" && date12!="" && date13!=null && name!=null && tel!=null && date11!=null && date12!=null && date13!=null){
 				$.ajax({
-					url:"/admin/recipient",
+					url:"<c:url value='/admin/recipient'/>",
 					method:"POST",
 					data:formData,
 					processData:false,
 					contentType:false,
-					success:function(data){
-						alert("謝謝您對我們的產品有興趣，我們會在近幾日與您聯繫");
+					success:function(data){	
 					}
 				})
+				alert("SUCCESS");
 			}else{
 				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}
