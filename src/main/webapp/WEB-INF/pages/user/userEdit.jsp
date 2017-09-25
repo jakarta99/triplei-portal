@@ -70,6 +70,7 @@
 											<option value="female" ${userDetails.gender == 'female' ? 'selected': ''}>女性</option>
 											<option value="male" ${userDetails.gender == 'male' ? 'selected': ''}>男性</option>
 										</select>
+										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 								
