@@ -39,12 +39,13 @@ public class RecipientController {
 			@PathVariable("premiumAfterDiscount") final String premiumAfterDiscountS,
 			@PathVariable("getPoint") final String getPointS) {
 		ProductEntity product = productService.getOneAll(id);
-		int year = productService.bDateToInt(bdate);
+		int age = productService.bDateToInt(bdate);
 		product.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
 		product.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
 		product.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
 		
-		model.addAttribute("year",year);
+		model.addAttribute("age",age);
+		model.addAttribute("gender",gender);
 		model.addAttribute("model",product);
 		return "/product/buyProduct";
 	}

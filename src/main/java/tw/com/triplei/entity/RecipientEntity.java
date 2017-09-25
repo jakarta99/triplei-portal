@@ -31,7 +31,7 @@ public class RecipientEntity extends GenericEntity {
 	private String gender; //性別
 	
 	@Column(name="AGE")
-	private String age; //年齡
+	private int age; //年齡
 	
 	@Column(name="TEL")
 	private String tel; //連絡電話

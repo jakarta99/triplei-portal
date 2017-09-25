@@ -1,5 +1,6 @@
 package tw.com.triplei.admin;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -107,22 +108,29 @@ public class AdminRecipientController {
 	@PostMapping
 	public AjaxResponse<RecipientEntity> insert(final Model model
 			,@RequestParam("name") String name
-			,@RequestParam("bdate") String Age,@RequestParam("gender") String gender
+			,@RequestParam("age") String age,@RequestParam("gender") String gender
 			,@RequestParam("tel") String tel,@RequestParam("date_1_1") String date_1_1
 			,@RequestParam("date_1_2") String date_1_2,@RequestParam("date_1_3") String date_1_3
 			,@RequestParam("date_2_1") String date_2_1,@RequestParam("date_2_2") String date_2_2
 			,@RequestParam("date_2_3") String date_2_3,@RequestParam("date_3_1") String date_3_1
 			,@RequestParam("date_3_2") String date_3_2,@RequestParam("date_3_3") String date_3_3
 			,@RequestParam("address") String address,@RequestParam("shops") String shops
-			,@RequestParam("pid") long pid) {
+			,@RequestParam("pid") long pid,@PathVariable("insureAmount") final String insureAmountS,
+			@PathVariable("premiumAfterDiscount") final String premiumAfterDiscountS,
+			@PathVariable("getPoint") final String getPointS) {
 		
 		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 		try {
 			RecipientEntity form = new RecipientEntity();
 			ProductEntity productEntity = productService.getOne(pid);
-			System.out.println(productEntity);
+			
+			productEntity.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
+			productEntity.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
+			productEntity.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
+
 			form.setName(name);
 			form.setGender(gender);
+			form.setAge(Integer.parseInt(age));
 			form.setTel(tel);
 			form.setBookedTime_1(date_1_1+" "+date_1_2+" "+date_1_3);
 			form.setBookedTime_2(date_2_1+" "+date_2_2+" "+date_2_3);
