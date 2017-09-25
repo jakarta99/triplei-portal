@@ -30,17 +30,24 @@ select {
 						<div class="col-sm-6" style="border-right: 1px lightgrey solid">
 							<div style="width: 85%">
 								<div class="col-sm-12">
-									<span>姓名</span> <br /> <input class="col-sm-8" type="text">
-									<label class="col-sm-2"> <input type="radio"
-										class="btn btn-secondary gender" value="male"> <span>先生</span>
-									</label> <label class="col-sm-2"> <input type="radio"
-										class="btn btn-secondary gender" value="female"> <span>小姐</span>
-									</label>
+									<span>姓名</span> <br /> <input id="name" class="col-sm-8" type="text">
+<!-- 									<label class="col-sm-2"> <input type="radio" -->
+<!-- 										class="btn btn-secondary gender" value="male"> <span>先生</span> -->
+<!-- 									</label> <label class="col-sm-2"> <input type="radio" -->
+<!-- 										class="btn btn-secondary gender" value="female"> <span>小姐</span> -->
+<!-- 									</label> -->
+								
+								<c:if test="${gender!='Female'}">
+								<span style="margin-left:2%">性別：男</span>
+								</c:if>
+								<c:if test="${gender!='Male'}">
+								<span style="margin-left:2%">性別：女</span>
+								</c:if>
+								
 								</div>
-								<div class="col-sm-12">
-									<span>手機號碼</span> <br /> <br /> <input type="text"
-										class="col-sm-2" placeholder="+886" style="margin-right: 1%">
-									<input type="text" class="col-sm-9" placeholder="0988-888-888">
+								<div class="col-sm-12" style="margin-top:2%">
+									<span>手機號碼</span><br/>
+									<input id="tel" type="text" placeholder="0988-888-888">
 								</div>
 								<div class="col-sm-12">
 									<br /> <span>有空時段1</span> <input class="col-sm-12 date"
@@ -82,17 +89,13 @@ select {
 								<input type="hidden" id="id" name="id" value="" />
 								<div class="col-sm-12">
 									<div class="col-sm-12" style="padding: 0">
-										<div class="form-group required col-sm-6"
-											style="margin: 0; padding: 0">
+										<div class="form-group required col-sm-6" style="margin: 0; padding: 0">
 											<label for="city" class="col-sm-4 control-label">縣市</label>
 											<div class="col-sm-8">
 												<select id="city" class="form-control">
 													<option value="" selected>請選擇</option>
 													<option value="台北市">台北市</option>
-													<option value="桃園">桃園</option>
-													<option value="台中">台中</option>
-													<option value="台南">台南</option>
-													<option value="高雄">高雄</option>
+													<option value="新北市">新北市</option>
 												</select>
 											</div>
 										</div>
@@ -116,7 +119,7 @@ select {
 										</div>
 									</div>
 
-									<div class="form-group required">
+									<div class="form-group required" style="margin-top:2%">
 										<label for="address" class="col-sm-2 control-label">超商地址</label>
 										<div class="col-sm-10">
 											<select id="address" class="form-control">
@@ -127,17 +130,12 @@ select {
 
 
 								</div>
-								<!-- class="col-md-8" -->
-								<div id="map"></div>
-
-<!-- 								<div class="col-sm-12" align="center" style="margin-top:2%"> -->
-<!-- 									<img width="80%" id="mapimg" -->
-<!-- 										src="https://maps.googleapis.com/maps/api/staticmap?center=%E5%8F%B0%E5%8C%97101&zoom=17&size=600x300&maptype=roadmap&markers=color:red%7C%E5%8F%B0%E5%8C%97101&key=AIzaSyAYD9w-VVl7VwL9mC1SPzvQmMw6Sxk3Ul0" /> -->
-<!-- 								</div> -->
+								<div class="col-sm-12" style="margin-top:2%">
 								<iframe id="googleMapping" width="600" height="450" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAuwYed8DxRGhmTy44R5HGKich9J-dGs9s
     &q=台北101">
 </iframe>
+</div>
 							</form>
 						</div>
 					</form>
@@ -147,28 +145,33 @@ select {
 						style="color: grey; margin-left: 1%;">與業務員見面後也可更改</span>
 					<div class="col-sm-12" style="border: 1px solid lightgrey">
 						<div class="col-sm-12" style="margin-bottom: 2%; margin-top: 1%;">
-							<img src=""> <span style="font-size: 115%">保險公司</span> <br />
-							<span style="font-size: 115%">保險商品編號+名稱</span>
+							<img src=""> <span style="font-size: 115%">${model.insurer.name}</span> <br />
+							<span style="font-size: 115%">${model.code}-${model.localName}</span>
 						</div>
 
 						<div class="col-sm-12" style="margin-bottom: 4%;">
 							<div class="col-sm-3" align="center">
-								<span>幣別</span> <br /> <span>新台幣</span>
+								<span>幣別</span> <br /> <span>${model.curr}</span>
 							</div>
 							<div class="col-sm-3" align="center"
 								style="border-left: 1px lightgrey solid">
-								<span>保額</span> <br /> <span>XX,XXX</span>
+								<span>保額</span> <br /> <span>$<fmt:formatNumber value="${model.insureAmount}" maxFractionDigits="0" />萬</span>
 							</div>
 							<div class="col-sm-3" align="center"
 								style="border-left: 1px lightgrey solid">
-								<span>每期保費</span> <br /> <span>XX,XXX</span>
+								<span>每期保費</span> <br /> <span>$<fmt:formatNumber value="${model.premiumAfterDiscount}" maxFractionDigits="0" /></span>
 							</div>
 							<div class="col-sm-3" align="center"
 								style="border-left: 1px lightgrey solid">
-								<span>可獲得點數</span> <br /> <span>X,XXX</span>
+								<span>可獲得點數</span> <br /> <span><fmt:formatNumber value="${model.getPoint}" maxFractionDigits="0" /></span>
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="col-sm-12 float-right" align="right" style="margin-top:2%;margin-bottom:5%;">
+				<input type="button" id="confirmPurchase" class="btn btn-secondary" style="width:30%;background-color:#5C8DEC;color:white;border:none" value="確認約訪購買">
+				</div>
+				<div class="col-sm-12" style="height:5%;">
 				</div>
 			</div>
 		</div>
@@ -185,7 +188,7 @@ select {
 			yearRange : 'c:2+c',
 			dateFormat : "yy-mm-dd"
 		});
-		$("#date1").datepicker('setDate', new Date());
+		$(".date").datepicker('setDate', new Date());
 
 		$("#session1").on("change", function() {
 			var sessionVal = $("#session1 option:selected").val();
@@ -227,14 +230,14 @@ select {
 				shift.append("<option value='1'>13:00~14:00</option>");
 				shift.append("<option value='2'>14:00~15:00</option>");
 				shift.append("<option value='3'>15:00~16:00</option>");
-				shift.append("<option value=‘4'>16:00~17:00</option>");
-				shift.append("<option value=‘5'>17:00~18:00</option>");
+				shift.append("<option value='4'>16:00~17:00</option>");
+				shift.append("<option value='5'>17:00~18:00</option>");
 			} else if (sessionVal == "evening") {
 				shift.empty();
-				shift.append("<option value=‘6'>18:00~19:00</option>");
-				shift.append("<option value=‘7'>19:00~20:00</option>");
-				shift.append("<option value=‘8'>20:00~21:00</option>");
-				shift.append("<option value=‘9'>21:00~22:00</option>");
+				shift.append("<option value='6'>18:00~19:00</option>");
+				shift.append("<option value='7'>19:00~20:00</option>");
+				shift.append("<option value='8'>20:00~21:00</option>");
+				shift.append("<option value='9'>21:00~22:00</option>");
 			}
 		})
 		$("#session3").on("change", function() {
@@ -252,14 +255,14 @@ select {
 				shift.append("<option value='1'>13:00~14:00</option>");
 				shift.append("<option value='2'>14:00~15:00</option>");
 				shift.append("<option value='3'>15:00~16:00</option>");
-				shift.append("<option value=‘4'>16:00~17:00</option>");
-				shift.append("<option value=‘5'>17:00~18:00</option>");
+				shift.append("<option value='4'>16:00~17:00</option>");
+				shift.append("<option value='5'>17:00~18:00</option>");
 			} else if (sessionVal == "evening") {
 				shift.empty();
-				shift.append("<option value=‘6'>18:00~19:00</option>");
-				shift.append("<option value=‘7'>19:00~20:00</option>");
-				shift.append("<option value=‘8'>20:00~21:00</option>");
-				shift.append("<option value=‘9'>21:00~22:00</option>");
+				shift.append("<option value='6'>18:00~19:00</option>");
+				shift.append("<option value='7'>19:00~20:00</option>");
+				shift.append("<option value='8'>20:00~21:00</option>");
+				shift.append("<option value='9'>21:00~22:00</option>");
 			}
 		})
 		$('#city')
@@ -424,66 +427,83 @@ select {
 									});
 						});
 
-		$('#address')
-				.on(
-						"change",
-						function() {
-
-							var address = $('#city').val() + $('#region').val()
-									+ $('#address').val();
-// 							var mapimg = 'https://maps.googleapis.com/maps/api/staticmap?center='
-// 									+ address
-// 									+ '&zoom=17&size=600x400&maptype=roadmap&markers=color:red%7C'
-// 									+ address
-// 									+ '&key=AIzaSyAYD9w-VVl7VwL9mC1SPzvQmMw6Sxk3Ul0'
-// 							$('#mapimg').attr("src", mapimg);
+		$('#address').on("change",function() {
+							var address = $('#city').val() + $('#region').val()+ $('#address').val();
 							var fixedAdd = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAuwYed8DxRGhmTy44R5HGKich9J-dGs9s&q="
     						var locate = fixedAdd+address;
 							$("#googleMapping").attr("src",locate);
 						});
 
-		function initMap() {
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom : 8,
-				center : {
-					lat : -34.397,
-					lng : 150.644
-				}
-			});
-			var geocoder = new google.maps.Geocoder();
 
-			document.getElementById('address').addEventListener('change',
-					function() {
-						geocodeAddress(geocoder, map);
-					});
-		}
+		
+		$("#confirmPurchase").on("click",function(){
+			var name = $("#name").val();
+			var age = "<c:out value="${age}"/>";
+			var gender = "<c:out value="${gender}"/>";
+			var tel = $("#tel").val();
 
-		function geocodeAddress(geocoder, resultsMap) {
-			var address = $('#city').val() + $('#region').val()
-					+ $('#address').val();
-			console.log(address);
-			geocoder
-					.geocode(
-							{
-								'address' : address
-							},
-							function(results, status) {
-								if (status === 'OK') {
-									resultsMap
-											.setCenter(results[0].geometry.location);
-									var marker = new google.maps.Marker({
-										map : resultsMap,
-										position : results[0].geometry.location
-									});
-								} else {
-									alert('Geocode was not successful for the following reason: '
-											+ status);
-								}
-							});
-		}
-	</script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYD9w-VVl7VwL9mC1SPzvQmMw6Sxk3Ul0&callback=initMap">
+			var date11 = $("#date1").val();
+			var date12 = $("#session1 option:selected").val();
+			var date13 = $("#shift1 option:selected").val();
+
+			var date21 = $("#date2").val();
+			var date22 = $("#session2 option:selected").val();
+			var date23 = $("#shift2 option:selected").val();
+			
+			var date31 = $("#date3").val();
+			var date32 = $("#session3 option:selected").val();
+			var date33 = $("#shift3 option:selected").val();
+			
+			var pid = <c:out value="${model.id}"/>;
+			var insureAmounts = <c:out value="${model.insureAmount}"/>;
+			var discountedPremium = <c:out value="${model.premiumAfterDiscount}"/>;
+			var scorePoints = <c:out value="${model.getPoint}"/>;
+			
+			var city = $("#city option:selected").val();
+			var region = $("#region option:selected").val();
+			var road = $("#street option:selected").val();
+			var add =$("#address option:selected").text();
+			var address = city+region+road+add;
+			
+			var formData = new FormData();
+			formData.append("name",name);
+			formData.append("age",age);
+			formData.append("gender",gender);
+			formData.append("tel",tel);
+			formData.append("date_1_1",date11);
+			formData.append("date_1_2",date12);
+			formData.append("date_1_3",date13);
+			formData.append("date_2_1",date21);
+			formData.append("date_2_2",date22);
+			formData.append("date_2_3",date23);
+			formData.append("date_3_1",date31);
+			formData.append("date_3_2",date32);
+			formData.append("date_3_3",date33);
+			formData.append("pid",pid);
+			formData.append("insureAmount",insureAmounts);
+			formData.append("premiumAfterDiscount",discountedPremium);
+			formData.append("getPoint",scorePoints);
+			formData.append("address",address);
+			
+			if(name=="" && tel=="" && date11=="" && date12=="" && date13==""){
+				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
+			}else if(name!="" && tel!="" && date11!="" && date12!="" && date13!=null && name!=null && tel!=null && date11!=null && date12!=null && date13!=null){
+				$.ajax({
+					url:"/admin/recipient",
+					method:"POST",
+					data:formData,
+					processData:false,
+					contentType:false,
+					success:function(data){
+						alert("謝謝您對我們的產品有興趣，我們會在近幾日與您聯繫");
+					}
+				})
+			}else{
+				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
+			}
+			
+		})
+		
 		
 	</script>
 </body>

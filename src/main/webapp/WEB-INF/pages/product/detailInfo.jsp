@@ -267,7 +267,8 @@ span {
 							<input type="button" id="iWantToBuy"
 							class="btn btn-secondary iWantToBuy"
 							style="color: white; background-color: #5C8DEC;" value="我要購買">
-						</a> <a href="/recipient/add/1">我要購買</a>
+						</a> 
+<!-- 						<a href="/recipient/add/1">我要購買</a> -->
 					</div>
 				</div>
 			</div>
@@ -381,8 +382,8 @@ span {
 		var premiumAfterDiscount = $("#discountedPremium").val();
 		var getPoint = $("#scorePoints").val();
 		var url = "/recipient/add/"+productID+"/"+birth+"/"+gender+"/"+insureAmount+"/"+premiumAfterDiscount+"/"+getPoint;
-		alert(url);
-// 		$.get(url);		
+		$(this).attr("href",url);	
+		$(this).click();
 	});
 	</script>
 </body>
