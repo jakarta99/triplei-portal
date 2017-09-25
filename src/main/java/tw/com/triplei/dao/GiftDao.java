@@ -12,6 +12,8 @@ import tw.com.triplei.enums.GiftType;
 public interface GiftDao extends GenericDao<GiftEntity>{
 
 	public GiftEntity findById(long id);
+
+	public GiftEntity findByName(String name);
 	
 	@Query("SELECT g FROM GiftEntity g WHERE GIFT_TYPE = :giftType")
 	public List<GiftEntity> findByGiftType(@Param("giftType")String giftType);

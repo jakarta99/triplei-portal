@@ -52,6 +52,10 @@ public class GiftService extends GenericService<GiftEntity> {
 	public List<GiftEntity> getTypeTop3Hot(boolean hotGift){
 		return giftDao.findTop3ByHotGift(hotGift);
 	}
+	
+	public GiftEntity getByName(String name){
+		return giftDao.findByName(name);
+	}
 
 
 	@Override

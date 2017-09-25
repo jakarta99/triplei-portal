@@ -19,15 +19,12 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
 		<div>
-			<h3>積點商品管理</h3>
-			<div>
-          		<a href="<c:url value='/admin/gift/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
-            	<span class="glyphicon glyphicon-plus"></span>新增</a>
-      		</div>
+			<h3>積點商品訂單管理</h3>
+			
 			<div id="jsGrid"></div>
 			
 			<script>
-			    var BASE_URL = "${pageContext.request.contextPath}/admin/gift";
+			    var BASE_URL = "${pageContext.request.contextPath}/admin/gift/giftOrder";
 			 
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
@@ -62,36 +59,10 @@
 			        fields: [
 			            { name: '刪／修', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '品牌', name: "brand", type: "text", width: 150 },
 			            { title: '積點商品名稱', name: "name", type: "text", width: 150 },
-			            { title: '顏色/花樣', name: "colorAndType", type: "text", width: 150 },
-			            { title: '商品代碼', name: "code", type: "code", width: 150 },
-			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
-			            { title: '照片', name: "image1", type: "text", width: 150 ,itemTemplate: function(val) {return $("<img>").attr("src",val).css({ width: 80 })}},
-// 			            { title: '照片二', name: "image2", type: "text", width: 150 },
-// 			            { title: '照片三', name: "image3", type: "text", width: 150 },
-			            { title: '類別', name: "giftType", width: 150,type:"text",itemTemplate:function(data){
-			            	
-			            	if(data=="VOUCHERS"){
-								return $("<span></span>").text("禮劵");	
-							}else if(data=="FURNITURES"){
-								return $("<span></span>").text("傢俱，廚具");
-							}else if(data=="ELECTRONICS"){
-								return $("<span></span>").text("3C家電");
-							}else if(data=="OUTDOOR"){
-								return $("<span></span>").text("戶外運動");
-							}else if(data=="WOMAN"){
-								return $("<span></span>").text("女仕用品");
-							}else if(data=="MAN"){
-								return $("<span></span>").text("男仕用品");
-							}else if(data=="OTHERS"){
-								return $("<span></span>").text("其他");
-							}
-			            }
-			            },
-			            { title: '熱門商品', name: "hotGift", type: "checkbox", width: 150 },
-			            { title: '兌換日期', name: "exchangeDate", type: "text", width: 150 },
-			            { title: '備註', name: "remarks", type: "text", width: 150 }
+// 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
+			            { title: '數量', name: "quantity", type: "text", width: 150 },
+			            { title: '兌換日期', name: "orderTime", type: "text", width: 150 },
      
 			        ]
 			    });

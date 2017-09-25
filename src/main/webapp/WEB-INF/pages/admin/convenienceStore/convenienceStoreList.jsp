@@ -131,6 +131,11 @@
 						type : "text",
 						width : 150
 					}, {
+						title : '街道',
+						name : "street",
+						type : "text",
+						width : 150
+					}, {
 						title : '地址',
 						name : "address",
 						type : "text",
