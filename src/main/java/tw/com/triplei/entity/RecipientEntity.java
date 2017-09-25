@@ -30,6 +30,9 @@ public class RecipientEntity extends GenericEntity {
 	@Column(name="GENDER")
 	private String gender; //性別
 	
+	@Column(name="AGE")
+	private String age; //年齡
+	
 	@Column(name="TEL")
 	private String tel; //連絡電話
 	

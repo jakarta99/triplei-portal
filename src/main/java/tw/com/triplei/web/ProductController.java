@@ -393,6 +393,8 @@ public class ProductController {
 								double irr = irrCaculator.getIRR(product.getYear(), yearMoneyBack,
 										product.getPremiumAfterDiscount().doubleValue(),
 										product.getCashValue().doubleValue());
+								
+								product.setNet(BigDecimal.valueOf(product.getCashValue().doubleValue()-product.getTotalPay().doubleValue()));
 								// IRR
 								product.setIrr(BigDecimal.valueOf(irr).setScale(4, BigDecimal.ROUND_HALF_UP));
 								log.debug("irr{}", product.getIrr());

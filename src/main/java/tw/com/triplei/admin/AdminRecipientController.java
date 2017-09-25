@@ -106,7 +106,8 @@ public class AdminRecipientController {
 	
 	@PostMapping
 	public AjaxResponse<RecipientEntity> insert(final Model model
-			,@RequestParam("name") String name,@RequestParam("gender") String gender
+			,@RequestParam("name") String name
+			,@RequestParam("bdate") String Age,@RequestParam("gender") String gender
 			,@RequestParam("tel") String tel,@RequestParam("date_1_1") String date_1_1
 			,@RequestParam("date_1_2") String date_1_2,@RequestParam("date_1_3") String date_1_3
 			,@RequestParam("date_2_1") String date_2_1,@RequestParam("date_2_2") String date_2_2
