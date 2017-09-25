@@ -18,85 +18,183 @@
 </head>
 
 <body>
-	
-	<div class="container-fluid">
+
+	<div class="container-fluid"
+		style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div>
-			<div class="col-lg-4"
-				style="height: 100vh; display: table; table-layout: fixed;">
-				<div style="display: table-cell; vertical-align: middle;">
-					<h1>最專業的保險理財</h1>
-					<h1>讓你的財富開始起飛</h1>
-					<div>TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問</div>
-					<div>
-						<br />
-					</div>
-					<div class="col-md-12 text-center">
+			<div class="col-sm-4"
+				style="height: 100vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;">
+				<!-- 左邊白 -->
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">
+					<h1 style="font-size: 2vw; margin-top: 30vh;">最專業的保險理財</h1>
+					<h1 style="font-size: 2vw; margin-top: 10px; margin-bottom: 25px;">讓你的財富開始起飛</h1>
+					<div style="opacity: 0.8; margin-bottom: 7vh;">TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問</div>
+					<div class="col-md-12">
 						<button id="productBtn" name="productBtn"
-							class="btn btn-lg btn-primary">開始篩選儲蓄險</button>
+							class="btn btn-md btn-primary"
+							style="background-color: white; color: #5C8DEC; border-radius: 30px;">開始篩選儲蓄險</button>
 					</div>
 				</div>
+				<div class="col-sm-1"></div>
 			</div>
-			<div class="col-lg-8 bg-info"
-				style="height: 100vh; display: table; table-layout: fixed;">
-
-				<div style="display: table-cell; vertical-align: middle;">
-
-					After traversing the United States from Oregon in just 94 minutes,
-					the Great American Eclipse of 2017 leaves the United States at
-					South Carolina. After leaving the eastern coast, the Moon's shadow
-					passes over most of the Atlantic before ending at sunset near
-					Africa. But no other land mass, island or continent, is again
-					touched by totality. The path of the total solar eclipse lies
-					exclusively within the United States. According to eclipse
-					meteorologist Jay Anderson on his website eclipsophile.com, the
-					odds of clear skies in South Carolina are fair. If you want to see
-					totality in South Carolina, be prepared to quickly relocate based
-					on cloud conditions. If the weather forecast the day before is not
-					favorable, strongly consider driving to an adjacent state within
-					the path with a better forecast. A pro-active eclipse chaser can
-					increase her odds of success by studying the short-term weather
-					forecast before eclipse day and being prepared to relocate if
-					necessary. That being said, it is very possible that you can
-					successfully see totality in South Carolina. South Carolina will be
-					a significant destination for the eclipse because it will be the
-					nearest spot within the path of totality for at least 100 million
-					Americans in the Atlantic Seaboard and Florida.
+			<div class=" col-sm-8  text-center "
+				style="height: 100vh; background-color: #5C8DEC; padding-right: 0px; padding-left: 0px;">
+				<!--右邊藍 -->
+				<div class="col-sm-12"
+					style="height: 100%; display: flex; justify-content: center; flex-direction: column"
+					align='center'>
+					<img alt="" src="/resources/pic/首頁/首頁動畫/images/img_7.png"
+						style="width: 60%;">
 				</div>
-
-
 			</div>
+			<!-- 第二頁 -->
+			<div class="col-sm-6" style="height: 100vh;">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10">
+					<div class="col-sm-12"
+						style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh">
+						<span style="color: #000079; font-weight: bold;">HOT<a
+							style="font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px">
+								本月熱搜榜</a></span>
+					</div>
+
+					<div class="col-sm-12"
+						style="height: 80vh; display: flex; flex-direction: column;"
+						align='center'>
+						<div class="col-sm-12"
+							style="border: 1px #5C8DEC solid; height: 18vh; width: 34vw; margin-bottom: 10vh">a</div>
+						<div class="col-sm-12"
+							style="border: 1px #5C8DEC solid; height: 18vh; width: 34vw; margin-bottom: 10vh">a</div>
+						<div class="col-sm-12"
+							style="border: 1px #5C8DEC solid; height: 18vh; width: 34vw">a</div>
+					</div>
+				</div>
+				<div class="col-sm-1"></div>
+			</div>
+			<!--右半圖 -->
+			<div class="col-sm-6" style="height: 100vh;">
+				<div class="col-sm-12"
+					style="height: 100%; display: flex; justify-content: flex-end; flex-direction: column"
+					align='center'>
+					<img alt="" src="/resources/pic/首頁/首頁插圖.png" style="width: 100%;">
+				</div>
+			</div>
+
+			<!--第三頁 -->
+			<div class="col-sm-6" style="height: 100vh;">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-10">
+					<div class="col-sm-12"
+						style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh;">
+						<div class="col-sm-12" style="display: inline;">
+							<a style="color: #000079; font-weight: bold;">HOT</a> <a
+								style="font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">熱門文章</a>
+							<a style="color: #5C8DEC;">查看更多</a>
+						</div>
+					</div>
+
+					<div class="col-sm-12"
+						style="height: 80vh; display: flex; flex-direction: column;"
+						align='center'>
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw">a</div>
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">b</div>
+						</div>
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw">a</div>
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">b</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+			<!--右半邊 -->
+
+
+			<div class="col-sm-6"
+				style="height: 100vh; padding-right: 0px; padding-left: 0px">
+				<div class="col-sm-10">
+					<div class="col-sm-12" style="height: 17vh; padding-bottom: 3vh"></div>
+					<div class="col-sm-12"
+						style="height: 80vh; display: flex; flex-direction: column;"
+						align='center'>
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw">a</div>
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">b</div>
+						</div>
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw">a</div>
+							<div class="col-sm-12"
+								style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">b</div>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<!-- 第四頁 -->
+			<div class="col-sm-12" style="height: 100vh;">
+
+				<!-- 		<div class="col-sm-1"></div> -->
+<!-- 				<div class="col-sm-1"></div> -->
+<!-- 				<div class="col-sm-10"> -->
+					<div class="col-sm-12"
+						style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh;padding-left: 3vw">
+						<div class="col-sm-12" style="display: inline;">
+							<a style="color: #000079; font-weight: bold;">HOT</a> <a
+								style="font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">熱門新聞</a>
+							<a style="color: #5C8DEC;">查看更多</a>
+						</div>
+					</div>
+					<div class="col-sm-4"
+						style="height: 60vh;"><!--三個框框 -->
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;"></div>
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;"></div>
+						</div>
+						<div class="col-sm-1"></div>
+						</div>
+					<div class="col-sm-4"
+						style="height: 60vh;">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;"></div>
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;"></div>
+						</div>
+						<div class="col-sm-1"></div>
+						</div>
+					<div class="col-sm-4"
+						style="height: 60vh;">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-10" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;"></div>
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;"></div>
+						</div>
+						<div class="col-sm-1"></div>
+						</div>
+				</div>
+<!-- 				<div class="col-sm-1"></div> -->
+			</div>
+
+
+
 
 		</div>
-		<div>
-			<div class="col-lg-6">
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				保險公司 <br/>
-				
-			
-			</div>
-			<div class="col-lg-6">
-				文章 <br/>
-				文章 <br/>
-				文章 <br/>
-				文章 <br/>
-				文章 <br/>
-				文章 <br/>
-				文章 <br/>
-				<a href="/admin/convenienceStore/test">test</a>
-			</div>
-		</div>
-<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
-		<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+	</div>
+	<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
+	<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 	</div>
 </body>
 </html>

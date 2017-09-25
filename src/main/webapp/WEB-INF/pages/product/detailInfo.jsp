@@ -134,7 +134,7 @@ font-size:110%;
 			<div class="col-sm-3">
 			<span>IRR</span>
 			<br/>
-			<span>${modelf.irr}%</span>
+			<span><fmt:formatNumber value="${modelf.irr*100}" maxFractionDigits="2" />%</span>
 			</div>
 			<br/><br/>
 			</div>
@@ -145,7 +145,7 @@ font-size:110%;
 			<span>保額：${modelf.insureAmount} 萬</span>
 			</div>
 			<div class="col-sm-4">
-			<span>保費折扣：${modelf.discount}%</span>
+			<span>保費折扣：<fmt:formatNumber value="${modelf.discount}" maxFractionDigits="2" />%</span>
 			</div>
 			<div class="col-sm-5">
 			<span>首年保費：$${modelf.premiumAfterDiscount}</span>
@@ -185,7 +185,8 @@ font-size:110%;
 			<input id="tableExpand" type="button" value="+" class="btn btn-secondary" style="background-color:white;">
 			</div>
 			<div class="col-sm-12 text-center">
-			<div id="simpleTable">
+			<div id="simpleTable" >
+			<div style="height:30vh;overflow-y:scroll">
 			<table>
 			<tr>
 			<th class="col-sm-3 text-center">保單年度</th>
@@ -193,22 +194,23 @@ font-size:110%;
 			<th class="col-sm-3 text-center">總解約金/領回金額</th>
 			<th class="col-sm-3 text-center">IRR</th>
 			</tr>
-			<c:forEach var="i" begin="1" end="10">
+			<c:forEach begin="1" items="${totalCancelRatio}" var="pay">
 			<tr>
-			<td  class="col-sm-3">${i}</td>
-			<td class="col-sm-3">XX,${i}XX</td>
-			<td class="col-sm-3">X${i},XXX</td>
+			<td  class="col-sm-3"><fmt:formatNumber value="${pay[0]}" maxFractionDigits="0" /></td>
+			<td class="col-sm-3"><fmt:formatNumber value="${pay[1]}" maxFractionDigits="0" /></td>
+			<td class="col-sm-3"><fmt:formatNumber value="${pay[2]}" maxFractionDigits="0" /></td>
 			<c:choose>
-			<c:when test="${-1.0>0.0}">
-			<td class="col-sm-3">1.0%</td>
+			<c:when test="${pay[3]>0.0}">
+			<td class="col-sm-3"><fmt:formatNumber value="${pay[3]*100}" maxFractionDigits="2" />%</td>
 			</c:when>
 			<c:otherwise>
-			<td class="col-sm-3" style="color:red">-1.0%</td>
+			<td class="col-sm-3" style="color:red"><fmt:formatNumber value="${pay[3]*100}" maxFractionDigits="2" />%</td>
 			</c:otherwise>
 			</c:choose>
 			</tr>
 			</c:forEach>
 			</table>
+			</div>
 			</div>
 			</div>
 			</div>
@@ -238,29 +240,26 @@ font-size:110%;
 		</div>
 		</div>
 	</div>
+<%-- 	<c:forEach items="${totalIrrAndCancelRatio}" var="cancel"> --%>
+<%-- 	<p>${cancel[0]}</p> --%>
+<%-- 	<p>${cancel[1]}</p> --%>
+<%-- 	<p>${cancel[2]}</p> --%>
+<%-- 	</c:forEach> --%>
 	<script>
 	new Morris.Line({
 		  element: 'chartContainer',
 		  data: [
-			  	{ y: '0', a: 50, b: 70 },
-			  	{ y: '1', a: 100, b: 90 },
-			    { y: '2', a: 75,  b: 85 },
-			    { y: '3', a: 50,  b: 40 },
-			    { y: '4', a: 75,  b: 55 },
-			    { y: '5', a: 50,  b: 50 },
-			    { y: '6', a: 75,  b: 65 },
-			    { y: '7', a: 100, b: 110 },
-			    { y: '8', a: 50,  b: 40 },
-			    { y: '9', a: 75,  b: 85 },
-			    { y: '10', a: 95,  b: 90 },
-			    { y: '11', a: 75,  b: 120 },
+				<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
+				{ y: ${item[0]}, a: ${item[1]}, b: parseFloat(${item[2]*100}).toFixed(2)},
+</c:forEach>
 		  ],
 		  xkey: 'y',
 		  ykeys: ['a', 'b'],
-		  labels: ['IRR', '解約金'],
+		  labels: ['解約金', 'IRR(%)'],
 		  numLines:'5',
 		  resize:true,
 		  parseTime:false,
+		  ymin:'auto[-100]',
 		});
 	
 	var path = window.location.pathname;
@@ -318,11 +317,11 @@ font-size:110%;
 	
 	$("#changeAmount").on("click",function(){
 		if($('input[name="gender"]:checked').val()!="" && $('#bDate').val()!="" && $("#insureAmount").val()!=""){
-		var url = "/product/Adjustment/"+$('input[name="gender"]:checked').val()+"/"+$('#bDate').val()+"/"+${modelf.insureAmount}+"/"+${modelf.id}+"/"+yearCode;
+		var url = "/product/Adjustment/"+$('input[name="gender"]:checked').val()+"/"+$('#bDate').val()+"/"+$("#insureAmount").val()+"/"+${modelf.id}+"/"+yearCode;
 		alert(url);
-// 		$.get(url,function(newData){
-			
-// 		})
+		$.get(url,function(newData){
+			console.log(newData.responseText);
+		});
 		}else{
 			alert("請輸入性別，生日與保額");
 		}
@@ -335,7 +334,7 @@ font-size:110%;
 		$(".MaleInput").prop("checked",true);
 		$(".MaleImg").attr("src","/resources/pic/product/male-hover.png");
 	}
-
+	
 // 		var currency = $().val();
 // 		var insureAmount = $().val();
 // 		var premium = $().val();
