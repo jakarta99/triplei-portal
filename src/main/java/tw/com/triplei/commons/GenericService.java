@@ -21,6 +21,12 @@ public abstract class GenericService<T extends GenericEntity> {
 	public Page<T> getAll(Specification<T> spec, Pageable page) {
 		return getDao().findAll(spec, page);
 	}
+	
+	@Transactional(readOnly = true)
+	public Page<T> getByCondition(final List<SpecCriterion> criterions, final Pageable pageable) {
+		return getDao().findAll(new SpecQueryPattern<T>(criterions), pageable);
+	}
+	
 
 	@Transactional(readOnly = true)
 	public T getOne(Long id) {

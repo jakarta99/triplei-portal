@@ -10,23 +10,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.UserSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.commons.QueryOpType;
+import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.RoleEntity;
 import tw.com.triplei.entity.UserEntity;
-import tw.com.triplei.service.RoleService;
 import tw.com.triplei.service.AdminUserService;
+import tw.com.triplei.service.RoleService;
 
 @Slf4j
 @Controller
@@ -62,11 +66,28 @@ public class AdminUserController {
 	@GetMapping
 	@ResponseBody
 	public GridResponse<UserEntity> list(final Model model, final UserEntity form, @RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
+		
+		log.debug("form {}", form);
 		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
 		
 		Page<UserEntity> page;
 		try {
-			page = userService.getAll(new UserSpecification(), pageable);
+			
+			final List<SpecCriterion> criterions = Lists.newArrayList();
+			
+			if (!Strings.isNullOrEmpty(form.getAccountNumber())) {
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "accountNumber", form.getAccountNumber() + "%"));
+			}
+
+			if (!Strings.isNullOrEmpty(form.getName())) {
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "name", "%" + form.getName() + "%"));
+			}
+
+			if (form.getEnabled() != null) {
+				criterions.add(new SpecCriterion(QueryOpType.EQ, "enabled", form.getEnabled()));
+			}
+			
+			page = userService.getByCondition(criterions, pageable);
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
 		}

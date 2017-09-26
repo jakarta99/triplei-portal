@@ -12,7 +12,7 @@ import tw.com.triplei.entity.UserEntity;
 public class UserSpecification implements Specification<UserEntity> {
 
 	@Override
-	public Predicate toPredicate(Root<UserEntity> arg0, CriteriaQuery<?> arg1, CriteriaBuilder arg2) {
+	public Predicate toPredicate(Root<UserEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		return null;
 	}
 

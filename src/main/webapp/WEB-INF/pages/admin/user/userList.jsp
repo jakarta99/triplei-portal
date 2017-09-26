@@ -16,13 +16,56 @@
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
+		
 		<div>
 			
 			<h3>會員管理</h3>
+			
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+							<label for="Code" class="col-sm-1 control-label">帳號</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="Account"/>
+							</div>
+		          
+							<label for="Description" class="col-sm-1 control-label">姓名</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Name" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="Status" class="col-sm-1 control-label">狀態</label>
+							<div class="col-sm-2">
+								<select id="enabled" name="enabled" class="form-control">
+									<option value="">全部</option>
+									<option value="true">有效</option>
+									<option value="false">失效</option>
+								</select>
+							</div>
+						</div>							
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success" data-loading-text="loading..." type="button">搜尋</button>
+		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
+			
 
 			<div id="jsGrid"></div>
 			
 			<script>
+				$("#searchBtn").bind("click",function(){
+					$("#jsGrid").jsGrid("reset");
+				});
+				
+				$("#resetBtn").bind("click", function(){
+					$("#listForm")[0].reset();
+				});
+			
+			
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/user";
 			 
 			    $("#jsGrid").jsGrid({
@@ -39,11 +82,11 @@
 			        autoload: true,
 			 
 			        controller: {
-			            loadData: function (filter) {
+			            loadData: function () {
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: filter,
+			                    data: "pageIndex=1&pageSize=10&"+$("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false
 			                });
