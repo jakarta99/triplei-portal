@@ -62,7 +62,7 @@
 			            { title: '商品代碼', name: "product.code", type: "text", width: 50 },
 			            { title: '商品名稱', name: "product.localName", type: "text", width: 100 },
 			            { title: '保額', name: "product.insureAmount", type: "text", width: 50 },
-			            { title: '電話', name: "tel", type: "text", width: 80 },
+			            { title: '電話', name: "tel", type: "text", width: 100 },
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
 			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
@@ -72,6 +72,7 @@
 			            { title: '業務員', name: "user.name", type: "text", width: 80 },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
 			            { title: '訂單標號', name: "id", type: "text", width: 80 },
+			            { title: '會員帳號', name: "createdBy", type: "text", width: 200 },
 			        ]
 			    });
 			    

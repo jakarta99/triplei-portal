@@ -49,7 +49,7 @@ public class ArticleController {
 	public String goodRead(Model model){
 		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.GOODREAD);
 		model.addAttribute("articles",articles);
-		
+
 		return "/article/goodReadSection";
 	}
 	
@@ -86,6 +86,10 @@ public class ArticleController {
 		log.debug("id{}",id);
 		ArticleEntity article = articleService.getOne(id);
 		model.addAttribute("article",article);
+		log.debug("DB article clickCount{}",article.getClickCount());
+		article.setClickCount((article.getClickCount()+1));
+		log.debug("+clickCount{}",article.getClickCount());
+		articleService.update(article);
 		return "/article/readArticle";
 	}
 	
@@ -106,5 +110,5 @@ public class ArticleController {
 			log.error("/Count --> NullPointerException");
 		}
 	}
-	
+
 }

@@ -2,7 +2,11 @@ package tw.com.triplei.admin;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,6 +35,7 @@ import tw.com.triplei.dao.UserDao;
 import tw.com.triplei.entity.ConvenienceStoreEntity;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.RecipientEntity;
+import tw.com.triplei.entity.RoleEntity;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.service.ProductService;
 import tw.com.triplei.service.RecipientService;
@@ -62,9 +67,21 @@ public class AdminRecipientController {
 
 		RecipientEntity dbEntity = recipientService.getOne(id);
 		model.addAttribute("entity", dbEntity);
-
+		List<UserEntity> saleUsers = new ArrayList<>();
+		List<UserEntity> users = userDao.findAll();
+		for(UserEntity user : users){
+			Set<RoleEntity> roles = user.getRoles();
+			for(RoleEntity role : roles){
+				if(role.getCode().equals("ROLE_SALES")){
+					saleUsers.add(user);
+				}
+			}
+		}
+		model.addAttribute("sales", saleUsers);
 		return "/admin/recipient/recipientEdit";
 	}
+	
+	
 
 	@GetMapping
 	@ResponseBody

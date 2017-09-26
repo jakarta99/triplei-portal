@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -22,6 +24,7 @@ import tw.com.triplei.commons.GenericService;
 import tw.com.triplei.commons.Message;
 import tw.com.triplei.dao.ArticleDao;
 import tw.com.triplei.entity.ArticleEntity;
+import tw.com.triplei.enums.ArticleType;
 
 @Slf4j
 @Service
@@ -131,6 +134,29 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		}
 
 		return sortList;
+	}
+	
+	/*首頁用*/
+	public List<ArticleEntity> getHotArticles(boolean hotArticle, boolean storeShelves) {
+		List<ArticleEntity> editorList = dao.findByArticleTypeAndHotArticleAndStoreShelves(ArticleType.EDITOR_CHOICE, hotArticle,storeShelves);
+		List<ArticleEntity> goodList = dao.findByArticleTypeAndHotArticleAndStoreShelves(ArticleType.GOODREAD, hotArticle,storeShelves);
+		List<ArticleEntity> investmentList = dao.findByArticleTypeAndHotArticleAndStoreShelves(ArticleType.INVESTMENT_TIPS, hotArticle,storeShelves);
+		
+		List<ArticleEntity> mixedList = new ArrayList<ArticleEntity>();
+		mixedList.addAll(editorList);
+		mixedList.addAll(goodList);
+		mixedList.addAll(investmentList);
+		log.debug("mixedList{}",mixedList);
+		mixedList.sort(Comparator.comparingInt(ArticleEntity::getClickCount));
+		Collections.reverse(mixedList);
+		log.debug("reverse mixedList{}",mixedList);
+		if (mixedList.size() > 4) {
+		
+			mixedList = mixedList.subList(0, 4);
+			return mixedList;
+		} else {
+			return mixedList;
+		}
 	}
 
 }

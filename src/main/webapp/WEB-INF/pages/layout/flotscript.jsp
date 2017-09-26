@@ -211,7 +211,7 @@ var optionbisRatio = {//資本適足率
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
-	        max: 15,min:-4,
+	        max: 16,min:-4,
 	        tickColor: "#FAF7F7",                        
 	        color:"black"
 	    },
@@ -249,7 +249,7 @@ var optionreturnonAssets = {//資產報酬率
 	    bars: {
 	    	show: true,
 	    	align: "center",
-	        barWidth: 0.3,
+	        barWidth: 0.2,
 	        horizontal: true,
 	        fillColor: { colors: [{ opacity: 0.5 }, { opacity: 1}] },
 	        lineWidth: 1
@@ -260,7 +260,7 @@ var optionreturnonAssets = {//資產報酬率
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
-	        max: 2,min:-3,
+	        max: 0.05,min:-0.05,
 	        tickColor: "#FAF7F7",                        
 	        color:"black"
 	    },
@@ -309,7 +309,7 @@ var optionpersistencyRatio = {//保單繼續率
         axisLabelFontSizePixels: 12,
         axisLabelFontFamily: 'Verdana, Arial',
         axisLabelPadding: 10,
-        max: 1,
+        max: 1.3,
         tickColor: "#FAF7F7",                        
         color:"black"
     },
@@ -358,7 +358,7 @@ var optionlitigationRatio = {//訴訟率
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
-	        max: 1,
+	        max: 0.0013,
 	        tickColor: "#FAF7F7",                        
 	        color:"black"
 	    },
@@ -407,7 +407,7 @@ var optionappealRatio = {//申訴率
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
-	        max: 1,
+	        max: 0.0013,
 	        tickColor: "#FAF7F7",                        
 	        color:"black"
 	    },
