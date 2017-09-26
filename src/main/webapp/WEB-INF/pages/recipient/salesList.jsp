@@ -17,12 +17,12 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
 		<div>
-			<h3>訂單管理</h3>
+			<h3>訂單紀錄</h3>
 			<div id="jsGrid"></div>
 			
 			<script>
-			    var BASE_URL = "${pageContext.request.contextPath}/admin/recipient";
-			 
+			    var BASE_URL = "${pageContext.request.contextPath}/recipient";
+			 	var userName = "<c:out value="${userName}"/>";
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
 			        height: "500px",
@@ -44,7 +44,7 @@
 			            loadData: function (filter) {
 			                return $.ajax({
 			                    type: "GET",
-			                    url: BASE_URL,
+			                    url: BASE_URL +"/saless/"+userName,
 			                    data: filter,
 			                    dataType: "json",
 			                    cache: false,
@@ -54,7 +54,8 @@
 			        
 			 
 			        fields: [
-			            { name: '刪／修', width:60, itemTemplate:btns },
+			            { name: '修', width:60, itemTemplate:btns },
+			            { title: '訂單標號', name: "id", type: "text", width: 80 },
 			            { title: '名字', name: "name", type: "text", width: 50 },
 			            { title: '性別', name: "gender", type: "text", width: 60 },
 			            { title: '年齡', name: "age", type: "text", width: 30 },
@@ -62,7 +63,7 @@
 			            { title: '商品代碼', name: "product.code", type: "text", width: 50 },
 			            { title: '商品名稱', name: "product.localName", type: "text", width: 100 },
 			            { title: '保額', name: "product.insureAmount", type: "text", width: 50 },
-			            { title: '電話', name: "tel", type: "text", width: 100 },
+			            { title: '電話', name: "tel", type: "text", width: 80 },
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
 			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
@@ -71,30 +72,16 @@
 			            { title: '超商地址', name: "convenienceStoreEntity.address", type: "text", width: 80 },
 			            { title: '業務員', name: "user.name", type: "text", width: 80 },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
-			            { title: '訂單標號', name: "id", type: "text", width: 80 },
-			            { title: '會員帳號', name: "createdBy", type: "text", width: 200 },
 			        ]
 			    });
 			    
 			    function btns(value, row) {
-					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
-					
-					$delBtn.click(function() {
-						if (confirm('你確定要刪除這筆資料?')) {
-							$delBtn.button('loading');
-							$.delete_(BASE_URL+ "/" + row.id, function() {
-								$delBtn.button('reset');
-								$("#jsGrid").jsGrid("reset");
-							});
-						}
-					});
 					
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
-					$editBtn.attr("href", BASE_URL + "/" + row.id);
+					$editBtn.attr("href", BASE_URL + "/sales/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append("<br/>").append($editBtn).append("<br/>").append($delBtn);
+					return $("<div></div>").append("<br/>").append($editBtn).append("<br/>");
 				}
 			</script>
 		</div>

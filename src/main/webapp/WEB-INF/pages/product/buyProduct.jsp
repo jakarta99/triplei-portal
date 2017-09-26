@@ -498,6 +498,7 @@ select {
 					}
 				})
 				alert("SUCCESS");
+				location.href = "/product/list"
 			}else{
 				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}

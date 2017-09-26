@@ -1,9 +1,13 @@
 package tw.com.triplei.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,10 +28,14 @@ public class RecipientService extends GenericService<RecipientEntity> {
 	private RecipientDao dao;
 
 	@Override
-	public GenericDao<RecipientEntity> getDao() {
+	public RecipientDao getDao() {
 		return dao;
 	}
-
+	
+//	public Collection<RecipientEntity> findByUserName(String name){
+//		return dao.findByCreatedBy(name);
+//	}
+	
 	@Override
 	public List<Message> validateInsert(RecipientEntity entity) {
 		List<Message> messages = Lists.newArrayList();

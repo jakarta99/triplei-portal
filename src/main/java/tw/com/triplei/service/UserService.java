@@ -29,7 +29,7 @@ public class UserService extends GenericService<UserEntity> {
 	private UserDao userDao;
 
 	@Override
-	public GenericDao<UserEntity> getDao() {
+	public UserDao getDao() {
 		return userDao;
 	}
 

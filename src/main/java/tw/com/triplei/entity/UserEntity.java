@@ -72,6 +72,9 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	@Column(name = "EDIT_STATE")
 	private String editState; // 修改密碼 pw/ 修改會員資料 info
 	
+	@Column(name = "REMAIN_WISH_TIMES")
+	private Integer remainWishTimes;
+	
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
