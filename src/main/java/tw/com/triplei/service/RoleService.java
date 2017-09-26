@@ -18,7 +18,7 @@ public class RoleService extends GenericService<RoleEntity>{
 	private RoleDao dao;
 	
 	@Override
-	public GenericDao<RoleEntity> getDao() {
+	public RoleDao getDao() {
 		// TODO Auto-generated method stub
 		return dao;
 	}
