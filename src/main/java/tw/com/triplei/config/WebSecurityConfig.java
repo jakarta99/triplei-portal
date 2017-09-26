@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.antMatchers(
                 		"/", 
                 		"/resources/**",
+                		"/userfiles/**",
                 		"/insurer/**", 
                 		"/product/**", 
                 		"/gift/**", 

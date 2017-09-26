@@ -118,14 +118,15 @@ public class AdminRecipientController {
 			@RequestParam("date_2_2") String date_2_2, @RequestParam("date_2_3") String date_2_3,
 			@RequestParam("date_3_1") String date_3_1, @RequestParam("date_3_2") String date_3_2,
 			@RequestParam("date_3_3") String date_3_3, @RequestParam("address") String address,
-			@RequestParam("pid") long pid, @PathVariable("insureAmount") final String insureAmountS,
-			@PathVariable("premiumAfterDiscount") final String premiumAfterDiscountS,
-			@PathVariable("getPoint") final String getPointS) {
-
+			@RequestParam("pid") String pid, @RequestParam("insureAmount") String insureAmountS,
+			@RequestParam("premiumAfterDiscount") String premiumAfterDiscountS,
+			@RequestParam("getPoint") String getPointS) {
+		
+		
 		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 		try {
 			RecipientEntity form = new RecipientEntity();
-			ProductEntity productEntity = productService.getOneAll(pid);
+			ProductEntity productEntity = productService.getOneAll(Integer.parseInt(pid));
 
 			productEntity.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
 			productEntity.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
@@ -140,6 +141,7 @@ public class AdminRecipientController {
 			form.setBookedTime_3(date_3_1 + " " + date_3_2 + " " + date_3_3);
 			form.setProduct(productEntity);
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
+			log.debug("convenienceStoreEntity: {}", convenienceStoreEntity);
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
@@ -156,7 +158,7 @@ public class AdminRecipientController {
 			response.addException(e);
 		}
 
-		log.debug("{}", response);
+//		log.debug("{}", response);
 
 		return response;
 	}
@@ -164,15 +166,17 @@ public class AdminRecipientController {
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public AjaxResponse<RecipientEntity> update(final Model model, @RequestParam("pid") long pid,
-			@RequestParam(name = "userName") String userName, @RequestBody final RecipientEntity form) {
+			@RequestParam(name = "userName") String userName, @RequestParam("address") String address, @RequestBody final RecipientEntity form) {
 
 		log.debug("{}", form);
 		final AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 
 		try {
 			ProductEntity productEntity = productService.getOne(pid);
+			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			UserEntity user = userDao.findByName(userName);
 			form.setUser(user);
+			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setProduct(productEntity);
 			System.out.println(form);
 			form.setModifiedTime(new Timestamp(new Date().getTime()));

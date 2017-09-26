@@ -90,6 +90,15 @@
 												class="help-block"></span>
 										</div>
 									</div>
+									
+									<div class="form-group required">
+										<label for="age" class="col-md-2 control-label">年齡</label>
+										<div class="col-md-10">
+											<input type="text" readonly="readonly" class="form-control"
+												id="age" name="age" value="${entity.age}" /> <span
+												class="help-block"></span>
+										</div>
+									</div>
 
 									<div class="form-group required">
 										<label for="tel" class="col-md-2 control-label">電話</label>
@@ -132,6 +141,33 @@
 											<input type="text" readonly="readonly" class="form-control"
 												id="date" name="bookedTime_3" placeholder="bookedTime_3"
 												value="${entity.bookedTime_3}" /> <span class="help-block"></span>
+										</div>
+									</div>
+									
+									<div class="form-group required">
+										<label for="storeName" class="col-md-2 control-label">超商名稱</label>
+										<div class="col-md-10">
+											<input type="text" readonly="readonly" class="form-control"
+												id="storeName" name="storeName" placeholder="storeName"
+												value="${entity.convenienceStoreEntity.storeName}" /> <span class="help-block"></span>
+										</div>
+									</div>
+									
+									<div class="form-group required">
+										<label for="region" class="col-md-2 control-label">超商區域</label>
+										<div class="col-md-10">
+											<input type="text" readonly="readonly" class="form-control"
+												id="region" name="region" placeholder="region"
+												value="${entity.convenienceStoreEntity.region}" /> <span class="help-block"></span>
+										</div>
+									</div>
+									
+									<div class="form-group required">
+										<label for="address" class="col-md-2 control-label">超商地址</label>
+										<div class="col-md-10">
+											<input type="text" readonly="readonly" class="form-control"
+												id="address" name="address" placeholder="address"
+												value="${entity.convenienceStoreEntity.address}" /> <span class="help-block"></span>
 										</div>
 									</div>
 
@@ -198,8 +234,9 @@
 						$btn.button("loading");
 						var name = $("#userName").val();
 						var pid = $("#pid").val();
+						var address = $("#address").val();
 						$.put("<c:url value='/admin/recipient?userName=" + name
-								+ "&pid=" + pid + "'/>", "dataForm", function(
+								+ "&pid=" + pid + "&address=" + address + "'/>", "dataForm", function(
 								data) {
 							if (data.messages.length == 0) {
 								alert("SUCCESS");

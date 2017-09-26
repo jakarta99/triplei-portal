@@ -28,6 +28,7 @@ import tw.com.triplei.admin.spec.WishSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.commons.Message;
 import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.entity.WishEntity;
 import tw.com.triplei.service.WishService;
@@ -73,9 +74,15 @@ public class AdminWishController {
 			form.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			form.setCreatedBy(userDetails.getUsername());
-			
-			
-			final WishEntity insertResult = wishService.insert(form);
+			log.debug("CreatedBy {}",form.getCreatedBy());
+			log.debug("~~~~ {}",userDetails);
+//			boolean result = wishService.makeAWish(userDetails.getUsername());
+//			log.debug("1111 {}",result);
+//			if(!result){
+//				wishService.makeAWishPlus(userDetails.getUsername());
+//				return response;
+//			}
+			final WishEntity insertResult = wishService.insert(form);				
 			response.setData(insertResult);
 			
 
