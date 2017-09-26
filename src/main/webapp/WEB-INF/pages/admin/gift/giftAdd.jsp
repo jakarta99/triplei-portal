@@ -70,11 +70,12 @@
 									<label for="image1" class="col-md-2 control-label">選擇圖片</label>
 									<div class="col-md-10">
 										<input type="file" class="form-control" id="image1"
-											name="image1" placeholder="照片一" value="" /> <input
-											type="file" class="form-control" id="image2" name="image2"
-											placeholder="照片二" value="" /> <input type="file"
-											class="form-control" id="image3" name="image3"
-											placeholder="照片三" value="" />
+											name="image1" placeholder="照片一" value="" /> 
+<!-- 											<input -->
+<!-- 											type="file" class="form-control" id="image2" name="image2" -->
+<!-- 											placeholder="照片二" value="" /> <input type="file" -->
+<!-- 											class="form-control" id="image3" name="image3" -->
+<!-- 											placeholder="照片三" value="" /> -->
 										<div class="text-danger"></div>
 										<div class="text-danger"></div>
 									</div>
@@ -172,12 +173,12 @@
 			$.each($("input[type='file']")[0].files, function(i, file) {
 				formData.append('upload-file', file);
 			});
-			$.each($("input[type='file']")[1].files, function(i, file) {
-				formData.append('upload-file1', file);
-			});
-			$.each($("input[type='file']")[2].files, function(i, file) {
-				formData.append('upload-file2', file);
-			});
+// 			$.each($("input[type='file']")[1].files, function(i, file) {
+// 				formData.append('upload-file1', file);
+// 			});
+// 			$.each($("input[type='file']")[2].files, function(i, file) {
+// 				formData.append('upload-file2', file);
+// 			});
 			$.ajax({
 				url : "<c:url value='/admin/gift'/>",
 				method : "POST",

@@ -13,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.GenericDao;
 import tw.com.triplei.commons.GenericService;
 import tw.com.triplei.commons.Message;
+import tw.com.triplei.dao.UserDao;
 import tw.com.triplei.dao.WishDao;
+import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.entity.WishEntity;
 
 @Slf4j
@@ -22,6 +24,9 @@ public class WishService extends GenericService<WishEntity> {
 
 	@Autowired
 	private WishDao dao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Override
 	public GenericDao<WishEntity> getDao() {
@@ -39,6 +44,30 @@ public class WishService extends GenericService<WishEntity> {
 		return messages;
 		// return null;
 	}
+	
+//	public boolean makeAWish(String accountNumber){
+//		UserEntity user = userDao.findByAccountNumber(accountNumber);
+//		try {
+//			int a = user.getRemainWishTimes()-1;
+//		} catch (Exception e) {
+//			log.debug("hihihihihihi{}");
+//			user.setRemainWishTimes(0);
+//		}
+//		if(user.getRemainWishTimes()-1>=0){
+//			log.debug("許願前:{}",user.getRemainWishTimes());
+//			user.setRemainWishTimes(user.getRemainWishTimes()-1);
+//			log.debug("許願後:{}",user.getRemainWishTimes());
+//			return true;
+//		}else{
+//			log.debug("沒得許願:{}");
+//			return false;			
+//		}
+//	}
+//	public void makeAWishPlus(String accountNumber){
+//		UserEntity user = userDao.findByAccountNumber(accountNumber);
+//		user.setRemainWishTimes(1);
+//		log.debug("沒得許願次數+1:{}",user.getRemainWishTimes());
+//	}
 
 	@Override
 	public List<Message> validateUpdate(WishEntity entity) {

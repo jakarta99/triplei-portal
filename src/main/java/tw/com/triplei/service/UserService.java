@@ -113,6 +113,14 @@ public class UserService extends GenericService<UserEntity> {
 			dbUserEntity.setGender(entity.getGender());
 		}
 		
+		if(!StringUtils.isBlank(entity.getTel())){
+			dbUserEntity.setTel(entity.getTel());
+		}
+		
+		if(entity.getBirthdate()!=null){
+			dbUserEntity.setBirthdate(entity.getBirthdate());
+		}
+		
 		
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);

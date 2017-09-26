@@ -22,7 +22,7 @@
 
 <body>
 
-	<div id="wrap" style="margin-top: 30px;">
+	<div id="wrap" >
 	<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding:0;width:100%;height:100%;color:white;">
@@ -53,7 +53,7 @@
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
 									<div style="height: 240px; width: 300px;">
-										<p style="text-align: center;">圖片:<img src="${modelh.image1}"></p>
+										<img style="height: 200px; width: 200px;" src='<c:url value="${modelh.image1}"/>'>
 									</div>
 									<div>
 									<div class = "col-md-8" style="height: 20px; ">
@@ -99,7 +99,7 @@
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
 									<div style="height: 240px; width: 300px;">
-										<p style="text-align: center;">圖片:<img src="${modelv.image1}"></p>
+										<p style="text-align: center;">圖片:<br/><img style="height: 200px; width: 200px;" src='<c:url value="${modelv.image1}"/>'></p>
 									</div>
 									<div>
 									<div class = "col-md-8" style="height: 20px;">
@@ -107,7 +107,7 @@
 										<p style="text-align: center;">商品兌換點數:${modelv.bonus}</p>
 									</div>
 									<div class = "col-md-4" style="height: 20px; ">
-										<p style="text-align: center;">商品兌換點數:${modelv.bonus}</p>
+										<p id = "placeOrder" class = "btn btn-sm btn-primary" style="text-align: center;">立即兌換</p>
 									</div>
 									</div>
 								</div></td>
@@ -247,6 +247,28 @@
 	</div>
 	</div>
 </div>
+
+<div id="dialog" title="Basic dialog">
+  <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
+<script type="text/javascript">
+  $('#placeOrder').on( 'click', function(){
+	  $( "#dialog" ).dialog( "open" );  
+  });
+  
+  $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "blind",
+        duration: 1000
+      }
+    });
+</script>
 </body>
 </html>
 

@@ -29,10 +29,7 @@ public class GiftOrderEntity extends GenericEntity {
 	
 	@Column(name = "QUANTITY")
 	private int quantity;
-	
-	
-//	@ManyToOne
-//	@Column(name = "NAME")
-//	private GiftEntity giftEntity;
-	
+		
+	@Column(name = "Gift")
+	private GiftEntity giftEntity;
 }

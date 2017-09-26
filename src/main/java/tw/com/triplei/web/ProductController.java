@@ -46,11 +46,6 @@ public class ProductController {
 	public String list(Model model) {
 		return "/product/list";
 	}
-	
-	@RequestMapping("/detailInfo")
-	public String detailInfo(Model model) {
-		return "/product/detailInfo";
-	}
 
 	@GetMapping("/{id}/{gender}/{bDate}/{premium}/{yearCode}")
 	public String detailInfo(@PathVariable("id") String id, @PathVariable("gender") String gender1,
@@ -319,8 +314,6 @@ public class ProductController {
 		while (ip.hasNext()) {
 			ProductPremiumRatio productPremiumRatio = (ProductPremiumRatio) ip.next();
 			if (productPremiumRatio.getInsAge() == age && productPremiumRatio.getGender().equals(gender)) {
-				log.debug("productPremiumRatio.getInsAge(){}", productPremiumRatio.getInsAge());
-				log.debug("productPremiumRatio.getGender(){}", productPremiumRatio.getGender());
 				Iterator ih = product.getHighDiscountRatios().iterator();
 				while (ih.hasNext()) {
 					ProductHighDiscountRatio productHighDiscountRatio = (ProductHighDiscountRatio) ih.next();
@@ -337,6 +330,12 @@ public class ProductController {
 						log.debug("折扣後保費{}", product.getPremiumAfterDiscount());
 						// 折扣趴數
 						product.setDiscount(productHighDiscountRatio.getDiscountRatio());
+						//總繳金額
+						if(yearMoneyBack<=product.getYear()){
+							product.setTotalPay(BigDecimal.valueOf(product.getPremiumAfterDiscount().doubleValue()*yearMoneyBack));
+						}else{
+							product.setTotalPay(BigDecimal.valueOf(product.getPremiumAfterDiscount().doubleValue()*product.getYear()));
+						}
 						// 可獲點數
 						product.setGetPoint(
 								BigDecimal
@@ -358,27 +357,31 @@ public class ProductController {
 									// 各年解約金
 									double cancelRatioPerYear = cancelRatio.doubleValue() * insureAmount.doubleValue();
 									// IRR
-									double irr = irrCaculator.getIRR(product.getYear(), yearMoneyBack,
-											insureAmount.doubleValue()
-													* productPremiumRatio.getPremiumRatio().doubleValue()
-													* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue()),
+									double irr = irrCaculator.getIRR(product.getYear(), i,
+											product.getPremiumAfterDiscount().doubleValue(),
 													cancelRatioPerYear);
 									double[] irrAndCancelRatio = {(double) i, BigDecimal.valueOf(cancelRatioPerYear).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(), BigDecimal.valueOf(irr).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-									totalIrrAndCancelRatio.add(irrAndCancelRatio);
+									if(cancelRatioPerYear!=0){
+										totalIrrAndCancelRatio.add(irrAndCancelRatio);	
+									}
 
 									// 各年總繳金額
 									if (i <= product.getYear()) {
 										double PremiumAfterDiscountPerYear = product.getPremiumAfterDiscount()
 												.doubleValue() * i;
 										double[] form = { (double) i, PremiumAfterDiscountPerYear, cancelRatioPerYear,
-												irr };
-										totalForm.add(form);
+												BigDecimal.valueOf(irr).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
+										if(cancelRatioPerYear!=0){
+											totalForm.add(form);											
+										}
 									} else {
 										double PremiumAfterDiscountPerYear = product.getPremiumAfterDiscount()
 												.doubleValue() * product.getYear();
 										double[] form = { (double) i, PremiumAfterDiscountPerYear, cancelRatioPerYear,
-												irr };
-										totalForm.add(form);
+												BigDecimal.valueOf(irr).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
+										if(cancelRatioPerYear!=0){
+											totalForm.add(form);											
+										}
 									}
 								}
 								BigDecimal cancelRatio = (BigDecimal) MethodUtils.invokeMethod(productCancelRatio,
@@ -388,9 +391,10 @@ public class ProductController {
 										BigDecimal.valueOf(cancelRatio.doubleValue() * insureAmount.doubleValue()));
 								log.debug("第n年解約金額{}", product.getCashValue());
 								double irr = irrCaculator.getIRR(product.getYear(), yearMoneyBack,
-										insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()
-												* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue()),
-										cancelRatio.doubleValue());
+										product.getPremiumAfterDiscount().doubleValue(),
+										product.getCashValue().doubleValue());
+								
+								product.setNet(BigDecimal.valueOf(product.getCashValue().doubleValue()-product.getTotalPay().doubleValue()));
 								// IRR
 								product.setIrr(BigDecimal.valueOf(irr).setScale(4, BigDecimal.ROUND_HALF_UP));
 								log.debug("irr{}", product.getIrr());
@@ -412,7 +416,15 @@ public class ProductController {
 		model.addAttribute("modelf", product);
 		model.addAttribute("totalCancelRatio", totalForm);
 		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
-		return "redirect:product/detailInfo";
+		Iterator iif = totalForm.iterator();
+		while(iif.hasNext()){
+			log.debug("totalForm{}",iif.next());
+		}
+		Iterator iiff = totalIrrAndCancelRatio.iterator();
+		while(iiff.hasNext()){
+			log.debug("totalIrrAndCancelRatio{}",iiff.next());
+		}
+		return "/product/detailInfo";
 	}
 
 	@RequestMapping(value = "getProduct/{gender}/{bDate}/{currency}/{paymentMethod}/{interestRateType}/{premium}/{year}/{yearCode}", method = RequestMethod.GET)

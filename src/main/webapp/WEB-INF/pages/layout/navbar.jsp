@@ -73,7 +73,7 @@ font-size:95%;
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="color:white">禮品訂單管理<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							
-							<li><a href="#">訂單管理</a></li>
+							<li><a href="/admin/gift/giftOrder/list">訂單管理</a></li>
 							<li><a href="/admin/gift/list">積點商品上架</a></li>
 							<li><a href="/admin/wish/list">許願池查詢</a></li>
 <!-- 							<li><a href="#">XXXX</a></li> -->

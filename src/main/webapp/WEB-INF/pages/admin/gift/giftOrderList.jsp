@@ -12,16 +12,19 @@
 <title>Triple i</title>
 
 </head>
+
 <body>
+	
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
 		<div>
-			<h3>訂單管理</h3>
+			<h3>積點商品訂單管理</h3>
+			
 			<div id="jsGrid"></div>
 			
 			<script>
-			    var BASE_URL = "${pageContext.request.contextPath}/admin/recipient";
+			    var BASE_URL = "${pageContext.request.contextPath}/admin/gift/giftOrder";
 			 
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
@@ -47,7 +50,7 @@
 			                    url: BASE_URL,
 			                    data: filter,
 			                    dataType: "json",
-			                    cache: false,
+			                    cache: false
 			                });
 			            },
 			        },
@@ -55,23 +58,12 @@
 			 
 			        fields: [
 			            { name: '刪／修', width:60, itemTemplate:btns },
-			            { title: '名字', name: "name", type: "text", width: 50 },
-			            { title: '性別', name: "gender", type: "text", width: 60 },
-			            { title: '年齡', name: "age", type: "text", width: 30 },
-			            { title: '公司名稱', name: "product.insurer.shortName", type: "text", width: 60 },
-			            { title: '商品代碼', name: "product.code", type: "text", width: 50 },
-			            { title: '商品名稱', name: "product.localName", type: "text", width: 100 },
-			            { title: '保額', name: "product.insureAmount", type: "text", width: 50 },
-			            { title: '電話', name: "tel", type: "text", width: 80 },
-			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
-			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
-			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
-			            { title: '超商名稱', name: "convenienceStoreEntity.storeName", type: "text", width: 80 },
-			            { title: '超商區域', name: "convenienceStoreEntity.region", type: "text", width: 80 },
-			            { title: '超商地址', name: "convenienceStoreEntity.address", type: "text", width: 80 },
-			            { title: '業務員', name: "user.name", type: "text", width: 80 },
-			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
-			            { title: '訂單標號', name: "id", type: "text", width: 80 },
+						{ name: "id", visible: false},
+			            { title: '積點商品名稱', name: "name", type: "text", width: 150 },
+// 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
+			            { title: '數量', name: "quantity", type: "text", width: 150 },
+			            { title: '兌換日期', name: "orderTime", type: "text", width: 150 },
+     
 			        ]
 			    });
 			    
@@ -80,7 +72,7 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('你確定要刪除這筆資料?')) {
+						if (confirm('Are You Sure Want to Delete?')) {
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
 								$delBtn.button('reset');
@@ -93,10 +85,15 @@
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append("<br/>").append($editBtn).append("<br/>").append($delBtn);
+					return $("<div></div>").append($editBtn).append("<br/>").append($delBtn);
 				}
+
 			</script>
+
 		</div>
 	</div>
+	
+	
+	
 </body>
 </html>
