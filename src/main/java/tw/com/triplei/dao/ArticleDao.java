@@ -14,4 +14,5 @@ public interface ArticleDao extends GenericDao<ArticleEntity> {
 	public ArticleEntity findById(Long Id);
 	
 	public List<ArticleEntity> findByArticleTypeAndHotArticleAndStoreShelves(Enum articleType, boolean hotArticle, boolean storeShelves);
+
 }
