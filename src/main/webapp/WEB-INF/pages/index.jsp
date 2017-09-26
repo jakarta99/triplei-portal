@@ -37,7 +37,7 @@ p{
 				<h1 style="font-size: 2vw; margin-top: 10px; margin-bottom: 25px;">讓你的財富開始起飛</h1>
 					<div style="opacity: 0.8; margin-bottom: 7vh;">TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問</div>
 					<div class="col-md-12">
-						<a href="#">
+						<a href="/product/list">
 							<button id="productBtn" name="productBtn" class="btn btn-md btn-primary" style="background-color: white; color: #5C8DEC; border-radius: 30px;">開始篩選儲蓄險</button>
 						</a>
 					</div>
@@ -90,20 +90,20 @@ p{
 					<div id="reloadThis" class="col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
 						<div class="col-sm-12" style="padding-left: 0px">
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw;color:black">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[0].bannerImage}" /></div>
+								<a href="/article/readArticle/read/${hotissue[0].id}"><div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[0].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">
 								<h4>${hotissue[0].title}</h4>
-								<p>${hotissue[0].introduction}</p>
+								<p>${hotissue[0].introduction}</p></a>
 							</div>
 						</div>
 						<div class="col-sm-12" style="padding-left: 0px">
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[1].bannerImage}" /></div>
+								<a href="/article/readArticle/read/${hotissue[1].id}"><div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[1].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">
 								<h4>${hotissue[1].title}</h4>
-								<p>${hotissue[1].introduction}</p>
+								<p>${hotissue[1].introduction}</p></a>
 							</div>
 						</div>
 					</div>
@@ -118,20 +118,20 @@ p{
 					<div class="col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
 						<div class="col-sm-12" style="padding-left: 0px">
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[2].bannerImage}" /></div>
+								<div style="margin-top:7%;"><a href="/article/readArticle/read/${hotissue[2].id}"><img style="width:100%;" src="${hotissue[2].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">
 								<h4>${hotissue[2].title}</h4>
-								<p>${hotissue[2].introduction}</p>
+								<p>${hotissue[2].introduction}</p></a>
 							</div>
 						</div>
 						<div class="col-sm-12" style="padding-left: 0px">
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh; width: 34vw">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[3].bannerImage}" /></div>
+								<div style="margin-top:7%;"><a href="/article/readArticle/read/${hotissue[3].id}"><img style="width:100%;" src="${hotissue[3].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh; width: 34vw">
 								<h4>${hotissue[3].title}</h4>
-								<p>${hotissue[3].introduction}</p>
+								<p>${hotissue[3].introduction}</p></a>
 							</div>
 						</div>
 					</div>
@@ -156,11 +156,11 @@ p{
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;">
-							<div style="margin-top:7%;"><img style="width:100%;" src="${news[0].bannerImage}" /></div>
+							<div style="margin-top:7%;"><a href="/article/readArticle/read/${news[0].id}"><img style="width:100%;" src="${news[0].bannerImage}" /></div>
 						</div>
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
 							<h4>${news[0].title}</h4>
-							<p>${news[0].introduction}</p>
+							<p>${news[0].introduction}</p></a>
 						</div>
 						</div>
 						<div class="col-sm-1"></div>
@@ -170,11 +170,11 @@ p{
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;">
-							<div style="margin-top:7%;"><img style="width:100%;" src="${news[1].bannerImage}" /></div>
+							<div style="margin-top:7%;"><a href="/article/readArticle/read/${news[1].id}"><img style="width:100%;" src="${news[1].bannerImage}" /></div>
 						</div>
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
 							<h4>${news[1].title}</h4>
-							<p>${news[1].introduction}</p>
+							<p>${news[1].introduction}</p></a>
 						</div>
 						</div>
 						<div class="col-sm-1"></div>
@@ -184,11 +184,11 @@ p{
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;">
-							<div style="margin-top:7%;"><img style="width:100%;" src="${news[2].bannerImage}" /></div>
+							<div style="margin-top:7%;"><a href="/article/readArticle/read/${news[2].id}"><img style="width:100%;" src="${news[2].bannerImage}" /></div>
 						</div>
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
 							<h4>${news[3].title}</h4>
-							<p>${news[3].introduction}</p>
+							<p>${news[3].introduction}</p></a>
 						</div>
 						</div>
 						<div class="col-sm-1"></div>
