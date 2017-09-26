@@ -5,6 +5,7 @@
 <link href='<c:url value="/resources/bootstrap-3.3.7/dist/css/bootstrap.min.css"/>' rel="stylesheet">
 <link href='<c:url value="/resources/jsgrid-1.5.3/jsgrid.min.css"/>' rel="stylesheet">
 <link href='<c:url value="/resources/jsgrid-1.5.3/jsgrid-theme.min.css"/>' rel="stylesheet">
+<link href='<c:url value="/resources/jquery/jquery-ui.1.11.2.css"/>' rel="stylesheet">
  
 
 

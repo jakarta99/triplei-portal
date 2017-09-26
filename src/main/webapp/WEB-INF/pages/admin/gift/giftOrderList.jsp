@@ -59,7 +59,7 @@
 			        fields: [
 			            { name: '刪／修', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '積點商品名稱', name: "name", type: "text", width: 150 },
+			            { title: '積點商品名稱', name: "giftEntity.name", type: "text", width: 150 },
 // 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
 			            { title: '數量', name: "quantity", type: "text", width: 150 },
 			            { title: '兌換日期', name: "orderTime", type: "text", width: 150 },

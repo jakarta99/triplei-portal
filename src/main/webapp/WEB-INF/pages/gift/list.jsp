@@ -99,12 +99,12 @@
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
 									<div style="height: 240px; width: 300px;">
-										<p style="text-align: center;">圖片:<br/><img style="height: 200px; width: 200px;" src='<c:url value="${modelv.image1}"/>'></p>
+										<p style="text-align: center;">圖片:<br/><img id="image" style="height: 200px; width: 200px;" src='<c:url value="${modelv.image1}"/>'></p>
 									</div>
 									<div>
-									<div class = "col-md-8" style="height: 20px;">
-										<p style="text-align: center;">積點商品名稱:${modelv.name}</p>
-										<p style="text-align: center;">商品兌換點數:${modelv.bonus}</p>
+									<div  class = "col-md-8" style="height: 20px;">
+										<span>積點商品名稱:    </span><span id="giftName" style="text-align: center;">${modelv.name}</span></br>
+										<span>商品兌換點數:    </span><span id="points" style="text-align: center;">${modelv.bonus}</span>
 									</div>
 									<div class = "col-md-4" style="height: 20px; ">
 										<p id = "placeOrder" class = "btn btn-sm btn-primary" style="text-align: center;">立即兌換</p>
@@ -184,7 +184,7 @@
 									<div class = "col-md-4" style="height: 20px; ">
 										<p style="text-align: center;">商品兌換點數:${modelw.bonus}</p>
 									</div>
-									</div>
+									</div> 
 								</div></td>
 						</c:forEach>
 					</tr>
@@ -198,7 +198,7 @@
 						<c:forEach items="${modelm}" var="modelm">
 							<td style="border: 1px solid; margin-left: 5px"><div
 									style="height: 300px; width: 300px;">
-									<div style="height: 240px; width: 300px;">
+									<div style="height: 240px; width: 300px;">				
 										<p style="text-align: center;">圖片:${modelm.image1}</p>
 									</div>
 									<div>
@@ -249,11 +249,47 @@
 </div>
 
 <div id="dialog" title="Basic dialog">
-  <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+      <div>
+        <div>
+            <img id="orderImage" style="height: 200px; width: 200px;" >
+        </div>
+        <div>
+            <span>積點商品名稱:    </span>
+            <span id="orderName" style="text-align: center;"></span>
+        </div>
+        <div>
+            <span>商品兌換點數:    </span>
+            <span id="orderPoint" style="text-align: center;"></span>
+        </div>
+        <div>
+        <label for="quantity1" class="">請輸入數量:</label>	
+			<input type="text" class="" id="quantity1"
+				name="quantity1" placeholder="quantity"/> 
+        </div>
+        <div>
+            <a href="#" class="btn btn-lg btn-primary btn-block"
+               data-loading-text="Loading" id="saveButton">確認購買</a>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
+$( function() {
+	var image;
+	var giftName;
+	var points;
+	var quantity1;
+	
   $('#placeOrder').on( 'click', function(){
+	   image =  $(this).parents().parents().find("#image").attr("src");
+	   giftName =  $(this).parent().siblings().find("#giftName").text();
+	   points =  $(this).parent().siblings().find("#points").text();
+	   console.log(image);
+	   console.log(giftName);
+	   console.log(points);
+	   $("orderImage").attr("src" , image);
+	   $("orderName").text(giftName);
+	   $("orderPoint").text(points);
 	  $( "#dialog" ).dialog( "open" );  
   });
   
@@ -268,6 +304,28 @@
         duration: 1000
       }
     });
+  
+  $("#saveButton").on("click", function() {
+		var $btn = $(this);
+		$btn.button("loading");
+		var datas = {};
+		quantity1 = $("#quantity1").val();
+		console.log(quantity1);
+		datas.giftName = giftName;
+		datas.quantity1 = quantity1;
+		
+		$.ajax({
+			url : "<c:url value='/gift/giftOrder/addOrder'/>",
+			method : "POST",
+			data : datas,
+			dataType : "json",
+			success : function(data) {
+				alert("SUCCESS");
+			}
+		})
+		$btn.button("reset");
+	});
+});
 </script>
 </body>
 </html>
