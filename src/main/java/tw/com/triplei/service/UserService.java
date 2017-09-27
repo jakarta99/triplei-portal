@@ -59,7 +59,7 @@ public class UserService extends GenericService<UserEntity> {
 		}
 
 		// 更新密碼
-		if(entity.getEditState().equals("pw")){
+		if(entity.getEditState().equals("pw") && StringUtils.isBlank(dbEntity.getProviderUserId())){
 			// TODO FB登入者不能使用密碼變更
 			
 			if (StringUtils.isBlank(entity.getOrgPassword())) {
@@ -85,6 +85,8 @@ public class UserService extends GenericService<UserEntity> {
 					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
 				}
 			}
+		} else {
+			messages.add(Message.builder().code("checkPassword").value("FB登入使用者不允許在此變更密碼").build());
 		}
 		
 		

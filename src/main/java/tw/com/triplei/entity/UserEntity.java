@@ -76,7 +76,17 @@ public class UserEntity extends GenericEntity implements SocialUserDetails {
 	private String editState; // 修改密碼 pw/ 修改會員資料 info
 	
 	@Column(name = "REMAIN_WISH_TIMES")
-	private Integer remainWishTimes;
+	private Boolean remainWishTimes; //剩餘許願池次數
+	
+	@Column(name = "REMAIN_POINT")
+	private Integer remainPoint; //剩餘點數
+	
+	@Column(name = "AUDITTING_POINT")
+	private Integer audittingPoint; //審核中點數
+	
+	@Column(name = "EXCHANGED_POINT")
+	private Integer exchangedPoint; //已兌換點數
+	
 	
 	// FB social
 	@Column(name = "PROVIDER")
@@ -145,14 +155,20 @@ public class UserEntity extends GenericEntity implements SocialUserDetails {
 
 	@Override
 	public String toString() {
-		return "UserEntity [accountNumber=" + accountNumber + ", password=" + password + ", name=" + name + ", email="
-				+ email + ", enabled=" + enabled + ", roles=" + roles + "]";
+		return "UserEntity [accountNumber=" + accountNumber + ", orgPassword=" + orgPassword + ", password=" + password
+				+ ", checkPassword=" + checkPassword + ", name=" + name + ", email=" + email + ", gender=" + gender
+				+ ", tel=" + tel + ", birthdate=" + birthdate + ", enabled=" + enabled + ", registeredCode="
+				+ registeredCode + ", editState=" + editState + ", remainWishTimes=" + remainWishTimes
+				+ ", remainPoint=" + remainPoint + ", audittingPoint=" + audittingPoint + ", exchangedPoint="
+				+ exchangedPoint + ", roles=" + roles + "]";
 	}
+
 
 	@Override
 	public String getUserId() {
 		return providerUserId;
 	}
+
 	
 	// 
 }

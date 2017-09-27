@@ -73,6 +73,7 @@
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
 			            { title: '訂單標號', name: "id", type: "text", width: 80 },
 			            { title: '會員帳號', name: "createdBy", type: "text", width: 200 },
+			            { title: '可獲得點數', name: "canGetPoint", type: "text", width: 80 },
 			        ]
 			    });
 			    

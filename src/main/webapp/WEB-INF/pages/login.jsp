@@ -53,14 +53,16 @@
 							</div>
 							
 							<form action="<c:url value="/auth/facebook" />" method="GET" role="form" name="fbForm" id="fbForm">
-								<input type="hidden" name="scope" value="public_profile,email" />
-								<!-- <input type="submit" value="">-->
-								<button type="button" name="submit_Btn" id="submit_Btn" onClick="document.fbForm.submit()" 
-									style="background-color:white;width:250px;height:150px;border:2px blue none">
-								<img  src="/resources/pic/registered/fb.png" width="100%"></button>
+								<div class="col-sm-12" style="margin:16px">
+									<input type="hidden" name="scope" value="public_profile,email" />
+									<!-- <input type="submit" value="">-->
+									<button type="button" name="submit_Btn" id="submit_Btn" onClick="document.fbForm.submit()" 
+										style="background-color:white;width:440px;height:100px;border:2px blue none">
+									<img  src="/resources/pic/registered/fb_login.png" width="100%"></button>
+								</div>
 							</form>
 						
-							<form method="post" action="${pageContext.request.contextPath}/login" role="login">
+							<form method="post" action="${pageContext.request.contextPath}/login" role="login" name="normalForm" id="normalForm">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						
 								<!-- 
@@ -68,6 +70,7 @@
 								 -->
 								 
 								<p align="center" style="margin:16px"> or </p>
+								
 								<div class="col-sm-12" style="margin:16px">
 									<input type="text" name="username" placeholder="請輸入您註冊時的 e-mail"
 										required class="form-control input-md" />
@@ -84,7 +87,10 @@
 										<a href="/registered/forgetPassword" class="btn btn-lg  btn-block" id="forgetPassword">忘記密碼</a>
 									</div>
 									<div class="col-sm-6">
-										<button type="submit" name="go" class="btn btn-lg btn-primary btn-block">登入</button>
+										<!-- <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">登入</button> -->
+										<button type="button" name="go" onClick="document.normalForm.submit()"
+										style="background-color:white;width:200px;height:40px;border:2px blue none">
+										<img  src="/resources/pic/registered/login.png" width="60%"></button>
 									</div>
 								</div>
 							

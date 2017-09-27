@@ -10,12 +10,14 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
-<script type="text/javascript"
-	src='<c:url value="/resources/jquery/localization/jquery.ui.datepicker-zh-TW1.js" />'></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script type="text/javascript" src='<c:url value="/resources/jquery/localization/jquery.ui.datepicker-zh-TW1.js" />'></script>
+<!-- <script type="text/javascript" src="/resources/flot/jquery.flot.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script> -->
+<script type="text/javascript" src="/resources/flot/jquery.flot.min.js"></script>
+<script type="text/javascript" src="/resources/flot/jquery.flot.symbol.js"></script>
+<script type="text/javascript" src="/resources/flot/jquery.flot.axislabels.js"></script>
+<script type="text/javascript" src="/resources/flot/jquery.flot.tooltip.min.js"></script>
+
 <style>
 label {
 	padding: 0;
@@ -255,7 +257,7 @@ span {
 								<input type="button" id="IRRExpand" value="+" class="btn btn-secondary" style="background-color: white;">
 							</div>
 							<div id="IRRgraph" class="col-sm-12">
-								<div id="chartContainer" style="height: 300px; width: 100%"></div>
+								<div id="flot-IRR" style="width: 65vw; height: 50vh;"></div>
 							</div>
 						</div>
 						<hr />
@@ -278,21 +280,81 @@ span {
 	<input id="scorePoints" value="${modelf.getPoint}" style="visibility:hidden"/>
 	<input id="discountedPremium" value="${modelf.premiumAfterDiscount}" style="visibility:hidden"/>
 	<script>
-	new Morris.Line({
-		  element: 'chartContainer',
-		  data: [
+		 var dataIRR1= [
+			 
 				<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
-				{ y: ${item[0]}, a: ${item[1]}, b: parseFloat(${item[2]*100}).toFixed(2)},
+				[${item[0]},${item[1]}],
 </c:forEach>
-		  ],
-		  xkey: 'y',
-		  ykeys: ['a', 'b'],
-		  labels: ['解約金', 'IRR(%)'],
-		  numLines:'5',
-		  resize:true,
-		  parseTime:false,
-		  ymin:'auto[-100]',
-		});
+];
+		  var dataIRR2= [
+				<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
+				[${item[0]},parseFloat(${item[2]*100}).toFixed(2)],
+</c:forEach>
+       ];
+
+				    $.plot($("#flot-IRR"),
+				        [
+				            {
+				              data: dataIRR1,
+				              label: "解約金",
+				              points: { show: true },
+				              lines: { show: true},
+				              
+				            },
+				            {
+				              data: dataIRR2,
+				              label: "IRR",
+				              points: { show: true },
+				              lines: { show: true},
+				              yaxis: 2,
+				            }
+				        ],
+				        {            
+				            grid: {
+				                backgroundColor: { colors: ["#D1D1D1", "#7A7A7A"] },
+				                hoverable:true,
+				                borderWidth: 1
+				            },
+				            legend: {
+				            	noColumns:1,
+				                labelBoxBorderColor: "none",
+				                    position: "se",
+				            },
+				            tooltip:{
+				            	show:true,
+				            	content:"%s | %lx：%x | %ly：%y",
+				            },
+				            xaxis: {
+				                axisLabel: "年期",
+				                axisLabelUseCanvas: true,
+				                axisLabelFontSizePixels: 15,
+				                axisLabelFontFamily: "Arial",
+				                axisLabelPadding: 10,
+				                
+				            },
+				            yaxes: [
+				                {
+				                    /* First y axis */
+				                	axisLabel: "解約金($)",
+				                	axisLabelUseCanvas: true,
+				                	axisLabelFontSizePixels: 15,
+				                    axisLabelFontFamily: "Arial",
+				                    axisLabelPadding: 10,
+				                },
+				                {
+				                    /* Second y axis */
+				                    axisLabel: "IRR(%)",
+				                    axisLabelUseCanvas: true,
+				                    axisLabelFontSizePixels: 15,
+				                    axisLabelFontFamily: "Arial",
+				                    axisLabelPadding: 10,
+				                    position: "right",  /* left or right */
+				                }
+				            ]      
+				        }
+				    );
+				    
+				    
 	
 	var path = window.location.pathname;
 	var yearCode = path.substring(path.lastIndexOf('/')+1);
