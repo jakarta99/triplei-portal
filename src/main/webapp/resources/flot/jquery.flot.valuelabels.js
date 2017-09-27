@@ -43,7 +43,7 @@
 					last_x = xx + val.length*8;
 					last_y = yy;
 					var head = '<div style="left:' + xx + 'px;top:' + yy + 'px;" class="valueLabel';
-					var tail = '">' + Math.round(val*100) + '%</div>';
+					var tail = '">' + Math.round(val*10000)/100 + '%</div>';
 					html+= head + "Light" + tail + head + tail;
 				}
 			}
