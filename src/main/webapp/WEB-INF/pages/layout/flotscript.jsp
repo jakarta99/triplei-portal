@@ -12,6 +12,8 @@
 <script type="text/javascript" src="/resources/flot/jquery.flot.time.js"></script>
 
 <script type="text/javascript" src="/resources/flot/jshashtable-2.1.js"></script>
+<script type="text/javascript" src="/resources/flot/jquery.flot.valuelabels.js"></script>
+<link rel="stylesheet" href="/resources/flot/plot.css">
 <script type="text/javascript"
 	src="/resources/flot/jquery.numberformatter-1.2.3.min.js"></script>
 <script type="text/javascript"
@@ -230,6 +232,7 @@ var optionbisRatio = {//資本適足率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -279,6 +282,7 @@ var optionreturnonAssets = {//資產報酬率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -328,13 +332,15 @@ var optionpersistencyRatio = {//保單繼續率
         labelBoxBorderColor: "white",
         position: "ne",
         sorted:"reverse", 
+        show:false,
     },
     grid: {
         borderWidth: 0,      
     },
     valueLabels: {
-        show: true
-       }
+    	   show: true,
+    	   showLastValue:true
+    }
 };
 	
 var optionlitigationRatio = {//訴訟率
@@ -377,6 +383,7 @@ var optionlitigationRatio = {//訴訟率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -426,6 +433,7 @@ var optionappealRatio = {//申訴率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -437,38 +445,7 @@ var optionappealRatio = {//申訴率
 
 
 //----------------------------------------五種options foot
-$(document).ready(function () {
-    $("#flot-placeholder").UseTooltip();
-});
 
-
-
-var previousPoint = null, previousLabel = null;
-
-$.fn.UseTooltip = function () {
-    $(this).bind("plothover", function (event, pos, item) {
-        if (item) {
-            if ((previousLabel != item.series.label) || 
-                 (previousPoint != item.dataIndex)) {
-                previousPoint = item.dataIndex;
-                previousLabel = item.series.label;
-                $("#tooltip").remove();
-
-                var x = item.datapoint[0];
-                var y = item.datapoint[1];
-
-                var color = item.series.color;
-                
-                showTooltip(item.pageX,
-                        item.pageY,
-                        color);                
-            }
-        } else {
-            $("#tooltip").remove();
-            previousPoint = null;
-        }
-    });
-};
 
 
 

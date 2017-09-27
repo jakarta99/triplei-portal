@@ -31,9 +31,9 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div>
 			<div class="col-xs-12 col-sm-3"
-				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;">
-				<!--左半藍 -->
-				<div
+				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;"><!--左半藍 -->
+ 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
+				<div class="col-xs-6 col-sm-12"
 					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
 					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">保險公司</h1>
 					<h4>
@@ -47,9 +47,10 @@
 					<img alt="" src="/resources/pic/各公司資訊/images/img_1.png"
 							style="width: 80% ;padding-top: 8vh">
 				</div>
+				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
 			<div class="col-xs-12 col-sm-9"
-				style="height: 100vh; background-color: #FAF7F7; overflow: auto; position: relative;">
+				style="height: 100vh; background-color: white; overflow: auto; position: relative;">
 				<!--右半白 -->
 				<div style="height: 100vh; position: relative; padding-top: 16vh;">
 					<!--選擇框 -->
