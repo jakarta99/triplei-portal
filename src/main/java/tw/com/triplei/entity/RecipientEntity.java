@@ -2,6 +2,7 @@ package tw.com.triplei.entity;
 
 
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -66,6 +67,7 @@ public class RecipientEntity extends GenericEntity {
 	
 	@Column(name = "ALREADY_AUDITTED_POINT")
 	private Boolean alreadyAudittedPoint;//是否已審核點數
+
 
 	@Override
 	public String toString() {

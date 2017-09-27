@@ -105,6 +105,7 @@
 						{ title: '剩餘點數', name: "remainPoint", type: "text", width: 30}, 
 						{ title: '已兌換點數', name: "exchangedPoint", type: "text", width: 30}, 
 						{ title: '審核中點數', name: "audittingPoint", type: "text", width: 30}, 
+						{ title: '本周可否許願', name: "remainWishTimes", type: "checkbox", width: 30}, 
 			        ]
 			    });
 			    

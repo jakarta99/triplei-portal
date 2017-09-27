@@ -7,9 +7,9 @@ import tw.com.triplei.entity.ArticleEntity;
 
 public interface ArticleDao extends GenericDao<ArticleEntity> {
 
-	public List<ArticleEntity> findByBannerRotation(boolean bannerRotation);	//輪播區選擇
+	public List<ArticleEntity> findByBannerRotationAndStoreShelves(boolean bannerRotation, boolean storeShelves);	//輪播區選擇
 	
-	public List<ArticleEntity> findByArticleType(Enum articleType);
+	public List<ArticleEntity> findByArticleTypeAndStoreShelves(Enum articleType, boolean storeShelves); //文章個別分類
 	
 	public ArticleEntity findById(Long Id);
 	

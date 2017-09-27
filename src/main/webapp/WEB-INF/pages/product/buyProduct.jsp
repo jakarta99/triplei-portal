@@ -458,6 +458,7 @@ select {
 			var insureAmounts = <c:out value="${model.insureAmount}"/>;
 			var discountedPremium = <c:out value="${model.premiumAfterDiscount}"/>;
 			var scorePoints = <c:out value="${model.getPoint}"/>;
+			var userName = "<c:out value="${model.createdBy}"/>";
 			
 			var city = $("#city option:selected").val();
 			var region = $("#region option:selected").val();
@@ -498,7 +499,7 @@ select {
 					}
 				})
 				alert("SUCCESS");
-				location.href = "/product/list"
+				location.href = "/recipient/list"
 			}else{
 				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}

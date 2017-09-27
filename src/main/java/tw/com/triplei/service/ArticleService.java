@@ -106,9 +106,9 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		}
 		return "";
 	}
-
-	public List<ArticleEntity> getBannerRotationArticles(boolean bannerRotation) { // 輪播區選擇
-		List<ArticleEntity> list = dao.findByBannerRotation(bannerRotation);
+	
+	public List<ArticleEntity> getBannerRotationArticles(boolean bannerRotation, boolean storeShelves) { // 輪播區選擇
+		List<ArticleEntity> list = dao.findByBannerRotationAndStoreShelves(bannerRotation, storeShelves);
 		List<ArticleEntity> sortList;
 		if (list.size() > 3) {
 			sortList = list.subList(0, 2);
@@ -118,17 +118,22 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		return sortList;
 	}
 
-	public List<ArticleEntity> getArticlesByTypes(Enum articleType) {
-		List<ArticleEntity> articles = dao.findByArticleType(articleType);
+	public List<ArticleEntity> getArticlesByTypes(Enum articleType, boolean storeShelves) {
+		List<ArticleEntity> articles = dao.findByArticleTypeAndStoreShelves(articleType,storeShelves);
 		return articles;
 	}
 
 	public List<ArticleEntity> getArticlesByHotArticle(Enum articleType, boolean hotArticle, boolean storeShelves) {
-		List<ArticleEntity> list = dao.findByArticleTypeAndHotArticleAndStoreShelves(articleType, hotArticle,
-				storeShelves);
-		List<ArticleEntity> sortList;
+		
+		List<ArticleEntity> list = dao.findByArticleTypeAndHotArticleAndStoreShelves(articleType, hotArticle, storeShelves);
+		
+		List<ArticleEntity> sortList = new ArrayList<ArticleEntity>();
+		sortList.sort(Comparator.comparingInt(ArticleEntity::getClickCount));
+		Collections.reverse(sortList);
+		
 		if (list.size() > 2) {
 			sortList = list.subList(0, 2);
+			return sortList;
 		} else {
 			sortList = list;
 		}
