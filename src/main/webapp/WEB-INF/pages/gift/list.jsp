@@ -323,13 +323,14 @@
 <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button>
 </div>
 <div class="col-sm-9" >
-<div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid;margin-bottom: 2vh">
+<div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid;margin-bottom: 2vh;display: flex; justify-content: center; flex-direction: column">
 <div style="">
 <label for="brand" style="color: #5C8DEC;font-family: 微軟正黑體;">品牌:</label> <input type="text" placeholder="請輸入品牌名稱" id="brand" name="brand" style="border: 0px #5C8DEC solid">
 </div></div>
-<div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid">
+<div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid;margin-bottom: 2vh;display: flex; justify-content: center; flex-direction: column">
+<div style="">
 <label for="name" style="color: #5C8DEC;font-family: 微軟正黑體;">商品名稱:</label> <input type="text" placeholder="請輸入商品名稱" id="name" name="name" style="border: 0px #5C8DEC solid">
-</div>
+</div></div>
 </div>
 <div class="col-sm-12" style="height:10vh" align="right">
 <button style="margin-top: 4vh;background-color: white;border: 1px #5C8DEC solid;color: #5C8DEC;border-radius: 20px;font-size: 15px">許願</button>
