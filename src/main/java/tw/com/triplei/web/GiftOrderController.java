@@ -104,6 +104,7 @@ public class GiftOrderController {
 				if (remainpoint >= 0) {
 
 					user.setRemainPoint(remainpoint);
+					user.setExchangedPoint(giftpoint * quantity);
 					userService.getDao().save(user);
 					entity.setQuantity(quantity);
 					LocalDateTime orderTime = LocalDateTime.now();
