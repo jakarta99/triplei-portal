@@ -46,18 +46,27 @@
 				<div class="col-sm-1"></div>
 				<div class="col-sm-10">
 				
-						<form method="post" action="${pageContext.request.contextPath}/login" role="login">
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<div class="panel-body">
+						
+							<div class="panel-heading">
+								<h3><span></span>&nbsp; <strong>會員登入</strong></h3>
+							</div>
 							
-							<div class="panel-body">
-								
-								<div class="panel-heading">
-									<h3><span></span>&nbsp; <strong>會員登入</strong></h3>
-								</div>
-							
-							
+							<form action="<c:url value="/auth/facebook" />" method="GET" role="form" name="fbForm" id="fbForm">
+								<input type="hidden" name="scope" value="public_profile,email" />
+								<!-- <input type="submit" value="">-->
+								<button type="button" name="submit_Btn" id="submit_Btn" onClick="document.fbForm.submit()" 
+									style="background-color:white;width:250px;height:150px;border:2px blue none">
+								<img  src="/resources/pic/registered/fb.png" width="100%"></button>
+							</form>
+						
+							<form method="post" action="${pageContext.request.contextPath}/login" role="login">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						
+								<!-- 
 								<img class="fb" name="fb" src="/resources/pic/registered/fb.png" width="50%" style="margin:16px">
-							
+								 -->
+								 
 								<p align="center" style="margin:16px"> or </p>
 								<div class="col-sm-12" style="margin:16px">
 									<input type="text" name="username" placeholder="請輸入您註冊時的 e-mail"

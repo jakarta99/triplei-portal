@@ -12,4 +12,6 @@ public interface UserDao extends GenericDao<UserEntity>{
 	public UserEntity findByRegisteredCode(String registeredCode);
 	
 	public UserEntity findByName(String name);
+	
+	public UserEntity findByProviderUserId(String providerUserId);
 }

@@ -2,6 +2,8 @@ package tw.com.triplei.entity;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,9 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.security.SocialUserDetails;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 
@@ -33,8 +35,9 @@ import tw.com.triplei.commons.GenericEntity;
 @Setter
 @Table(name = "USERMEMBER")
 //@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class UserEntity extends GenericEntity implements UserDetails{
-	
+//public class UserEntity extends GenericEntity implements UserDetails {
+public class UserEntity extends GenericEntity implements SocialUserDetails {
+
 	@Column(name = "ACCOUNT_NUMBER")
 	private String accountNumber; // 會員帳號 
 	
@@ -75,10 +78,31 @@ public class UserEntity extends GenericEntity implements UserDetails{
 	@Column(name = "REMAIN_WISH_TIMES")
 	private Integer remainWishTimes;
 	
+	// FB social
+	@Column(name = "PROVIDER")
+	private String provider; // 通路
+	
+	@Column(name = "PROVIDER_USER_ID")
+	private String providerUserId; // social login 使用者
+	
+//	@Column(name = "DISPLAY_NAME")
+//	private String displayName; // social login user name
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<RoleEntity> roles; // 角色
+	
+	public UserEntity() {
+	}
+
+	public UserEntity(Connection<?> connection) {
+		this.provider = "FB";
+		this.providerUserId = connection.getKey().getProviderUserId();
+		this.accountNumber = connection.getKey().getProviderUserId();
+		//this.displayName = connection.getDisplayName();
+		this.name = connection.getDisplayName();
+		this.enabled = true;
+	}
 
 	@JsonIgnore
 	@Override
@@ -125,8 +149,10 @@ public class UserEntity extends GenericEntity implements UserDetails{
 				+ email + ", enabled=" + enabled + ", roles=" + roles + "]";
 	}
 
-
+	@Override
+	public String getUserId() {
+		return providerUserId;
+	}
 	
-
-
+	// 
 }

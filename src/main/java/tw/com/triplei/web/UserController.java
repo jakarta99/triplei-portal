@@ -54,6 +54,8 @@ public class UserController {
 		UserEntity entity = userDao.findByAccountNumber(details.getUsername());
 		log.debug("principal user accountNumber: {}" , entity);
 		
+		//TODO 如果是FB登入的不能更改帳號密碼
+		
 		
 		model.addAttribute("userDetails", entity);
 		
