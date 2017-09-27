@@ -9,13 +9,13 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
-<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
+<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <style>
 #mainNavbar {
 	border-color: #333333;
@@ -320,8 +320,11 @@
 </div>
 <div class="col-sm-12" style="padding-left: 0px;padding-bottom: 1vh">希望增加的兌換商品：</div>
 <div class="col-sm-3" style="border: 1px #5C8DEC solid;height: 20vh;display: flex; justify-content: center; flex-direction: column" align="center">
-<button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button>
+<!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
+<label for="image1" style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;;font-family: 微軟正黑體;">圖片:</label> <input type="file" placeholder="請上傳圖片" id="image1" name="image1" style="border: 0px #5C8DEC solid">
+
 </div>
+<form enctype="multipart/form-data" method="post" id="dataForm">
 <div class="col-sm-9" >
 <div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid;margin-bottom: 2vh;display: flex; justify-content: center; flex-direction: column">
 <div style="">
@@ -332,11 +335,26 @@
 <label for="name" style="color: #5C8DEC;font-family: 微軟正黑體;">商品名稱:</label> <input type="text" placeholder="請輸入商品名稱" id="name" name="name" style="border: 0px #5C8DEC solid">
 </div></div>
 </div>
+</form>
 <div class="col-sm-12" style="height:10vh" align="right">
-<button style="margin-top: 4vh;background-color: white;border: 1px #5C8DEC solid;color: #5C8DEC;border-radius: 20px;font-size: 15px">許願</button>
+<a class="btn btn-primary" data-loading-text="Loading" id="wishButton" style="margin-top: 4vh;background-color: white;border: 1px #5C8DEC solid;color: #5C8DEC;border-radius: 20px;font-size: 15px;">許願</a>
 </div>
 </div>
 <div class="col-sm-1"></div>
+</div>
+
+<div id="dialog-success">
+<img alt="" src="/resources/pic/積點專區/許願成功.png" class="col-sm-10" style="width: 500"><br/>
+<div class="col-sm-10">
+<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">許願成功</p>
+</div>
+</div>
+
+<div id="dialog-failed">
+<img alt="" src="/resources/pic/積點專區/只能許一次.png" class="col-sm-10" style="width: 500"><br/>
+<div class="col-sm-10">
+<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">一周只能許一次喔</p>
+</div>
 </div>
 
 
@@ -407,8 +425,8 @@ $( function() {
 	});
 //   以下許願池
 		$('#dialog-wish').hide();
-		$('#wishpool').on("click",function() {
-			$('#dialog-wish').dialog({
+		$('#dialog-success').hide();
+			var dialog1 = $('#dialog-wish').dialog({
 				autoOpen: false,
 				resizable : true,
 				height : "auto",
@@ -421,8 +439,74 @@ $( function() {
 				hide : {
 					effect : "blind",
 					duration : 500
-				}
-			});
+				},
+			})
+			var dialog2 = $('#dialog-success').dialog({
+				autoOpen: false,
+				resizable : true,
+				height : 300,
+				width : 400,
+				modal : true,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				},
+			})
+			var dialog3 = $('#dialog-failed').dialog({
+				autoOpen: false,
+				resizable : true,
+				height : 300,
+				width : 400,
+				modal : true,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				},
+			})
+		$('#wishpool').on("click",function() {
+			dialog1.dialog("open");
+			//<!-- Save -->
+			$("#wishButton").bind("click",function() {
+								var $btn = $(this);
+								$btn.button("loading");
+								
+								var formData = new FormData();
+								formData.append('name', $("#name").val());
+								formData.append('brand', $("#brand").val());
+								$.each($("input[type='file']")[0].files, function(i, file) {
+									formData.append('file', file);
+								});
+								
+								$.ajax({
+									url : "<c:url value='/admin/wish'/>",
+									method : "POST",
+									data : formData,
+									enctype : "multipart/form-data",
+									processData : false,
+									contentType : false,
+									success : function(data) {
+										if (data.data == null) {
+											dialog3.dialog("open");
+											$btn.button("reset");
+											dialog1.dialog("close");
+										}else if (data.messages.length == 0) {
+															$("#dataForm").trigger("reset");
+															dialog2.dialog("open");
+															$btn.button("reset");
+															dialog1.dialog("close");
+														}
+									}
+								})
+								$btn.button("reset");
+							});
 			});
 	
 });

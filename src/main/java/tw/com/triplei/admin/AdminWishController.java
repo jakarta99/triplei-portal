@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.GiftSpecification;
@@ -31,6 +32,7 @@ import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.commons.Message;
 import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.entity.WishEntity;
+import tw.com.triplei.service.ArticleService;
 import tw.com.triplei.service.WishService;
 
 @Slf4j
@@ -40,6 +42,9 @@ public class AdminWishController {
 
 	@Autowired
 	private WishService wishService;
+	
+	@Autowired
+	private ArticleService articleService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage(Model model) {
@@ -53,20 +58,22 @@ public class AdminWishController {
 	
 	@PostMapping
 	@ResponseBody
-	public AjaxResponse<WishEntity> insert(final Model model,@RequestBody final WishEntity form) {
+	public AjaxResponse<WishEntity> insert(final Model model,@RequestParam(value = "file") MultipartFile file,
+			@RequestParam(value = "brand") String brand,@RequestParam(value = "name") String name,WishEntity form) {
 
 		AjaxResponse<WishEntity> response = new AjaxResponse<WishEntity>();
 
 		try {
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//			Date date = new Date();
-//			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
-//			form.setWishTime(localDateTime);
-//			System.out.println(form.getWishTime());
 			
-//			form.setWishTime(System.currentTimeMillis());
-//			System.out.println(form.getWishTime());
-			
+			if(!file.isEmpty()){
+				String location = articleService.imageUpload(file);
+				form.setImage1(location);
+			}else{
+				form.setImage1("");
+			}
+
+			form.setBrand(brand);
+			form.setName(name);
 			String date = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
 			form.setWishTime(date);
 			log.debug("userDetails: {}",date);
@@ -74,18 +81,15 @@ public class AdminWishController {
 			form.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			form.setCreatedBy(userDetails.getUsername());
-			log.debug("CreatedBy {}",form.getCreatedBy());
-			log.debug("~~~~ {}",userDetails);
-//			boolean result = wishService.makeAWish(userDetails.getUsername());
-//			log.debug("1111 {}",result);
-//			if(!result){
-//				wishService.makeAWishPlus(userDetails.getUsername());
-//				return response;
-//			}
-			final WishEntity insertResult = wishService.insert(form);				
-			response.setData(insertResult);
+			log.debug("CreatedBy() {}",form.getCreatedBy());
+			log.debug("userDetails.getUsername() {}",userDetails.getUsername());
+			boolean result = wishService.makeAWish(userDetails.getUsername());
+			log.debug("result {}",result);
+			if(result){
+				final WishEntity insertResult = wishService.insert(form);				
+				response.setData(insertResult);				
+			}
 			
-
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
 			response.addMessages(ex.getMessages());

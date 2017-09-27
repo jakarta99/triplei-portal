@@ -101,7 +101,6 @@ font-size:95%;
 						<ul class="dropdown-menu">
 							<li><a href="/product/list">商品列表</a></li>
 							<li><a href="/product/irr">IRR計算機</a></li>
-							<li><a href="/admin/wish/add">許願池</a></li>
 						</ul>
 					</li>
 				<li><a href="/gift/list"  style="color:white">績點專區</a></li>

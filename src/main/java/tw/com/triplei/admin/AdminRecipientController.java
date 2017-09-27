@@ -36,6 +36,7 @@ import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.RecipientEntity;
 import tw.com.triplei.entity.RoleEntity;
 import tw.com.triplei.entity.UserEntity;
+import tw.com.triplei.service.EmailService;
 import tw.com.triplei.service.ProductService;
 import tw.com.triplei.service.RecipientService;
 import tw.com.triplei.service.RoleService;
@@ -47,6 +48,9 @@ public class AdminRecipientController {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@Autowired
 	private RoleService roleService;
@@ -169,6 +173,7 @@ public class AdminRecipientController {
 			form.setCreatedBy(userDetails.getUsername());
 			form.setAlreadyGetPoint(false);
 			form.setAlreadyAudittedPoint(false);
+			
 			// 一般會員下單後 自動升級成下單會員
 			UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
 			Set<RoleEntity> roles = owner.getRoles();
@@ -216,37 +221,31 @@ public class AdminRecipientController {
 					.getPrincipal();
 			log.debug("可獲得點數: {}", form.getCanGetPoint());
 			form.setModifiedBy(userDetails.getUsername());
-
+			
+			
+			
 			if (form.getOrderStatus().equals("第六階段") && !form.getAlreadyGetPoint()) {
 				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
-				try {
 					int remainPoint = owner.getRemainPoint();
 					owner.setAudittingPoint(owner.getAudittingPoint() - form.getCanGetPoint());
 					owner.setRemainPoint(remainPoint + form.getCanGetPoint());
-				} catch (Exception e) {
-					owner.setRemainPoint(form.getCanGetPoint());
-					try {
-						owner.setAudittingPoint(owner.getAudittingPoint() - form.getCanGetPoint());
-					} catch (Exception e1) {
-						owner.setAudittingPoint(0);
-					}
-				}
-				form.setAlreadyGetPoint(true);
+					form.setAlreadyGetPoint(true);
 				userDao.save(owner);
 			} else if (!form.getOrderStatus().equals("第六階段") && !form.getAlreadyAudittedPoint()) {
 				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
-				try {
-					int auditting = owner.getAudittingPoint();
-					owner.setAudittingPoint(auditting + form.getCanGetPoint());
-				} catch (Exception e) {
-					owner.setAudittingPoint(form.getCanGetPoint());
-				}
+				int auditting = owner.getAudittingPoint();
+				owner.setAudittingPoint(auditting + form.getCanGetPoint());
 				form.setAlreadyAudittedPoint(true);
 				userDao.save(owner);
 			}
 
 			final RecipientEntity updateResult = recipientService.update(form);
 			response.setData(updateResult);
+			if(updateResult.getOrderStatus().equals("第一階段")){
+				emailService.sendAlertEmailToSales(user, updateResult);
+				UserEntity owner = userDao.findByAccountNumber(userDetails.getUsername());
+				emailService.sendAlertEmailToAdmin(owner, user, updateResult);
+			}
 
 		} catch (final Exception e) {
 			response.addException(e);

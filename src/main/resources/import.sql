@@ -36,19 +36,21 @@ INSERT INTO QUESTION(CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME, ASKER
 --INSERT INTO WISH (CREATED_BY,MODIFIED_BY,BRAND, NAME, WISH_TIME, WISH_TYPE) VALUES ('SYS','SYS','統一','7-11','2017/09/04 00:11:37','禮券');
 --INSERT INTO WISH (CREATED_BY,MODIFIED_BY,BRAND, NAME, WISH_TIME, WISH_TYPE) VALUES ('SYS','SYS','舒適','刮鬍刀','2017/09/03 12:19:55','男仕用品');
 --INSERT INTO WISH (CREATED_BY,MODIFIED_BY,BRAND, NAME, WISH_TIME, WISH_TYPE) VALUES ('SYS','SYS','DYSON','吹風機','2017/09/02 07:43:12','3C家電');
-INSERT INTO WISH (BRAND, NAME, WISH_TIME, WISH_TYPE,WEEK_USE_COUNT) VALUES ('統一','7-11','2017/09/04 00:11:37','禮券',1);
-INSERT INTO WISH (BRAND, NAME, WISH_TIME, WISH_TYPE,WEEK_USE_COUNT) VALUES ('舒適','刮鬍刀','2017/09/03 12:19:55','男仕用品',1);
-INSERT INTO WISH (BRAND, NAME, WISH_TIME, WISH_TYPE,WEEK_USE_COUNT) VALUES ('DYSON','吹風機','2017/09/02 07:43:12','3C家電',1);
+INSERT INTO WISH (BRAND, NAME, WISH_TIME,WEEK_USE_COUNT) VALUES ('統一','7-11','2017/09/04 00:11:37',1);
+INSERT INTO WISH (BRAND, NAME, WISH_TIME,WEEK_USE_COUNT) VALUES ('舒適','刮鬍刀','2017/09/03 12:19:55',1);
+INSERT INTO WISH (BRAND, NAME, WISH_TIME,WEEK_USE_COUNT) VALUES ('DYSON','吹風機','2017/09/02 07:43:12',1);
 --SECURITY
 --USERMEMBER
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user001', 'user001@gmail.com', '測試使用者1號-一般', '$2a$10$puxiUKFbiwV8.EI512uTIu5pHa22lxchelswDjNipVc2khnLfqTMO', true,0,0,0);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user002', 'user002@gmail.com', '測試使用者2號-下單', '$2a$10$sPgzOU8Atu9cu.rtLYqutOg8OIYpfPTJ8BApXE8R0jGDGC5CpdeiW', true,0,0,0);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user003', 'user003@gmail.com', '測試使用者3號-工讀', '$2a$10$pGU.Fdw9aIvFArtdglM3K.3.SLwJ2oWKURpYr3BHgl.p.TewtFUWO', true,0,0,0);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user004', 'user004@gmail.com', '測試使用者4號-業務員', '$2a$10$/XvBLQYpXlvVZoPRPyWNj./lG1J/5bPtLaiOYl.JDRO7YNHkUrUeu', true,0,0,0);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user005', 'user005@gmail.com', '測試使用者5號-客服', '$2a$10$gPTRoeQ9JkMUuItxaIjZHOTxmkg8WYXpaysL0zfjs3fRzTGKF/egO', true,0,0,0);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user006', 'user006@gmail.com', '測試使用者6號-文章', '$2a$10$rFOlbE5C/gf4YTTUWJMU2.kMtgTOWEVFeiWOjkzR24xYL4pIgNLae', true,0,0,0);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user007', 'user007@gmail.com', '測試使用者7號-管理', '$2a$10$B5Zppebjo2RBW5WPuY65H.Nxc45stN0HMjZU4YWVUzVC71j66b4UG', true , 10000, 0, 0);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user008', 'user008@gmail.com', '測試使用者8號-管理', '$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', false,0,0,0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user001', 'user001@gmail.com', '測試使用者1號-一般', '$2a$10$puxiUKFbiwV8.EI512uTIu5pHa22lxchelswDjNipVc2khnLfqTMO', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user002', 'user002@gmail.com', '測試使用者2號-下單', '$2a$10$sPgzOU8Atu9cu.rtLYqutOg8OIYpfPTJ8BApXE8R0jGDGC5CpdeiW', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user003', 'user003@gmail.com', '測試使用者3號-工讀', '$2a$10$pGU.Fdw9aIvFArtdglM3K.3.SLwJ2oWKURpYr3BHgl.p.TewtFUWO', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user004', 'user004@gmail.com', '測試使用者4號-業務員', '$2a$10$/XvBLQYpXlvVZoPRPyWNj./lG1J/5bPtLaiOYl.JDRO7YNHkUrUeu', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user005', 'user005@gmail.com', '測試使用者5號-客服', '$2a$10$gPTRoeQ9JkMUuItxaIjZHOTxmkg8WYXpaysL0zfjs3fRzTGKF/egO', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user006', 'user006@gmail.com', '測試使用者6號-文章', '$2a$10$rFOlbE5C/gf4YTTUWJMU2.kMtgTOWEVFeiWOjkzR24xYL4pIgNLae', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user007', 'user007@gmail.com', '測試使用者7號-管理', '$2a$10$B5Zppebjo2RBW5WPuY65H.Nxc45stN0HMjZU4YWVUzVC71j66b4UG', true , 10000,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('user008', 'user008@gmail.com', '測試使用者8號-管理', '$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', false,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('monkey81817@gmail.com', 'monkey81817@gmail.com', '張耀元','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('lacerjoe@gmail.com', 'lacerjoe@gmail.com', '劉駿','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
 --ROLE
 INSERT INTO ROLE (code, name) VALUES ('ROLE_NORMAL', '一般會員');
 INSERT INTO ROLE (code, name) VALUES ('ROLE_ORDER', '下單會員');
@@ -66,6 +68,10 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (5,5);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (6,6);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (7,7);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (8,7);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (9,1);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (9,4);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (9,7);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (10,4);
 
 --Article
 INSERT INTO ARTICLE (ARTICLE_TYPE,AUTHOR,BANNER_IMAGE,BANNER_ROTATION,CLICK_COUNT,CONTENT,HOT_ARTICLE,INTRODUCTION,STORE_SHELVES,TITLE) VALUES ('EDITOR_CHOICE','Sarah','/userfiles/bannerImage/09-24_215744tooopen_sy_160022175511.jpg',true,0,'<p>我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1</p>',true,'我是編輯精選1',true,'編輯精選1');
