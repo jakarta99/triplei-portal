@@ -56,6 +56,30 @@
 			      						<input type="text" class="form-control" id="email" name="email" placeholder="email" value="${entity.email}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
+								</div>
+								
+								<div class="form-group required">
+			    					<label for="exchangedPoint" class="col-md-2 control-label">已兌換點數</label>
+			    					<div class="col-md-8">
+			      						<input type="text" readonly="readonly" class="form-control" id="exchangedPoint" name="exchangedPoint" placeholder="exchangedPoint" value="${entity.exchangedPoint}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">
+			    					<label for="remainPoint" class="col-md-2 control-label">剩餘點數</label>
+			    					<div class="col-md-8">
+			      						<input type="text" readonly="readonly" class="form-control" id="remainPoint" name="remainPoint" placeholder="remainPoint" value="${entity.remainPoint}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">
+			    					<label for="audittingPoint" class="col-md-2 control-label">審核中點數</label>
+			    					<div class="col-md-8">
+			      						<input type="text" readonly="readonly" class="form-control" id="audittingPoint" name="audittingPoint" placeholder="audittingPoint" value="${entity.audittingPoint}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
 								</div>	
 																
 								<div class="form-group required">

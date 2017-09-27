@@ -171,6 +171,31 @@
 										</div>
 									</div>
 
+											<input type="hidden" readonly="readonly" class="form-control"
+												id="createdBy" name="createdBy" placeholder="createdBy"
+												value="${entity.createdBy}" /> <span
+												class="help-block"></span>
+
+
+
+											<input type="hidden" readonly="readonly" class="form-control"
+												id="canGetPoint" name="canGetPoint" placeholder="canGetPoint"
+												value="${entity.canGetPoint}" /> <span
+												class="help-block"></span>
+
+	
+									
+
+											<input type="hidden" readonly="readonly" class="form-control"
+												id="alreadyAudittedPoint" name="alreadyAudittedPoint" placeholder="alreadyAudittedPoint"
+												value="${entity.alreadyAudittedPoint}" /> <span
+												class="help-block"></span>
+
+											<input type="hidden" readonly="readonly" class="form-control"
+												id="alreadyGetPoint" name="alreadyGetPoint" placeholder="alreadyGetPoint"
+												value="${entity.alreadyGetPoint}" /> <span
+												class="help-block"></span>
+
 									<div class="form-group required">
 										<label for="userName" class="col-md-2 control-label">業務員</label>
 										<div class="col-md-10">
@@ -184,12 +209,12 @@
 										<div class="col-md-10">
 											<select class="form-control" id="orderStatus"
 												name="orderStatus">
+												<option value="${entity.orderStatus}">${entity.orderStatus}</option>
 												<option value="第一階段">第一階段</option>
 												<option value="第二階段">第二階段</option>
 												<option value="第三階段">第三階段</option>
 												<option value="第四階段">第四階段</option>
 												<option value="第五階段">第五階段</option>
-												<option value="第六階段">第六階段</option>
 											</select> <span class="help-block"></span>
 										</div>
 									</div>

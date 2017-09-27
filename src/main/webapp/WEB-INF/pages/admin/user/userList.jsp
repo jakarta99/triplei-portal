@@ -101,7 +101,10 @@
 						{ title: '會員密碼', visible: false },
 						{ title: '會員姓名', name: "name", type: "text", width: 50 },
 						{ title: '會員email', name: "email", type: "text", width: 100 },
-						{ title: '狀態', name: "enabled", type: "checkbox", width: 30} 
+						{ title: '狀態', name: "enabled", type: "checkbox", width: 30}, 
+						{ title: '剩餘點數', name: "remainPoint", type: "text", width: 30}, 
+						{ title: '已兌換點數', name: "exchangedPoint", type: "text", width: 30}, 
+						{ title: '審核中點數', name: "audittingPoint", type: "text", width: 30}, 
 			        ]
 			    });
 			    

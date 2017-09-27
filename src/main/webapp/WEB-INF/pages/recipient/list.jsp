@@ -71,6 +71,7 @@
 			            { title: '超商地址', name: "convenienceStoreEntity.address", type: "text", width: 80 },
 			            { title: '業務員', name: "user.name", type: "text", width: 80 },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
+			            { title: '可獲得點數', name: "product.getPoint", type: "text", width: 80 },
 			        ]
 			    });
 
