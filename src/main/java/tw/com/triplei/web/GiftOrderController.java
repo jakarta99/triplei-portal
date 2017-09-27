@@ -82,11 +82,11 @@ public class GiftOrderController {
 			try {
 				int quantity = Integer.valueOf(quantity1);
 				if(quantity<=0) {
-					response.put("fail", "請輸入有效數量");
+					response.put("請輸入有效數量", "請輸入有效數量");
 					return response;
 				}
 				
-				UserEntity user = userService.getDao().findByName(userDetails.getUsername());
+				UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
 				log.debug("orderUser : {}", user);
 
 				// 找出USER點數
@@ -110,13 +110,13 @@ public class GiftOrderController {
 					entity.setOrderTime(orderTime);
 					entity.setGiftEntity(giftEntity);
 					giftOrderService.insert(entity);
-					response.put("success", "訂購成功");
+					response.put("訂購成功", "訂購成功");
 
 					return response;
 
 				}
 
-				response.put("fail", "剩餘點數不足");
+				response.put("剩餘點數不足", "剩餘點數不足");
 				return response;
 
 			} catch (NumberFormatException e) {

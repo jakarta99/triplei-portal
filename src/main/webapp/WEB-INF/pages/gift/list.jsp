@@ -45,17 +45,17 @@
 				</div>
 				<div class="col-sm-12">
 				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="50" height="50">
-				<span style="font-size: 3.5em;vertical-align: middle;">999999${XXX}</span>
+				<span style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
 				</div>
 				<div class="col-sm-12">
 				<div class="col-sm-12" style="height: 15vh;border: 1px white solid;border-radius: 20px;margin-top: 3vh;padding-left: 0px;padding-right: 0px;">
 				<div class="col-sm-6" style="border-right: 1px white solid;height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%;">審核中點數</p>
-				<span>999${XXX}</span>
+				<span>${audittingPoint}</span>
 				</div>
 				<div class="col-sm-6" style="height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%">已兌換點數</p>
-				<span>888${XXX}</span>
+				<span>${exchangedPoint}</span>
 				</div>
 				</div></div>
 				<div class="col-sm-12"><img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png" width="200" height="200"></div>
@@ -283,7 +283,7 @@
 	</div>
 </div>
 
-<div id="dialog" title="Basic dialog">
+<div id="dialog" title="商品明細">
       <div>
         <div>
             <img id="orderImage" style="height: 200px; width: 200px;" >
@@ -347,19 +347,21 @@ $( function() {
 	var points;
 	var quantity1;
 	
-  $('#placeOrder').on( 'click', function(){
+  $('p#placeOrder').on( 'click', function(){
+// 	   image =  $(this).parents().parents().find("#image").attr("src");
 	   image =  $(this).parents().parents().find("#image").attr("src");
 	   giftName =  $(this).parent().siblings().find("#giftName").text();
 	   points =  $(this).parent().siblings().find("#points").text();
 	   console.log(image);
 	   console.log(giftName);
 	   console.log(points);
-	   $("orderImage").attr("src" , image);
-	   $("orderName").text(giftName);
-	   $("orderPoint").text(points);
+	   $("#orderImage").attr("src" , image);
+	   $("#orderName").text(giftName);
+	   $("#orderPoint").text(points);
 	  $( "#dialog" ).dialog( "open" );  
   });
   
+  $("#dialog").hide();
   $( "#dialog" ).dialog({
       autoOpen: false,
       show: {
@@ -373,8 +375,8 @@ $( function() {
     });
   
   $("#saveButton").on("click", function() {
-		var $btn = $(this);
-		$btn.button("loading");
+// 		var $btn = $(this);
+// 		$btn.button("loading");
 		var datas = {};
 		quantity1 = $("#quantity1").val();
 		console.log(quantity1);
@@ -387,24 +389,27 @@ $( function() {
 			data : datas,
 			dataType : "json",
 			success : function(data) {
-				if(data.success){
+				if(data.訂購成功){
 				alert("購買成功");
-				}else if(data.fail){
+				}else if(data.剩餘點數不足){
 					alert("剩餘點數不足");
+				}else if(data.數字輸入錯誤){
+					alert("數字輸入錯誤");
 				}else{
-					alert("ERROR");
+					alert("請輸入正確資料");
 				}
-			}
+			},
 			error : function(){
 				alert("NetWorkError");
 			}
 		})
-		$btn.button("reset");
+// 		$btn.button("reset");
 	});
 //   以下許願池
 		$('#dialog-wish').hide();
 		$('#wishpool').on("click",function() {
 			$('#dialog-wish').dialog({
+				autoOpen: false,
 				resizable : true,
 				height : "auto",
 				width : 700,
