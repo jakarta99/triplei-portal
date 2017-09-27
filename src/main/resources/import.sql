@@ -41,14 +41,14 @@ INSERT INTO WISH (BRAND, NAME, WISH_TIME, WISH_TYPE,WEEK_USE_COUNT) VALUES ('舒
 INSERT INTO WISH (BRAND, NAME, WISH_TIME, WISH_TYPE,WEEK_USE_COUNT) VALUES ('DYSON','吹風機','2017/09/02 07:43:12','3C家電',1);
 --SECURITY
 --USERMEMBER
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user001', 'user001@gmail.com', '測試使用者1號-一般', '$2a$10$puxiUKFbiwV8.EI512uTIu5pHa22lxchelswDjNipVc2khnLfqTMO', true);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user002', 'user002@gmail.com', '測試使用者2號-下單', '$2a$10$sPgzOU8Atu9cu.rtLYqutOg8OIYpfPTJ8BApXE8R0jGDGC5CpdeiW', true);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user003', 'user003@gmail.com', '測試使用者3號-工讀', '$2a$10$pGU.Fdw9aIvFArtdglM3K.3.SLwJ2oWKURpYr3BHgl.p.TewtFUWO', true);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user004', 'user004@gmail.com', '測試使用者4號-業務員', '$2a$10$/XvBLQYpXlvVZoPRPyWNj./lG1J/5bPtLaiOYl.JDRO7YNHkUrUeu', true);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user005', 'user005@gmail.com', '測試使用者5號-客服', '$2a$10$gPTRoeQ9JkMUuItxaIjZHOTxmkg8WYXpaysL0zfjs3fRzTGKF/egO', true);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user006', 'user006@gmail.com', '測試使用者6號-文章', '$2a$10$rFOlbE5C/gf4YTTUWJMU2.kMtgTOWEVFeiWOjkzR24xYL4pIgNLae', true);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user007', 'user007@gmail.com', '測試使用者7號-管理', '$2a$10$B5Zppebjo2RBW5WPuY65H.Nxc45stN0HMjZU4YWVUzVC71j66b4UG', true);
-INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled) VALUES ('user008', 'user008@gmail.com', '測試使用者8號-管理', '$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', false);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user001', 'user001@gmail.com', '測試使用者1號-一般', '$2a$10$puxiUKFbiwV8.EI512uTIu5pHa22lxchelswDjNipVc2khnLfqTMO', true,0,0,0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user002', 'user002@gmail.com', '測試使用者2號-下單', '$2a$10$sPgzOU8Atu9cu.rtLYqutOg8OIYpfPTJ8BApXE8R0jGDGC5CpdeiW', true,0,0,0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user003', 'user003@gmail.com', '測試使用者3號-工讀', '$2a$10$pGU.Fdw9aIvFArtdglM3K.3.SLwJ2oWKURpYr3BHgl.p.TewtFUWO', true,0,0,0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user004', 'user004@gmail.com', '測試使用者4號-業務員', '$2a$10$/XvBLQYpXlvVZoPRPyWNj./lG1J/5bPtLaiOYl.JDRO7YNHkUrUeu', true,0,0,0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user005', 'user005@gmail.com', '測試使用者5號-客服', '$2a$10$gPTRoeQ9JkMUuItxaIjZHOTxmkg8WYXpaysL0zfjs3fRzTGKF/egO', true,0,0,0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user006', 'user006@gmail.com', '測試使用者6號-文章', '$2a$10$rFOlbE5C/gf4YTTUWJMU2.kMtgTOWEVFeiWOjkzR24xYL4pIgNLae', true,0,0,0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user007', 'user007@gmail.com', '測試使用者7號-管理', '$2a$10$B5Zppebjo2RBW5WPuY65H.Nxc45stN0HMjZU4YWVUzVC71j66b4UG', true , 10000, 0, 0);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point) VALUES ('user008', 'user008@gmail.com', '測試使用者8號-管理', '$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', false,0,0,0);
 --ROLE
 INSERT INTO ROLE (code, name) VALUES ('ROLE_NORMAL', '一般會員');
 INSERT INTO ROLE (code, name) VALUES ('ROLE_ORDER', '下單會員');
