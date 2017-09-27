@@ -320,7 +320,16 @@ $( function() {
 			data : datas,
 			dataType : "json",
 			success : function(data) {
-				alert("SUCCESS");
+				if(data.success){
+				alert("購買成功");
+				}else if(data.fail){
+					alert("剩餘點數不足");
+				}else{
+					alert("ERROR");
+				}
+			}
+			error : function(){
+				alert("NetWorkError");
 			}
 		})
 		$btn.button("reset");
