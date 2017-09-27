@@ -349,7 +349,7 @@ $( function() {
 	
   $('p#placeOrder').on( 'click', function(){
 // 	   image =  $(this).parents().parents().find("#image").attr("src");
-	   image =  $(this).parents().parents().find("#image").attr("src");
+	   image =  $(this).parent().parent().siblings().find("#image").attr("src");
 	   giftName =  $(this).parent().siblings().find("#giftName").text();
 	   points =  $(this).parent().siblings().find("#points").text();
 	   console.log(image);
