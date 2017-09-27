@@ -24,6 +24,11 @@
 
 
 <script>
+
+
+
+
+
 		var rawData = [];
 		var ticks = [];
 //----------------------抓y軸數值陣列head
@@ -465,50 +470,6 @@ $.fn.UseTooltip = function () {
     });
 };
 
-var dataIRR1= [
-	<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
-	[${item[0]},${item[1]}],
-</c:forEach>
-];
-var dataIRR2= [
-	<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
-	[${item[0]},parseFloat(${item[2]*100}).toFixed(2)],
-</c:forEach>
-];
-	    $.plot($("#flot-IRR"),
-	        [
-	            {
-	              data: dataIRR1,
-	              label: "解約金",
-	              lines: { fill: true}
-	 
-	            },
-	            {
-	              data: dataIRR2,
-	              label: "IRR",
-	              points: { show: true },
-	              lines: { show: true},
-	              yaxis: 2
-	            }
-	        ],
-	        {            
-	            grid: {
-	                backgroundColor: { colors: ["#D1D1D1", "#7A7A7A"] }
-	            },
-	            xaxis: {
-	                mode: "time",
-	                timeformat: "%0m/%0d %0H:%0M"
-	            },
-	            yaxes: [
-	                {
-	                    /* First y axis */
-	                },
-	                {
-	                    /* Second y axis */
-	                    position: "right"  /* left or right */
-	                }
-	            ]      
-	        }
-	    );
+
 
 </script>
