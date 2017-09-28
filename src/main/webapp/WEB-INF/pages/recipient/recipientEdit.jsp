@@ -18,7 +18,7 @@
 
 <body>
 
-	<div class="container-fluid" style="padding:0;">
+	<div class="container-fluid" style="padding: 0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
@@ -28,6 +28,7 @@
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
 						<input type="hidden" id="id" name="id" value="${entity.id}" />
+						<input type="hidden" id="orderNo" name="orderNo" value="${entity.orderNo}" />
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -90,7 +91,7 @@
 												class="help-block"></span>
 										</div>
 									</div>
-									
+
 									<div class="form-group required">
 										<label for="age" class="col-md-2 control-label">年齡</label>
 										<div class="col-md-10">
@@ -143,33 +144,58 @@
 												value="${entity.bookedTime_3}" /> <span class="help-block"></span>
 										</div>
 									</div>
-									
+
 									<div class="form-group required">
 										<label for="storeName" class="col-md-2 control-label">超商名稱</label>
 										<div class="col-md-10">
 											<input type="text" readonly="readonly" class="form-control"
 												id="storeName" name="storeName" placeholder="storeName"
-												value="${entity.convenienceStoreEntity.storeName}" /> <span class="help-block"></span>
+												value="${entity.convenienceStoreEntity.storeName}" /> <span
+												class="help-block"></span>
 										</div>
 									</div>
-									
+
 									<div class="form-group required">
 										<label for="region" class="col-md-2 control-label">超商區域</label>
 										<div class="col-md-10">
 											<input type="text" readonly="readonly" class="form-control"
 												id="region" name="region" placeholder="region"
-												value="${entity.convenienceStoreEntity.region}" /> <span class="help-block"></span>
+												value="${entity.convenienceStoreEntity.region}" /> <span
+												class="help-block"></span>
 										</div>
 									</div>
-									
+
 									<div class="form-group required">
 										<label for="address" class="col-md-2 control-label">超商地址</label>
 										<div class="col-md-10">
 											<input type="text" readonly="readonly" class="form-control"
 												id="address" name="address" placeholder="address"
-												value="${entity.convenienceStoreEntity.address}" /> <span class="help-block"></span>
+												value="${entity.convenienceStoreEntity.address}" /> <span
+												class="help-block"></span>
 										</div>
 									</div>
+
+									<input type="hidden" readonly="readonly" class="form-control"
+										id="createdBy" name="createdBy" placeholder="createdBy"
+										value="${entity.createdBy}" /> <span class="help-block"></span>
+
+
+
+									<input type="hidden" readonly="readonly" class="form-control"
+										id="canGetPoint" name="canGetPoint" placeholder="canGetPoint"
+										value="${entity.canGetPoint}" /> <span class="help-block"></span>
+
+
+
+
+									<input type="hidden" readonly="readonly" class="form-control"
+										id="alreadyAudittedPoint" name="alreadyAudittedPoint"
+										placeholder="alreadyAudittedPoint"
+										value="${entity.alreadyAudittedPoint}" /> <span
+										class="help-block"></span> <input type="hidden"
+										readonly="readonly" class="form-control" id="alreadyGetPoint"
+										name="alreadyGetPoint" placeholder="alreadyGetPoint"
+										value="${entity.alreadyGetPoint}" /> <span class="help-block"></span>
 
 									<div class="form-group required">
 										<label for="userName" class="col-md-2 control-label">業務員</label>
@@ -184,12 +210,11 @@
 										<div class="col-md-10">
 											<select class="form-control" id="orderStatus"
 												name="orderStatus">
-												<option value="第一階段">第一階段</option>
+												<option value="">${entity.orderStatus}</option>
 												<option value="第二階段">第二階段</option>
 												<option value="第三階段">第三階段</option>
 												<option value="第四階段">第四階段</option>
 												<option value="第五階段">第五階段</option>
-												<option value="第六階段">第六階段</option>
 											</select> <span class="help-block"></span>
 										</div>
 									</div>
@@ -230,16 +255,18 @@
 						var name = $("#userName").val();
 						var pid = $("#pid").val();
 						var address = $("#address").val();
-						$.put("<c:url value='/admin/recipient?userName=" + name
-								+ "&pid=" + pid + "&address=" + address + "'/>", "dataForm", function(
-								data) {
-							if (data.messages.length == 0) {
-								alert("SUCCESS");
-								$btn.button("reset");
-							}
-						}, function(data, textStatus, jqXHR) {
-							$btn.button("reset");
-						});
+						$.put(
+								"<c:url value='/admin/recipient?userName="
+										+ name + "&pid=" + pid + "&address="
+										+ address + "'/>", "dataForm",
+								function(data) {
+									if (data.messages.length == 0) {
+										alert("SUCCESS");
+										$btn.button("reset");
+									}
+								}, function(data, textStatus, jqXHR) {
+									$btn.button("reset");
+								});
 
 						$btn.button("reset");
 					});

@@ -2,6 +2,7 @@ package tw.com.triplei.entity;
 
 
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -57,14 +58,30 @@ public class RecipientEntity extends GenericEntity {
 	
 	@Column(name="ORDERNO")
 	private String orderNo; //訂單號碼
+	
+	@Column(name="CAN_GET_POINT")
+	private Integer canGetPoint; //可獲得點數
+	
+	@Column(name = "ALREADY_GET_POINT")
+	private Boolean alreadyGetPoint; //是否已得到點數
+	
+	@Column(name = "ALREADY_AUDITTED_POINT")
+	private Boolean alreadyAudittedPoint;//是否已審核點數
+
 
 	@Override
 	public String toString() {
-		return "RecipientEntity [product=" + product + ", name=" + name + ", gender=" + gender + ", tel=" + tel
-				+ ", bookedTime_1=" + bookedTime_1 + ", bookedTime_2=" + bookedTime_2 + ", bookedTime_3=" + bookedTime_3
-				+ ", convenienceStoreEntity=" + convenienceStoreEntity + ", user=" + user + ", orderStatus="
-				+ orderStatus + ", orderNo=" + orderNo + "]";
+		return "RecipientEntity [product=" + product + ", name=" + name + ", gender=" + gender + ", age=" + age
+				+ ", tel=" + tel + ", bookedTime_1=" + bookedTime_1 + ", bookedTime_2=" + bookedTime_2
+				+ ", bookedTime_3=" + bookedTime_3 + ", convenienceStoreEntity=" + convenienceStoreEntity + ", user="
+				+ user + ", orderStatus=" + orderStatus + ", orderNo=" + orderNo + ", canGetPoint=" + canGetPoint
+				+ ", alreadyGetPoint=" + alreadyGetPoint + ", alreadyAudittedPoint=" + alreadyAudittedPoint + "]";
 	}
+
+
+	
+
+
 	
 	
 }

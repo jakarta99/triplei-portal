@@ -1,15 +1,20 @@
 package tw.com.triplei.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import tw.com.triplei.entity.GiftEntity;
+import lombok.extern.slf4j.Slf4j;
+import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.enums.GiftType;
 import tw.com.triplei.service.GiftService;
+import tw.com.triplei.service.UserService;
 
+@Slf4j
 @Controller
 @RequestMapping("/gift")
 public class GiftController {
@@ -17,9 +22,21 @@ public class GiftController {
 	@Autowired
 	private GiftService giftService;
 	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		log.debug("userDetails: {}", userDetails);
+		
+		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+		log.debug("getUser : {}", user);
+		
+		model.addAttribute("userPoint",user.getRemainPoint());
+		model.addAttribute("audittingPoint",user.getAudittingPoint());
+		model.addAttribute("exchangedPoint",user.getExchangedPoint());
 		
 //		model.addAttribute("modelv", giftService.getTypeTop3("VOUCHERS"));
 //		model.addAttribute("modelf", giftService.getTypeTop3("FURNITURES"));

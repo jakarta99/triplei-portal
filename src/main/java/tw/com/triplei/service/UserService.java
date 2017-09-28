@@ -59,7 +59,9 @@ public class UserService extends GenericService<UserEntity> {
 		}
 
 		// 更新密碼
-		if(entity.getEditState().equals("pw")){
+		if(entity.getEditState().equals("pw") && StringUtils.isBlank(dbEntity.getProviderUserId())){
+			// TODO FB登入者不能使用密碼變更
+			
 			if (StringUtils.isBlank(entity.getOrgPassword())) {
 				messages.add(Message.builder().code("orgPassword").value("原始欄位為必填欄位").build());
 			}
@@ -83,6 +85,8 @@ public class UserService extends GenericService<UserEntity> {
 					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
 				}
 			}
+		} else {
+			messages.add(Message.builder().code("checkPassword").value("FB登入使用者不允許在此變更密碼").build());
 		}
 		
 		
@@ -99,7 +103,7 @@ public class UserService extends GenericService<UserEntity> {
 		if(!StringUtils.isBlank(entity.getCheckPassword())){
 			dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
 		}
-
+		
 		
 		if(!StringUtils.isBlank(entity.getName())){
 			dbUserEntity.setName(entity.getName());
@@ -135,6 +139,11 @@ public class UserService extends GenericService<UserEntity> {
 	}
 	
 	public String encodePasswrod(final String rawPassword) {
-		return passwordEncoder.encode(rawPassword);
+		if (!StringUtils.isBlank(rawPassword)){
+			return passwordEncoder.encode(rawPassword);
+		} else {
+			return null;
+		}
+		
 	}
 }

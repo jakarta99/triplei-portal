@@ -9,13 +9,21 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<title>Triple i</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Triple i</title>
 <style>
 #mainNavbar {
 	border-color: #333333;
 	background-color: #030033;
+}
+.ui-widget-header {
+	 border: 0px solid #e78f08; 
+	background-color: white;
 }
 </style>
 </head>
@@ -26,22 +34,49 @@
 	<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding:0;width:100%;height:100%;color:white;">
-			<div class="col-sm-4" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
-			<div style="margin:7% auto 0 auto; display:table;width:70%;">
-				<br/><br/>
-				<h1>商品專區</h1>
-				<br/>				
-				<div id="container-fluid" style="height:100%;position:relative;">
-				<div >
-				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;">
+<!-- 左半藍 -->
+			<div class="col-sm-3" style="background-color:#5C8DEC;height:100vh;">
+			
+				<div class="col-sm-1"></div>
+				<div class="col-sm-10" style="height: 100vh;padding-left: 0px;padding-right: 0px;">
+				<div class="col-sm-12" style="padding-top: 15vh;padding-bottom: 0vh">
+				<span style="font-size: 2.5em;font-family: 微軟正黑體;">T-Point</span>
+				<span style="font-size: 1.5em;font-family: 微軟正黑體;">積點專區</span>
 				</div>
-				<div >
-				<img src="/resources/pic/product/商品專區動畫/images/img_0.png" width="100%" style="width:30%;position:absolute;margin:23% auto auto 50%;">
+				<div class="col-sm-12">
+				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="50" height="50">
+				<span style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
 				</div>
+				<div class="col-sm-12">
+				<div class="col-sm-12" style="height: 15vh;border: 1px white solid;border-radius: 20px;margin-top: 3vh;padding-left: 0px;padding-right: 0px;">
+				<div class="col-sm-6" style="border-right: 1px white solid;height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
+				<p style="margin-top: 10%;margin-bottom: 10%;">審核中點數</p>
+				<span>${audittingPoint}</span>
 				</div>
+				<div class="col-sm-6" style="height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
+				<p style="margin-top: 10%;margin-bottom: 10%">已兌換點數</p>
+				<span>${exchangedPoint}</span>
 				</div>
+				</div></div>
+				<div class="col-sm-12"><img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png" width="200" height="200"></div>
+				</div>
+				<div class="col-sm-1"></div>
+<!-- 			<div style="margin:7% auto 0 auto; display:table;width:70%;"> -->
+<!-- 				<br/><br/> -->
+<!-- 				<h1>商品專區</h1> -->
+<!-- 				<br/>				 -->
+<!-- 				<div id="container-fluid" style="height:100%;position:relative;"> -->
+<!-- 				<div > -->
+<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;"> -->
+<!-- 				</div> -->
+<!-- 				<div > -->
+<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_0.png" width="100%" style="width:30%;position:absolute;margin:23% auto auto 50%;"> -->
+<!-- 				</div> -->
+<!-- 				</div> -->
+<!-- 				</div> -->
 			</div>
-			<div class="col-sm-8" style="height:100%;padding:3%;color:black;overflow-y:scroll">
+<!-- 右半白 -->
+			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll">
 		<div
 			style="height: 100vh; display: table; table-layout: fixed; width: 1400px;">
 
@@ -248,7 +283,7 @@
 	</div>
 </div>
 
-<div id="dialog" title="Basic dialog">
+<div id="dialog" title="商品明細">
       <div>
         <div>
             <img id="orderImage" style="height: 200px; width: 200px;" >
@@ -272,6 +307,56 @@
         </div>
     </div>
 </div>
+<!-- 許願池dialog -->
+<div id="dialog-wish">
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+<div class="col-sm-12" style="padding-left: 0px;padding-right: 0px">
+<div class="col-sm-8" style="padding-left: 0px">
+<h3>許願池</h3>
+<p> 積點專區的商品無法滿足你的慾望嗎?別擔心,你可以在這裡告訴我們您想要的商品,TRIPLE-I會盡全力滿足您的願望!快許下願望吧</p>
+</div>
+<div class="col-sm-4" style="padding-right: 0px"><img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png" width="150" height="150"></div>
+</div>
+<div class="col-sm-12" style="padding-left: 0px;padding-bottom: 1vh">希望增加的兌換商品：</div>
+<div class="col-sm-3" style="border: 1px #5C8DEC solid;height: 20vh;display: flex; justify-content: center; flex-direction: column" align="center">
+<!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
+<label for="image1" style="background-color: white;color: #5C8DEC;font-family: 微軟正黑體;">圖片(必要):</label> <input type="file" id="image1" name="image1" style="border: 0px #5C8DEC solid">
+
+</div>
+<form enctype="multipart/form-data" method="post" id="dataForm">
+<div class="col-sm-9" >
+<div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid;margin-bottom: 2vh;display: flex; justify-content: center; flex-direction: column">
+<div style="">
+<label for="brand" style="color: #5C8DEC;font-family: 微軟正黑體;">品牌:</label> <input type="text" placeholder="請輸入品牌名稱" id="brand" name="brand" style="border: 0px #5C8DEC solid">
+</div></div>
+<div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid;margin-bottom: 2vh;display: flex; justify-content: center; flex-direction: column">
+<div style="">
+<label for="name" style="color: #5C8DEC;font-family: 微軟正黑體;">商品名稱:</label> <input type="text" placeholder="請輸入商品名稱" id="name" name="name" style="border: 0px #5C8DEC solid">
+</div></div>
+</div>
+</form>
+<div class="col-sm-12" style="height:10vh" align="right">
+<a class="btn btn-primary" data-loading-text="Loading" id="wishButton" style="margin-top: 4vh;background-color: white;border: 1px #5C8DEC solid;color: #5C8DEC;border-radius: 20px;font-size: 15px;">許願</a>
+</div>
+</div>
+<div class="col-sm-1"></div>
+</div>
+
+<div id="dialog-success">
+<img alt="" src="/resources/pic/積點專區/許願成功.png" class="col-sm-10" style="width: 500"><br/>
+<div class="col-sm-10">
+<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">許願成功</p>
+</div>
+</div>
+
+<div id="dialog-failed">
+<img alt="" src="/resources/pic/積點專區/只能許一次.png" class="col-sm-10" style="width: 500"><br/>
+<div class="col-sm-10">
+<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">一周只能許一次喔</p>
+</div>
+</div>
+
 
 <script type="text/javascript">
 $( function() {
@@ -280,19 +365,21 @@ $( function() {
 	var points;
 	var quantity1;
 	
-  $('#placeOrder').on( 'click', function(){
-	   image =  $(this).parents().parents().find("#image").attr("src");
+  $('p#placeOrder').on( 'click', function(){
+// 	   image =  $(this).parents().parents().find("#image").attr("src");
+	   image =  $(this).parent().parent().siblings().find("#image").attr("src");
 	   giftName =  $(this).parent().siblings().find("#giftName").text();
 	   points =  $(this).parent().siblings().find("#points").text();
 	   console.log(image);
 	   console.log(giftName);
 	   console.log(points);
-	   $("orderImage").attr("src" , image);
-	   $("orderName").text(giftName);
-	   $("orderPoint").text(points);
+	   $("#orderImage").attr("src" , image);
+	   $("#orderName").text(giftName);
+	   $("#orderPoint").text(points);
 	  $( "#dialog" ).dialog( "open" );  
   });
   
+  $("#dialog").hide();
   $( "#dialog" ).dialog({
       autoOpen: false,
       show: {
@@ -306,8 +393,8 @@ $( function() {
     });
   
   $("#saveButton").on("click", function() {
-		var $btn = $(this);
-		$btn.button("loading");
+// 		var $btn = $(this);
+// 		$btn.button("loading");
 		var datas = {};
 		quantity1 = $("#quantity1").val();
 		console.log(quantity1);
@@ -320,11 +407,108 @@ $( function() {
 			data : datas,
 			dataType : "json",
 			success : function(data) {
-				alert("SUCCESS");
+				if(data.訂購成功){
+				alert("購買成功");
+				}else if(data.剩餘點數不足){
+					alert("剩餘點數不足");
+				}else if(data.數字輸入錯誤){
+					alert("數字輸入錯誤");
+				}else{
+					alert("請輸入正確資料");
+				}
+			},
+			error : function(){
+				alert("NetWorkError");
 			}
 		})
-		$btn.button("reset");
+// 		$btn.button("reset");
 	});
+//   以下許願池
+		$('#dialog-wish').hide();
+		$('#dialog-success').hide();
+			var dialog1 = $('#dialog-wish').dialog({
+				autoOpen: false,
+				resizable : true,
+				height : "auto",
+				width : 700,
+				modal : true,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				},
+			})
+			var dialog2 = $('#dialog-success').dialog({
+				autoOpen: false,
+				resizable : true,
+				height : 300,
+				width : 400,
+				modal : true,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				},
+			})
+			var dialog3 = $('#dialog-failed').dialog({
+				autoOpen: false,
+				resizable : true,
+				height : 300,
+				width : 400,
+				modal : true,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				},
+			})
+		$('#wishpool').on("click",function() {
+			dialog1.dialog("open");
+			//<!-- Save -->
+			$("#wishButton").bind("click",function() {
+								var $btn = $(this);
+								$btn.button("loading");
+								
+								var formData = new FormData();
+								formData.append('name', $("#name").val());
+								formData.append('brand', $("#brand").val());
+								$.each($("input[type='file']")[0].files, function(i, file) {
+									formData.append('file', file);
+								});
+								
+								$.ajax({
+									url : "<c:url value='/admin/wish'/>",
+									method : "POST",
+									data : formData,
+									enctype : "multipart/form-data",
+									processData : false,
+									contentType : false,
+									success : function(data) {
+										if (data.data == null) {
+											dialog3.dialog("open");
+											$btn.button("reset");
+											dialog1.dialog("close");
+										}else if (data.messages.length == 0) {
+															$("#dataForm").trigger("reset");
+															dialog2.dialog("open");
+															$btn.button("reset");
+															dialog1.dialog("close");
+														}
+									}
+								})
+								$btn.button("reset");
+							});
+			});
+	
 });
 </script>
 </body>

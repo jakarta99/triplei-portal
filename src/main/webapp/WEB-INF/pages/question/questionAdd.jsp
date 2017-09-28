@@ -15,7 +15,7 @@
 
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>

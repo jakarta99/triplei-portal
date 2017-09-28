@@ -18,8 +18,8 @@ font-size:95%;
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default" id="mainNavbar"  style="border-radius:0">
 <!--  style="navbar-fixed-top" -->
-	<div class="container" >
-		<div class="navbar-header">
+	<div class="container" style="padding:0" >
+		<div class="navbar-header" style="width:10%;">
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 				aria-controls="navbar">
@@ -27,10 +27,10 @@ font-size:95%;
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"  style="color:white">Triple-I</a>
-<!-- 				<img class="navbar-brand" src="/resources/pic/logo-white.png" style="width:85%;height:auto;margin:0;"> -->
+<!-- 			<a class="navbar-brand" href="/"  style="color:white">Triple-I</a> -->
+				<a href="/"><img class="navbar-brand" src="/resources/pic/logo-white.png" style="width:100%;height:auto;margin:0;"></a>
 		</div>
-		<div id="navbar" class="navbar-collapse collapse">
+		<div id="navbar" class="navbar-collapse collapse" style="float:right;">
 			<ul class="nav navbar-nav navbar-right">
 				
 					<li class="dropdown">
@@ -101,7 +101,6 @@ font-size:95%;
 						<ul class="dropdown-menu">
 							<li><a href="/product/list">商品列表</a></li>
 							<li><a href="/product/irr">IRR計算機</a></li>
-							<li><a href="/admin/wish/add">許願池</a></li>
 						</ul>
 					</li>
 				<li><a href="/gift/list"  style="color:white">績點專區</a></li>

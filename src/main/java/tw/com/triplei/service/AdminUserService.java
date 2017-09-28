@@ -45,37 +45,44 @@ public class AdminUserService extends GenericService<UserEntity>{
 	@Override
 	public List<Message> validateInsert(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
-
-		UserEntity dbEntity = userDao.findByEmail(entity.getEmail()); // email 不得重複註冊
 		
-		if (StringUtils.isBlank(entity.getName())) {
-			messages.add(Message.builder().code("name").value("會員姓名為必填欄位").build());
-		}
-		
-		if (StringUtils.isBlank(entity.getEmail())){
-			messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
-		}
-
-		if (dbEntity != null) {
-			messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
-		}
-		
-		if (StringUtils.isBlank(entity.getPassword())){
-			messages.add(Message.builder().code("password").value("請輸入密碼").build());
-		}
-		
-		if (StringUtils.isBlank(entity.getCheckPassword())){
-			messages.add(Message.builder().code("checkPassword").value("請輸入確認密碼").build());
-		}
-				
-		if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())){
-			if (!entity.getPassword().equals(entity.getCheckPassword())){
-				messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
-				messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
+		if(StringUtils.isBlank(entity.getProviderUserId())){
+			// 一般會員註冊
+			UserEntity dbEntity = userDao.findByEmail(entity.getEmail()); // email 不得重複註冊
+			
+			if (StringUtils.isBlank(entity.getName())) {
+				messages.add(Message.builder().code("name").value("會員姓名為必填欄位").build());
 			}
-		}
 
-		log.debug("{}", messages);
+			if (StringUtils.isBlank(entity.getEmail())) {
+				messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
+			}
+
+			if (dbEntity != null) {
+				messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
+			}
+
+			if (StringUtils.isBlank(entity.getPassword())) {
+				messages.add(Message.builder().code("password").value("請輸入密碼").build());
+			}
+
+			if (StringUtils.isBlank(entity.getCheckPassword())) {
+				messages.add(Message.builder().code("checkPassword").value("請輸入確認密碼").build());
+			}
+
+			if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())) {
+				if (!entity.getPassword().equals(entity.getCheckPassword())) {
+					messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
+					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
+				}
+			}
+			
+
+
+			log.debug("{}", messages);
+		}
+		
+
 		
 		return messages;
 	}
@@ -95,10 +102,13 @@ public class AdminUserService extends GenericService<UserEntity>{
 	public UserEntity handleInsert(final UserEntity entity) {
 		
 		entity.setPassword(encodePasswrod(entity.getPassword()));
-		//entity.setOrgPassword(encodePasswrod(entity.getPassword()));
-		entity.setEnabled(false);  // 預設新註冊的會員不啟用
-		entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
 		
+		if(entity.getProviderUserId()==null){ 
+			// FB登入的人才會有 providerUserId，此唯一般註冊流程
+			entity.setEnabled(false);  // 預設新註冊的會員不啟用
+			entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
+		}
+
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);
 		entity.setCreatedTime(timestamp);
@@ -171,7 +181,11 @@ public class AdminUserService extends GenericService<UserEntity>{
 	}
 	
 	public String encodePasswrod(final String rawPassword) {
-		return passwordEncoder.encode(rawPassword);
+		if(!StringUtils.isBlank(rawPassword)){
+			return passwordEncoder.encode(rawPassword);
+		} else {
+			return null;
+		}
 	}
 	
 	public UserEntity getByEmail(final String email) {
@@ -184,6 +198,10 @@ public class AdminUserService extends GenericService<UserEntity>{
 	
 	public UserEntity getByAccountNumber(final String accountNumber) {
 		return userDao.findByAccountNumber(accountNumber);
+	}
+	
+	public UserEntity save(UserEntity entity){
+		return userDao.save(entity);
 	}
 	
 

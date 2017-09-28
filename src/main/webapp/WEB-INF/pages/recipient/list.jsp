@@ -54,7 +54,7 @@
 			        
 			 
 			        fields: [
-			            { title: '訂單標號', name: "id", type: "text", width: 80 },
+			            { title: '訂單標號', name: "orderNo", type: "text", width: 80 },
 			            { title: '名字', name: "name", type: "text", width: 50 },
 			            { title: '性別', name: "gender", type: "text", width: 60 },
 			            { title: '年齡', name: "age", type: "text", width: 30 },
@@ -71,6 +71,7 @@
 			            { title: '超商地址', name: "convenienceStoreEntity.address", type: "text", width: 80 },
 			            { title: '業務員', name: "user.name", type: "text", width: 80 },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
+			            { title: '可獲得點數', name: "product.getPoint", type: "text", width: 80 },
 			        ]
 			    });
 

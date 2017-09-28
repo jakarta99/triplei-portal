@@ -28,6 +28,7 @@
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
 						<input type="hidden" id="id" name="id" value="${entity.id}" />
+						<input type="hidden" id="orderNo" name="orderNo" value="${entity.orderNo}" />
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -83,7 +84,7 @@
 									</div>
 
 									<div class="form-group required">
-										<label for="gender" class="col-md-2 control-label">姓別</label>
+										<label for="gender" class="col-md-2 control-label">性別</label>
 										<div class="col-md-10">
 											<input type="text" readonly="readonly" class="form-control"
 												id="gender" name="gender" value="${entity.gender}" /> <span
@@ -174,6 +175,30 @@
 										</div>
 									</div>
 
+
+									<input type="hidden" readonly="readonly" class="form-control"
+										id="createdBy" name="createdBy" placeholder="createdBy"
+										value="${entity.createdBy}" /> <span class="help-block"></span>
+
+
+
+									<input type="hidden" readonly="readonly" class="form-control"
+										id="canGetPoint" name="canGetPoint" placeholder="canGetPoint"
+										value="${entity.canGetPoint}" /> <span class="help-block"></span>
+
+
+
+
+									<input type="hidden" readonly="readonly" class="form-control"
+										id="alreadyAudittedPoint" name="alreadyAudittedPoint"
+										placeholder="alreadyAudittedPoint"
+										value="${entity.alreadyAudittedPoint}" /> <span
+										class="help-block"></span> <input type="hidden"
+										readonly="readonly" class="form-control" id="alreadyGetPoint"
+										name="alreadyGetPoint" placeholder="alreadyGetPoint"
+										value="${entity.alreadyGetPoint}" /> <span class="help-block"></span>
+
+
 									<div class="form-group required">
 										<label for="userName" class="col-md-2 control-label">選擇業務員</label>
 										<div class="col-md-10">
@@ -185,6 +210,12 @@
 												<!-- 												<option value="測試使用者5號-客服">測試使用者5號-客服</option> -->
 												<!-- 												<option value="測試使用者6號-文章">測試使用者6號-文章</option> -->
 												<!-- 												<option value="張耀元">張耀元</option> -->
+												<c:if test="${empty entity.user}">
+													<option value="">請選擇</option>
+												</c:if>
+												<c:if test="${not empty entity.user}">
+													<option value="${entity.user.name}">${entity.user.name}</option>
+												</c:if>
 												<c:forEach items="${sales}" var="sale">
 													<option value="${sale.name}">${sale.name}</option>
 												</c:forEach>
@@ -196,12 +227,24 @@
 										<div class="col-md-10">
 											<select class="form-control" id="orderStatus"
 												name="orderStatus">
-												<option value="第一階段">第一階段</option>
-												<option value="第二階段">第二階段</option>
-												<option value="第三階段">第三階段</option>
-												<option value="第四階段">第四階段</option>
-												<option value="第五階段">第五階段</option>
-												<option value="第六階段">第六階段</option>
+												<c:if test="${empty entity.orderStatus}">
+													<option value="">請選擇</option>
+													<option value="第一階段">第一階段</option>
+													<option value="第二階段">第二階段</option>
+													<option value="第三階段">第三階段</option>
+													<option value="第四階段">第四階段</option>
+													<option value="第五階段">第五階段</option>
+													<option value="第六階段">第六階段</option>
+												</c:if>
+												<c:if test="${not empty entity.orderStatus}">
+													<option value="${entity.orderStatus}">${entity.orderStatus}</option>
+													<option value="第一階段">第一階段</option>
+													<option value="第二階段">第二階段</option>
+													<option value="第三階段">第三階段</option>
+													<option value="第四階段">第四階段</option>
+													<option value="第五階段">第五階段</option>
+													<option value="第六階段">第六階段</option>
+												</c:if>
 											</select> <span class="help-block"></span>
 										</div>
 									</div>

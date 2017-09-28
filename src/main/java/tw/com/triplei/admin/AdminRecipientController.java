@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -37,8 +36,10 @@ import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.RecipientEntity;
 import tw.com.triplei.entity.RoleEntity;
 import tw.com.triplei.entity.UserEntity;
+import tw.com.triplei.service.EmailService;
 import tw.com.triplei.service.ProductService;
 import tw.com.triplei.service.RecipientService;
+import tw.com.triplei.service.RoleService;
 
 @Slf4j
 @Controller
@@ -47,6 +48,12 @@ public class AdminRecipientController {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private EmailService emailService;
+
+	@Autowired
+	private RoleService roleService;
 
 	@Autowired
 	private ConvenienceStoreDao convenienceStoreDao;
@@ -66,13 +73,14 @@ public class AdminRecipientController {
 	public String editPage(@PathVariable("id") final Long id, Model model) {
 
 		RecipientEntity dbEntity = recipientService.getOne(id);
+		log.debug("!!!{}", dbEntity.getCreatedBy());
 		model.addAttribute("entity", dbEntity);
 		List<UserEntity> saleUsers = new ArrayList<>();
 		List<UserEntity> users = userDao.findAll();
-		for(UserEntity user : users){
+		for (UserEntity user : users) {
 			Set<RoleEntity> roles = user.getRoles();
-			for(RoleEntity role : roles){
-				if(role.getCode().equals("ROLE_SALES")){
+			for (RoleEntity role : roles) {
+				if (role.getCode().equals("ROLE_SALES")) {
 					saleUsers.add(user);
 				}
 			}
@@ -80,8 +88,6 @@ public class AdminRecipientController {
 		model.addAttribute("sales", saleUsers);
 		return "/admin/recipient/recipientEdit";
 	}
-	
-	
 
 	@GetMapping
 	@ResponseBody
@@ -138,8 +144,7 @@ public class AdminRecipientController {
 			@RequestParam("pid") String pid, @RequestParam("insureAmount") String insureAmountS,
 			@RequestParam("premiumAfterDiscount") String premiumAfterDiscountS,
 			@RequestParam("getPoint") String getPointS) {
-		
-		
+
 		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 		try {
 			RecipientEntity form = new RecipientEntity();
@@ -157,16 +162,35 @@ public class AdminRecipientController {
 			form.setBookedTime_2(date_2_1 + " " + date_2_2 + " " + date_2_3);
 			form.setBookedTime_3(date_3_1 + " " + date_3_2 + " " + date_3_3);
 			form.setProduct(productEntity);
+			form.setCanGetPoint((int) productEntity.getGetPoint().doubleValue());
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			log.debug("convenienceStoreEntity: {}", convenienceStoreEntity);
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
 					.getPrincipal();
-			log.debug("userDetails: {}", userDetails);
+			log.debug("userDetails: {}", userDetails.getUsername());
 			form.setCreatedBy(userDetails.getUsername());
+			form.setAlreadyGetPoint(false);
+			form.setAlreadyAudittedPoint(false);
+			
+			// 一般會員下單後 自動升級成下單會員
+			UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
+			Set<RoleEntity> roles = owner.getRoles();
+			RoleEntity role = roleService.getDao().findByCode("ROLE_ORDER");
+			if (!roles.contains(role)) {
+				roles.add(role);
+				owner.setRoles(roles);
+				userDao.save(owner);
+				log.debug("升級成功!!{}");
+			}
+
 			final RecipientEntity insertResult = recipientService.insert(form);
-			response.setData(insertResult);
+			String formatStr = "%07d";
+			String formatAns = String.format(formatStr,insertResult.getId());
+			insertResult.setOrderNo(formatAns);
+			final RecipientEntity insertResultG = recipientService.insert(insertResult);
+			response.setData(insertResultG);
 
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
@@ -175,7 +199,7 @@ public class AdminRecipientController {
 			response.addException(e);
 		}
 
-//		log.debug("{}", response);
+		// log.debug("{}", response);
 
 		return response;
 	}
@@ -183,27 +207,49 @@ public class AdminRecipientController {
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public AjaxResponse<RecipientEntity> update(final Model model, @RequestParam("pid") long pid,
-			@RequestParam(name = "userName") String userName, @RequestParam("address") String address, @RequestBody final RecipientEntity form) {
+			@RequestParam(name = "userName") String userName, @RequestParam("address") String address,
+			@RequestBody final RecipientEntity form) {
 
-		log.debug("{}", form);
+		log.debug("{}", form.getCreatedBy());
 		final AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 
 		try {
-			ProductEntity productEntity = productService.getOne(pid);
+			ProductEntity productEntity = productService.getOneAll(pid);
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			UserEntity user = userDao.findByName(userName);
 			form.setUser(user);
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setProduct(productEntity);
-			System.out.println(form);
 			form.setModifiedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
 					.getPrincipal();
-			log.debug("userDetails: {}", userDetails);
+			log.debug("可獲得點數: {}", form.getCanGetPoint());
 			form.setModifiedBy(userDetails.getUsername());
-			final RecipientEntity updateResult = recipientService.update(form);
+			
+			
+			
+			if (form.getOrderStatus().equals("第六階段") && !form.getAlreadyGetPoint()) {
+				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
+					int remainPoint = owner.getRemainPoint();
+					owner.setAudittingPoint(owner.getAudittingPoint() - form.getCanGetPoint());
+					owner.setRemainPoint(remainPoint + form.getCanGetPoint());
+					form.setAlreadyGetPoint(true);
+				userDao.save(owner);
+			} else if (!form.getOrderStatus().equals("第六階段") && !form.getAlreadyAudittedPoint()) {
+				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
+				int auditting = owner.getAudittingPoint();
+				owner.setAudittingPoint(auditting + form.getCanGetPoint());
+				form.setAlreadyAudittedPoint(true);
+				userDao.save(owner);
+			}
 
+			final RecipientEntity updateResult = recipientService.update(form);
 			response.setData(updateResult);
+			if(updateResult.getOrderStatus().equals("第一階段")){
+				emailService.sendAlertEmailToSales(user, updateResult);
+				UserEntity owner = userDao.findByAccountNumber(userDetails.getUsername());
+				emailService.sendAlertEmailToAdmin(owner, user, updateResult);
+			}
 
 		} catch (final Exception e) {
 			response.addException(e);

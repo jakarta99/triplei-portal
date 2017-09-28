@@ -224,6 +224,10 @@ public class RegisteredController {
 		
 		try {
 
+			form.setAudittingPoint(0);
+			form.setRemainPoint(0);
+			form.setExchangedPoint(0);
+			form.setRemainWishTimes(true);
 			final UserEntity insertResult = userService.insert(form);
 			response.setData(insertResult);
 			
