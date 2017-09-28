@@ -186,7 +186,11 @@ public class AdminRecipientController {
 			}
 
 			final RecipientEntity insertResult = recipientService.insert(form);
-			response.setData(insertResult);
+			String formatStr = "%07d";
+			String formatAns = String.format(formatStr,insertResult.getId());
+			insertResult.setOrderNo(formatAns);
+			final RecipientEntity insertResultG = recipientService.insert(insertResult);
+			response.setData(insertResultG);
 
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();

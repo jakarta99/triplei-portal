@@ -321,7 +321,7 @@
 <div class="col-sm-12" style="padding-left: 0px;padding-bottom: 1vh">希望增加的兌換商品：</div>
 <div class="col-sm-3" style="border: 1px #5C8DEC solid;height: 20vh;display: flex; justify-content: center; flex-direction: column" align="center">
 <!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
-<label for="image1" style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;;font-family: 微軟正黑體;">圖片:</label> <input type="file" placeholder="請上傳圖片" id="image1" name="image1" style="border: 0px #5C8DEC solid">
+<label for="image1" style="background-color: white;color: #5C8DEC;font-family: 微軟正黑體;">圖片(必要):</label> <input type="file" id="image1" name="image1" style="border: 0px #5C8DEC solid">
 
 </div>
 <form enctype="multipart/form-data" method="post" id="dataForm">

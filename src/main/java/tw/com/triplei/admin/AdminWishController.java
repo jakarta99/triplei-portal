@@ -62,7 +62,7 @@ public class AdminWishController {
 			@RequestParam(value = "brand") String brand,@RequestParam(value = "name") String name,WishEntity form) {
 
 		AjaxResponse<WishEntity> response = new AjaxResponse<WishEntity>();
-
+		log.debug("RRRRRRRRRR{}",file);
 		try {
 			
 			if(!file.isEmpty()){

@@ -54,7 +54,7 @@
 			        
 			 
 			        fields: [
-			            { title: '訂單標號', name: "id", type: "text", width: 80 },
+			            { title: '訂單標號', name: "orderNo", type: "text", width: 80 },
 			            { title: '名字', name: "name", type: "text", width: 50 },
 			            { title: '性別', name: "gender", type: "text", width: 60 },
 			            { title: '年齡', name: "age", type: "text", width: 30 },
