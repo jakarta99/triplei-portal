@@ -45,17 +45,17 @@
 				</div>
 				<div class="col-sm-12">
 				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="50" height="50">
-				<span style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
+				<span id="userPoint" style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
 				</div>
 				<div class="col-sm-12">
 				<div class="col-sm-12" style="height: 15vh;border: 1px white solid;border-radius: 20px;margin-top: 3vh;padding-left: 0px;padding-right: 0px;">
 				<div class="col-sm-6" style="border-right: 1px white solid;height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%;">審核中點數</p>
-				<span>${audittingPoint}</span>
+				<span id="audittingPoint" >${audittingPoint}</span>
 				</div>
 				<div class="col-sm-6" style="height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%">已兌換點數</p>
-				<span>${exchangedPoint}</span>
+				<span id="exchangedPoint" >${exchangedPoint}</span>
 				</div>
 				</div></div>
 				<div class="col-sm-12"><img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png" width="200" height="200"></div>
@@ -364,6 +364,8 @@ $( function() {
 	var giftName;
 	var points;
 	var quantity1;
+// 	var userPoint = $.('#userPoint');
+// 	var exchangedPoint = $.('#exchangedPoint');
 	
   $('p#placeOrder').on( 'click', function(){
 // 	   image =  $(this).parents().parents().find("#image").attr("src");
@@ -382,6 +384,8 @@ $( function() {
   $("#dialog").hide();
   $( "#dialog" ).dialog({
       autoOpen: false,
+      height : "auto",
+	  width : 700,
       show: {
         effect: "blind",
         duration: 1000
@@ -409,6 +413,9 @@ $( function() {
 			success : function(data) {
 				if(data.訂購成功){
 				alert("購買成功");
+				location.replace("/gift/list");
+// 				userPoint.text(data.userPoint);
+// 				exchangedPoint.text(data.exchangedPoint);
 				}else if(data.剩餘點數不足){
 					alert("剩餘點數不足");
 				}else if(data.數字輸入錯誤){

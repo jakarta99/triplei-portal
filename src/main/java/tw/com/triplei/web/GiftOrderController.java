@@ -104,13 +104,16 @@ public class GiftOrderController {
 				if (remainpoint >= 0) {
 
 					user.setRemainPoint(remainpoint);
-					user.setExchangedPoint(giftpoint * quantity);
+					
+					user.setExchangedPoint(user.getExchangedPoint() + (giftpoint * quantity));
 					userService.getDao().save(user);
 					entity.setQuantity(quantity);
 					LocalDateTime orderTime = LocalDateTime.now();
 					entity.setOrderTime(orderTime);
 					entity.setGiftEntity(giftEntity);
 					giftOrderService.insert(entity);
+					response.put("userPoint", user.getRemainPoint().toString());
+					response.put("exchangedPoint", user.getExchangedPoint().toString());
 					response.put("訂購成功", "訂購成功");
 
 					return response;

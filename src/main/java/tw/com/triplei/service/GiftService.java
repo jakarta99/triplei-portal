@@ -37,7 +37,7 @@ public class GiftService extends GenericService<GiftEntity> {
 		return giftDao;
 	}
 	
-	public List<GiftEntity> getType(String giftType){
+	public List<GiftEntity> getByGiftType(String giftType){
 		return giftDao.findByGiftType(giftType);
 	}
 	

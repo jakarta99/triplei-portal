@@ -10,8 +10,7 @@
 <script type="text/javascript" src='<c:url value="/resources/log4javascript-1.4.13/log4javascript.js" />'></script>
 <script type="text/javascript" src='<c:url value="/resources/softleader/jquery.softleader.js" />'></script>
 <script type="text/javascript" src='<c:url value="/resources/form2js/form2js.js" />'></script>
-
-
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <script>
 var log = log4javascript.getLogger("<c:out value='${pageContext.request.servletPath}' />");
 log.setLevel(log4javascript.Level.ALL);

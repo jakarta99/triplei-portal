@@ -37,6 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.hasAnyRole("ADMIN","USER","NORMAL")
 		.and().formLogin().loginPage("/login").permitAll();
 		
+//		http.authorizeRequests().antMatchers("/gift/giftOrder/addOrder")
+//		.hasAnyRole("ADMIN","USER","NORMAL")
+//		.and().formLogin().loginPage("/login").permitAll();
+		http.authorizeRequests().antMatchers("/gift/**")
+		.hasAnyRole("ADMIN","USER","NORMAL")
+		.and().formLogin().loginPage("/login").permitAll();
+		
         http.authenticationProvider(daoAuthenticationProvider())
         	.authorizeRequests()
         	.antMatchers(
