@@ -81,9 +81,9 @@ public class AdminGiftController {
 		AjaxResponse<GiftEntity> response = new AjaxResponse<GiftEntity>();
 
 		try {
-			String brandnum = brand.substring(brand.length()-3);
-			String giftnum = name.substring(name.length()-3);
-			String colorAndType = colorAndType1.substring(colorAndType1.length()-2);
+//			String brandnum = brand.substring(brand.length()-3);
+//			String giftnum = name.substring(name.length()-3);
+//			String colorAndType = colorAndType1.substring(colorAndType1.length()-2);
 			
 			if(!file.isEmpty()){
 				String imagePath= giftService.imageUpload(file);
@@ -117,10 +117,10 @@ public class AdminGiftController {
 //			LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(),ZoneId.systemDefault());
 //			form.setExchangeDate(localDateTime);
 			final GiftEntity insertResult = giftService.insert(giftEntity);
-			String formatStr = "%05d";
-			String formatAns = String.format(formatStr,insertResult.getId());
-			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
-			giftEntity.setCode(giftNumber);
+//			String formatStr = "%05d";
+//			String formatAns = String.format(formatStr,insertResult.getId());
+//			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
+//			giftEntity.setCode(giftNumber);
 			giftEntity.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			log.debug("userDetails: {}",userDetails);

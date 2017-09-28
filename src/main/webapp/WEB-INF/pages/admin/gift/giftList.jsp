@@ -65,7 +65,7 @@
 			            { title: '品牌', name: "brand", type: "text", width: 150 },
 			            { title: '積點商品名稱', name: "name", type: "text", width: 150 },
 			            { title: '顏色/花樣', name: "colorAndType", type: "text", width: 150 },
-			            { title: '商品代碼', name: "code", type: "code", width: 150 },
+// 			            { title: '商品代碼', name: "code", type: "code", width: 150 },
 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
 			            { title: '照片', name: "image1", type: "text", width: 150 ,itemTemplate: function(val) {return $("<img>").attr("src",val).css({ width: 80 })}},
 // 			            { title: '照片二', name: "image2", type: "text", width: 150 },
@@ -90,7 +90,7 @@
 			            }
 			            },
 			            { title: '熱門商品', name: "hotGift", type: "checkbox", width: 150 },
-			            { title: '兌換日期', name: "exchangeDate", type: "text", width: 150 },
+// 			            { title: '兌換日期', name: "exchangeDate", type: "text", width: 150 },
 			            { title: '備註', name: "remarks", type: "text", width: 150 }
      
 			        ]
