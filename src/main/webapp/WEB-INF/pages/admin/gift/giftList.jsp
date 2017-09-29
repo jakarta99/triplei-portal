@@ -18,7 +18,7 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-		<div>
+		<div style="padding-top:9vh">
 			<h3>積點商品管理</h3>
 			<div>
           		<a href="<c:url value='/admin/gift/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">

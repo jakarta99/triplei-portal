@@ -17,14 +17,14 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
-		<div>
+		<div style="padding-top:9vh">
 			<h3>文章列表</h3>
-			<div>
+			<div style="padding-top:1vh">
 				<a href="<c:url value='/admin/article/insertArticle'/>"
 					class="btn btn-sm btn-primary" data-loading-text="Loading"> 
 					<span class="glyphicon glyphicon-plus"></span>新增</a>
 			</div>
-			<div id="jsGrid"></div>
+			<div id="jsGrid" style="padding-top:1vh"></div>
 
 	<script>
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/article";

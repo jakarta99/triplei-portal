@@ -14,6 +14,9 @@
 <style>
 select {
 	border: 1px lightgrey solid;
+	background:white;
+	text-shadow:0;
+	height:2.5em;
 }
 </style>
 </head>
@@ -23,20 +26,15 @@ select {
 		<div class="container-fluid"
 			style="width: 100%; height: 100%; position: absolute; padding: 0">
 			<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-			<div style="padding: 0; width: 100%; height: 100%;">
+			<div style="padding: 0; width: 100%; height: 100%;padding-top:9vh">
 				<div class="col-sm-12" style="margin-top: 4%;">
-					<span style="font-size: 150%">基本資料及聯絡資訊</span>
-					<form>
+					<span style="font-size: 150%;width:85%;margin-left:6%;color:#5C8DEC;">基本資料及聯絡資訊</span>
+
+					<form style="margin-top:2vh">
 						<div class="col-sm-6" style="border-right: 1px lightgrey solid">
-							<div style="width: 85%">
+							<div style="width: 85%;margin-left:8%">
 								<div class="col-sm-12">
 									<span>姓名</span> <br /> <input id="name" class="col-sm-8" type="text">
-<!-- 									<label class="col-sm-2"> <input type="radio" -->
-<!-- 										class="btn btn-secondary gender" value="male"> <span>先生</span> -->
-<!-- 									</label> <label class="col-sm-2"> <input type="radio" -->
-<!-- 										class="btn btn-secondary gender" value="female"> <span>小姐</span> -->
-<!-- 									</label> -->
-								
 								<c:if test="${gender!='Female'}">
 								<span style="margin-left:2%">性別：男</span>
 								</c:if>
@@ -84,13 +82,13 @@ select {
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-6" style="padding-right:6%">
 							<form id="dataForm">
 								<input type="hidden" id="id" name="id" value="" />
 								<div class="col-sm-12">
 									<div class="col-sm-12" style="padding: 0">
 										<div class="form-group required col-sm-6" style="margin: 0; padding: 0">
-											<label for="city" class="col-sm-4 control-label">縣市</label>
+											<label for="city" class="col-sm-4 control-label" style="font-weight: normal;">縣市</label>
 											<div class="col-sm-8">
 												<select id="city" class="form-control">
 													<option value="" selected>請選擇</option>
@@ -101,7 +99,7 @@ select {
 										</div>
 
 										<div class="form-group required col-sm-6">
-											<label for="region" class="col-sm-4 control-label">區域</label>
+											<label for="region" class="col-sm-4 control-label;" style="font-weight: normal;">區域</label>
 											<div class="col-sm-8">
 												<select id="region" class="form-control">
 													<option value="" selected>請選擇</option>
@@ -111,27 +109,32 @@ select {
 									</div>
 
 									<div class="form-group required">
-										<label for="street" class="col-sm-2 control-label">街道</label>
-										<div class="col-sm-10">
+										<label for="street" class="col-sm-2 control-label" style="margin-bottom:2%;font-weight: normal;">街道</label>
+										<div class="col-sm-10" style="margin-bottom:2%">
 											<select id="street" class="form-control">
 												<option value="" selected>請選擇</option>
 											</select>
 										</div>
 									</div>
 
-									<div class="form-group required" style="margin-top:2%">
-										<label for="address" class="col-sm-2 control-label">超商地址</label>
-										<div class="col-sm-10">
+									<div class="form-group required">
+										<label for="address" class="col-sm-2 control-label" style="font-weight: normal;">超商地址</label>
+										<div class="col-sm-6">
 											<select id="address" class="form-control">
 												<option value="" selected>請選擇</option>
 											</select>
+										</div>
+										<div class="col-sm-4" style="vertical-align:middle;padding-top:1%">
+										<span id="storeName" >
+										超商店名
+										</span>
 										</div>
 									</div>
 
 
 								</div>
-								<div class="col-sm-12" style="margin-top:2%">
-								<iframe id="googleMapping" width="600" height="450" style="border:0"
+								<div class="col-sm-12" style="min-width:400px;padding-left:5%;margin-top:2%;width:45vw;height:50vh;">
+								<iframe id="googleMapping" width="90%" height="90%" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAuwYed8DxRGhmTy44R5HGKich9J-dGs9s
     &q=台北101">
 </iframe>
@@ -140,12 +143,13 @@ select {
 						</div>
 					</form>
 				</div>
-				<div class="col-sm-12">
-					<span style="font-size: 150%">確認保單資料</span> <span
-						style="color: grey; margin-left: 1%;">與業務員見面後也可更改</span>
-					<div class="col-sm-12" style="border: 1px solid lightgrey">
+				<div class="col-sm-12" style="width:88%;margin-left:6%;">
+					<span style="font-size: 150%;color:#5C8DEC;">確認保單資料</span>
+					<span style="color: grey; margin-left: 1%;">與業務員見面後也可更改</span>
+					<div class="col-sm-12" style="border: 1px solid lightgrey;padding-top:2%;padding-bottom:2%;margin-top:1%">
 						<div class="col-sm-12" style="margin-bottom: 2%; margin-top: 1%;">
-							<img src=""> <span style="font-size: 115%">${model.insurer.name}</span> <br />
+							<img src="${model.insurer.imgsrc}" width="35vw"> 
+							<span style="font-size: 115%">${model.insurer.name}</span> <br />
 							<span style="font-size: 115%">${model.code}-${model.localName}</span>
 						</div>
 
@@ -169,7 +173,7 @@ select {
 					</div>
 				</div>
 				<div class="col-sm-12 float-right" align="right" style="margin-top:2%;margin-bottom:5%;">
-				<input type="button" id="confirmPurchase" class="btn btn-secondary" style="width:30%;background-color:#5C8DEC;color:white;border:none" value="確認約訪購買">
+				<input type="button" id="confirmPurchase" class="btn btn-secondary" style="width:30%;background-color:#5C8DEC;color:white;border:none;margin-right:6%" value="確認約訪購買">
 				</div>
 				<div class="col-sm-12" style="height:5%;">
 				</div>
@@ -506,7 +510,10 @@ select {
 			
 		})
 		
-		
+		window.onresize = function(event) {
+			
+			
+		}
 	</script>
 </body>
 </html>

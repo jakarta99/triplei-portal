@@ -19,7 +19,7 @@
 		<div>
 			<h3>超商檔案上傳</h3>
 
-			<div class="panel panel-default">
+			<div class="panel panel-default" style="padding-top:9vh">
 				<div class="panel-body">
 					<form class="form-horizontal" action="/admin/convenienceStore/insertFile" method="POST" enctype="multipart/form-data">
 						<div class="panel panel-primary">

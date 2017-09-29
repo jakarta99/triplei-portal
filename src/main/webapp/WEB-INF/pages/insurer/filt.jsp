@@ -29,7 +29,7 @@
 	<div class="container-fluid"
 		style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div>
+		<div style="padding-top:9vh">
 			<div class="col-xs-12 col-sm-3"
 				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;"><!--左半藍 -->
  				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
