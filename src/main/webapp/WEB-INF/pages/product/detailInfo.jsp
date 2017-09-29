@@ -26,7 +26,7 @@ label {
 }
 
 .genderImage {
-	width: 25%;
+	width: 23%;
 	border-radius: 50%;
 }
 
@@ -39,7 +39,7 @@ label {
 }
 
 #input1 span {
-	font-size: 150%;
+	font-size: 130%;
 }
 
 td {
@@ -52,7 +52,10 @@ td {
 }
 
 span {
-	font-size: 110%;
+	font-size: 100%;
+}
+#detailInfo div{
+padding-bottom:1vh;
 }
 </style>
 </head>
@@ -62,17 +65,17 @@ span {
 	<div id="wrap">
 		<div class="container-fluid"
 			style="width: 100%; height: 100%; position: absolute; padding: 0;">
-
 			<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
+			
 			<div class="col-sm-12"
-				style="padding: 0; width: 100%; height: 100%; color: white;">
+				style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh">
 				<div class="col-sm-3"
 					style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 					<div style="margin: 7% auto 0 auto; display: table; width: 70%;">
 						<br /> <br />
-						<h1>商品專區</h1>
+						<span style="font-size:190%">商品內容</span>
 						<br />
-						<form id="input1">
+						<form id="input1" style="margin-top:10%">
 							<div>
 								<span>性別</span> <label> <input type="radio"
 									class="gender FemaleInput" name="gender" value="Female"><img
@@ -86,12 +89,12 @@ span {
 							</div>
 							<div>
 								<span>生日</span><br /> <input type="text" id="bDate"
-									style="width: 80%; background-color: #5C8DEC; border: 1px white solid; margin-top: 2%">
+									style="width: 80%; background-color: #5C8DEC; border: 1px white solid; margin-top: 2%;font-size:115%">
 							</div>
-							<div>
+							<div style="margin-top:8%">
 								<span>保額(萬)</span><br /> <input type="text" id="insureAmount"
 									name="insureAmount" value="<fmt:formatNumber value="${modelf.insureAmount}" maxFractionDigits="2" />"
-									style="width: 80%; color: black;">
+									style="width: 80%; color: white;border:1px white solid;background-color:#5C8DEC;margin-top:2%;font-size:115%">
 							</div>
 							<div style="margin-top: 3%; margin-bottom: 3%">
 								<a id="changeID" href=""> <input type="button"
@@ -101,7 +104,7 @@ span {
 							</div>
 						</form>
 						<div id="container-fluid"
-							style="height: 100%; position: relative;">
+							style="height: 100%; position: relative;margin-top:15%">
 							<div>
 								<img src="/resources/pic/product/商品專區動畫/images/img_1.png"
 									width="100%;"
@@ -120,18 +123,18 @@ span {
 					style="height: 100%; padding: 3%; color: black; overflow-y: scroll;">
 					<br />
 					<div id="productDetails" class="productDetails">
-						<div class="col-sm-12">
-							<div class="col-sm-2" style="margin-bottom: 2%">
-								<img src="${modelf.insurer.imgsrc}" width="80%">
+						<div class="col-sm-12" style="padding-bottom:1vh">
+							<div class="col-sm-1" style="margin-bottom: 2vh">
+								<img src="${modelf.insurer.imgsrc}" width="70vw">
 							</div>
-							<div class="col-sm-7">
-								<span style="font-size: 120%">${modelf.insurer.name}</span> <br />
+							<div class="col-sm-8" style="padding-left:2vw;padding-top:2vh">
+								<span style="font-size: 120%;">${modelf.insurer.name}</span>
 								<br /> <span style="font-weight: bold; font-size: 150%">${modelf.code}-${modelf.localName}</span>
 							</div>
 							<div class="col-sm-3" style="color: #5C8DEC">
 								<span style="font-size: 150%">可獲得點數</span> <br />
 								<div>
-									<img src="/resources/pic/積點專區/點數(小).png" width="25em"
+									<img src="/resources/pic/積點專區/點數(小).png" width="27vw"
 										style="margin-top: 3%; margin-right: 3%; float: left"> 
 										<span style="font-size: 200%; font-weight: bold">${modelf.getPoint}</span>
 								</div>
@@ -140,7 +143,7 @@ span {
 						</div>
 
 						<div class="col-sm-12"
-							style="background-color: #5C8DEC; padding-bottom: 2%"
+							style="background-color: #5C8DEC; padding-bottom: 2%;color:white"
 							align="center">
 							<br />
 							<div class="col-sm-3">
@@ -162,9 +165,9 @@ span {
 							<br /> <br />
 						</div>
 
-						<div class="col-sm-12">
+						<div id="detailInfo" class="col-sm-12">
 							<hr />
-							<br />
+
 							<div class="col-sm-3">
 								<span>保額：<fmt:formatNumber value="${modelf.insureAmount}" maxFractionDigits="2" /> 萬</span>
 							</div>
@@ -292,19 +295,19 @@ span {
 </c:forEach>
        ];
 
-				    $.plot($("#flot-IRR"),
+				  $.plot($("#flot-IRR"),
 				        [
 				            {
 				              data: dataIRR1,
 				              label: "解約金",
-				              points: { show: true },
+				              points: { show: false},
 				              lines: { show: true},
 				              
 				            },
 				            {
 				              data: dataIRR2,
 				              label: "IRR",
-				              points: { show: true },
+				              points: { show: false },
 				              lines: { show: true},
 				              yaxis: 2,
 				            }
@@ -447,6 +450,71 @@ span {
 		$(this).attr("href",url);	
 		$(this).click();
 	});
+	
+	window.onresize = function(event) {
+		 $.plot($("#flot-IRR"),
+			        [
+			            {
+			              data: dataIRR1,
+			              label: "解約金",
+			              points: { show: false},
+			              lines: { show: true},
+			              
+			            },
+			            {
+			              data: dataIRR2,
+			              label: "IRR",
+			              points: { show: false },
+			              lines: { show: true},
+			              yaxis: 2,
+			            }
+			        ],
+			        {            
+			            grid: {
+			                backgroundColor: { colors: ["#D1D1D1", "#7A7A7A"] },
+			                hoverable:true,
+			                borderWidth: 1
+			            },
+			            legend: {
+			            	noColumns:1,
+			                labelBoxBorderColor: "none",
+			                    position: "se",
+			            },
+			            tooltip:{
+			            	show:true,
+			            	content:"%s | %lx：%x | %ly：%y",
+			            },
+			            xaxis: {
+			                axisLabel: "年期",
+			                axisLabelUseCanvas: true,
+			                axisLabelFontSizePixels: 15,
+			                axisLabelFontFamily: "Arial",
+			                axisLabelPadding: 10,
+			                
+			            },
+			            yaxes: [
+			                {
+			                    /* First y axis */
+			                	axisLabel: "解約金($)",
+			                	axisLabelUseCanvas: true,
+			                	axisLabelFontSizePixels: 15,
+			                    axisLabelFontFamily: "Arial",
+			                    axisLabelPadding: 10,
+			                },
+			                {
+			                    /* Second y axis */
+			                    axisLabel: "IRR(%)",
+			                    axisLabelUseCanvas: true,
+			                    axisLabelFontSizePixels: 15,
+			                    axisLabelFontFamily: "Arial",
+			                    axisLabelPadding: 10,
+			                    position: "right",  /* left or right */
+			                }
+			            ]      
+			        }
+			    );
+    }
+	
 	</script>
 </body>
 </html>

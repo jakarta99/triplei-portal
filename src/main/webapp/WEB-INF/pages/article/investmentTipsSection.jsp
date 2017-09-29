@@ -18,7 +18,7 @@ h2{
 	color:black;
 }
 
-img{
+content img{
 	width:100%;
 	margin-bottom: 2%;
 	margin-top: 1%;
@@ -38,7 +38,7 @@ span{
 <body>
 <div class="container-fluid" style="width: 100%; height: 100%; position: absolute; padding: 0">
 	<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-	<div style="padding: 0; width: 100%; height: 100%; color: white;">
+	<div  id="content" style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh">
 		<div class="col-lg-3" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 			<div class="col-sm-12" style="text-align: center; margin-top: 7%; display: table">
 				<br /> <br />

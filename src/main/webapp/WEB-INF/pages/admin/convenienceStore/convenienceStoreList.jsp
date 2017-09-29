@@ -47,7 +47,7 @@
 
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div>
+		<div style="padding-top:9vh">
 			<h3>超商一覽</h3>
 			<div>
 					<a href="/admin/convenienceStore/insertPage"

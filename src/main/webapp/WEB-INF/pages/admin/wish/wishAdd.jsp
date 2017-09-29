@@ -18,7 +18,7 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
-		<div>
+		<div style="padding-top:9vh">
 			<h3 style="text-align: center"></h3>
 
 			<div class="panel panel-default">
