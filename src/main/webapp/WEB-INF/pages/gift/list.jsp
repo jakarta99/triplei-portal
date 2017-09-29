@@ -126,31 +126,37 @@
 				</table>
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/ELETRONICS">查看更多...</a></span>
-				<table
-					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+				
 					<h3 style="margin-left: 20px;">禮卷兌換:</h3>
-					<tr>
-						<c:forEach items="${modelv}" var="modelv">
-							<td style="border: 1px solid; margin-left: 5px"><div
-									style="height: 300px; width: 300px;">
-									<div style="height: 240px; width: 300px;">
-										<p style="text-align: center;">圖片:<br/><img id="image" style="height: 200px; width: 200px;" src='<c:url value="${modelv.image1}"/>'></p>
+					<div class="row">
+						<c:forEach items="${modelv}" var="modelv" varStatus="status">
+						<div class="col-md-3" style="width:300px ; border: #5C8DEC 1px solid; border-radius: 10px; margin-left: 20px">
+							<div style="height: 300px; ">
+								<div class="col-md-12" style="height: 220px;">
+									<img id="image" style="margin-top: 5px ; height: 200px; width: 200px;" src='<c:url value="${modelv.image1}"/>'>
+								</div>
+								<div>
+									<div  class="col-md-8" style="height: 20px;">
+										<span id="giftName" style="text-align: center;">一二三四五六七${modelv.name}</span></br>
+									<img alt="" src="/resources/pic/積點專區/點數(小).png" width="15" height="15">
+										<span id="points" style="text-align: center;">${modelv.bonus}</span>
 									</div>
-									<div>
-									<div  class = "col-md-8" style="height: 20px;">
-										<span>積點商品名稱:    </span><span id="giftName" style="text-align: center;">${modelv.name}</span></br>
-										<span>商品兌換點數:    </span><span id="points" style="text-align: center;">${modelv.bonus}</span>
+									<div class="col-md-4" style="height: 20px; ">
+										<p id="placeOrder" class="btn btn-sm btn-primary" style="text-align: center;">立即兌換</p>
 									</div>
-									<div class = "col-md-4" style="height: 20px; ">
-										<p id = "placeOrder" class = "btn btn-sm btn-primary" style="text-align: center;">立即兌換</p>
-									</div>
-									</div>
-								</div></td>
+								</div>
+							</div>
+						</div>
+						<c:if test="${status.count%3==0}">
+					</div><div class="row">
+						</c:if>
 						</c:forEach>
-					</tr>
-				</table>
-				<span style="margin-left: 1130px"><a
+				</div>
+				<div class="row">
+				<div class="col-md-9"></div>
+				<span class="col-md-3"><a
 					href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a></span>
+				</div>
 				<table
 					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
 					<h3 style="margin-left: 20px;">家居、廚具兌換:</h3>

@@ -19,7 +19,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div>
-			<br /> <br /> <br />
+			
 			<h3>聯繫客服</h3>
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -100,7 +100,8 @@
 				</div>
 				<div class="col-md-6">
 					<div>
-						<a href="<c:url value='/index'/>"
+<%-- 						<a href="<c:url value='/index'/>" --%>
+						<a href="http://localhost:8080"
 							class="btn btn-lg btn-primary btn-warning btn-block"
 							data-loading-text="Loading">返回</a>
 					</div>
@@ -121,13 +122,15 @@
 					var $btn = $(this);
 					$btn.button("loading");
 				if(checkEmail()&&checklength()){
+					alert("感謝您的提問，即將跳轉回首頁...");
 					$.post("<c:url value='/question'/>", "dataForm",
 							function(data) {
 								if (data.messages.length == 0) {
 									$("#dataForm").trigger("reset");
 									//swal("SUCCESS", "資料新增成功！", "success");
-									alert("SUCCESS");
+// 									alert("Email已寄出");
 									$btn.button("reset");
+									location.replace('http://localhost:8080');
 								}
 							}, function(data, textStatus, jqXHR) {
 								$btn.button("reset");
