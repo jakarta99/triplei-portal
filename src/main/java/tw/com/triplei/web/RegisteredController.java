@@ -223,7 +223,11 @@ public class RegisteredController {
 		AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
 		
 		try {
-
+			
+			form.setEnabled(false);  // 預設新註冊的會員不啟用
+			form.setAccountNumber(form.getEmail());  // 帳號預設為電子信箱
+			
+			
 			form.setAudittingPoint(0);
 			form.setRemainPoint(0);
 			form.setExchangedPoint(0);

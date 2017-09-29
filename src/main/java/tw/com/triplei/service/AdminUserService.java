@@ -103,12 +103,6 @@ public class AdminUserService extends GenericService<UserEntity>{
 		
 		entity.setPassword(encodePasswrod(entity.getPassword()));
 		
-		if(entity.getProviderUserId()==null){ 
-			// FB登入的人才會有 providerUserId，此唯一般註冊流程
-			entity.setEnabled(false);  // 預設新註冊的會員不啟用
-			entity.setAccountNumber(entity.getEmail());  // 帳號預設為電子信箱
-		}
-
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);
 		entity.setCreatedTime(timestamp);
