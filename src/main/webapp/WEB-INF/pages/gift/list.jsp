@@ -153,9 +153,9 @@
 						</c:forEach>
 				</div>
 				<div class="row">
-				<div class="col-md-9"></div>
-				<span class="col-md-3"><a
-					href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a></span>
+					<div class="col-md-9"></div>
+						<span class="col-md-3"><a
+						href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a></span>
 				</div>
 				<table
 					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
