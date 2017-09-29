@@ -44,8 +44,7 @@
 						<a href="/insurer/filt"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
 					</h4>
-					<img alt="" src="/resources/pic/各公司資訊/images/img_1.png"
-							style="width: 80% ;padding-top: 8vh">
+					<div id="bm"></div>
 				</div>
 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
@@ -219,6 +218,13 @@
 
 // 		    }
 		});
+		var animation = bodymovin.loadAnimation({
+			  container: document.getElementById('bm'),
+			  renderer: 'svg',
+			  loop: true,
+			  autoplay: true,
+			  path: '/resources/pic/各公司資訊/company.json'
+			})
 	</script>
 </body>
 </html>
