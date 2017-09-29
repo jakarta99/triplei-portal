@@ -48,9 +48,7 @@ h3 {
 					<p style="opacity: 0.7;">保單上面的數字那麼多，哪個才是真正的報酬率呢?別被搞混了!IRR才是真正的報酬率!</p>
 					<br />
 					<p style="opacity: 0.7;">IRR又稱為「年化報酬率」，假設一年期定存的利率為1.23%，那麼它的IRR即為1.23%。</p>
-					<img src="/resources/pic/IRR計算機/images/img_1.png" width="10%"	style="margin-top: 15%; margin-left: 25%">
-					<img src="/resources/pic/IRR計算機/images/img_2.png" width="10%" style="margin-top: 15%; margin-left: 25%">
-					<img src="/resources/pic/IRR計算機/images/img_0.png" width="100%" style="margin-top: 0%">
+					<div id="bm"></div>
 				</div>
 			</div>
 			<div class="col-lg-8 bg-info" style="background-color: white; height: 100%; padding-top: 5%; color: black;">
@@ -211,6 +209,14 @@ h3 {
 						alert("請輸入整數的年期");
 					}
 				})
+				
+						var animation = bodymovin.loadAnimation({
+			  container: document.getElementById('bm'),
+			  renderer: 'svg',
+			  loop: true,
+			  autoplay: true,
+			  path: '/resources/pic/IRR計算機/IRR.json'
+			})
 	</script>
 </body>
 </html>

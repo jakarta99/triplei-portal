@@ -48,8 +48,8 @@ p{
 				<!--右邊藍 -->
 				<div class="col-sm-12"
 					style="height: 100%; display: flex; justify-content: center; flex-direction: column"
-					align='center'>
-					<img alt="" src="/resources/pic/首頁/首頁動畫/images/img_7.png" style="width: 60%;">
+					align='center' id="bm">
+<!-- 					<div id="bm"></div> -->
 				</div>
 			</div>
 			<!-- 第二頁 -->
@@ -202,6 +202,15 @@ p{
 	<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
 	<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 
+<script type="text/javascript">
 
+var animation = bodymovin.loadAnimation({
+	  container: document.getElementById('bm'),
+	  renderer: 'svg',
+	  loop: true,
+	  autoplay: true,
+	  path: '/resources/pic/首頁/首頁動畫/main.json'
+	})
+</script>
 </body>
 </html>
