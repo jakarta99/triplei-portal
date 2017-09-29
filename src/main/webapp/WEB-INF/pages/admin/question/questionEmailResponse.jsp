@@ -36,7 +36,7 @@
 								</h4>
 							</div>
 							<div class="panel-body">
-
+							
 								<div class="form-group required">
 									<label for="name" class="col-md-2 control-label">問題分類1</label>
 									<div class="col-md-10">
@@ -83,7 +83,7 @@
 										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
-
+								<input type="hidden" id="postTime" name="postTime" value="${entity.postTime}" />
 							</div>
 						</div>
 					</form>

@@ -12,6 +12,8 @@
 <script type="text/javascript" src="/resources/flot/jquery.flot.time.js"></script>
 
 <script type="text/javascript" src="/resources/flot/jshashtable-2.1.js"></script>
+<script type="text/javascript" src="/resources/flot/jquery.flot.valuelabels.js"></script>
+<link rel="stylesheet" href="/resources/flot/plot.css">
 <script type="text/javascript"
 	src="/resources/flot/jquery.numberformatter-1.2.3.min.js"></script>
 <script type="text/javascript"
@@ -24,6 +26,11 @@
 
 
 <script>
+
+
+
+
+
 		var rawData = [];
 		var ticks = [];
 //----------------------抓y軸數值陣列head
@@ -225,6 +232,7 @@ var optionbisRatio = {//資本適足率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -274,6 +282,7 @@ var optionreturnonAssets = {//資產報酬率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -323,13 +332,15 @@ var optionpersistencyRatio = {//保單繼續率
         labelBoxBorderColor: "white",
         position: "ne",
         sorted:"reverse", 
+        show:false,
     },
     grid: {
         borderWidth: 0,      
     },
     valueLabels: {
-        show: true
-       }
+    	   show: true,
+    	   showLastValue:true
+    }
 };
 	
 var optionlitigationRatio = {//訴訟率
@@ -372,6 +383,7 @@ var optionlitigationRatio = {//訴訟率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -421,6 +433,7 @@ var optionappealRatio = {//申訴率
 	        labelBoxBorderColor: "white",
 	        position: "ne",
 	        sorted:"reverse", 
+	        show:false,
 	    },
 	    grid: {
 	        borderWidth: 0,      
@@ -432,83 +445,8 @@ var optionappealRatio = {//申訴率
 
 
 //----------------------------------------五種options foot
-$(document).ready(function () {
-    $("#flot-placeholder").UseTooltip();
-});
 
 
 
-var previousPoint = null, previousLabel = null;
-
-$.fn.UseTooltip = function () {
-    $(this).bind("plothover", function (event, pos, item) {
-        if (item) {
-            if ((previousLabel != item.series.label) || 
-                 (previousPoint != item.dataIndex)) {
-                previousPoint = item.dataIndex;
-                previousLabel = item.series.label;
-                $("#tooltip").remove();
-
-                var x = item.datapoint[0];
-                var y = item.datapoint[1];
-
-                var color = item.series.color;
-                
-                showTooltip(item.pageX,
-                        item.pageY,
-                        color);                
-            }
-        } else {
-            $("#tooltip").remove();
-            previousPoint = null;
-        }
-    });
-};
-
-var dataIRR1= [
-	<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
-	[${item[0]},${item[1]}],
-</c:forEach>
-];
-var dataIRR2= [
-	<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
-	[${item[0]},parseFloat(${item[2]*100}).toFixed(2)],
-</c:forEach>
-];
-	    $.plot($("#flot-IRR"),
-	        [
-	            {
-	              data: dataIRR1,
-	              label: "解約金",
-	              lines: { fill: true}
-	 
-	            },
-	            {
-	              data: dataIRR2,
-	              label: "IRR",
-	              points: { show: true },
-	              lines: { show: true},
-	              yaxis: 2
-	            }
-	        ],
-	        {            
-	            grid: {
-	                backgroundColor: { colors: ["#D1D1D1", "#7A7A7A"] }
-	            },
-	            xaxis: {
-	                mode: "time",
-	                timeformat: "%0m/%0d %0H:%0M"
-	            },
-	            yaxes: [
-	                {
-	                    /* First y axis */
-	                },
-	                {
-	                    /* Second y axis */
-	                    position: "right"  /* left or right */
-	                }
-	            ]      
-	        }
-	    );
 
 </script>

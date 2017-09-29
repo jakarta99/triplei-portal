@@ -117,8 +117,12 @@ public class ProductEntity extends GenericEntity{
 	
 	@Column(name="TOTAL_PAY")
 	private BigDecimal totalPay; //總繳金額
-
-
+	
+	@Column(name = "CLICK_COUNT")
+	private int clickCount; // 點擊數
+	
+	@Column(name = "HOT_PRODUCT")
+	private boolean hotProduct; // 分類熱門
 
 	public BigDecimal getNet() {
 		return net;
@@ -322,6 +326,22 @@ public class ProductEntity extends GenericEntity{
 		this.discount = discount;
 	}
 
+	public int getClickCount() {
+		return clickCount;
+	}
+
+	public void setClickCount(int clickCount) {
+		this.clickCount = clickCount;
+	}
+
+	public boolean isHotProduct() {
+		return hotProduct;
+	}
+
+	public void setHotProduct(boolean hotProduct) {
+		this.hotProduct = hotProduct;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductEntity [id=" + id + ", insurer=" + insurer + ", localName=" + localName + ", code=" + code
@@ -332,10 +352,8 @@ public class ProductEntity extends GenericEntity{
 				+ insureAmount + ", premium=" + premium + ", premiumAfterDiscount=" + premiumAfterDiscount
 				+ ", cashValue=" + cashValue + ", storeShelves=" + storeShelves + ", bonusPoint=" + bonusPoint
 				+ ", getPoint=" + getPoint + ", irr=" + irr + ", discount=" + discount + ", net=" + net + ", totalPay="
-				+ totalPay + "]";
+				+ totalPay + ", clickCount=" + clickCount + ", hotProduct=" + hotProduct + "]";
 	}
-
-	
 
 
 }

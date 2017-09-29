@@ -106,29 +106,45 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		}
 		return "";
 	}
-
-	public List<ArticleEntity> getBannerRotationArticles(boolean bannerRotation) { // 輪播區選擇
-		List<ArticleEntity> list = dao.findByBannerRotation(bannerRotation);
-		List<ArticleEntity> sortList;
-		if (list.size() > 3) {
-			sortList = list.subList(0, 2);
+	
+	/*輪播區選擇(不要新聞)*/
+	public List<ArticleEntity> getBannerRotationArticles(boolean bannerRotation, boolean storeShelves) {
+		List<ArticleEntity> editorList = dao.findByArticleTypeAndBannerRotationAndStoreShelves(ArticleType.EDITOR_CHOICE, bannerRotation, storeShelves);
+		List<ArticleEntity> goodList = dao.findByArticleTypeAndBannerRotationAndStoreShelves(ArticleType.GOODREAD, bannerRotation, storeShelves);
+		List<ArticleEntity> investmentList = dao.findByArticleTypeAndBannerRotationAndStoreShelves(ArticleType.INVESTMENT_TIPS, bannerRotation, storeShelves);
+		
+		List<ArticleEntity> mixedList = new ArrayList<ArticleEntity>();
+		mixedList.addAll(editorList);
+		mixedList.addAll(goodList);
+		mixedList.addAll(investmentList);
+		
+		if (mixedList.size() > 3) {
+			
+			mixedList = mixedList.subList(0,3);
+			return mixedList;
 		} else {
-			sortList = list;
+			return mixedList;
 		}
-		return sortList;
 	}
 
-	public List<ArticleEntity> getArticlesByTypes(Enum articleType) {
-		List<ArticleEntity> articles = dao.findByArticleType(articleType);
+	/*文章個分類頁面*/
+	public List<ArticleEntity> getArticlesByTypes(Enum articleType, boolean storeShelves) {
+		List<ArticleEntity> articles = dao.findByArticleTypeAndStoreShelves(articleType,storeShelves);
 		return articles;
 	}
-
+	
+	/*文章專欄*/
 	public List<ArticleEntity> getArticlesByHotArticle(Enum articleType, boolean hotArticle, boolean storeShelves) {
-		List<ArticleEntity> list = dao.findByArticleTypeAndHotArticleAndStoreShelves(articleType, hotArticle,
-				storeShelves);
-		List<ArticleEntity> sortList;
+		
+		List<ArticleEntity> list = dao.findByArticleTypeAndHotArticleAndStoreShelves(articleType, hotArticle, storeShelves);
+		
+		List<ArticleEntity> sortList = new ArrayList<ArticleEntity>();
+		sortList.sort(Comparator.comparingInt(ArticleEntity::getClickCount));
+		Collections.reverse(sortList);
+		
 		if (list.size() > 2) {
 			sortList = list.subList(0, 2);
+			return sortList;
 		} else {
 			sortList = list;
 		}
@@ -136,7 +152,7 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		return sortList;
 	}
 	
-	/*首頁用*/
+	/*首頁熱門文章區(不要新聞)*/
 	public List<ArticleEntity> getHotArticles(boolean hotArticle, boolean storeShelves) {
 		List<ArticleEntity> editorList = dao.findByArticleTypeAndHotArticleAndStoreShelves(ArticleType.EDITOR_CHOICE, hotArticle,storeShelves);
 		List<ArticleEntity> goodList = dao.findByArticleTypeAndHotArticleAndStoreShelves(ArticleType.GOODREAD, hotArticle,storeShelves);

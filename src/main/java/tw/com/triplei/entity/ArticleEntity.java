@@ -1,6 +1,7 @@
 package tw.com.triplei.entity;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,12 +21,12 @@ import tw.com.triplei.enums.ArticleType;
  * 文章
  * 
  *
- *author Joe
+ * author Joe
  */
 @Entity
 @Table(name = "ARTICLE")
 public class ArticleEntity extends GenericEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -37,11 +38,11 @@ public class ArticleEntity extends GenericEntity {
 
 	@Column(name = "TITLE")
 	private String title;
-	
+
 	@Column(name = "INTRODUCTION")
 	private String introduction; // 文章簡介
 
-	@Column(name = "CONTENT", columnDefinition="TEXT")
+	@Column(name = "CONTENT", columnDefinition = "TEXT")
 	private String content;
 
 	@Column(name = "AUTHOR")
@@ -55,25 +56,26 @@ public class ArticleEntity extends GenericEntity {
 
 	@Column(name = "CLICK_COUNT")
 	private int clickCount; // 點擊數
-	
+
 	@Column(name = "BANNER_ROTATION")
 	private boolean bannerRotation; // 輪播
-	
+
 	@Column(name = "HOT_ARTICLE")
 	private boolean hotArticle; // 分類熱門
-	
+
 	@Column(name = "STORE_SHELVES")
 	private boolean storeShelves; // 文章上架
-	
+
 	@Column(name = "FILE")
 	private byte[] file;
 
 	@Override
 	public String toString() {
-		return "ArticleEntity [id=" + id + ", articleType=" + articleType + ", title=" + title + ", content=" + content
-				+ ", author=" + author + ", bannerImage=" + bannerImage + ", publishTime=" + publishTime
-				+ ", clickCount=" + clickCount + ", bannerRotation=" + bannerRotation + ", hotArticle=" + hotArticle
-				+ ", introduction=" + introduction + "]";
+		return "ArticleEntity [id=" + id + ", articleType=" + articleType + ", title=" + title + ", introduction="
+				+ introduction + ", content=" + content + ", author=" + author + ", bannerImage=" + bannerImage
+				+ ", publishTime=" + publishTime + ", clickCount=" + clickCount + ", bannerRotation=" + bannerRotation
+				+ ", hotArticle=" + hotArticle + ", storeShelves=" + storeShelves + ", file=" + Arrays.toString(file)
+				+ "]";
 	}
 
 	public Long getId() {
@@ -180,7 +182,4 @@ public class ArticleEntity extends GenericEntity {
 		this.file = file;
 	}
 
-
-	
-	
 }

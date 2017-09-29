@@ -34,8 +34,6 @@ public class WishEntity extends GenericEntity  {
 	@Column(name = "IMAGE1")
 	private String image1; // 商品圖片
 
-	@Column(name = "WISH_TYPE")
-	private String wishType;
 
 	@Column(name = "BRAND") //品牌
 	private String brand;
@@ -48,7 +46,7 @@ public class WishEntity extends GenericEntity  {
 
 	@Override
 	public String toString() {
-		return "WishEntity [id=" + id + ", name=" + name + ", image1=" + image1 + ", wishType=" + wishType + ", brand="
+		return "WishEntity [id=" + id + ", name=" + name + ", image1=" + image1 + ", brand="
 				+ brand + ", weekUseCount=" + weekUseCount + ", wishTime=" + wishTime + "]";
 	}
 

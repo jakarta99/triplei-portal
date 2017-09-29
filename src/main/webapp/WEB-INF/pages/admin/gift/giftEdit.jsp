@@ -73,11 +73,12 @@
 									<label for="image1" class="col-md-2 control-label">選擇圖片</label>
 									<div class="col-md-10">
 										<input type="file" class="form-control" id="image1"
-											name="image1" placeholder="照片一" value="" /> <input
-											type="file" class="form-control" id="image2" name="image2"
-											placeholder="照片二" value="" /> <input type="file"
-											class="form-control" id="image3" name="image3"
-											placeholder="照片三" value="" />
+											name="image1" placeholder="照片一" value="" /> 
+<!-- 											<input -->
+<!-- 											type="file" class="form-control" id="image2" name="image2" -->
+<!-- 											placeholder="照片二" value="" /> <input type="file" -->
+<!-- 											class="form-control" id="image3" name="image3" -->
+<!-- 											placeholder="照片三" value="" /> -->
 										<div class="text-danger"></div>
 										<div class="text-danger"></div>
 									</div>
@@ -109,19 +110,19 @@
 								<label for="hotGift" class="col-md-2 control-label">熱門商品</label>
 								<div class="col-md-10">
 									<input type="checkbox" class="form-control" id="hotGift"
-										name="hotGift" placeholder="hotGift" value="${entity.hotGift}"
+										name="hotGift" placeholder="hotGift" value="false"
 										onclick="CBSelectedValueToTrue(this);" /> <span
 										class="help-block"><div class="text-danger"></div></span>
 								</div>
 							</div>
-							<div class="form-group required">
-								<label for="exchangeDate" class="col-md-2 control-label">兌換日期</label>
-								<div class="col-md-10">
-									<input type="text" class="form-control" id="exchangeDate"
-										name="exchangeDate" placeholder="exchangeDate"
-										value="${entity.exchangeDate}" /> <span class="help-block"><div
-											class="text-danger"></div></span>
-								</div>
+<!-- 							<div class="form-group required"> -->
+<!-- 								<label for="exchangeDate" class="col-md-2 control-label">兌換日期</label> -->
+<!-- 								<div class="col-md-10"> -->
+<!-- 									<input type="text" class="form-control" id="exchangeDate" -->
+<!-- 										name="exchangeDate" placeholder="exchangeDate" -->
+<%-- 										value="${entity.exchangeDate}" /> <span class="help-block"><div --%>
+<!-- 											class="text-danger"></div></span> -->
+<!-- 								</div> -->
 							</div>
 						</div>
 					</form>
@@ -153,20 +154,48 @@
 <script type="text/javascript">
 	$(function() {
 		//<!-- Save -->	
-		$("#saveButton").bind("click", function() {
+		$("#saveButton").on("click", function() {
 			var $btn = $(this);
 			$btn.button("loading");
 
-			$.put("<c:url value='/admin/gift'/>", "dataForm", function(data) {
-				if (data.messages.length == 0) {
-					//swal("SUCCESS", "保險公司資料更新成功", "success");
-					alert("SUCCESS");
-					$btn.button("reset");
-				}
-			}, function(data, textStatus, jqXHR) {
-				$btn.button("reset");
-			});
+			var formData = new FormData();
+			formData.append('id', $("#id").val());
+			formData.append('brand', $("#brand").val());
+			formData.append('name', $("#name").val());
+			formData.append('colorAndType', $("#colorAndType").val());
+			formData.append('bonus', $("#bonus").val());
+			formData.append('remarks', $("#remarks").val());
+			formData.append('giftType', $("#giftType").val());
+			if($("#hotGift").val()){		
+				formData.append('hotGift', $("#hotGift").val());
+			}else if($("#hotGift").val()==false){
+				formData.append('hotGift', $("#hotGift").val("false"));
+			}
+			// 			formData.append('exchangeDate', $("#exchangeDate").val());
 
+			$.each($("input[type='file']")[0].files, function(i, file) {
+				formData.append('upload-file', file);
+			});
+// 			$.each($("input[type='file']")[1].files, function(i, file) {
+// 				formData.append('upload-file1', file);
+// 			});
+// 			$.each($("input[type='file']")[2].files, function(i, file) {
+// 				formData.append('upload-file2', file);
+// 			});
+			$.ajax({
+				url : "<c:url value='/admin/gift'/>",
+				method : "PUT",
+				data : formData,
+				enctype : "multipart/form-data",
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					alert("修改成功");
+				},
+				error : function() {
+					alert("請確認資料填寫無誤");
+				}
+			})
 			$btn.button("reset");
 		});
 	});
@@ -175,6 +204,8 @@
 	function CBSelectedValueToTrue(cb) {
 		if (cb.checked) {
 			cb.value = "true";
+		}else{
+			cb.value = "false";
 		}
 	}
 </script>

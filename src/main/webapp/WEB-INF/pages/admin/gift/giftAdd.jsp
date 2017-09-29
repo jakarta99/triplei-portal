@@ -187,7 +187,10 @@
 				processData : false,
 				contentType : false,
 				success : function(data) {
-					alert("SUCCESS");
+					alert("新增成功");
+				},
+				error : function() {
+					alert("請確認資料填寫無誤");
 				}
 			})
 			$btn.button("reset");

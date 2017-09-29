@@ -9,13 +9,13 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
-<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
+<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <style>
 #mainNavbar {
 	border-color: #333333;
@@ -45,17 +45,17 @@
 				</div>
 				<div class="col-sm-12">
 				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="50" height="50">
-				<span style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
+				<span id="userPoint" style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
 				</div>
 				<div class="col-sm-12">
 				<div class="col-sm-12" style="height: 15vh;border: 1px white solid;border-radius: 20px;margin-top: 3vh;padding-left: 0px;padding-right: 0px;">
 				<div class="col-sm-6" style="border-right: 1px white solid;height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%;">審核中點數</p>
-				<span>${audittingPoint}</span>
+				<span id="audittingPoint" >${audittingPoint}</span>
 				</div>
 				<div class="col-sm-6" style="height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%">已兌換點數</p>
-				<span>${exchangedPoint}</span>
+				<span id="exchangedPoint" >${exchangedPoint}</span>
 				</div>
 				</div></div>
 				<div class="col-sm-12"><img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png" width="200" height="200"></div>
@@ -126,31 +126,37 @@
 				</table>
 				<span style="margin-left: 1130px"><a
 					href="${pageContext.request.contextPath}/gift/ELETRONICS">查看更多...</a></span>
-				<table
-					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
+				
 					<h3 style="margin-left: 20px;">禮卷兌換:</h3>
-					<tr>
-						<c:forEach items="${modelv}" var="modelv">
-							<td style="border: 1px solid; margin-left: 5px"><div
-									style="height: 300px; width: 300px;">
-									<div style="height: 240px; width: 300px;">
-										<p style="text-align: center;">圖片:<br/><img id="image" style="height: 200px; width: 200px;" src='<c:url value="${modelv.image1}"/>'></p>
+					<div class="row">
+						<c:forEach items="${modelv}" var="modelv" varStatus="status">
+						<div class="col-md-3" style="width:300px ; border: #5C8DEC 1px solid; border-radius: 10px; margin-left: 20px">
+							<div style="height: 300px; ">
+								<div class="col-md-12" style="height: 220px;">
+									<img id="image" style="margin-top: 5px ; height: 200px; width: 200px;" src='<c:url value="${modelv.image1}"/>'>
+								</div>
+								<div>
+									<div  class="col-md-8" style="height: 20px;">
+										<span id="giftName" style="text-align: center;">${modelv.name}</span></br>
+									<img alt="" src="/resources/pic/積點專區/點數(小).png" width="15" height="15">
+										<span id="points" style="text-align: center;">${modelv.bonus}</span>
 									</div>
-									<div>
-									<div  class = "col-md-8" style="height: 20px;">
-										<span>積點商品名稱:    </span><span id="giftName" style="text-align: center;">${modelv.name}</span></br>
-										<span>商品兌換點數:    </span><span id="points" style="text-align: center;">${modelv.bonus}</span>
+									<div class="col-md-4" style="height: 20px; ">
+										<p id="placeOrder" class="btn btn-sm btn-primary" style="text-align: center;">立即兌換</p>
 									</div>
-									<div class = "col-md-4" style="height: 20px; ">
-										<p id = "placeOrder" class = "btn btn-sm btn-primary" style="text-align: center;">立即兌換</p>
-									</div>
-									</div>
-								</div></td>
+								</div>
+							</div>
+						</div>
+						<c:if test="${status.count%3==0}">
+					</div><div class="row">
+						</c:if>
 						</c:forEach>
-					</tr>
-				</table>
-				<span style="margin-left: 1130px"><a
-					href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a></span>
+				</div>
+				<div class="row">
+					<div class="col-md-9"></div>
+						<span class="col-md-3"><a
+						href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a></span>
+				</div>
 				<table
 					style="border: 2px solid; margin-left: 20px; cellpadding: 10px">
 					<h3 style="margin-left: 20px;">家居、廚具兌換:</h3>
@@ -293,13 +299,37 @@
             <span id="orderName" style="text-align: center;"></span>
         </div>
         <div>
+        	<img alt="" src="/resources/pic/積點專區/點數(小).png" width="30" height="30">
             <span>商品兌換點數:    </span>
             <span id="orderPoint" style="text-align: center;"></span>
         </div>
         <div>
         <label for="quantity1" class="">請輸入數量:</label>	
-			<input type="text" class="" id="quantity1"
-				name="quantity1" placeholder="quantity"/> 
+			<input type="number" class="" id="quantity1"
+				name="quantity1" min="1" value="1" placeholder="quantity"/> 
+        </div>
+        <div>
+        <label for="recipient" class="">收件人姓名:</label>	
+			<input type="text" class="" id="recipient"
+				name="recipient" placeholder=""/> 
+        </div>
+        <div>
+        <label for="recipientAddress" class="">收件人地址:</label>	
+			<input type="text" class="" id="recipientAddress"
+				name="recipientAddress" placeholder=""/> 
+        </div>
+        <div>
+        <label for="recipientPhone" class="">收件人電話:</label>	
+			<input type="text" class="" id="recipientPhone"
+				name="recipientPhone" placeholder=""/> 
+        </div>
+        <div>
+        <label for="recipientTime" class="">希望收件時間:</label>	
+				<select class="" id="recipientTime"
+				name="recipientTime">
+				<option value="上午" selected>上午</option>
+				<option value="下午">下午</option>
+				</select>
         </div>
         <div>
             <a href="#" class="btn btn-lg btn-primary btn-block"
@@ -320,8 +350,11 @@
 </div>
 <div class="col-sm-12" style="padding-left: 0px;padding-bottom: 1vh">希望增加的兌換商品：</div>
 <div class="col-sm-3" style="border: 1px #5C8DEC solid;height: 20vh;display: flex; justify-content: center; flex-direction: column" align="center">
-<button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button>
+<!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
+<label for="image1" style="background-color: white;color: #5C8DEC;font-family: 微軟正黑體;">圖片(必要):</label> <input type="file" id="image1" name="image1" style="border: 0px #5C8DEC solid">
+
 </div>
+<form enctype="multipart/form-data" method="post" id="dataForm">
 <div class="col-sm-9" >
 <div class="col-sm-12" style="height: 9vh;border: 1px #5C8DEC solid;margin-bottom: 2vh;display: flex; justify-content: center; flex-direction: column">
 <div style="">
@@ -332,11 +365,26 @@
 <label for="name" style="color: #5C8DEC;font-family: 微軟正黑體;">商品名稱:</label> <input type="text" placeholder="請輸入商品名稱" id="name" name="name" style="border: 0px #5C8DEC solid">
 </div></div>
 </div>
+</form>
 <div class="col-sm-12" style="height:10vh" align="right">
-<button style="margin-top: 4vh;background-color: white;border: 1px #5C8DEC solid;color: #5C8DEC;border-radius: 20px;font-size: 15px">許願</button>
+<a class="btn btn-primary" data-loading-text="Loading" id="wishButton" style="margin-top: 4vh;background-color: white;border: 1px #5C8DEC solid;color: #5C8DEC;border-radius: 20px;font-size: 15px;">許願</a>
 </div>
 </div>
 <div class="col-sm-1"></div>
+</div>
+
+<div id="dialog-success">
+<img alt="" src="/resources/pic/積點專區/許願成功.png" class="col-sm-10" style="width: 500"><br/>
+<div class="col-sm-10">
+<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">許願成功</p>
+</div>
+</div>
+
+<div id="dialog-failed">
+<img alt="" src="/resources/pic/積點專區/只能許一次.png" class="col-sm-10" style="width: 500"><br/>
+<div class="col-sm-10">
+<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">一周只能許一次喔</p>
+</div>
 </div>
 
 
@@ -346,6 +394,8 @@ $( function() {
 	var giftName;
 	var points;
 	var quantity1;
+// 	var userPoint = $.('#userPoint');
+// 	var exchangedPoint = $.('#exchangedPoint');
 	
   $('p#placeOrder').on( 'click', function(){
 // 	   image =  $(this).parents().parents().find("#image").attr("src");
@@ -364,6 +414,8 @@ $( function() {
   $("#dialog").hide();
   $( "#dialog" ).dialog({
       autoOpen: false,
+      height : "auto",
+	  width : 700,
       show: {
         effect: "blind",
         duration: 1000
@@ -382,6 +434,10 @@ $( function() {
 		console.log(quantity1);
 		datas.giftName = giftName;
 		datas.quantity1 = quantity1;
+		datas.recipient = $("#recipient").val();
+		datas.recipientAddress = $("#recipientAddress").val();
+		datas.recipientPhone = $("#recipientPhone").val();
+		datas.recipientTime = $("#recipientTime").val();
 		
 		$.ajax({
 			url : "<c:url value='/gift/giftOrder/addOrder'/>",
@@ -391,6 +447,9 @@ $( function() {
 			success : function(data) {
 				if(data.訂購成功){
 				alert("購買成功");
+				location.replace("/gift/list");
+// 				userPoint.text(data.userPoint);
+// 				exchangedPoint.text(data.exchangedPoint);
 				}else if(data.剩餘點數不足){
 					alert("剩餘點數不足");
 				}else if(data.數字輸入錯誤){
@@ -407,8 +466,8 @@ $( function() {
 	});
 //   以下許願池
 		$('#dialog-wish').hide();
-		$('#wishpool').on("click",function() {
-			$('#dialog-wish').dialog({
+		$('#dialog-success').hide();
+			var dialog1 = $('#dialog-wish').dialog({
 				autoOpen: false,
 				resizable : true,
 				height : "auto",
@@ -421,8 +480,74 @@ $( function() {
 				hide : {
 					effect : "blind",
 					duration : 500
-				}
-			});
+				},
+			})
+			var dialog2 = $('#dialog-success').dialog({
+				autoOpen: false,
+				resizable : true,
+				height : 300,
+				width : 400,
+				modal : true,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				},
+			})
+			var dialog3 = $('#dialog-failed').dialog({
+				autoOpen: false,
+				resizable : true,
+				height : 300,
+				width : 400,
+				modal : true,
+				show : {
+					effect : "blind",
+					duration : 500
+				},
+				hide : {
+					effect : "blind",
+					duration : 500
+				},
+			})
+		$('#wishpool').on("click",function() {
+			dialog1.dialog("open");
+			//<!-- Save -->
+			$("#wishButton").bind("click",function() {
+								var $btn = $(this);
+								$btn.button("loading");
+								
+								var formData = new FormData();
+								formData.append('name', $("#name").val());
+								formData.append('brand', $("#brand").val());
+								$.each($("input[type='file']")[0].files, function(i, file) {
+									formData.append('file', file);
+								});
+								
+								$.ajax({
+									url : "<c:url value='/admin/wish'/>",
+									method : "POST",
+									data : formData,
+									enctype : "multipart/form-data",
+									processData : false,
+									contentType : false,
+									success : function(data) {
+										if (data.data == null) {
+											dialog3.dialog("open");
+											$btn.button("reset");
+											dialog1.dialog("close");
+										}else if (data.messages.length == 0) {
+															$("#dataForm").trigger("reset");
+															dialog2.dialog("open");
+															$btn.button("reset");
+															dialog1.dialog("close");
+														}
+									}
+								})
+								$btn.button("reset");
+							});
 			});
 	
 });

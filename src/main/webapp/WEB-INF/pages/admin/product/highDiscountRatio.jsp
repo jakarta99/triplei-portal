@@ -16,7 +16,7 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-		<div>
+		<div style="padding-top:9vh">
 			<h3>保險商品管理:高保費率</h3>
 
 			<div id="jsGrid"></div>

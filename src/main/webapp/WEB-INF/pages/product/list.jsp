@@ -17,7 +17,7 @@ margin:0;
 display:inline;
 }
 .genderImage{
-width:25%;
+width:23%;
 border-radius:50%;
 }
 .genderImage:hover{
@@ -27,7 +27,7 @@ cursor:pointer;
 margin-top:3%;
 }
 #input1 span{
-font-size:150%;
+font-size:130%;
 }
 #input2 select{
 width:70%;
@@ -36,8 +36,18 @@ height:120%;
 #input2 span{
 font-size:100%;
 }
-span{
-font-size:110%;
+#right-side span{
+font-size:100%;
+color:#444444;
+}
+select option{
+background-color:white;
+}
+select {
+background-color:white;
+}
+.infoToggle div{
+padding-bottom:2vh;
 }
 </style>
 </head>
@@ -47,13 +57,14 @@ font-size:110%;
 	<div id="wrap">
 		<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div style="padding:0;width:100%;height:100%;color:white;">
+		
+		<div style="padding:0;width:100%;height:100%;color:white;padding-top:9vh">
 			<div class="col-sm-3" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
 			<div style="margin:7% auto 0 auto; display:table;width:70%;">
 				<br/><br/>
-				<h1>商品專區</h1>
+				<span style="font-size:190%;">商品專區</span>
 				<br/>
-				<form id="input1">
+				<form id="input1" style="margin-top:10%">
 				<div>
 				<span>性別</span>
 				<label>
@@ -65,19 +76,19 @@ font-size:110%;
 				</div >
 				<div>
 				<span>生日</span><br/>
-				<input type="text" id="bDate" style="width:80%;background-color:#5C8DEC;border:1px white solid;margin-top:2%" >
+				<input type="text" id="bDate" style="width:80%;background-color:#5C8DEC;border:1px white solid;margin-top:2%;font-size:115%" >
 				</div>
-				<div>
+				<div style="margin-top:8%">
 				<span>幣別</span><br/>
-				<select id="currency" name="currency" style="width:80%;background-color:#5C8DEC;margin-top:2%;">
-				<option value="TWD">新台幣</option>
+				<select id="currency" name="currency" style="border:1px white solid;width:80%;background-color:#5C8DEC;margin-top:2%;font-size:115%">
+				<option value="TWD" selected>新台幣</option>
 				<option value="USD">美金</option>
 				<option value="RMB">人民幣</option>
 				<option value="AUD">澳幣</option>
 				</select>
 				</div>
 				</form>
-				<div id="container-fluid" style="height:100%;position:relative;">
+				<div id="container-fluid" style="height:100%;position:relative;margin-top:15%">
 				<div >
 				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;">
 				</div>
@@ -88,28 +99,29 @@ font-size:110%;
 				</div>
 			</div>
 			
-			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll">
+			<div id="right-side" class="col-sm-9" style="height:100%;padding-right:3%;padding-bottom:3%;padding-left:3%;color:black;overflow-y:scroll;">
 			<br/><br/>
 			<div>
 			<form id="input2">
-			<div class="col-sm-4">
+			<div class="col-sm-4" style="margin-bottom:2%">
 			<span>存款方式</span><br/>
 			<select id="paymentMethod">
 			<option value="">請選擇</option>
-			<option value="once">躉繳</option>
-			<option value="many">年繳</option>
+			<option value="once">躉繳(一次繳清)</option>
+			<option value="many">一般年期</option>
 			</select>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4" style="margin-bottom:2%;">
 			<span>利率</span><br/>
 			<select id="interestRateType">
 			<option value="declareInterestRate">宣告利率</option>
 			<option value="predictInterestRate">預定利率</option>
 			</select>
 			</div>
-			<div class="col-sm-4">
-			<span>金額(元／年)</span><br/>
-			<input type="text" id="premium" placeholder="50,000" style="width:70%">
+			<div class="col-sm-4" style="margin-bottom:2%;border:1px white solid">
+			<span id="dollar">金額(新台幣／年)</span><br/>
+			<span>$</span>
+			<input type="text" id="premium" placeholder="50,000" style="width:70%;border:1px black solid">
 			</div>
 			<div class="col-sm-4">
 			<span>繳費年期(年)</span><br/>
@@ -117,13 +129,13 @@ font-size:110%;
 			<option value="">請選擇</option>
 			</select>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4" style="margin-bottom:2%;border:1px white solid">
 			<span>預計領回時間(年)</span><br/>
-			<input type="text" id="yearCode" placeholder="10" style="width:70%">
+			<input type="text" id="yearCode" placeholder="10" style="width:70%;border:1px black solid;">
 			</div>
 			<div class="col-sm-4">
 			<br/>
-			<input class="btn btn-secondary float-right productFilter" type="button" value="篩選" style="background-color:white;color:#5C8DEC;border:1px #5C8DEC solid;font-size:125%">
+			<input class="btn btn-secondary float-right productFilter" type="button" value="篩選" style="background-color:white;color:#5C8DEC;border:1px #5C8DEC solid;font-size:100%">
 			</div>
 			</form>
 			</div>
@@ -230,9 +242,9 @@ font-size:110%;
 						installment="躉繳";
 					}
 					if(row.year!=1){
-						installment="年繳"
+						installment="一般年期"
 					}
-					$("#products").append("<div style='display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;'></div><div class='col-sm-12'  style='display:table;background-color:#FAF7F7;width:100%;' ><div class='col-sm-12'  style='padding-top:2%'><div class='col-sm-2' style='padding:0'><img width='40%' style='display:block;margin:auto' src='"+row.insurer.imgsrc+"'></div><div class='col-sm-9' style='margin-top:1%'><span style='font-size:150%'>"+row.insurer.name+"</span><br/><span style='font-size:125%'>"+row.code+"-"+row.localName+"</span></div><div class='col-sm-1'><a href='/product/"+row.id+"/"+$('input[name="gender"]:checked').val()+"/"+$("#bDate").val()+"/"+$('#premium').val()+"/"+$('#yearCode').val()+"' id='interested'><input class='btn btn-secondary' name='interested' type='button' value='我有興趣' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;'></a></div></div><br/><div class='col-sm-12' style='margin-top:1%;margin-bottom:1%'><div class='col-sm-3'><span style='color:#5C8DEC'>可獲得點數："+row.getPoint+"</span></div><div class='col-sm-2'><span>總繳金額</span><br/><span> $"+parseFloat(row.totalPay).toFixed(0)+"</span></div><div class='col-sm-2'><span>領回金額</span><br/><span> $"+parseFloat(row.cashValue).toFixed(0)+"</span></div><div class='col-sm-2'><span>凈報酬</span><br/><span> $"+parseFloat(row.net).toFixed(0)+"</span></div><div class='col-sm-2'><span>IRR</span><br/><span>"+parseFloat(row.irr*100).toFixed(2)+"%</span></div><div class='col-sm-1'><input class='btn btn-secondary float-right moreInfo' type='button' name='#id' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;' value='+'></div></div><div class='col-sm-12 infoToggle' style='padding-bottom:1%;'><hr/><div class='col-sm-4'><span>保額："+row.insureAmount+" 萬</span></div><div class='col-sm-4'><span>繳費折扣：$"+row.discount+"</span></div><div class='col-sm-4'><span>續年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳別："+installment+"</span></div><div class='col-sm-4'><span>折扣後年繳保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>"+row.interestRateType+"："+parseFloat(row.declareInterestRate*100).toFixed(2)+"%</span></div><div class='col-sm-4'><span>折扣前年繳保費：$"+row.premium+"</span></div><div class='col-sm-4'><span>首年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳費方式："+row.paymentMethod+"</span></div></div></div>");
+					$("#products").append("<div style='display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;'></div><div class='col-sm-12'  style='display:table;background-color:#FAF7F7;width:100%;' ><div class='col-sm-12'  style='padding-top:2%;'><div class='col-sm-9'><div class='col-sm-1'><img width='50vw' height='auto' src='"+row.insurer.imgsrc+"'></div><div class='col-sm-11' style='padding-left:2vw'><span style='font-size:150%'>"+row.insurer.name+"</span><a href='/insurer/list'><img width='15vw' height='auto' src='/resources/pic/product/info-icon.png'></a><br/><span style='font-size:125%;'>"+row.code+"-"+row.localName+"</span></div></div><div class='col-sm-3' ><div class='col-sm-8'><span style='color:#5C8DEC;'>可獲得點數:<br/>"+row.getPoint+"</span></div><div class='col-sm-4'><a href='/product/"+row.id+"/"+$('input[name="gender"]:checked').val()+"/"+$("#bDate").val()+"/"+$('#premium').val()+"/"+$('#yearCode').val()+"' id='interested'><input class='btn btn-secondary' name='interested' type='button' value='我有興趣' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;'></a></div></div></div><br/><div class='col-sm-12' style='margin-top:1%;margin-bottom:1%'><div class='col-sm-2'></div><div class='col-sm-2'><span>總繳金額</span><br/><span> $"+parseFloat(row.totalPay).toFixed(0)+"</span></div><div class='col-sm-2'><span>領回金額</span><br/><span> $"+parseFloat(row.cashValue).toFixed(0)+"</span></div><div class='col-sm-2'><span>凈報酬</span><br/><span> $"+parseFloat(row.net).toFixed(0)+"</span></div><div class='col-sm-2'><span>IRR</span><br/><span>"+parseFloat(row.irr*100).toFixed(2)+"%</span></div><div class='col-sm-2'><input class='btn btn-secondary float-right moreInfo' type='button' name='#id' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;' value='+'></div></div><div class='col-sm-12 infoToggle' style='padding-bottom:6vh;'><hr/><div class='col-sm-4'><span>保額："+row.insureAmount+" 萬</span></div><div class='col-sm-4'><span>繳費折扣：$"+row.discount+"</span></div><div class='col-sm-4'><span>續年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳別："+installment+"</span></div><div class='col-sm-4'><span>折扣後年繳保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>"+row.interestRateType+"："+parseFloat(row.declareInterestRate*100).toFixed(2)+"%</span></div><div class='col-sm-4'><span>折扣前年繳保費：$"+row.premium+"</span></div><div class='col-sm-4'><span>首年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳費方式："+row.paymentMethod+"</span></div></div></div>");
 
 	 				})
 	 				$(".infoToggle").hide();
@@ -243,6 +255,12 @@ font-size:110%;
 				}
 			})
 		}
+	})
+	
+	$("#currency").on("change",function(){
+		var curr = $("#currency option:selected").text();
+		var changeDollar= "金額("+curr+"／年)";
+		$("#dollar").text(changeDollar);
 	})
 	
 	</script>

@@ -8,6 +8,7 @@
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
+
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -34,28 +35,27 @@
 	<div class="container-fluid"
 		style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div>
+		<div style="padding-top:9vh">
 			<div class="col-xs-12 col-sm-3"
 				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;"><!--左半藍 -->
  				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 				<div class="col-xs-6 col-sm-12"
 					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
-					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">保險公司</h1>
-					<h4>
+					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;padding-bottom: 5vh">保險公司</h1>
+					<h4 style="margin-bottom: 5vh">
 						<a href="/insurer/list"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各公司列表</a>
 					</h4>
-					<h4>
+					<h4  style="margin-bottom: 5vh">
 						<a href="/insurer/filt"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
 					</h4>
-					<img alt="" src="/resources/pic/各公司資訊/images/img_1.png"
-							style="width: 80% ;padding-top: 8vh">
+					<div id="bm"></div>
 				</div>
 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
 			<div class="col-sm-9"
-				style="height: 100vh; display: table; table-layout: fixed; background-color: #FAF7F7;padding-right: 0px; padding-left: 0px;"><!--右半白 -->
+				style="height: 100vh; display: table; table-layout: fixed; background-color: white;padding-right: 0px; padding-left: 0px;"><!--右半白 -->
 				<div
 					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;">
 					<div class="col-xs-1 col-sm-1"></div>
@@ -89,7 +89,7 @@
 							<a style="padding-left: 13%">訴訟率　　　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.litigationRatio}" /></a><br>
 							<a style="padding-left: 13%">申訴率　　　：<fmt:formatNumber type="percent" minFractionDigits="5" value="${model.appealRatio}" /></a><br>
 							<a style="padding-left: 13%">保險安定基金：<c:if test="${model.insuranceGuarantyFund=true}">已加入</c:if><c:if test="${model.insuranceGuarantyFund=false}">未加入</c:if></a><br>
-							<a style="padding-left: 13%">網址　　　　：<a href="${model.description}" target="_blank">${model.description}</a></a><br>
+							<a style="padding-left: 13%">${model.shortName}官網：<a href="${model.description}" target="_blank">${model.description}</a></a><br>
 							<a style="padding-left: 13%">${model.description2}</a><br>
 							<a style="padding-left: 13%">${model.description3}</a><br>
 							<a style="padding-left: 13%">${model.description4}</a><br>
@@ -123,6 +123,15 @@
 				});
 			});
 		});
+		
+		var animation = bodymovin.loadAnimation({
+			  container: document.getElementById('bm'),
+			  renderer: 'svg',
+			  loop: true,
+			  autoplay: true,
+			  path: '/resources/pic/各公司資訊/company.json'
+			})
+			
 	</script>
 </body>
 </html>

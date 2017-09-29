@@ -69,7 +69,7 @@ public class GiftController {
 	@RequestMapping("/{giftType}")
 	public String list_Vouchers(@PathVariable("giftType") String giftType, Model model) {
 
-		model.addAttribute("models", giftService.getType(giftType));
+		model.addAttribute("models", giftService.getByGiftType(giftType));
 
 		return "/gift/list_class";
 	}

@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.GiftOrderSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.entity.ConvenienceStoreEntity;
 import tw.com.triplei.entity.GiftOrderEntity;
 import tw.com.triplei.service.GiftOrderService;
 
@@ -34,6 +35,15 @@ public class AdminGiftOrderController {
 			
 		return "/admin/gift/giftOrderList";
 		
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String editPage(@PathVariable("id") final Long id, Model model) {
+
+		GiftOrderEntity dbEntity = giftOrderService.getOne(id);
+		model.addAttribute("entity", dbEntity);
+
+		return "/admin/gift/giftOrderEdit";
 	}
 	
 	@GetMapping

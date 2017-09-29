@@ -26,7 +26,7 @@ public class ArticleController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 
-		List<ArticleEntity> list= articleService.getBannerRotationArticles(true);
+		List<ArticleEntity> list= articleService.getBannerRotationArticles(true, true);
 		model.addAttribute("bannerRotation",list);
 		
 		List<ArticleEntity> editorChoiceList = articleService.getArticlesByHotArticle(ArticleType.EDITOR_CHOICE, true, true);
@@ -40,14 +40,15 @@ public class ArticleController {
 		
 		List<ArticleEntity> investmentTipsList = articleService.getArticlesByHotArticle(ArticleType.INVESTMENT_TIPS, true, true);
 		model.addAttribute("investmentTips", investmentTipsList);
-		
+
+		log.debug("sortList{}",list);
 		return "/article/list";
 	}
 	
 	/*用戶從文章首頁點入到小資族必讀專區 */
 	@RequestMapping("/goodRead")
 	public String goodRead(Model model){
-		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.GOODREAD);
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.GOODREAD,true);
 		model.addAttribute("articles",articles);
 
 		return "/article/goodReadSection";
@@ -56,7 +57,7 @@ public class ArticleController {
 	/*用戶從文章首頁點入到新聞專區 */
 	@RequestMapping("/news")
 	public String news(Model model){
-		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.NEWS);
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.NEWS,true);
 		model.addAttribute("articles",articles);
 		
 		return "/article/newsSection";
@@ -65,7 +66,7 @@ public class ArticleController {
 	/*用戶從文章首頁點入到理財觀念專區 */
 	@RequestMapping("/investmentTips")
 	public String investmentTips(Model model){
-		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.INVESTMENT_TIPS);
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.INVESTMENT_TIPS,true);
 		model.addAttribute("articles",articles);
 		
 		return "/article/investmentTipsSection";
@@ -74,7 +75,7 @@ public class ArticleController {
 	/*用戶從文章首頁點入到編輯精選專區 */
 	@RequestMapping("/editorChoice")
 	public String editorChoice(Model model){
-		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.EDITOR_CHOICE);
+		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.EDITOR_CHOICE,true);
 		model.addAttribute("articles",articles);
 		
 		return "/article/editorChoiceSection";

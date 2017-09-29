@@ -33,7 +33,7 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
-		<div>
+		<div style="padding-top:9vh">
 			<h3>許願池商品管理</h3>
 <!-- 			<div> -->
 <%-- 				<a href="<c:url value='/admin/wish/add'/>" --%>
@@ -80,15 +80,10 @@
 
 					fields : [ 
 						{name : "id",visible : true,width : 50},
-						{title : '商品類型',name : "wishType",type : "text",width : 150},
 						{title : '品牌',name : "brand",type : "text",width : 150},
 						{title : '商品名稱',name : "name",type : "text",width : 400},
-// 						{title : '許願時間',name : "wishTime",type : "text",width : 200},
-						
+						{ title: '圖片', name: "image1", width: 80,itemTemplate: function(val) {return $("<img>").attr("src",val).css({ width: 80})}},
 						{ title: '許願時間', name: "wishTime",type : "text", width: 200}
-// 							{ title: '許願時間', name: "created_time", width: 200 ,itemTemplate:function(xxx){ 
-// 				                 return moment({xxx}).format("YYYY/MM/DD"); 
-// 				               }},
 						
 
 					]
