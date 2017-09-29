@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
-import tw.com.triplei.entity.ArticleEntity;
 import tw.com.triplei.entity.QuestionEntity;
+import tw.com.triplei.entity.UserEntity;
+import tw.com.triplei.service.EmailService;
 import tw.com.triplei.service.QuestionService;
+import tw.com.triplei.service.UserService;
 
 @Slf4j
 @Controller
@@ -24,6 +26,12 @@ public class QuestionController {
 	
 	@Autowired
 	private QuestionService questionService;  	
+
+	@Autowired
+	private EmailService emailService;  	
+
+	@Autowired
+	private UserService userservice;  	
 	
 	@RequestMapping("/test")
 	public String test(Model model) {
@@ -52,11 +60,24 @@ public class QuestionController {
 		AjaxResponse<QuestionEntity> response = new AjaxResponse<QuestionEntity>();
 		
 		try {
+			log.debug("QuestionForm = {}", form);
 			
-			LocalDateTime publishTime = LocalDateTime.now();
-			form.setPostTime(publishTime);
+			LocalDateTime postTime = LocalDateTime.now();
+			form.setPostTime(postTime);
 			final QuestionEntity insertResult = questionService.insert(form);
 			response.setData(insertResult);
+			
+			String userName ;
+			UserEntity user =  userservice.getDao().findByEmail(form.getAskerEmail());
+			log.debug("問題user = {}" + user);
+			
+			if(user!=null) {
+			 userName =user.getName();
+			}else{
+			 userName = "";
+			}
+			
+			emailService.sendConfirmEmail(form.getAskerEmail(), postTime, userName, form.getContent());
 		
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();

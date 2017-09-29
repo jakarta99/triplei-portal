@@ -143,25 +143,38 @@ public class AdminGiftController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public AjaxResponse<GiftEntity> update(final Model model, @RequestBody final GiftEntity form) {
-
-		log.debug("{}", form);
+	public AjaxResponse<GiftEntity> update(@RequestParam(value = "upload-file",required=false) MultipartFile file,@RequestParam(value="id",required=false)Long id,
+			@RequestParam(value="brand",required=false)String brand, @RequestParam(value="name",required=false) String name,
+			@RequestParam(value="colorAndType",required=false)String colorAndType1,@RequestParam(value="bonus",required=false)Integer bonus,
+			@RequestParam(value="remarks",required=false)String remarks,@RequestParam(value="giftType",required=false)GiftType giftType,
+			@RequestParam(value="hotGift",required=false)Boolean hotGift, GiftEntity giftEntity) {
 
 		final AjaxResponse<GiftEntity> response = new AjaxResponse<GiftEntity>();
-
+			log.debug("{}","start update");
 		try {
-			String brandnum = form.getBrand().substring(form.getBrand().length()-3);
-			String giftnum = form.getName().substring(form.getName().length()-3);
-			String colorAndType = form.getColorAndType().substring(form.getColorAndType().length()-2);
-			String formatStr = "%05d";
-			String formatAns = String.format(formatStr,form.getId());
-			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
-			form.setCode(giftNumber);
-			form.setModifiedTime(new Timestamp(new Date().getTime()));
+			
+			if(!file.isEmpty()){
+				String imagePath= giftService.imageUpload(file);
+				giftEntity.setImage1(imagePath);
+				}else{
+					giftEntity.setImage1("");
+				}
+			
+			giftEntity.setId(id);
+			giftEntity.setBonus(bonus);
+			giftEntity.setBrand(brand);
+			giftEntity.setColorAndType(colorAndType1);
+			giftEntity.setName(name);
+			giftEntity.setRemarks(remarks);
+			giftEntity.setGiftType(giftType);
+			giftEntity.setHotGift(hotGift);
+			giftEntity.setModifiedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			log.debug("userDetails: {}",userDetails);
-			form.setModifiedBy(userDetails.getUsername());
-			final GiftEntity updateResult = giftService.update(form);
+			giftEntity.setModifiedBy(userDetails.getUsername());
+			log.debug("giftEntity: {}",giftEntity);
+			final GiftEntity updateResult = giftService.update(giftEntity);
+			log.debug("updateResult: {}",updateResult);
 			response.setData(updateResult);
 
 		} catch (final Exception e) {

@@ -208,7 +208,7 @@ public class AdminConvenienceStoreController {
 		final AjaxResponse<ConvenienceStoreEntity> response = new AjaxResponse<>();
 
 		try {
-			System.out.println(form);
+			log.debug("{}", form);
 			final ConvenienceStoreEntity updateResult = convenienceStoreService.update(form);
 			response.setData(updateResult);
 

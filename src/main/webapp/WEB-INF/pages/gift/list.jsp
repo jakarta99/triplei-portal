@@ -293,13 +293,37 @@
             <span id="orderName" style="text-align: center;"></span>
         </div>
         <div>
+        	<img alt="" src="/resources/pic/積點專區/點數(小).png" width="30" height="30">
             <span>商品兌換點數:    </span>
             <span id="orderPoint" style="text-align: center;"></span>
         </div>
         <div>
         <label for="quantity1" class="">請輸入數量:</label>	
-			<input type="text" class="" id="quantity1"
-				name="quantity1" placeholder="quantity"/> 
+			<input type="number" class="" id="quantity1"
+				name="quantity1" min="1" value="1" placeholder="quantity"/> 
+        </div>
+        <div>
+        <label for="recipient" class="">收件人姓名:</label>	
+			<input type="text" class="" id="recipient"
+				name="recipient" placeholder=""/> 
+        </div>
+        <div>
+        <label for="recipientAddress" class="">收件人地址:</label>	
+			<input type="text" class="" id="recipientAddress"
+				name="recipientAddress" placeholder=""/> 
+        </div>
+        <div>
+        <label for="recipientPhone" class="">收件人電話:</label>	
+			<input type="text" class="" id="recipientPhone"
+				name="recipientPhone" placeholder=""/> 
+        </div>
+        <div>
+        <label for="recipientTime" class="">希望收件時間:</label>	
+				<select class="" id="recipientTime"
+				name="recipientTime">
+				<option value="上午" selected>上午</option>
+				<option value="下午">下午</option>
+				</select>
         </div>
         <div>
             <a href="#" class="btn btn-lg btn-primary btn-block"
@@ -404,6 +428,10 @@ $( function() {
 		console.log(quantity1);
 		datas.giftName = giftName;
 		datas.quantity1 = quantity1;
+		datas.recipient = $("#recipient").val();
+		datas.recipientAddress = $("#recipientAddress").val();
+		datas.recipientPhone = $("#recipientPhone").val();
+		datas.recipientTime = $("#recipientTime").val();
 		
 		$.ajax({
 			url : "<c:url value='/gift/giftOrder/addOrder'/>",

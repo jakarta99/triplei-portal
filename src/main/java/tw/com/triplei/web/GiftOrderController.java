@@ -70,7 +70,8 @@ public class GiftOrderController {
 
 	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> order(String giftName, String quantity1, GiftOrderEntity entity) {
+	public Map<String, String> order(String giftName, String quantity1, String recipient,
+			String recipientAddress, String recipientPhone, String recipientTime, GiftOrderEntity entity) {
 
 		Map<String, String> response = new HashMap<>();
 
@@ -78,6 +79,10 @@ public class GiftOrderController {
 		log.debug("userDetails: {}", userDetails);
 		log.debug("giftName: {}", giftName);
 		log.debug("quantity1: {}", quantity1);
+		log.debug("recipient: {}", recipient);
+		log.debug("recipientAddress: {}", recipientAddress);
+		log.debug("recipientPhone: {}", recipientPhone);
+		log.debug("recipientTime: {}", recipientTime);
 		if (quantity1 != null && quantity1.length() >= 0) {
 			try {
 				int quantity = Integer.valueOf(quantity1);
@@ -108,6 +113,10 @@ public class GiftOrderController {
 					user.setExchangedPoint(user.getExchangedPoint() + (giftpoint * quantity));
 					userService.getDao().save(user);
 					entity.setQuantity(quantity);
+					entity.setRecipient(recipient);
+					entity.setRecipientAddress(recipientAddress);
+					entity.setRecipientPhone(recipientPhone);
+					entity.setRecipientTime(recipientTime);
 					LocalDateTime orderTime = LocalDateTime.now();
 					entity.setOrderTime(orderTime);
 					entity.setGiftEntity(giftEntity);

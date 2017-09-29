@@ -63,6 +63,10 @@
 // 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
 			            { title: '數量', name: "quantity", type: "text", width: 150 },
 			            { title: '兌換日期', name: "orderTime", type: "text", width: 150 },
+			            { title: '收件人姓名', name: "recipient", type: "text", width: 150 },
+			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 150 },
+			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 150 },
+			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 150 },
      
 			        ]
 			    });

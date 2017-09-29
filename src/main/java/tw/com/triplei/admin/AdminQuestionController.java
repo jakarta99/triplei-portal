@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +21,10 @@ import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.QuestionEntity;
+import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.service.EmailService;
 import tw.com.triplei.service.QuestionService;
+import tw.com.triplei.service.UserService;
 
 @Slf4j
 @Controller
@@ -35,6 +36,9 @@ public class AdminQuestionController {
 
 	@Autowired
 	private EmailService emailservice;
+
+	@Autowired
+	private UserService userservice;
 	
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -77,12 +81,22 @@ public class AdminQuestionController {
 //		@RequestParam("emailreply") String emailreply
 
 		log.debug("{}", form);
-		System.out.println("問題Error檢查 = " + model.toString());
-		System.out.println("問題回覆個資 = " + form);
-		System.out.println("問題回覆文字 = " + emailreply);
+		log.debug("問題Error檢查 = {}" + model.toString());
+		log.debug("問題回覆個資 = {}" + form);
+		log.debug("問題回覆文字 = {}" + emailreply);
 		
+		String userName ;
+		UserEntity user =  userservice.getDao().findByEmail(form.getAskerEmail());
+		log.debug("問題user = {}" + user);
 		
-		emailservice.sendEmail(form.getAskerEmail(), emailreply);
+		if(user!=null) {
+		 userName =user.getName();
+		}else{
+		 userName = "";
+		}
+		
+		emailservice.sendReplyEmail(form.getAskerEmail(), emailreply, 
+				form.getPostTime(), userName, form.getContent());
 		
 		final AjaxResponse<QuestionEntity> response = new AjaxResponse<QuestionEntity>();
 
