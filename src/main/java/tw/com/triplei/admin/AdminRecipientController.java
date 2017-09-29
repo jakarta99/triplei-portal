@@ -173,9 +173,11 @@ public class AdminRecipientController {
 			form.setCreatedBy(userDetails.getUsername());
 			form.setAlreadyGetPoint(false);
 			form.setAlreadyAudittedPoint(false);
+			form.setAlreadyDeletedPoint(false);
 			
 			// 一般會員下單後 自動升級成下單會員
 			UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
+			log.debug("升級會員前{}",owner);
 			Set<RoleEntity> roles = owner.getRoles();
 			RoleEntity role = roleService.getDao().findByCode("ROLE_ORDER");
 			if (!roles.contains(role)) {
@@ -185,21 +187,38 @@ public class AdminRecipientController {
 				log.debug("升級成功!!{}");
 			}
 
+
 			final RecipientEntity insertResult = recipientService.insert(form);
 			String formatStr = "%07d";
 			String formatAns = String.format(formatStr,insertResult.getId());
 			insertResult.setOrderNo(formatAns);
 			final RecipientEntity insertResultG = recipientService.insert(insertResult);
+
 			response.setData(insertResultG);
+			//發email給顧客
+			emailService.sendAlertEmailToCustomer(owner, insertResultG);
+			//發email給管理員
+			List<UserEntity> users = userDao.findAll();
+			for(UserEntity admin : users){
+				Set<RoleEntity> userRole = admin.getRoles();
+				RoleEntity roleAdmin = roleService.getDao().findByCode("ROLE_ADMIN");
+				if(userRole.contains(roleAdmin)){
+					emailService.sendAlertEmailToAdminC(admin , owner, insertResultG);
+					log.debug("管理者:{}",admin.getName());
+				}
+			}
+			
 
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
 			response.addMessages(ex.getMessages());
+			log.debug("~~~~~~~~~~{}");
 		} catch (final Exception e) {
 			response.addException(e);
+			log.debug("---------------{}");
 		}
 
-		// log.debug("{}", response);
+//		 log.debug("{}", response);
 
 		return response;
 	}
@@ -212,12 +231,13 @@ public class AdminRecipientController {
 
 		log.debug("{}", form.getCreatedBy());
 		final AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
-
+		
 		try {
 			ProductEntity productEntity = productService.getOneAll(pid);
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			UserEntity user = userDao.findByName(userName);
 			form.setUser(user);
+			log.debug("業務員後{}",form.getUser().getName());
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setProduct(productEntity);
 			form.setModifiedTime(new Timestamp(new Date().getTime()));
@@ -225,27 +245,33 @@ public class AdminRecipientController {
 					.getPrincipal();
 			log.debug("可獲得點數: {}", form.getCanGetPoint());
 			form.setModifiedBy(userDetails.getUsername());
+
 			
-			
-			
-			if (form.getOrderStatus().equals("第六階段") && !form.getAlreadyGetPoint()) {
+			if (form.getOrderStatus().equals("已完成(含派送點數)") && !form.getAlreadyGetPoint()) {
 				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
 					int remainPoint = owner.getRemainPoint();
 					owner.setAudittingPoint(owner.getAudittingPoint() - form.getCanGetPoint());
 					owner.setRemainPoint(remainPoint + form.getCanGetPoint());
 					form.setAlreadyGetPoint(true);
 				userDao.save(owner);
-			} else if (!form.getOrderStatus().equals("第六階段") && !form.getAlreadyAudittedPoint()) {
+			} else if (!form.getOrderStatus().equals("已完成(含派送點數)") && !form.getAlreadyAudittedPoint() && !form.getOrderStatus().equals("已見面，未購買(刪除審核中點數)")) {
 				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
 				int auditting = owner.getAudittingPoint();
 				owner.setAudittingPoint(auditting + form.getCanGetPoint());
 				form.setAlreadyAudittedPoint(true);
 				userDao.save(owner);
+			} else if(form.getOrderStatus().equals("已見面，未購買(刪除審核中點數)") && form.getAlreadyAudittedPoint() && !form.getAlreadyDeletedPoint()){
+				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
+				int auditting = owner.getAudittingPoint();
+				owner.setAudittingPoint(auditting - form.getCanGetPoint());
+				form.setAlreadyDeletedPoint(true);
+				userDao.save(owner);
 			}
 
 			final RecipientEntity updateResult = recipientService.update(form);
 			response.setData(updateResult);
-			if(updateResult.getOrderStatus().equals("第一階段")){
+			//指派業務員 發mail通知 業務員及管理員
+			if(updateResult.getUser() != null && form.getOrderStatus().equals("未見面")){
 				emailService.sendAlertEmailToSales(user, updateResult);
 				UserEntity owner = userDao.findByAccountNumber(userDetails.getUsername());
 				emailService.sendAlertEmailToAdmin(owner, user, updateResult);

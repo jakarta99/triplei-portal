@@ -180,155 +180,318 @@ public class EmailService {
 		}
 
 	}
-
-	public void sendAlertEmailToSales(UserEntity entity, RecipientEntity recipient) {
-
-		String name = entity.getName();
-		log.debug("業務員姓名:{}", name);
-		Date date = new Date(recipient.getModifiedTime().getTime());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
-		String dateString = sdf.format(date);
-		log.debug("時間:{}", dateString);
-		String productName = recipient.getProduct().getLocalName();// 商品名稱
-		String productCode = recipient.getProduct().getCode();// 商品代碼
-		String payYear = recipient.getProduct().getYear() + "";// 年期
-		String yearCode = recipient.getProduct().getYearCode();// 第n年
-		String insureAmount = recipient.getProduct().getInsureAmount().toString();
-		log.debug("保額:{}", insureAmount);
-		String contactName = recipient.getName(); // 聯絡人
-		String contactMethod = recipient.getTel(); // 聯絡方式
-		String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
-		String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
-		String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
-		String toAge = recipient.getAge() + "";// 被保險人年齡
-		String gender = "";
-		// 被保險人性別
-		if (recipient.getGender().equals("Male")) {
-			gender = "男";
-		} else if (recipient.getGender().equals("Female")) {
-			gender = "女";
-		}
-		// 地址
-		String address = recipient.getConvenienceStoreEntity().getCity()
-				+ recipient.getConvenienceStoreEntity().getRegion()
-				+ recipient.getConvenienceStoreEntity().getAddress();
-		// 超商門市
-		String storeName = recipient.getConvenienceStoreEntity().getStoreName();
-		// 超商廠商
-		String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
-
-		StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
-				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
-				.append("<title></title><meta charset='utf-8' /></head>")
-				.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("業務員 " + name + " 您好，<br /><br />")
-				.append("管理員已經於 " + dateString + " 指派訂單給您：<br /><br />").append("聯絡人資訊：<br />")
-				.append("姓名：" + contactName + "     電話:" + contactMethod + "<br />")
-				.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
-				.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
-				.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />").append("訂單詳細如下:<br />")
-				.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
-				.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
-				.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
-				.append(" " + address + "<br /><br />").append("若還有任何關於訂單的相關問題，麻煩請與管理員聯絡!<br />")
-				.append("祝您順心<br /><br />").append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
-
-		String content = sBuffer.toString();
-
-		MimeMessage mimeMessage = mailSender.createMimeMessage();
-		try {
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-
-			helper.setFrom("triplei");
-			helper.setTo(entity.getEmail());
-			helper.setSubject("訂單通知");
-			helper.setText(content, true);
-			// FileSystemResource file = new
-			// FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
-			// helper.addInline("virusattack", file);
-			mailSender.send(mimeMessage);
-
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-
-	}
 	
-	public void sendAlertEmailToAdmin(UserEntity admin,UserEntity entity, RecipientEntity recipient) {
+	//指派業務員通知業務員
+		public void sendAlertEmailToSales(UserEntity entity, RecipientEntity recipient) {
 
-		String name = entity.getName();
-		log.debug("業務員姓名:{}", name);
-		Date date = new Date(recipient.getModifiedTime().getTime());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
-		String dateString = sdf.format(date);
-		log.debug("時間:{}", dateString);
-		String productName = recipient.getProduct().getLocalName();// 商品名稱
-		String productCode = recipient.getProduct().getCode();// 商品代碼
-		String payYear = recipient.getProduct().getYear() + "";// 年期
-		String yearCode = recipient.getProduct().getYearCode();// 第n年
-		String insureAmount = recipient.getProduct().getInsureAmount().toString();
-		log.debug("保額:{}", insureAmount);
-		String contactName = recipient.getName(); // 聯絡人
-		String contactMethod = recipient.getTel(); // 聯絡方式
-		String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
-		String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
-		String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
-		String toAge = recipient.getAge() + "";// 被保險人年齡
-		String gender = "";
-		// 被保險人性別
-		if (recipient.getGender().equals("Male")) {
-			gender = "男";
-		} else if (recipient.getGender().equals("Female")) {
-			gender = "女";
+			String name = entity.getName();
+			log.debug("業務員姓名:{}", name);
+			Date date = new Date(recipient.getModifiedTime().getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
+			String dateString = sdf.format(date);
+			log.debug("時間:{}", dateString);
+			String productName = recipient.getProduct().getLocalName();// 商品名稱
+			String productCode = recipient.getProduct().getCode();// 商品代碼
+			String payYear = recipient.getProduct().getYear() + "";// 年期
+			String yearCode = recipient.getProduct().getYearCode();// 第n年
+			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			log.debug("保額:{}", insureAmount);
+			String orderNo = recipient.getOrderNo(); //訂單標號
+			String contactName = recipient.getName(); // 聯絡人
+			String contactMethod = recipient.getTel(); // 聯絡方式
+			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
+			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			String toAge = recipient.getAge() + "";// 被保險人年齡
+			String gender = "";
+			// 被保險人性別
+			if (recipient.getGender().equals("Male")) {
+				gender = "男";
+			} else if (recipient.getGender().equals("Female")) {
+				gender = "女";
+			}
+			// 地址
+			String address = recipient.getConvenienceStoreEntity().getCity()
+					+ recipient.getConvenienceStoreEntity().getRegion()
+					+ recipient.getConvenienceStoreEntity().getAddress();
+			// 超商門市
+			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			// 超商廠商
+			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+
+			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
+					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
+					.append("<title></title><meta charset='utf-8' /></head>")
+					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("業務員 " + name + " 您好，<br /><br />")
+					.append("管理員已經於 " + dateString + " 指派訂單給您：<br /><br />")
+					.append("訂單編號："+ orderNo +"<br />")
+					.append("聯絡人資訊：<br />")
+					.append("姓名：" + contactName + "     電話:" + contactMethod + "<br />")
+					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
+					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
+					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />").append("訂單詳細如下:<br />")
+					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
+					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append(" " + address + "<br /><br />").append("若還有任何關於訂單的相關問題，麻煩請與管理員聯絡!<br />")
+					.append("祝您順心<br /><br />").append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
+
+			String content = sBuffer.toString();
+
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			try {
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+				helper.setFrom("triplei");
+				helper.setTo(entity.getEmail());
+				helper.setSubject("接收訂單通知");
+				helper.setText(content, true);
+				// FileSystemResource file = new
+				// FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
+				// helper.addInline("virusattack", file);
+				mailSender.send(mimeMessage);
+
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+
 		}
-		// 地址
-		String address = recipient.getConvenienceStoreEntity().getCity()
-				+ recipient.getConvenienceStoreEntity().getRegion()
-				+ recipient.getConvenienceStoreEntity().getAddress();
-		// 超商門市
-		String storeName = recipient.getConvenienceStoreEntity().getStoreName();
-		// 超商廠商
-		String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+		
+		//指派業務員通知管理員
+		public void sendAlertEmailToAdmin(UserEntity admin,UserEntity entity, RecipientEntity recipient) {
 
-		StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
-				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
-				.append("<title></title><meta charset='utf-8' /></head>")
-				.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("管理員 " + admin.getName() + " 您好，<br /><br />")
-				.append("您已經於 " + dateString + " 指派訂單給業務員： "+name+"<br /><br />").append("聯絡人資訊：<br />")
-				.append("姓名：" + contactName + "     電話:" + contactMethod + "<br />")
-				.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
-				.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
-				.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />").append("訂單詳細如下:<br />")
-				.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
-				.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
-				.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
-				.append(" " + address + "<br /><br />")
-				.append("祝您順心<br /><br />").append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
+			String name = entity.getName();
+			log.debug("業務員姓名:{}", name);
+			Date date = new Date(recipient.getModifiedTime().getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
+			String dateString = sdf.format(date);
+			log.debug("時間:{}", dateString);
+			String productName = recipient.getProduct().getLocalName();// 商品名稱
+			String productCode = recipient.getProduct().getCode();// 商品代碼
+			String payYear = recipient.getProduct().getYear() + "";// 年期
+			String yearCode = recipient.getProduct().getYearCode();// 第n年
+			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			log.debug("保額:{}", insureAmount);
+			String orderNo = recipient.getOrderNo(); //訂單標號
+			String contactName = recipient.getName(); // 聯絡人
+			String contactMethod = recipient.getTel(); // 聯絡方式
+			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
+			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			String toAge = recipient.getAge() + "";// 被保險人年齡
+			String gender = "";
+			// 被保險人性別
+			if (recipient.getGender().equals("Male")) {
+				gender = "男";
+			} else if (recipient.getGender().equals("Female")) {
+				gender = "女";
+			}
+			// 地址
+			String address = recipient.getConvenienceStoreEntity().getCity()
+					+ recipient.getConvenienceStoreEntity().getRegion()
+					+ recipient.getConvenienceStoreEntity().getAddress();
+			// 超商門市
+			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			// 超商廠商
+			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
 
-		String content = sBuffer.toString();
+			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
+					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
+					.append("<title></title><meta charset='utf-8' /></head>")
+					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("管理員 " + admin.getName() + " 您好，<br /><br />")
+					.append("您已經於 " + dateString + " 指派訂單給業務員： "+name+"<br /><br />")
+					.append("訂單編號："+ orderNo +"<br />")
+					.append("聯絡人資訊：<br />")
+					.append("姓名：" + contactName + "     電話:" + contactMethod + "<br />")
+					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
+					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
+					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />").append("訂單詳細如下:<br />")
+					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
+					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append(" " + address + "<br /><br />")
+					.append("祝您順心<br /><br />").append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
 
-		MimeMessage mimeMessage = mailSender.createMimeMessage();
-		try {
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+			String content = sBuffer.toString();
 
-			helper.setFrom("triplei");
-			helper.setTo(admin.getEmail());
-			helper.setSubject("訂單通知");
-			helper.setText(content, true);
-			// FileSystemResource file = new
-			// FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
-			// helper.addInline("virusattack", file);
-			mailSender.send(mimeMessage);
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			try {
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-		} catch (MessagingException e) {
-			e.printStackTrace();
+				helper.setFrom("triplei");
+				helper.setTo(admin.getEmail());
+				helper.setSubject("訂單通知");
+				helper.setText(content, true);
+				// FileSystemResource file = new
+				// FileSystemResource("C:/Users/Student/Desktop/virusattack.jpg");
+				// helper.addInline("virusattack", file);
+				mailSender.send(mimeMessage);
+
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		// public static void main(String[] args) {
+		// String a = UUID.randomUUID().toString().replaceAll("-", "").substring(0,
+		// 15);
+		// System.out.println(a);
+		// }
+		
+		
+		//顧客下訂單寄給顧客
+		public void sendAlertEmailToCustomer(UserEntity customer,RecipientEntity recipient) {
+
+			String name = customer.getName();//會員姓名
+			
+			Date date = new Date(recipient.getCreatedTime().getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
+			String dateString = sdf.format(date);
+			log.debug("時間:{}", dateString);
+			String productName = recipient.getProduct().getLocalName();// 商品名稱
+			String productCode = recipient.getProduct().getCode();// 商品代碼
+			String payYear = recipient.getProduct().getYear() + "";// 年期
+			String yearCode = recipient.getProduct().getYearCode();// 第n年
+			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			log.debug("保額:{}", insureAmount);
+			String orderNo = recipient.getOrderNo(); //訂單標號
+			String contactMethod = recipient.getTel(); // 聯絡方式
+			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
+			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			String toAge = recipient.getAge() + "";// 被保險人年齡
+			String gender = "";
+			// 被保險人性別
+			if (recipient.getGender().equals("Male")) {
+				gender = "男";
+			} else if (recipient.getGender().equals("Female")) {
+				gender = "女";
+			}
+			// 地址
+			String address = recipient.getConvenienceStoreEntity().getCity()
+					+ recipient.getConvenienceStoreEntity().getRegion()
+					+ recipient.getConvenienceStoreEntity().getAddress();
+			// 超商門市
+			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			// 超商廠商
+			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+
+			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
+					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
+					.append("<title></title><meta charset='utf-8' /></head>")
+					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("親愛的會員  " + name + " 您好，<br /><br />")
+					.append("您已經於 " + dateString + " 選擇這筆保險商品：<br /><br />")
+					.append("您的聯絡電話:" + contactMethod + "<br />")
+					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
+					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
+					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />")
+					.append("訂單詳細如下:<br />")
+					.append("訂單編號："+ orderNo +"<br />")
+					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
+					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append(" " + address + "<br /><br /><br />")
+					.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
+					.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
+					.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+					.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
+
+			String content = sBuffer.toString();
+
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			try {
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+				helper.setFrom("triplei");
+				helper.setTo(customer.getEmail());
+				helper.setSubject("選購保險通知");
+				helper.setText(content, true);
+				mailSender.send(mimeMessage);
+
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		//顧客下訂單寄給管理員
+		public void sendAlertEmailToAdminC(UserEntity admin,UserEntity customer,RecipientEntity recipient) {
+
+			String name = admin.getName();//管理員姓名
+			String cName = customer.getName();
+			Date date = new Date(recipient.getCreatedTime().getTime());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
+			String dateString = sdf.format(date);
+			log.debug("時間:{}", dateString);
+			String productName = recipient.getProduct().getLocalName();// 商品名稱
+			String productCode = recipient.getProduct().getCode();// 商品代碼
+			String payYear = recipient.getProduct().getYear() + "";// 年期
+			String yearCode = recipient.getProduct().getYearCode();// 第n年
+			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			log.debug("保額:{}", insureAmount);
+			String orderNo = recipient.getOrderNo(); //訂單標號
+			String contactMethod = recipient.getTel(); // 聯絡方式
+			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
+			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			String toAge = recipient.getAge() + "";// 被保險人年齡
+			String gender = "";
+			// 被保險人性別
+			if (recipient.getGender().equals("Male")) {
+				gender = "男";
+			} else if (recipient.getGender().equals("Female")) {
+				gender = "女";
+			}
+			// 地址
+			String address = recipient.getConvenienceStoreEntity().getCity()
+					+ recipient.getConvenienceStoreEntity().getRegion()
+					+ recipient.getConvenienceStoreEntity().getAddress();
+			// 超商門市
+			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			// 超商廠商
+			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+
+			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
+					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
+					.append("<title></title><meta charset='utf-8' /></head>")
+					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("親愛的管理員  " + name + " 您好，<br /><br />")
+					.append("會員 "+ cName +" 已經於 " + dateString + " 選擇這筆保險商品：<br /><br />")
+					.append("他的聯絡電話:" + contactMethod + "<br />")
+					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
+					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
+					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />")
+					.append("訂單詳細如下:<br />")
+					.append("訂單編號："+ orderNo +"<br />")
+					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
+					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append(" " + address + "<br /><br /><br />")
+					.append("<h4>請盡速指派業務員處理!!!!!!!!!</h4><br /><br /><br />")
+					.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
+					.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
+					.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+					.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
+
+			String content = sBuffer.toString();
+
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			try {
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+
+				helper.setFrom("triplei");
+				helper.setTo(admin.getEmail());
+				helper.setSubject("會員選購保險通知");
+				helper.setText(content, true);
+				mailSender.send(mimeMessage);
+
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}
 
-	// public static void main(String[] args) {
-	// String a = UUID.randomUUID().toString().replaceAll("-", "").substring(0,
-	// 15);
-	// System.out.println(a);
-	// }
 
-}
+	

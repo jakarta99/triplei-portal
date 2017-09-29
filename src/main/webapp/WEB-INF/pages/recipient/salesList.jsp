@@ -67,6 +67,7 @@
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
 			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
+			            { title: '超商', name: "convenienceStoreEntity.manufacturer", type: "text", width: 60 },
 			            { title: '超商名稱', name: "convenienceStoreEntity.storeName", width: 90, itemTemplate: function(val) {return val+"門市"} },
 			            { title: '超商區域', name: "convenienceStoreEntity.region", type: "text", width: 80 },
 			            { title: '超商地址', name: "convenienceStoreEntity.address", type: "text", width: 80 },

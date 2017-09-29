@@ -1,5 +1,7 @@
 package tw.com.triplei.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,13 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
 import lombok.extern.slf4j.Slf4j;
-import tw.com.triplei.admin.spec.ProductHighDiscountRatioSpecification;
-import tw.com.triplei.admin.spec.ProductPremiumRatioSpecification;
-import tw.com.triplei.admin.spec.ProductSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
-import tw.com.triplei.entity.InsurerEntity;
+import tw.com.triplei.commons.QueryOpType;
+import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.ProductHighDiscountRatio;
@@ -143,7 +146,25 @@ public class AdminProductController {
 		Page<ProductEntity> page;
 
 		try {
-			page = productService.getAll(new ProductSpecification(), pageable);
+			final List<SpecCriterion> criterions = Lists.newArrayList();
+
+			if(!Strings.isNullOrEmpty(form.getCode())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE,"code","%"+form.getCode()+"%"));
+			}
+			if(!Strings.isNullOrEmpty(form.getInterestRateType())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE,"interestRateType","%"+form.getInterestRateType()+"%"));
+			}
+			if (form.getCurr() != null) {
+				criterions.add(new SpecCriterion(QueryOpType.EQ, "curr", form.getCurr()));
+			}
+			if(form.getYear()!=0){
+				criterions.add(new SpecCriterion(QueryOpType.EQ,"year",form.getYear()));
+			}
+			if(!Strings.isNullOrEmpty(form.getLocalName())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE,"localName","%"+form.getLocalName()+"%"));
+			}
+				
+			page = productService.getByCondition(criterions, pageable);
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);

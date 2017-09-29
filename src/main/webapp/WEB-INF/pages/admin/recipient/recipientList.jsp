@@ -62,11 +62,12 @@
 			            { title: '公司名稱', name: "product.insurer.shortName", type: "text", width: 80 },
 			            { title: '商品代碼', name: "product.code", type: "text", width: 50 },
 			            { title: '商品名稱', name: "product.localName", type: "text", width: 100 },
-			            { title: '保額', name: "product.insureAmount", width: 80, itemTemplate: function(val) {return val+"萬"}  },
+			            { title: '保額', name: "product.insureAmount", width: 50, itemTemplate: function(val) {return val+"萬"}  },
 			            { title: '電話', name: "tel", type: "text", width: 100 },
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
 			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
+			            { title: '超商', name: "convenienceStoreEntity.manufacturer", type: "text", width: 60 },
 			            { title: '超商名稱', name: "convenienceStoreEntity.storeName", width: 90, itemTemplate: function(val) {return val+"門市"} },
 			            { title: '超商區域', name: "convenienceStoreEntity.region", type: "text", width: 80 },
 			            { title: '超商地址', name: "convenienceStoreEntity.address", type: "text", width: 80 },
@@ -74,6 +75,8 @@
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
 			            { title: '會員帳號', name: "createdBy", type: "text", width: 200 },
 			            { title: '可獲得點數', name: "canGetPoint", type: "text", width: 80 },
+			            { title: '上次修改者', name: "modifiedBy", type: "text", width: 200 },
+			            { title: '上次修改時間', name: "modifiedTime", width: 200, itemTemplate: function(val) {return new Date(val);}},
 			        ]
 			    });
 			    
