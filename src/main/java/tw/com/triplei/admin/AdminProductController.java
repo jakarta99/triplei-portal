@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ import tw.com.triplei.admin.spec.ProductPremiumRatioSpecification;
 import tw.com.triplei.admin.spec.ProductSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.ProductHighDiscountRatio;
@@ -44,28 +46,33 @@ public class AdminProductController {
 	public String addPage(Model model) {
 		return "/admin/product/productAdd";
 	}
-
+	
+	
+	/*編輯(熱門屬性)頁面*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String editPage(@PathVariable("id") final Long id, Model model) {
-
+		
 		ProductEntity dbEntity = productService.getOne(id);
 		model.addAttribute("entity", dbEntity);
-
+		
 		return "/admin/product/productEdit";
 	}
 	
+	/*查看高保費率*/
 	@RequestMapping(value = "/highDiscountRatio/{id}", method = RequestMethod.GET)
 	public String highDiscountRatiosPage(@PathVariable("id") final Long id, Model model) {
 
 		return "/admin/product/highDiscountRatio";
 	}
 	
+	/*查看基本費率*/
 	@RequestMapping(value = "/premiumRatio/{id}", method = RequestMethod.GET)
 	public String premiumRatiosPage(@PathVariable("id") final Long id, Model model) {
 
 		return "/admin/product/premiumRatio";
 	}
 	
+	/*查看解約金費率*/
 	@RequestMapping(value = "/cancelRatio/{id}", method = RequestMethod.GET)
 	public String cancelRatioPage(@PathVariable("id") final Long id, Model model) {
 		
@@ -144,6 +151,7 @@ public class AdminProductController {
 		return new GridResponse<>(page);
 	}
 
+	/*上傳檔案*/
 	@PostMapping
 	public String insert(final Model model, @RequestParam("files") MultipartFile[] files) {
 		AjaxResponse<String> response = new AjaxResponse<String>();
@@ -168,11 +176,27 @@ public class AdminProductController {
 				}
 			}
 		}
-		log.debug("{}", files);
 
 		return "redirect:/admin/product/list";
 	}
 
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
+	public AjaxResponse<ProductEntity> update(final Model model, @RequestBody final ProductEntity form) {
+		
+		final AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
+		
+		try {
+			
+			final ProductEntity updateResult = productService.update(form);
+			response.setData(updateResult);
+			
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+
+		return response;
+	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody

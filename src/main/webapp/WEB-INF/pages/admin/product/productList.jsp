@@ -55,16 +55,18 @@
 			        
 			 
 			        fields: [
-			            { name: 'btns', width:60, itemTemplate:btns },
+			            { name: '刪/修', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
 			            { title: '公司', name: "insurer.shortName", type: "text", width: 60 },
-			            { title: '產品名稱', name: "localName", type: "text", width: 200 },
-			            { title: '商品代碼', name: "code", type: "text", width: 75 , validate: "required" },
-			            { title: '年度代碼', name: "yearCode", type: "text", width: 75 },
-			            { title: '年期', name: "year", type: "text", width: 50 },
+			            { title: '產品名稱', name: "localName", type: "text", width: 180 },
+			            { title: '商品代碼', name: "code", type: "text", width: 70 , validate: "required" },
+			            { title: '年度代碼', name: "yearCode", type: "text", width: 70 },
+			            { title: '年期', name: "year", type: "text", width: 40 },
 			            { title: '宣告利率', name: "declareInterestRate", type: "text", width: 75 },
 			            { title: '預定利率', name: "predictInterestRate", type: "text", width: 75 },
 			            { title: '幣別', name: "curr", type: "text", width: 50 },
+			            { title: '點擊數', name: "clickCount", type: "text", width: 55 },
+			            { title: '熱門分類', name: "hotProduct", type: "text", width: 75 },
 			            { title: '高保費率', name: "highDiscountRatios", width: 75 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/highDiscountRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
 			            { title: '基本費率', name: "premiumRatios", width: 75 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/premiumRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
 			            { title: '解約金費率', name: "cancelRatios", width: 80 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/cancelRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
@@ -78,11 +80,13 @@
 			    });
 			    
 			    function btns(value, row) {
+			    	
 					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('Are You Sure Want to Delete?')) {
+						if (confirm('你確定要刪除這筆資料?')) {
+							
 							$delBtn.button('loading');
 							$.delete_(BASE_URL+ "/" + row.id, function() {
 								$delBtn.button('reset');
@@ -91,15 +95,12 @@
 						}
 					});
 					
-// 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
-// 					$editBtn.attr("href", BASE_URL + "/" + row.id);
-// 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
+					$editBtn.attr("href", BASE_URL + "/" + row.id);
+					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($delBtn);
+					return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
 				}
-			    
-			    
-			    
 			    
 			</script>
 		</div>

@@ -57,10 +57,8 @@
 			                    dataType: "json",
 			                    cache: false
 			                });
-			                
 			            },
 			        },
-			        
 			 
 			        fields: [
 			            { name: '刪／修', width:45, itemTemplate:btns },
