@@ -40,17 +40,17 @@
 </head>
 
 <body>
-<div class="container-fluid" style="width: 100%; height: 100%; position: absolute; padding: 0;padding-top:9vh">
+<div class="container-fluid" style="width: 100%; height: 100%; position: absolute; padding: 0;">
 <c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-	<div id="content" style="padding: 0; width: 100%; height: 100%; color: white;">
+	<div id="content" style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh">
 		<div class="col-lg-3" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 			<div class="col-sm-12" style="text-align: center; margin-top: 7%; display: table">
 				<br /> <br />
 				<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
 			</div>
 		</div>
-		<div class="col-lg-9" style="height: 100%; padding: 0; overflow-y: scroll; color: black">
-			<div id="ArticleCarousel" class="col-md-12" style="height: 40vh; width: 100%; padding: 0;">
+		<div class="col-lg-9" style="height: 100%; padding: 0; overflow-y: scroll; color: black;">
+			<div id="ArticleCarousel" class="col-md-12" style="height: 40vh; width: 100%; padding: 0;margin-top:-2vh">
 				<div>
 					<a href="/article/readArticle/read/${bannerRotation[0].id}">
 					<img src="${bannerRotation[0].bannerImage}" title="${bannerRotation[0].title}" class="rotation"></a>
