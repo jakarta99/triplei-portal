@@ -30,6 +30,18 @@ public class GiftOrderEntity extends GenericEntity {
 	@Column(name = "QUANTITY")
 	private int quantity;
 		
+	@Column(name = "RECIPIENT")
+	private String recipient;
+
+	@Column(name = "RECIPIENT_ADDRESS")
+	private String recipientAddress;
+
+	@Column(name = "RECIPIENT_PHONE")
+	private String recipientPhone;
+
+	@Column(name = "RECIPIENT_TIME")
+	private String recipientTime;
+	
 	@Column(name = "Gift")
 	private GiftEntity giftEntity;
 }
