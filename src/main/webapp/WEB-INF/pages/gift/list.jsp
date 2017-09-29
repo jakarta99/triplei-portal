@@ -137,7 +137,7 @@
 								</div>
 								<div>
 									<div  class="col-md-8" style="height: 20px;">
-										<span id="giftName" style="text-align: center;">一二三四五六七${modelv.name}</span></br>
+										<span id="giftName" style="text-align: center;">${modelv.name}</span></br>
 									<img alt="" src="/resources/pic/積點專區/點數(小).png" width="15" height="15">
 										<span id="points" style="text-align: center;">${modelv.bonus}</span>
 									</div>
