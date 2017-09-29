@@ -40,12 +40,12 @@
  				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 				<div class="col-xs-6 col-sm-12"
 					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
-					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">保險公司</h1>
-					<h4>
+					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;padding-bottom: 5vh">保險公司</h1>
+					<h4 style="margin-bottom: 5vh">
 						<a href="/insurer/list"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各公司列表</a>
 					</h4>
-					<h4>
+					<h4  style="margin-bottom: 5vh">
 						<a href="/insurer/filt"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
 					</h4>
@@ -89,7 +89,7 @@
 							<a style="padding-left: 13%">訴訟率　　　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.litigationRatio}" /></a><br>
 							<a style="padding-left: 13%">申訴率　　　：<fmt:formatNumber type="percent" minFractionDigits="5" value="${model.appealRatio}" /></a><br>
 							<a style="padding-left: 13%">保險安定基金：<c:if test="${model.insuranceGuarantyFund=true}">已加入</c:if><c:if test="${model.insuranceGuarantyFund=false}">未加入</c:if></a><br>
-							<a style="padding-left: 13%">網址　　　　：<a href="${model.description}" target="_blank">${model.description}</a></a><br>
+							<a style="padding-left: 13%">${model.shortName}官網：<a href="${model.description}" target="_blank">${model.description}</a></a><br>
 							<a style="padding-left: 13%">${model.description2}</a><br>
 							<a style="padding-left: 13%">${model.description3}</a><br>
 							<a style="padding-left: 13%">${model.description4}</a><br>
