@@ -26,7 +26,7 @@ public class ArticleController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 
-		List<ArticleEntity> list= articleService.getBannerRotationArticles(true,true);
+		List<ArticleEntity> list= articleService.getBannerRotationArticles(true, true);
 		model.addAttribute("bannerRotation",list);
 		
 		List<ArticleEntity> editorChoiceList = articleService.getArticlesByHotArticle(ArticleType.EDITOR_CHOICE, true, true);
