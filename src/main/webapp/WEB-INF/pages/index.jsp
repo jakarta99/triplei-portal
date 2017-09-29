@@ -143,7 +143,7 @@ p{
 <!-- 				<div class="col-sm-1"></div> -->
 <!-- 				<div class="col-sm-10"> -->
 					<!--三個框框(熱門新聞) -->
-					<div class="col-sm-12">
+					<div class="col-sm-12" style="height: 90vh">
 					<div class="col-xs-2 col-sm-1"></div>
 					<div class="col-xs-8 col-sm-10" style="padding-left: 0px">
 					<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh;padding-left: 3vw">
@@ -153,9 +153,9 @@ p{
 							<a href="/article/news" style="color: #5C8DEC;">查看更多</a>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-4" style="height: 60vh;">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;">
+					<div class="col-xs-12 col-sm-4" style="height: 80vh;">
+						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
 							<div style="margin-top:7%;"><img style="width:100%;" src="${news[0].bannerImage}" /></div>
 						</div>
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
@@ -167,8 +167,8 @@ p{
 						
 					<div class="col-xs-12 col-sm-4"
 						style="height: 60vh;">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;">
+						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
 							<div style="margin-top:7%;"><img style="width:100%;" src="${news[1].bannerImage}" /></div>
 						</div>
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
@@ -180,8 +180,8 @@ p{
 						
 					<div class="col-xs-12 col-sm-4"
 						style="height: 60vh;">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 40vh;">
+						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
+						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
 							<div style="margin-top:7%;"><img style="width:100%;" src="${news[2].bannerImage}" /></div>
 						</div>
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
