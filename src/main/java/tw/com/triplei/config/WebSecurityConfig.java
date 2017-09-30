@@ -37,12 +37,45 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.hasAnyRole("ADMIN","USER","NORMAL")
 		.and().formLogin().loginPage("/login").permitAll();
 		
-//		http.authorizeRequests().antMatchers("/gift/giftOrder/addOrder")
-//		.hasAnyRole("ADMIN","USER","NORMAL")
-//		.and().formLogin().loginPage("/login").permitAll();
 		http.authorizeRequests().antMatchers("/gift/**")
 		.hasAnyRole("ADMIN","USER","NORMAL")
 		.and().formLogin().loginPage("/login").permitAll();
+		
+		// 前台業務員權限設定
+		http.authorizeRequests().antMatchers("/recipient/sales/**")
+		.hasAnyRole("SALES")
+		.and().formLogin().loginPage("/login").permitAll();
+		
+		// 後台產品訂單權限設定 : ADMINT, PARTTIME, SERVICE
+		http.authorizeRequests().antMatchers("/admin/recipient/**")
+		.hasAnyRole("ADMIN", "PARTTIME", "SERVICE")
+		.and().formLogin().loginPage("/login").permitAll();
+		
+		// 後台積點訂單權限設定 : ADMINT, PARTTIME, SERVICE
+		http.authorizeRequests().antMatchers("/admin/gift/giftOrder/**")
+		.hasAnyRole("ADMIN", "PARTTIME", "SERVICE")
+		.and().formLogin().loginPage("/login").permitAll();
+		
+		// 後台 文章權限設定 : ADMIN, ARTICLE
+		http.authorizeRequests().antMatchers("/admin/article/**")
+		.hasAnyRole("ADMIN", "ARTICLE")
+		.and().formLogin().loginPage("/login").permitAll();
+		
+		// 後台 問題一覽設定: ADMIN, SERVICE
+		http.authorizeRequests().antMatchers("/admin/question/**")
+		.hasAnyRole("ADMIN", "SERVICE")
+		.and().formLogin().loginPage("/login").permitAll();
+		
+		// 後台 會員管理設定: ADMIN, SERVICE
+		http.authorizeRequests().antMatchers("/admin/user/**")
+		.hasAnyRole("ADMIN", "SERVICE")
+		.and().formLogin().loginPage("/login").permitAll();
+		
+		// 整個後台
+		http.authorizeRequests().antMatchers("/admin/**")
+		.hasAnyRole("ADMIN")
+		.and().formLogin().loginPage("/login").permitAll();
+		
 		
         http.authenticationProvider(daoAuthenticationProvider())
         	.authorizeRequests()
@@ -70,9 +103,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // 為特定的使用者綁定相對應的Role​​​
-    	auth.inMemoryAuthentication()
-        	.withUser("user").password("user1234").roles("USER")
-        	.and().withUser("admin").password("admin1234").roles("ADMIN");
+//    	auth.inMemoryAuthentication()
+//        	.withUser("user").password("user1234").roles("USER")
+//        	.and().withUser("admin").password("admin1234").roles("ADMIN");
     }	
     
 	@Bean
