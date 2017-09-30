@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,8 @@ import tw.com.triplei.enums.GiftType;
 @Service
 public class GiftService extends GenericService<GiftEntity> {
 
+	@Autowired
+	private Environment env;
 
 	@Autowired
 	private GiftDao giftDao;
@@ -103,8 +106,10 @@ public class GiftService extends GenericService<GiftEntity> {
 		if(file.toString()!=""){
 		try {
 			bytes = file.getBytes();
-			String path = "src/main/webapp/userfiles/giftImage";
-			String path1 = "/userfiles/giftImage";
+			String filePath = env.getProperty("giftFileUploadPath");
+			log.debug("Gift Upload Path{}",filePath);
+			String path = "src/main/webapp"+filePath;
+//			String path1 = "/userfiles/giftImage";
 			File dir = new File(path);
 			if (!dir.exists())
 				dir.mkdirs();
@@ -112,7 +117,7 @@ public class GiftService extends GenericService<GiftEntity> {
 			String date = DateTimeFormatter.ofPattern("MM-dd_HHmmss").format(LocalDateTime.now());
 			File serverFile = new File(dir.getAbsolutePath() + File.separator + date + file.getOriginalFilename());
 			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-			String url = path1+"/"+date+file.getOriginalFilename();
+			String url = filePath+"/"+date+file.getOriginalFilename();
 			stream.write(bytes);
 			stream.close();
 			

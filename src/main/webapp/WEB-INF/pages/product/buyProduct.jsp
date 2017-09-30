@@ -157,16 +157,13 @@ select {
 							<div class="col-sm-3" align="center">
 								<span>幣別</span> <br /> <span>${model.curr}</span>
 							</div>
-							<div class="col-sm-3" align="center"
-								style="border-left: 1px lightgrey solid">
+							<div class="col-sm-3" align="center">
 								<span>保額</span> <br /> <span>$<fmt:formatNumber value="${model.insureAmount}" maxFractionDigits="0" />萬</span>
 							</div>
-							<div class="col-sm-3" align="center"
-								style="border-left: 1px lightgrey solid">
+							<div class="col-sm-3" align="center">
 								<span>每期保費</span> <br /> <span>$<fmt:formatNumber value="${model.premiumAfterDiscount}" maxFractionDigits="0" /></span>
 							</div>
-							<div class="col-sm-3" align="center"
-								style="border-left: 1px lightgrey solid">
+							<div class="col-sm-3" align="center">
 								<span>可獲得點數</span> <br /> <span><fmt:formatNumber value="${model.getPoint}" maxFractionDigits="0" /></span>
 							</div>
 						</div>
@@ -277,117 +274,59 @@ select {
 							var city = $('#city').val();
 							datas.city = city;
 
-							$
-									.ajax({
+							$.ajax({
 										type : "GET",
 										url : "<c:url value='/admin/convenienceStore/searchRegion'/>",
 										dataType : "json",
 										data : datas,
 										success : function(data) {
 											$("#region").empty();
-											$("#region")
-													.append(
-															$(
-																	"<option selected></option>")
-																	.attr(
-																			"value",
-																			"")
-																	.text("請選擇"));
+											$("#region").append($("<option selected></option>").attr("value","").text("請選擇"));
 											$("#street").empty();
-											$("#street")
-													.append(
-															$(
-																	"<option selected></option>")
-																	.attr(
-																			"value",
-																			"")
-																	.text("請選擇"));
+											$("#street").append($("<option selected></option>").attr("value","").text("請選擇"));
 											$("#address").empty();
-											$("#address")
-													.append(
-															$(
-																	"<option selected></option>")
-																	.attr(
-																			"value",
-																			"")
-																	.text("請選擇"));
+											$("#address").append($("<option selected></option>").attr("value","").text("請選擇"));
 											for (var i = 0; i < data.length; i++) {
-												$("#region")
-														.append(
-																$(
-																		"<option></option>")
-																		.attr(
-																				"value",
-																				data[i])
-																		.text(
-																				data[i]));
+												$("#region").append($("<option></option>").attr("value",data[i]).text(data[i]));
 											}
 										},
 										error : function(data) {
-											alert("error");
+											swal("error");
 										}
 
 									});
 						});
 
-		$('#region')
-				.on(
-						"change",
-						function() {
+		$('#region').on("change",function() {
 							var datas = {};
 							var city = $('#city').val();
 							var region = $('#region').val();
 							datas.city = city;
 							datas.region = region;
 
-							$
-									.ajax({
+							$.ajax({
 										type : "GET",
 										url : "<c:url value='/admin/convenienceStore/searchStreet'/>",
 										dataType : "json",
 										data : datas,
 										success : function(data) {
 											$("#street").empty();
-											$("#street")
-													.append(
-															$(
-																	"<option selected></option>")
-																	.attr(
-																			"value",
-																			"")
-																	.text("請選擇"));
+											$("#street").append($("<option selected></option>").attr("value","").text("請選擇"));
 											$("#address").empty();
-											$("#address")
-													.append(
-															$(
-																	"<option selected></option>")
-																	.attr(
-																			"value",
-																			"")
-																	.text("請選擇"));
+											$("#address").append($("<option selected></option>").attr("value","").text("請選擇"));
 											for (var i = 0; i < data.length; i++) {
-												$("#street")
-														.append(
-																$(
-																		"<option></option>")
-																		.attr(
-																				"value",
-																				data[i])
-																		.text(
-																				data[i]));
+												$("#street").append($("<option></option>").attr("value",data[i]).text(data[i]));
 											}
 										},
 										error : function(data) {
-											alert("error");
+											swal("error");
 										}
 
 									});
 						});
 
 		$('#street')
-				.on(
-						"change",
-						function() {
+				.on("change",function() {
 							var datas = {};
 							var city = $('#city').val();
 							var region = $('#region').val();
@@ -396,36 +335,20 @@ select {
 							datas.region = region;
 							datas.street = street;
 
-							$
-									.ajax({
+							$.ajax({
 										type : "GET",
 										url : "<c:url value='/admin/convenienceStore/searchAddress'/>",
 										dataType : "json",
 										data : datas,
 										success : function(data) {
 											$("#address").empty();
-											$("#address")
-													.append(
-															$(
-																	"<option selected></option>")
-																	.attr(
-																			"value",
-																			"")
-																	.text("請選擇"));
+											$("#address").append($("<option selected></option>").attr("value","").text("請選擇"));
 											for (var i = 0; i < data.length; i++) {
-												$("#address")
-														.append(
-																$(
-																		"<option></option>")
-																		.attr(
-																				"value",
-																				data[i].address)
-																		.text(
-																				data[i].address));
+												$("#address").append($("<option></option>").attr("value",data[i].address).text(data[i].address));
 											}
 										},
 										error : function(data) {
-											alert("error");
+											swal("error");
 										}
 
 									});
@@ -502,10 +425,10 @@ select {
 					success:function(data){	
 					}
 				})
-				alert("SUCCESS");
+				swal("SUCCESS");
 				location.href = "/recipient/list"
 			}else{
-				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
+				swal("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}
 			
 		})

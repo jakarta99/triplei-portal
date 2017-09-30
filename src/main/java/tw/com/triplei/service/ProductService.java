@@ -4,7 +4,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
@@ -23,6 +22,7 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -49,7 +49,10 @@ import tw.com.triplei.enums.Currency;
 @Slf4j
 @Service
 public class ProductService extends GenericService<ProductEntity> {
-
+	
+	@Autowired
+	private Environment env;
+	
 	@Autowired
 	private ProductDao dao;
 
@@ -302,7 +305,8 @@ public class ProductService extends GenericService<ProductEntity> {
 		byte[] bytes;
 		try {
 			bytes = file.getBytes();
-			String path = "src/main/resources/files";
+			String path = env.getProperty("productUploadPath");
+			log.debug("Product Upload Path{}",path);
 			File dir = new File(path);
 			if (!dir.exists())
 				dir.mkdirs();

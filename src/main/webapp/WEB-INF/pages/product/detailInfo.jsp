@@ -68,7 +68,7 @@ padding-bottom:1vh;
 			<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 			
 			<div class="col-sm-12"
-				style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh">
+				style="padding: 0; width: 100%; height: 100%; color: white;padding-top:8vh">
 				<div class="col-sm-3"
 					style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 					<div style="margin: 7% auto 0 auto; display: table; width: 70%;">
@@ -146,19 +146,19 @@ padding-bottom:1vh;
 							style="background-color: #5C8DEC; padding-bottom: 2%;color:white"
 							align="center">
 							<br />
-							<div class="col-sm-3">
+							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>總繳金額</span> <br /> <span>$<fmt:formatNumber
 										value="${modelf.totalPay}" maxFractionDigits="0" /></span>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>領回金額</span> <br /> <span>$<fmt:formatNumber
 										value="${modelf.cashValue}" maxFractionDigits="0" /></span>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>凈報酬</span> <br /> <span>$<fmt:formatNumber
 										value="${modelf.net}" maxFractionDigits="0" /></span>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>IRR</span> <br /> <span><fmt:formatNumber
 										value="${modelf.irr*100}" maxFractionDigits="2" />%</span>
 							</div>
@@ -168,18 +168,18 @@ padding-bottom:1vh;
 						<div id="detailInfo" class="col-sm-12">
 							<hr />
 
-							<div class="col-sm-3">
+							<div class="col-sm-3" style="padding-bottom:1vh">
 								<span>保額：<fmt:formatNumber value="${modelf.insureAmount}" maxFractionDigits="2" /> 萬</span>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4" style="padding-bottom:1vh">
 								<span>保費折扣：<fmt:formatNumber value="${modelf.discount*100}"
 										maxFractionDigits="2" />%
 								</span>
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-5" style="padding-bottom:1vh">
 								<span>首年保費：$${modelf.premiumAfterDiscount}</span>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3" style="padding-bottom:1vh">
 								<c:if test="${modelf.year!=1}">
 									<span>繳別：年繳</span>
 								</c:if>
@@ -187,19 +187,19 @@ padding-bottom:1vh;
 									<span>繳別：躉繳</span>
 								</c:if>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4" style="padding-bottom:1vh">
 								<span>折扣前年繳保費：$${modelf.premium}</span>
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-5" style="padding-bottom:1vh">
 								<span>續年保費：$${modelf.premiumAfterDiscount}</span>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-3" style="padding-bottom:1vh">
 								<span>${modelf.interestRateType}：<fmt:formatNumber value="${modelf.declareInterestRate*100}" maxFractionDigits="2" />%</span>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4" style="padding-bottom:1vh">
 								<span>折扣後年繳保費：</span><span id="getPremiumAfterDiscount">$${modelf.premiumAfterDiscount}</span>
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-5" style="padding-bottom:1vh">
 								<span>繳費方式：${modelf.paymentMethod}</span>
 							</div>
 							<br />
@@ -302,7 +302,6 @@ padding-bottom:1vh;
 				              label: "解約金",
 				              points: { show: false},
 				              lines: { show: true},
-				              
 				            },
 				            {
 				              data: dataIRR2,
@@ -310,11 +309,12 @@ padding-bottom:1vh;
 				              points: { show: false },
 				              lines: { show: true},
 				              yaxis: 2,
+				              color:"#5C8DEC"
 				            }
 				        ],
 				        {            
 				            grid: {
-				                backgroundColor: { colors: ["#D1D1D1", "#7A7A7A"] },
+				                backgroundColor: "white",
 				                hoverable:true,
 				                borderWidth: 1
 				            },

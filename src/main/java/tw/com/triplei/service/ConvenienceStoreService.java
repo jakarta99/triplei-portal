@@ -5,21 +5,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,17 +28,14 @@ import tw.com.triplei.commons.GenericService;
 import tw.com.triplei.commons.Message;
 import tw.com.triplei.dao.ConvenienceStoreDao;
 import tw.com.triplei.entity.ConvenienceStoreEntity;
-import tw.com.triplei.entity.InsurerEntity;
-import tw.com.triplei.entity.ProductCancelRatio;
-import tw.com.triplei.entity.ProductEntity;
-import tw.com.triplei.entity.ProductHighDiscountRatio;
-import tw.com.triplei.entity.ProductPremiumRatio;
-import tw.com.triplei.enums.Currency;
 
 @Slf4j
 @Service
 public class ConvenienceStoreService extends GenericService<ConvenienceStoreEntity> {
-
+	
+	@Autowired
+	private Environment env;
+	
 	@Autowired
 	private ConvenienceStoreDao convenienceStoreDao;
 
@@ -130,7 +124,8 @@ public class ConvenienceStoreService extends GenericService<ConvenienceStoreEnti
 		byte[] bytes;
 		try {
 			bytes = file.getBytes();
-			String path = "src/main/resources/files";
+			String path = env.getProperty("convenienceStoreFileUploadPath");
+			log.debug("ConveniencecStore Upload path{}",path);
 			File dir = new File(path);
 			if (!dir.exists())
 				dir.mkdirs();

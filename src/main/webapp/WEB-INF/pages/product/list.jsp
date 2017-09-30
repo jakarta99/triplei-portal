@@ -206,25 +206,25 @@ padding-bottom:2vh;
 	
 	$(".productFilter").on("click",function(){
 		if($('input[name="gender"]:checked').val()==null){
-			alert("請輸入您的性別");
+			swal("請輸入您的性別");
 		}else if($('#bDate').val()==""){
-			alert("請輸入您的生日");
+			swal("請輸入您的生日");
 		}else if($("#premium").val()==""){
-			alert("請輸入您的繳費金額");
+			swal("請輸入您的繳費金額");
 		}else if(isNaN($("#premium").val())){
-			alert("輸入的繳費金額必須是數字");
+			swal("輸入的繳費金額必須是數字");
 		}else if(($("#premium").val()).indexOf('.') > -1){
-			alert("輸入的繳費金額必須是整數");
+			swal("輸入的繳費金額必須是整數");
 		}else if($("#paymentMethod").val()==""){
-			alert("請選擇存款方式");
+			swal("請選擇存款方式");
 		}else if($("#yearCode").val()==""){
-			alert("請輸入您的預計領回時間");
+			swal("請輸入您的預計領回時間");
 		}else if($("#year").val()==""){
-			alert("請輸入繳費年期");
+			swal("請輸入繳費年期");
 		}else if(isNaN($("#yearCode").val())){
-			alert("輸入的預計領回時間必須是數字");
+			swal("輸入的預計領回時間必須是數字");
 		}else if(($("#yearCode").val()).indexOf('.') > -1){
-			alert("輸入的預計領回時間必須是整數");
+			swal("輸入的預計領回時間必須是整數");
 		}else if($('input[name="gender"]:checked').val()!=null && $('#bDate').val()!="" && $("#premium").val()!="" &&$("#yearCode").val()!=""){
 			$("#products").show();
 			$("#products").empty();
@@ -246,7 +246,7 @@ padding-bottom:2vh;
 					if(row.year!=1){
 						installment="一般年期"
 					}
-					$("#products").append("<div style='display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;'></div><div class='col-sm-12'  style='display:table;background-color:#FAF7F7;width:100%;' ><div class='col-sm-12'  style='padding-top:2%;'><div class='col-sm-9'><div class='col-sm-1'><img width='50vw' height='auto' src='"+row.insurer.imgsrc+"'></div><div class='col-sm-11' style='padding-left:2vw'><span style='font-size:150%'>"+row.insurer.name+"</span><a href='/insurer/list'><img width='15vw' height='auto' src='/resources/pic/product/info-icon.png'></a><br/><span style='font-size:125%;'>"+row.code+"-"+row.localName+"</span></div></div><div class='col-sm-3' ><div class='col-sm-8'><span style='color:#5C8DEC;'>可獲得點數:<br/>"+row.getPoint+"</span></div><div class='col-sm-4'><a href='/product/"+row.id+"/"+$('input[name="gender"]:checked').val()+"/"+$("#bDate").val()+"/"+$('#premium').val()+"/"+$('#yearCode').val()+"' id='interested'><input class='btn btn-secondary' name='interested' type='button' value='我有興趣' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;'></a></div></div></div><br/><div class='col-sm-12' style='margin-top:1%;margin-bottom:1%'><div class='col-sm-2'></div><div class='col-sm-2'><span>總繳金額</span><br/><span> $"+parseFloat(row.totalPay).toFixed(0)+"</span></div><div class='col-sm-2'><span>領回金額</span><br/><span> $"+parseFloat(row.cashValue).toFixed(0)+"</span></div><div class='col-sm-2'><span>凈報酬</span><br/><span> $"+parseFloat(row.net).toFixed(0)+"</span></div><div class='col-sm-2'><span>IRR</span><br/><span>"+parseFloat(row.irr*100).toFixed(2)+"%</span></div><div class='col-sm-2'><input class='btn btn-secondary float-right moreInfo' type='button' name='#id' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;' value='+'></div></div><div class='col-sm-12 infoToggle' style='padding-bottom:6vh;'><hr/><div class='col-sm-4'><span>保額："+row.insureAmount+" 萬</span></div><div class='col-sm-4'><span>繳費折扣：$"+row.discount+"</span></div><div class='col-sm-4'><span>續年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳別："+installment+"</span></div><div class='col-sm-4'><span>折扣後年繳保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>"+row.interestRateType+"："+parseFloat(row.declareInterestRate*100).toFixed(2)+"%</span></div><div class='col-sm-4'><span>折扣前年繳保費：$"+row.premium+"</span></div><div class='col-sm-4'><span>首年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳費方式："+row.paymentMethod+"</span></div></div></div>");
+					$("#products").append("<div style='display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;'></div><div class='col-sm-12'  style='display:table;background-color:#FAF7F7;width:100%;' ><div class='col-sm-12'  style='padding-top:2%;'><div class='col-sm-8'><div class='col-sm-1'><img width='50vw' height='auto' src='"+row.insurer.imgsrc+"'></div><div class='col-sm-11' style='padding-left:2vw'><span style='font-size:150%'>"+row.insurer.name+"</span><a href='/insurer/list'><img width='15vw' height='auto' src='/resources/pic/product/info-icon.png'></a><br/><span style='font-size:125%;'>"+row.code+"-"+row.localName+"</span></div></div><div class='col-sm-3' ><div class='col-sm-8'><span style='color:#5C8DEC;'>可獲得點數:<br/>"+row.getPoint+"</span></div><div class='col-sm-4'><a href='/product/"+row.id+"/"+$('input[name="gender"]:checked').val()+"/"+$("#bDate").val()+"/"+$('#premium').val()+"/"+$('#yearCode').val()+"' id='interested'><input class='btn btn-secondary' name='interested' type='button' value='我有興趣' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;'></a></div></div><div class='col-sm-1'></div></div><br/><div class='col-sm-12' style='margin-top:1%;margin-bottom:1%'><div class='col-sm-2'></div><div class='col-sm-2'><span>總繳金額</span><br/><span> $"+parseFloat(row.totalPay).toFixed(0)+"</span></div><div class='col-sm-2'><span>領回金額</span><br/><span> $"+parseFloat(row.cashValue).toFixed(0)+"</span></div><div class='col-sm-2'><span>凈報酬</span><br/><span> $"+parseFloat(row.net).toFixed(0)+"</span></div><div class='col-sm-2'><span>IRR</span><br/><span>"+parseFloat(row.irr*100).toFixed(2)+"%</span></div><div class='col-sm-2'><input class='btn btn-secondary float-right moreInfo' type='button' name='#id' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;' value='+'></div></div><div class='col-sm-12 infoToggle' style='padding-bottom:6vh;'><hr/><div class='col-sm-4'><span>保額："+row.insureAmount+" 萬</span></div><div class='col-sm-4'><span>繳費折扣：$"+row.discount+"</span></div><div class='col-sm-4'><span>續年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳別："+installment+"</span></div><div class='col-sm-4'><span>折扣後年繳保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>"+row.interestRateType+"："+parseFloat(row.declareInterestRate*100).toFixed(2)+"%</span></div><div class='col-sm-4'><span>折扣前年繳保費：$"+row.premium+"</span></div><div class='col-sm-4'><span>首年保費：$"+row.premiumAfterDiscount+"</span></div><div class='col-sm-4'><span>繳費方式："+row.paymentMethod+"</span></div></div></div>");
 
 	 				})
 	 				$(".infoToggle").hide();

@@ -76,7 +76,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.hasAnyRole("ADMIN")
 		.and().formLogin().loginPage("/login").permitAll();
 		
-		
         http.authenticationProvider(daoAuthenticationProvider())
         	.authorizeRequests()
         	.antMatchers(
@@ -85,7 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/userfiles/**",
                 		"/insurer/**", 
                 		"/product/**", 
-                		"/gift/**", 
+//                		"/gift/**", 
                 		"/article/**",
                 		"/jolokia/**",
                 		"/registered/**",

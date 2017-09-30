@@ -117,9 +117,15 @@ public class AdminRecipientController {
 			if(!Strings.isNullOrEmpty(form.getOrderStatus())){
 				criterions.add(new SpecCriterion(QueryOpType.EQ,"orderStatus",form.getOrderStatus()));			
 			}
-//			if(!Strings.isNullOrEmpty(form.getUser().getName())){
-//				criterions.add(new SpecCriterion(QueryOpType.LIKE,"user.name","%"+form.getUser().getName()+"%"));
-//			}
+			if(!Strings.isNullOrEmpty(form.getUserNamee())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE,"userNamee","%"+form.getUserNamee()+"%"));
+			}
+			if(!Strings.isNullOrEmpty(form.getCode())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE,"code","%"+form.getCode()+"%"));
+			}
+			if(!Strings.isNullOrEmpty(form.getYear())){
+				criterions.add(new SpecCriterion(QueryOpType.EQ,"year",form.getYear()));
+			}
 
 			
 			page = recipientService.getByCondition(criterions, pageable);
@@ -152,7 +158,8 @@ public class AdminRecipientController {
 			productEntity.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
 			productEntity.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
 			productEntity.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
-
+			form.setCode(productEntity.getCode());
+			form.setYear(productEntity.getYear()+"");
 			form.setName(name);
 			form.setGender(gender);
 			form.setAge(Integer.parseInt(age));
@@ -237,6 +244,7 @@ public class AdminRecipientController {
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			UserEntity user = userDao.findByName(userName);
 			form.setUser(user);
+			form.setUserNamee(user.getName());
 			log.debug("業務員後{}",form.getUser().getName());
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setProduct(productEntity);

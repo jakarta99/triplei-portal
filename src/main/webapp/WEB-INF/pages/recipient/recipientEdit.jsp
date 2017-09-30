@@ -27,9 +27,10 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
-						<input type="hidden" id="id" name="id" value="${entity.id}" /> <input
-							type="hidden" id="orderNo" name="orderNo"
-							value="${entity.orderNo}" />
+						<input type="hidden" id="id" name="id" value="${entity.id}" />
+							<input type="hidden" id="userNamee" name="userNamee" value="${entity.userNamee}" />
+							   <input type="hidden" id="code" name="code" value="${entity.code}" />
+							   		<input type="hidden" id="year" name="year" value="${entity.year}" />
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -40,21 +41,21 @@
 
 								<div class="form-group required">
 									<div class="col-md-10">
-										<input type="hidden" class="form-control" id="pid" name="pid"
-											placeholder="pid" value="${entity.product.id}" /> <span
+										<input type="hidden" id="pid" name="pid"
+											value="${entity.product.id}" />	<span
 											class="help-block"></span>
 									</div>
 								</div>
-
-								<div class="panel-body">
-									<div class="form-group required">
-										<label for=orderNo class="col-md-2 control-label">商品名稱</label>
+								<div class="form-group required">
+										<label for=orderNo class="col-md-2 control-label">訂單編號</label>
 										<div class="col-md-10">
 											<input type="text" readonly="readonly" class="form-control"
 												id="orderNo" name="orderNo" placeholder="orderNo"
 												value="${entity.orderNo}" /> <span class="help-block"></span>
 										</div>
 									</div>
+
+								<div class="panel-body">
 									<div class="form-group required">
 										<label for="localName" class="col-md-2 control-label">商品名稱</label>
 										<div class="col-md-10">

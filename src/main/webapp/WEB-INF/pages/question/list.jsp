@@ -21,7 +21,7 @@
 	
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div>
+		<div style="padding-top:8vh">
 			<div class="col-lg-4"
 				style="height: 100vh; display: table; table-layout: fixed;">
 				<div style="display: table-cell; vertical-align: middle;">
@@ -51,10 +51,10 @@
               
 <!--             </tbody> -->
 <!--         </table> -->
-<!-- 			</div> -->
+			</div>
 
-<!-- 		</div> -->
-<!-- 	</div> -->
+		</div>
+	</div>
 <!-- 	  <script> -->
 //         $(function () {
 //             $('#table1').DataTable({
