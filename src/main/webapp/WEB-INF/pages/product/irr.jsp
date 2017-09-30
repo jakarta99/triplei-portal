@@ -48,7 +48,7 @@ h3 {
 					<p style="opacity: 0.7;">保單上面的數字那麼多，哪個才是真正的報酬率呢?別被搞混了!IRR才是真正的報酬率!</p>
 					<br />
 					<p style="opacity: 0.7;">IRR又稱為「年化報酬率」，假設一年期定存的利率為1.23%，那麼它的IRR即為1.23%。</p>
-					<div id="bm" style="width: 170%;position: absolute;left: -100px;top: -50px"></div>
+					<div id="bm" style="width: 150%;position: absolute;left: -100px;top: -50px"></div>
 				</div>
 			</div>
 			<div class="col-lg-8 bg-info" style="background-color: white; height: 100%; padding-top: 5%; color: black;">

@@ -49,7 +49,7 @@
 				<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
 			</div>
 		</div>
-		<div class="col-lg-9" style="height: 100%; padding: 0; overflow-y: scroll; color: black;">
+		<div class="col-lg-9" style="height: 100%; padding: 0; overflow-y: scroll; color: black;" id="style-1">
 			<div id="ArticleCarousel" class="col-md-12" style="height: 40vh; width: 100%; padding: 0;margin-top:-2vh">
 				<div>
 					<a href="/article/readArticle/read/${bannerRotation[0].id}">

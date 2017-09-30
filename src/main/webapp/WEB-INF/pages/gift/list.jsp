@@ -76,7 +76,7 @@
 <!-- 				</div> -->
 			</div>
 <!-- 右半白 -->
-			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll">
+			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll" id="style-1">
 		<div
 			style="height: 100vh; display: table; table-layout: fixed; width: 1400px;">
 

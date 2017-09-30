@@ -48,7 +48,7 @@
 				</div>
 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
-			<div class="col-xs-12 col-sm-9"
+			<div class="col-xs-12 col-sm-9" id="style-1"
 				style="height: 100vh; background-color: white; overflow: auto; position: relative;">
 				<!--右半白 -->
 				<div style="height: 100vh; position: relative; padding-top: 16vh;">

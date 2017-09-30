@@ -57,7 +57,7 @@
 			<div class="col-sm-9"
 				style="height: 100vh; display: table; table-layout: fixed; background-color: white;padding-right: 0px; padding-left: 0px;"><!--右半白 -->
 				<div
-					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;">
+					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;" id="style-1">
 					<div class="col-xs-1 col-sm-1"></div>
 					<div class="col-xs-10 col-sm-10">
 						<c:forEach items="${models}" var="model">
