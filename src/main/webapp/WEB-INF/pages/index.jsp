@@ -167,7 +167,7 @@ p{
 						</div>
 						
 					<div class="col-xs-12 col-sm-4"
-						style="height: 60vh;">
+						style="height: 80vh;">
 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
 							<div style="margin-top:7%;"><img style="width:100%;" src="${news[1].bannerImage}" /></div>
@@ -180,7 +180,7 @@ p{
 						</div>
 						
 					<div class="col-xs-12 col-sm-4"
-						style="height: 60vh;">
+						style="height: 80vh;">
 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
 							<div style="margin-top:7%;"><img style="width:100%;" src="${news[2].bannerImage}" /></div>
