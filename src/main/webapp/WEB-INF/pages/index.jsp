@@ -49,19 +49,19 @@ p{
 				<div class="col-sm-12"
 					style="height: 100%; display: flex; justify-content: center; flex-direction: column;padding-left: 0px;padding-right: 0px"
 					align='center' >
-					<img alt="" src="/resources/pic/首頁/背景雲.svg" style="position: absolute;top:5vh">
+					<img alt="" src="/resources/pic/首頁/背景雲.svg" style="position: absolute;top:5vh;">
 					<div class="col-sm-12"  id="bm" style="height: 100%"></div>
 				</div>
 			</div>
 			<!-- 第二頁 -->
-			<div class="col-xs-12 col-sm-6" style="height: 100vh;">
+			<div class="col-xs-12 col-sm-6" style="height: 100vh;;background-color: white">
 				<div class="col-xs-0 col-sm-2"></div>
 				<div class="col-xs-12 col-sm-10">
 					<div class="col-xs-12 col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh">
 						<span style="color: #000079; font-weight: bold;">HOT<a style="font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px">本月熱搜榜</a></span>
 					</div>
 
-					<div class="col-xs-12 col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
+					<div class="col-xs-12 col-sm-12" style="height: 80vh; display: flex; flex-direction: column" align='center'>
 						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid; height: 18vh; margin-bottom: 10vh">a</div>
 						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid; height: 18vh;margin-bottom: 10vh">a</div>
 						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid; height: 18vh;">a</div>
@@ -69,7 +69,7 @@ p{
 				</div>
 			</div>
 			<!--右半圖 -->
-			<div class="col-xs-12 col-sm-6" style="height: 100vh;">
+			<div class="col-xs-12 col-sm-6" style="height: 100vh;;background-color: white">
 				<div class="col-xs-12 col-sm-10" style="height: 100%; display: flex; justify-content: flex-end; flex-direction: column" align='center'>
 					<img alt="" src="/resources/pic/首頁/首頁插圖.png" style="width: 100%;">
 				</div>
