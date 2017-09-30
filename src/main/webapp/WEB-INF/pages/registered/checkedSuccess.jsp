@@ -23,7 +23,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
 		<br>
-		<div style="text-align:center;">
+		<div style="text-align:center;padding-top:9vh">
 		<h1>恭喜您註冊成功!!</h1>
 		<img class="registeredSuccess" name="registeredSuccess"
 			src="/resources/pic/registered/registeredSuccess.png" width="40%">

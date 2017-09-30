@@ -7,6 +7,7 @@
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 <title>Triple i</title>
 <style>
 
@@ -17,7 +18,7 @@
 
 		<div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div>
+		<div style="padding-top:9vh">
 			<form class="form-horizontal" id="dataForm">
 				<div class="col-sm-6" style="height: 100vh; padding-right: 0px; padding-left: 0px;">
 					<!-- 左邊白 -->
@@ -127,6 +128,13 @@
 
 		$(function() {		
 			
+			$('#birthdate').inputmask({
+				  mask: '9999-99-99'
+			});
+			
+			$('#tel').inputmask({
+				  mask: '9999-999-999'
+			});
 
 			
 			//<!-- Save -->	

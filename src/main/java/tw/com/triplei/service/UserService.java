@@ -57,9 +57,8 @@ public class UserService extends GenericService<UserEntity> {
 				messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
 			}
 		}
-
 		// 更新密碼
-		if(entity.getEditState().equals("pw") && StringUtils.isBlank(dbEntity.getProviderUserId())){
+		else if(entity.getEditState().equals("pw") && dbEntity.getProviderUserId() == null){
 			// TODO FB登入者不能使用密碼變更
 			
 			if (StringUtils.isBlank(entity.getOrgPassword())) {
@@ -85,7 +84,27 @@ public class UserService extends GenericService<UserEntity> {
 					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
 				}
 			}
-		} else {
+		} 
+		// 忘記密碼的更新密碼
+		else if(entity.getEditState().equals("forgetpw") && dbEntity.getProviderUserId() == null){
+			if (StringUtils.isBlank(entity.getPassword())) {
+				messages.add(Message.builder().code("password").value("請輸入新密碼").build());
+			}
+			
+			if (StringUtils.isBlank(entity.getCheckPassword())) {
+				messages.add(Message.builder().code("checkPassword").value("請輸入確認密碼").build());
+			}
+			
+			
+			if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())){
+				if (!entity.getPassword().equals(entity.getCheckPassword())){
+					messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
+					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
+				}
+			}
+			
+		}
+		else {
 			messages.add(Message.builder().code("checkPassword").value("FB登入使用者不允許在此變更密碼").build());
 		}
 		

@@ -23,7 +23,7 @@
 		
 		<!-- 輸入帳號 -->
 		<form class="form-horizontal" id="dataForm">
-		<div style="text-align: center;">
+		<div style="text-align: center;padding-top:9vh">
 			<img class="forgetPassword" name="forgetPassword"
 				src="/resources/pic/registered/forgetPassword.png" width="35%">
 			
@@ -64,12 +64,12 @@ $(function(){
 		var $btn = $(this);
 			$btn.button("loading");
 			
-		$.put("<c:url value='/registered/genNewPassword'/>", "dataForm",
+		$.put("<c:url value='/registered/getForgetPerson'/>", "dataForm",
 				function(data) {
 					
 					if (data.messages.length==0){
 						//alert("SUCCESS");
-						location.href = '/registered/sendNewPassword?id=' + data.data.id
+						location.href = '/registered/sendPwEditLink?id=' + data.data.id
 						$btn.button("reset");
 					}	
 				}, function(data, textStatus, jqXHR) {
