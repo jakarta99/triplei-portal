@@ -26,7 +26,7 @@
 		<form class="form-horizontal" id="dataForm">
 		<input type="hidden" id="id" name="id" value="${resendInfo.id}" /> 
 		<input type="hidden" id="email" name="email" value="${resendInfo.email}" /><br>
-		<div style="text-align: center;">
+		<div style="text-align: center;padding-top:9vh" >
 			<h1>請至您的信箱點擊確認信連結</h1>
 			<img class="checkLetter" name="checkLetter"
 				src="/resources/pic/registered/checkLetter.png" width="40%">

@@ -163,10 +163,10 @@ public class AdminUserService extends GenericService<UserEntity>{
 	public UserEntity updateForgetPassword(final UserEntity entity) {
 		final UserEntity dbUserEntity = userDao.findOne(entity.getId());
 		
-		String newPassword = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 4);
-		log.debug("newPassword : {}", newPassword);
-		dbUserEntity.setCheckPassword(newPassword); // 要記起未加密的密碼，寄給使用者，在使用者更新密碼後清空
-		dbUserEntity.setPassword(encodePasswrod(newPassword));
+//		String newPassword = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 4);
+//		log.debug("newPassword : {}", newPassword);
+//		dbUserEntity.setCheckPassword(newPassword); // 要記起未加密的密碼，寄給使用者，在使用者更新密碼後清空
+//		dbUserEntity.setPassword(encodePasswrod(newPassword));
 		
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);
@@ -190,7 +190,7 @@ public class AdminUserService extends GenericService<UserEntity>{
 		return userDao.findByEmail(email);
 	}
 	
-	public UserEntity getByRegisteredCpde(final String registeredCode) {
+	public UserEntity getByRegisteredCode(final String registeredCode) {
 		return userDao.findByRegisteredCode(registeredCode);
 	}
 	

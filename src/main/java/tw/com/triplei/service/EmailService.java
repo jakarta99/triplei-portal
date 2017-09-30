@@ -149,15 +149,22 @@ public class EmailService {
 
 	public void sendNewPassword(UserEntity entity) {
 
-		UserEntity userEntity = userService.getOne(entity.getId());
-		log.debug("{}", userEntity);
+		String registeredCode = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 15); // 認證uuid
+		entity.setRegisteredCode(registeredCode);
+		userService.update(entity);
+		log.debug("{}", entity);
+		
+		String url = "http://localhost:8080/registered/checkUid?uid=" + registeredCode;
 
 		StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
 				.append("<title></title><meta charset='utf-8' /></head>")
 				.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />")
-				.append("親愛的 " + entity.getName() + " 您好，<br/><br/>").append("您的臨時密碼為:" + userEntity.getCheckPassword())
-				.append("<br /> 提醒您，使用臨時密碼登入後，請更改您的密碼及基本資料。<br /><br />")
+				.append("親愛的 " + entity.getName() + " 您好，<br/><br/>")
+				.append("更新密碼連結為:")
+				.append("<a href=\"" + url + " \">" + url + "</a> <br><br>")
+				.append("請在半小時內完成密碼變更，否則此連結將失效。 <br><br>")
+				//.append("<br /> 提醒您，使用臨時密碼登入後，請更改您的密碼及基本資料。<br /><br />")
 				.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
 				.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
 				.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
@@ -170,7 +177,7 @@ public class EmailService {
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
 			helper.setFrom("triplei");
-			helper.setTo(userEntity.getEmail());
+			helper.setTo(entity.getEmail());
 			helper.setSubject("Triple-I會員臨時密碼");
 			helper.setText(content, true);
 			mailSender.send(mimeMessage);

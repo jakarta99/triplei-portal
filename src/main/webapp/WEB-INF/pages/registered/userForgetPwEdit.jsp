@@ -17,15 +17,15 @@
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-		<div>
+		<div style="padding-top:9vh">
 			
 			<h3>重設密碼</h3>
 
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
-						<input type="hidden" id="id" name="id" value="${userDetails.id}" />
-						<input type="hidden" id="editState" name="editState" value="pw"/>
+						<input type="hidden" id="id" name="id" value="${entity.id}" />
+						<input type="hidden" id="editState" name="editState" value="forgetpw"/>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -33,16 +33,6 @@
 								</h4>
 							</div>
 							<div class="panel-body">
-
-
-								<div class="form-group required">
-									<label for="orgPassword" class="col-md-2 control-label">輸入原始密碼</label>
-									<div class="col-md-8">
-										<input type="password" class="form-control" id="orgPassword"
-											name="orgPassword" placeholder="orgPassword" value="" />
-										<span class="help-block"><div class="text-danger"></div></span>
-									</div>
-								</div>
 
 								<div class="form-group required">
 									<label for="password" class="col-md-2 control-label">輸入新密碼</label>
@@ -79,7 +69,6 @@
 
 		</div>
 	</div>	
-
 </body>
 </html>
 <script type="text/javascript">
@@ -89,7 +78,7 @@ $(function(){
 		var $btn = $(this);
 			$btn.button("loading");
 			
-		$.put("<c:url value='/user/reset'/>", "dataForm",
+		$.put("<c:url value='/registered'/>", "dataForm",
 				function(data) {
 					console.log(data.messages.length);
 					if (data.messages.length==0){
