@@ -44,7 +44,7 @@
 				<span style="font-size: 1.5em;font-family: 微軟正黑體;">積點專區</span>
 				</div>
 				<div class="col-sm-12">
-				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="50" height="50">
+				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="41" height="41">
 				<span id="userPoint" style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
 				</div>
 				<div class="col-sm-12">
