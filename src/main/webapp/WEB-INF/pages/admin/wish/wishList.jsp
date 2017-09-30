@@ -34,16 +34,42 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
 		<div style="padding-top:9vh">
-			<h3>許願池商品管理</h3>
-<!-- 			<div> -->
-<%-- 				<a href="<c:url value='/admin/wish/add'/>" --%>
-<!-- 					class="btn btn-sm btn-primary" data-loading-text="Loading"> <span -->
-<!-- 					class="glyphicon glyphicon-plus"></span>許願池測試 -->
-<!-- 				</a> -->
-<!-- 			</div> -->
+			<h3>許願池查看</h3>
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+							<label for="date1" class="col-sm-1 control-label">開始日期</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="date1" name="date1" placeholder="yyyy-MM-dd"/>
+							</div>
+		          
+							<label for="date2" class="col-sm-1 control-label">結束日期</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="date2" name="date2" placeholder="yyyy-MM-dd" />
+							</div>
+						</div>
+										
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success" data-loading-text="loading..." type="button">搜尋</button>
+		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
 			<div id="jsGrid"></div>
 
 			<script>
+			$("#searchBtn").bind("click",function(){
+				$("#jsGrid").jsGrid("reset");
+			});
+			
+			$("#resetBtn").bind("click", function(){
+				$("#listForm")[0].reset();
+			});
+			
+			
+			
 				var BASE_URL = "${pageContext.request.contextPath}/admin/wish";
 
 				$("#jsGrid").jsGrid({
@@ -61,17 +87,14 @@
 					pageSize :10,
 			        pageButtonCount: 5,
 					pageLoading : true,
-					pageNextText:"下一頁",
-			        pagePrevText:"上一頁",
-			        pageFirstText:"第一頁",
-			        pageLastText:"最後一頁",
+
 
 					controller : {
-						loadData : function(filter) {
+						loadData : function() {
 							return $.ajax({
 								type : "GET",
 								url : BASE_URL,
-								data : filter,
+								data : "pageIndex=1&pageSize=10&"+$("#listForm").serialize()+"&date1="+$("#date1").val()+"&date2="+$("#date2").val(),
 								dataType : "json",
 								cache : false
 							});

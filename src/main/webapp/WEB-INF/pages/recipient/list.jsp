@@ -61,7 +61,7 @@
 			            { title: '公司名稱', name: "product.insurer.shortName", type: "text", width: 60 },
 			            { title: '商品代碼', name: "product.code", type: "text", width: 60 },
 			            { title: '商品名稱', name: "product.localName", type: "text", width: 100 },
-			            { title: '保額', name: "product.insureAmount", width: 50, itemTemplate: function(val) {return val+"萬"}  },
+			            { title: '保額', name: "insureAmount", width: 50, itemTemplate: function(val) {return val+"萬"}  },
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", width: 90, itemTemplate: function(val) {if(val.endsWith("00")) {return val}else {return "無"}}  },
 			            { title: '預約時段3', name: "bookedTime_3", width: 90, itemTemplate: function(val) {if(val.endsWith("00")) {return val}else {return "無"}}  },
@@ -69,7 +69,7 @@
 			            { title: '門市', name: "convenienceStoreEntity.storeName", width: 60, itemTemplate: function(val) {if(val==null){return "無";}else{return val+"門市";}} },
 			            { title: '業務員', name: "user.name", width: 80, itemTemplate: function(val) {if(val==null){return "尚未指派";}else{return val ;}} },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80, itemTemplate: function(val) {if(val=="已見面，未購買(刪除審核中點數)"){return "已取消";}else{return val;}} },
-			            { title: '可獲得點數', name: "product.getPoint", type: "text", width: 80 },
+			            { title: '可獲得點數', name: "canGetPoint", type: "text", width: 80 },
 			        ]
 			    });
 

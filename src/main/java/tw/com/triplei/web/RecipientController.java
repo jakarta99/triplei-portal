@@ -108,6 +108,7 @@ public class RecipientController {
 			productEntity.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
 			productEntity.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
 			productEntity.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
+			form.setInsureAmount(productEntity.getInsureAmount());
 			form.setCode(productEntity.getCode());
 			form.setYear(productEntity.getYear()+"");
 			form.setName(name);
@@ -153,7 +154,9 @@ public class RecipientController {
 
 			response.setData(insertResultG);
 			//發email給顧客
+			log.debug("寄信顧客:{}");
 			emailService.sendAlertEmailToCustomer(owner, insertResultG);
+			log.debug("寄信顧客:{}");
 			//發email給管理員
 			List<UserEntity> users = userDao.findAll();
 			for(UserEntity admin : users){

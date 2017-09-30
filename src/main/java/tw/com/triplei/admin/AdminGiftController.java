@@ -1,7 +1,9 @@
 package tw.com.triplei.admin;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,11 +23,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.GiftSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.commons.QueryOpType;
+import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.enums.GiftType;
 import tw.com.triplei.service.GiftService;
@@ -60,13 +67,32 @@ public class AdminGiftController {
 	@GetMapping
 	@ResponseBody
 	public GridResponse<GiftEntity> query(final Model model, final GiftEntity form,
-			@RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize) {
+			@RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize,
+			@RequestParam("val1") int val1,@RequestParam("val2") int val2) {
 		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
-
 		Page<GiftEntity> page;
+		try {
+			final List<SpecCriterion> criterions = Lists.newArrayList();
+			
+			if(!Strings.isNullOrEmpty(form.getName())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "name", "%"+form.getName()+"%"));	
+			}
+			if(!Strings.isNullOrEmpty(form.getBrand())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "brand", "%"+form.getBrand()+"%"));	
+			}
+			if(val1!=0){
+				criterions.add(new SpecCriterion(QueryOpType.GE,"bonus",val1));
+			}
+			if(val2!=0){
+				criterions.add(new SpecCriterion(QueryOpType.LE,"bonus",val2));
+			}
+			
+			page = giftService.getByCondition(criterions, pageable);
+			
 
-			page = giftService.getAll(new GiftSpecification(), pageable);
-
+		} catch (final Exception e) {
+			return new GridResponse<>(e);
+		}
 		return new GridResponse<>(page);
 	}
 

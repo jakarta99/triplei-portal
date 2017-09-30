@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,11 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ConvenienceStoreSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.commons.QueryOpType;
+import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.ConvenienceStoreEntity;
 import tw.com.triplei.service.ConvenienceStoreService;
 
@@ -164,8 +170,22 @@ public class AdminConvenienceStoreController {
 		Page<ConvenienceStoreEntity> page;
 
 		try {
+			final List<SpecCriterion> criterions = Lists.newArrayList();
+			
+			if(!Strings.isNullOrEmpty(form.getManufacturer())){
+				criterions.add(new SpecCriterion(QueryOpType.EQ, "manufacturer", form.getManufacturer()));
+			}
+			if(!Strings.isNullOrEmpty(form.getAddress())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "address", "%"+form.getAddress()+"%"));
+			}
+			if(!Strings.isNullOrEmpty(form.getRegion())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "region","%"+form.getRegion()+"%"));
+			}
+			if(!Strings.isNullOrEmpty(form.getCity())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "city", "%"+form.getCity()+"%"));	
+			}
 
-			page = convenienceStoreService.getAll(new ConvenienceStoreSpecification(), pageable);
+			page = convenienceStoreService.getByCondition(criterions, pageable);
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);

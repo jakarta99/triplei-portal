@@ -19,6 +19,47 @@
 
 		<div style="padding-top:9vh">
 			<h3>文章列表</h3>
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+							<label for="title" class="col-sm-1 control-label">標題</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="title" name="title" placeholder="標題"/>
+							</div>
+		          
+							<label for="author" class="col-sm-1 control-label">作者</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="author" name="author" placeholder="作者" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="articleType" class="col-sm-1 control-label">文章分類</label>
+							<div class="col-sm-5">
+								<select id="articleType" name="articleType" class="form-control">
+									<option value="">全部</option>
+									<option value="EDITOR_CHOICE">編輯精選</option>
+									<option value="NEWS">新聞專區</option>
+									<option value="GOODREAD">小資族必讀</option>
+									<option value="INVESTMENT_TIPS">理財觀念</option>
+								</select>
+							</div>
+							<label for="content" class="col-sm-1 control-label">內文搜索</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="content" name="content" placeholder="內文搜索" />
+							</div>
+						</div>							
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success" data-loading-text="loading..." type="button">搜尋</button>
+		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
+			
+			
+			
+			
 			<div style="padding-top:1vh">
 				<a href="<c:url value='/admin/article/insertArticle'/>"
 					class="btn btn-sm btn-primary" data-loading-text="Loading"> 
@@ -27,6 +68,14 @@
 			<div id="jsGrid" style="padding-top:1vh"></div>
 
 	<script>
+	
+	$("#searchBtn").bind("click",function(){
+		$("#jsGrid").jsGrid("reset");
+	});
+	
+	$("#resetBtn").bind("click", function(){
+		$("#listForm")[0].reset();
+	});
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/article";
 			    var url = "${pageContext.request.contextPath}";
 			    
@@ -42,18 +91,13 @@
 			        pageLoading: true,
 			        autoload: true,
 			        sorting:true,
-			        pageNextText:"下一頁",
-			        pagePrevText:"上一頁",
-			        pageFirstText:"第一頁",
-			        pageLastText:"最後一頁",
-			        pagerFormat: "&nbsp;&nbsp; {first} {prev} {pages} {next} {last} &nbsp;&nbsp;&nbsp; 總共： {pageCount} 頁 ／ {itemCount} 筆",
 			 
 			        controller: {
-			            loadData: function (filter) {
+			            loadData: function () {
 			            	return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: filter,
+			                    data: "pageIndex=1&pageSize=5&"+$("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false
 			                });
