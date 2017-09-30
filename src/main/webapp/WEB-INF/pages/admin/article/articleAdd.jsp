@@ -165,7 +165,7 @@
 					processData : false,
 					contentType : false,
 					success : function(data) {
-						alert("SUCCESS");
+						sweetAlert('新增成功');
 					}
 				})
 				$btn.button("reset");

@@ -88,7 +88,7 @@ padding-bottom:2vh;
 				</select>
 				</div>
 				</form>
-				<div id="bm" style="width: 35vw;position: absolute;left: -70px;top: 260px"></div>
+				<div id="bm" style="width: 35vw;position: absolute;left: -70px;top: 360px"></div>
 <!-- 				<div id="container-fluid" style="height:100%;position:relative;margin-top:15%"> -->
 <!-- 				<div > -->
 <!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;"> -->
