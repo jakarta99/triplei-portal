@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,6 +33,9 @@ public class ArticleService extends GenericService<ArticleEntity> {
 
 	@Autowired
 	private ArticleDao dao;
+	
+	@Autowired
+	private Environment env;
 
 	@Override
 	public GenericDao<ArticleEntity> getDao() {
@@ -85,8 +89,10 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		if (file.toString() != "") {
 			try {
 				bytes = file.getBytes();
-				String path = "src/main/webapp/userfiles/bannerImage";
-				String path1 = "/userfiles/bannerImage";
+				String filePath = env.getProperty("articleFileUploadPath");
+				String path = "src/main/webapp"+filePath;
+				log.debug("Article Upload Path{} ",filePath);
+//				String path1 = "/userfiles/bannerImage";
 				File dir = new File(path);
 				if (!dir.exists())
 					dir.mkdirs();
@@ -94,7 +100,7 @@ public class ArticleService extends GenericService<ArticleEntity> {
 				String date = DateTimeFormatter.ofPattern("MM-dd_HHmmss").format(LocalDateTime.now());
 				File serverFile = new File(dir.getAbsolutePath() + File.separator + date + file.getOriginalFilename());
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-				String url = path1 + "/" + date + file.getOriginalFilename();
+				String url = filePath + "/" + date + file.getOriginalFilename();
 				stream.write(bytes);
 				stream.close();
 
