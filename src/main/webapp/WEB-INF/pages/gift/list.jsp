@@ -373,19 +373,19 @@
 <div class="col-sm-1"></div>
 </div>
 
-<div id="dialog-success">
-<img alt="" src="/resources/pic/積點專區/許願成功.png" class="col-sm-10" style="width: 500"><br/>
-<div class="col-sm-10">
-<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">許願成功</p>
-</div>
-</div>
+<!-- <div id="dialog-success"> -->
+<!-- <img alt="" src="/resources/pic/積點專區/許願成功.png" class="col-sm-10" style="width: 500"><br/> -->
+<!-- <div class="col-sm-10"> -->
+<!-- <p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">許願成功</p> -->
+<!-- </div> -->
+<!-- </div> -->
 
-<div id="dialog-failed">
-<img alt="" src="/resources/pic/積點專區/只能許一次.png" class="col-sm-10" style="width: 500"><br/>
-<div class="col-sm-10">
-<p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">一周只能許一次喔</p>
-</div>
-</div>
+<!-- <div id="dialog-failed"> -->
+<!-- <img alt="" src="/resources/pic/積點專區/只能許一次.png" class="col-sm-10" style="width: 500"><br/> -->
+<!-- <div class="col-sm-10"> -->
+<!-- <p style="background-color: white;color: black;font-family: 微軟正黑體;font-size: 30px" align="center">一周只能許一次喔</p> -->
+<!-- </div> -->
+<!-- </div> -->
 
 
 <script type="text/javascript">
@@ -482,36 +482,36 @@ $( function() {
 					duration : 500
 				},
 			})
-			var dialog2 = $('#dialog-success').dialog({
-				autoOpen: false,
-				resizable : true,
-				height : 300,
-				width : 400,
-				modal : true,
-				show : {
-					effect : "blind",
-					duration : 500
-				},
-				hide : {
-					effect : "blind",
-					duration : 500
-				},
-			})
-			var dialog3 = $('#dialog-failed').dialog({
-				autoOpen: false,
-				resizable : true,
-				height : 300,
-				width : 400,
-				modal : true,
-				show : {
-					effect : "blind",
-					duration : 500
-				},
-				hide : {
-					effect : "blind",
-					duration : 500
-				},
-			})
+// 			var dialog2 = $('#dialog-success').dialog({
+// 				autoOpen: false,
+// 				resizable : true,
+// 				height : 300,
+// 				width : 400,
+// 				modal : true,
+// 				show : {
+// 					effect : "blind",
+// 					duration : 500
+// 				},
+// 				hide : {
+// 					effect : "blind",
+// 					duration : 500
+// 				},
+// 			})
+// 			var dialog3 = $('#dialog-failed').dialog({
+// 				autoOpen: false,
+// 				resizable : true,
+// 				height : 300,
+// 				width : 400,
+// 				modal : true,
+// 				show : {
+// 					effect : "blind",
+// 					duration : 500
+// 				},
+// 				hide : {
+// 					effect : "blind",
+// 					duration : 500
+// 				},
+// 			})
 		$('#wishpool').on("click",function() {
 			dialog1.dialog("open");
 			//<!-- Save -->
@@ -535,12 +535,18 @@ $( function() {
 									contentType : false,
 									success : function(data) {
 										if (data.data == null) {
-											dialog3.dialog("open");
+											swal({
+												  icon: "/resources/pic/積點專區/只能許一次.png",
+												  title:'一周只能許一次噢...'
+												});
 											$btn.button("reset");
 											dialog1.dialog("close");
 										}else if (data.messages.length == 0) {
 															$("#dataForm").trigger("reset");
-															dialog2.dialog("open");
+															swal({
+																  icon: "/resources/pic/積點專區/許願成功.png",
+																  title:'許願成功!!!'
+																});
 															$btn.button("reset");
 															dialog1.dialog("close");
 														}
