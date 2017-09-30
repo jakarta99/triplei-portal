@@ -291,7 +291,7 @@ select {
 											}
 										},
 										error : function(data) {
-											alert("error");
+											swal("error");
 										}
 
 									});
@@ -319,7 +319,7 @@ select {
 											}
 										},
 										error : function(data) {
-											alert("error");
+											swal("error");
 										}
 
 									});
@@ -348,7 +348,7 @@ select {
 											}
 										},
 										error : function(data) {
-											alert("error");
+											swal("error");
 										}
 
 									});
@@ -425,10 +425,10 @@ select {
 					success:function(data){	
 					}
 				})
-				alert("SUCCESS");
+				swal("SUCCESS");
 				location.href = "/recipient/list"
 			}else{
-				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
+				swal("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}
 			
 		})

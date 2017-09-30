@@ -206,25 +206,25 @@ padding-bottom:2vh;
 	
 	$(".productFilter").on("click",function(){
 		if($('input[name="gender"]:checked').val()==null){
-			alert("請輸入您的性別");
+			swal("請輸入您的性別");
 		}else if($('#bDate').val()==""){
-			alert("請輸入您的生日");
+			swal("請輸入您的生日");
 		}else if($("#premium").val()==""){
-			alert("請輸入您的繳費金額");
+			swal("請輸入您的繳費金額");
 		}else if(isNaN($("#premium").val())){
-			alert("輸入的繳費金額必須是數字");
+			swal("輸入的繳費金額必須是數字");
 		}else if(($("#premium").val()).indexOf('.') > -1){
-			alert("輸入的繳費金額必須是整數");
+			swal("輸入的繳費金額必須是整數");
 		}else if($("#paymentMethod").val()==""){
-			alert("請選擇存款方式");
+			swal("請選擇存款方式");
 		}else if($("#yearCode").val()==""){
-			alert("請輸入您的預計領回時間");
+			swal("請輸入您的預計領回時間");
 		}else if($("#year").val()==""){
-			alert("請輸入繳費年期");
+			swal("請輸入繳費年期");
 		}else if(isNaN($("#yearCode").val())){
-			alert("輸入的預計領回時間必須是數字");
+			swal("輸入的預計領回時間必須是數字");
 		}else if(($("#yearCode").val()).indexOf('.') > -1){
-			alert("輸入的預計領回時間必須是整數");
+			swal("輸入的預計領回時間必須是整數");
 		}else if($('input[name="gender"]:checked').val()!=null && $('#bDate').val()!="" && $("#premium").val()!="" &&$("#yearCode").val()!=""){
 			$("#products").show();
 			$("#products").empty();
