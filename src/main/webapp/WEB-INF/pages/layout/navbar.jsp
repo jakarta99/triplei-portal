@@ -42,7 +42,7 @@ ul {
 		<div id="navbar" class="navbar-collapse collapse navbar-right"
 			style="font-size: 85%; padding: 0; position: relative;text-align:right;float:right;">
 			<ul class="nav navbar-nav navbar-right">
-
+				<!-- 後台 -->
 				<li class="dropdown"><sec:authorize
 						access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#"
@@ -52,21 +52,23 @@ ul {
 						<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
 							<li><a href="/admin/user/list">會員管理</a></li>
 						</sec:authorize>
-
-						<sec:authorize access="hasAnyRole('SALES','SERVICE')">
-							<li><a href="/recipient/sale/list">接收訂單</a></li>
-						</sec:authorize>
-
+						
 						<sec:authorize
 							access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
 							<li><a href="/user/reset/info">基本資料設定</a></li>
-							<li><a href="/recipient/list">保險訂單查詢</a></li>
 							<li><a href="/user/reset/pw">重設密碼</a></li>
 						</sec:authorize>
+						
+						<sec:authorize access="hasAnyRole('ORDER','ADMIN')">
+							<li><a href="/recipient/list">保險訂單查詢</a></li>
+						</sec:authorize>
+						
+						<sec:authorize access="hasAnyRole('SALES','SERVICE')">
+							<li><a href="/recipient/sale/list">接收訂單</a></li>
+						</sec:authorize>	
 					</ul></li>
 
-				<sec:authorize
-					access="hasAnyRole('ADMIN', 'ARTICLE', 'SERVICE', 'PARTTIME')">
+				<sec:authorize access="hasAnyRole('ADMIN', 'SERVICE')">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#" style="color: white">客服管理<span
 							class="caret"></span></a>
@@ -74,26 +76,47 @@ ul {
 							<li><a href="/admin/question/list">問題一覽</a></li>
 							<!-- 							<li><a href="/question/list">問題回覆</a></li>							 -->
 
-						</ul></li>
+						</ul>
+					</li>
+				</sec:authorize>
+
+				<sec:authorize access="hasAnyRole('ADMIN', 'SERVICE', 'PARTTIME')">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#" style="color: white">保險商品管理<span
-							class="caret"></span></a>
+							class="caret"></span></a>			
 						<ul class="dropdown-menu">
-							<li><a href="/admin/product/list">保險商品管理</a></li>
-							<li><a href="/admin/insurer/list">保險公司管理</a></li>
-							<li><a href="/admin/recipient/list">訂單管理</a></li>
-							<li><a href="/admin/convenienceStore/list">超商管理</a></li>
-						</ul></li>
+							<sec:authorize access="hasAnyRole('ADMIN')">
+								<li><a href="/admin/product/list">保險商品管理</a></li>
+								<li><a href="/admin/insurer/list">保險公司管理</a></li>
+								<li><a href="/admin/convenienceStore/list">超商管理</a></li>	
+							</sec:authorize>
+							<sec:authorize access="hasAnyRole('ADMIN', 'SERVICE', 'PARTTIME')">					
+								<li><a href="/admin/recipient/list">訂單管理</a></li>
+							</sec:authorize>
+						</ul>
+					</li>
+				</sec:authorize>
+					
+				<sec:authorize access="hasAnyRole('ADMIN', 'SERVICE' ,'PARTTIME')">	
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#" style="color: white">禮品訂單管理<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-
-							<li><a href="/admin/gift/giftOrder/list">訂單管理</a></li>
+						
+							<sec:authorize access="hasAnyRole('ADMIN')">	
 							<li><a href="/admin/gift/list">積點商品上架</a></li>
 							<li><a href="/admin/wish/list">許願池查詢</a></li>
-							<!-- 							<li><a href="#">XXXX</a></li> -->
-						</ul></li>
+							</sec:authorize>
+							
+							<sec:authorize access="hasAnyRole('ADMIN', 'SERVICE' ,'PARTTIME')">
+							<li><a href="/admin/gift/giftOrder/list">訂單管理</a></li>
+							</sec:authorize>
+							
+						</ul>
+					</li>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAnyRole('ADMIN', 'ARTICLE')">		
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#" style="color: white">文章管理<span
 							class="caret"></span></a>
@@ -101,38 +124,42 @@ ul {
 
 							<li><a href="/admin/article/getArticles">文章列表</a></li>
 							<li><a href="/admin/article/insertArticle">新增文章</a></li>
+						</ul>
+					</li>
+				</sec:authorize>	
+
+
+					<!-- 前台 -->
+					<li><a href="/insurer/list" style="color: white">各公司資訊</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#" style="color: white">商品專區<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/product/list">商品列表</a></li>
+							<li><a href="/product/irr">IRR計算機</a></li>
 						</ul></li>
-				</sec:authorize>
 
-				<!-- 				</ul> -->
-				<!-- 				<ul class="nav navbar-nav navbar-right"> -->
+					<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
+						<li><a href="/gift/list" style="color: white">績點專區</a></li>
+					</sec:authorize>
 
-				<li><a href="/insurer/list" style="color: white">各公司資訊</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#" style="color: white">商品專區<span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="/product/list">商品列表</a></li>
-						<li><a href="/product/irr">IRR計算機</a></li>
-					</ul></li>
-				<li><a href="/gift/list" style="color: white">績點專區</a></li>
-				<li><a href="/article/list" style="color: white">文章專欄</a></li>
-				<li><a href="/question/askQuestion" style="color: white">聯絡客服</a></li>
+					<li><a href="/article/list" style="color: white">文章專欄</a></li>
+					<li><a href="/question/askQuestion" style="color: white">聯絡客服</a></li>
 
-				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
-					<li><a href="/login" style="color: white">登入</a></li>
-				</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+						<li><a href="/login" style="color: white">登入</a></li>
+					</sec:authorize>
 
-				<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
-					<li><a href="#" onclick="$('#logout').submit();"
-						style="color: white"><span class="glyphicon glyphicon-log-out"
-							style="color: white"></span>登出</a></li>
-					<form class="hide" id="logout" action="<c:url value="/logout" />"
-						method="post">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-					</form>
-				</sec:authorize>
+					<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
+						<li><a href="#" onclick="$('#logout').submit();"
+							style="color: white"><span
+								class="glyphicon glyphicon-log-out" style="color: white"></span>登出</a></li>
+						<form class="hide" id="logout" action="<c:url value="/logout" />"
+							method="post">
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</form>
+					</sec:authorize>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
