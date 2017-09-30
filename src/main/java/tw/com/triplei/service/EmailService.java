@@ -207,8 +207,22 @@ public class EmailService {
 			String contactName = recipient.getName(); // 聯絡人
 			String contactMethod = recipient.getTel(); // 聯絡方式
 			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
+			
+			
 			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			if(contactDate2.endsWith("00")){
+				contactDate2 = recipient.getBookedTime_2();
+			}else{
+				contactDate2 = "無";
+			}
+			
 			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			if(contactDate3.endsWith("00")){
+				contactDate3 = recipient.getBookedTime_2();
+			}else{
+				contactDate3 = "無";
+			}
+			
 			String toAge = recipient.getAge() + "";// 被保險人年齡
 			String gender = "";
 			// 被保險人性別
@@ -231,12 +245,12 @@ public class EmailService {
 					.append("<title></title><meta charset='utf-8' /></head>")
 					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("業務員 " + name + " 您好，<br /><br />")
 					.append("管理員已經於 " + dateString + " 指派訂單給您：<br /><br />")
-					.append("訂單編號："+ orderNo +"<br />")
 					.append("聯絡人資訊：<br />")
 					.append("姓名：" + contactName + "     電話:" + contactMethod + "<br />")
 					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
 					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
 					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />").append("訂單詳細如下:<br />")
+					.append("訂單編號："+ orderNo +"<br />")
 					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
 					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
 					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
@@ -284,7 +298,18 @@ public class EmailService {
 			String contactMethod = recipient.getTel(); // 聯絡方式
 			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
 			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			if(contactDate2.endsWith("00")){
+				contactDate2 = recipient.getBookedTime_2();
+			}else{
+				contactDate2 = "無";
+			}
+			
 			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			if(contactDate3.endsWith("00")){
+				contactDate3 = recipient.getBookedTime_2();
+			}else{
+				contactDate3 = "無";
+			}
 			String toAge = recipient.getAge() + "";// 被保險人年齡
 			String gender = "";
 			// 被保險人性別
@@ -307,12 +332,12 @@ public class EmailService {
 					.append("<title></title><meta charset='utf-8' /></head>")
 					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("管理員 " + admin.getName() + " 您好，<br /><br />")
 					.append("您已經於 " + dateString + " 指派訂單給業務員： "+name+"<br /><br />")
-					.append("訂單編號："+ orderNo +"<br />")
 					.append("聯絡人資訊：<br />")
 					.append("姓名：" + contactName + "     電話:" + contactMethod + "<br />")
 					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
 					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
 					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />").append("訂單詳細如下:<br />")
+					.append("訂單編號："+ orderNo +"<br />")
 					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
 					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
 					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
@@ -350,7 +375,10 @@ public class EmailService {
 		//顧客下訂單寄給顧客
 		public void sendAlertEmailToCustomer(UserEntity customer,RecipientEntity recipient) {
 
+			
+			
 			String name = customer.getName();//會員姓名
+			String nameC = recipient.getName();//聯絡人
 			
 			Date date = new Date(recipient.getCreatedTime().getTime());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
@@ -366,7 +394,18 @@ public class EmailService {
 			String contactMethod = recipient.getTel(); // 聯絡方式
 			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
 			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			if(contactDate2.endsWith("00")){
+				contactDate2 = recipient.getBookedTime_2();
+			}else{
+				contactDate2 = "無";
+			}
+			
 			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			if(contactDate3.endsWith("00")){
+				contactDate3 = recipient.getBookedTime_2();
+			}else{
+				contactDate3 = "無";
+			}
 			String toAge = recipient.getAge() + "";// 被保險人年齡
 			String gender = "";
 			// 被保險人性別
@@ -389,7 +428,9 @@ public class EmailService {
 					.append("<title></title><meta charset='utf-8' /></head>")
 					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("親愛的會員  " + name + " 您好，<br /><br />")
 					.append("您已經於 " + dateString + " 選擇這筆保險商品：<br /><br />")
-					.append("您的聯絡電話:" + contactMethod + "<br />")
+					.append("聯絡人資訊:<br />")
+					.append("姓名:" + nameC + "<br />")
+					.append("電話:" + contactMethod + "<br />")
 					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
 					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
 					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />")
@@ -426,7 +467,8 @@ public class EmailService {
 		public void sendAlertEmailToAdminC(UserEntity admin,UserEntity customer,RecipientEntity recipient) {
 
 			String name = admin.getName();//管理員姓名
-			String cName = customer.getName();
+			String cName = customer.getName();//會員姓名
+			String fName = recipient.getName();//聯絡人姓名
 			Date date = new Date(recipient.getCreatedTime().getTime());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
 			String dateString = sdf.format(date);
@@ -441,7 +483,18 @@ public class EmailService {
 			String contactMethod = recipient.getTel(); // 聯絡方式
 			String contactDate1 = recipient.getBookedTime_1(); // 聯絡時間1
 			String contactDate2 = recipient.getBookedTime_2(); // 聯絡時間2
+			if(contactDate2.endsWith("00")){
+				contactDate2 = recipient.getBookedTime_2();
+			}else{
+				contactDate2 = "無";
+			}
+			
 			String contactDate3 = recipient.getBookedTime_3(); // 聯絡時間3
+			if(contactDate3.endsWith("00")){
+				contactDate3 = recipient.getBookedTime_2();
+			}else{
+				contactDate3 = "無";
+			}
 			String toAge = recipient.getAge() + "";// 被保險人年齡
 			String gender = "";
 			// 被保險人性別
@@ -464,7 +517,9 @@ public class EmailService {
 					.append("<title></title><meta charset='utf-8' /></head>")
 					.append("<body><div style=''>   <hr>(此為系統發送信件，請勿回覆)<hr />").append("親愛的管理員  " + name + " 您好，<br /><br />")
 					.append("會員 "+ cName +" 已經於 " + dateString + " 選擇這筆保險商品：<br /><br />")
-					.append("他的聯絡電話:" + contactMethod + "<br />")
+					.append("聯絡資訊:<br />")
+					.append("姓名:" + fName + "<br />")
+					.append("電話:" + contactMethod + "<br />")
 					.append("1.方便聯絡時間 " + contactDate1 + "<br />").append("2.方便聯絡時間 " + contactDate2 + "<br />")
 					.append("3.方便聯絡時間 " + contactDate3 + "<br /><br />")
 					.append("被保人資料       性別:" + gender + "      年齡:" + toAge + " 歲<br />")

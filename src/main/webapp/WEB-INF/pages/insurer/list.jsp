@@ -50,7 +50,7 @@
 						<a href="/insurer/filt"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
 					</h4>
-					<div id="bm"></div>
+					<div id="bm" style="width: 40vw;position: absolute;left: -120px;top: 200px"></div>
 				</div>
 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>

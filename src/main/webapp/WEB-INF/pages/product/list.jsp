@@ -88,14 +88,15 @@ padding-bottom:2vh;
 				</select>
 				</div>
 				</form>
-				<div id="container-fluid" style="height:100%;position:relative;margin-top:15%">
-				<div >
-				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;">
-				</div>
-				<div >
-				<img src="/resources/pic/product/商品專區動畫/images/img_0.png" width="100%" style="width:30%;position:absolute;margin:23% auto auto 50%;">
-				</div>
-				</div>
+				<div id="bm" style="width: 35vw;position: absolute;left: -70px;top: 260px"></div>
+<!-- 				<div id="container-fluid" style="height:100%;position:relative;margin-top:15%"> -->
+<!-- 				<div > -->
+<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;"> -->
+<!-- 				</div> -->
+<!-- 				<div > -->
+<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_0.png" width="100%" style="width:30%;position:absolute;margin:23% auto auto 50%;"> -->
+<!-- 				</div> -->
+<!-- 				</div> -->
 				</div>
 			</div>
 			
@@ -236,6 +237,7 @@ padding-bottom:2vh;
 				
 				if(val!=null){
 	 				$.each(val,function(index,value){
+	 					
 					var installment="";
 					var row= val[index];
 					if(row.year==1){
@@ -253,6 +255,7 @@ padding-bottom:2vh;
 			moreInfoBtn.toggle("drop",500);
 		})
 				}
+				
 			})
 		}
 	})
@@ -262,6 +265,14 @@ padding-bottom:2vh;
 		var changeDollar= "金額("+curr+"／年)";
 		$("#dollar").text(changeDollar);
 	})
+	
+			var animation = bodymovin.loadAnimation({
+			  container: document.getElementById('bm'),
+			  renderer: 'svg',
+			  loop: true,
+			  autoplay: true,
+			  path: '/resources/pic/product/商品專區動畫/product.json'
+			})
 	
 	</script>
 </body>

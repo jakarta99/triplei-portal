@@ -105,6 +105,7 @@ public class AdminUserController {
 		try {
 			
 			final UserEntity updateResult = userService.update(form);
+
 			log.debug("updateResult {}",updateResult);
 			response.setData(updateResult);
 			

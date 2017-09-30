@@ -130,6 +130,10 @@ public class AdminUserService extends GenericService<UserEntity>{
 			dbUserEntity.setRegisteredCode(entity.getRegisteredCode());
 		}
 		
+		dbUserEntity.setRemainPoint(entity.getRemainPoint());
+		dbUserEntity.setAudittingPoint(entity.getAudittingPoint());
+		dbUserEntity.setExchangedPoint(entity.getExchangedPoint());
+		
 
 		dbUserEntity.getRoles().clear();
 		
