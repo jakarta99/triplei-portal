@@ -40,7 +40,7 @@
 				<span style="font-size: 1.5em;font-family: 微軟正黑體;">積點專區</span>
 				</div>
 				<div class="col-sm-12">
-				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="50" height="50">
+				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="41" height="41">
 				<span id="userPoint" style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
 				</div>
 				<div class="col-sm-12">
@@ -72,7 +72,7 @@
 <!-- 				</div> -->
 			</div>
 <!-- 右半白 -->
-			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll">
+			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll" id="style-1">
 		<div
 			style="height: 100vh; display: table; table-layout: fixed; width: 1400px;">
 
