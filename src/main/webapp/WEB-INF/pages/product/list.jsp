@@ -236,6 +236,7 @@ padding-bottom:2vh;
 				
 				if(val!=null){
 	 				$.each(val,function(index,value){
+	 					
 					var installment="";
 					var row= val[index];
 					if(row.year==1){
@@ -253,6 +254,7 @@ padding-bottom:2vh;
 			moreInfoBtn.toggle("drop",500);
 		})
 				}
+				
 			})
 		}
 	})

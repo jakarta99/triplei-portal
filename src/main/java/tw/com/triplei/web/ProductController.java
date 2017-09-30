@@ -204,14 +204,14 @@ public class ProductController {
 		model.addAttribute("modelf", form);
 		model.addAttribute("totalCancelRatio", totalCancelRatio);
 		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
-		Iterator itt = totalCancelRatio.iterator();
-		while (itt.hasNext()) {
-			log.debug("totalCancelRatio資料={}", itt.next());
-		}
-		Iterator ittt = totalIrrAndCancelRatio.iterator();
-		while (ittt.hasNext()) {
-			log.debug("totalIrrAndCancelRatio資料={}", ittt.next());
-		}
+//		Iterator itt = totalCancelRatio.iterator();
+//		while (itt.hasNext()) {
+//			log.debug("totalCancelRatio資料={}", itt.next());
+//		}
+//		Iterator ittt = totalIrrAndCancelRatio.iterator();
+//		while (ittt.hasNext()) {
+//			log.debug("totalIrrAndCancelRatio資料={}", ittt.next());
+//		}
 
 		return "/product/detailInfo";
 	}
@@ -406,7 +406,7 @@ public class ProductController {
 					}
 				}
 				if (product.getDiscount() == null) {
-					product = new ProductEntity();
+					product = null;
 					break;
 				}
 
@@ -416,14 +416,14 @@ public class ProductController {
 		model.addAttribute("modelf", product);
 		model.addAttribute("totalCancelRatio", totalForm);
 		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
-		Iterator iif = totalForm.iterator();
-		while(iif.hasNext()){
-			log.debug("totalForm{}",iif.next());
-		}
-		Iterator iiff = totalIrrAndCancelRatio.iterator();
-		while(iiff.hasNext()){
-			log.debug("totalIrrAndCancelRatio{}",iiff.next());
-		}
+//		Iterator iif = totalForm.iterator();
+//		while(iif.hasNext()){
+//			log.debug("totalForm{}",iif.next());
+//		}
+//		Iterator iiff = totalIrrAndCancelRatio.iterator();
+//		while(iiff.hasNext()){
+//			log.debug("totalIrrAndCancelRatio{}",iiff.next());
+//		}
 		return "/product/detailInfo";
 	}
 
@@ -515,6 +515,9 @@ public class ProductController {
 						break;
 					} else {
 						product.setPremium(null);
+						product.setTotalPay(BigDecimal.valueOf(-1D));
+						product.setPremiumAfterDiscount(BigDecimal.valueOf(-1D));
+						product.setPremium(BigDecimal.valueOf(-1D));
 					}
 				}
 				// double cancelRatio =
@@ -545,15 +548,15 @@ public class ProductController {
 					premium = product.getPremiumAfterDiscount().doubleValue();
 					double irr = iRRCaculator.getIRR(period, times, premium, expired);
 					product.setIrr(BigDecimal.valueOf(irr).setScale(4, BigDecimal.ROUND_HALF_UP));
-					System.out.println("irr=" + irr);
+					log.debug("{}",product.getIrr());
 				}
 
-				if (product.getPremium() == null) {// 如果保額不在上下限範圍之內 則不顯示這張表單
-					System.out.println("NO product.getPremium()!!!");
-					continue;
+				if (product.getPremium().doubleValue() == -1) {// 如果保額不在上下限範圍之內 則不顯示這張表單
+					product = null;
+					log.debug("沒東西RRR{}");
+					continue; 
 				} else {
 					productss.add(product);
-					System.out.println(productss);
 				}
 			} catch (final ApplicationException ex) {
 				ex.printStackTrace();
@@ -562,6 +565,7 @@ public class ProductController {
 			}
 
 		}
+		log.debug("商品堆{}",productss);
 		return productss;
 	}
 

@@ -23,8 +23,8 @@
 			<h3>會員管理</h3>
 			
 			<div class="panel panel-default">
-				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
+				<div class="panel-body">
 					<input type="hidden" id="id" name="id" value="${entity.id}"/>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
@@ -61,7 +61,7 @@
 								<div class="form-group required">
 			    					<label for="exchangedPoint" class="col-md-2 control-label">已兌換點數</label>
 			    					<div class="col-md-8">
-			      						<input type="text" readonly="readonly" class="form-control" id="exchangedPoint" name="exchangedPoint" placeholder="exchangedPoint" value="${entity.exchangedPoint}"/>
+			      						<input type="text" class="form-control" id="exchangedPoint" name="exchangedPoint" placeholder="exchangedPoint" value="${entity.exchangedPoint}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -69,7 +69,7 @@
 								<div class="form-group required">
 			    					<label for="remainPoint" class="col-md-2 control-label">剩餘點數</label>
 			    					<div class="col-md-8">
-			      						<input type="text" readonly="readonly" class="form-control" id="remainPoint" name="remainPoint" placeholder="remainPoint" value="${entity.remainPoint}"/>
+			      						<input type="text" class="form-control" id="remainPoint" name="remainPoint" placeholder="remainPoint" value="${entity.remainPoint}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -77,7 +77,7 @@
 								<div class="form-group required">
 			    					<label for="audittingPoint" class="col-md-2 control-label">審核中點數</label>
 			    					<div class="col-md-8">
-			      						<input type="text" readonly="readonly" class="form-control" id="audittingPoint" name="audittingPoint" placeholder="audittingPoint" value="${entity.audittingPoint}"/>
+			      						<input type="text" class="form-control" id="audittingPoint" name="audittingPoint" placeholder="audittingPoint" value="${entity.audittingPoint}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>	

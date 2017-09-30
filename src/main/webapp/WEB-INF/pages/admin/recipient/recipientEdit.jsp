@@ -234,8 +234,8 @@
 										<div class="col-md-10">
 											<select class="form-control" id="orderStatus"
 												name="orderStatus">
-												<c:if test="${empty entity.orderStatus}">
-													<option value="">請選擇</option>
+												<c:if test="${entity.orderStatus=='未指派業務員'}">
+													<option value="">${entity.orderStatus}</option>
 													<option value="未見面">未見面</option>
 												</c:if>
 												<c:if test="${entity.orderStatus=='已完成(含派送點數)'}">
@@ -253,7 +253,7 @@
 													<option value="已完成(含派送點數)">已完成(含派送點數)</option>
 												</c:if>
 												<c:if
-													test="${not empty entity.orderStatus && entity.orderStatus!='未見面' && entity.orderStatus!='已完成(含派送點數)' && entity.orderStatus!='已見面，未購買(刪除審核中點數)'}">
+													test="${not empty entity.orderStatus && entity.orderStatus!='未見面' && entity.orderStatus!='已完成(含派送點數)' && entity.orderStatus!='已見面，未購買(刪除審核中點數)' && entity.orderStatus!='未指派業務員'}">
 													<option value="${entity.orderStatus}">${entity.orderStatus}</option>
 													<option value="已見面，未購買(刪除審核中點數)">已見面，未購買(刪除審核中點數)</option>
 													<option value="已見面，已購買">已見面，已購買</option>
@@ -308,14 +308,13 @@
 										+ address + "'/>", "dataForm",
 								function(data) {
 									if (data.messages.length == 0) {
-										location.href = "/admin/recipient/list"
-// 										alert("SUCCESS");
 										$btn.button("reset");
 									}
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");
 								});
-						
+						alert("SUCCESS");
+						location.href = "/admin/recipient/list"
 						$btn.button("reset");
 					});
 		});

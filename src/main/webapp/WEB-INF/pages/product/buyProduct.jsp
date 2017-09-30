@@ -52,9 +52,9 @@ select {
 										id="date1" type="text" placeholder="日期"> <br /> <br />
 									<select id="session1" class="col-sm-3">
 										<option value="" selected="selected">請選擇</option>
-										<option value="morning">上午</option>
-										<option value="afternoon">下午</option>
-										<option value="evening">晚上</option>
+										<option value="上午">上午</option>
+										<option value="下午">下午</option>
+										<option value="晚上">晚上</option>
 									</select> <select id="shift1" class="col-sm-9">
 									</select> <br />
 								</div>
@@ -63,9 +63,9 @@ select {
 										id="date2" type="text" placeholder="日期"> <br /> <br /> <select
 										id="session2" class="col-sm-3">
 										<option value="" selected="selected">請選擇</option>
-										<option value="morning">上午</option>
-										<option value="afternoon">下午</option>
-										<option value="evening">晚上</option>
+										<option value="上午">上午</option>
+										<option value="下午">下午</option>
+										<option value="晚上">晚上</option>
 									</select> <select id="shift2" class="col-sm-9">
 									</select> <br />
 								</div>
@@ -74,9 +74,9 @@ select {
 										id="date3" type="text" placeholder="日期"> <br /> <br /> <select
 										id="session3" class="col-sm-3">
 										<option value="" selected="selected">請選擇</option>
-										<option value="morning">上午</option>
-										<option value="afternoon">下午</option>
-										<option value="evening">晚上</option>
+										<option value="上午">上午</option>
+										<option value="下午">下午</option>
+										<option value="晚上">晚上</option>
 									</select> <select id="shift3" class="col-sm-9">
 									</select> <br /> <br /> <br />
 								</div>
@@ -197,13 +197,13 @@ select {
 		$("#session1").on("change", function() {
 			var sessionVal = $("#session1 option:selected").val();
 			var shift = $("#shift1");
-			if (sessionVal == "morning") {
+			if (sessionVal == "上午") {
 				shift.empty();
 				shift.append("<option value='8'>08:00~09:00</option>");
 				shift.append("<option value='9'>09:00~10:00</option>");
 				shift.append("<option value='10'>10:00~11:00</option>");
 				shift.append("<option value='11'>11:00~12:00</option>");
-			} else if (sessionVal == "afternoon") {
+			} else if (sessionVal == "下午") {
 				shift.empty();
 				shift.append("<option value='12'>12:00~13:00</option>");
 				shift.append("<option value='1'>13:00~14:00</option>");
@@ -211,7 +211,7 @@ select {
 				shift.append("<option value='3'>15:00~16:00</option>");
 				shift.append("<option value=‘4'>16:00~17:00</option>");
 				shift.append("<option value=‘5'>17:00~18:00</option>");
-			} else if (sessionVal == "evening") {
+			} else if (sessionVal == "晚上") {
 				shift.empty();
 				shift.append("<option value=‘6'>18:00~19:00</option>");
 				shift.append("<option value=‘7'>19:00~20:00</option>");
@@ -222,13 +222,13 @@ select {
 		$("#session2").on("change", function() {
 			var sessionVal = $("#session2 option:selected").val();
 			var shift = $("#shift2");
-			if (sessionVal == "morning") {
+			if (sessionVal == "上午") {
 				shift.empty();
 				shift.append("<option value='8'>08:00~09:00</option>");
 				shift.append("<option value='9'>09:00~10:00</option>");
 				shift.append("<option value='10'>10:00~11:00</option>");
 				shift.append("<option value='11'>11:00~12:00</option>");
-			} else if (sessionVal == "afternoon") {
+			} else if (sessionVal == "下午") {
 				shift.empty();
 				shift.append("<option value='12'>12:00~13:00</option>");
 				shift.append("<option value='1'>13:00~14:00</option>");
@@ -236,7 +236,7 @@ select {
 				shift.append("<option value='3'>15:00~16:00</option>");
 				shift.append("<option value='4'>16:00~17:00</option>");
 				shift.append("<option value='5'>17:00~18:00</option>");
-			} else if (sessionVal == "evening") {
+			} else if (sessionVal == "晚上") {
 				shift.empty();
 				shift.append("<option value='6'>18:00~19:00</option>");
 				shift.append("<option value='7'>19:00~20:00</option>");
@@ -247,13 +247,13 @@ select {
 		$("#session3").on("change", function() {
 			var sessionVal = $("#session3 option:selected").val();
 			var shift = $("#shift3");
-			if (sessionVal == "morning") {
+			if (sessionVal == "上午") {
 				shift.empty();
 				shift.append("<option value='8'>08:00~09:00</option>");
 				shift.append("<option value='9'>09:00~10:00</option>");
 				shift.append("<option value='10'>10:00~11:00</option>");
 				shift.append("<option value='11'>11:00~12:00</option>");
-			} else if (sessionVal == "afternoon") {
+			} else if (sessionVal == "下午") {
 				shift.empty();
 				shift.append("<option value='12'>12:00~13:00</option>");
 				shift.append("<option value='1'>13:00~14:00</option>");
@@ -261,7 +261,7 @@ select {
 				shift.append("<option value='3'>15:00~16:00</option>");
 				shift.append("<option value='4'>16:00~17:00</option>");
 				shift.append("<option value='5'>17:00~18:00</option>");
-			} else if (sessionVal == "evening") {
+			} else if (sessionVal == "晚上") {
 				shift.empty();
 				shift.append("<option value='6'>18:00~19:00</option>");
 				shift.append("<option value='7'>19:00~20:00</option>");
@@ -447,15 +447,15 @@ select {
 			var tel = $("#tel").val();
 
 			var date11 = $("#date1").val();
-			var date12 = $("#session1 option:selected").text();
+			var date12 = $("#session1 option:selected").val();
 			var date13 = $("#shift1 option:selected").text();
 
 			var date21 = $("#date2").val();
-			var date22 = $("#session2 option:selected").text();
+			var date22 = $("#session2 option:selected").val();
 			var date23 = $("#shift2 option:selected").text();
 			
 			var date31 = $("#date3").val();
-			var date32 = $("#session3 option:selected").text();
+			var date32 = $("#session3 option:selected").val();
 			var date33 = $("#shift3 option:selected").text();
 			
 			var pid = <c:out value="${model.id}"/>;

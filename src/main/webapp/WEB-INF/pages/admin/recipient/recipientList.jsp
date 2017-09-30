@@ -18,9 +18,73 @@
 		
 		<div style="padding-top:9vh">
 			<h3>訂單管理</h3>
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+		          
+							<label for="orderNo" class="col-sm-1 control-label">訂單標號</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="orderNo" name="orderNo" placeholder="訂單標號" />
+							</div>
+							<label for="orderStatus" class="col-sm-1 control-label">訂單狀態</label>
+							<div class="col-sm-2">
+								<select id="orderStatus" name="orderStatus" class="form-control">
+									<option value="">請選擇</option>
+									<option value="未指派業務員">未指派業務員</option>
+									<option value="未見面">未見面</option>
+									<option value="已見面，未購買(刪除審核中點數)">已見面，未購買(刪除審核中點數)</option>
+									<option value="已見面，已購買">已見面，已購買</option>
+									<option value="保單處理中">保單處理中</option>
+									<option value="已寄發保單">已寄發保單</option>
+									<option value="已完成(含派送點數)">已完成(含派送點數)</option>
+								</select>
+							</div>
+						
+						</div>
+						<div class="form-group">
+							<label for="createdBy" class="col-sm-1 control-label">會員帳號</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="createdBy" name="createdBy" placeholder="會員帳號"/>
+							</div>
+							
+		          			<label for="name" class="col-sm-1 control-label">聯絡人姓名</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="name" name="name" placeholder="聯絡人姓名" >
+							</div>
+							
+						</div>
+<!-- 						<div class="form-group"> -->
+<!-- 							<label for="user.name" class="col-sm-1 control-label">業務員姓名</label> -->
+<!-- 							<div class="col-sm-5"> -->
+<!-- 								<input type="text" class="form-control" id="user.name" name="user.name" placeholder="會員帳號"/> -->
+<!-- 							</div> -->
+
+							
+<!-- 						</div>						 -->
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success" data-loading-text="loading..." type="button">搜尋</button>
+		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
+			
+			
+			
+			
 			<div id="jsGrid"></div>
 			
 			<script>
+			
+			
+			$("#searchBtn").bind("click",function(){
+				$("#jsGrid").jsGrid("reset");
+				});
+			
+				$("#resetBtn").bind("click", function(){
+				$("#listForm")[0].reset();
+				});
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/recipient";
 			 
 			    $("#jsGrid").jsGrid({
@@ -41,11 +105,11 @@
 			        pageLastText:"最後一頁",
 			 
 			        controller: {
-			            loadData: function (filter) {
+			            loadData: function () {
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: filter,
+			                    data: "pageIndex=1&pageSize=10&"+$("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false,
 			                });
@@ -65,8 +129,8 @@
 			            { title: '保額', name: "product.insureAmount", width: 50, itemTemplate: function(val) {return val+"萬"}  },
 			            { title: '電話', name: "tel", type: "text", width: 100 },
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
-			            { title: '預約時段2', name: "bookedTime_2", type: "text", width: 90 },
-			            { title: '預約時段3', name: "bookedTime_3", type: "text", width: 90 },
+			            { title: '預約時段2', name: "bookedTime_2", width: 90, itemTemplate: function(val) {if(val.endsWith("00")) {return val}else {return "無"}}  },
+			            { title: '預約時段3', name: "bookedTime_3", width: 90, itemTemplate: function(val) {if(val.endsWith("00")) {return val}else {return "無"}}  },
 			            { title: '超商', name: "convenienceStoreEntity.manufacturer", type: "text", width: 60 },
 			            { title: '超商名稱', name: "convenienceStoreEntity.storeName", width: 90, itemTemplate: function(val) {return val+"門市"} },
 			            { title: '超商區域', name: "convenienceStoreEntity.region", type: "text", width: 80 },
