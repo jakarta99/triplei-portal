@@ -108,7 +108,7 @@ public class UserEntity extends GenericEntity implements SocialUserDetails {
 	public UserEntity(Connection<?> connection) {
 		this.provider = "FB";
 		this.providerUserId = connection.getKey().getProviderUserId();
-		this.accountNumber = connection.getKey().getProviderUserId();
+		//this.accountNumber = connection.getKey().getProviderUserId();
 		//this.displayName = connection.getDisplayName();
 		this.name = connection.getDisplayName();
 		this.enabled = true;
