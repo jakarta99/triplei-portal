@@ -56,6 +56,14 @@ public class UserService extends GenericService<UserEntity> {
 			if(StringUtils.isBlank(entity.getEmail())){
 				messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
 			}
+			
+			if(entity.getBirthdate() == null){
+				messages.add(Message.builder().code("birthdate").value("生日為必填欄位").build());
+			}
+			
+			if(StringUtils.isBlank(entity.getTel())){
+				messages.add(Message.builder().code("tel").value("連絡電話為必填欄位").build());
+			}
 		}
 		// 更新密碼
 		else if(entity.getEditState().equals("pw") && dbEntity.getProviderUserId() == null){

@@ -62,6 +62,10 @@ public class AdminUserService extends GenericService<UserEntity>{
 				messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
 			}
 
+			if (StringUtils.isBlank(entity.getTel())) {
+				messages.add(Message.builder().code("tel").value("電話為必填欄位").build());
+			}
+			
 			if (StringUtils.isBlank(entity.getPassword())) {
 				messages.add(Message.builder().code("password").value("請輸入密碼").build());
 			}

@@ -52,17 +52,20 @@ ul {
 						<sec:authorize access="hasAnyRole('ADMIN','SERVICE')">
 							<li><a href="/admin/user/list">會員管理</a></li>
 						</sec:authorize>
-
-						<sec:authorize access="hasAnyRole('SALES','SERVICE')">
-							<li><a href="/recipient/sale/list">接收訂單</a></li>
-						</sec:authorize>
-
+						
 						<sec:authorize
 							access="hasAnyRole('NORMAL','ORDER','PARTTIME','SALES','SERVICE','ARTICLE','ADMIN')">
 							<li><a href="/user/reset/info">基本資料設定</a></li>
-							<li><a href="/recipient/list">保險訂單查詢</a></li>
 							<li><a href="/user/reset/pw">重設密碼</a></li>
 						</sec:authorize>
+						
+						<sec:authorize access="hasAnyRole('ORDER')">
+							<li><a href="/recipient/list">保險訂單查詢</a></li>
+						</sec:authorize>
+						
+						<sec:authorize access="hasAnyRole('SALES','SERVICE')">
+							<li><a href="/recipient/sale/list">接收訂單</a></li>
+						</sec:authorize>	
 					</ul></li>
 
 				<sec:authorize

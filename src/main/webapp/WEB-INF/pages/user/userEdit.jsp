@@ -9,6 +9,7 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 <title>Triple i</title>
 
 </head>
@@ -75,7 +76,7 @@
 								</div>
 								
 								<div class="form-group required">
-			    					<label for="tel" class="col-md-2 control-label">電話</label>
+			    					<label for="tel" class="col-md-2 control-label">聯絡電話</label>
 			    					<div class="col-md-8">
 			      						<input type="text" class="form-control" id="tel" name="tel" placeholder="+886" value="${userDetails.tel}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
@@ -105,6 +106,14 @@
 </html>
 <script type="text/javascript">
 $(function(){
+	
+	$('#birthdate').inputmask({
+		  mask: '9999-99-99'
+	});
+	
+	$('#tel').inputmask({
+		  mask: '9999-999-999'
+	});
 	
 	$("#saveButton").bind("click", function() {
 		
