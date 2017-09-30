@@ -18,7 +18,7 @@
 	<div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
-		<div style="padding-top: 10vh">
+		<div style="padding-top: 9vh">
 			
 
 					<form class="form-horizontal col-md-12" id="dataForm" style="width:85%">

@@ -16,7 +16,7 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-		<div style="padding-top:9vh">
+		<div style="padding-top:8vh">
 			<h3>訂單紀錄</h3>
 			<div id="jsGrid"></div>
 			

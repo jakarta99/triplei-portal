@@ -58,7 +58,7 @@ padding-bottom:2vh;
 		<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-		<div style="padding:0;width:100%;height:100%;color:white;padding-top:9vh">
+		<div style="padding:0;width:100%;height:100%;color:white;padding-top:8vh">
 			<div class="col-sm-3" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
 			<div style="margin:7% auto 0 auto; display:table;width:70%;">
 				<br/><br/>
