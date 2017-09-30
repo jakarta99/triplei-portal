@@ -37,7 +37,7 @@ p{
 				<h1 style="font-size: 2vw; margin-top: 10px; margin-bottom: 25px;">讓你的財富開始起飛</h1>
 					<div style="opacity: 0.8; margin-bottom: 7vh;">TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問</div>
 					<div class="col-sm-12">
-						<a href="/">
+						<a href="/product/list">
 							<button id="productBtn" name="productBtn" class="btn btn-md btn-primary" style="background-color: white; color: #5C8DEC; border-radius: 30px;">開始篩選儲蓄險</button>
 						</a>
 					</div>

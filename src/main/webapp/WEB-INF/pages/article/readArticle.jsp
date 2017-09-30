@@ -1,8 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -37,7 +36,7 @@ content img{
 		</div>
 		<div class="col-lg-9" style="height:100%;overflow-y:scroll;color:black">
 			<div class="col-sm-12" style="height:40vh;width:100%; margin-top: 3%; display: table">
-				<img src="${article.bannerImage}" title="">
+				<img style="width:100% ;margin-top: 1%;" src="${article.bannerImage}" title="">
 					<div>
 						<h3 style="font-size:180%">${article.title}</h3>
 						<p style="font-size:180%">${article.content}</p>
@@ -46,24 +45,6 @@ content img{
 		</div>
 	</div>
 </div>
-	<!-- Testing inserting images -->
-<!-- 	<div class="col-lg-8 bg-info" -->
-<!-- 		style="height: 100vh; display: table; table-layout: fixed; float: right; padding: 0;"> -->
-
-<!-- 		<div style="display: table-cell;"> -->
-<!-- 		<div style="margin:5% auto auto 8%; width:85%;border:1px black solid"> -->
-<!-- 			<img src="/resources/logo/google-logo.png" alt="#" style="width:100%"> -->
-<%-- 			<h2>${article.title}</h2> --%>
-<%-- 			<h5>${article.author}</h5> --%>
-<%-- 			<span>${article.content}</span> --%>
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-	<!-- Testing ends here -->
-
 
 </body>
 </html>
-
-
-
