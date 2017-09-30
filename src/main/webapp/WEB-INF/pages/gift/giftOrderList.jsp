@@ -67,6 +67,7 @@
 			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 150 },
 			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 150 },
 			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 150 },
+			            { title: '訂單處理狀態', name: "status", type: "text", width: 150 },
      
 			        ]
 			    });

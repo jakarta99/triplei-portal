@@ -67,7 +67,19 @@
 			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 150 },
 			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 150 },
 			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 150 },
-     
+			            { title: '訂單處理狀態', name: "status", width: 150, itemTemplate:function(data){
+			            	if(data=="PROCESSING"){
+								return $("<span></span>").text("訂單處理中");	
+							}else if(data=="SHIPORDER"){
+								return $("<span></span>").text("出貨中");
+							}else if(data=="DONE"){
+								return $("<span></span>").text("處理完成");
+							}else if(data=="CANCEL"){
+								return $("<span></span>").text("退訂中");
+							}else if(data=="CANCELDONE"){
+								return $("<span></span>").text("退訂完成");
+							} },
+
 			        ]
 			    });
 			    
