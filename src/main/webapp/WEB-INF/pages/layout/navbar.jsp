@@ -40,7 +40,7 @@ ul {
 
 		</div>
 		<div id="navbar" class="navbar-collapse collapse navbar-right"
-			style="width:75vw;font-size: 85%; padding: 0; position: relative;text-align:right;float:right">
+			style="width:75vw;font-size: 85%; padding: 0; position: relative;text-align:right;float:right;padding-right:3vw">
 			<ul class="nav navbar-nav navbar-right">
 
 				<li class="dropdown"><sec:authorize

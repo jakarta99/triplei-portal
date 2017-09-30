@@ -18,19 +18,13 @@
 	<div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
-		<div>
+		<div style="padding-top: 10vh">
 			
-			<h3>聯繫客服</h3>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form class="form-horizontal" id="dataForm">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h4>
-									<span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>聯繫客服</strong>
-								</h4>
-							</div>
-							<div class="panel-body">
+
+					<form class="form-horizontal col-md-12" id="dataForm" style="width:85%">
+								<h3 style=" margin-left: 10vh; margin-bottom: 5vh;">
+									<strong>聯繫客服</strong>
+								</h3>
 
 								<div class="form-group required">
 									<label for="questionType" class="col-md-2 control-label">問題分類</label>
@@ -83,15 +77,10 @@
 								<!-- 			    					</div> -->
 								<!-- 								</div>	 -->
 
-
-
-							</div>
-						</div>
 					</form>
-				</div>
-			</div>
 
-			<div class="row">
+
+			<div class="row col-sm-12" style="width: 84%; margin-left: 8%">
 				<div class="col-md-6">
 					<div>
 						<a href="#" class="btn btn-lg btn-primary btn-block"

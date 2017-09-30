@@ -39,7 +39,7 @@
 <body>
 	<div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div style="padding-top:9vh">
+		<div style="padding-top:8vh">
 			<section class="login-form">
 			<div class="col-sm-6" style="height: 100vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;">
 				<!-- 左邊白 -->
