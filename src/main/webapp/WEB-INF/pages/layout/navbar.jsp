@@ -32,15 +32,15 @@ ul {
 					class="icon-bar"></span>
 			</button>
 
-				<a class="navbar-brand" href="/" style="padding: 0; padding-left: 5%; margin-top: 1vh;">
-				<img class="img-responsive" src="/resources/pic/logo-white-big.png" style="margin: 0; max-height: 85%;">
+				<a class="navbar-brand" href="/" style="padding: 0; ">
+				<img class="img-responsive" src="/resources/pic/logo-white-big.png" style="margin: 0;margin-top:1vh; max-height: 75%;">
 				</a>
 			
 			<!-- 			<a class="navbar-brand" href="/"  style="color:white">Triple-I</a> -->
 
 		</div>
 		<div id="navbar" class="navbar-collapse collapse navbar-right"
-			style="width:75vw;font-size: 85%; padding: 0; position: relative;text-align:right;float:right;padding-right:3vw">
+			style="font-size: 85%; padding: 0; position: relative;text-align:right;float:right;">
 			<ul class="nav navbar-nav navbar-right">
 
 				<li class="dropdown"><sec:authorize
