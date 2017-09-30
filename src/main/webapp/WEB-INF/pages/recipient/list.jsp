@@ -67,7 +67,7 @@
 			            { title: '預約時段3', name: "bookedTime_3", width: 90, itemTemplate: function(val) {if(val.endsWith("00")) {return val}else {return "無"}}  },
 			            { title: '超商', name: "convenienceStoreEntity.manufacturer", width: 60,itemTemplate: function(val) {if(val==null){return "無";}else{return val;}} },
 			            { title: '門市', name: "convenienceStoreEntity.storeName", width: 60, itemTemplate: function(val) {if(val==null){return "無";}else{return val+"門市";}} },
-			            { title: '業務員', name: "user.name", type: "text", width: 80 },
+			            { title: '業務員', name: "user.name", width: 80, itemTemplate: function(val) {if(val==null){return "尚未指派";}else{return val ;}} },
 			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80, itemTemplate: function(val) {if(val=="已見面，未購買(刪除審核中點數)"){return "已取消";}else{return val;}} },
 			            { title: '可獲得點數', name: "product.getPoint", type: "text", width: 80 },
 			        ]

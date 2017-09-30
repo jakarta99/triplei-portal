@@ -529,7 +529,7 @@ $( function() {
 								});
 								
 								$.ajax({
-									url : "<c:url value='/admin/wish'/>",
+									url : "<c:url value='/wish'/>",
 									method : "POST",
 									data : formData,
 									enctype : "multipart/form-data",

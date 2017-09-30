@@ -138,97 +138,97 @@ public class AdminRecipientController {
 		return new GridResponse<>(page);
 	}
 
-	@PostMapping
-	public AjaxResponse<RecipientEntity> insert(final Model model, @RequestParam("name") String name,
-			@RequestParam("age") String age, @RequestParam("gender") String gender, @RequestParam("tel") String tel,
-			@RequestParam("date_1_1") String date_1_1, @RequestParam("date_1_2") String date_1_2,
-			@RequestParam("date_1_3") String date_1_3, @RequestParam("date_2_1") String date_2_1,
-			@RequestParam("date_2_2") String date_2_2, @RequestParam("date_2_3") String date_2_3,
-			@RequestParam("date_3_1") String date_3_1, @RequestParam("date_3_2") String date_3_2,
-			@RequestParam("date_3_3") String date_3_3, @RequestParam("address") String address,
-			@RequestParam("pid") String pid, @RequestParam("insureAmount") String insureAmountS,
-			@RequestParam("premiumAfterDiscount") String premiumAfterDiscountS,
-			@RequestParam("getPoint") String getPointS) {
-
-		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
-		try {
-			RecipientEntity form = new RecipientEntity();
-			ProductEntity productEntity = productService.getOneAll(Integer.parseInt(pid));
-
-			productEntity.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
-			productEntity.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
-			productEntity.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
-			form.setCode(productEntity.getCode());
-			form.setYear(productEntity.getYear()+"");
-			form.setName(name);
-			form.setGender(gender);
-			form.setAge(Integer.parseInt(age));
-			form.setTel(tel);
-			form.setBookedTime_1(date_1_1 + " " + date_1_2 + " " + date_1_3);
-			form.setBookedTime_2(date_2_1 + " " + date_2_2 + " " + date_2_3);
-			form.setBookedTime_3(date_3_1 + " " + date_3_2 + " " + date_3_3);
-			form.setProduct(productEntity);
-			form.setCanGetPoint((int) productEntity.getGetPoint().doubleValue());
-			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
-			log.debug("convenienceStoreEntity: {}", convenienceStoreEntity);
-			form.setConvenienceStoreEntity(convenienceStoreEntity);
-			form.setCreatedTime(new Timestamp(new Date().getTime()));
-			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
-			log.debug("userDetails: {}", userDetails.getUsername());
-			form.setCreatedBy(userDetails.getUsername());
-			form.setAlreadyGetPoint(false);
-			form.setAlreadyAudittedPoint(false);
-			form.setAlreadyDeletedPoint(false);
-			form.setOrderStatus("未指派業務員");
-			
-			// 一般會員下單後 自動升級成下單會員
-			UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
-			log.debug("升級會員前{}",owner);
-			Set<RoleEntity> roles = owner.getRoles();
-			RoleEntity role = roleService.getDao().findByCode("ROLE_ORDER");
-			if (!roles.contains(role)) {
-				roles.add(role);
-				owner.setRoles(roles);
-				userDao.save(owner);
-				log.debug("升級成功!!{}");
-			}
-
-
-			final RecipientEntity insertResult = recipientService.insert(form);
-			String formatStr = "%07d";
-			String formatAns = String.format(formatStr,insertResult.getId());
-			insertResult.setOrderNo(formatAns);
-			final RecipientEntity insertResultG = recipientService.insert(insertResult);
-
-			response.setData(insertResultG);
-			//發email給顧客
-			emailService.sendAlertEmailToCustomer(owner, insertResultG);
-			//發email給管理員
-			List<UserEntity> users = userDao.findAll();
-			for(UserEntity admin : users){
-				Set<RoleEntity> userRole = admin.getRoles();
-				RoleEntity roleAdmin = roleService.getDao().findByCode("ROLE_ADMIN");
-				if(userRole.contains(roleAdmin)){
-					emailService.sendAlertEmailToAdminC(admin , owner, insertResultG);
-					log.debug("管理者:{}",admin.getName());
-				}
-			}
-			
-
-		} catch (final ApplicationException ex) {
-			ex.printStackTrace();
-			response.addMessages(ex.getMessages());
-			log.debug("~~~~~~~~~~{}");
-		} catch (final Exception e) {
-			response.addException(e);
-			log.debug("---------------{}");
-		}
-
-//		 log.debug("{}", response);
-
-		return response;
-	}
+//	@PostMapping
+//	public AjaxResponse<RecipientEntity> insert(final Model model, @RequestParam("name") String name,
+//			@RequestParam("age") String age, @RequestParam("gender") String gender, @RequestParam("tel") String tel,
+//			@RequestParam("date_1_1") String date_1_1, @RequestParam("date_1_2") String date_1_2,
+//			@RequestParam("date_1_3") String date_1_3, @RequestParam("date_2_1") String date_2_1,
+//			@RequestParam("date_2_2") String date_2_2, @RequestParam("date_2_3") String date_2_3,
+//			@RequestParam("date_3_1") String date_3_1, @RequestParam("date_3_2") String date_3_2,
+//			@RequestParam("date_3_3") String date_3_3, @RequestParam("address") String address,
+//			@RequestParam("pid") String pid, @RequestParam("insureAmount") String insureAmountS,
+//			@RequestParam("premiumAfterDiscount") String premiumAfterDiscountS,
+//			@RequestParam("getPoint") String getPointS) {
+//
+//		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
+//		try {
+//			RecipientEntity form = new RecipientEntity();
+//			ProductEntity productEntity = productService.getOneAll(Integer.parseInt(pid));
+//
+//			productEntity.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
+//			productEntity.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
+//			productEntity.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
+//			form.setCode(productEntity.getCode());
+//			form.setYear(productEntity.getYear()+"");
+//			form.setName(name);
+//			form.setGender(gender);
+//			form.setAge(Integer.parseInt(age));
+//			form.setTel(tel);
+//			form.setBookedTime_1(date_1_1 + " " + date_1_2 + " " + date_1_3);
+//			form.setBookedTime_2(date_2_1 + " " + date_2_2 + " " + date_2_3);
+//			form.setBookedTime_3(date_3_1 + " " + date_3_2 + " " + date_3_3);
+//			form.setProduct(productEntity);
+//			form.setCanGetPoint((int) productEntity.getGetPoint().doubleValue());
+//			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
+//			log.debug("convenienceStoreEntity: {}", convenienceStoreEntity);
+//			form.setConvenienceStoreEntity(convenienceStoreEntity);
+//			form.setCreatedTime(new Timestamp(new Date().getTime()));
+//			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+//					.getPrincipal();
+//			log.debug("userDetails: {}", userDetails.getUsername());
+//			form.setCreatedBy(userDetails.getUsername());
+//			form.setAlreadyGetPoint(false);
+//			form.setAlreadyAudittedPoint(false);
+//			form.setAlreadyDeletedPoint(false);
+//			form.setOrderStatus("未指派業務員");
+//			
+//			// 一般會員下單後 自動升級成下單會員
+//			UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
+//			log.debug("升級會員前{}",owner);
+//			Set<RoleEntity> roles = owner.getRoles();
+//			RoleEntity role = roleService.getDao().findByCode("ROLE_ORDER");
+//			if (!roles.contains(role)) {
+//				roles.add(role);
+//				owner.setRoles(roles);
+//				userDao.save(owner);
+//				log.debug("升級成功!!{}");
+//			}
+//
+//
+//			final RecipientEntity insertResult = recipientService.insert(form);
+//			String formatStr = "%07d";
+//			String formatAns = String.format(formatStr,insertResult.getId());
+//			insertResult.setOrderNo(formatAns);
+//			final RecipientEntity insertResultG = recipientService.insert(insertResult);
+//
+//			response.setData(insertResultG);
+//			//發email給顧客
+//			emailService.sendAlertEmailToCustomer(owner, insertResultG);
+//			//發email給管理員
+//			List<UserEntity> users = userDao.findAll();
+//			for(UserEntity admin : users){
+//				Set<RoleEntity> userRole = admin.getRoles();
+//				RoleEntity roleAdmin = roleService.getDao().findByCode("ROLE_ADMIN");
+//				if(userRole.contains(roleAdmin)){
+//					emailService.sendAlertEmailToAdminC(admin , owner, insertResultG);
+//					log.debug("管理者:{}",admin.getName());
+//				}
+//			}
+//			
+//
+//		} catch (final ApplicationException ex) {
+//			ex.printStackTrace();
+//			response.addMessages(ex.getMessages());
+//			log.debug("~~~~~~~~~~{}");
+//		} catch (final Exception e) {
+//			response.addException(e);
+//			log.debug("---------------{}");
+//		}
+//
+////		 log.debug("{}", response);
+//
+//		return response;
+//	}
 
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
