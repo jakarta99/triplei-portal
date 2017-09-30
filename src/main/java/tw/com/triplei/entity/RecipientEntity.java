@@ -70,6 +70,15 @@ public class RecipientEntity extends GenericEntity {
 	
 	@Column(name = "ALREADY_DELETED_POINT")
 	private Boolean alreadyDeletedPoint; //是否已刪除點數
+	
+	@Column(name = "USER_NAME")
+	private String userNamee;//業務員姓名(篩選用)
+	
+	@Column(name = "PCODE")
+	private String code;//商品代碼(篩選用)
+	
+	@Column(name = "YEAR")
+	private String year;//年期(篩選用)
 
 	@Override
 	public String toString() {
@@ -78,8 +87,11 @@ public class RecipientEntity extends GenericEntity {
 				+ ", bookedTime_3=" + bookedTime_3 + ", convenienceStoreEntity=" + convenienceStoreEntity + ", user="
 				+ user + ", orderStatus=" + orderStatus + ", orderNo=" + orderNo + ", canGetPoint=" + canGetPoint
 				+ ", alreadyGetPoint=" + alreadyGetPoint + ", alreadyAudittedPoint=" + alreadyAudittedPoint
-				+ ", alreadyDeletedPoint=" + alreadyDeletedPoint + "]";
+				+ ", alreadyDeletedPoint=" + alreadyDeletedPoint + ", userNamee=" + userNamee + ", code=" + code
+				+ "]";
 	}
+
+
 
 
 

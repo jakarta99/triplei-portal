@@ -27,9 +27,10 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
-						<input type="hidden" id="id" name="id" value="${entity.id}" /> <input
-							type="hidden" id="orderNo" name="orderNo"
-							value="${entity.orderNo}" />
+						<input type="hidden" id="id" name="id" value="${entity.id}" />
+						   <input type="hidden" id="userNamee" name="userNamee" value="${entity.userNamee}" />
+							<input type="hidden" id="code" name="code" value="${entity.code}" />
+							<input type="hidden" id="year" name="year" value="${entity.year}" />
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
