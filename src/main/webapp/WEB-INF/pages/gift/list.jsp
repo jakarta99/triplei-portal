@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -291,23 +287,28 @@
 
 <div id="dialog" title="商品明細">
       <div>
-        <div>
-            <img id="orderImage" style="height: 200px; width: 200px;" >
+	      <div class="container-fluid">
+	        <div class="col-md-7">
+		        <div>
+		            <span>積點商品名稱:    </span>
+		            <span id="orderName" style="text-align: center;"></span>
+		        </div>
+		        <div>
+		        <label for="quantity1" class="">請輸入數量:</label>	
+					<input type="number" class="" id="quantity1"
+						name="quantity1" min="1" value="1" placeholder="quantity"/> 
+		        </div>
+		        <div>
+		        	<img alt="" src="/resources/pic/積點專區/點數(小).png" width="30" height="30">
+		            <span>商品兌換點數:    </span>
+		            <span id="orderPoint" style="text-align: center;"></span>
+		        </div>
+	        </div>
+	        <div class="col-md-4">
+	            <img id="orderImage" style="height: 200px; width: 200px;" >
+	        </div>
         </div>
-        <div>
-            <span>積點商品名稱:    </span>
-            <span id="orderName" style="text-align: center;"></span>
-        </div>
-        <div>
-        	<img alt="" src="/resources/pic/積點專區/點數(小).png" width="30" height="30">
-            <span>商品兌換點數:    </span>
-            <span id="orderPoint" style="text-align: center;"></span>
-        </div>
-        <div>
-        <label for="quantity1" class="">請輸入數量:</label>	
-			<input type="number" class="" id="quantity1"
-				name="quantity1" min="1" value="1" placeholder="quantity"/> 
-        </div>
+        <hr>
         <div>
         <label for="recipient" class="">收件人姓名:</label>	
 			<input type="text" class="" id="recipient"
@@ -331,7 +332,8 @@
 				<option value="下午">下午</option>
 				</select>
         </div>
-        <div>
+        <div class="col-md-8"></div>
+        <div class="col-md-3">
             <a href="#" class="btn btn-lg btn-primary btn-block"
                data-loading-text="Loading" id="saveButton">確認購買</a>
         </div>
