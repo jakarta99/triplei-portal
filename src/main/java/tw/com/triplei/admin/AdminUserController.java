@@ -111,6 +111,12 @@ public class AdminUserController {
 			if(form.getEditState() == null){
 				form.setEditState("");
 			}
+			// 若由FB登入 需做些處理 (FB登入DB不會記錄密碼)
+			if(entity.getProvider() != null){
+				form.setProvider(entity.getProvider());
+				form.setProviderUserId(entity.getProviderUserId());
+			}
+			
 			
 			
 			final UserEntity updateResult = userService.update(form);

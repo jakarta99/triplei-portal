@@ -97,7 +97,7 @@
 			        fields: [
 			            { name: '修/刪', width:30, itemTemplate:btns },
 						{ name: "id", visible: false},
-						{ title: '會員帳號', name: "accountNumber", type: "text", width: 50 },
+						{ title: '會員帳號', name: "accountNumber", type: "text", width: 100 },
 						{ title: '會員密碼', visible: false },
 						{ title: '會員姓名', name: "name", type: "text", width: 50 },
 						{ title: '會員email', name: "email", type: "text", width: 100 },
