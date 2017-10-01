@@ -44,7 +44,7 @@
 						<a href="/insurer/filt"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
 					</h4>
-					<div id="bm" style="width: 170%;position: absolute;left: -100px"></div>
+					<div id="bm" style="width: 120%;position: relative;left: -40px" ></div>
 				</div>
 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
@@ -223,7 +223,7 @@
 			  renderer: 'svg',
 			  loop: true,
 			  autoplay: true,
-			  path: '/resources/pic/各公司資訊/company.json'
+			  path: '/resources/pic/各公司資訊/data.json'
 			})
 	</script>
 </body>

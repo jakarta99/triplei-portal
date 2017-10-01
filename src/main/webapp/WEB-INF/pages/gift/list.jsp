@@ -31,45 +31,32 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding:0;width:100%;height:100%;color:white;">
 <!-- 左半藍 -->
-			<div class="col-sm-3" style="background-color:#5C8DEC;height:100vh;">
+			<div class="col-xs-12 col-sm-3" style="background-color:#5C8DEC;height:100vh;">
 			
-				<div class="col-sm-1"></div>
-				<div class="col-sm-10" style="height: 100vh;padding-left: 0px;padding-right: 0px;">
-				<div class="col-sm-12" style="padding-top: 15vh;padding-bottom: 0vh">
+				<div class="col-xs-1 col-sm-1"></div>
+				<div class="col-xs-10 col-sm-10" style="height: 100vh;padding-left: 0px;padding-right: 0px;">
+				<div class="col-xs-12 col-sm-12" style="padding-top: 15vh;padding-bottom: 0vh">
 				<span style="font-size: 2.5em;font-family: 微軟正黑體;">T-Point</span>
 				<span style="font-size: 1.5em;font-family: 微軟正黑體;">積點專區</span>
 				</div>
-				<div class="col-sm-12">
+				<div class="col-xs-12 col-sm-12">
 				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="41" height="41">
 				<span id="userPoint" style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
 				</div>
-				<div class="col-sm-12">
-				<div class="col-sm-12" style="height: 15vh;border: 1px white solid;border-radius: 20px;margin-top: 3vh;padding-left: 0px;padding-right: 0px;">
-				<div class="col-sm-6" style="border-right: 1px white solid;height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
+				<div class="col-xs-12 col-sm-12">
+				<div class="col-xs-12 col-sm-12" style="height: 15vh;border: 1px white solid;border-radius: 20px;margin-top: 3vh;padding-left: 0px;padding-right: 0px;">
+				<div class="col-xs-6 col-sm-6" style="border-right: 1px white solid;height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%;">審核中點數</p>
 				<span id="audittingPoint" >${audittingPoint}</span>
 				</div>
-				<div class="col-sm-6" style="height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
+				<div class="col-xs-6 col-sm-6" style="height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
 				<p style="margin-top: 10%;margin-bottom: 10%">已兌換點數</p>
 				<span id="exchangedPoint" >${exchangedPoint}</span>
 				</div>
 				</div></div>
-					<div id="bm" style="width: 100%;height: 40%"></div>
+					<div class="col-xs-12 col-sm-12" id="bm" style="width: 140%;position: relative;top: 20px;left: -50px"></div>
 				</div>
-				<div class="col-sm-1"></div>
-<!-- 			<div style="margin:7% auto 0 auto; display:table;width:70%;"> -->
-<!-- 				<br/><br/> -->
-<!-- 				<h1>商品專區</h1> -->
-<!-- 				<br/>				 -->
-<!-- 				<div id="container-fluid" style="height:100%;position:relative;"> -->
-<!-- 				<div > -->
-<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;"> -->
-<!-- 				</div> -->
-<!-- 				<div > -->
-<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_0.png" width="100%" style="width:30%;position:absolute;margin:23% auto auto 50%;"> -->
-<!-- 				</div> -->
-<!-- 				</div> -->
-<!-- 				</div> -->
+				<div class="col-xs-1 col-sm-1"></div>
 			</div>
 <!-- 右半白 -->
 			<div class="col-sm-9" style="height:100%;padding:3%;color:black;overflow-y:scroll" id="style-1">
