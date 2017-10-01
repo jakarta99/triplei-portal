@@ -103,6 +103,15 @@ public class AdminUserController {
 		final AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
 		
 		try {
+			UserEntity entity = userService.getOne(form.getId());
+			// 不允許後台管理員修改:生日、性別、密碼
+			form.setBirthdate(entity.getBirthdate());
+			form.setGender(entity.getGender());
+			form.setPassword(entity.getPassword());
+			if(form.getEditState() == null){
+				form.setEditState("");
+			}
+			
 			
 			final UserEntity updateResult = userService.update(form);
 
@@ -122,13 +131,16 @@ public class AdminUserController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public AjaxResponse<InsurerEntity> delete(@PathVariable(value = "id") final long id) {
+	public AjaxResponse<UserEntity> delete(@PathVariable(value = "id") final long id) {
 		
 		log.debug("{}", id);
 		
-		final AjaxResponse<InsurerEntity> response = new AjaxResponse<InsurerEntity>();
+		final AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
 		
-		try {			
+		try {		
+			UserEntity entity = userService.getOne(id);
+			entity.setEditState("delete");
+			entity.getRoles().clear();
 			userService.delete(id);
 			
 		} catch (final Exception e) {

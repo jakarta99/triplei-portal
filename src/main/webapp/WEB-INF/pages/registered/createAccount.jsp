@@ -101,7 +101,7 @@
 					</div>
 								
 					<div class="form-group required">
-						<label for="tel" class="col-md-3 control-label">電話</label>
+						<label for="tel" class="col-md-3 control-label">聯絡電話</label>
 						<div class="col-md-8">
 							<input type="tel" class="form-control" id="tel"
 								name="tel" placeholder="+886" value="" /> 

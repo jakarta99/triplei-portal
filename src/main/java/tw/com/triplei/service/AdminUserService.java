@@ -45,10 +45,17 @@ public class AdminUserService extends GenericService<UserEntity>{
 	@Override
 	public List<Message> validateInsert(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
+		return messages;
+	}
+
+	@Override
+	public List<Message> validateUpdate(UserEntity entity) {
 		
+		List<Message> messages = new ArrayList<Message>();
+		
+		// 確保要更新的資料該有的都要有
 		if(StringUtils.isBlank(entity.getProviderUserId())){
 			// 一般會員註冊
-			UserEntity dbEntity = userDao.findByEmail(entity.getEmail()); // email 不得重複註冊
 			
 			if (StringUtils.isBlank(entity.getName())) {
 				messages.add(Message.builder().code("name").value("會員姓名為必填欄位").build());
@@ -58,10 +65,6 @@ public class AdminUserService extends GenericService<UserEntity>{
 				messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
 			}
 
-			if (dbEntity != null) {
-				messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
-			}
-
 			if (StringUtils.isBlank(entity.getTel())) {
 				messages.add(Message.builder().code("tel").value("電話為必填欄位").build());
 			}
@@ -69,32 +72,13 @@ public class AdminUserService extends GenericService<UserEntity>{
 			if (StringUtils.isBlank(entity.getPassword())) {
 				messages.add(Message.builder().code("password").value("請輸入密碼").build());
 			}
-
-			if (StringUtils.isBlank(entity.getCheckPassword())) {
-				messages.add(Message.builder().code("checkPassword").value("請輸入確認密碼").build());
-			}
-
-			if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())) {
-				if (!entity.getPassword().equals(entity.getCheckPassword())) {
-					messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
-					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
-				}
-			}
 			
+			if (entity.getBirthdate() == null){
+				messages.add(Message.builder().code("birthdate").value("生日為必填欄位").build());
+			}
 
-
-			log.debug("{}", messages);
-		}
+		}		
 		
-
-		
-		return messages;
-	}
-
-	@Override
-	public List<Message> validateUpdate(UserEntity entity) {
-		
-		List<Message> messages = new ArrayList<Message>();
 		log.debug("{}", messages);
 		
 		return messages;
@@ -122,17 +106,23 @@ public class AdminUserService extends GenericService<UserEntity>{
 	}
 
 	@Transactional
-	//@org.springframework.transaction.annotation.Transactional
 	@Override
 	public UserEntity handleUpdate(final UserEntity entity) {
+		// 傳進來前Controller要先撈到entity的所有資料，以免資料更新異常
+		
 		final UserEntity dbUserEntity = userDao.findOne(entity.getId());
-		// 後台會員管理不能更改密碼，密碼不須加密
-//		dbUserEntity.setPassword(dbUserEntity.getPassword());
+
+		dbUserEntity.setAccountNumber(entity.getAccountNumber());
+		dbUserEntity.setName(entity.getName());
+		dbUserEntity.setPassword(entity.getPassword()); // 後台會員管理不能更改密碼，密碼不須加密，若需由此更改密碼，需先加密過在進來，避免二次加密
 		dbUserEntity.setEmail(entity.getEmail());
 		dbUserEntity.setEnabled(entity.getEnabled());
 		if(!StringUtils.isBlank(entity.getRegisteredCode())){
 			dbUserEntity.setRegisteredCode(entity.getRegisteredCode());
 		}
+		dbUserEntity.setBirthdate(entity.getBirthdate());
+		dbUserEntity.setGender(entity.getGender());
+		dbUserEntity.setTel(entity.getTel());
 		
 		dbUserEntity.setRemainPoint(entity.getRemainPoint());
 		dbUserEntity.setAudittingPoint(entity.getAudittingPoint());
@@ -142,7 +132,7 @@ public class AdminUserService extends GenericService<UserEntity>{
 		dbUserEntity.getRoles().clear();
 		
 		// 每個會員至少會有一般會員權限		
-		if(entity.getRoles().isEmpty()){
+		if(entity.getRoles().isEmpty() && (!entity.getEditState().equals("delete"))){
 			final Set<RoleEntity> RoleEntity = new HashSet<>();
 			final RoleEntity roleDefault = roleDao.findByCode("ROLE_NORMAL"); // 預設權限為一般會員
 			RoleEntity.add(roleDefault);

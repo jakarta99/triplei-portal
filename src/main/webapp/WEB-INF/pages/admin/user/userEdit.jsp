@@ -52,11 +52,34 @@
 								
 								<div class="form-group required">
 			    					<label for="email" class="col-md-2 control-label">會員email</label>
-			    					<div class="col-md-8">
+			    					<div class="col-md-3">
 			      						<input type="text" class="form-control" id="email" name="email" placeholder="email" value="${entity.email}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
+			    					
+			    					<label for="tel" class="col-md-2 control-label">連絡電話</label>
+			    					<div class="col-md-3">
+			      						<input type="text" class="form-control" id="tel" name="tel" value="${entity.tel}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
 								</div>
+								
+								<div class="form-group required">
+			    					<label for="birthdate" class="col-md-2 control-label">生日</label>
+			    					<div class="col-md-3">
+			      						<p class="form-control-static">${entity.birthdate}</p>
+			      						<input type="hidden" class="form-control" id="birthdate" name="birthdate" value="${entity.birthdate}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+			    					
+			    					<label for="gender" class="col-md-2 control-label">性別</label>
+			    					<div class="col-md-3">
+			    						<p class="form-control-static">${entity.gender == 'female' ? '女性' : '男性'}</p>
+										<input type="hidden" class="form-control" id="gender" name="gender" value="${entity.gender}"/>
+										<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+							
 								
 								<div class="form-group required">
 			    					<label for="exchangedPoint" class="col-md-2 control-label">已兌換點數</label>
@@ -68,20 +91,18 @@
 								
 								<div class="form-group required">
 			    					<label for="remainPoint" class="col-md-2 control-label">剩餘點數</label>
-			    					<div class="col-md-8">
+			    					<div class="col-md-3">
 			      						<input type="text" class="form-control" id="remainPoint" name="remainPoint" placeholder="remainPoint" value="${entity.remainPoint}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
-								</div>
-								
-								<div class="form-group required">
+			    					
 			    					<label for="audittingPoint" class="col-md-2 control-label">審核中點數</label>
-			    					<div class="col-md-8">
+			    					<div class="col-md-3">
 			      						<input type="text" class="form-control" id="audittingPoint" name="audittingPoint" placeholder="audittingPoint" value="${entity.audittingPoint}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
-								</div>	
-																
+								</div>
+														
 								<div class="form-group required">
 									<label for="enabled" class="col-md-2 control-label">狀態 </label>
 									<div class="col-md-8">

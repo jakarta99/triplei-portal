@@ -10,6 +10,7 @@ import tw.com.triplei.commons.GenericService;
 import tw.com.triplei.commons.Message;
 import tw.com.triplei.dao.RoleDao;
 import tw.com.triplei.entity.RoleEntity;
+import tw.com.triplei.entity.UserEntity;
 
 @Service
 public class RoleService extends GenericService<RoleEntity>{
@@ -33,6 +34,10 @@ public class RoleService extends GenericService<RoleEntity>{
 	public List<Message> validateUpdate(RoleEntity entity) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public RoleEntity getByCode(final String code) {
+		return dao.findByCode(code);
 	}
 
 }

@@ -147,7 +147,7 @@ public class EmailService {
 
 	}
 
-	public void sendNewPassword(UserEntity entity) {
+	public void sendUpdatePasswordLink(UserEntity entity) {
 
 		String registeredCode = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 15); // 認證uuid
 		entity.setRegisteredCode(registeredCode);
@@ -163,9 +163,11 @@ public class EmailService {
 				.append("親愛的 " + entity.getName() + " 您好，<br/><br/>")
 				.append("更新密碼連結為:")
 				.append("<a href=\"" + url + " \">" + url + "</a> <br><br>")
-				.append("請在半小時內完成密碼變更，否則此連結將失效。 <br><br>")
+				.append("為保障您的交易安全，請在半小時內完成密碼變更，否則此連結將失效。 <br><br>")
+				.append("更改成功後妥善保存修改後的新密碼，切勿向第三人透漏。<br><br>")
 				//.append("<br /> 提醒您，使用臨時密碼登入後，請更改您的密碼及基本資料。<br /><br />")
-				.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
+				.append("若有任何其他關於保險的問題，歡迎到TRIPLE I的線上客服提問，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
+				.append("祝您順心<br /><br />")
 				.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
 				.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
 				.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
@@ -178,7 +180,7 @@ public class EmailService {
 
 			helper.setFrom("triplei");
 			helper.setTo(entity.getEmail());
-			helper.setSubject("Triple-I會員臨時密碼");
+			helper.setSubject("Triple-I 忘記/重新設定密碼信函");
 			helper.setText(content, true);
 			mailSender.send(mimeMessage);
 

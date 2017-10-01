@@ -3,9 +3,13 @@ package tw.com.triplei.web;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.Message;
-import tw.com.triplei.dao.RoleDao;
-import tw.com.triplei.dao.UserDao;
+import tw.com.triplei.entity.RoleEntity;
 import tw.com.triplei.entity.UserEntity;
-import tw.com.triplei.service.EmailService;
-import tw.com.triplei.service.UserService;
 import tw.com.triplei.service.AdminUserService;
+import tw.com.triplei.service.EmailService;
+import tw.com.triplei.service.RoleService;
+import tw.com.triplei.service.UserService;
 
 @Slf4j
 @Controller
@@ -40,11 +44,11 @@ public class RegisteredController {
 	@Autowired
 	private EmailService emailservice;
 	
-//	@Autowired
-//	private RoleDao roleDao;
-//	
-//	@Autowired
-//	private UserDao userDao;
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addPage(Model model) {
@@ -88,7 +92,7 @@ public class RegisteredController {
 			
 			UserEntity entity = adminUserService.getOne(form.getId());
 			log.debug("sendPwEditEMail entity {}:", entity);
-			emailservice.sendNewPassword(entity); // 發送忘記密碼的更信密碼認證連結
+			emailservice.sendUpdatePasswordLink(entity); // 發送忘記密碼的更信密碼認證連結
 			
 		}catch (final ApplicationException ex) {
 			ex.printStackTrace();
@@ -266,14 +270,38 @@ public class RegisteredController {
 			
 			form.setEnabled(false);  // 預設新註冊的會員不啟用
 			form.setAccountNumber(form.getEmail());  // 帳號預設為電子信箱
-			
+			form.setEditState("");
 			
 			form.setAudittingPoint(0);
 			form.setRemainPoint(0);
 			form.setExchangedPoint(0);
 			form.setRemainWishTimes(true);
-			final UserEntity insertResult = adminUserService.insert(form);
-			response.setData(insertResult);
+			
+			UserEntity entity ;
+			List<Message> messages = validateRegistered(form);
+			if (messages != null && messages.size() > 0) {
+				throw new ApplicationException(messages);
+			} 
+			
+			if(adminUserService.getByAccountNumber(form.getEmail())!=null){
+				
+				form.setId(adminUserService.getByAccountNumber(form.getEmail()).getId());
+				
+				final Set<RoleEntity> RoleEntity = new HashSet<>();
+				final RoleEntity roleDefault = roleService.getByCode("ROLE_NORMAL"); // 預設權限為一般會員
+				RoleEntity.add(roleDefault);
+				
+				form.setRoles(RoleEntity);
+				
+				form.setPassword(encodePasswrod(form.getPassword()));
+				
+				final UserEntity updateResult = adminUserService.update(form);
+				response.setData(updateResult);
+			} else {
+				final UserEntity insertResult = adminUserService.insert(form);
+				response.setData(insertResult);
+			}
+			
 			
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
@@ -287,7 +315,50 @@ public class RegisteredController {
 		return response;
 	}
 	
+	public String encodePasswrod(final String rawPassword) {
+		if(!StringUtils.isBlank(rawPassword)){
+			return passwordEncoder.encode(rawPassword);
+		} else {
+			return null;
+		}
+	}
 	
+	
+	private List<Message> validateRegistered(UserEntity entity) {
+		List<Message> messages = new ArrayList<Message>();
+		
+		boolean isBirthday;
+		
+		if(StringUtils.isBlank(entity.getProviderUserId())){
+			// 一般會員註冊
+			UserEntity dbEntity = adminUserService.getByEmail(entity.getEmail()); // email 不得重複註冊
+		
+			if (dbEntity != null && entity.getEnabled().equals(true)) {
+				messages.add(Message.builder().code("email").value("該電子信箱已註冊").build());
+			}
+			
+			if (StringUtils.isBlank(entity.getPassword())) {
+				messages.add(Message.builder().code("password").value("請輸入密碼").build());
+			}
+
+			if (StringUtils.isBlank(entity.getCheckPassword())) {
+				messages.add(Message.builder().code("checkPassword").value("請輸入確認密碼").build());
+			}
+
+			if (!StringUtils.isBlank(entity.getPassword()) && !StringUtils.isBlank(entity.getCheckPassword())) {
+				if (!entity.getPassword().equals(entity.getCheckPassword())) {
+					messages.add(Message.builder().code("password").value("輸入的密碼不相同，請重新輸入").build());
+					messages.add(Message.builder().code("checkPassword").value("輸入的密碼不相同，請重新輸入").build());
+				}
+			}
+			
+
+			log.debug("{}", messages);
+		}
+		
+		return messages;
+	}
+
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
 	public AjaxResponse<UserEntity> update(final Model model, @RequestBody final UserEntity form) {
@@ -316,6 +387,6 @@ public class RegisteredController {
 		log.debug("response: {}",response);
 		return response;
 	}
-
+	
 
 }
