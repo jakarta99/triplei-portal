@@ -46,9 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.hasAnyRole("SALES")
 		.and().formLogin().loginPage("/login").permitAll();
 		
-		// 後台產品訂單權限設定 : ADMINT, PARTTIME, SERVICE
+		// 後台產品訂單權限設定 : ADMINT, PARTTIME, SERVICE, SALES
 		http.authorizeRequests().antMatchers("/admin/recipient/**")
-		.hasAnyRole("ADMIN", "PARTTIME", "SERVICE")
+		.hasAnyRole("ADMIN", "PARTTIME", "SERVICE", "SALES")
 		.and().formLogin().loginPage("/login").permitAll();
 		
 		// 後台積點訂單權限設定 : ADMINT, PARTTIME, SERVICE

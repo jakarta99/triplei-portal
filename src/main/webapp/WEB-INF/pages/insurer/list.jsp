@@ -9,6 +9,7 @@
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
 
+
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -50,14 +51,14 @@
 						<a href="/insurer/filt"
 							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
 					</h4>
-					<div id="bm" style="width: 170%;position: absolute;left: -100px"></div>
+					<div id="bm" style="width: 120%;position: relative;left: -40px" ></div>
 				</div>
 				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 			</div>
 			<div class="col-sm-9"
 				style="height: 100vh; display: table; table-layout: fixed; background-color: white;padding-right: 0px; padding-left: 0px;"><!--右半白 -->
 				<div
-					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;">
+					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;" id="style-1">
 					<div class="col-xs-1 col-sm-1"></div>
 					<div class="col-xs-10 col-sm-10">
 						<c:forEach items="${models}" var="model">
@@ -129,7 +130,7 @@
 			  renderer: 'svg',
 			  loop: true,
 			  autoplay: true,
-			  path: '/resources/pic/各公司資訊/company.json'
+			  path: '/resources/pic/各公司資訊/data.json'
 			})
 			
 	</script>

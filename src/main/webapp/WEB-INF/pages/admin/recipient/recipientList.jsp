@@ -180,7 +180,7 @@
 								width : 100
 							}, {
 								title : '保額',
-								name : "product.insureAmount",
+								name : "insureAmount",
 								width : 50,
 								itemTemplate : function(val) {
 									return val + "萬"

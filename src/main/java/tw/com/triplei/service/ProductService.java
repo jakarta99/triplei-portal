@@ -362,6 +362,7 @@ public class ProductService extends GenericService<ProductEntity> {
 				product.setYearCode((int) rowi.getCell(3).getNumericCellValue() + "");
 				// 商品代碼
 				product.setCode(rowi.getCell(4).getStringCellValue());
+				
 				// 幣別
 				if ("美元".equals(rowi.getCell(5).getStringCellValue())) {
 					product.setCurr(Currency.USD);

@@ -49,6 +49,43 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding-top:9vh">
 			<h3>超商一覽</h3>
+			
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+		          
+							<label for="manufacturer" class="col-sm-1 control-label">廠商</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="廠商" />
+							</div>
+							
+							<label for="city" class="col-sm-1 control-label">城市</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="city" name="city" placeholder="城市"/>
+							</div>
+						</div>
+						<div class="form-group">
+							
+		          
+							<label for="region" class="col-sm-1 control-label">區域</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="region" name="region" placeholder="區域"/>
+							</div>
+							
+							<label for="address" class="col-sm-1 control-label">地址</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="address" name="address" placeholder="地址"/>
+							</div>
+						</div>
+											
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success" data-loading-text="loading..." type="button">搜尋</button>
+		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
 			<div>
 					<a href="/admin/convenienceStore/insertPage"
 						class="btn btn-sm btn-primary" data-loading-text="Loading"> <span
@@ -61,11 +98,25 @@
 					</a>
 				
 			</div>
+			
+			
+			
+			
+			
+			
 			<div id="jsGrid"></div>
 			<div id="detailsDialog">
 				<span id="content" style="word-wrap: break-word"></span>
 			</div>
 			<script type="text/javascript">
+			$("#searchBtn").bind("click",function(){
+				$("#jsGrid").jsGrid("reset");
+				});
+			
+				$("#resetBtn").bind("click", function(){
+				$("#listForm")[0].reset();
+				});
+			
 				var BASE_URL = "${pageContext.request.contextPath}/admin/convenienceStore";
 
 				$("#jsGrid").jsGrid({
@@ -74,29 +125,25 @@
 
 					inserting : false,
 					editing : false,
-					sorting : true,
+					sorting : false,
 					paging : true,
 					pageIndex : 1,
 					pageSize : 10,
 					pageLoading : true,
 					autoload : true,
-					pageNextText : "下一頁",
-					pagePrevText : "上一頁",
-					pageFirstText : "第一頁",
-					pageLastText : "最後一頁",
 					dialogClass : 'detailsDialog',
 					rowDoubleClick : function(args) {
 						showDetailsDialog("內容", args.item);
 					},
 
 					controller : {
-						loadData : function(filter) {
+						loadData : function() {
 							return $.ajax({
 								type : "GET",
 								url : BASE_URL,
-								data : filter,
+								data : "pageIndex=1&pageSize=10&"+$("#listForm").serialize(),
 								dataType : "json",
-								cache : false
+								cache : true
 							});
 						},
 					},

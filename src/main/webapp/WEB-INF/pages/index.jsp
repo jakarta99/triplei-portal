@@ -7,6 +7,8 @@
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<!-- <link rel="stylesheet" href="/resources/fullpage/jquery.fullPage.css"> -->
+<!-- <script src="/resources/fullpage/jquery.fullPage.min.js"></script> -->
 <title>Triple i</title>
 
 <style>
@@ -33,8 +35,8 @@ p{
 		<!-- 左邊白 -->
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
-				<h1 style="font-size: 2vw; margin-top: 30vh;">最專業的保險理財</h1>
-				<h1 style="font-size: 2vw; margin-top: 10px; margin-bottom: 25px;">讓你的財富開始起飛</h1>
+				<h1 style="font-size: 5vh; margin-top: 30vh;">最專業的保險理財</h1>
+				<h1 style="font-size: 5vh; margin-top: 10px; margin-bottom: 25px;">讓你的財富開始起飛</h1>
 					<div style="opacity: 0.8; margin-bottom: 7vh;">TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問</div>
 					<div class="col-sm-12">
 						<a href="/product/list">
@@ -167,7 +169,7 @@ p{
 						</div>
 						
 					<div class="col-xs-12 col-sm-4"
-						style="height: 60vh;">
+						style="height: 80vh;">
 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
 							<div style="margin-top:7%;"><img style="width:100%;" src="${news[1].bannerImage}" /></div>
@@ -180,7 +182,7 @@ p{
 						</div>
 						
 					<div class="col-xs-12 col-sm-4"
-						style="height: 60vh;">
+						style="height: 80vh;">
 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
 						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
 							<div style="margin-top:7%;"><img style="width:100%;" src="${news[2].bannerImage}" /></div>
@@ -205,6 +207,11 @@ p{
 
 <script type="text/javascript">
 
+// $(function(){
+// 	$('#dowebok').fullpage();
+// });
+
+
 var animation = bodymovin.loadAnimation({
 	  container: document.getElementById('bm'),
 	  renderer: 'svg',
@@ -212,6 +219,8 @@ var animation = bodymovin.loadAnimation({
 	  autoplay: true,
 	  path: '/resources/pic/首頁/首頁動畫/main.json'
 	})
+	
+	
 </script>
 </body>
 </html>

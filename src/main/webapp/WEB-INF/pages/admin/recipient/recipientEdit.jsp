@@ -31,6 +31,8 @@
 						   <input type="hidden" id="userNamee" name="userNamee" value="${entity.userNamee}" />
 							<input type="hidden" id="code" name="code" value="${entity.code}" />
 							<input type="hidden" id="year" name="year" value="${entity.year}" />
+							 <input type="hidden" id="insureAmount" name="insureAmount" value="${entity.insureAmount}" />
+
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>

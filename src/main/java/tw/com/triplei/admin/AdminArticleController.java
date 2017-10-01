@@ -1,6 +1,8 @@
 package tw.com.triplei.admin;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,11 +18,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.ArticleSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.commons.QueryOpType;
+import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.ArticleEntity;
 import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.service.ArticleService;
@@ -72,7 +79,23 @@ public class AdminArticleController {
 		
 		Page<ArticleEntity> page;	
 		try {
-			page = articleService.getAll(new ArticleSpecification(), pageable);
+			final List<SpecCriterion> criterions = Lists.newArrayList();
+			
+			if(!Strings.isNullOrEmpty(form.getTitle())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "title", "%"+form.getTitle()+"%"));
+			}
+			if(!Strings.isNullOrEmpty(form.getAuthor())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE,"author","%"+form.getAuthor()+"%"));
+			}
+			if(form.getArticleType()!=null){
+				criterions.add(new SpecCriterion(QueryOpType.EQ, "articleType", form.getArticleType()));
+			}
+			if(!Strings.isNullOrEmpty(form.getContent())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "content", "%"+form.getContent()+"%"));
+			}
+			
+			page = articleService.getByCondition(criterions, pageable);
+						
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);

@@ -79,6 +79,9 @@ public class RecipientEntity extends GenericEntity {
 	
 	@Column(name = "YEAR")
 	private String year;//年期(篩選用)
+	
+	@Column(name = "INSURE_AMOUNT")
+	private BigDecimal insureAmount;//保額
 
 	@Override
 	public String toString() {

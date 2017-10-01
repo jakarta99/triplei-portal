@@ -62,7 +62,7 @@
 			            { title: '公司名稱', name: "product.insurer.shortName", type: "text", width: 80 },
 			            { title: '商品代碼', name: "product.code", type: "text", width: 50 },
 			            { title: '商品名稱', name: "product.localName", type: "text", width: 100 },
-			            { title: '保額', name: "product.insureAmount", width: 80, itemTemplate: function(val) {return val+"萬"}  },
+			            { title: '保額', name: "insureAmount", width: 80, itemTemplate: function(val) {return val+"萬"}  },
 			            { title: '電話', name: "tel", type: "text", width: 100 },
 			            { title: '預約時段1', name: "bookedTime_1", type: "text", width: 90 },
 			            { title: '預約時段2', name: "bookedTime_2", width: 90, itemTemplate: function(val) {if(val.endsWith("00")) {return val}else {return "無"}}  },

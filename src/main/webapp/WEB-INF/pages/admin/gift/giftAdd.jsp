@@ -70,7 +70,7 @@
 									<label for="image1" class="col-md-2 control-label">選擇圖片</label>
 									<div class="col-md-10">
 										<input type="file" class="form-control" id="image1"
-											name="image1" placeholder="照片一" value="" /> 
+											name="image1" placeholder="照片" value="" /> 
 <!-- 											<input -->
 <!-- 											type="file" class="form-control" id="image2" name="image2" -->
 <!-- 											placeholder="照片二" value="" /> <input type="file" -->

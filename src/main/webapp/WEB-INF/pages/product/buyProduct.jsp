@@ -417,16 +417,16 @@ select {
 				alert("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}else if(name!="" && tel!="" && date11!="" && date12!="" && date13!=null && name!=null && tel!=null && date11!=null && date12!=null && date13!=null){
 				$.ajax({
-					url:"<c:url value='/admin/recipient'/>",
+					url:"<c:url value='/recipient'/>",
 					method:"POST",
 					data:formData,
 					processData:false,
 					contentType:false,
-					success:function(data){	
+					success:function(){	
 					}
 				})
-				swal("SUCCESS");
-				location.href = "/recipient/list"
+				swal('已下單成功');
+				setTimeout("location.href = '/recipient/list'",1500);
 			}else{
 				swal("請輸入姓名，電話和最少一組聯絡時間，以便我們儘速跟您聯繫");
 			}

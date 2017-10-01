@@ -20,13 +20,57 @@
 		
 		<div style="padding-top:9vh">
 			<h3>積點商品管理</h3>
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+							<label for="name" class="col-sm-1 control-label">名稱</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="name" name="name" placeholder="名稱"/>
+							</div>
+		          
+							<label for="brand" class="col-sm-1 control-label">品牌</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="brand" name="brand" placeholder="品牌" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="brand" class="col-sm-1 control-label">兌換點數區間</label>
+							<div class="col-sm-5">
+								從  <input type="number" id="val1" name="val1" placeholder="低" value="0"/> ~ 
+								<input type="number"  id="val2" name="val2" placeholder="高" value="0"/> :範圍
+							</div>
+						</div>							
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success" data-loading-text="loading..." type="button">搜尋</button>
+		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
+			
+			
+			
 			<div>
           		<a href="<c:url value='/admin/gift/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
             	<span class="glyphicon glyphicon-plus"></span>新增</a>
       		</div>
+
+      		
+      		
 			<div id="jsGrid"></div>
 			
 			<script>
+			$("#searchBtn").bind("click",function(){
+				$("#jsGrid").jsGrid("reset");
+			});
+			
+			$("#resetBtn").bind("click", function(){
+				$("#listForm")[0].reset();
+			});
+			
+			
+			
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/gift";
 			 
 			    $("#jsGrid").jsGrid({
@@ -41,17 +85,13 @@
 			        pageSize: 10,
 			        pageLoading: true,
 			        autoload: true,
-			        pageNextText:"下一頁",
-			        pagePrevText:"上一頁",
-			        pageFirstText:"第一頁",
-			        pageLastText:"最後一頁",
 			 
 			        controller: {
-			            loadData: function (filter) {
+			            loadData: function () {
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: filter,
+			                    data: "pageIndex=1&pageSize=10&"+$("#listForm").serialize()+"&val1="+$("#val1").val()+"&val2="+$("#val2").val(),
 			                    dataType: "json",
 			                    cache: false
 			                });

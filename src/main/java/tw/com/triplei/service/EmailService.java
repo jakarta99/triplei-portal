@@ -194,7 +194,7 @@ public class EmailService {
 		public void sendAlertEmailToSales(UserEntity entity, RecipientEntity recipient) {
 
 			String name = entity.getName();
-			log.debug("業務員姓名:{}", name);
+			log.debug("業業務員姓名:{}", name);
 			Date date = new Date(recipient.getModifiedTime().getTime());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
 			String dateString = sdf.format(date);
@@ -203,7 +203,7 @@ public class EmailService {
 			String productCode = recipient.getProduct().getCode();// 商品代碼
 			String payYear = recipient.getProduct().getYear() + "";// 年期
 			String yearCode = recipient.getProduct().getYearCode();// 第n年
-			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			String insureAmount = recipient.getInsureAmount().toString();
 			log.debug("保額:{}", insureAmount);
 			String orderNo = recipient.getOrderNo(); //訂單標號
 			String contactName = recipient.getName(); // 聯絡人
@@ -234,13 +234,22 @@ public class EmailService {
 				gender = "女";
 			}
 			// 地址
-			String address = recipient.getConvenienceStoreEntity().getCity()
-					+ recipient.getConvenienceStoreEntity().getRegion()
-					+ recipient.getConvenienceStoreEntity().getAddress();
+			String address;
 			// 超商門市
-			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			String storeName;
 			// 超商廠商
-			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			String manufacturer;
+			try {
+				address = recipient.getConvenienceStoreEntity().getCity()
+						+ recipient.getConvenienceStoreEntity().getRegion()
+						+ recipient.getConvenienceStoreEntity().getAddress();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			} catch (Exception e1) {
+				address="無";
+				manufacturer="無";
+				storeName="無";
+			}
 
 			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
@@ -288,12 +297,12 @@ public class EmailService {
 			Date date = new Date(recipient.getModifiedTime().getTime());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
 			String dateString = sdf.format(date);
-			log.debug("時間:{}", dateString);
+			log.debug("時間間:{}", dateString);
 			String productName = recipient.getProduct().getLocalName();// 商品名稱
 			String productCode = recipient.getProduct().getCode();// 商品代碼
 			String payYear = recipient.getProduct().getYear() + "";// 年期
 			String yearCode = recipient.getProduct().getYearCode();// 第n年
-			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			String insureAmount = recipient.getInsureAmount().toString();
 			log.debug("保額:{}", insureAmount);
 			String orderNo = recipient.getOrderNo(); //訂單標號
 			String contactName = recipient.getName(); // 聯絡人
@@ -321,13 +330,22 @@ public class EmailService {
 				gender = "女";
 			}
 			// 地址
-			String address = recipient.getConvenienceStoreEntity().getCity()
-					+ recipient.getConvenienceStoreEntity().getRegion()
-					+ recipient.getConvenienceStoreEntity().getAddress();
+			String address;
 			// 超商門市
-			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			String storeName;
 			// 超商廠商
-			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			String manufacturer;
+			try {
+				address = recipient.getConvenienceStoreEntity().getCity()
+						+ recipient.getConvenienceStoreEntity().getRegion()
+						+ recipient.getConvenienceStoreEntity().getAddress();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			} catch (Exception e1) {
+				address="無";
+				manufacturer="無";
+				storeName="無";
+			}
 
 			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
@@ -390,7 +408,7 @@ public class EmailService {
 			String productCode = recipient.getProduct().getCode();// 商品代碼
 			String payYear = recipient.getProduct().getYear() + "";// 年期
 			String yearCode = recipient.getProduct().getYearCode();// 第n年
-			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			String insureAmount = recipient.getInsureAmount().toString();
 			log.debug("保額:{}", insureAmount);
 			String orderNo = recipient.getOrderNo(); //訂單標號
 			String contactMethod = recipient.getTel(); // 聯絡方式
@@ -417,13 +435,22 @@ public class EmailService {
 				gender = "女";
 			}
 			// 地址
-			String address = recipient.getConvenienceStoreEntity().getCity()
-					+ recipient.getConvenienceStoreEntity().getRegion()
-					+ recipient.getConvenienceStoreEntity().getAddress();
+			String address;
 			// 超商門市
-			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			String storeName;
 			// 超商廠商
-			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			String manufacturer;
+			try {
+				address = recipient.getConvenienceStoreEntity().getCity()
+						+ recipient.getConvenienceStoreEntity().getRegion()
+						+ recipient.getConvenienceStoreEntity().getAddress();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			} catch (Exception e1) {
+				address="無";
+				manufacturer="無";
+				storeName="無";
+			}
 
 			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
@@ -479,7 +506,7 @@ public class EmailService {
 			String productCode = recipient.getProduct().getCode();// 商品代碼
 			String payYear = recipient.getProduct().getYear() + "";// 年期
 			String yearCode = recipient.getProduct().getYearCode();// 第n年
-			String insureAmount = recipient.getProduct().getInsureAmount().toString();
+			String insureAmount = recipient.getInsureAmount().toString();
 			log.debug("保額:{}", insureAmount);
 			String orderNo = recipient.getOrderNo(); //訂單標號
 			String contactMethod = recipient.getTel(); // 聯絡方式
@@ -506,13 +533,22 @@ public class EmailService {
 				gender = "女";
 			}
 			// 地址
-			String address = recipient.getConvenienceStoreEntity().getCity()
-					+ recipient.getConvenienceStoreEntity().getRegion()
-					+ recipient.getConvenienceStoreEntity().getAddress();
+			String address;
 			// 超商門市
-			String storeName = recipient.getConvenienceStoreEntity().getStoreName();
+			String storeName;
 			// 超商廠商
-			String manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			String manufacturer;
+			try {
+				address = recipient.getConvenienceStoreEntity().getCity()
+						+ recipient.getConvenienceStoreEntity().getRegion()
+						+ recipient.getConvenienceStoreEntity().getAddress();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
+			} catch (Exception e1) {
+				address="無";
+				manufacturer="無";
+				storeName="無";
+			}
 
 			StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 					.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")

@@ -61,12 +61,11 @@ padding-bottom:2vh;
 		<div style="padding:0;width:100%;height:100%;color:white;padding-top:8vh">
 			<div class="col-sm-3" style="background-color:#5C8DEC;height:100%;overflow-y:auto;">
 			<div style="margin:7% auto 0 auto; display:table;width:70%;">
-				<br/><br/>
-				<span style="font-size:190%;">商品專區</span>
 				<br/>
+				<span style="font-size:190%;margin-bottom: 3vh;margin-top: 3vh">商品專區</span>
 				<form id="input1" style="margin-top:10%">
-				<div>
-				<span>性別</span>
+				<div style="margin-top: 0px">
+				<span style="margin-bottom: 3vh;">性別</span>
 				<label>
 				<input type="radio" class="gender" name="gender" value="Female"><img class="genderImage female" data-toggle="tooltip" title="女生" alt="女" name="female" src="/resources/pic/product/female.png">
 				</label>
@@ -74,11 +73,11 @@ padding-bottom:2vh;
 				<input type="radio" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男" data-toggle="tooltip" title="男生"  name="male" src="/resources/pic/product/male.png">
 				</label>
 				</div >
-				<div>
+				<div style="margin-top: 0px">
 				<span>生日</span><br/>
 				<input type="text" id="bDate" style="width:80%;background-color:#5C8DEC;border:1px white solid;margin-top:2%;font-size:115%" >
 				</div>
-				<div style="margin-top:8%">
+				<div style="margin-top:8%;margin-top: 0px">
 				<span>幣別</span><br/>
 				<select id="currency" name="currency" style="border:1px white solid;width:80%;background-color:#5C8DEC;margin-top:2%;font-size:115%">
 				<option value="TWD" selected>新台幣</option>
@@ -88,7 +87,7 @@ padding-bottom:2vh;
 				</select>
 				</div>
 				</form>
-				<div id="bm" style="width: 35vw;position: absolute;left: -70px;top: 360px"></div>
+				<div id="bm" style="width: 100%;position: relative;top: 20px;"></div>
 <!-- 				<div id="container-fluid" style="height:100%;position:relative;margin-top:15%"> -->
 <!-- 				<div > -->
 <!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;"> -->
@@ -271,7 +270,7 @@ padding-bottom:2vh;
 			  renderer: 'svg',
 			  loop: true,
 			  autoplay: true,
-			  path: '/resources/pic/product/商品專區動畫/product.json'
+			  path: '/resources/pic/product/商品專區動畫/data.json'
 			})
 	
 	</script>

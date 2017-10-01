@@ -18,11 +18,7 @@
 		
 		<div style="padding-top:9vh">
 			<h3>保險商品管理</h3>
-			<div>
-          		<a href="<c:url value='/admin/product/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
-            	<span class="glyphicon glyphicon-plus"></span>上傳</a>
-            	
-      		</div>
+			
       		<section class="well">
 				<div>
 					<form role="form" class="form-horizontal" id="listForm">
@@ -73,7 +69,11 @@
 		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
 				</div>
 			</section>
-      		
+      		<div>
+          		<a href="<c:url value='/admin/product/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
+            	<span class="glyphicon glyphicon-plus"></span>上傳</a>
+            	
+      		</div>
       		
       		
       		
@@ -96,7 +96,7 @@
 			 
 			        inserting: false,
 			        editing: false,
-			        sorting: false,
+			        sorting: true,
 			        paging: true,
 			        pageIndex: 1,
 			        pageSize: 10,
@@ -104,7 +104,7 @@
 			        autoload: true,
 			 
 			        controller: {
-			            loadData: function () {
+			            loadData: function (filter) {
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,

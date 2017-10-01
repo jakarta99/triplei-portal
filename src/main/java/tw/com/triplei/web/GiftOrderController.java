@@ -26,6 +26,7 @@ import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.entity.GiftOrderEntity;
 import tw.com.triplei.entity.UserEntity;
+import tw.com.triplei.enums.GiftOrderType;
 import tw.com.triplei.service.GiftOrderService;
 import tw.com.triplei.service.GiftService;
 import tw.com.triplei.service.UserService;
@@ -117,6 +118,7 @@ public class GiftOrderController {
 					entity.setRecipientAddress(recipientAddress);
 					entity.setRecipientPhone(recipientPhone);
 					entity.setRecipientTime(recipientTime);
+					entity.setStatus(GiftOrderType.PROCESSING);
 					LocalDateTime orderTime = LocalDateTime.now();
 					entity.setOrderTime(orderTime);
 					entity.setGiftEntity(giftEntity);
