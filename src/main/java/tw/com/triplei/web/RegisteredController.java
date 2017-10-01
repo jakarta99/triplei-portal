@@ -327,8 +327,6 @@ public class RegisteredController {
 	private List<Message> validateRegistered(UserEntity entity) {
 		List<Message> messages = new ArrayList<Message>();
 		
-		boolean isBirthday;
-		
 		if(StringUtils.isBlank(entity.getProviderUserId())){
 			// 一般會員註冊
 			UserEntity dbEntity = adminUserService.getByEmail(entity.getEmail()); // email 不得重複註冊

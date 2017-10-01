@@ -106,15 +106,15 @@
 				<div class="col-sm-1"></div>
 				<div class="col-sm-10" style="height: 100%; display: flex; justify-content: center; flex-direction: column" align='center'>
 					<div class="panel-body">
-					<div>
-						<img class="hotBalloon" name="hotBalloon" src="/resources/pic/registered/registered/images/img_1.png" width="10%">
-						<img class="joinUs" name="joinUs" src="/resources/pic/registered/registered/images/img_2.png" width="30%">
-					</div>
-					<div>
-						<img class="mountain" name="mountain" src="/resources/pic/registered/registered/images/img_0.png" width="60%">
+					
+					<!-- 動圖 -->
+					<div class="col-sm-12"
+						style="height: 100%; display: flex; justify-content: center; flex-direction: column;padding-left: 0px;padding-right: 0px"
+						align='center'>
+						<div class="col-sm-12"  id="bm" style="height: 100%"></div>
 					</div>
 						
-					</br>
+					<!-- 免費註冊 -->
 					<div>
 						<a href="/registered/add" data-loading-text="Loading" id="registered">
 						<img src="/resources/pic/registered/freeRegistered.png" border="0" width="50%"></a>
@@ -128,11 +128,17 @@
 	</div>
 
 </body>
+<script type="text/javascript">
+
+
+var animation = bodymovin.loadAnimation({
+	  container: document.getElementById('bm'),
+	  renderer: 'svg',
+	  loop: true,
+	  autoplay: true,
+	  path: '/resources/pic/registered/registered/balloon.json'
+	})
+	
+	
+</script>
 </html>
-<footer>
-<!-- 
-	<div class="form-links">
-		<a href="${pageContext.request.contextPath}/">www.triple-i.com.tw</a>
-	</div>
- -->	
-</footer>
