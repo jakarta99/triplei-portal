@@ -19,8 +19,6 @@
 <script type="text/javascript"
 	src="/resources/flot/jquery.flot.symbol.js"></script>
 
-<script type="text/javascript"
-	src="/resources/flot/jquery.flot.axislabels.js"></script>
 
 
 
