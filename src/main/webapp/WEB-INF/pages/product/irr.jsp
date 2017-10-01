@@ -38,17 +38,14 @@ h3 {
 		<div style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh">
 			<div class="col-sm-4" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 				<div class="col-sm-10" style="margin-top: 7%; display: table;">
-					<br /> <br />
-					<h2 style="padding: 0;">儲蓄險真正的報酬率</h2>
-					<br />
-					<h2 style="padding: 0; margin-top: 0">IRR計算機</h2>
-					<br /> <br />
+					<h2 style="padding: 0;margin-bottom: 3vh;margin-top: 3vh">儲蓄險真正的報酬率</h2>
+					<h2 style="padding: 0;margin-bottom: 3vh">IRR計算機</h2>
 				</div>
 				<div class="col-sm-10">
 					<p style="opacity: 0.7;">保單上面的數字那麼多，哪個才是真正的報酬率呢?別被搞混了!IRR才是真正的報酬率!</p>
 					<br />
 					<p style="opacity: 0.7;">IRR又稱為「年化報酬率」，假設一年期定存的利率為1.23%，那麼它的IRR即為1.23%。</p>
-					<div id="bm" style="width: 150%;position: absolute;left: -100px;top: -50px"></div>
+					<div id="bm" style="width: 90%;"></div>
 				</div>
 			</div>
 			<div class="col-lg-8 bg-info" style="background-color: white; height: 100%; padding-top: 5%; color: black;">
@@ -215,7 +212,7 @@ h3 {
 			  renderer: 'svg',
 			  loop: true,
 			  autoplay: true,
-			  path: '/resources/pic/IRR計算機/IRR.json'
+			  path: '/resources/pic/IRR計算機/data.json'
 			})
 	</script>
 </body>

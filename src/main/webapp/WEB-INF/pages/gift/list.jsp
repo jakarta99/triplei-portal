@@ -54,7 +54,7 @@
 				<span id="exchangedPoint" >${exchangedPoint}</span>
 				</div>
 				</div></div>
-				<div class="col-sm-12"><img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png" width="200" height="200"></div>
+					<div id="bm" style="width: 100%;height: 40%"></div>
 				</div>
 				<div class="col-sm-1"></div>
 <!-- 			<div style="margin:7% auto 0 auto; display:table;width:70%;"> -->
@@ -514,7 +514,7 @@ $( function() {
 // 					duration : 500
 // 				},
 // 			})
-		$('#wishpool').on("click",function() {
+		$('#bm').on("click",function() {
 			dialog1.dialog("open");
 			//<!-- Save -->
 			$("#wishButton").bind("click",function() {
@@ -559,6 +559,14 @@ $( function() {
 			});
 	
 });
+
+var animation = bodymovin.loadAnimation({
+	  container: document.getElementById('bm'),
+	  renderer: 'svg',
+	  loop: true,
+	  autoplay: true,
+	  path: '/resources/pic/積點專區/動畫/data.json'
+	})
 </script>
 </body>
 </html>
