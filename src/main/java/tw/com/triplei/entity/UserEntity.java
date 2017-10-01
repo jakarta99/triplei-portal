@@ -72,8 +72,11 @@ public class UserEntity extends GenericEntity implements SocialUserDetails {
 	@Column(name = "REGISTERED_CODE")
 	private String registeredCode; // 會員驗證碼 
 	
+	// FIXME
+	// userService :修改密碼 pw, 修改會員資料 info, 忘記密碼 forgetpw
+	// adminUserService :刪除 delete, 一般/其他 ""
 	@Column(name = "EDIT_STATE")
-	private String editState; // 修改密碼 pw/ 修改會員資料 info
+	private String editState; 
 	
 	@Column(name = "REMAIN_WISH_TIMES")
 	private Boolean remainWishTimes; //剩餘許願池次數
