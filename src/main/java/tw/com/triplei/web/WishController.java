@@ -2,6 +2,7 @@ package tw.com.triplei.web;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -66,6 +67,9 @@ public class WishController {
 			String date = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
 			form.setWishTime(date);
 			log.debug("userDetails: {}",date);
+			LocalDateTime time =
+					LocalDateTime.ofInstant(Instant.ofEpochMilli(new Date().getTime()), ZoneId.systemDefault());
+			form.setTime(time);
 
 			form.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

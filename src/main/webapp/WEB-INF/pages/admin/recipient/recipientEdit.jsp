@@ -188,31 +188,29 @@
 									</div>
 
 
-									<input type="hidden" readonly="readonly" class="form-control"
-										id="createdBy" name="createdBy" placeholder="createdBy"
+									<input type="hidden" class="form-control"
+										id="createdBy" name="createdBy"
 										value="${entity.createdBy}" /> <span class="help-block"></span>
 
 
 
 									<input type="hidden" readonly="readonly" class="form-control"
-										id="canGetPoint" name="canGetPoint" placeholder="canGetPoint"
+										id="canGetPoint" name="canGetPoint"
 										value="${entity.canGetPoint}" /> <span class="help-block"></span>
 
 
 
 
-									<input type="hidden" readonly="readonly" class="form-control"
+									<input type="hidden" class="form-control"
 										id="alreadyAudittedPoint" name="alreadyAudittedPoint"
-										placeholder="alreadyAudittedPoint"
 										value="${entity.alreadyAudittedPoint}" /> <span
 										class="help-block"></span> <input type="hidden"
-										readonly="readonly" class="form-control"
+										class="form-control"
 										id="alreadyDeletedPoint" name="alreadyDeletedPoint"
-										placeholder="alreadyDeletedPoint"
 										value="${entity.alreadyDeletedPoint}" /> <span
 										class="help-block"></span> <input type="hidden"
-										readonly="readonly" class="form-control" id="alreadyGetPoint"
-										name="alreadyGetPoint" placeholder="alreadyGetPoint"
+										 class="form-control" id="alreadyGetPoint"
+										name="alreadyGetPoint"
 										value="${entity.alreadyGetPoint}" /> <span class="help-block"></span>
 
 
@@ -316,7 +314,7 @@
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");
 								});
-						alert("SUCCESS");
+						swal("SUCCESS");
 						location.href = "/admin/recipient/list"
 						$btn.button("reset");
 					});

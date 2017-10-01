@@ -41,6 +41,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.hasAnyRole("ADMIN","USER","NORMAL")
 		.and().formLogin().loginPage("/login").permitAll();
 		
+		//訂單ajax下拉
+		http.authorizeRequests().antMatchers("/admin/convenienceStore/**")
+		.hasAnyRole("ADMIN","USER","NORMAL")
+		.and().formLogin().loginPage("/login").permitAll();
+		
 		// 前台業務員權限設定
 		http.authorizeRequests().antMatchers("/recipient/sales/**")
 		.hasAnyRole("SALES")

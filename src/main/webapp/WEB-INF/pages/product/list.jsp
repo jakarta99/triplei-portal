@@ -249,6 +249,7 @@ padding-bottom:2vh;
 
 	 				})
 	 				$(".infoToggle").hide();
+	 				swal("已查詢完畢");
 		$(".moreInfo").on("click",function(){
 			var moreInfoBtn = $(this).parent().parent().siblings(".infoToggle");
 			moreInfoBtn.toggle("drop",500);
