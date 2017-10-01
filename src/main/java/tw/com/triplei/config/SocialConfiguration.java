@@ -79,10 +79,11 @@ public class SocialConfiguration implements SocialConfigurer{
 				String [] fields = { "id", "email", "first_name", "gender", "last_name" };
 				User userProfile = api.fetchObject("me", User.class, fields);
 				
-				entity.setAccountNumber(userProfile.getEmail()); // 統一 accountNumber用email
+				//entity.setAccountNumber(userProfile.getEmail()); // 不能用 用email 做accounNumber，有些人的email抓不到
 				entity.setName(userProfile.getLastName() + userProfile.getFirstName());
 				entity.setEmail(userProfile.getEmail());
 				entity.setGender(userProfile.getGender());
+				log.debug("userProfile.getEmail {}", userProfile.getEmail());
 		        
 				adminUserService.insert(entity);
 		        log.info("New social user signin: {} - {}", entity.getName(), entity.getAccountNumber());
