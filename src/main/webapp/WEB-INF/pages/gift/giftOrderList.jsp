@@ -17,18 +17,44 @@
 	
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		
-		<div style="padding-top:8vh">
-			<h3>積點商品訂單</h3>
+		<div style="padding-top:8vh ;">
+			<div class="col-xs-12 col-sm-3" style="background-color:#5C8DEC;height:; color:white;">
 			
+				<div class="col-xs-1 col-sm-1"></div>
+				<div class="col-xs-10 col-sm-10" style="height: 100vh;padding-left: 0px;padding-right: 0px;">
+				<div class="col-xs-12 col-sm-12" style="padding-top: 15vh;padding-bottom: 0vh">
+				<span style="font-size: 2.5em;font-family: 微軟正黑體;">T-Point</span>
+				<span style="font-size: 1.5em;font-family: 微軟正黑體;">積點專區</span>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+				<img alt="" src="/resources/pic/積點專區/點數(大).png" width="41" height="41">
+				<span id="userPoint" style="font-size: 3.5em;vertical-align: middle;">${userPoint}</span>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+				<div class="col-xs-12 col-sm-12" style="height: 15vh;border: 1px white solid;border-radius: 20px;margin-top: 3vh;padding-left: 0px;padding-right: 0px;">
+				<div class="col-xs-6 col-sm-6" style="border-right: 1px white solid;height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
+				<p style="margin-top: 10%;margin-bottom: 10%;">審核中點數</p>
+				<span id="audittingPoint" >${audittingPoint}</span>
+				</div>
+				<div class="col-xs-6 col-sm-6" style="height: 80%;margin-top:5%;display: flex; justify-content: center; flex-direction: column" align="center">
+				<p style="margin-top: 10%;margin-bottom: 10%">已兌換點數</p>
+				<span id="exchangedPoint" >${exchangedPoint}</span>
+				</div>
+				</div></div>
+					<div class="col-xs-12 col-sm-12" id="bm" style="width: 140%;position: relative;top: 20px;left: -50px"></div>
+				</div>
+				<div class="col-xs-1 col-sm-1"></div>
+			</div>
+			
+			<div class="col-sm-9">
 			<div id="jsGrid"></div>
-			
+			</div>
 			<script>
 			    var BASE_URL = "${pageContext.request.contextPath}/gift/giftOrder";
 			 
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
-			        height: "500px",
+			        height: "100vh",
 			 
 			        inserting: false,
 			        editing: false,
@@ -57,18 +83,18 @@
 			        
 			 
 			        fields: [
-			            { name: '訂單修改', width:75, itemTemplate:btns },
+			            { name: '訂單修改', width:85, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '積點商品名稱', name: "giftEntity.name", type: "text", width: 150 },
+			            { title: '積點商品名稱', name: "giftEntity.name", type: "text", width: 100 },
 // 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
-			            { title: '數量', name: "quantity", type: "text", width: 150 },
+			            { title: '數量', name: "quantity", type: "text", width: 50 },
 			            { title: '兌換日期', name: "orderTime", type: "text", width: 150 },
 // 			            itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString();}
-			            { title: '收件人姓名', name: "recipient", type: "text", width: 150 },
-			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 150 },
+			            { title: '收件人姓名', name: "recipient", type: "text", width: 100 },
+			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 250 },
 			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 150 },
-			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 150 },
-			            { title: '訂單處理狀態', name: "status", width: 150, itemTemplate:function(data){
+			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 100 },
+			            { title: '訂單處理狀態', name: "status", width: 100, itemTemplate:function(data){
 			            	if(data=="PROCESSING"){
 								return $("<span id='status'></span>").text("訂單處理中");	
 							}else if(data=="SHIPORDER"){

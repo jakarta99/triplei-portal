@@ -322,7 +322,7 @@
         </div>
         <div class="col-md-8"></div>
         <div class="col-md-3">
-            <a href="#" class="btn btn-lg btn-primary btn-block"
+            <a href="#"  style="color:white;" class="btn btn-lg btn-primary btn-block"
                data-loading-text="Loading" id="saveButton">確認購買</a>
         </div>
     </div>
