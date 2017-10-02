@@ -52,7 +52,7 @@ p{
 					style="height: 100%; display: flex; justify-content: center; flex-direction: column;padding-left: 0px;padding-right: 0px"
 					align='center' >
 					<img alt="" src="/resources/pic/首頁/背景雲.svg" style="position: absolute;top:5vh;">
-					<div class="col-sm-12"  id="k" style="height: 100%"></div>
+					<div class="col-sm-12"  id="bm" style="height: 100%"></div>
 				</div>
 			</div>
 			<!-- 第二頁 -->
