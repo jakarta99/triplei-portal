@@ -108,7 +108,7 @@
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: "pageIndex=1&pageSize=10&"+$("#listForm").serialize(),
+			                    data: "pageIndex=" + filter.pageIndex + "&pageSize=10&"+$("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false
 			                });

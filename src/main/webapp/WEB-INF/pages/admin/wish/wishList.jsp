@@ -90,11 +90,11 @@
 
 
 					controller : {
-						loadData : function() {
+						loadData : function(filter) {
 							return $.ajax({
 								type : "GET",
 								url : BASE_URL,
-								data : "pageIndex=1&pageSize=10&"+$("#listForm").serialize()+"&date1="+$("#date1").text()+"&date2="+$("#date2").text(),
+								data : "pageIndex=" + filter.pageIndex + "&pageSize=10&"+$("#listForm").serialize()+"&date1="+$("#date1").text()+"&date2="+$("#date2").text(),
 								dataType : "json",
 								cache : false
 							});
