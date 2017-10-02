@@ -38,7 +38,13 @@ public class UserController {
 		
 		UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		log.debug("details: {}", details.getUsername());
-		UserEntity entity = userDao.findByAccountNumber(details.getUsername());
+		UserEntity entity;
+		if(!details.getUsername().contains("@")){
+			entity = userDao.findByProviderUserId(details.getUsername());
+		} else {
+			entity = userDao.findByAccountNumber(details.getUsername());
+		}
+		
 		log.debug("principal user accountNumber: {}" , entity);
 		
 //		Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();

@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -126,7 +130,7 @@ public class UserService extends GenericService<UserEntity> {
 	@Override
 	public UserEntity handleUpdate(final UserEntity entity) {
 		final UserEntity dbUserEntity = userDao.findOne(entity.getId());
-
+		
 		if(!StringUtils.isBlank(entity.getCheckPassword())){
 			dbUserEntity.setPassword(encodePasswrod(entity.getPassword()));
 		}
@@ -138,6 +142,15 @@ public class UserService extends GenericService<UserEntity> {
 		
 		if(!StringUtils.isBlank(entity.getEmail())){
 			dbUserEntity.setEmail(entity.getEmail());
+			
+			// 若 由FB登入的帳號 accountNumber不包含@，則 使用者完成基本資料填寫後 accountNumber會改為 email
+			if(!entity.getAccountNumber().contains("@")){
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				dbUserEntity.setAccountNumber(entity.getEmail());
+				Authentication newAuthentication = new UsernamePasswordAuthenticationToken(dbUserEntity, authentication.getCredentials(), authentication.getAuthorities());
+				SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+				
+			}
 		}
 		
 		if(!StringUtils.isBlank(entity.getGender())){
@@ -173,4 +186,9 @@ public class UserService extends GenericService<UserEntity> {
 		}
 		
 	}
+	
+	public UserEntity getByAccountNumber(final String accountNumber) {
+		return userDao.findByAccountNumber(accountNumber);
+	}
+
 }
