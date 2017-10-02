@@ -89,11 +89,18 @@
 								</div>
 
 								<div class="form-group required">
-									<label for="recipientTime" class="col-md-2 control-label">希望收件時間</label>
+									<label for="recipientTime" class="col-md-2 control-label">訂單狀態</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="recipientTime"
-											name="recipientTime" placeholder="Time"
-											value="${entity.recipientTime}" /> <span class="help-block"><div
+										<select class="form-control" id="status"
+											name="status"> 
+											<option value="${entity.status}">請選擇</option>
+											<option value="PROCESSING">訂單處理中</option>
+											<option value="SHIPORDER">出貨中</option>
+											<option value="DONE">處理完成</option>
+											<option value="CANCEL">退訂中</option>
+											<option value="CANCELDONE">退訂完成</option>
+											</select>
+											<span class="help-block"><div
 												class="text-danger"></div></span>
 									</div>
 								</div>

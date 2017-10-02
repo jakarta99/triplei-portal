@@ -41,12 +41,12 @@
 						<div class="form-group">
 							<label for="date1" class="col-sm-1 control-label">開始日期</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" id="date1" name="date1" placeholder="yyyy-MM-dd"/>
+								<input type="date" class="form-control" id="date1" name="date1" placeholder="yyyy-MM-dd" value=""/>
 							</div>
 		          
 							<label for="date2" class="col-sm-1 control-label">結束日期</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" id="date2" name="date2" placeholder="yyyy-MM-dd" />
+								<input type="date" class="form-control" id="date2" name="date2" placeholder="yyyy-MM-dd" value="" />
 							</div>
 						</div>
 										
@@ -94,7 +94,7 @@
 							return $.ajax({
 								type : "GET",
 								url : BASE_URL,
-								data : "pageIndex=1&pageSize=10&"+$("#listForm").serialize()+"&date1="+$("#date1").val()+"&date2="+$("#date2").val(),
+								data : "pageIndex=1&pageSize=10&"+$("#listForm").serialize()+"&date1="+$("#date1").text()+"&date2="+$("#date2").text(),
 								dataType : "json",
 								cache : false
 							});

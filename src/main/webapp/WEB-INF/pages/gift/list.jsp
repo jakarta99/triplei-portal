@@ -5,13 +5,14 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+
 <title>Triple i</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
-<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <style>
 #mainNavbar {
 	border-color: #333333;
@@ -321,7 +322,7 @@
         </div>
         <div class="col-md-8"></div>
         <div class="col-md-3">
-            <a href="#" class="btn btn-lg btn-primary btn-block"
+            <a href="#"  style="color:white;" class="btn btn-lg btn-primary btn-block"
                data-loading-text="Loading" id="saveButton">確認購買</a>
         </div>
     </div>

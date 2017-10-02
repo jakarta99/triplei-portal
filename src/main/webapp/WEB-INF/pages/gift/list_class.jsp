@@ -23,7 +23,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>		
 <!-- 			<div style="padding:0;width:100%;height:100%;color:white;"> -->
 			<!-- 左半藍 -->
-			<div class="col-sm-3" style="background-color:#5C8DEC;height:100vh;">
+			<div class="col-sm-3" style="background-color:#5C8DEC;height:100vh;  color:white;">
 			
 				<div class="col-sm-1"></div>
 				<div class="col-sm-10" style="height: 100vh;padding-left: 0px;padding-right: 0px;">
@@ -51,8 +51,8 @@
 				<div class="col-sm-1"></div>
 			
 			</div>
-			<div class="col-md-9">
-					<div class="row">
+			<div class="col-md-9" style="height:100%;padding:3%; margin-top:8vh;color:black;overflow-y:scroll" id="style-1">
+					<div class="row" style="margin-top: 20px;">
 						<c:forEach items="${models}" var="model" varStatus="status">
 						<div class="col-md-3" style="width:300px ; border: #5C8DEC 1px solid; border-radius: 10px; margin-left: 20px">
 							<div style="height: 300px; ">
@@ -72,7 +72,7 @@
 							</div>
 						</div>
 						<c:if test="${status.count%3==0}">
-					</div><div class="row">
+					</div><div class="row" style="margin-top: 20px;">
 						</c:if>
 						</c:forEach>
 				</div>
@@ -138,7 +138,7 @@
         </div>
         <div class="col-md-8"></div>
         <div class="col-md-3">
-            <a href="#" class="btn btn-lg btn-primary btn-block"
+            <a href="#" style="color:white;" class="btn btn-lg btn-primary btn-block"
                data-loading-text="Loading" id="saveButton">確認購買</a>
         </div>
     </div>

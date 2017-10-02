@@ -99,6 +99,10 @@ public class AdminUserService extends GenericService<UserEntity>{
 		final Set<RoleEntity> RoleEntity = new HashSet<>();
 		final RoleEntity roleDefault = roleDao.findByCode("ROLE_NORMAL"); // 預設權限為一般會員
 		RoleEntity.add(roleDefault);
+		entity.setRemainWishTimes(true);
+		entity.setRemainPoint(0);
+		entity.setAudittingPoint(0);
+		entity.setExchangedPoint(0);
 		
 		entity.setRoles(RoleEntity);
 	

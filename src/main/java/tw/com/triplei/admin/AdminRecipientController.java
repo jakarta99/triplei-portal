@@ -3,6 +3,7 @@ package tw.com.triplei.admin;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -152,9 +153,14 @@ public class AdminRecipientController {
 		try {
 			ProductEntity productEntity = productService.getOneAll(pid);
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
-			UserEntity user = userDao.findByName(userName);
-			form.setUser(user);
-			form.setUserNamee(user.getName());
+			Collection<UserEntity> users = userDao.findByName(userName);
+			for(UserEntity user:users){
+				RoleEntity role = roleService.getDao().findByCode("ROLE_SALES");
+				if(user.getRoles().contains(role)){
+					form.setUser(user);
+					form.setUserNamee(user.getName());
+				}
+			}
 			log.debug("業務員後{}",form.getUser().getName());
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setProduct(productEntity);
@@ -193,9 +199,9 @@ public class AdminRecipientController {
 			response.setData(updateResult);
 			//指派業務員 發mail通知 業務員及管理員
 			if(updateResult.getUser() != null && form.getOrderStatus().equals("未見面")){
-				emailService.sendAlertEmailToSales(user, updateResult);
+				emailService.sendAlertEmailToSales(updateResult.getUser(), updateResult);
 				UserEntity owner = userDao.findByAccountNumber(userDetails.getUsername());
-				emailService.sendAlertEmailToAdmin(owner, user, updateResult);
+				emailService.sendAlertEmailToAdmin(owner, updateResult.getUser(), updateResult);
 			}
 
 		} catch (final Exception e) {

@@ -187,7 +187,11 @@
 				processData : false,
 				contentType : false,
 				success : function(data) {
-					alert("新增成功");
+					if(data.messages!=null){
+						alert("請確認欄位填寫完成，並最少上傳一張圖片");
+						}else{
+						alert("修改成功");
+						}
 				},
 				error : function() {
 					alert("請確認資料填寫無誤");

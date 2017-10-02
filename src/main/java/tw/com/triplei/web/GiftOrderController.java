@@ -1,9 +1,7 @@
 package tw.com.triplei.web;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.GiftOrderSpecification;
+import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.entity.GiftOrderEntity;
@@ -47,6 +47,17 @@ public class GiftOrderController {
 
 	@RequestMapping("/list")
 	public String list(Model model) {
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		log.debug("userDetails: {}", userDetails);
+		
+		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+		log.debug("getUser : {}", user);
+		
+		model.addAttribute("userPoint",user.getRemainPoint());
+		model.addAttribute("audittingPoint",user.getAudittingPoint());
+		model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		
 		return "/gift/giftOrderList";
 	}
 
@@ -142,5 +153,33 @@ public class GiftOrderController {
 		
 		response.put("fail", "Process Error");
 		return response;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/orderCancel/{id}", method=RequestMethod.PUT)
+	public Map<String,String> orderCancel(@PathVariable(value = "id") final long id){
+		
+		Map<String,String> response = new HashMap<>();
+		
+		log.debug("OrderCancelId : {}", id);
+		
+		try {
+			GiftOrderEntity cancelEntity = giftOrderService.getById(id);
+			
+			if(cancelEntity.getStatus()==GiftOrderType.PROCESSING) {
+			cancelEntity.setStatus(GiftOrderType.CANCEL);
+			giftOrderService.update(cancelEntity);
+			
+			response.put("訂單已取消", "訂單已取消");
+			}
+//			else {
+//				
+//			}
+		} catch (final Exception e) {
+			response.put("ProcessError", "ProcessError");
+			return response;
+		}
+		return response;
+		
 	}
 }

@@ -1,5 +1,7 @@
 package tw.com.triplei.dao;
 
+import java.util.Collection;
+
 import tw.com.triplei.commons.GenericDao;
 import tw.com.triplei.entity.UserEntity;
 
@@ -11,7 +13,7 @@ public interface UserDao extends GenericDao<UserEntity>{
 	
 	public UserEntity findByRegisteredCode(String registeredCode);
 	
-	public UserEntity findByName(String name);
+	public Collection<UserEntity> findByName(String name);
 	
 	public UserEntity findByProviderUserId(String providerUserId);
 }

@@ -2,9 +2,11 @@ package tw.com.triplei.admin;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,20 +54,41 @@ public class AdminWishController {
 			@RequestParam("date1") String date1, @RequestParam("date2") String date2) {
 		Pageable pageable = new PageRequest(pageIndex - 1, pageSize);
 
+		
+		log.debug("date1{}",date1);
+		log.debug("date2{}",date2);
 		Page<WishEntity> page;
-
 		try {
-			final List<SpecCriterion> criterions = Lists.newArrayList();
-//			if(!Strings.isNullOrEmpty(date1)){
-//				Date date3 = new SimpleDateFormat("yyyy-MM-dd").parse(date1);
-//				log.debug("!!!!!!!{}",date3.getTime());
-//				criterions.add(new SpecCriterion(QueryOpType.GE,"createdTime",date3.getTime()));
-//			}
-//			if(!Strings.isNullOrEmpty(date2)){
-//				Date date4 = new SimpleDateFormat("yyyy-MM-dd").parse(date2);
-//				criterions.add(new SpecCriterion(QueryOpType.LE,"createdTime",date4.getTime()));
-//			}
 			
+			
+			final List<SpecCriterion> criterions = Lists.newArrayList();
+			if(!Strings.isNullOrEmpty(date1.substring(0, date1.length()-1)) && !Strings.isNullOrEmpty(date2.substring(0, date2.length()-1))){
+				String date1t = date1.substring(0, date1.length()-1);
+				Date date3 = new SimpleDateFormat("yyyy-MM-dd").parse(date1t);
+				LocalDateTime triggerTime =
+						LocalDateTime.ofInstant(Instant.ofEpochSecond(date3.getTime()),
+								TimeZone.getDefault().toZoneId());
+				log.debug("{}",date3);
+				log.debug("triggerTime{}",triggerTime);
+				
+				String date2t = date2.substring(0, date2.length()-1);
+				Date date4 = new SimpleDateFormat("yyyy-MM-dd").parse(date2t);
+				LocalDateTime triggerTime2 =
+						LocalDateTime.ofInstant(Instant.ofEpochSecond(date4.getTime()),
+								TimeZone.getDefault().toZoneId());
+				log.debug("{}",date4);
+				log.debug("triggerTime{}",triggerTime2);
+				
+				LocalDateTime[] values = {triggerTime,triggerTime2};
+				
+				
+				
+				
+				
+				
+				criterions.add(new SpecCriterion(QueryOpType.BETWEEN,"time",values));
+			}
+	
 			page = wishService.getByCondition(criterions, pageable);
 
 

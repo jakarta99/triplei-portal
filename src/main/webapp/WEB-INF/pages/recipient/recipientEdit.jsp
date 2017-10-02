@@ -288,7 +288,7 @@
 								function(data) {
 									if (data.messages.length == 0) {
 										location.href = "/recipient/sale/list"
-										alert("SUCCESS");
+										swal("SUCCESS");
 										$btn.button("reset");
 									}
 								}, function(data, textStatus, jqXHR) {

@@ -140,7 +140,13 @@ ul {
 						</ul></li>
 
 					<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
-						<li><a href="/gift/list" style="color: white">績點專區</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#" style="color: white">績點專區<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/gift/list" >績點商品列表</a></li>
+							<li><a href="/gift/giftOrder/list" >績點商品訂單</a></li>
+						</ul></li>
 					</sec:authorize>
 
 					<li><a href="/article/list" style="color: white">文章專欄</a></li>

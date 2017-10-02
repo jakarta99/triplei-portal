@@ -84,7 +84,6 @@ public class SocialConfiguration implements SocialConfigurer{
 				entity.setEmail(userProfile.getEmail());
 				entity.setGender(userProfile.getGender());
 				log.debug("userProfile.getEmail {}", userProfile.getEmail());
-		        
 				adminUserService.insert(entity);
 		        log.info("New social user signin: {} - {}", entity.getName(), entity.getAccountNumber());
 				return connection.getKey().getProviderUserId();
