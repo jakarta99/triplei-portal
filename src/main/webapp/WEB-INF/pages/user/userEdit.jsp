@@ -126,6 +126,7 @@ $(function(){
 					if (data.messages.length==0){
 						alert("SUCCESS");
 						$btn.button("reset");
+						location.href = '/user/reset/info'
 					}	
 				}, function(data, textStatus, jqXHR) {
 					$btn.button("reset");

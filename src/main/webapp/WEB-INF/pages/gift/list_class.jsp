@@ -23,7 +23,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>		
 <!-- 			<div style="padding:0;width:100%;height:100%;color:white;"> -->
 			<!-- 左半藍 -->
-			<div class="col-sm-3" style="background-color:#5C8DEC;height:100vh;">
+			<div class="col-sm-3" style="background-color:#5C8DEC;height:100vh;  color:white;">
 			
 				<div class="col-sm-1"></div>
 				<div class="col-sm-10" style="height: 100vh;padding-left: 0px;padding-right: 0px;">
@@ -138,7 +138,7 @@
         </div>
         <div class="col-md-8"></div>
         <div class="col-md-3">
-            <a href="#" class="btn btn-lg btn-primary btn-block"
+            <a href="#" style="color:white;" class="btn btn-lg btn-primary btn-block"
                data-loading-text="Loading" id="saveButton">確認購買</a>
         </div>
     </div>

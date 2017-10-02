@@ -47,6 +47,17 @@ public class GiftOrderController {
 
 	@RequestMapping("/list")
 	public String list(Model model) {
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		log.debug("userDetails: {}", userDetails);
+		
+		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+		log.debug("getUser : {}", user);
+		
+		model.addAttribute("userPoint",user.getRemainPoint());
+		model.addAttribute("audittingPoint",user.getAudittingPoint());
+		model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		
 		return "/gift/giftOrderList";
 	}
 

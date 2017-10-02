@@ -52,7 +52,7 @@
 		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
 				</div>
 			</section>
-			
+			 
 
 			<div id="jsGrid"></div>
 			
@@ -82,11 +82,12 @@
 			        autoload: true,
 			 
 			        controller: {
-			            loadData: function () {
+			            loadData: function (filter) {
+			            	//console.log(filter);
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: "pageIndex=1&pageSize=10&"+$("#listForm").serialize(),
+			                    data: "pageIndex=" + filter.pageIndex + "&pageSize=10&" + $("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false
 			                });

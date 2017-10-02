@@ -130,7 +130,7 @@ public class UserEntity extends GenericEntity implements SocialUserDetails {
 	@JsonIgnore
 	@Override
 	public String getUsername() {
-		return accountNumber;  // can not return null
+		return accountNumber;  // 
 	}
 
 	@JsonIgnore
