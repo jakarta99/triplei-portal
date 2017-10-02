@@ -1,5 +1,7 @@
 package tw.com.triplei.admin;
 
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,10 +27,12 @@ import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.commons.QueryOpType;
 import tw.com.triplei.commons.SpecCriterion;
+import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.ProductHighDiscountRatio;
 import tw.com.triplei.entity.ProductPremiumRatio;
+import tw.com.triplei.enums.Currency;
 import tw.com.triplei.service.ProductService;
 
 @Slf4j
@@ -201,15 +204,20 @@ public class AdminProductController {
 		return "redirect:/admin/product/list";
 	}
 
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(value="/edit",method = RequestMethod.POST)
 	@ResponseBody
-	public AjaxResponse<ProductEntity> update(final Model model, @RequestBody final ProductEntity form) {
+	public AjaxResponse<ProductEntity> update(@RequestParam("id")String uid,@RequestParam("hotProduct")Boolean hotProduct,ProductEntity productEntity) {
 		
-		final AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
-		
+		AjaxResponse<ProductEntity> response = new AjaxResponse<ProductEntity>();
+		log.debug("{}{}{}",uid,hotProduct);
 		try {
+			Long id= Long.parseLong(uid);
 			
-			final ProductEntity updateResult = productService.update(form);
+			ProductEntity update= productService.getOne(id);
+			update.setHotProduct(hotProduct);
+			log.debug("ProductUpdate{}",update);
+			
+			final ProductEntity updateResult = productService.update(update);;
 			response.setData(updateResult);
 			
 		} catch (final Exception e) {

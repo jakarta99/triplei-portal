@@ -127,6 +127,8 @@
 			            { title: '宣告利率', name: "declareInterestRate", width: 75 ,itemTemplate: function(val) {return (val*100).toFixed(2)+"%" }},
 			            { title: '預定利率', name: "predictInterestRate", width: 75 ,itemTemplate: function(val) {return (val*100).toFixed(2)+"%" }},
 			            { title: '幣別', name: "curr", type: "text", width: 50 },
+			            { title: '點擊數', name: "clickCount", type: "text", width: 50 },
+			            { title: '熱門商品', name: "hotProduct", type: "checkbox", width: 50},
 			            { title: '高保費率', name: "highDiscountRatios", width: 75 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/highDiscountRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
 			            { title: '基本費率', name: "premiumRatios", width: 75 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/premiumRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
 			            { title: '解約金費率', name: "cancelRatios", width: 80 ,itemTemplate: function(val,row) {return $("<a></a>").attr("href",BASE_URL+"/cancelRatio/" + row.id).append("<button id='CR' style='font-size:10px'>檢視</button>")}},
@@ -153,11 +155,11 @@
 						}
 					});
 					
-// 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
-// 					$editBtn.attr("href", BASE_URL + "/" + row.id);
-// 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
+					$editBtn.attr("href", BASE_URL + "/" + row.id);
+					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append($delBtn);
+					return $("<div></div>").append($editBtn).append("<br/>").append($delBtn);
 				}
 	    
 			</script>

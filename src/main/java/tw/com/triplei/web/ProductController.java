@@ -204,6 +204,11 @@ public class ProductController {
 		model.addAttribute("modelf", form);
 		model.addAttribute("totalCancelRatio", totalCancelRatio);
 		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);
+		
+		//+1 clickCount
+		form.setClickCount((form.getClickCount()+1));
+		productService.update(form);
+		log.debug("Product +1 to clickCount{}",form.getClickCount());
 //		Iterator itt = totalCancelRatio.iterator();
 //		while (itt.hasNext()) {
 //			log.debug("totalCancelRatio資料={}", itt.next());
