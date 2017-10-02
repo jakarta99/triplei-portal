@@ -111,7 +111,7 @@
 					<div class="col-sm-12"
 						style="height: 100%; display: flex; justify-content: center; flex-direction: column;padding-left: 0px;padding-right: 0px"
 						align='center'>
-						<div class="col-sm-12"  id="bm" style="height: 100%"></div>
+						<div class="col-sm-12"  id="bm" style="height:100%"></div>
 					</div>
 						
 					<!-- 免費註冊 -->
@@ -136,7 +136,7 @@ var animation = bodymovin.loadAnimation({
 	  renderer: 'svg',
 	  loop: true,
 	  autoplay: true,
-	  path: '/resources/pic/registered/registered/balloon.json'
+	  path: '/resources/pic/registered/registered/1002/balloon.json'
 	})
 	
 	
