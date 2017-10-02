@@ -21,9 +21,41 @@
 		<div style="padding-top:8vh">
 			<h3>積點商品訂單管理</h3>
 			
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+							<label for="Status" class="col-sm-1 control-label">訂單狀態</label>
+							<div class="col-sm-2">
+								<select id="status" name="status" class="form-control">
+									<option value="">全部</option>
+									<option value="PROCESSING">訂單處理中</option>
+									<option value="SHIPORDER">出貨中</option>
+									<option value="DONE">處理完成</option>
+									<option value="CANCEL">退訂中</option>
+									<option value="CANCELDONE">退訂完成</option>
+								</select>
+							</div>
+						</div>							
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success" data-loading-text="loading..." type="button">搜尋</button>
+		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
+			
 			<div id="jsGrid"></div>
 			
 			<script>
+			$("#searchBtn").bind("click",function(){
+				$("#jsGrid").jsGrid("reset");
+			});
+			
+			$("#resetBtn").bind("click", function(){
+				$("#listForm")[0].reset();
+			});
+			
 			    var BASE_URL = "${pageContext.request.contextPath}/admin/gift/giftOrder";
 			 
 			    $("#jsGrid").jsGrid({
@@ -38,17 +70,13 @@
 			        pageSize: 10,
 			        pageLoading: true,
 			        autoload: true,
-			        pageNextText:"下一頁",
-			        pagePrevText:"上一頁",
-			        pageFirstText:"第一頁",
-			        pageLastText:"最後一頁",
 			 
 			        controller: {
 			            loadData: function (filter) {
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: filter,
+			                    data: "pageIndex=" + filter.pageIndex + "&pageSize=10&" + $("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false
 			                });
