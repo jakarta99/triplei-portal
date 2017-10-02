@@ -18,7 +18,7 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		
-		<div>
+		<div style="padding-top:8vh">
 			<h3>積點商品訂單管理</h3>
 			
 			<div id="jsGrid"></div>
@@ -78,7 +78,7 @@
 								return $("<span></span>").text("退訂中");
 							}else if(data=="CANCELDONE"){
 								return $("<span></span>").text("退訂完成");
-							} },
+							} }}
 
 			        ]
 			    });

@@ -51,8 +51,8 @@
 				<div class="col-sm-1"></div>
 			
 			</div>
-			<div class="col-md-9">
-					<div class="row">
+			<div class="col-md-9" style="height:100%;padding:3%; margin-top:8vh;color:black;overflow-y:scroll" id="style-1">
+					<div class="row" style="margin-top: 20px;">
 						<c:forEach items="${models}" var="model" varStatus="status">
 						<div class="col-md-3" style="width:300px ; border: #5C8DEC 1px solid; border-radius: 10px; margin-left: 20px">
 							<div style="height: 300px; ">
@@ -72,7 +72,7 @@
 							</div>
 						</div>
 						<c:if test="${status.count%3==0}">
-					</div><div class="row">
+					</div><div class="row" style="margin-top: 20px;">
 						</c:if>
 						</c:forEach>
 				</div>
