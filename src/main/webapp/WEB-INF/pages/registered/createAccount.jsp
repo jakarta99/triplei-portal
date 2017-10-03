@@ -126,6 +126,18 @@
 
 	<script tyep="text/javascript">	
 
+	window.legacyAlert = window.alert;
+	
+	window.alert = function(msg, title, type, params) {
+	    	var title = (title == null) ? 'Error' : title;
+	    	var type = (type == null) ? 'Warning' : type;
+	   	 	swal($.extend({
+	            	title: title,
+	            	text: msg,
+	            	type: type
+	        	}, params || {})
+	    	);
+		};
 		$(function() {		
 			
 			$('#birthdate').inputmask({
@@ -147,10 +159,9 @@
 								function(data) {
 									if (data.messages.length == 0) {
 										//$("#dataForm").trigger("reset");
-										
 										//location.href = '/registered/checkLetter?email=' + data.data.email
-										location.href = '/registered/checkLetter?id=' + data.data.id
 										
+										location.href = '/registered/checkLetter?id=' + data.data.id
 										$btn.button("reset");
 									}
 								}, function(data, textStatus, jqXHR) {

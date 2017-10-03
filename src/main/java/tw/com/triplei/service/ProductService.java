@@ -39,6 +39,7 @@ import tw.com.triplei.dao.ProductCancelRatioDao;
 import tw.com.triplei.dao.ProductDao;
 import tw.com.triplei.dao.ProductHighDiscountRatioDao;
 import tw.com.triplei.dao.ProductPremiumRatioDao;
+import tw.com.triplei.entity.ArticleEntity;
 import tw.com.triplei.entity.InsurerEntity;
 import tw.com.triplei.entity.ProductCancelRatio;
 import tw.com.triplei.entity.ProductEntity;
@@ -195,6 +196,22 @@ public class ProductService extends GenericService<ProductEntity> {
 //		}
 //		return premiumRatio;
 //	}
+	
+	/*首頁抓熱門商品*/
+	public List<ProductEntity> getHotProduct(){
+		
+		List<ProductEntity> hotList = dao.findByHotProduct(true);
+		List<ProductEntity> sortList = null;
+		
+		if (hotList.size() > 3) {
+			sortList = hotList.subList(0, 3);
+			return sortList;
+		} else {
+			sortList = hotList;
+		}
+
+		return sortList;
+	}
 
 	public List<ProductEntity> search(String gender, int insAge, Currency currency, String interestRateType, int year) {
 
