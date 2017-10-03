@@ -13,13 +13,18 @@
 	border-color: #333333;
 	background-color: #030033;
 }
+
+.ui-widget-header {
+	border: 0px solid #e78f08;
+	background-color: white;
+}
 </style>
 </head>
 
 <body>
 
 	<div id="wrap">
-		<div div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
+		<div class="container-fluid" style="width:100%;height:100%;position:absolute;padding:0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>		
 <!-- 			<div style="padding:0;width:100%;height:100%;color:white;"> -->
 			<!-- 左半藍 -->
@@ -46,189 +51,256 @@
 				<span id="exchangedPoint" >${exchangedPoint}</span>
 				</div>
 				</div></div>
-				<div class="col-sm-12"><img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png" width="200" height="200"></div>
+				<div class="col-xs-12 col-sm-12" id="bm"
+							style="width: 140%; position: relative; top: 20px; left: -50px"></div>
 				</div>
 				<div class="col-sm-1"></div>
 			
 			</div>
 			<div class="col-md-9" style="height:100%;padding:3%; margin-top:8vh;color:black;overflow-y:scroll" id="style-1">
-					<div class="row" style="margin-top: 20px;">
-						<c:forEach items="${models}" var="model" varStatus="status">
-						<div class="col-md-3" style="width:300px ; border: #5C8DEC 1px solid; border-radius: 10px; margin-left: 20px">
-							<div style="height: 300px; ">
-								<div class="col-md-12" style="height: 220px;">
-									<img id="image" style="margin-top: 5px ; height: 200px; width: 200px;" src='<c:url value="${model.image1}"/>'>
-								</div>
-								<div>
-									<div  class="col-md-8" style="height: 20px;">
-										<span id="giftName" style="text-align: center;">${model.name}</span></br>
-									<img alt="" src="/resources/pic/積點專區/點數(小).png" width="15" height="15">
-										<span id="points" style="text-align: center;">${model.bonus}</span>
+			
+			
+			<div class="col-sm-12">
+							<c:forEach items="${models}" var="model" varStatus="status">
+								<div class="col-sm-3"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
+									<div class="col-sm-12">
+										<img id="image" class="img-responsive"
+											style="margin-top: 2vh; height: 100%; width: 100%;"
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-md-4" style="height: 20px; ">
-										<p id="placeOrder" class="btn btn-sm btn-primary" style="text-align: center;">立即兌換</p>
+									<div class="col-sm-12"
+										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
+										<div class="col-sm-12" style="padding: 0;">
+											<span class="col-sm-8" id="giftName" style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+											</div>
+											<div class="col-sm-12">
+												<div style="padding: 0;">
+													<img alt="" style="margin-top: -1vh;"
+														src="/resources/pic/積點專區/點數(小).png"> <span
+														id="points"
+														style="font-size: 125%; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
+							</c:forEach>
 						</div>
-						<c:if test="${status.count%3==0}">
-					</div><div class="row" style="margin-top: 20px;">
-						</c:if>
-						</c:forEach>
-				</div>
-			</div>
 		</div>
 	</div>
-<!-- </div> -->
+</div>
 		
 		
 		
-		
+		<!-- 許願池dialog -->
+	<div id="dialog-wish">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-10">
+			<div class="col-sm-12" style="padding-left: 0px; padding-right: 0px">
+				<div class="col-sm-8" style="padding-left: 0px">
+					<h3>許願池</h3>
+					<p>
+						積點專區的商品無法滿足你的慾望嗎?別擔心,你可以在這裡告訴我們您想要的商品,TRIPLE-I會盡全力滿足您的願望!快許下願望吧</p>
+				</div>
+				<div class="col-sm-4" style="padding-right: 0px">
+					<img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png"
+						width="150" height="150">
+				</div>
+			</div>
+			<div class="col-sm-12" style="padding-left: 0px; padding-bottom: 1vh">希望增加的兌換商品：</div>
+			<div class="col-sm-3"
+				style="border: 1px #5C8DEC solid; height: 20vh; display: flex; justify-content: center; flex-direction: column"
+				align="center">
+				<!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
+				<label for="image1"
+					style="background-color: white; color: #5C8DEC; font-family: 微軟正黑體;">圖片(必要):</label>
+				<input type="file" id="image1" name="image1"
+					style="border: 0px #5C8DEC solid">
+
+			</div>
+			<form enctype="multipart/form-data" method="post" id="dataForm">
+				<div class="col-sm-9">
+					<div class="col-sm-12"
+						style="height: 9vh; border: 1px #5C8DEC solid; margin-bottom: 2vh; display: flex; justify-content: center; flex-direction: column">
+						<div style="">
+							<label for="brand" style="color: #5C8DEC; font-family: 微軟正黑體;">品牌:</label>
+							<input type="text" placeholder="請輸入品牌名稱" id="brand" name="brand"
+								style="border: 0px #5C8DEC solid">
+						</div>
+					</div>
+					<div class="col-sm-12"
+						style="height: 9vh; border: 1px #5C8DEC solid; margin-bottom: 2vh; display: flex; justify-content: center; flex-direction: column">
+						<div style="">
+							<label for="name" style="color: #5C8DEC; font-family: 微軟正黑體;">商品名稱:</label>
+							<input type="text" placeholder="請輸入商品名稱" id="name" name="name"
+								style="border: 0px #5C8DEC solid">
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="col-sm-12" style="height: 10vh" align="right">
+				<a class="btn btn-primary" data-loading-text="Loading"
+					id="wishButton"
+					style="margin-top: 4vh; background-color: white; border: 1px #5C8DEC solid; color: #5C8DEC; border-radius: 20px; font-size: 15px;">許願</a>
+			</div>
+		</div>
+		<div class="col-sm-1"></div>
+	</div>
 		
 		
 		
 		
 		
 <div id="dialog" title="商品明細">
-      <div>
-	      <div class="container-fluid">
-	        <div class="col-md-7">
-		        <div>
-		            <span>積點商品名稱:    </span>
-		            <span id="orderName" style="text-align: center;"></span>
-		        </div>
-		        <div>
-		        <label for="quantity1" class="">請輸入數量:</label>	
-					<input type="number" class="" id="quantity1"
-						name="quantity1" min="1" value="1" placeholder="quantity"/> 
-		        </div>
-		        <div>
-		        	<img alt="" src="/resources/pic/積點專區/點數(小).png" width="30" height="30">
-		            <span>商品兌換點數:    </span>
-		            <span id="orderPoint" style="text-align: center;"></span>
-		        </div>
-	        </div>
-	        <div class="col-md-4">
-	            <img id="orderImage" style="height: 200px; width: 200px;" >
-	        </div>
-        </div>
-        <hr>
-        <div>
-        <label for="recipient" class="">收件人姓名:</label>	
-			<input type="text" class="" id="recipient"
-				name="recipient" placeholder=""/> 
-        </div>
-        <div>
-        <label for="recipientAddress" class="">收件人地址:</label>	
-			<input type="text" class="" id="recipientAddress"
-				name="recipientAddress" placeholder=""/> 
-        </div>
-        <div>
-        <label for="recipientPhone" class="">收件人電話:</label>	
-			<input type="text" class="" id="recipientPhone"
-				name="recipientPhone" placeholder=""/> 
-        </div>
-        <div>
-        <label for="recipientTime" class="">希望收件時間:</label>	
-				<select class="" id="recipientTime"
-				name="recipientTime">
-				<option value="上午" selected>上午</option>
-				<option value="下午">下午</option>
+		<div>
+			<div class="container-fluid">
+				<div class="col-md-7">
+					<div>
+						<span>積點商品名稱: </span> <span id="orderName"
+							style="text-align: center;"></span>
+					</div>
+					<div>
+						<label for="quantity1" class="">請輸入數量:</label> <input
+							type="number" class="" id="quantity1" name="quantity1" min="1"
+							value="1" placeholder="quantity" style="width: 20%" />
+					</div>
+					<div>
+						<img alt="" src="/resources/pic/積點專區/點數(小).png" width="30"
+							height="30"> <span>兌換單一商品點數: </span>
+							<span id="orderPoint" style="text-align:center;font-size:100%"></span>
+							<br/>
+							<span>兌換商品總點數: </span>
+							<span id="totalPoints" style="text-align:center;font-size:125%"></span>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<img id="orderImage" style="padding: 0; height: 12vh; width: 12vw;">
+				</div>
+			</div>
+			<hr>
+			<div>
+				<label for="recipient" class="">收件人姓名:</label> <input type="text"
+					class="" id="recipient" name="recipient" placeholder="" />
+			</div>
+			<div>
+				<label for="recipientAddress" class="">收件人地址:</label> <input
+					type="text" class="" id="recipientAddress" name="recipientAddress"
+					placeholder="" />
+			</div>
+			<div>
+				<label for="recipientPhone" class="">收件人電話:</label> <input
+					type="text" class="" id="recipientPhone" name="recipientPhone"
+					placeholder="" />
+			</div>
+			<div>
+				<label for="recipientTime" class="">希望收件時間:</label> <select class=""
+					id="recipientTime" name="recipientTime">
+					<option value="上午" selected>上午</option>
+					<option value="下午">下午</option>
 				</select>
-        </div>
-        <div class="col-md-8"></div>
-        <div class="col-md-3">
-            <a href="#" style="color:white;" class="btn btn-lg btn-primary btn-block"
-               data-loading-text="Loading" id="saveButton">確認購買</a>
-        </div>
-    </div>
-</div>
+			</div>
+			<div class="col-md-8"></div>
+			<div class="col-md-3">
+				<a href="#" class="btn btn-secondary" data-loading-text="Loading"
+					id="saveButton"
+					style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">確認購買</a>
+			</div>
+		</div>
+	</div>
 		
 	
 	
 	
 	
 <script type="text/javascript">
-$( function() {
-	var image;
-	var giftName;
-	var points;
-	var quantity1;
-// 	var userPoint = $.('#userPoint');
-// 	var exchangedPoint = $.('#exchangedPoint');
-	
-  $('p#placeOrder').on( 'click', function(){
-// 	   image =  $(this).parents().parents().find("#image").attr("src");
-	   image =  $(this).parent().parent().siblings().find("#image").attr("src");
-	   giftName =  $(this).parent().siblings().find("#giftName").text();
-	   points =  $(this).parent().siblings().find("#points").text();
-	   console.log(image);
-	   console.log(giftName);
-	   console.log(points);
-	   $("#orderImage").attr("src" , image);
-	   $("#orderName").text(giftName);
-	   $("#orderPoint").text(points);
-	  $( "#dialog" ).dialog( "open" );  
-  });
-  
-  $("#dialog").hide();
-  $( "#dialog" ).dialog({
-      autoOpen: false,
-      height : "auto",
-	  width : 700,
-      show: {
-        effect: "blind",
-        duration: 1000
-      },
-      hide: {
-        effect: "blind",
-        duration: 1000
-      }
-    });
-  
-  $("#saveButton").on("click", function() {
-// 		var $btn = $(this);
-// 		$btn.button("loading");
-		var datas = {};
-		quantity1 = $("#quantity1").val();
-		console.log(quantity1);
-		datas.giftName = giftName;
-		datas.quantity1 = quantity1;
-		datas.recipient = $("#recipient").val();
-		datas.recipientAddress = $("#recipientAddress").val();
-		datas.recipientPhone = $("#recipientPhone").val();
-		datas.recipientTime = $("#recipientTime").val();
-		
-		$.ajax({
-			url : "<c:url value='/gift/giftOrder/addOrder'/>",
-			method : "POST",
-			data : datas,
-			dataType : "json",
-			success : function(data) {
-				if(data.訂購成功){
-				alert("購買成功");
-				location.replace("/gift/list");
-// 				userPoint.text(data.userPoint);
-// 				exchangedPoint.text(data.exchangedPoint);
-				}else if(data.剩餘點數不足){
-					alert("剩餘點數不足");
-				}else if(data.數字輸入錯誤){
-					alert("數字輸入錯誤");
-				}else{
-					alert("請輸入正確資料");
+		$(function() {
+			var image;
+			var giftName;
+			var points;
+			var quantity1;
+			// 	var userPoint = $.('#userPoint');
+			// 	var exchangedPoint = $.('#exchangedPoint');
+
+			$('button#placeOrder').on('click',function() {
+						// 	   image =  $(this).parents().parents().find("#image").attr("src");
+						image = $(this).parent().parent().parent().siblings()
+								.find("#image").attr("src");
+						points = $(this).parent().siblings().find("#points").text();
+						itemName = $(this).parent().parent().find("#giftName").text();
+
+						console.log(image);
+						console.log(itemName);
+						console.log(points);
+						count = $("#quantity1").val();
+						$("#orderImage").attr("src", image);
+						$("#orderName").text(itemName);
+						$("#orderPoint").text(points);
+						$("#totalPoints").text(points*count);
+						$("#dialog").dialog("open");
+					});
+
+			$("#dialog").hide();
+			$("#dialog").dialog({
+				autoOpen : false,
+				height : "auto",
+				width : 450,
+				show : {
+					effect : "blind",
+					duration : 800
+				},
+				hide : {
+					effect : "blind",
+					duration : 800
 				}
-			},
-			error : function(){
-				alert("NetWorkError");
-			}
-		})
-// 		$btn.button("reset");
-	});
-//   以下許願池
-		$('#dialog-wish').hide();
-		$('#dialog-success').hide();
+			});
+
+			$("#saveButton").on("click", function() {
+				// 		var $btn = $(this);
+				// 		$btn.button("loading");
+				var datas = {};
+				quantity1 = $("#quantity1").val();
+				console.log(quantity1);
+				datas.giftName = itemName;
+				datas.quantity1 = quantity1;
+				datas.recipient = $("#recipient").val();
+				datas.recipientAddress = $("#recipientAddress").val();
+				datas.recipientPhone = $("#recipientPhone").val();
+				datas.recipientTime = $("#recipientTime").val();
+
+				$.ajax({
+					url : "<c:url value='/gift/giftOrder/addOrder'/>",
+					method : "POST",
+					data : datas,
+					dataType : "json",
+					success : function(data) {
+						if (data.訂購成功) {
+							swal("購買成功");
+							location.replace("/gift/list");
+							// 				userPoint.text(data.userPoint);
+							// 				exchangedPoint.text(data.exchangedPoint);
+						} else if (data.剩餘點數不足) {
+							alert("剩餘點數不足");
+						} else if (data.數字輸入錯誤) {
+							alert("數字輸入錯誤");
+						} else {
+							alert("請輸入正確資料");
+						}
+					},
+					error : function() {
+						alert("請檢查網路連線");
+					}
+				})
+				// 		$btn.button("reset");
+			});
+			//   以下許願池
+			$('#dialog-wish').hide();
+			$('#dialog-success').hide();
 			var dialog1 = $('#dialog-wish').dialog({
-				autoOpen: false,
+				autoOpen : false,
 				resizable : true,
 				height : "auto",
 				width : 700,
@@ -242,82 +314,96 @@ $( function() {
 					duration : 500
 				},
 			})
-// 			var dialog2 = $('#dialog-success').dialog({
-// 				autoOpen: false,
-// 				resizable : true,
-// 				height : 300,
-// 				width : 400,
-// 				modal : true,
-// 				show : {
-// 					effect : "blind",
-// 					duration : 500
-// 				},
-// 				hide : {
-// 					effect : "blind",
-// 					duration : 500
-// 				},
-// 			})
-// 			var dialog3 = $('#dialog-failed').dialog({
-// 				autoOpen: false,
-// 				resizable : true,
-// 				height : 300,
-// 				width : 400,
-// 				modal : true,
-// 				show : {
-// 					effect : "blind",
-// 					duration : 500
-// 				},
-// 				hide : {
-// 					effect : "blind",
-// 					duration : 500
-// 				},
-// 			})
-		$('#wishpool').on("click",function() {
-			dialog1.dialog("open");
-			//<!-- Save -->
-			$("#wishButton").bind("click",function() {
-								var $btn = $(this);
-								$btn.button("loading");
-								
-								var formData = new FormData();
-								formData.append('name', $("#name").val());
-								formData.append('brand', $("#brand").val());
-								$.each($("input[type='file']")[0].files, function(i, file) {
-									formData.append('file', file);
+			// 			var dialog2 = $('#dialog-success').dialog({
+			// 				autoOpen: false,
+			// 				resizable : true,
+			// 				height : 300,
+			// 				width : 400,
+			// 				modal : true,
+			// 				show : {
+			// 					effect : "blind",
+			// 					duration : 500
+			// 				},
+			// 				hide : {
+			// 					effect : "blind",
+			// 					duration : 500
+			// 				},
+			// 			})
+			// 			var dialog3 = $('#dialog-failed').dialog({
+			// 				autoOpen: false,
+			// 				resizable : true,
+			// 				height : 300,
+			// 				width : 400,
+			// 				modal : true,
+			// 				show : {
+			// 					effect : "blind",
+			// 					duration : 500
+			// 				},
+			// 				hide : {
+			// 					effect : "blind",
+			// 					duration : 500
+			// 				},
+			// 			})
+			$('#bm').on("click", function() {
+				dialog1.dialog("open");
+				//<!-- Save -->
+				$("#wishButton").bind("click", function() {
+					var $btn = $(this);
+					$btn.button("loading");
+
+					var formData = new FormData();
+					formData.append('name', $("#name").val());
+					formData.append('brand', $("#brand").val());
+					$.each($("input[type='file']")[0].files, function(i, file) {
+						formData.append('file', file);
+					});
+
+					$.ajax({
+						url : "<c:url value='/wish'/>",
+						method : "POST",
+						data : formData,
+						enctype : "multipart/form-data",
+						processData : false,
+						contentType : false,
+						success : function(data) {
+							if (data.data == null) {
+								swal({
+									icon : "/resources/pic/積點專區/只能許一次.png",
+									title : '一周只能許一次噢...'
 								});
-								
-								$.ajax({
-									url : "<c:url value='/admin/wish'/>",
-									method : "POST",
-									data : formData,
-									enctype : "multipart/form-data",
-									processData : false,
-									contentType : false,
-									success : function(data) {
-										if (data.data == null) {
-											swal({
-												  icon: "/resources/pic/積點專區/只能許一次.png",
-												  title:'一周只能許一次噢...'
-												});
-											$btn.button("reset");
-											dialog1.dialog("close");
-										}else if (data.messages.length == 0) {
-															$("#dataForm").trigger("reset");
-															swal({
-																  icon: "/resources/pic/積點專區/許願成功.png",
-																  title:'許願成功!!!'
-																});
-															$btn.button("reset");
-															dialog1.dialog("close");
-														}
-									}
-								})
 								$btn.button("reset");
-							});
+								dialog1.dialog("close");
+							} else if (data.messages.length == 0) {
+								$("#dataForm").trigger("reset");
+								swal({
+									icon : "/resources/pic/積點專區/許願成功.png",
+									title : '許願成功!!!'
+								});
+								$btn.button("reset");
+								dialog1.dialog("close");
+							}
+						}
+					})
+					$btn.button("reset");
+				});
 			});
-	
-});
-</script>	
+
+		});
+
+		var animation = bodymovin.loadAnimation({
+			container : document.getElementById('bm'),
+			renderer : 'svg',
+			loop : true,
+			autoplay : true,
+			path : '/resources/pic/積點專區/動畫/data.json'
+		})
+		
+		$("#quantity1").on("change",function(){
+			quantity = $("#quantity1").val();
+			points = $("#orderPoint").text();
+			$("#totalPoints").text(quantity*points);
+		})
+	</script>
 </body>
 </html>
 
