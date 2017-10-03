@@ -87,11 +87,11 @@
 			        autoload: true,
 			 
 			        controller: {
-			            loadData: function () {
+			            loadData: function (filter) {
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: "pageIndex=1&pageSize=10&"+$("#listForm").serialize()+"&val1="+$("#val1").val()+"&val2="+$("#val2").val(),
+			                    data: "pageIndex=" + filter.pageIndex + "&pageSize=10&"+$("#listForm").serialize()+"&val1="+$("#val1").val()+"&val2="+$("#val2").val(),
 			                    dataType: "json",
 			                    cache: false
 			                });

@@ -93,11 +93,11 @@
 			        sorting:true,
 			 
 			        controller: {
-			            loadData: function () {
+			            loadData: function (filter) {
 			            	return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL,
-			                    data: "pageIndex=1&pageSize=5&"+$("#listForm").serialize(),
+			                    data: "pageIndex=" + filter.pageIndex + "&pageSize=5&"+$("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false
 			                });

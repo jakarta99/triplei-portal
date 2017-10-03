@@ -376,15 +376,15 @@ public class ProductService extends GenericService<ProductEntity> {
 
 				// 預定利率
 				try {
-					product.setPredictInterestRate(BigDecimal.valueOf(rowi.getCell(6).getNumericCellValue()));
+					product.setPredictInterestRate(
+							BigDecimal.valueOf(rowi.getCell(6).getNumericCellValue()).setScale(4));
 				} catch (Exception e) {
 					product.setPredictInterestRate(BigDecimal.valueOf(0D));
 				}
 				// 宣告利率
 				try {
-					iii = BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()).doubleValue();
 					product.setDeclareInterestRate(
-							BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()).setScale(3));
+							BigDecimal.valueOf(rowi.getCell(7).getNumericCellValue()).setScale(4));
 				} catch (Exception e) {
 					product.setDeclareInterestRate(BigDecimal.valueOf(0D));
 				}
