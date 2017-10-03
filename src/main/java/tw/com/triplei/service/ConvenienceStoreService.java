@@ -204,4 +204,9 @@ public class ConvenienceStoreService extends GenericService<ConvenienceStoreEnti
 		return convenienceStoreDao.findByCityAndRegionAndStreet(city, region, street);
 		
 	}
+
+	public ConvenienceStoreEntity findByAddress(String address) {
+		return convenienceStoreDao.findByAddress(address);
+		
+	}
 }

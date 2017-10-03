@@ -187,10 +187,10 @@
 				processData : false,
 				contentType : false,
 				success : function(data) {
-					if(data.messages!=null){
+					if(data.messages){
+						alert("新增成功");
+						}else if(data.messages[0].code=='EXCEPTION'){
 						alert("請確認欄位填寫完成，並最少上傳一張圖片");
-						}else{
-						alert("修改成功");
 						}
 				},
 				error : function() {

@@ -52,6 +52,7 @@ INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_p
 INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('monkey81817@gmail.com', 'monkey81817@gmail.com', '張耀元','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
 INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('lacerjoe@gmail.com', 'lacerjoe@gmail.com', '劉駿','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
 INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('tomx220052@yahoo.com.tw', 'tomx220052@yahoo.com.tw', '豪豪','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('pcfn744e5w@gmail.com', 'pcfn744e5w@gmail.com', '趙洵','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,50000,0,0,true);
 --ROLE
 INSERT INTO ROLE (code, name) VALUES ('ROLE_NORMAL', '一般會員');
 INSERT INTO ROLE (code, name) VALUES ('ROLE_ORDER', '下單會員');
@@ -74,7 +75,9 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (9,4);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (9,7);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (10,4);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (11,1);
-
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (12,1);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (12,4);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (12,7);
 --Article
 INSERT INTO ARTICLE (ARTICLE_TYPE,AUTHOR,BANNER_IMAGE,BANNER_ROTATION,CLICK_COUNT,CONTENT,HOT_ARTICLE,INTRODUCTION,STORE_SHELVES,TITLE) VALUES ('EDITOR_CHOICE','Sarah','/userfiles/bannerImage/images.jpg',true,0,'<p>我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1</p>',true,'我是編輯精選1',true,'編輯精選1');
 INSERT INTO ARTICLE (ARTICLE_TYPE,AUTHOR,BANNER_IMAGE,BANNER_ROTATION,CLICK_COUNT,CONTENT,HOT_ARTICLE,INTRODUCTION,STORE_SHELVES,TITLE) VALUES ('EDITOR_CHOICE','Sarah','/userfiles/bannerImage/images.jpg',false,0,'<p>我是編輯精選2</p>',true,'我是編輯精選1',true,'編輯精選2');
