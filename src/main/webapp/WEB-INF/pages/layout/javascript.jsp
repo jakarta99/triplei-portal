@@ -29,4 +29,9 @@ window.$log = log;
 function alertMessage(message) {
 	alert(message);
 }
+
+// 解決dialog閃一下消失
+
+$(".dialog-init").css("display","block");
+
 </script>

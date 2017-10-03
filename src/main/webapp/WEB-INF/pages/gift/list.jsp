@@ -425,7 +425,7 @@
 		</div>
 	</div>
 
-	<div id="dialog" title="商品明細">
+	<div id="dialog" class="dialog-init" title="商品明細">
 		<div>
 			<div class="container-fluid">
 				<div class="col-md-7">
@@ -482,7 +482,7 @@
 		</div>
 	</div>
 	<!-- 許願池dialog -->
-	<div id="dialog-wish">
+	<div id="dialog-wish" class="dialog-init">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
 			<div class="col-sm-12" style="padding-left: 0px; padding-right: 0px">

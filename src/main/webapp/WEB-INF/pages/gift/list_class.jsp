@@ -89,7 +89,7 @@
 		
 		
 		
-<div id="dialog" title="商品明細">
+<div id="dialog" class="dialog-init" title="商品明細">
       <div>
 	      <div class="container-fluid">
 	        <div class="col-md-7">

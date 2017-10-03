@@ -55,4 +55,10 @@ body::-webkit-scrollbar-thumb
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #9D9D9D;
 }
+
+/* 解決dialog閃一下消失 */
+
+.dialog-init {
+    display: none;
+}
 </style>

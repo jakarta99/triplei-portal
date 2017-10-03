@@ -111,7 +111,7 @@
 					var $btn = $(this);
 					$btn.button("loading");
 				if(checkEmail()&&checklength()){
-					alert("感謝您的提問，即將跳轉回首頁...");
+					swal("感謝您的提問，即將跳轉回首頁...");
 					$.post("<c:url value='/question'/>", "dataForm",
 							function(data) {
 								if (data.messages.length == 0) {
@@ -125,7 +125,7 @@
 								$btn.button("reset");
 							});
 				}else{
-					alert("請確認資料填寫無誤");
+					swal("請確認資料填寫無誤", "", "warning");
 				}
 
 					$btn.button("reset");
@@ -174,7 +174,7 @@
 		if ($("#content").text().length > 50) {
 			$("#content").text(
 					$("#content").text().substring(0, 50));
-			alert("已超過最大長度!");
+			swal("已超過最大長度!", "", "warning");
 			return false;
 		}
 		return true;
