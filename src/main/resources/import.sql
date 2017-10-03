@@ -1,3 +1,18 @@
+--FBUserConnection
+create table FBUserConnection (
+    userId varchar(255) not null,
+    providerId varchar(255) not null,
+    providerUserId varchar(255),
+    rank int not null,
+    displayName varchar(255),
+    profileUrl varchar(512),
+    imageUrl varchar(512),
+    accessToken varchar(255) not null,                    
+    secret varchar(255),
+    refreshToken varchar(255),
+    expireTime bigint,
+    primary key (userId, providerId, providerUserId));
+create unique index UserConnectionRank on FBUserConnection(userId, providerId, rank);
 -- insurer
 INSERT INTO INSURER (CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME, CODE, NAME, SHORT_NAME,IMG_SRC,DESCRIPTION,BIS_RATIO, RETURN_ON_ASSETS, PERSISTENCY_RATIO, LITIGATION_RATIO, APPEAL_RATIO, INSURANCE_GUARANTY_FUND, DESCRIPTION2, DESCRIPTION3, DESCRIPTION4) VALUES ('SYS', '2017-08-01 00:00:00', 'SYS', '2017-08-01 00:00:00', '51', '臺銀人壽保險公司','臺銀人壽','/resources/pic/保險公司logo/台銀人壽.png','http://www.twfhclife.com.tw/pages/default.aspx','2.1293','-0.0062','0.9913','0.00029','0.0000025','true','中華信評：twAAA','標準普爾：A+','');
 INSERT INTO INSURER (CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME, CODE, NAME, SHORT_NAME,IMG_SRC,DESCRIPTION,BIS_RATIO, RETURN_ON_ASSETS, PERSISTENCY_RATIO, LITIGATION_RATIO, APPEAL_RATIO, INSURANCE_GUARANTY_FUND, DESCRIPTION2, DESCRIPTION3, DESCRIPTION4) VALUES ('SYS', '2017-08-01 00:00:00', 'SYS', '2017-08-01 00:00:00', '52', '台灣人壽保險公司','台灣人壽','/resources/pic/保險公司logo/台灣人壽.png','https://www.taiwanlife.com/','2.884','-0.0032','0.984','0.00094','0.0000043','true','惠譽國際評等：AA+','','');
