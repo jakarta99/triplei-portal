@@ -190,10 +190,10 @@
 				processData : false,
 				contentType : false,
 				success : function(data) {
-					if(data.messages!=null){
-					alert("請確認欄位填寫完成，並最少上傳一張圖片");
-					}else{
+					if(data.messages){
 					alert("修改成功");
+					}else if(data.messages[0].code=='EXCEPTION'){
+					alert("請確認欄位填寫完成，並最少上傳一張圖片");
 					}
 				},
 				error : function() {

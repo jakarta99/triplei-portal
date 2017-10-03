@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.entity.ArticleEntity;
+import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.service.ArticleService;
+import tw.com.triplei.service.ProductService;
 import tw.com.triplei.service.UserService;
 
 @Controller
@@ -24,6 +26,9 @@ public class IndexController {
 	private ArticleService articleService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ProductService productService;
+	
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -34,6 +39,8 @@ public class IndexController {
 		List<ArticleEntity> hotIssueList = articleService.getHotArticles(true, true);
 		model.addAttribute("hotissue", hotIssueList);
 		
+		List<ProductEntity> hotProduct = productService.getHotProduct();
+		model.addAttribute("hotproduct", hotProduct);
 		
 		//TODO 進入首頁，若為會員，檢查基本資料是否填寫完畢，若否，請他填寫完基本資料
 		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != null) {

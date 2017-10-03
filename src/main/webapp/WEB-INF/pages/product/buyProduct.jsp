@@ -125,8 +125,8 @@ select {
 											</select>
 										</div>
 										<div class="col-sm-4" style="vertical-align:middle;padding-top:1%">
-										<span id="storeName" >
-										超商店名
+										<span >
+										超商店名:  <span id="storeName" ></span>
 										</span>
 										</div>
 									</div>
@@ -276,7 +276,7 @@ select {
 
 							$.ajax({
 										type : "GET",
-										url : "<c:url value='/admin/convenienceStore/searchRegion'/>",
+										url : "<c:url value='/convenienceStore/searchRegion'/>",
 										dataType : "json",
 										data : datas,
 										success : function(data) {
@@ -306,7 +306,7 @@ select {
 
 							$.ajax({
 										type : "GET",
-										url : "<c:url value='/admin/convenienceStore/searchStreet'/>",
+										url : "<c:url value='/convenienceStore/searchStreet'/>",
 										dataType : "json",
 										data : datas,
 										success : function(data) {
@@ -337,7 +337,7 @@ select {
 
 							$.ajax({
 										type : "GET",
-										url : "<c:url value='/admin/convenienceStore/searchAddress'/>",
+										url : "<c:url value='/convenienceStore/searchAddress'/>",
 										dataType : "json",
 										data : datas,
 										success : function(data) {
@@ -359,7 +359,25 @@ select {
 							var fixedAdd = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAuwYed8DxRGhmTy44R5HGKich9J-dGs9s&q="
     						var locate = fixedAdd+address;
 							$("#googleMapping").attr("src",locate);
-						});
+							var datas = {};
+							datas.address = $('#address').val();
+							$.ajax({
+								type : "GET",
+								url : "<c:url value='/convenienceStore/searchStoreName'/>",
+								dataType : "json",
+								data : datas,
+								success : function(data) {
+// 									for (var i = 0; i < data.length; i++) {
+										$("#storeName").text(data.storeName);
+// 									}
+								},
+								error : function(data) {
+									swal("error");
+								}
+
+							});
+		
+							});
 
 
 		

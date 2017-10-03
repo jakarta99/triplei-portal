@@ -161,6 +161,18 @@ public class AdminConvenienceStoreController {
 		return data;
 	}
 	
+	@RequestMapping(value = "/searchStoreName" , method = RequestMethod.GET)
+	@ResponseBody
+	public ConvenienceStoreEntity searchAddress(final Model model, String address){
+		
+		log.debug("this address is = {}", address);
+		
+		ConvenienceStoreEntity data = convenienceStoreService.findByAddress(address);
+		log.debug("{}", "hahaha="+data);
+		
+		return data;
+	}
+	
 	@GetMapping
 	@ResponseBody
 	public GridResponse<ConvenienceStoreEntity> query(final Model model, final ConvenienceStoreEntity form,

@@ -82,9 +82,11 @@
 					<div class="col-sm-12" style="margin-top: 3vh; margin-bottom: 3vh;">
 
 						<!-- 					hot items col starts here -->
+						<c:if test="${not empty modelh}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">熱門兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelh}" var="modelh">
 								<div class="col-sm-3"
@@ -115,14 +117,18 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modelh}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/true">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							hot items col ends here -->
 						<!-- 					electronics col starts here -->
+						<c:if test="${not empty modele}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">家電兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modele}" var="modele">
 								<div class="col-sm-3"
@@ -153,14 +159,18 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modele}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/ELETRONICS">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							electronics col ends here -->
 						<!-- 					voucher col starts here -->
+						<c:if test="${not empty modelv}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">禮卷兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelv}" var="modelv">
 								<div class="col-sm-3"
@@ -192,14 +202,18 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modelv}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							voucher col ends here -->
 						<!-- 					furnitures col starts here -->
+						<c:if test="${not empty modelf}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">家居、廚具兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelf}" var="modelf">
 								<div class="col-sm-3"
@@ -230,14 +244,18 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modelf}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/FURNITURES">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							furnitures col ends here -->
 						<!-- 					outdoor col starts here -->
+						<c:if test="${not empty modelod}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">戶外運動商品兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelod}" var="modelod">
 								<div class="col-sm-3"
@@ -268,14 +286,18 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modelod}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/OUTDOOR">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							furnitures col ends here -->
 						<!-- 					ladies col starts here -->
+						<c:if test="${not empty modelw}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">女仕用品兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelw}" var="modelw">
 								<div class="col-sm-3"
@@ -306,14 +328,18 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modelw}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/WOMAN">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							ladies col ends here -->
 						<!-- 					men col starts here -->
+						<c:if test="${not empty modelm}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">男仕用品兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelm}" var="modelm">
 								<div class="col-sm-3"
@@ -344,14 +370,18 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modelm}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/MAN">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							men col ends here -->
 						<!-- 					others col starts here -->
+						<c:if test="${not empty modelot}">
 						<div class="col-sm-12" style="padding-bottom: 2vh">
 							<span style="font-size: 190%">其他商品兌換：</span>
 						</div>
+						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelot}" var="modelot">
 								<div class="col-sm-3"
@@ -383,9 +413,11 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${not empty modelot}">
 						<div class="col-sm-12" align="right">
 							<a href="${pageContext.request.contextPath}/gift/OTHERS">查看更多...</a>
 						</div>
+						</c:if>
 						<!-- 							others col ends here -->
 					</div>
 				</div>
@@ -416,7 +448,7 @@
 					</div>
 				</div>
 				<div class="col-md-5">
-					<img id="orderImage" style="padding: 0; height: 12vh; width: 12vw;">
+					<img id="orderImage" style="padding: 0; height: 20vh; width: 20vw;">
 				</div>
 			</div>
 			<hr>
@@ -550,7 +582,7 @@
 			$("#dialog").dialog({
 				autoOpen : false,
 				height : "auto",
-				width : 450,
+				width : 600,
 				show : {
 					effect : "blind",
 					duration : 800
@@ -574,6 +606,7 @@
 				datas.recipientPhone = $("#recipientPhone").val();
 				datas.recipientTime = $("#recipientTime").val();
 
+				if(datas.recipient&&datas.recipientAddress&&datas.recipientPhone!=null){
 				$.ajax({
 					url : "<c:url value='/gift/giftOrder/addOrder'/>",
 					method : "POST",
@@ -581,24 +614,31 @@
 					dataType : "json",
 					success : function(data) {
 						if (data.訂購成功) {
-							swal("購買成功");
-							location.replace("/gift/list");
-							// 				userPoint.text(data.userPoint);
-							// 				exchangedPoint.text(data.exchangedPoint);
+							
+							swal("購買成功" ,"" ,"success")
+							.then((value) => {
+								location.replace("/gift/list");
+							});
+							
 						} else if (data.剩餘點數不足) {
-							alert("剩餘點數不足");
+							swal("剩餘點數不足", "", "warning");
 						} else if (data.數字輸入錯誤) {
-							alert("數字輸入錯誤");
+							swal("數字輸入錯誤", "", "warning");
 						} else {
-							alert("請輸入正確資料");
+							swal("請輸入正確資料", "", "warning");
 						}
 					},
 					error : function() {
-						alert("請檢查網路連線");
+						alert("請檢查網路連線", "", "warning");
 					}
 				})
+				
+			}else{
+				swal("請確認資料填寫無誤" , "", "warning");
+			}
 				// 		$btn.button("reset");
 			});
+			
 			//   以下許願池
 			$('#dialog-wish').hide();
 			$('#dialog-success').hide();

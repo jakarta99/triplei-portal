@@ -1,3 +1,18 @@
+--FBUserConnection
+create table FBUserConnection (
+    userId varchar(255) not null,
+    providerId varchar(255) not null,
+    providerUserId varchar(255),
+    rank int not null,
+    displayName varchar(255),
+    profileUrl varchar(512),
+    imageUrl varchar(512),
+    accessToken varchar(255) not null,                    
+    secret varchar(255),
+    refreshToken varchar(255),
+    expireTime bigint,
+    primary key (userId, providerId, providerUserId));
+create unique index UserConnectionRank on FBUserConnection(userId, providerId, rank);
 -- insurer
 INSERT INTO INSURER (CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME, CODE, NAME, SHORT_NAME,IMG_SRC,DESCRIPTION,BIS_RATIO, RETURN_ON_ASSETS, PERSISTENCY_RATIO, LITIGATION_RATIO, APPEAL_RATIO, INSURANCE_GUARANTY_FUND, DESCRIPTION2, DESCRIPTION3, DESCRIPTION4) VALUES ('SYS', '2017-08-01 00:00:00', 'SYS', '2017-08-01 00:00:00', '51', '臺銀人壽保險公司','臺銀人壽','/resources/pic/保險公司logo/台銀人壽.png','http://www.twfhclife.com.tw/pages/default.aspx','2.1293','-0.0062','0.9913','0.00029','0.0000025','true','中華信評：twAAA','標準普爾：A+','');
 INSERT INTO INSURER (CREATED_BY, CREATED_TIME, MODIFIED_BY, MODIFIED_TIME, CODE, NAME, SHORT_NAME,IMG_SRC,DESCRIPTION,BIS_RATIO, RETURN_ON_ASSETS, PERSISTENCY_RATIO, LITIGATION_RATIO, APPEAL_RATIO, INSURANCE_GUARANTY_FUND, DESCRIPTION2, DESCRIPTION3, DESCRIPTION4) VALUES ('SYS', '2017-08-01 00:00:00', 'SYS', '2017-08-01 00:00:00', '52', '台灣人壽保險公司','台灣人壽','/resources/pic/保險公司logo/台灣人壽.png','https://www.taiwanlife.com/','2.884','-0.0032','0.984','0.00094','0.0000043','true','惠譽國際評等：AA+','','');
@@ -52,6 +67,7 @@ INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_p
 INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('monkey81817@gmail.com', 'monkey81817@gmail.com', '張耀元','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
 INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('lacerjoe@gmail.com', 'lacerjoe@gmail.com', '劉駿','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
 INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('tomx220052@yahoo.com.tw', 'tomx220052@yahoo.com.tw', '豪豪','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,0,0,0,true);
+INSERT INTO USERMEMBER (account_Number, email, name ,password, enabled, remain_point, exchanged_point, auditting_point,remain_wish_times) VALUES ('pcfn744e5w@gmail.com', 'pcfn744e5w@gmail.com', '趙洵','$2a$10$oc/UifmcXcOup6Cxf6ngxu4z68Yx75ZPbm2BL4LDmssqUQ74tobmm', true,50000,0,0,true);
 --ROLE
 INSERT INTO ROLE (code, name) VALUES ('ROLE_NORMAL', '一般會員');
 INSERT INTO ROLE (code, name) VALUES ('ROLE_ORDER', '下單會員');
@@ -74,7 +90,9 @@ INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (9,4);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (9,7);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (10,4);
 INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (11,1);
-
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (12,1);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (12,4);
+INSERT INTO USER_ROLE (USER_ID, ROLE_ID) VALUES (12,7);
 --Article
 INSERT INTO ARTICLE (ARTICLE_TYPE,AUTHOR,BANNER_IMAGE,BANNER_ROTATION,CLICK_COUNT,CONTENT,HOT_ARTICLE,INTRODUCTION,STORE_SHELVES,TITLE) VALUES ('EDITOR_CHOICE','Sarah','/userfiles/bannerImage/images.jpg',true,0,'<p>我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1我是編輯精選1</p>',true,'我是編輯精選1',true,'編輯精選1');
 INSERT INTO ARTICLE (ARTICLE_TYPE,AUTHOR,BANNER_IMAGE,BANNER_ROTATION,CLICK_COUNT,CONTENT,HOT_ARTICLE,INTRODUCTION,STORE_SHELVES,TITLE) VALUES ('EDITOR_CHOICE','Sarah','/userfiles/bannerImage/images.jpg',false,0,'<p>我是編輯精選2</p>',true,'我是編輯精選1',true,'編輯精選2');
