@@ -18,7 +18,7 @@
 	<div class="container-fluid" style="padding:0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding-top:8vh ;">
-			<div class="col-xs-12 col-sm-3" style="background-color:#5C8DEC;height:; color:white;">
+			<div class="col-xs-12 col-sm-3" style="background-color:#5C8DEC; color:white;">
 			
 				<div class="col-xs-1 col-sm-1"></div>
 				<div class="col-xs-10 col-sm-10" style="height: 100vh;padding-left: 0px;padding-right: 0px;">
@@ -46,8 +46,8 @@
 				<div class="col-xs-1 col-sm-1"></div>
 			</div>
 			
-			<div class="col-sm-9">
-			<div id="jsGrid"></div>
+			<div class="col-sm-9" style="padding-top:8vh">
+			<div id="jsGrid" style="overflow:auto"></div>
 			</div>
 			<script>
 			    var BASE_URL = "${pageContext.request.contextPath}/gift/giftOrder";

@@ -93,7 +93,7 @@ padding-bottom:1vh;
 							</div>
 							<div style="margin-top:8%">
 								<span>保額(萬)</span><br /> <input type="text" id="insureAmount"
-									name="insureAmount" value="<fmt:formatNumber value="${modelf.insureAmount}" maxFractionDigits="2" />"
+									name="insureAmount" value="<fmt:formatNumber value="${modelf.insureAmount}" maxFractionDigits="2"/>"
 									style="width: 80%; color: white;border:1px white solid;background-color:#5C8DEC;margin-top:2%;font-size:115%">
 							</div>
 							<div style="margin-top: 3%; margin-bottom: 3%">
@@ -136,7 +136,7 @@ padding-bottom:1vh;
 								<div>
 									<img src="/resources/pic/積點專區/點數(小).png" width="27vw"
 										style="margin-top: 3%; margin-right: 3%; float: left"> 
-										<span style="font-size: 200%; font-weight: bold">${modelf.getPoint}</span>
+										<span style="font-size: 200%; font-weight: bold"><fmt:formatNumber value="${modelf.getPoint}" type="number"/></span>
 								</div>
 							</div>
 							<br /> <br /> <br /> <br />
@@ -148,15 +148,15 @@ padding-bottom:1vh;
 							<br />
 							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>總繳金額</span> <br /> <span>$<fmt:formatNumber
-										value="${modelf.totalPay}" maxFractionDigits="0" /></span>
+										value="${modelf.totalPay}" maxFractionDigits="0" type="number" /></span>
 							</div>
 							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>領回金額</span> <br /> <span>$<fmt:formatNumber
-										value="${modelf.cashValue}" maxFractionDigits="0" /></span>
+										value="${modelf.cashValue}" maxFractionDigits="0" type="number" /></span>
 							</div>
 							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>凈報酬</span> <br /> <span>$<fmt:formatNumber
-										value="${modelf.net}" maxFractionDigits="0" /></span>
+										value="${modelf.net}" maxFractionDigits="0" type="number" /></span>
 							</div>
 							<div class="col-sm-3" style="padding-bottom:2vh">
 								<span>IRR</span> <br /> <span><fmt:formatNumber
@@ -177,7 +177,7 @@ padding-bottom:1vh;
 								</span>
 							</div>
 							<div class="col-sm-5" style="padding-bottom:1vh">
-								<span>首年保費：$${modelf.premiumAfterDiscount}</span>
+								<span>首年保費：$<fmt:formatNumber value="${modelf.premiumAfterDiscount}" type="number"/></span>
 							</div>
 							<div class="col-sm-3" style="padding-bottom:1vh">
 								<c:if test="${modelf.year!=1}">
@@ -188,16 +188,16 @@ padding-bottom:1vh;
 								</c:if>
 							</div>
 							<div class="col-sm-4" style="padding-bottom:1vh">
-								<span>折扣前年繳保費：$${modelf.premium}</span>
+								<span>折扣前年繳保費：$<fmt:formatNumber value="${modelf.premium}" type="number"/></span>
 							</div>
 							<div class="col-sm-5" style="padding-bottom:1vh">
-								<span>續年保費：$${modelf.premiumAfterDiscount}</span>
+								<span>續年保費：$<fmt:formatNumber value="${modelf.premiumAfterDiscount}" type="number"/></span>
 							</div>
 							<div class="col-sm-3" style="padding-bottom:1vh">
 								<span>${modelf.interestRateType}：<fmt:formatNumber value="${modelf.declareInterestRate*100}" maxFractionDigits="2" />%</span>
 							</div>
 							<div class="col-sm-4" style="padding-bottom:1vh">
-								<span>折扣後年繳保費：</span><span id="getPremiumAfterDiscount">$${modelf.premiumAfterDiscount}</span>
+								<span>折扣後年繳保費：</span><span id="getPremiumAfterDiscount">$<fmt:formatNumber value="${modelf.premiumAfterDiscount}" type="number"/></span>
 							</div>
 							<div class="col-sm-5" style="padding-bottom:1vh">
 								<span>繳費方式：${modelf.paymentMethod}</span>
