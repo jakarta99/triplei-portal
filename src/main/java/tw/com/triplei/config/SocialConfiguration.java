@@ -33,7 +33,7 @@ import tw.com.triplei.service.AdminUserService;
 @Slf4j
 @EnableSocial
 @Configuration
-@PropertySource("classpath:FBUserConnection.sql")
+//@PropertySource("classpath:FBUserConnection.sql")
 public class SocialConfiguration implements SocialConfigurer{
 	
 	@Autowired
