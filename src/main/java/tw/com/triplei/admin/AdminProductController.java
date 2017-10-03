@@ -204,6 +204,8 @@ public class AdminProductController {
 		return "redirect:/admin/product/list";
 	}
 
+	
+	/*進編輯頁面修改熱門分類*/
 	@RequestMapping(value="/edit",method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxResponse<ProductEntity> update(@RequestParam("id")String uid,@RequestParam("hotProduct")Boolean hotProduct,ProductEntity productEntity) {

@@ -64,9 +64,47 @@ p{
 					</div>
 
 					<div class="col-xs-12 col-sm-12" style="height: 80vh; display: flex; flex-direction: column" align='center'>
-						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid; height: 18vh; margin-bottom: 10vh">a</div>
-						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid; height: 18vh;margin-bottom: 10vh">a</div>
-						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid; height: 18vh;">a</div>
+						<div class="col-xs-12 col-sm-12" style="width:auto; height: 18vh; margin-bottom: 10vh">
+							<img class="col-xs-3 col-sm-3" src="${hotproduct[0].insurer.imgsrc}" style="height:100%;padding:0;"/>
+							<table class="col-xs-9 col-sm-9" style="height:100%;text-align:left;padding:0;">
+								<tr style="padding:0;">
+									<td style="font-size:190%;padding-top:1vh;">${hotproduct[0].insurer.name}</td>
+								</tr>
+								<tr style="font-size:130%;">
+									<td class="align-middle" style="margin-top:-1vh;">${hotproduct[0].code} - ${hotproduct[0].localName}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-xs-12 col-sm-12" style="width:auto; height: 18vh; margin-bottom: 10vh">
+							<img class="col-xs-3 col-sm-3" src="${hotproduct[1].insurer.imgsrc}" style="height:100%;padding:0;"/>
+							<table class="col-xs-9 col-sm-9" style="height:100%;text-align:left;padding:0;">
+								<tr style="padding:0;">
+									<td style="font-size:190%;padding-top:1vh;">${hotproduct[1].insurer.name}</td>
+								</tr>
+								<tr style="font-size:130%;">
+									<td class="align-middle" style="margin-top:-1vh;">${hotproduct[1].code} - ${hotproduct[1].localName}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-xs-12 col-sm-12" style="width:auto; height: 18vh; margin-bottom: 10vh">
+							<img class="col-xs-3 col-sm-3" src="${hotproduct[2].insurer.imgsrc}" style="height:100%;padding:0;"/>
+							<table class="col-xs-9 col-sm-9" style="height:100%;text-align:left;padding:0;">
+								<tr style="padding:0;">
+									<td style="font-size:190%;padding-top:1vh;">${hotproduct[2].insurer.name}</td>
+								</tr>
+								<tr style="font-size:130%;">
+									<td class="align-middle" style="margin-top:-1vh;">${hotproduct[2].code} - ${hotproduct[2].localName}</td>
+								</tr>
+							</table>
+						</div>
+<!-- 						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid;width:auto; height: 18vh;margin-bottom: 10vh"> -->
+<%-- 						<img class="col-xs-9 col-sm-3" alt="" src="${hotproduct[1].insurer.imgsrc}" style="height:100%;padding:0"> --%>
+<!-- 						<div class="col-xs-9 col-sm-9" style="height:100%;padding-top:1vh;text-align:left"> -->
+<%-- 						<span style="font-size:190%">${hotproduct[1].insurer.name}</span> --%>
+<!-- 						<br/> -->
+<%-- 						<span style="font-size:130%">${hotproduct[1].code} - ${hotproduct[1].localName}</span> --%>
+<!-- 						</div> -->
+<!-- 						</div> -->
 					</div>
 				</div>
 			</div>
@@ -91,20 +129,24 @@ p{
 					</div>
 
 						<div class="col-sm-12" style="padding-left: 0px">
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh;color:black">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[0].bannerImage}" /></div>
+							<div class="col-sm-12" style="height: 25vh;color:black">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${hotissue[0].id}">
+								<img style="width:100%;" src="${hotissue[0].bannerImage}" /></div>
 							</div>
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh">
-								<h4>${hotissue[0].title}</h4>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${hotissue[0].title}</h4></a>
 								<p>${hotissue[0].introduction}</p>
 							</div>
 						</div>
 						<div class="col-sm-12" style="padding-left: 0px">
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[1].bannerImage}" /></div>
+							<div class="col-sm-12" style="height: 25vh">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${hotissue[1].id}">
+								<img style="width:100%;" src="${hotissue[1].bannerImage}" /></div>
 							</div>
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh">
-								<h4>${hotissue[1].title}</h4>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${hotissue[1].title}</h4></a>
 								<p>${hotissue[1].introduction}</p>
 							</div>
 						</div>
@@ -118,20 +160,24 @@ p{
 					<div class="col-sm-0 col-sm-12" style="height: 17vh; padding-bottom: 3vh"></div>
 					<div class="col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
 						<div class="col-sm-12" style="padding-left: 0px">
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[2].bannerImage}" /></div>
+							<div class="col-sm-12" style="height: 25vh">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${hotissue[2].id}">
+								<img style="width:100%;" src="${hotissue[2].bannerImage}" /></div>
 							</div>
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh">
-								<h4>${hotissue[2].title}</h4>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${hotissue[2].title}</h4></a>
 								<p>${hotissue[2].introduction}</p>
 							</div>
 						</div>
 						<div class="col-sm-12" style="padding-left: 0px">
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 25vh">
-								<div style="margin-top:7%;"><img style="width:100%;" src="${hotissue[3].bannerImage}" /></div>
+							<div class="col-sm-12" style="height: 25vh">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${hotissue[3].id}">
+								<img style="width:100%;" src="${hotissue[3].bannerImage}" /></div>
 							</div>
-							<div class="col-sm-12" style="border: 1px #5C8DEC solid; height: 12vh">
-								<h4>${hotissue[3].title}</h4>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${hotissue[3].title}</h4></a>
 								<p>${hotissue[3].introduction}</p>
 							</div>
 						</div>
@@ -142,9 +188,6 @@ p{
 			<!-- 第四頁 -->
 			<div class="col-xs-12 col-sm-12" style="height: 100vh;">
 
-				<!-- 		<div class="col-sm-1"></div> -->
-<!-- 				<div class="col-sm-1"></div> -->
-<!-- 				<div class="col-sm-10"> -->
 					<!--三個框框(熱門新聞) -->
 					<div class="col-sm-12" style="height: 90vh">
 					<div class="col-xs-2 col-sm-1"></div>
@@ -158,11 +201,13 @@ p{
 					</div>
 					<div class="col-xs-12 col-sm-4" style="height: 80vh;">
 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
-							<div style="margin-top:7%;"><img style="width:100%;" src="${news[0].bannerImage}" /></div>
+						<div class="col-sm-12" style="height: 50vh;">
+							<div style="margin-top:7%;">
+							<a href="/article/readArticle/read/${news[0].id}">
+							<img style="width:100%;" src="${news[0].bannerImage}" /></div>
 						</div>
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
-							<h4>${news[0].title}</h4>
+						<div class="col-sm-12" style="height: 20vh;">
+							<h4>${news[0].title}</h4></a>
 							<p>${news[0].introduction}</p>
 						</div>
 						</div>
@@ -171,11 +216,13 @@ p{
 					<div class="col-xs-12 col-sm-4"
 						style="height: 80vh;">
 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
-							<div style="margin-top:7%;"><img style="width:100%;" src="${news[1].bannerImage}" /></div>
+						<div class="col-sm-12" style="height: 50vh;">
+							<div style="margin-top:7%;">
+							<a href="/article/readArticle/read/${news[1].id}">
+							<img style="width:100%;" src="${news[1].bannerImage}" /></div>
 						</div>
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
-							<h4>${news[1].title}</h4>
+						<div class="col-sm-12" style="height: 20vh;">
+							<h4>${news[1].title}</h4></a>
 							<p>${news[1].introduction}</p>
 						</div>
 						</div>
@@ -184,11 +231,13 @@ p{
 					<div class="col-xs-12 col-sm-4"
 						style="height: 80vh;">
 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 50vh;">
-							<div style="margin-top:7%;"><img style="width:100%;" src="${news[2].bannerImage}" /></div>
+						<div class="col-sm-12" style="height: 50vh;">
+							<div style="margin-top:7%;">
+							<a href="/article/readArticle/read/${news[2].id}">
+							<img style="width:100%;" src="${news[2].bannerImage}" /></div>
 						</div>
-						<div class="col-sm-12" style=" border: 1px #5C8DEC solid;height: 20vh;">
-							<h4>${news[3].title}</h4>
+						<div class="col-sm-12" style="height: 20vh;">
+							<h4>${news[3].title}</h4></a>
 							<p>${news[3].introduction}</p>
 						</div>
 						</div>
