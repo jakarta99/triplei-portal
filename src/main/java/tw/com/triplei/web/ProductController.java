@@ -76,11 +76,11 @@ public class ProductController {
 			if (productPremiumRatioff.getInsAge() == age && productPremiumRatioff.getGender().equals(gender)) {
 				// 保額
 				double insureAmounts = premiumPerYear / productPremiumRatioff.getPremiumRatio().doubleValue();
-				if (form.getCurr() == Currency.USD || form.getCurr() == Currency.AUD) {
+				if (form.getCurr() == Currency.AUD) {
 					form.setInsureAmount(BigDecimal.valueOf(insureAmounts).setScale(1, BigDecimal.ROUND_HALF_UP));
 				} else if (form.getCurr() == Currency.TWD) {
 					form.setInsureAmount(BigDecimal.valueOf(insureAmounts).setScale(0, BigDecimal.ROUND_HALF_UP));
-				} else if (form.getCurr() == Currency.RMB) {
+				} else if (form.getCurr() == Currency.USD || form.getCurr() == Currency.RMB) {
 					form.setInsureAmount(BigDecimal.valueOf(insureAmounts).setScale(2, BigDecimal.ROUND_HALF_UP));
 				}
 				log.debug("保額:{}", form.getInsureAmount());

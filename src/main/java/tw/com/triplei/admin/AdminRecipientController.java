@@ -178,7 +178,8 @@ public class AdminRecipientController {
 					owner.setRemainPoint(remainPoint + form.getCanGetPoint());
 					form.setAlreadyGetPoint(true);
 				UserEntity sales = userDao.findByAccountNumber(form.getUser().getAccountNumber());
-				sales.setRemainPoint(sales.getRemainPoint()-form.getCanGetPoint());
+				double iii = form.getCanGetPoint().doubleValue()*1.17D;
+				sales.setRemainPoint(sales.getRemainPoint()-(int)BigDecimal.valueOf(iii).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue());
 				userDao.save(owner);
 				userDao.save(sales);
 			} else if (!form.getOrderStatus().equals("已完成(含派送點數)") && !form.getAlreadyAudittedPoint() && !form.getOrderStatus().equals("已見面，未購買(刪除審核中點數)")) {
