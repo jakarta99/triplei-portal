@@ -150,6 +150,8 @@
 // 			})   先留一下
 			$('#btn').click(function() {//全部收起再給出checkbox給人家選
 				$('div[id^="flot"]').hide();
+				$("div[id$='ooo']").hide();
+				$("div[id$='sss']").hide();
 				$('#insurerfilter').toggle(500);
 			})
 // 			$('#persistencyRatioo').click(function() {//收起該表格
