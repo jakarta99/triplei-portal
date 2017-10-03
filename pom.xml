@@ -6,6 +6,7 @@
 	<groupId>tw.com.triplei</groupId>
 	<artifactId>triplei-portal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -170,6 +171,12 @@
 		<artifactId>spring-social-security</artifactId>
 	</dependency>
 
+
+	<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+	<dependency>
+		<groupId>org.assertj</groupId>
+		<artifactId>assertj-core</artifactId>
+	</dependency>
 	</dependencies>
 
 
