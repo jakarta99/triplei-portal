@@ -267,7 +267,7 @@ padding-bottom:1vh;
 						<br /> <a href="#" id="iWantToBuy">
 							<input type="button" id="iWantToBuy"
 							class="btn btn-secondary iWantToBuy"
-							style="color: white; background-color: #5C8DEC;" value="我要購買">
+							style="color: white; background-color: #5C8DEC;" value="我想購買">
 						</a> 
 <!-- 						<a href="/recipient/add/1">我要購買</a> -->
 					</div>
