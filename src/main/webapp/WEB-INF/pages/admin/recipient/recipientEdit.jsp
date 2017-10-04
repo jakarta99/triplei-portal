@@ -230,13 +230,13 @@
 											</select> <span class="help-block"></span>
 										</div>
 									</div>
+									
 									<div class="form-group required">
 										<label for="orderStatus" class="col-md-2 control-label">選擇階段</label>
 										<div class="col-md-10">
 											<select class="form-control" id="orderStatus"
 												name="orderStatus">
 												<c:if test="${entity.orderStatus=='未指派業務員'}">
-													<option value="">${entity.orderStatus}</option>
 													<option value="未見面">未見面</option>
 												</c:if>
 												<c:if test="${entity.orderStatus=='已完成(含派送點數)'}">

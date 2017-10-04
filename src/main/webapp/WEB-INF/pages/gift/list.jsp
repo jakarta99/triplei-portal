@@ -497,6 +497,7 @@
 				</div>
 			</div>
 			<div class="col-sm-12" style="padding-left: 0px; padding-bottom: 1vh">希望增加的兌換商品：</div>
+			<form enctype="multipart/form-data" method="post" id="dataForm">
 			<div class="col-sm-3"
 				style="border: 1px #5C8DEC solid; height: 20vh; display: flex; justify-content: center; flex-direction: column"
 				align="center">
@@ -504,10 +505,9 @@
 				<label for="image1"
 					style="background-color: white; color: #5C8DEC; font-family: 微軟正黑體;">圖片(必要):</label>
 				<input type="file" id="image1" name="image1"
-					style="border: 0px #5C8DEC solid">
+					style="border: 0px #5C8DEC solid" value="0">
 
 			</div>
-			<form enctype="multipart/form-data" method="post" id="dataForm">
 				<div class="col-sm-9">
 					<div class="col-sm-12"
 						style="height: 9vh; border: 1px #5C8DEC solid; margin-bottom: 2vh; display: flex; justify-content: center; flex-direction: column">
@@ -691,6 +691,10 @@
 				dialog1.dialog("open");
 				//<!-- Save -->
 				$("#wishButton").bind("click", function() {
+					if($("#image1").val()==0){
+						swal('要記得放圖片喔~');
+					};
+	
 					var $btn = $(this);
 					$btn.button("loading");
 

@@ -10,6 +10,8 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
+
 <title>Triple i</title>
 
 </head>
@@ -270,7 +272,7 @@
 								title : '訂單狀態',
 								name : "orderStatus",
 								type : "text",
-								width : 80
+								width : 90
 							}, {
 								title : '會員帳號',
 								name : "createdBy",
@@ -291,7 +293,7 @@
 								name : "modifiedTime",
 								width : 200,
 								itemTemplate : function(val) {
-									return new Date(val);
+									return moment(new Date(val)).format("YYYY年MM月DD日 HH:mm:ss")
 								}
 							}, ]
 						});

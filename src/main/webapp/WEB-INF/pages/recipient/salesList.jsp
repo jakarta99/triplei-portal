@@ -72,7 +72,7 @@
 			            { title: '超商區域', name: "convenienceStoreEntity.region", width: 80,itemTemplate: function(val) {if(val==null){return "無";}else{return val;}} },
 			            { title: '超商地址', name: "convenienceStoreEntity.address", width: 80,itemTemplate: function(val) {if(val==null){return "無";}else{return val;}} },
 			            { title: '業務員', name: "user.name", type: "text", width: 80 },
-			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 80 },
+			            { title: '訂單狀態', name: "orderStatus", type: "text", width: 90 },
 			        ]
 			    });
 			    
