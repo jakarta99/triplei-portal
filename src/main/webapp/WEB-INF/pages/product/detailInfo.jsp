@@ -4,6 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/resources/jquery/jquery-ui.1.11.2.css">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
