@@ -3,7 +3,9 @@ package tw.com.triplei.web;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -225,13 +227,15 @@ public class ProductController {
 	@ResponseBody
 	public Collection<Integer> getYear() {
 		List<ProductEntity> products = productService.getAll();
-		Collection<Integer> years = new ArrayList<>();
+		List<Integer> years = new ArrayList<>();
 		for (ProductEntity product : products) {
 			int year = product.getYear();
-			if (!years.contains(year)) {
+			if (!years.contains(year) && year != 1) {
 				years.add(year);
 			}
 		}
+		log.debug("year{}", years);
+		Collections.sort(years);
 		log.debug("year{}", years);
 		return years;
 	}

@@ -182,7 +182,6 @@ padding-bottom:2vh;
 				url:"/product/getYear",
 				type:"GET",
 				success:function(val){					
-					val.sort();
 					$.each(val,function(index,value){
 						$("#year").append("<option value='"+value+"'>"+value+"</option>");
 					})
