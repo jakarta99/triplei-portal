@@ -185,7 +185,12 @@ padding-bottom:1vh;
 								<span>續年保費：$<fmt:formatNumber value="${modelf.premiumAfterDiscount}" type="number"/></span>
 							</div>
 							<div class="col-sm-3" style="padding-bottom:1vh">
+							<c:if test="${modelf.interestRateType=='宣告利率'}">
 								<span>${modelf.interestRateType}：<fmt:formatNumber value="${modelf.declareInterestRate*100}" maxFractionDigits="2" />%</span>
+							</c:if>
+							<c:if test="${modelf.interestRateType=='預定利率'}">
+								<span>${modelf.interestRateType}：<fmt:formatNumber value="${modelf.predictInterestRate*100}" maxFractionDigits="2" />%</span>
+							</c:if>
 							</div>
 							<div class="col-sm-4" style="padding-bottom:1vh">
 								<span>折扣後年繳保費：</span><span id="getPremiumAfterDiscount">$<fmt:formatNumber value="${modelf.premiumAfterDiscount}" type="number"/></span>

@@ -314,7 +314,14 @@ public class ProductController {
 		log.debug("yearMoneyBack{}", yearMoneyBack);
 		ProductEntity product = productService.getOneAll(id);
 		log.debug("product{}", product);
-		product.setInsureAmount(insureAmount);
+		//傳進來的保額 若是小數 則判斷是哪一種幣別 4捨5入
+		if(product.getCurr()==Currency.TWD){
+			product.setInsureAmount(insureAmount.setScale(0, BigDecimal.ROUND_HALF_UP));
+		}else if(product.getCurr()==Currency.AUD){
+			product.setInsureAmount(insureAmount.setScale(1, BigDecimal.ROUND_HALF_UP));
+		}else if(product.getCurr()==Currency.USD || product.getCurr()==Currency.RMB){
+			product.setInsureAmount(insureAmount.setScale(2, BigDecimal.ROUND_HALF_UP));
+		}
 		Iterator ip = product.getPremiumRatios().iterator();
 		while (ip.hasNext()) {
 			ProductPremiumRatio productPremiumRatio = (ProductPremiumRatio) ip.next();
@@ -485,10 +492,10 @@ public class ProductController {
 				if (product.getCurr() == Currency.TWD) {
 					insureAmount = insureAmount.setScale(0, BigDecimal.ROUND_HALF_UP);// 4捨5入到整數
 					System.out.println("insureAmount= " + insureAmount);
-				} else if (product.getCurr() == Currency.USD || product.getCurr() == Currency.AUD) {
+				} else if (product.getCurr() == Currency.AUD) {
 					insureAmount = insureAmount.setScale(1, BigDecimal.ROUND_HALF_UP);// 4捨5入到小數點後一位
 					System.out.println("insureAmount= " + insureAmount);
-				} else if (product.getCurr() == Currency.RMB) {
+				} else if (product.getCurr() == Currency.USD || product.getCurr() == Currency.RMB) {
 					insureAmount = insureAmount.setScale(2, BigDecimal.ROUND_HALF_UP);// 4捨5入到小數點後二位
 					System.out.println("insureAmount= " + insureAmount);
 				}
