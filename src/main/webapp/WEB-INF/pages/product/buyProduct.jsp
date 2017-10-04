@@ -11,6 +11,7 @@
 <title>Triple i</title>
 <script type="text/javascript"
 	src='<c:url value="/resources/jquery/localization/jquery.ui.datepicker-zh-TW1.js" />'></script>
+	<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 <style>
 select {
 	border: 1px lightgrey solid;
@@ -45,7 +46,7 @@ select {
 								</div>
 								<div class="col-sm-12" style="margin-top:2%">
 									<span>手機號碼</span><br/>
-									<input id="tel" type="text" placeholder="0988-888-888">
+									<input id="tel" name="tel" type="text">
 								</div>
 								<div class="col-sm-12">
 									<br /> <span>有空時段1</span> <input class="col-sm-12 date"
@@ -179,6 +180,10 @@ select {
 	</div>
 
 	<script>
+	$('#tel').inputmask({
+		  mask: '9999-999-999'
+	});
+	
 		$(".date").on("change", function() {
 			$(this).attr("placeholder", "");
 		})

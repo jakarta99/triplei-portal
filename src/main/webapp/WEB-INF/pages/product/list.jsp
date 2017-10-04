@@ -40,12 +40,7 @@ font-size:100%;
 font-size:100%;
 color:#444444;
 }
-select option{
-background-color:white;
-}
-select {
-background-color:white;
-}
+
 .infoToggle div{
 padding-bottom:2vh;
 }
@@ -81,21 +76,13 @@ padding-bottom:2vh;
 				<span>幣別</span><br/>
 				<select id="currency" name="currency" style="border:1px white solid;width:80%;background-color:#5C8DEC;margin-top:2%;font-size:115%">
 				<option value="TWD" selected>新台幣</option>
-				<option value="USD">美金</option>
+				<option value="USD">美元</option>
 				<option value="RMB">人民幣</option>
 				<option value="AUD">澳幣</option>
 				</select>
 				</div>
 				</form>
 				<div id="bm" style="width: 100%;position: relative;top: 20px;"></div>
-<!-- 				<div id="container-fluid" style="height:100%;position:relative;margin-top:15%"> -->
-<!-- 				<div > -->
-<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_1.png" width="100%;" style="width:90%;position:absolute;margin-top:4%;"> -->
-<!-- 				</div> -->
-<!-- 				<div > -->
-<!-- 				<img src="/resources/pic/product/商品專區動畫/images/img_0.png" width="100%" style="width:30%;position:absolute;margin:23% auto auto 50%;"> -->
-<!-- 				</div> -->
-<!-- 				</div> -->
 				</div>
 			</div>
 			
