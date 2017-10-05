@@ -21,8 +21,8 @@ ul {
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top" id="mainNavbar"
 	style="border-radius: 0;padding-bottom:2vh">
-	<div class="container" style="padding: 0">
-		<div class="navbar-header" style="padding: 0;">
+	<div class="container">
+		<div class="navbar-header">
 
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"

@@ -225,6 +225,27 @@ public class RecipientController {
 			@PathVariable("gender") final String gender, @PathVariable("insureAmount") final String insureAmountS,
 			@PathVariable("premiumAfterDiscount") final String premiumAfterDiscountS,
 			@PathVariable("getPoint") final String getPointS) {
+		
+		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		log.debug("Username: {}", userDetails.getUsername());
+		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+		if(user.getEmail()==null){
+			
+			if(!userDetails.getUsername().contains("@")){
+				user = userDao.findByProviderUserId(userDetails.getUsername());
+			} else {
+				user = userDao.findByAccountNumber(userDetails.getUsername());
+			}
+			
+			log.debug("principal user accountNumber: {}" , user);
+
+			
+			model.addAttribute("userDetails", user);
+			return "/user/userEdit";
+		}
+		
 		ProductEntity product = productService.getOneAll(id);
 		int age = productService.bDateToInt(bdate);
 		product.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));

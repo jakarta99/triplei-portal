@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -66,23 +67,20 @@ public class AdminWishController {
 				String date1t = date1.substring(0, date1.length()-1);
 				Date date3 = new SimpleDateFormat("yyyy-MM-dd").parse(date1t);
 				LocalDateTime triggerTime =
-						LocalDateTime.ofInstant(Instant.ofEpochSecond(date3.getTime()),
+						LocalDateTime.ofInstant(Instant.ofEpochSecond(date3.getTime()/1000+3),
 								TimeZone.getDefault().toZoneId());
-				log.debug("{}",date3);
-				log.debug("triggerTime{}",triggerTime);
+				log.debug("triggerTime{}",triggerTime.atZone(ZoneId.systemDefault()).toEpochSecond());
+				log.debug("triggerTime    {}",triggerTime);
 				
 				String date2t = date2.substring(0, date2.length()-1);
 				Date date4 = new SimpleDateFormat("yyyy-MM-dd").parse(date2t);
 				LocalDateTime triggerTime2 =
-						LocalDateTime.ofInstant(Instant.ofEpochSecond(date4.getTime()),
+						LocalDateTime.ofInstant(Instant.ofEpochSecond(date4.getTime()/1000+2),
 								TimeZone.getDefault().toZoneId());
-				log.debug("{}",date4);
-				log.debug("triggerTime{}",triggerTime2);
+				log.debug("triggerTime2{}",triggerTime2.atZone(ZoneId.systemDefault()).toEpochSecond());
+				log.debug("triggerTime2   {}",triggerTime2);
 				
 				LocalDateTime[] values = {triggerTime,triggerTime2};
-				
-				
-				
 				
 				
 				

@@ -70,7 +70,8 @@ public class WishController {
 			LocalDateTime time =
 					LocalDateTime.ofInstant(Instant.ofEpochMilli(new Date().getTime()), ZoneId.systemDefault());
 			form.setTime(time);
-
+			log.debug("time() {}",form.getTime());
+			
 			form.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			form.setCreatedBy(userDetails.getUsername());

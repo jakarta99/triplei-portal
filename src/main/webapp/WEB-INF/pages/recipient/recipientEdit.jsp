@@ -226,19 +226,33 @@
 										<div class="col-md-10">
 											<select class="form-control" id="orderStatus"
 												name="orderStatus">
-												<c:if
-													test="${not empty entity.orderStatus && entity.orderStatus!='已完成(含派送點數)' && entity.orderStatus!='已見面，未購買(刪除審核中點數)'}">
-													<option value="">${entity.orderStatus}</option>
-													<option value="已見面，未購買(刪除審核中點數)">已見面，未購買(刪除審核中點數)</option>
-													<option value="已見面，已購買">已見面，已購買</option>
-													<option value="保單處理中">保單處理中</option>
-													<option value="已寄發保單">已寄發保單</option>
-												</c:if>
 												<c:if test="${entity.orderStatus=='已完成(含派送點數)'}">
 													<option value="">${entity.orderStatus}</option>
 												</c:if>
 												<c:if test="${entity.orderStatus=='已見面，未購買(刪除審核中點數)'}">
 													<option value="">${entity.orderStatus}</option>
+												</c:if>
+												<c:if test="${entity.orderStatus=='已寄發保單'}">
+													<option value="">${entity.orderStatus}</option>
+												</c:if>
+												<c:if test="${entity.orderStatus=='保單處理中'}">
+													<option value="">${entity.orderStatus}</option>
+													<option value="已寄發保單">已寄發保單</option>
+												</c:if>
+												<c:if test="${entity.orderStatus=='已見面，已購買'}">
+													<option value="">${entity.orderStatus}</option>
+													<option value="保單處理中">保單處理中</option>
+													<option value="已寄發保單">已寄發保單</option>
+												</c:if>
+												<c:if test="${entity.orderStatus=='未見面'}">
+													<option value="">${entity.orderStatus}</option>
+													<option value="已見面，已購買">已見面，已購買</option>
+													<option value="保單處理中">保單處理中</option>
+													<option value="已寄發保單">已寄發保單</option>
+												</c:if>
+												<c:if
+													test="${not empty entity.orderStatus && entity.orderStatus!='已完成(含派送點數)' && entity.orderStatus!='已見面，未購買(刪除審核中點數)' }">
+													<option value="已見面，未購買(刪除審核中點數)">已見面，未購買(刪除審核中點數)</option>
 												</c:if>
 											</select> <span class="help-block"></span>
 										</div>

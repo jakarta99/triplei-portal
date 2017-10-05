@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Configuration
 @PropertySources({
-@PropertySource("classpath:ArticleContent/ArticleList.properties"),
 @PropertySource("classpath:ArticleContent/fckeditor.properties")
 })
 public class WebMvcConfig extends WebMvcConfigurerAdapter {

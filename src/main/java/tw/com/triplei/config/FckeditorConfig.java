@@ -28,7 +28,7 @@ public class FckeditorConfig extends WebMvcConfigurerAdapter{
 		urlMappings.add("/fckeditor/editor/filemanager/connectors/*");
 		
 		Map<String,String> initparm = new HashMap<>();
-		initparm.put("baseDir", "/UserFiles/");
+		initparm.put("baseDir", "/userfiles/");
 		initparm.put("debug", "true");
 		PropertiesLoader.setProperty("connector.userActionImpl","net.fckeditor.requestcycle.impl.EnabledUserAction");
 		registrationBean.setInitParameters(initparm);

@@ -4,6 +4,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/resources/jquery/jquery-ui.1.11.2.css">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
@@ -11,8 +12,6 @@
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
 <script type="text/javascript" src='<c:url value="/resources/jquery/localization/jquery.ui.datepicker-zh-TW1.js" />'></script>
-<!-- <script type="text/javascript" src="/resources/flot/jquery.flot.min.js"></script> -->
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js"></script> -->
 <script type="text/javascript" src="/resources/flot/jquery.flot.min.js"></script>
 <script type="text/javascript" src="/resources/flot/jquery.flot.symbol.js"></script>
 <script type="text/javascript" src="/resources/flot/jquery.flot.axislabels.js"></script>
@@ -103,19 +102,7 @@ padding-bottom:1vh;
 								</a>
 							</div>
 						</form>
-						<div id="container-fluid"
-							style="height: 100%; position: relative;margin-top:15%">
-							<div>
-								<img src="/resources/pic/product/商品專區動畫/images/img_1.png"
-									width="100%;"
-									style="width: 90%; position: absolute; margin-top: 4%;">
-							</div>
-							<div>
-								<img src="/resources/pic/product/商品專區動畫/images/img_0.png"
-									width="100%"
-									style="width: 30%; position: absolute; margin: 23% auto auto 50%;">
-							</div>
-						</div>
+						<div id="bm" style="width: 100%;position: relative;top: 20px;"></div>
 					</div>
 				</div>
 
@@ -146,22 +133,27 @@ padding-bottom:1vh;
 							style="background-color: #5C8DEC; padding-bottom: 2%;color:white"
 							align="center">
 							<br />
-							<div class="col-sm-3" style="padding-bottom:2vh">
+							<div class="col-sm-1" style="padding-bottom:2vh"></div>
+							<div class="col-sm-2" style="padding-bottom:2vh">
+								<span>幣別</span> <br /> <span>${modelf.curr}</span>
+							</div>
+							<div class="col-sm-2" style="padding-bottom:2vh">
 								<span>總繳金額</span> <br /> <span>$<fmt:formatNumber
 										value="${modelf.totalPay}" maxFractionDigits="0" type="number" /></span>
 							</div>
-							<div class="col-sm-3" style="padding-bottom:2vh">
+							<div class="col-sm-2" style="padding-bottom:2vh">
 								<span>領回金額</span> <br /> <span>$<fmt:formatNumber
 										value="${modelf.cashValue}" maxFractionDigits="0" type="number" /></span>
 							</div>
-							<div class="col-sm-3" style="padding-bottom:2vh">
+							<div class="col-sm-2" style="padding-bottom:2vh">
 								<span>凈報酬</span> <br /> <span>$<fmt:formatNumber
 										value="${modelf.net}" maxFractionDigits="0" type="number" /></span>
 							</div>
-							<div class="col-sm-3" style="padding-bottom:2vh">
+							<div class="col-sm-2" style="padding-bottom:2vh">
 								<span>IRR</span> <br /> <span><fmt:formatNumber
 										value="${modelf.irr*100}" maxFractionDigits="2" />%</span>
 							</div>
+							<div class="col-sm-1" style="padding-bottom:2vh"></div>
 							<br /> <br />
 						</div>
 
@@ -194,7 +186,12 @@ padding-bottom:1vh;
 								<span>續年保費：$<fmt:formatNumber value="${modelf.premiumAfterDiscount}" type="number"/></span>
 							</div>
 							<div class="col-sm-3" style="padding-bottom:1vh">
+							<c:if test="${modelf.interestRateType=='宣告利率'}">
 								<span>${modelf.interestRateType}：<fmt:formatNumber value="${modelf.declareInterestRate*100}" maxFractionDigits="2" />%</span>
+							</c:if>
+							<c:if test="${modelf.interestRateType=='預定利率'}">
+								<span>${modelf.interestRateType}：<fmt:formatNumber value="${modelf.predictInterestRate*100}" maxFractionDigits="2" />%</span>
+							</c:if>
 							</div>
 							<div class="col-sm-4" style="padding-bottom:1vh">
 								<span>折扣後年繳保費：</span><span id="getPremiumAfterDiscount">$<fmt:formatNumber value="${modelf.premiumAfterDiscount}" type="number"/></span>
@@ -217,9 +214,9 @@ padding-bottom:1vh;
 							</div>
 							<div class="col-sm-12 text-center">
 								<div id="simpleTable">
-									<div style="height: 30vh; overflow-y: scroll">
-										<table>
-											<tr>
+									<div style="height: 30vh; overflow-y: scroll;">
+										<table style="margin:0 auto;">
+											<tr style="color:white;">
 												<th class="col-sm-3 text-center">保單年度</th>
 												<th class="col-sm-3 text-center">繳費金額</th>
 												<th class="col-sm-3 text-center">總解約金/領回金額</th>
@@ -271,7 +268,7 @@ padding-bottom:1vh;
 						<br /> <a href="#" id="iWantToBuy">
 							<input type="button" id="iWantToBuy"
 							class="btn btn-secondary iWantToBuy"
-							style="color: white; background-color: #5C8DEC;" value="我要購買">
+							style="color: white; background-color: #5C8DEC;" value="我想購買">
 						</a> 
 <!-- 						<a href="/recipient/add/1">我要購買</a> -->
 					</div>
@@ -514,7 +511,13 @@ padding-bottom:1vh;
 			        }
 			    );
     }
-	
+	var animation = bodymovin.loadAnimation({
+		  container: document.getElementById('bm'),
+		  renderer: 'svg',
+		  loop: true,
+		  autoplay: true,
+		  path: '/resources/pic/product/商品專區動畫/data.json'
+		})
 	</script>
 </body>
 </html>
