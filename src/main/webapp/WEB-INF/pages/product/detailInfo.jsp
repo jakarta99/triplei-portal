@@ -468,7 +468,7 @@ padding-bottom:1vh;
 			        ],
 			        {            
 			            grid: {
-			                backgroundColor: { colors: ["#D1D1D1", "#7A7A7A"] },
+			                backgroundColor:"white",
 			                hoverable:true,
 			                borderWidth: 1
 			            },
