@@ -98,14 +98,6 @@ p{
 								</tr>
 							</table>
 						</div>
-<!-- 						<div class="col-xs-12 col-sm-12" style="border: 1px #5C8DEC solid;width:auto; height: 18vh;margin-bottom: 10vh"> -->
-<%-- 						<img class="col-xs-9 col-sm-3" alt="" src="${hotproduct[1].insurer.imgsrc}" style="height:100%;padding:0"> --%>
-<!-- 						<div class="col-xs-9 col-sm-9" style="height:100%;padding-top:1vh;text-align:left"> -->
-<%-- 						<span style="font-size:190%">${hotproduct[1].insurer.name}</span> --%>
-<!-- 						<br/> -->
-<%-- 						<span style="font-size:130%">${hotproduct[1].code} - ${hotproduct[1].localName}</span> --%>
-<!-- 						</div> -->
-<!-- 						</div> -->
 					</div>
 				</div>
 			</div>
@@ -187,69 +179,137 @@ p{
 				<div class="col-xs-0 col-sm-2"></div>
 			</div>
 			<!-- 第四頁 -->
-			<div class="col-xs-12 col-sm-12" style="height: 100vh;">
-
-					<!--三個框框(熱門新聞) -->
-					<div class="col-sm-12" style="height: 90vh">
-					<div class="col-xs-2 col-sm-1"></div>
-					<div class="col-xs-8 col-sm-10" style="padding-left: 0px">
-					<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh;padding-left: 3vw">
+			<div class="col-xs-12 col-sm-6" style="height: 100vh;">
+				<div class="col-xs-0 col-sm-2"></div>
+				<div class="col-xs-12 col-sm-10">
+					<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh;">
 						<div class="col-sm-12" style="display: inline;">
 							<a style="color: #000079; font-weight: bold;">HOT</a>
 							<a style="font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">熱門新聞</a>
-							<a href="/article/news" style="color: #5C8DEC;">查看更多</a>
+							<a href="/article/list" style="color: #5C8DEC;">查看更多</a>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-4" style="height: 80vh;">
-						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style="height: 50vh;">
-							<div style="margin-top:7%;">
-							<a href="/article/readArticle/read/${news[0].id}">
-							<img style="width:100%;" src="${news[0].bannerImage}" /></div>
+
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12" style="height: 25vh;color:black">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${news[0].id}">
+								<img style="width:100%;" src="${news[0].bannerImage}" /></div>
+							</div>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${news[0].title}</h4></a>
+								<p>${news[0].introduction}</p>
+							</div>
 						</div>
-						<div class="col-sm-12" style="height: 20vh;">
-							<h4>${news[0].title}</h4></a>
-							<p>${news[0].introduction}</p>
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12" style="height: 25vh">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${news[1].id}">
+								<img style="width:100%;" src="${news[1].bannerImage}" /></div>
+							</div>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${news[1].title}</h4></a>
+								<p>${news[1].introduction}</p>
+							</div>
 						</div>
-						</div>
-						</div>
-						
-					<div class="col-xs-12 col-sm-4"
-						style="height: 80vh;">
-						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style="height: 50vh;">
-							<div style="margin-top:7%;">
-							<a href="/article/readArticle/read/${news[1].id}">
-							<img style="width:100%;" src="${news[1].bannerImage}" /></div>
-						</div>
-						<div class="col-sm-12" style="height: 20vh;">
-							<h4>${news[1].title}</h4></a>
-							<p>${news[1].introduction}</p>
-						</div>
-						</div>
-						</div>
-						
-					<div class="col-xs-12 col-sm-4"
-						style="height: 80vh;">
-						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px">
-						<div class="col-sm-12" style="height: 50vh;">
-							<div style="margin-top:7%;">
-							<a href="/article/readArticle/read/${news[2].id}">
-							<img style="width:100%;" src="${news[2].bannerImage}" /></div>
-						</div>
-						<div class="col-sm-12" style="height: 20vh;">
-							<h4>${news[3].title}</h4></a>
-							<p>${news[3].introduction}</p>
-						</div>
-						</div>
-						</div>
-					
-					</div>
-					<div class="col-xs-2 col-sm-1"></div>
-					</div>
-					
-						
 				</div>
+			</div>
+			<!--右半邊 -->
+
+
+			<div class="col-xs-12 col-sm-6" style="height: 100vh; padding-right: 0px; padding-left: 0px">
+				<div class="col-xs-12 col-sm-10">
+					<div class="col-sm-0 col-sm-12" style="height: 17vh; padding-bottom: 3vh"></div>
+					<div class="col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12" style="height: 25vh">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${news[2].id}">
+								<img style="width:100%;" src="${news[2].bannerImage}" /></div>
+							</div>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${news[2].title}</h4></a>
+								<p>${news[2].introduction}</p>
+							</div>
+						</div>
+						<div class="col-sm-12" style="padding-left: 0px">
+							<div class="col-sm-12" style="height: 25vh">
+								<div style="margin-top:7%;">
+								<a href="/article/readArticle/read/${news[3].id}">
+								<img style="width:100%;" src="${news[3].bannerImage}" /></div>
+							</div>
+							<div class="col-sm-12" style="height: 12vh">
+								<h4>${news[3].title}</h4></a>
+								<p>${news[3].introduction}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-0 col-sm-2"></div>
+			</div>
+<!-- 			<div class="col-xs-12 col-sm-12" style="height: 100vh;"> -->
+
+<!-- 					三個框框(熱門新聞) -->
+<!-- 					<div class="col-sm-12" style="height: 90vh"> -->
+<!-- 					<div class="col-xs-2 col-sm-1"></div> -->
+<!-- 					<div class="col-xs-8 col-sm-10" style="padding-left: 0px"> -->
+<!-- 					<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh;padding-left: 3vw"> -->
+<!-- 						<div class="col-sm-12" style="display: inline;"> -->
+<!-- 							<a style="color: #000079; font-weight: bold;">HOT</a> -->
+<!-- 							<a style="font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">熱門新聞</a> -->
+<!-- 							<a href="/article/news" style="color: #5C8DEC;">查看更多</a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-12 col-sm-4" style="height: 80vh;"> -->
+<!-- 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px"> -->
+<!-- 						<div class="col-sm-12" style="height: 50vh;"> -->
+<!-- 							<div style="margin-top:7%;"> -->
+<%-- 							<a href="/article/readArticle/read/${news[0].id}"> --%>
+<%-- 							<img style="width:100%;" src="${news[0].bannerImage}" /></div> --%>
+<!-- 						</div> -->
+<!-- 						<div class="col-sm-12" style="height: 20vh;"> -->
+<%-- 							<h4>${news[0].title}</h4></a> --%>
+<%-- 							<p>${news[0].introduction}</p> --%>
+<!-- 						</div> -->
+<!-- 						</div> -->
+<!-- 						</div> -->
+						
+<!-- 					<div class="col-xs-12 col-sm-4" -->
+<!-- 						style="height: 80vh;"> -->
+<!-- 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px"> -->
+<!-- 						<div class="col-sm-12" style="height: 50vh;"> -->
+<!-- 							<div style="margin-top:7%;"> -->
+<%-- 							<a href="/article/readArticle/read/${news[1].id}"> --%>
+<%-- 							<img style="width:100%;" src="${news[1].bannerImage}" /></div> --%>
+<!-- 						</div> -->
+<!-- 						<div class="col-sm-12" style="height: 20vh;"> -->
+<%-- 							<h4>${news[1].title}</h4></a> --%>
+<%-- 							<p>${news[1].introduction}</p> --%>
+<!-- 						</div> -->
+<!-- 						</div> -->
+<!-- 						</div> -->
+						
+<!-- 					<div class="col-xs-12 col-sm-4" -->
+<!-- 						style="height: 80vh;"> -->
+<!-- 						<div class="col-sm-12" style="height: 60vh;padding-right: 0px; padding-left: 0px"> -->
+<!-- 						<div class="col-sm-12" style="height: 50vh;"> -->
+<!-- 							<div style="margin-top:7%;"> -->
+<%-- 							<a href="/article/readArticle/read/${news[2].id}"> --%>
+<%-- 							<img style="width:100%;" src="${news[2].bannerImage}" /></div> --%>
+<!-- 						</div> -->
+<!-- 						<div class="col-sm-12" style="height: 20vh;"> -->
+<%-- 							<h4>${news[3].title}</h4></a> --%>
+<%-- 							<p>${news[3].introduction}</p> --%>
+<!-- 						</div> -->
+<!-- 						</div> -->
+<!-- 						</div> -->
+					
+<!-- 					</div> -->
+<!-- 					<div class="col-xs-2 col-sm-1"></div> -->
+<!-- 					</div> -->
+					
+						
+<!-- 				</div> -->
 			</div>
 		</div>
 	<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->

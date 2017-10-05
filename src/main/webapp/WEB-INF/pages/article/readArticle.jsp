@@ -36,7 +36,6 @@ content img{
 		</div>
 		<div class="col-lg-9" style="height:100%;overflow-y:scroll;color:black">
 			<div class="col-sm-12" style="height:40vh;width:100%; margin-top: 3%; display: table">
-				<img style="width:100% ;margin-top: 1%;" src="${article.bannerImage}" title="">
 					<div>
 						<h3 style="font-size:180%">${article.title}</h3>
 						<p style="font-size:180%">${article.content}</p>

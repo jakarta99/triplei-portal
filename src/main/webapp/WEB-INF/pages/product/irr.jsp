@@ -124,8 +124,7 @@ h3 {
 						<div class="col-md-12" style="padding: 0;">
 							<span style="font-size: 150%">IRR內部報酬率</span>
 						</div>
-						<div class="col-md-12" id="spanIRR"
-							style="margin: 0 auto 2% auto;">
+						<div class="col-md-12" id="spanIRR" style="margin: 0 auto 2% auto;">
 							<h3 id="showIRR">1.23%</h3>
 						</div>
 					</div>
@@ -202,8 +201,23 @@ h3 {
 							})
 						}
 
+						if(period>times){
+							swal("貼心提醒","繳費年期如果小於領回年期幾乎都會虧本唷~");
+						}
+						if(period.toString().indexOf('-')!=-1){
+							swal("貼心提醒","沒有負的年期唷~");
+						}
+						if(times.toString().indexOf('-')!=-1){
+							swal("貼心提醒","沒有負的年期唷~");
+						}
+						if(premium.toString().indexOf('-')!=-1){
+							swal("貼心提醒","沒有保險公司還給你錢唷~");
+						}
+						if(expired.toString().indexOf('-')!=-1){
+							swal("貼心提醒","沒有這種機車保單唷~");
+						}
 					} else {
-						alert("請輸入整數的年期");
+						swal("請輸入整數的年期");
 					}
 				})
 				
