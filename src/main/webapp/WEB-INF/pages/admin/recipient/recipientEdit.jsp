@@ -21,17 +21,19 @@
 	<div class="container-fluid" style="padding: 0;">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 
-		<div style="padding-top:9vh">
+		<div style="padding-top: 9vh">
 			<h3>修改資料</h3>
 
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
-						<input type="hidden" id="id" name="id" value="${entity.id}" />
-						   <input type="hidden" id="userNamee" name="userNamee" value="${entity.userNamee}" />
-							<input type="hidden" id="code" name="code" value="${entity.code}" />
-							<input type="hidden" id="year" name="year" value="${entity.year}" />
-							 <input type="hidden" id="insureAmount" name="insureAmount" value="${entity.insureAmount}" />
+						<input type="hidden" id="id" name="id" value="${entity.id}" /> <input
+							type="hidden" id="userNamee" name="userNamee"
+							value="${entity.userNamee}" /> <input type="hidden" id="code"
+							name="code" value="${entity.code}" /> <input type="hidden"
+							id="year" name="year" value="${entity.year}" /> <input
+							type="hidden" id="insureAmount" name="insureAmount"
+							value="${entity.insureAmount}" />
 
 						<div class="panel panel-primary">
 							<div class="panel-heading">
@@ -188,30 +190,23 @@
 									</div>
 
 
-									<input type="hidden" class="form-control"
-										id="createdBy" name="createdBy"
-										value="${entity.createdBy}" /> <span class="help-block"></span>
-
-
-
-									<input type="hidden" readonly="readonly" class="form-control"
-										id="canGetPoint" name="canGetPoint"
-										value="${entity.canGetPoint}" /> <span class="help-block"></span>
-
-
-
-
-									<input type="hidden" class="form-control"
-										id="alreadyAudittedPoint" name="alreadyAudittedPoint"
+									<input type="hidden" class="form-control" id="createdBy"
+										name="createdBy" value="${entity.createdBy}" /> <span
+										class="help-block"></span> <input type="hidden"
+										readonly="readonly" class="form-control" id="canGetPoint"
+										name="canGetPoint" value="${entity.canGetPoint}" /> <span
+										class="help-block"></span> <input type="hidden"
+										class="form-control" id="alreadyAudittedPoint"
+										name="alreadyAudittedPoint"
 										value="${entity.alreadyAudittedPoint}" /> <span
 										class="help-block"></span> <input type="hidden"
-										class="form-control"
-										id="alreadyDeletedPoint" name="alreadyDeletedPoint"
+										class="form-control" id="alreadyDeletedPoint"
+										name="alreadyDeletedPoint"
 										value="${entity.alreadyDeletedPoint}" /> <span
 										class="help-block"></span> <input type="hidden"
-										 class="form-control" id="alreadyGetPoint"
-										name="alreadyGetPoint"
-										value="${entity.alreadyGetPoint}" /> <span class="help-block"></span>
+										class="form-control" id="alreadyGetPoint"
+										name="alreadyGetPoint" value="${entity.alreadyGetPoint}" /> <span
+										class="help-block"></span>
 
 
 									<div class="form-group required">
@@ -230,7 +225,7 @@
 											</select> <span class="help-block"></span>
 										</div>
 									</div>
-									
+
 									<div class="form-group required">
 										<label for="orderStatus" class="col-md-2 control-label">選擇階段</label>
 										<div class="col-md-10">
@@ -267,7 +262,7 @@
 									</div>
 								</div>
 							</div>
-							</div>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -291,9 +286,11 @@
 
 		</div>
 	</div>
-
 	<script type="text/javascript">
 		$(function() {
+			window.alert = function() {
+				return swal.apply(this, arguments);
+			};
 			//<!-- Save -->	
 			$("#saveButton").bind(
 					"click",
@@ -307,15 +304,12 @@
 								"<c:url value='/admin/recipient?userName="
 										+ name + "&pid=" + pid + "&address="
 										+ address + "'/>", "dataForm",
-								function(data) {
-									if (data.messages.length == 0) {
-										$btn.button("reset");
-									}
-								}, function(data, textStatus, jqXHR) {
+								function() {
 									$btn.button("reset");
 								});
 						swal("SUCCESS");
-						location.href = "/admin/recipient/list"
+						setTimeout("location.href = '/admin/recipient/list'",
+								1500);
 						$btn.button("reset");
 					});
 		});

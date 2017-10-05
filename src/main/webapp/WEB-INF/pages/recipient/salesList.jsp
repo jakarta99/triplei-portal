@@ -82,8 +82,14 @@
 					$editBtn.attr("href", BASE_URL + "/sales/" + row.id);
 					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 					
-					return $("<div></div>").append("<br/>").append($editBtn).append("<br/>");
+					
+					if(row.orderStatus=='已完成(含派送點數)' || row.orderStatus=='已見面，未購買(刪除審核中點數)'){
+							return "";
+						}else{
+							return $("<div></div>").append("<br/>").append($editBtn).append("<br/>");
+						}
 				}
+
 			</script>
 		</div>
 	</div>

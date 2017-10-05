@@ -64,7 +64,7 @@ ul {
 						</sec:authorize>
 						
 						<sec:authorize access="hasAnyRole('SALES','SERVICE')">
-							<li><a href="/recipient/sale/list">接收訂單</a></li>
+							<li><a href="/recipient/sale/list">接收保險訂單</a></li>
 						</sec:authorize>	
 					</ul></li>
 
@@ -91,7 +91,7 @@ ul {
 								<li><a href="/admin/convenienceStore/list">超商管理</a></li>	
 							</sec:authorize>
 							<sec:authorize access="hasAnyRole('ADMIN', 'SERVICE', 'PARTTIME')">					
-								<li><a href="/admin/recipient/list">訂單管理</a></li>
+								<li><a href="/admin/recipient/list">保險訂單管理</a></li>
 							</sec:authorize>
 						</ul>
 					</li>
@@ -109,7 +109,7 @@ ul {
 							</sec:authorize>
 							
 							<sec:authorize access="hasAnyRole('ADMIN', 'SERVICE' ,'PARTTIME')">
-							<li><a href="/admin/gift/giftOrder/list">訂單管理</a></li>
+							<li><a href="/admin/gift/giftOrder/list">積點商品訂單管理</a></li>
 							</sec:authorize>
 							
 						</ul>
