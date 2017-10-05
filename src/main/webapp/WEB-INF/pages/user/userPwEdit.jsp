@@ -69,9 +69,16 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div>
 						<a href="#" class="btn btn-lg btn-primary btn-block" data-loading-text="Loading" id="saveButton">儲存</a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div>
+						<a href="<c:url value='/'/>"
+							class="btn btn-lg btn-primary btn-warning btn-block"
+							data-loading-text="Loading">回首頁</a>
 					</div>
 				</div>
 			</div>
