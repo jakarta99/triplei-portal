@@ -126,18 +126,6 @@
 
 	<script tyep="text/javascript">	
 
-	window.legacyAlert = window.alert;
-	
-	window.alert = function(msg, title, type, params) {
-	    	var title = (title == null) ? 'Error' : title;
-	    	var type = (type == null) ? 'Warning' : type;
-	   	 	swal($.extend({
-	            	title: title,
-	            	text: msg,
-	            	type: type
-	        	}, params || {})
-	    	);
-		};
 		$(function() {		
 			
 			$('#birthdate').inputmask({

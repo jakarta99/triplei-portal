@@ -131,7 +131,7 @@ $(function(){
 				function(data) {
 					console.log(data.messages.length);
 					if (data.messages.length==0){
-						alert("SUCCESS");
+						swal("SUCCESS","資料更新成功");
 						$btn.button("reset");
 						location.href = '/user/reset/info'
 					}	

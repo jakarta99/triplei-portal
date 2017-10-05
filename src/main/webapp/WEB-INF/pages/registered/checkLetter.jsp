@@ -65,7 +65,7 @@ $(function(){
 					if (data.messages.length==0){
 						$count = $count + 1;  
 						if($count>1){
-							alert("SUCCESS");	
+							swal("SUCCESS","寄送成功");
 						}
 						$btn.button("reset");
 					}	

@@ -82,7 +82,7 @@ $(function(){
 				function(data) {
 					console.log(data.messages.length);
 					if (data.messages.length==0){
-						alert("SUCCESS");
+						swal("SUCCESS","更新成功");
 						$btn.button("reset");
 					}	
 				}, function(data, textStatus, jqXHR) {

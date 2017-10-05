@@ -60,7 +60,7 @@ h3 {
 						<div class="col-md-8">
 							<input class="form-control check_change" id="period" name="period" type="number" min="0" value="1" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="periodlabelcontent">繳費年期解釋</p>
+								<p class="explancontent" id="periodlabelcontent">保費要繳幾年?(躉繳請輸入1唷)</p>
 							</div>
 						</div>
 					</div>
@@ -72,7 +72,7 @@ h3 {
 						<div class="col-md-8">
 							<input class="form-control check_change" id="premium" type="number" min="0" value="10000" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="premiumlabelcontent">年繳保費解釋</p>
+								<p class="explancontent" id="premiumlabelcontent">每年繳多少錢呢?</p>
 							</div>
 						</div>
 					</div>
@@ -84,7 +84,7 @@ h3 {
 						<div class="col-md-8">
 							<input class="form-control check_change" id="times" name="times" type="number" min="0" value="1" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="timeslabelcontent">第幾年末領回解釋</p>
+								<p class="explancontent" id="timeslabelcontent">期望在第幾年後領回?</p>
 							</div>
 						</div>
 					</div>
@@ -96,7 +96,7 @@ h3 {
 						<div class="col-md-8">
 							<input class="form-control check_change" id="expired" name="expired" type="number" min="0" value="10123" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="expiredlabelcontent">領回金額解釋</p>
+								<p class="explancontent" id="expiredlabelcontent">填入的領回時間當年度的解約金額</p>
 							</div>
 						</div>
 					</div>
