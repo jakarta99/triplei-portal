@@ -51,4 +51,8 @@ public class GiftOrderEntity extends GenericEntity {
 	
 	@Column(name = "Gift")
 	private GiftEntity giftEntity;
+	
+//	@Column(name = "USER")
+//	private UserEntity userEntity;
+
 }

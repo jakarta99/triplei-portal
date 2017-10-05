@@ -3,7 +3,6 @@ package tw.com.triplei.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.QualifierEntry;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,17 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
-import tw.com.triplei.admin.spec.GiftOrderSpecification;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.commons.QueryOpType;
 import tw.com.triplei.commons.SpecCriterion;
+import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.entity.GiftOrderEntity;
 import tw.com.triplei.service.GiftOrderService;
+import tw.com.triplei.service.GiftService;
 
 @Slf4j
 @Controller
@@ -36,6 +35,9 @@ public class AdminGiftOrderController {
 
 	@Autowired
 	private GiftOrderService giftOrderService;
+
+	@Autowired
+	private GiftService giftService;
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -48,7 +50,25 @@ public class AdminGiftOrderController {
 	public String editPage(@PathVariable("id") final Long id, Model model) {
 
 		GiftOrderEntity dbEntity = giftOrderService.getOne(id);
+		
+//		if(dbEntity.getStatus()==GiftOrderType.CANCEL) {
+//			model.addAttribute("entityStatus", GiftOrderType.CANCELDONE);
+//		}else if(dbEntity.getStatus()==GiftOrderType.PROCESSING) {
+//			List<GiftOrderType> list = new ArrayList<>();
+//			list.add(GiftOrderType.SHIPORDER);
+//			list.add(GiftOrderType.DONE);
+//			model.addAttribute("entityStatus", list);
+//		}else if(dbEntity.getStatus()==GiftOrderType.SHIPORDER) {
+//			model.addAttribute("entityStatus", GiftOrderType.DONE);
+//		}else if(dbEntity.getStatus()==GiftOrderType.DONE) {
+//			model.addAttribute("entityStatus", GiftOrderType.DONE);
+//		}else {
+//			model.addAttribute("entityStatus", GiftOrderType.CANCELDONE);
+//		}
+		
+		
 		model.addAttribute("entity", dbEntity);
+		
 
 		return "/admin/gift/giftOrderEdit";
 	}
@@ -88,6 +108,11 @@ public class AdminGiftOrderController {
 
 		try {
 			log.debug("{}",form);
+
+			GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
+			
+			form.setGiftEntity(giftEntity);
+			
 			final GiftOrderEntity updateResult = giftOrderService.update(form);
 			response.setData(updateResult);
 

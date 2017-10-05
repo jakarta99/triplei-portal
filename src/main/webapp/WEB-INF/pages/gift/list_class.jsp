@@ -306,7 +306,7 @@
 			$("#dialog").dialog({
 				autoOpen : false,
 				height : "auto",
-				width : 450,
+				width : 600,
 				show : {
 					effect : "blind",
 					duration : 800

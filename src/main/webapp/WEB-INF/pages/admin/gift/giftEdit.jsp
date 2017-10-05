@@ -182,6 +182,7 @@
 // 			$.each($("input[type='file']")[2].files, function(i, file) {
 // 				formData.append('upload-file2', file);
 // 			});
+			if($('#image1').val()!=""){
 			$.ajax({
 				url : "<c:url value='/admin/gift'/>",
 				method : "PUT",
@@ -190,16 +191,18 @@
 				processData : false,
 				contentType : false,
 				success : function(data) {
-					if(data.messages){
-					alert("修改成功");
-					}else if(data.messages[0].code=='EXCEPTION'){
-					alert("請確認欄位填寫完成，並最少上傳一張圖片");
-					}
+					
+					swal("修改成功","","success");	
+					
 				},
 				error : function() {
-					alert("請確認資料填寫無誤");
+					swal("請確認資料填寫無誤","","warning");
 				}
 			})
+			
+			}else{
+				swal("請確認欄位填寫完成，並最少上傳一張圖片","","warning");
+			}
 			$btn.button("reset");
 		});
 	});

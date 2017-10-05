@@ -100,12 +100,12 @@
 											<option value="下午">下午</option>
 											</c:when>
 											</c:choose>
-											</select>
-											<span class="help-block"><divclass="text-danger"></div></span>
+											</select> <span class="help-block"><div
+												class="text-danger"></div></span>
 									</div>
-								
+								</div>
 
-								<div class="form-group required">
+				<!-- 			<div class="form-group required">
 									<label for="recipientTime" class="col-md-2 control-label">訂單狀態</label>
 									<div class="col-md-10">
 										<select class="form-control" id="status"
@@ -113,27 +113,20 @@
 											<c:choose>
 											<c:when test="${entity.status == 'WAITING'}">
 											<option value="WAITING">已收到訂單</option>
-											<option value="PROCESSING">訂單處理中</option>
-											<option value="SHIPORDER">配送中</option>
-											<option value="DONE">配送完成</option>
+											<option value="CANCELDONE">取消訂單</option>
 											</c:when>
 											<c:when test="${entity.status == 'PROCESSING'}">
 											<option value="PROCESSING">訂單處理中</option>
-											<option value="SHIPORDER">配送中</option>
-											<option value="DONE">配送完成</option>
-											<option value="WAITING">已收到訂單</option>
+											<option value="CANCELDONE">取消訂單</option>
 											</c:when>
 											<c:when test="${entity.status == 'SHIPORDER'}">
-											<option value="SHIPORDER">配送中</option>
-											<option value="DONE">配送完成</option>
-											<option value="WAITING">已收到訂單</option>
-											<option value="PROCESSING">訂單處理中</option>
+											<option value="SHIPORDER">不可修改</option>
 											</c:when>
 											<c:when test="${entity.status == 'DONE'}">
-											<option value="DONE">配送完成不可再修改</option>
+											<option value="DONE">不可修改</option>
 											</c:when>
 											<c:when test="${entity.status == 'CANCELDONE'}">
-											<option value="CANCELDONE">退訂完成不可再修改</option>
+											<option value="CANCELDONE">不可修改</option>
 											</c:when>
 											</c:choose>
 											</select>
@@ -142,7 +135,7 @@
 									</div>
 								</div>
 
-								</div>
+ -->	
 
 							</div>
 						</div>
@@ -159,7 +152,7 @@
 				</div>
 				<div class="col-md-6">
 					<div>
-						<a href="<c:url value='/admin/gift/giftOrder/list'/>"
+						<a href="<c:url value='/gift/giftOrder/list'/>"
 							class="btn btn-lg btn-primary btn-warning btn-block"
 							data-loading-text="Loading">返回</a>
 					</div>
@@ -180,9 +173,10 @@
 						var $btn = $(this);
 						$btn.button("loading");
 
-						$.put("<c:url value='/admin/gift/giftOrder'/>", "dataForm",
+						$.put("<c:url value='/gift/giftOrder'/>", "dataForm",
 								function(data) {
 									if (data.messages.length == 0) {
+										//swal("SUCCESS", "問題資料更新成功", "success");
 										swal("SUCCESS", "訂單修改成功", "success");
 										$btn.button("reset");
 									}
