@@ -6,6 +6,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <title>Triple i</title>
@@ -62,19 +63,20 @@
 						style="padding-left: 0px; padding-right: 0px;">
 						<div id="insurerfilter"
 							style="background-color: #5C8DEC; display: none;">
-							<p class="col-xs-12 col-sm-12">
+							<p class="col-xs-12 col-sm-12" style="color: white">
 								<input type="checkbox" id="checkall" checked="checked">全選
 							</p>
 							<!-- 							<p id="insurerfilter2"> -->
 							<c:forEach items="${models}" var="model">
-								<p class="col-xs-6 col-sm-6">
-									<input id="chk${model.id}" type="checkbox" checked="checked"
+								<p class="col-xs-6 col-sm-6"  style="color: white">
+									<input id="chk${model.id}" type="checkbox" checked="checked"  style="color: white"
 										name="${model.shortName}">${model.shortName}
 								</p>
 							</c:forEach>
 							<!-- 							</p> -->
 							<p class="col-xs-6 col-sm-6">
-								<button id="strcompare">開始比較</button>
+								<button id="strcompare" class="btn btn-md btn-primary" style="background-color: #5C8DEC; color: white; border-radius: 30px;border: 1px white solid;">開始比較</button>
+<!-- <button id="productBtn" name="productBtn" class="btn btn-md btn-primary" style="background-color: white; color: #5C8DEC; border-radius: 30px;">開始篩選儲蓄險</button> -->
 							</p>
 							<button style="visibility: hidden;">比較</button>
 						</div>
