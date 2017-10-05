@@ -185,16 +185,16 @@
 										<div class="col-sm-12" style="padding: 0;">
 											<span id="giftName" class="col-sm-8 giftNames"
 												style="font-size: 135%;">${modelv.name}</span>
-											<div class="col-sm-4" style="padding: 0; float: right">
+											<div class="col-sm-12">
+												<div class="col-sm-8" style="padding: 0;">
+													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
+														src="/resources/pic/積點專區/點數(小).png"> <span
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelv.bonus}</span>
+												</div>
+												<div class="col-sm-4" style="padding: 0; float: right">
 												<button id="placeOrder" class="btn btn-sm btn-primary"
 													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
-											</div>
-											<div class="col-sm-12">
-												<div style="padding: 0;">
-													<img alt="" style="margin-top: -1vh;"
-														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; color: #5C8DEC; margin-top: 1vh">${modelv.bonus}</span>
 												</div>
 											</div>
 										</div>
@@ -471,6 +471,7 @@
 					id="recipientTime" name="recipientTime">
 					<option value="上午" selected>上午</option>
 					<option value="下午">下午</option>
+					<option value="晚上">晚上</option>
 				</select>
 			</div>
 			<div class="col-md-8"></div>
@@ -562,10 +563,14 @@
 
 			$('button#placeOrder').on('click',function() {
 						// 	   image =  $(this).parents().parents().find("#image").attr("src");
-						image = $(this).parent().parent().parent().siblings()
+// 						image = $(this).parent().parent().parent().siblings()
+// 								.find("#image").attr("src");
+// 						points = $(this).parent().siblings().find("#points").text();
+// 						itemName = $(this).parent().parent().find("#giftName").text();
+						image = $(this).parent().parent().parent().parent().siblings()
 								.find("#image").attr("src");
 						points = $(this).parent().siblings().find("#points").text();
-						itemName = $(this).parent().parent().find("#giftName").text();
+						itemName = $(this).parent().parent().parent().find("#giftName").text();
 
 						console.log(image);
 						console.log(itemName);

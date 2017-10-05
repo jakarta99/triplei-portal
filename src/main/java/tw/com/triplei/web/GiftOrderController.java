@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,6 +60,17 @@ public class GiftOrderController {
 		model.addAttribute("exchangedPoint",user.getExchangedPoint());
 		
 		return "/gift/giftOrderList";
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String editPage(@PathVariable("id") final Long id, Model model) {
+
+		GiftOrderEntity dbEntity = giftOrderService.getOne(id);
+		
+		model.addAttribute("entity", dbEntity);
+		
+
+		return "/gift/giftOrderEdit";
 	}
 
 	@GetMapping
@@ -129,10 +141,11 @@ public class GiftOrderController {
 					entity.setRecipientAddress(recipientAddress);
 					entity.setRecipientPhone(recipientPhone);
 					entity.setRecipientTime(recipientTime);
-					entity.setStatus(GiftOrderType.PROCESSING);
+					entity.setStatus(GiftOrderType.WAITING);
 					LocalDateTime orderTime = LocalDateTime.now();
 					entity.setOrderTime(orderTime);
 					entity.setGiftEntity(giftEntity);
+//					entity.setUserEntity(user);
 					giftOrderService.insert(entity);
 					response.put("userPoint", user.getRemainPoint().toString());
 					response.put("exchangedPoint", user.getExchangedPoint().toString());
@@ -163,23 +176,71 @@ public class GiftOrderController {
 		
 		log.debug("OrderCancelId : {}", id);
 		
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		log.debug("userDetails: {}", userDetails);
+		
+		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+		
+		log.debug("orderUser : {}", user);
+		
 		try {
 			GiftOrderEntity cancelEntity = giftOrderService.getById(id);
 			
-			if(cancelEntity.getStatus()==GiftOrderType.PROCESSING) {
-			cancelEntity.setStatus(GiftOrderType.CANCEL);
+			//判斷訂單狀態再進行處理(直接退貨完成)
+			if(cancelEntity.getStatus()==GiftOrderType.PROCESSING 
+				|| cancelEntity.getStatus()==GiftOrderType.WAITING) {
+			cancelEntity.setStatus(GiftOrderType.CANCELDONE);
 			giftOrderService.update(cancelEntity);
+			
+			int cancelPoint = cancelEntity.getGiftEntity().getBonus();
+			log.debug("UserCancelPoint : {}", cancelPoint);
+			int remainPoint = user.getRemainPoint();
+			log.debug("UserRemainPoint : {}", remainPoint);
+			int exchangedPoint = user.getExchangedPoint();
+			log.debug("UserExchangedPoint : {}", exchangedPoint);
+			int returnPoint = cancelPoint+remainPoint;
+			int returnPoint2 = exchangedPoint-cancelPoint;
+			user.setRemainPoint(returnPoint);
+			user.setExchangedPoint(returnPoint2);
+			
+			userService.getDao().save(user);
 			
 			response.put("訂單已取消", "訂單已取消");
 			}
-//			else {
-//				
-//			}
+			else {
+			response.put("已超過取消期限", "已超過取消期限");
+			}
 		} catch (final Exception e) {
 			response.put("ProcessError", "ProcessError");
 			return response;
 		}
 		return response;
 		
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
+	public AjaxResponse<GiftOrderEntity> update(final Model model, @RequestBody final GiftOrderEntity form) {
+
+		log.debug("{}", form);
+
+		final AjaxResponse<GiftOrderEntity> response = new AjaxResponse<>();
+
+		try {
+			log.debug("{}",form);
+
+			GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
+			
+			form.setGiftEntity(giftEntity);
+			
+			final GiftOrderEntity updateResult = giftOrderService.update(form);
+			response.setData(updateResult);
+
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+
+		return response;
 	}
 }

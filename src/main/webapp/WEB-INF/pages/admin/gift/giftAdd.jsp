@@ -80,7 +80,7 @@
 										<div class="text-danger"></div>
 									</div>
 								</div>
-							</div>
+							
 							<div class="form-group required">
 								<label for="remarks" class="col-md-2 control-label">備註</label>
 								<div class="col-md-10">
@@ -123,6 +123,8 @@
 <!-- 							</div> -->
 						</div>
 					</form>
+					
+					</div>
 				</div>
 
 			</div>
@@ -179,6 +181,7 @@
 // 			$.each($("input[type='file']")[2].files, function(i, file) {
 // 				formData.append('upload-file2', file);
 // 			});
+			if($("#image1").val() != "" ){						
 			$.ajax({
 				url : "<c:url value='/admin/gift'/>",
 				method : "POST",
@@ -186,17 +189,17 @@
 				enctype : "multipart/form-data",
 				processData : false,
 				contentType : false,
-				success : function(data) {
-					if(data.messages){
-						alert("新增成功");
-						}else if(data.messages[0].code=='EXCEPTION'){
-						alert("請確認欄位填寫完成，並最少上傳一張圖片");
-						}
+				success : function(data) {	
+					swal("新增成功","","success");		
 				},
 				error : function() {
-					alert("請確認資料填寫無誤");
+					swal("請確認資料填寫無誤","","warning");
 				}
 			})
+			
+			}else{
+				swal("請確認欄位填寫完成，並最少上傳一張圖片","","warning");
+			}
 			$btn.button("reset");
 		});
 	});

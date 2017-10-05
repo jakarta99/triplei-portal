@@ -60,7 +60,7 @@
 			 
 			    $("#jsGrid").jsGrid({
 			        width: "100%",
-			        height: "500px",
+			        height: "80vh",
 			 
 			        inserting: false,
 			        editing: false,
@@ -87,23 +87,25 @@
 			        fields: [
 			            { name: '刪／修', width:60, itemTemplate:btns },
 						{ name: "id", visible: false},
-			            { title: '積點商品名稱', name: "giftEntity.name", type: "text", width: 150 },
-// 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
-			            { title: '數量', name: "quantity", type: "text", width: 150 },
+			            { title: '積點商品名稱', name: "giftEntity.name", type: "text", width: 100 },
+			            { title: '商品兌換點數', name: "giftEntity.bonus", type: "text", width: 100 },
+			            { title: '數量', name: "quantity", type: "text", width: 50 },
 			            { title: '兌換日期', name: "orderTime", type: "text", width: 150 },
 			            { title: '收件人姓名', name: "recipient", type: "text", width: 150 },
 			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 150 },
 			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 150 },
 			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 150 },
+// 			            { title: '訂購會員帳號', name: "userEntity.accountNumber", type: "text", width: 150 },
+// 			            { title: '訂購會員email', name: "userEntity.email", type: "text", width: 150 },
 			            { title: '訂單處理狀態', name: "status", width: 150, itemTemplate:function(data){
-			            	if(data=="PROCESSING"){
-								return $("<span></span>").text("訂單處理中");	
+			            	if(data=="WAITING"){
+								return $("<span></span>").text("已收到訂單");	
+							}else if(data=="PROCESSING"){
+								return $("<span></span>").text("訂單處理中");
 							}else if(data=="SHIPORDER"){
-								return $("<span></span>").text("出貨中");
+								return $("<span></span>").text("配送中");
 							}else if(data=="DONE"){
-								return $("<span></span>").text("處理完成");
-							}else if(data=="CANCEL"){
-								return $("<span></span>").text("退訂中");
+								return $("<span></span>").text("配送完成");
 							}else if(data=="CANCELDONE"){
 								return $("<span></span>").text("退訂完成");
 							} }}
