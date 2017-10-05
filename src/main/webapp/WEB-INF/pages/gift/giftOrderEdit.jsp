@@ -27,6 +27,8 @@
 						<input type="hidden" id="id" name="id" value="${entity.id}" />
 						<input type="hidden" id="orderTime" name="orderTime" value="${entity.orderTime}" />
 						<input type="hidden" id="giftEntity.name" name="giftEntity.name" value="${entity.giftEntity.name}"> 
+						<input type="hidden" id="status" name="status" value="${entity.status}"> 
+						<input type="hidden" id="createdBy" name="createdBy" value="${entity.createdBy}"> 
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
@@ -45,7 +47,7 @@
 								<div class="form-group required">
 									<label for="quantity" class="col-md-2 control-label">數量</label>
 									<div class="col-md-10">
-										<input type="number" class="form-control" id="quantity"
+										<input type="number" min="1" class="form-control" id="quantity"
 											name="quantity" value="${entity.quantity}"> <span
 											class="help-block"><div class="text-danger"></div></span>
 									</div>
@@ -147,7 +149,7 @@
 				<div class="col-md-6">
 					<div>
 						<a href="#" class="btn btn-lg btn-primary btn-block"
-							data-loading-text="Loading" id="saveButton">儲存</a>
+							data-loading-text="Loading" id="saveButton">修改</a>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -175,10 +177,14 @@
 
 						$.put("<c:url value='/gift/giftOrder'/>", "dataForm",
 								function(data) {
-									if (data.messages.length == 0) {
+									if (data.訂單已修改) {
 										//swal("SUCCESS", "問題資料更新成功", "success");
 										swal("SUCCESS", "訂單修改成功", "success");
 										$btn.button("reset");
+									}else if(data.系統發生錯誤){
+										swal("非常抱歉", "系統發生錯誤", "warning");
+									}else if(data.已超過修改期限){
+										swal("已超過修改期限", "", "warning");
 									}
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");

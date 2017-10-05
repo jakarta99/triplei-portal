@@ -9,6 +9,8 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
+
 <title>Triple i</title>
 
 </head>
@@ -87,11 +89,10 @@
 			            { title: '積點商品名稱', name: "giftEntity.name", type: "text", width: 100 },
 			            { title: '商品兌換點數', name: "giftEntity.bonus", type: "text", width: 100 },
 			            { title: '數量', name: "quantity", type: "text", width: 50 },
-			            { title: '兌換日期', name: "orderTime", type: "text", width: 150,  },
-// 			            itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString();}
+			            { title: '兌換日期', name: "orderTime", type: "text", width: 90, itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString();} },
 			            { title: '收件人姓名', name: "recipient", type: "text", width: 100 },
 			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 250 },
-			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 150 },
+			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 100 },
 			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 100 },
 			            { title: '訂單處理狀態', name: "status", width: 100, itemTemplate:function(data){
 			            	if(data=="WAITING"){
@@ -113,7 +114,8 @@
 			    function btns(value, row) {
 					var $cancelBtn ;
 					var $editBtn ;
-					if(value=="WAITING" || value=="PROCESSING"){
+// 					|| value=="PROCESSING"
+					if(value=="WAITING" ){
 					$cancelBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
 					$cancelBtn.empty();
 					$cancelBtn.append('<span class="glyphicon glyphicon-trash"></span> 取消訂單');

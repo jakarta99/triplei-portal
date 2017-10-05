@@ -193,12 +193,12 @@
 			</div>
 			<div>
 				<label for="recipientAddress" class="">收件人地址:</label> <input
-					type="text" class="" id="recipientAddress" name="recipientAddress"
+					type="text" class=""  id="recipientAddress" name="recipientAddress"
 					placeholder="" />
 			</div>
 			<div>
 				<label for="recipientPhone" class="">收件人電話:</label> <input
-					type="text" class="" id="recipientPhone" name="recipientPhone"
+					type="text" class="" maxlength="13" id="recipientPhone" name="recipientPhone"
 					placeholder="" />
 			</div>
 			<div>
