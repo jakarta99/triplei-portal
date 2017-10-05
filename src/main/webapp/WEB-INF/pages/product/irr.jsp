@@ -55,48 +55,48 @@ h3 {
 				
 					<div class="col-md-12" style="height:80px;">
 						<div class="col-md-8">
-							<label for="period" class="explan" id="period">繳費年期(年)</label>
+							<label for="period" class="explan" id="periodlabel">繳費年期(年)</label>
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="period" name="period" type="number" min="0" value="1" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="periodcontent">繳費年期解釋</p>
+								<p class="explancontent" id="periodlabelcontent">繳費年期解釋</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md-12" style="height:80px;margin: 3% auto">
 						<div class="col-md-8">
-							<label for="premium" class="explan" id="premium">年繳保費(元)</label>
+							<label for="premium" class="explan" id="premiumlabel">年繳保費(元)</label>
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="premium" type="number" min="0" value="10000" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="premiumcontent">年繳保費解釋</p>
+								<p class="explancontent" id="premiumlabelcontent">年繳保費解釋</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md-12" style="height:80px;margin: 3% auto">
 						<div class="col-md-8">
-							<label for="times" class="explan" id="times">第幾年末領回</label>
+							<label for="times" class="explan" id="timeslabel">第幾年末領回</label>
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="times" name="times" type="number" min="0" value="1" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="timescontent">第幾年末領回解釋</p>
+								<p class="explancontent" id="timeslabelcontent">第幾年末領回解釋</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-md-12" style="height:80px;margin: 3% auto">
 						<div class="col-md-8">
-							<label for="expired" class="explan" id="expired">領回金額</label>
+							<label for="expired" class="explan" id="expiredlabel">領回金額</label>
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="expired" name="expired" type="number" min="0" value="10123" style="width:300px;border: 1px solid #5C8DEC" />
 							<div style="opacity: 0.8;">
-								<p class="explancontent" id="expiredcontent">領回金額解釋</p>
+								<p class="explancontent" id="expiredlabelcontent">領回金額解釋</p>
 							</div>
 						</div>
 					</div>
@@ -152,7 +152,6 @@ h3 {
 					var times = $("#times").val();
 					var period = $("#period").val();
 					var expired = $("#expired").val();
-
 					var url = "/product/calculationofirr/" + premium + "/"
 							+ times + "/" + period + "/" + expired;
 
@@ -208,7 +207,7 @@ h3 {
 					}
 				})
 				
-						var animation = bodymovin.loadAnimation({
+			var animation = bodymovin.loadAnimation({
 			  container: document.getElementById('bm'),
 			  renderer: 'svg',
 			  loop: true,
