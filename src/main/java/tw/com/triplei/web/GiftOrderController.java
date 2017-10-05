@@ -145,6 +145,7 @@ public class GiftOrderController {
 					LocalDateTime orderTime = LocalDateTime.now();
 					entity.setOrderTime(orderTime);
 					entity.setGiftEntity(giftEntity);
+					entity.setCreatedBy(user.getAccountNumber());
 //					entity.setUserEntity(user);
 					giftOrderService.insert(entity);
 					response.put("userPoint", user.getRemainPoint().toString());
@@ -193,13 +194,13 @@ public class GiftOrderController {
 			cancelEntity.setStatus(GiftOrderType.CANCELDONE);
 			giftOrderService.update(cancelEntity);
 			
-			int cancelPoint = cancelEntity.getGiftEntity().getBonus();
+			int cancelPoint = cancelEntity.getGiftEntity().getBonus()*cancelEntity.getQuantity();
 			log.debug("UserCancelPoint : {}", cancelPoint);
 			int remainPoint = user.getRemainPoint();
 			log.debug("UserRemainPoint : {}", remainPoint);
 			int exchangedPoint = user.getExchangedPoint();
 			log.debug("UserExchangedPoint : {}", exchangedPoint);
-			int returnPoint = cancelPoint+remainPoint;
+			int returnPoint = remainPoint+cancelPoint;
 			int returnPoint2 = exchangedPoint-cancelPoint;
 			user.setRemainPoint(returnPoint);
 			user.setExchangedPoint(returnPoint2);
@@ -221,24 +222,71 @@ public class GiftOrderController {
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public AjaxResponse<GiftOrderEntity> update(final Model model, @RequestBody final GiftOrderEntity form) {
+	public Map<String,String> update(final Model model, @RequestBody final GiftOrderEntity form) {
 
 		log.debug("{}", form);
 
-		final AjaxResponse<GiftOrderEntity> response = new AjaxResponse<>();
+		final Map<String,String> response = new HashMap<>();
 
 		try {
+			//找出user
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			log.debug("userDetails: {}", userDetails);
+			
+			UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+			
+			log.debug("orderUser : {}", user);
+			
+			//查看form
 			log.debug("{}",form);
-
+			
+			log.debug("form.getStatus() : {}",form.getStatus());
+			
+			//找出下單gift
 			GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
 			
 			form.setGiftEntity(giftEntity);
 			
-			final GiftOrderEntity updateResult = giftOrderService.update(form);
-			response.setData(updateResult);
-
+			GiftOrderEntity originalOrder = giftOrderService.getById(form.getId());
+			
+			
+			//判斷訂單狀態再進行處理(已收到訂單之外才可操作)
+			if(form.getStatus()==GiftOrderType.WAITING) {
+			
+			//處理點數  先加回去再扣除數量*點數
+			int giftPoint = giftEntity.getBonus();
+			log.debug("UserCancelPoint : {}", giftPoint);
+			int remainPoint = user.getRemainPoint();
+			log.debug("UserRemainPoint : {}", remainPoint);
+			int exchangedPoint = user.getExchangedPoint();
+			log.debug("UserExchangedPoint : {}", exchangedPoint);
+			int returnPoint = remainPoint+(originalOrder.getQuantity()*giftPoint)-(form.getQuantity()*giftPoint);
+			int returnPoint2 = exchangedPoint-(originalOrder.getQuantity()*giftPoint)+(form.getQuantity()*giftPoint);
+			
+			if(returnPoint>=0) {
+				user.setRemainPoint(returnPoint);
+				user.setExchangedPoint(returnPoint2);
+				
+				userService.getDao().save(user);
+				
+				final GiftOrderEntity updateResult = giftOrderService.update(form);
+				response.put("訂單已修改", "訂單已修改");
+				
+			}else {
+				response.put("剩餘點數不足", "剩餘點數不足");
+			}
+			
+			}else if(form.getQuantity()<=0) {
+				response.put("請輸入正確資料", "請輸入正確資料");
+			}
+			else {
+			response.put("已超過修改期限", "已超過修改期限");
+			}
+			
+			
 		} catch (final Exception e) {
-			response.addException(e);
+			response.put("系統發生錯誤", "系統發生錯誤");
 		}
 
 		return response;

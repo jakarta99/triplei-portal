@@ -25,8 +25,11 @@ import tw.com.triplei.commons.QueryOpType;
 import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.entity.GiftOrderEntity;
+import tw.com.triplei.entity.UserEntity;
+import tw.com.triplei.enums.GiftOrderType;
 import tw.com.triplei.service.GiftOrderService;
 import tw.com.triplei.service.GiftService;
+import tw.com.triplei.service.UserService;
 
 @Slf4j
 @Controller
@@ -38,6 +41,9 @@ public class AdminGiftOrderController {
 
 	@Autowired
 	private GiftService giftService;
+
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -107,8 +113,24 @@ public class AdminGiftOrderController {
 		final AjaxResponse<GiftOrderEntity> response = new AjaxResponse<>();
 
 		try {
-			log.debug("{}",form);
-
+			log.debug("form : {}",form);
+			
+			//如果訂單從原本不是取消訂單修改成取消訂單 則 把點數加回user
+			if(form.getStatus()==GiftOrderType.CANCELDONE
+				&& giftOrderService.getById(form.getId()).getStatus()!=GiftOrderType.CANCELDONE) {
+				UserEntity user = userService.getDao().findByAccountNumber(form.getCreatedBy());
+				log.debug("user before cancel : {}",user.getRemainPoint());
+				
+				int userExchangedPoint = user.getExchangedPoint();
+				int userPoint = user.getRemainPoint();
+				int giftPoint = form.getGiftEntity().getBonus();
+				
+				user.setRemainPoint(userPoint+giftPoint);
+				user.setExchangedPoint(userExchangedPoint-giftPoint);
+				userService.getDao().save(user);
+				
+				log.debug("user after cancel : {}",user.getRegisteredCode());
+			}
 			GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
 			
 			form.setGiftEntity(giftEntity);

@@ -27,6 +27,8 @@
 						<input type="hidden" id="id" name="id" value="${entity.id}" />
 						<input type="hidden" id="orderTime" name="orderTime" value="${entity.orderTime}" />
 						<input type="hidden" id="giftEntity.name" name="giftEntity.name" value="${entity.giftEntity.name}"> 
+						<input type="hidden" id="giftEntity.bonus" name="giftEntity.bonus" value="${entity.giftEntity.bonus}"> 
+						<input type="hidden" id="createdBy" name="createdBy" value="${entity.createdBy}"> 
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>
