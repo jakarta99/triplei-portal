@@ -232,18 +232,7 @@ public class RecipientController {
 		log.debug("Username: {}", userDetails.getUsername());
 		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
 		if(user.getEmail()==null){
-			
-			if(!userDetails.getUsername().contains("@")){
-				user = userDao.findByProviderUserId(userDetails.getUsername());
-			} else {
-				user = userDao.findByAccountNumber(userDetails.getUsername());
-			}
-			
-			log.debug("principal user accountNumber: {}" , user);
-
-			
-			model.addAttribute("userDetails", user);
-			return "/user/userEdit";
+			return "redirect:/user/reset/info";
 		}
 		
 		ProductEntity product = productService.getOneAll(id);
