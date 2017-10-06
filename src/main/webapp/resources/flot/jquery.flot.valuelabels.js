@@ -24,25 +24,26 @@
 		    var last_x = -1000;
 		    var last_y = -1000;
 		    for (var i = 0; i < series.data.length; ++i) {
-			if (series.data[i] == null)
-			    continue;
+//			if (series.data[i] == null)
+//			    continue;
 			  
 			var x = series.data[i][0], y = series.data[i][1];
-			if (x < series.xaxis.min || x > series.xaxis.max || y < series.yaxis.min || y > series.yaxis.max)
-			    continue;
 			var val = x;
 			if (series.valueLabelFunc) {
 				val = series.valueLabelFunc({ series: series, seriesIndex: ii, index: i });
 			}
 			val = ""+val;
-			if (val!=last_val || i==series.data.length-1) {
+			if (val!=last_val || i==series.data.length-1) { 
+				if (x < series.xaxis.min || x > series.xaxis.max || y < series.yaxis.min || y > series.yaxis.max){
+					x=16;
+				}
 				var xx = series.xaxis.p2c(x)+plot.getPlotOffset().left;
 				var yy = series.yaxis.p2c(y)-12+plot.getPlotOffset().top;
 				if (Math.abs(yy-last_y)>20 || last_x<xx) {
 					last_val = val;
 					last_x = xx + val.length*8;
 					last_y = yy;
-					
+//					window.document.write(xx+"<br>");
 					var head = '<div style="left:' + xx + 'px;top:' + yy + 'px;" class="valueLabel';
 					var tail = '">' + Math.round(val*10000)/100 + '%</div>';
 					html+= head + "Light" + tail + head + tail;

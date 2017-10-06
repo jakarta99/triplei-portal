@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript" src="<c:url value='/resources/jquery/jquery-1.11.1.js' />"></script>
 <script type="text/javascript" src='<c:url value="/resources/jquery/jquery-ui-1.10.4.js" />'></script>
 <script type="text/javascript" src='<c:url value="/resources/bootstrap-3.3.7/dist/js/bootstrap.min.js" />'></script>
