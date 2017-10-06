@@ -122,7 +122,12 @@
 					$delBtn.click(function() {
 						if (confirm('Are You Sure Want to Delete?')) {
 							$delBtn.button('loading');
-							$.delete_(BASE_URL+ "/" + row.id, function() {
+							$.delete_(BASE_URL+ "/" + row.id, function(data) {
+								if(data.刪除成功){
+									swal("刪除成功","","success");
+								}else if(data.exception){
+									swal("非常抱歉", "修改未成功", "warning")
+								}
 								$delBtn.button('reset');
 								$("#jsGrid").jsGrid("reset");
 							});

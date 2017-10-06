@@ -61,7 +61,7 @@
 								<div class="form-group required">
 									<label for="bonus" class="col-md-2 control-label">商品兌換點數</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="bonus"
+										<input type="number" min="1" class="form-control" id="bonus"
 											name="bonus" placeholder="bonus" value="${entity.bonus}" />
 										<span class="help-block"><div class="text-danger"></div></span>
 									</div>
@@ -181,7 +181,7 @@
 // 			$.each($("input[type='file']")[2].files, function(i, file) {
 // 				formData.append('upload-file2', file);
 // 			});
-			if($("#image1").val() != "" ){						
+			if($("#image1").val() != "" && $("#bonus").val()>0){						
 			$.ajax({
 				url : "<c:url value='/admin/gift'/>",
 				method : "POST",
@@ -197,6 +197,8 @@
 				}
 			})
 			
+			}else if($("#bonus").val()<=0){
+				swal("請確認資料填寫無誤","請輸入正確數字","error");
 			}else{
 				swal("請確認欄位填寫完成，並最少上傳一張圖片","","warning");
 			}

@@ -184,7 +184,11 @@
 									}else if(data.系統發生錯誤){
 										swal("非常抱歉", "系統發生錯誤", "warning");
 									}else if(data.已超過修改期限){
-										swal("已超過修改期限", "", "warning");
+										swal("非常抱歉", "已超過修改期限", "warning");
+									}else if(data.剩餘點數不足){
+										swal("非常抱歉", "剩餘點數不足", "warning");
+									}else if(data.輸入數量過大){
+										swal("非常抱歉", "輸入數量過大", "warning");
 									}
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");

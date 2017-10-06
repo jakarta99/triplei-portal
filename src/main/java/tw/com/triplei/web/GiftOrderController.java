@@ -126,11 +126,12 @@ public class GiftOrderController {
 				int giftpoint = giftEntity.getBonus();
 
 				int remainpoint = (userpoint - giftpoint * quantity);
+				int inputPoint = giftpoint * quantity;
 				log.debug("remainpoint: {}", remainpoint);
 
 				// 檢查剩餘點數並進行扣點與下訂單
 
-				if (remainpoint >= 0) {
+				if (remainpoint >= 0 && inputPoint>0) {
 
 					user.setRemainPoint(remainpoint);
 					
@@ -154,6 +155,8 @@ public class GiftOrderController {
 
 					return response;
 
+				}else if(inputPoint<0) {
+					response.put("數量輸入過大", "數量輸入過大");
 				}
 
 				response.put("剩餘點數不足", "剩餘點數不足");
@@ -263,8 +266,9 @@ public class GiftOrderController {
 			log.debug("UserExchangedPoint : {}", exchangedPoint);
 			int returnPoint = remainPoint+(originalOrder.getQuantity()*giftPoint)-(form.getQuantity()*giftPoint);
 			int returnPoint2 = exchangedPoint-(originalOrder.getQuantity()*giftPoint)+(form.getQuantity()*giftPoint);
+			int inputPoint = form.getQuantity()*giftPoint;
 			
-			if(returnPoint>=0) {
+			if(returnPoint>=0 && inputPoint>0) {
 				user.setRemainPoint(returnPoint);
 				user.setExchangedPoint(returnPoint2);
 				
@@ -273,14 +277,15 @@ public class GiftOrderController {
 				final GiftOrderEntity updateResult = giftOrderService.update(form);
 				response.put("訂單已修改", "訂單已修改");
 				
+			}else if(inputPoint<0) {
+				response.put("輸入數量過大", "輸入數量過大");
 			}else {
 				response.put("剩餘點數不足", "剩餘點數不足");
 			}
 			
 			}else if(form.getQuantity()<=0) {
 				response.put("請輸入正確資料", "請輸入正確資料");
-			}
-			else {
+			}else {
 			response.put("已超過修改期限", "已超過修改期限");
 			}
 			

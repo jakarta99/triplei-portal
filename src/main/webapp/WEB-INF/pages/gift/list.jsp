@@ -629,6 +629,8 @@
 							swal("剩餘點數不足", "", "warning");
 						} else if (data.數字輸入錯誤) {
 							swal("數字輸入錯誤", "", "warning");
+						} else if (data.數量輸入過大) {
+							swal("數量輸入過大", "", "warning");
 						} else {
 							swal("請輸入正確資料", "", "warning");
 						}

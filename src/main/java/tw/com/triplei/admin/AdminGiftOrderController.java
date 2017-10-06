@@ -1,6 +1,8 @@
 package tw.com.triplei.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
-import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.commons.QueryOpType;
 import tw.com.triplei.commons.SpecCriterion;
@@ -106,40 +107,79 @@ public class AdminGiftOrderController {
 
 	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseBody
-	public AjaxResponse<GiftOrderEntity> update(final Model model, @RequestBody final GiftOrderEntity form) {
+	public Map<String,String> update(final Model model, @RequestBody final GiftOrderEntity form) {
 
 		log.debug("{}", form);
 
-		final AjaxResponse<GiftOrderEntity> response = new AjaxResponse<>();
+		final Map<String,String> response = new HashMap<>();
 
+		GiftOrderEntity giftOrderEntity = giftOrderService.getById(form.getId());
 		try {
 			log.debug("form : {}",form);
 			
+			UserEntity user = userService.getDao().findByAccountNumber(form.getCreatedBy());
+			log.debug("user before cancel : {}",user.getRemainPoint());
+			
 			//如果訂單從原本不是取消訂單修改成取消訂單 則 把點數加回user
 			if(form.getStatus()==GiftOrderType.CANCELDONE
-				&& giftOrderService.getById(form.getId()).getStatus()!=GiftOrderType.CANCELDONE) {
-				UserEntity user = userService.getDao().findByAccountNumber(form.getCreatedBy());
-				log.debug("user before cancel : {}",user.getRemainPoint());
+				&& giftOrderEntity.getStatus()!=GiftOrderType.CANCELDONE) {
 				
 				int userExchangedPoint = user.getExchangedPoint();
 				int userPoint = user.getRemainPoint();
-				int giftPoint = form.getGiftEntity().getBonus();
+				int giftPoint = form.getGiftEntity().getBonus()*giftOrderEntity.getQuantity();
 				
 				user.setRemainPoint(userPoint+giftPoint);
 				user.setExchangedPoint(userExchangedPoint-giftPoint);
 				userService.getDao().save(user);
 				
 				log.debug("user after cancel : {}",user.getRegisteredCode());
+				
+				GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
+				
+				form.setGiftEntity(giftEntity);
+				
+				giftOrderService.update(form);
+				response.put("修改成功", "修改成功");
 			}
-			GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
+			// 如果有修改數量  則修改user點數
+			else if (form.getQuantity() != giftOrderEntity.getQuantity() && form.getQuantity()>0 ) {
+				
+				int userExchangedPoint = user.getExchangedPoint();
+				int userPoint = user.getRemainPoint();
+				int originalGiftPoint = form.getGiftEntity().getBonus()*giftOrderEntity.getQuantity();
+				int newGiftPoint = giftOrderEntity.getGiftEntity().getBonus()*form.getQuantity();
+				
+				user.setRemainPoint(userPoint+originalGiftPoint-newGiftPoint);
+				user.setExchangedPoint(userExchangedPoint-originalGiftPoint+newGiftPoint);
+				if(user.getRemainPoint()>=0 && newGiftPoint>0) {
+					userService.getDao().save(user);
+					
+					log.debug("user after cancel : {}",user.getRegisteredCode());
+					
+					GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
+					
+					form.setGiftEntity(giftEntity);
+					
+					giftOrderService.update(form);
+					response.put("修改成功", "修改成功");
+				}else if(newGiftPoint<0) {
+					response.put("輸入數量過大", "輸入數量過大");
+				}else {
+					response.put("剩餘點數不足", "剩餘點數不足");
+				}
+			}else {
+				GiftEntity giftEntity = giftService.getByName(form.getGiftEntity().getName());
+				
+				form.setGiftEntity(giftEntity);
+				
+				giftOrderService.update(form);
+				response.put("修改成功", "修改成功");
+			}
 			
-			form.setGiftEntity(giftEntity);
-			
-			final GiftOrderEntity updateResult = giftOrderService.update(form);
-			response.setData(updateResult);
 
 		} catch (final Exception e) {
-			response.addException(e);
+			response.put("exception", "exception");
+			return response;
 		}
 
 		return response;
@@ -148,17 +188,37 @@ public class AdminGiftOrderController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public AjaxResponse<GiftOrderEntity> delete(@PathVariable(value = "id") final long id) {
+	public Map<String,String> delete(@PathVariable(value = "id") final long id) {
 
 		log.debug("{}", id);
 
-		final AjaxResponse<GiftOrderEntity> response = new AjaxResponse<>();
-
+		final Map<String,String> response = new HashMap<>();
+		GiftOrderEntity originalEntity = giftOrderService.getById(id);
 		try {
-			giftOrderService.delete(id);
+			
+			//定單未處理完時把點數加回去
+			if(originalEntity.getStatus()!=GiftOrderType.CANCELDONE
+			&&originalEntity.getStatus()!=GiftOrderType.DONE) {
+				
+			UserEntity user = userService.getDao().findByAccountNumber(originalEntity.getCreatedBy());
+			log.debug("deleteOrder user : {}",user);
+			
+			int userRemainPoint = user.getRemainPoint();
+			int userExchangePoint = user.getExchangedPoint();
+			int giftPoint = originalEntity.getQuantity()*originalEntity.getGiftEntity().getBonus();
+			
+			user.setRemainPoint(userRemainPoint+giftPoint);
+			user.setExchangedPoint(userExchangePoint-giftPoint);
 
+			log.debug("deleteOrder user : {}",user);
+			
+			userService.getDao().save(user);
+			}
+			giftOrderService.delete(id);
+			response.put("刪除成功", "刪除成功");
 		} catch (final Exception e) {
-			return new AjaxResponse<>(e);
+			response.put("exception", "exception");
+			return response;
 		}
 		return response;
 

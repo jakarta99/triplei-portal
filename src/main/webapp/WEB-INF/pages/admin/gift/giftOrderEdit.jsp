@@ -184,9 +184,15 @@
 
 						$.put("<c:url value='/admin/gift/giftOrder'/>", "dataForm",
 								function(data) {
-									if (data.messages.length == 0) {
+									if (data.修改成功) {
 										swal("SUCCESS", "訂單修改成功", "success");
 										$btn.button("reset");
+									}else if(data.剩餘點數不足){
+										swal("剩餘點數不足", "", "warning");
+									}else if(data.輸入數量過大){
+										swal("輸入數量過大", "", "warning");
+									}else if(data.exception){
+										swal("非常抱歉", "修改未成功", "warning");
 									}
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");
