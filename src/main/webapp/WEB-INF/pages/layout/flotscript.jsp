@@ -211,7 +211,7 @@ var optionbisRatio = {//資本適足率
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
-	        max: 16,min:-4,
+	        max: 16,min:0,
 	        tickColor: "#FAF7F7",                        
 	        color:"black"
 	    },
@@ -261,7 +261,7 @@ var optionreturnonAssets = {//資產報酬率
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
-	        max: 0.05,min:-0.05,
+	        max: 0.04,min:-0.02,
 	        tickColor: "#FAF7F7",                        
 	        color:"black"
 	    },

@@ -58,14 +58,14 @@ public class InsurerEntity extends GenericEntity {
 	@Column(name = "PERSISTENCY_RATIO_DESC")
 	private String persistencyRatioDesc; // 保單繼續率介紹
 
-	@Digits(integer = 15, fraction = 4)
+	@Digits(integer = 13, fraction = 6)
 	@Column(name = "LITIGATION_RATIO")
 	private BigDecimal litigationRatio; // 訴訟率
 
 	@Column(name = "LITIGATION_RATIO_DESC")
 	private String litigationRatioDesc; // 訴訟率介紹
 
-	@Digits(integer = 12, fraction = 7)
+	@Digits(integer = 13, fraction = 6)
 	@Column(name = "APPEAL_RATIO")
 	private BigDecimal appealRatio; // 申訴率
 
