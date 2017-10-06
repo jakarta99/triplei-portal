@@ -122,23 +122,51 @@ $(function(){
 		  mask: '9999-999-999'
 	});
 	
+	$('#email').on("change",function(){
+		var email = $('#email').val();
+		var userAccountNumber = "<c:out value="${userDetails.accountNumber}"/>";
+		$.ajax({
+			type : "GET",
+			url : "<c:url value='/user/reset/check/" + userAccountNumber + "/" + email +"'/>",
+			success : function(data){
+				if(data == true){
+					swal("email可以使用~");
+				}else{
+					$('#email').val(null);
+					swal("email已重複,請重新輸入!!");
+				}
+			},
+		})
+	})
+	
+	
+	
+	
+	
 	$("#saveButton").bind("click", function() {
 		
 		var $btn = $(this);
 			$btn.button("loading");
-			
-		$.put("<c:url value='/user/reset'/>", "dataForm",
-				function(data) {
-					console.log(data.messages.length);
-					if (data.messages.length==0){
-						swal("SUCCESS","資料更新成功");
-						$btn.button("reset");
-						location.href = '/user/reset/info'
-					}	
-				}, function(data, textStatus, jqXHR) {
-					$btn.button("reset");
-				});
+		var email = $("#email").val();
+		var name = $("#name").val();
+		var birthdate = $("#birthdate").val();
+		var tel = $("#tel").val();
 		
+		if(email==""||name==""||birthdate==""||tel==""){
+			swal('資料請輸入完整喔~~')
+		}else{
+			$.put("<c:url value='/user/reset'/>", "dataForm",
+					function(data) {
+						console.log(data.messages.length);
+						if (data.messages.length==0){
+							swal("SUCCESS","資料更新成功");
+							$btn.button("reset");
+//	 						location.href = '/user/reset/info'
+						}	
+					}, function(data, textStatus, jqXHR) {
+						$btn.button("reset");
+					});
+		}
 		$btn.button("reset");			
 	});
 	

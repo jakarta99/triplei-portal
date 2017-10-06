@@ -136,27 +136,51 @@
 			$('#tel').inputmask({
 				  mask: '9999-999-999'
 			});
+			
+			$('#email').on("change",function(){
+				var email = $('#email').val();
+				$.ajax({
+					type : "GET",
+					url : "<c:url value='/registered/check/" + email +"'/>",
+					success : function(data){
+						if(data == true){
+							swal("email可以使用~");
+						}else{
+							$('#email').val(null);
+							swal("email已重複,請重新輸入!!");
+						}
+					},
+				})
+			})
 
 			
 			//<!-- Save -->	
 			$("#saveButton").on("click",
 					function() {
-						var $btn = $(this);
-						$btn.button("loading");
-						
-						$.post("<c:url value='/registered'/>", "dataForm",
-								function(data) {
-									if (data.messages.length == 0) {
-										//$("#dataForm").trigger("reset");
-										//location.href = '/registered/checkLetter?email=' + data.data.email
-										
-										location.href = '/registered/checkLetter?id=' + data.data.id
+						var email = $("#email").val();
+						var name = $("#name").val();
+						var birthdate = $("#birthdate").val();
+						var tel = $("#tel").val();
+						if(email==""||name==""||birthdate==""||tel==""){
+							swal('資料請輸入完整喔~~')
+						}else{
+							var $btn = $(this);
+							$btn.button("loading");
+							
+							$.post("<c:url value='/registered'/>", "dataForm",
+									function(data) {
+										if (data.messages.length == 0) {
+											//$("#dataForm").trigger("reset");
+											//location.href = '/registered/checkLetter?email=' + data.data.email
+											
+											location.href = '/registered/checkLetter?id=' + data.data.id
+											$btn.button("reset");
+										}
+									}, function(data, textStatus, jqXHR) {
 										$btn.button("reset");
-									}
-								}, function(data, textStatus, jqXHR) {
-									$btn.button("reset");
 
-								});
+									});
+						}
 						$btn.button("reset");
 					});
 		})

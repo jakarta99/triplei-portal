@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +56,22 @@ public class RegisteredController {
 	public String addPage(Model model) {
 		return "/registered/createAccount";
 	}
+	
+	//判斷email是否重複
+	@RequestMapping(value = "/check/{email:.+}", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean findEmail(Model model,@PathVariable String email) {
+		log.debug("email={}",email);
+		List<UserEntity> users = userService.getDao().findAll();
+		for(UserEntity user:users){
+			if(email.equals(user.getEmail())){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	
 	
 	@RequestMapping(value = "/checkedSuccess", method = RequestMethod.GET)
 	public String successPage() {

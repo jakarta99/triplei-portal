@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,6 +55,22 @@ public class UserController {
 		
 		return "/user/userEdit";
 	}
+	
+	//判斷email是否重複
+		@RequestMapping(value = "/check/{userAccountNumber}/{email:.+}", method = RequestMethod.GET)
+		@ResponseBody
+		public boolean findEmail(Model model,@PathVariable String email,@PathVariable String userAccountNumber) {
+			log.debug("email={}",email);
+			log.debug("userAccountNumber={}",userAccountNumber);
+			
+			List<UserEntity> users = userService.getDao().findAll();
+			for(UserEntity user:users){
+				if(email.equals(user.getEmail()) && !user.getEmail().equals(userAccountNumber)){
+					return false;
+				}
+			}
+			return true;
+		}
 	
 	@RequestMapping("/pw")
 	public String pwPage(Model model) {
