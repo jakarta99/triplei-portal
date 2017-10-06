@@ -98,9 +98,9 @@
 			</div>
 
 
-		</div>
 		<div class="col-sm-12" style="height: 10vh"></div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+		</div>
 	</div>
 </body>
 </html>

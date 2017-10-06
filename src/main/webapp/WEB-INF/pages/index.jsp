@@ -151,7 +151,7 @@ p{
 			<div class="col-xs-12 col-sm-6" style="height: 100vh; padding-right: 0px; padding-left: 0px">
 				<div class="col-xs-12 col-sm-10">
 					<div class="col-sm-0 col-sm-12" style="height: 17vh; padding-bottom: 3vh"></div>
-					<div class="col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
+					<div class="col-sm-12" style="height: 80vh; display: flex; flex-direction: column;">
 						<div class="col-sm-12" style="padding-left: 0px">
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
@@ -194,7 +194,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh;color:black">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[0].id}">
-								<img style="width:100%;" src="${news[0].bannerImage}" /></div>
+								<img style="width:100%;" src="${hotissue[0].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[0].title}</h4></a>
@@ -205,7 +205,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[1].id}">
-								<img style="width:100%;" src="${news[1].bannerImage}" /></div>
+								<img style="width:100%;" src="${hotissue[1].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[1].title}</h4></a>
@@ -225,7 +225,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[2].id}">
-								<img style="width:100%;" src="${news[2].bannerImage}" /></div>
+								<img style="width:100%;" src="${hotissue[2].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[2].title}</h4></a>
@@ -236,7 +236,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[3].id}">
-								<img style="width:100%;" src="${news[3].bannerImage}" /></div>
+								<img style="width:100%;" src="${hotissue[3].bannerImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[3].title}</h4></a>
@@ -312,6 +312,7 @@ p{
 <!-- 				</div> -->
 			</div>
 		</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 	<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
 	<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 

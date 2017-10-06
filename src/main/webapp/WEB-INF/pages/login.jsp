@@ -115,8 +115,8 @@
 						</div>
 						<div class="col-*-1"></div>
 					</div>
-			</div>
-			<div class="row">
+<!-- 			</div> -->
+<!-- 			<div class="row"> -->
 				<div class=" col-*-6  text-center "
 					style="height: 100vh; background-color: #5C8DEC; padding-right: 0px; padding-left: 0px;">
 					<!--右邊藍 -->
