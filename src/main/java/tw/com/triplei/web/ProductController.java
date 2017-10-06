@@ -159,7 +159,7 @@ public class ProductController {
 										double[] data = { (double) i, i * form.getPremiumAfterDiscount().doubleValue(),
 												BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(), BigDecimal.valueOf(iRRCaculator.getIRR((double) form.getYear(), (double) i,
 														form.getPremiumAfterDiscount().doubleValue(), cancelRatio)).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0 && i!=0){
 											totalCancelRatio.add(data);											
 										}
 										// log.debug("第"+i+"年={}", data);
@@ -167,7 +167,7 @@ public class ProductController {
 										double[] irrAndCancelRatio = { (double) i, BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(),
 												BigDecimal.valueOf(iRRCaculator.getIRR((double) form.getYear(), (double) i,
 														form.getPremiumAfterDiscount().doubleValue(), cancelRatio)).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0 && i!=0){
 											totalIrrAndCancelRatio.add(irrAndCancelRatio);											
 										}
 									} else {
@@ -180,7 +180,7 @@ public class ProductController {
 																		form.getPremiumAfterDiscount().doubleValue(),
 																		cancelRatio))
 														.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue() };
-										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0 && i!=0){
 											totalCancelRatio.add(data);											
 										}
 										// log.debug("第"+i+"年={}", data);
@@ -189,7 +189,7 @@ public class ProductController {
 												.valueOf(iRRCaculator.getIRR((double) form.getYear(), (double) i,
 														form.getPremiumAfterDiscount().doubleValue(), cancelRatio))
 												.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue() };
-										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0){
+										if(BigDecimal.valueOf(cancelRatio).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue()!=0 && i!=0){
 											totalIrrAndCancelRatio.add(irrAndCancelRatio);											
 										}
 									}
@@ -326,6 +326,7 @@ public class ProductController {
 		}else if(product.getCurr()==Currency.USD || product.getCurr()==Currency.RMB){
 			product.setInsureAmount(insureAmount.setScale(2, BigDecimal.ROUND_HALF_UP));
 		}
+		Double max = null;
 		Iterator ip = product.getPremiumRatios().iterator();
 		while (ip.hasNext()) {
 			ProductPremiumRatio productPremiumRatio = (ProductPremiumRatio) ip.next();
@@ -333,8 +334,11 @@ public class ProductController {
 				Iterator ih = product.getHighDiscountRatios().iterator();
 				while (ih.hasNext()) {
 					ProductHighDiscountRatio productHighDiscountRatio = (ProductHighDiscountRatio) ih.next();
+					max = productHighDiscountRatio.getMaxValue().doubleValue();
 					if (insureAmount.doubleValue() >= productHighDiscountRatio.getMinValue().doubleValue()
 							&& insureAmount.doubleValue() <= productHighDiscountRatio.getMaxValue().doubleValue()) {
+						
+						
 						// 保費
 						product.setPremium(BigDecimal.valueOf(
 								insureAmount.doubleValue() * productPremiumRatio.getPremiumRatio().doubleValue()).setScale(0,BigDecimal.ROUND_HALF_UP));
@@ -377,7 +381,7 @@ public class ProductController {
 											product.getPremiumAfterDiscount().doubleValue(),
 													cancelRatioPerYear);
 									double[] irrAndCancelRatio = {(double) i, BigDecimal.valueOf(cancelRatioPerYear).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue(), BigDecimal.valueOf(irr).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-									if(cancelRatioPerYear!=0){
+									if(cancelRatioPerYear!=0 && i!=0){
 										totalIrrAndCancelRatio.add(irrAndCancelRatio);	
 									}
 
@@ -387,7 +391,7 @@ public class ProductController {
 												.doubleValue() * i;
 										double[] form = { (double) i, PremiumAfterDiscountPerYear, cancelRatioPerYear,
 												BigDecimal.valueOf(irr).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-										if(cancelRatioPerYear!=0){
+										if(cancelRatioPerYear!=0 && i!=0){
 											totalForm.add(form);											
 										}
 									} else {
@@ -395,7 +399,7 @@ public class ProductController {
 												.doubleValue() * product.getYear();
 										double[] form = { (double) i, PremiumAfterDiscountPerYear, cancelRatioPerYear,
 												BigDecimal.valueOf(irr).setScale(4,BigDecimal.ROUND_HALF_UP).doubleValue() };
-										if(cancelRatioPerYear!=0){
+										if(cancelRatioPerYear!=0 && i!=0){
 											totalForm.add(form);											
 										}
 									}
@@ -422,13 +426,17 @@ public class ProductController {
 					}
 				}
 				if (product.getDiscount() == null) {
-					product = null;
-					break;
+					Double insureAmountD = max;
+					return "redirect:/product/Adjustment/"+gender1+"/"+bDate+"/"+insureAmountD+"/"+id+"/"+yearMoneyBack;					
 				}
-
+				break;
 			}
 
 		}
+		if(max == null){
+			return "redirect:/product/list";
+		}
+		
 		model.addAttribute("modelf", product);
 		model.addAttribute("totalCancelRatio", totalForm);
 		model.addAttribute("totalIrrAndCancelRatio", totalIrrAndCancelRatio);

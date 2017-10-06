@@ -102,6 +102,7 @@
 					},
 
 					fields : [ 
+						{ name: '刪除', width:50, itemTemplate:btns },
 						{name : "id",visible : true,width : 50},
 						{title : '品牌',name : "brand",type : "text",width : 150},
 						{title : '商品名稱',name : "name",type : "text",width : 400},
@@ -111,6 +112,25 @@
 
 					]
 				});
+				
+				 function btns(value, row) {
+						var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
+						$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+						
+						$delBtn.click(function() {
+							if (confirm('你確定要刪除這筆資料?')) {
+								$delBtn.button('loading');
+								$.delete_(BASE_URL+ "/" + row.id, function() {
+									$delBtn.button('reset');
+									$("#jsGrid").jsGrid("reset");
+									swal("刪除成功");
+								});
+							}
+						});
+						
+						// return $("<div></div>").append($editBtn);
+						return $("<div></div>").append($delBtn).append("&nbsp;");
+					}
 // 				$("#sort").click(function() {
 // 					var field = $("#sortingField").val();
 // 					$("#jsGrid").jsGrid("sort", field);

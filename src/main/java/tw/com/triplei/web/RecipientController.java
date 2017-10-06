@@ -22,10 +22,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.ApplicationException;
 import tw.com.triplei.commons.GridResponse;
+import tw.com.triplei.commons.QueryOpType;
+import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.dao.ConvenienceStoreDao;
 import tw.com.triplei.dao.UserDao;
 import tw.com.triplei.entity.ConvenienceStoreEntity;
@@ -192,6 +197,7 @@ public class RecipientController {
 
 		Page<RecipientEntity> page;
 		try {
+			
 
 			page = recipientService.getDao().findByCreatedBy(userName, pageable);
 
@@ -209,10 +215,25 @@ public class RecipientController {
 
 		Page<RecipientEntity> page;
 		try {
-			System.out.println(userName);
+			log.debug("user{}",userName);
 			UserEntity user = userService.getDao().findByAccountNumber(userName);
-			System.out.println(user);
-			page = recipientService.getDao().findByUser(user, pageable);
+			log.debug("user{}",user);
+			
+			
+			final List<SpecCriterion> criterions = Lists.newArrayList();
+				criterions.add(new SpecCriterion(QueryOpType.EQ,"userNamee",user.getName()));
+				
+			if(!Strings.isNullOrEmpty(form.getOrderNo())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE, "orderNo", "%"+form.getOrderNo()+"%"));
+			}
+			if(!Strings.isNullOrEmpty(form.getOrderStatus())){
+				criterions.add(new SpecCriterion(QueryOpType.EQ,"orderStatus",form.getOrderStatus()));			
+			}
+			if(!Strings.isNullOrEmpty(form.getName())){
+				criterions.add(new SpecCriterion(QueryOpType.LIKE,"name","%"+form.getName()+"%"));
+			}
+			
+			page = recipientService.getByCondition(criterions, pageable);
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);

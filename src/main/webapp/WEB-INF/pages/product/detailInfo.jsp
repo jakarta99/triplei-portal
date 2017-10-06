@@ -222,7 +222,7 @@ padding-bottom:1vh;
 												<th class="col-sm-3 text-center">總解約金/領回金額</th>
 												<th class="col-sm-3 text-center">IRR</th>
 											</tr>
-											<c:forEach begin="1" items="${totalCancelRatio}" var="pay">
+											<c:forEach begin="0" items="${totalCancelRatio}" var="pay">
 												<tr>
 													<td class="col-sm-3"><fmt:formatNumber
 															value="${pay[0]}" maxFractionDigits="0" /></td>
@@ -282,12 +282,12 @@ padding-bottom:1vh;
 	<script>
 		 var dataIRR1= [
 			 
-				<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
+				<c:forEach begin="0" var="item" items="${totalIrrAndCancelRatio}">
 				[${item[0]},${item[1]}],
 </c:forEach>
 ];
 		  var dataIRR2= [
-				<c:forEach begin="1" var="item" items="${totalIrrAndCancelRatio}">
+				<c:forEach begin="0" var="item" items="${totalIrrAndCancelRatio}">
 				[${item[0]},parseFloat(${item[2]*100}).toFixed(2)],
 </c:forEach>
        ];
@@ -409,6 +409,10 @@ padding-bottom:1vh;
 		$("#IRRgraph").toggle("drop",1000);
 	})
 	
+	
+	
+	
+	
 	if(sex!="Male"){
 		$(".FemaleInput").prop("checked",true);
 		$(".FemaleImg").attr("src","/resources/pic/product/female-hover.png");
@@ -417,7 +421,7 @@ padding-bottom:1vh;
 		$(".MaleImg").attr("src","/resources/pic/product/male-hover.png");
 	}
 	
-	$("#insureAmount").on("change",function(){
+	$("#insureAmount").on("blur",function(){
 	var url = "/product/Adjustment/"+$('input[name="gender"]:checked').val()+"/"+$('#bDate').val()+"/"+$("#insureAmount").val()+"/"+${modelf.id}+"/"+yearCode;
 	$("#changeID").attr("href",url);
 	})
@@ -432,7 +436,7 @@ padding-bottom:1vh;
 		$("#changeID").attr("href",url);
 	})
 	
-	$("#bDate").on("change",function(){
+	$("#bDate").on("blur",function(){
 		var url = "/product/Adjustment/"+$('input[name="gender"]:checked').val()+"/"+$('#bDate').val()+"/"+$("#insureAmount").val()+"/"+${modelf.id}+"/"+yearCode;
 	})
 	
@@ -468,7 +472,7 @@ padding-bottom:1vh;
 			        ],
 			        {            
 			            grid: {
-			                backgroundColor:"white",
+                            backgroundColor:"white",
 			                hoverable:true,
 			                borderWidth: 1
 			            },
@@ -521,4 +525,5 @@ padding-bottom:1vh;
 	</script>
 </body>
 </html>
+
 

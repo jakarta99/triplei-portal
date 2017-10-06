@@ -67,9 +67,7 @@ public class WishController {
 			String date = new java.text.SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date());
 			form.setWishTime(date);
 			log.debug("userDetails: {}",date);
-			LocalDateTime time =
-					LocalDateTime.ofInstant(Instant.ofEpochMilli(new Date().getTime()), ZoneId.systemDefault());
-			form.setTime(time);
+			form.setTime(new Date().getTime());
 			log.debug("time() {}",form.getTime());
 			
 			form.setCreatedTime(new Timestamp(new Date().getTime()));
@@ -79,6 +77,7 @@ public class WishController {
 			log.debug("userDetails.getUsername() {}",userDetails.getUsername());
 			boolean result = wishService.makeAWish(userDetails.getUsername());
 			log.debug("result {}",result);
+			
 			if(result){
 				final WishEntity insertResult = wishService.insert(form);				
 				response.setData(insertResult);				

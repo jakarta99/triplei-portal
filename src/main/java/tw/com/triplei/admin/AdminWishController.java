@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +27,11 @@ import com.google.common.collect.Lists;
 
 import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.admin.spec.WishSpecification;
+import tw.com.triplei.commons.AjaxResponse;
 import tw.com.triplei.commons.GridResponse;
 import tw.com.triplei.commons.QueryOpType;
 import tw.com.triplei.commons.SpecCriterion;
+import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.entity.WishEntity;
 import tw.com.triplei.service.WishService;
 
@@ -63,28 +66,17 @@ public class AdminWishController {
 			
 			
 			final List<SpecCriterion> criterions = Lists.newArrayList();
-			if(!Strings.isNullOrEmpty(date1.substring(0, date1.length()-1)) && !Strings.isNullOrEmpty(date2.substring(0, date2.length()-1))){
+			if(!Strings.isNullOrEmpty(date1.substring(0, date1.length()-1))&&!Strings.isNullOrEmpty(date2.substring(0, date1.length()-1))){
 				String date1t = date1.substring(0, date1.length()-1);
 				Date date3 = new SimpleDateFormat("yyyy-MM-dd").parse(date1t);
-				LocalDateTime triggerTime =
-						LocalDateTime.ofInstant(Instant.ofEpochSecond(date3.getTime()/1000+3),
-								TimeZone.getDefault().toZoneId());
-				log.debug("triggerTime{}",triggerTime.atZone(ZoneId.systemDefault()).toEpochSecond());
-				log.debug("triggerTime    {}",triggerTime);
+
 				
 				String date2t = date2.substring(0, date2.length()-1);
 				Date date4 = new SimpleDateFormat("yyyy-MM-dd").parse(date2t);
-				LocalDateTime triggerTime2 =
-						LocalDateTime.ofInstant(Instant.ofEpochSecond(date4.getTime()/1000+2),
-								TimeZone.getDefault().toZoneId());
-				log.debug("triggerTime2{}",triggerTime2.atZone(ZoneId.systemDefault()).toEpochSecond());
-				log.debug("triggerTime2   {}",triggerTime2);
+
 				
-				LocalDateTime[] values = {triggerTime,triggerTime2};
-				
-				
-				
-				criterions.add(new SpecCriterion(QueryOpType.BETWEEN,"time",values));
+				criterions.add(new SpecCriterion(QueryOpType.GT,"time",date3.getTime()));
+				criterions.add(new SpecCriterion(QueryOpType.LT,"time",date4.getTime()));
 			}
 	
 			page = wishService.getByCondition(criterions, pageable);
@@ -95,6 +87,22 @@ public class AdminWishController {
 		}
 
 		return new GridResponse<>(page);
+	}
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public AjaxResponse<UserEntity> delete(@PathVariable(value = "id") final long id) {
+		
+		log.debug("{}", id);
+		
+		final AjaxResponse<UserEntity> response = new AjaxResponse<UserEntity>();
+		
+		try {		
+			wishService.delete(id);
+			
+		} catch (final Exception e) {
+			return new AjaxResponse<>(e);
+		}
+		return response;
 	}
 
 }

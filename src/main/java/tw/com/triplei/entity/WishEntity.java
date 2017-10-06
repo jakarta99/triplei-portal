@@ -45,7 +45,7 @@ public class WishEntity extends GenericEntity  {
 	private String wishTime; // 許願日期
 	
 	@Column(name = "TIME")
-	private LocalDateTime time;//時間(篩選用)
+	private Long time;//時間(篩選用)
 
 	@Override
 	public String toString() {

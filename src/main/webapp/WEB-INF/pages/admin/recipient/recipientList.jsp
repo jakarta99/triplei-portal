@@ -34,7 +34,7 @@
 							<label for="orderStatus" class="col-sm-1 control-label">訂單狀態</label>
 							<div class="col-sm-2">
 								<select id="orderStatus" name="orderStatus" class="form-control">
-									<option value="">請選擇</option>
+									<option value="">全部</option>
 									<option value="未指派業務員">未指派業務員</option>
 									<option value="未見面">未見面</option>
 									<option value="已見面，未購買(刪除審核中點數)">已見面，未購買(刪除審核中點數)</option>
@@ -136,7 +136,7 @@
 							},
 
 							fields : [ {
-								name : '刪／修',
+								name : '修改',
 								width : 60,
 								itemTemplate : btns
 							}, {
@@ -299,19 +299,19 @@
 						});
 
 				function btns(value, row) {
-					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-					$delBtn
-							.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+// 					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
+// 					$delBtn
+// 							.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 
-					$delBtn.click(function() {
-						if (confirm('你確定要刪除這筆資料?')) {
-							$delBtn.button('loading');
-							$.delete_(BASE_URL + "/" + row.id, function() {
-								$delBtn.button('reset');
-								$("#jsGrid").jsGrid("reset");
-							});
-						}
-					});
+// 					$delBtn.click(function() {
+// 						if (confirm('你確定要刪除這筆資料?')) {
+// 							$delBtn.button('loading');
+// 							$.delete_(BASE_URL + "/" + row.id, function() {
+// 								$delBtn.button('reset');
+// 								$("#jsGrid").jsGrid("reset");
+// 							});
+// 						}
+// 					});
 
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
@@ -320,10 +320,11 @@
 					
 					
 					if(row.orderStatus=='已完成(含派送點數)' || row.orderStatus=='已見面，未購買(刪除審核中點數)'){
-							return $("<div></div>").append("<br/>").append($delBtn);
+							return "";
+// 							$("<div></div>").append("<br/>").append($delBtn);
 						}else{
-							return $("<div></div>").append("<br/>").append($editBtn)
-							.append("<br/>").append($delBtn);
+							return $("<div></div>").append("<br/>").append($editBtn);
+// 							.append("<br/>").append($delBtn);
 						}
 
 				}

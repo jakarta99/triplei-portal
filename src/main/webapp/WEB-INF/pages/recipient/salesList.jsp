@@ -18,9 +18,63 @@
 		
 		<div style="padding-top:8vh">
 			<h3>訂單紀錄</h3>
+			<div class="text-center">			
+			<h5>你是業務員</h5>
+			</div>
+			
+			<section class="well">
+				<div>
+					<form role="form" class="form-horizontal" id="listForm">
+						<div class="form-group">
+
+							<label for="orderNo" class="col-sm-1 control-label">訂單標號</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="orderNo"
+									name="orderNo" placeholder="訂單標號" />
+							</div>
+							<label for="orderStatus" class="col-sm-1 control-label">訂單狀態</label>
+							<div class="col-sm-2">
+								<select id="orderStatus" name="orderStatus" class="form-control">
+									<option value="">全部</option>
+									<option value="未見面">未見面</option>
+									<option value="已見面，未購買(刪除審核中點數)">已見面，未購買(刪除審核中點數)</option>
+									<option value="已見面，已購買">已見面，已購買</option>
+									<option value="保單處理中">保單處理中</option>
+									<option value="已寄發保單">已寄發保單</option>
+									<option value="已完成(含派送點數)">已完成(含派送點數)</option>
+								</select>
+							</div>
+
+						</div>
+						<div class="form-group">
+
+							<label for="name" class="col-sm-1 control-label">聯絡人姓名</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" id="name" name="name"
+									placeholder="聯絡人姓名">
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<div class="row pull-right">
+					<button id="searchBtn" class="btn btn-success"
+						data-loading-text="loading..." type="button">搜尋</button>
+					<button id="resetBtn" class="btn btn-warning"
+						data-loading-text="loading..." type="button" value="reset">重設</button>
+				</div>
+			</section>
 			<div id="jsGrid"></div>
 			
 			<script>
+			$("#searchBtn").bind("click", function() {
+				$("#jsGrid").jsGrid("reset");
+			});
+
+			$("#resetBtn").bind("click", function() {
+				$("#listForm")[0].reset();
+			});
+			
 			    var BASE_URL = "${pageContext.request.contextPath}/recipient";
 			 	var userName = "<c:out value="${userName}"/>";
 			    $("#jsGrid").jsGrid({
@@ -45,7 +99,8 @@
 			                return $.ajax({
 			                    type: "GET",
 			                    url: BASE_URL +"/saless/"+userName,
-			                    data: filter,
+			                    data: "pageIndex=" + filter.pageIndex + "&pageSize=10&"
+								+ $("#listForm").serialize(),
 			                    dataType: "json",
 			                    cache: false,
 			                });
@@ -54,7 +109,7 @@
 			        
 			 
 			        fields: [
-			            { name: '修', width:60, itemTemplate:btns },
+			            { name: '修改', width:60, itemTemplate:btns },
 			            { title: '訂單標號', name: "orderNo", type: "text", width: 80 },
 			            { title: '名字', name: "name", type: "text", width: 50 },
 			            { title: '性別', name: "gender",width: 30, itemTemplate: function(val) {if(val=="Female"){return "女"}else{return "男"}} },
