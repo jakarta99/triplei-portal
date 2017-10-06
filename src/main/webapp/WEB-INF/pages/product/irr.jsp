@@ -155,7 +155,8 @@ h3 {
 					var url = "/product/calculationofirr/" + premium + "/"
 							+ times + "/" + period + "/" + expired;
 
-					if (times.indexOf(".") == -1 && period.indexOf(".") == -1) {
+					if (times.indexOf(".") == -1 && period.indexOf(".") == -1 && times.indexOf("-") == -1 
+							&& period.indexOf("-") == -1 && premium.indexOf("-") == -1 && expired.indexOf("-") == -1) {
 
 						if (premium != "" && times != "" && period != ""
 								&& expired != "") {
@@ -201,22 +202,18 @@ h3 {
 
 							})
 						}
-
 						if(period>times){
 							swal("貼心提醒","繳費年期如果小於領回年期幾乎都會虧本唷~");
 						}
-						if(period.toString().indexOf('-')!=-1){
+						}else if(period.indexOf('-')!=-1){
 							swal("貼心提醒","沒有負的年期唷~");
-						}
-						if(times.toString().indexOf('-')!=-1){
+						}else if(times.indexOf('-')!=-1){
 							swal("貼心提醒","沒有負的年期唷~");
-						}
-						if(premium.toString().indexOf('-')!=-1){
-							swal("貼心提醒","沒有保險公司還給你錢唷~");
-						}
-						if(expired.toString().indexOf('-')!=-1){
+						}else if(premium.indexOf('-')!=-1){
 							swal("貼心提醒","沒有這種機車保單唷~");
-						}
+						}else if(expired.indexOf('-')!=-1){
+							swal("貼心提醒","沒有這種機車保單唷~");
+							
 					} else {
 						swal("請輸入整數的年期");
 					}
