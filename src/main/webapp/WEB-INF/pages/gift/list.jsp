@@ -427,6 +427,7 @@
 					</div>
 				</div>
 			</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 	</div>
 

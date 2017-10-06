@@ -177,6 +177,7 @@ select {
 				<div class="col-sm-12" style="height:5%;">
 				</div>
 			</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 	</div>
 

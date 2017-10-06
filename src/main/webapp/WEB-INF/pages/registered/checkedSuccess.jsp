@@ -29,6 +29,7 @@
 			src="/resources/pic/registered/registeredSuccess.png" width="40%">
 		<h3>於右上角登入後即可開始使用</h3>
 		</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 
 
 	</div>

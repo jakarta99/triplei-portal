@@ -274,6 +274,7 @@ padding-bottom:1vh;
 					</div>
 				</div>
 			</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 	</div>
 	<input id="getProductId" value="${modelf.id}" style="visibility:hidden"/>

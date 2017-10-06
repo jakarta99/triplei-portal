@@ -28,6 +28,7 @@
 			src="/resources/pic/registered/registeredFailure.png" width="40%">
 		</div>
 		
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 	</div>
 </body>
 </html>

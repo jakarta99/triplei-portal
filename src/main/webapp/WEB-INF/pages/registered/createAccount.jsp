@@ -122,6 +122,7 @@
 				<div class="col-sm-1"></div>
 			</div>
 			</form>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>	
 
 	<script tyep="text/javascript">	

@@ -159,6 +159,7 @@
 			</script>
 
 		</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 	</div>
 	
 	

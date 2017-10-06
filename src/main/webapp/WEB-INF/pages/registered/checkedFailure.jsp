@@ -33,6 +33,7 @@
 				<li>您的會員帳號已被開通，驗證連結已無法使用</li>
 			</h3>
 		</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		
 	</div>
 </body>
