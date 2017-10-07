@@ -137,9 +137,9 @@
 					<div class="col-xs-1 col-sm-4 col-md-7"></div>
 				</div>
 			</div>
-<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 	</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 <%-- 	window.document.write(${models}); --%>
 
 	<script type="text/javascript">

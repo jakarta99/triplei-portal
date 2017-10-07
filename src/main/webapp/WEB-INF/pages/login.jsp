@@ -43,14 +43,14 @@
 <!-- 		<div class="container" style="padding-top: 8vh"> -->
 <!-- 			<div class="row"> -->
 <div class="col-sm-12" style="height: 8vh"></div>
-				<section class="login-form">
 					<div class="col-sm-6"
 						style="height: 100vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;">
 						<!-- 左邊白 -->
+				<section class="login-form">
 						<div class="col-sm-1"></div>
 						<div class="col-sm-10">
 
-							<div class="panel-body">
+							<div class="panel-body col-sm-12">
 
 								<div class="panel-heading">
 									<h3>
@@ -60,12 +60,12 @@
 
 								<form action="<c:url value="/auth/facebook" />" method="GET"
 									role="form" name="fbForm" id="fbForm">
-									<div class="col-*-12" style="margin: 16px">
+									<div class="col-sm-12" style="margin: 16px">
 										<input type="hidden" name="scope" value="public_profile,email" />
 										<!-- <input type="submit" value="">-->
 										<button type="button" name="submit_Btn" id="submit_Btn"
 											onClick="document.fbForm.submit()"
-											style="background-color: white; width: 440px; height: 100px; border: 2px blue none">
+											style="background-color: white; height: 10vh; border: 2px blue none">
 											<img src="/resources/pic/registered/fb_login.png"
 												width="100%">
 										</button>
@@ -114,9 +114,9 @@
 							</div>
 
 						</div>
-						<div class="col-*-1"></div>
-					</div>
+						<div class="col-sm-1"></div>
 			</section>
+					</div>
 <!-- 			</div> -->
 <!-- 			<div class="row"> -->
 				<div class=" col-sm-6  text-center "

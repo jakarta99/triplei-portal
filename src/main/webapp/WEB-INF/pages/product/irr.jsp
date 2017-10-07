@@ -36,7 +36,7 @@ h3 {
 <body>
 	<div class="container-fluid" style="width: 100%; height: 100%; position: absolute; padding: 0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh">
+		<div style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh" class="col-sm-12">
 			<div class="col-sm-4" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 				<div class="col-sm-10" style="margin-top: 7%; display: table;">
 					<h2 style="padding: 0;margin-bottom: 3vh;margin-top: 3vh">儲蓄險真正的報酬率</h2>
@@ -49,9 +49,9 @@ h3 {
 					<div id="bm" style="width: 100%;position: relative;"></div>
 				</div>
 			</div>
-			<div class="col-lg-8 bg-info" style="background-color: white; height: 100%; padding-top: 5%; color: black;">
+			<div class="col-sm-4" style="background-color: white; height: 60vh; padding-top: 5%; color: black;">
 				
-				<div class="col-lg-7" style="padding-top: 0%;">
+				<div class="col-sm-12" style="padding-top: 0%; height: 90vh;">
 				
 					<div class="col-md-12" style="height:80px;">
 						<div class="col-md-8">
@@ -103,7 +103,11 @@ h3 {
 					
 				</div>
 				
-				<div id="showResults" class="col-lg-4" style="padding-top: 5%;">
+			</div>
+			
+			<div class="col-sm-4" style="background-color: white; height: 90vh; padding-top: 5%; color: black;">
+			
+				<div id="showResults" class="col-sm-12" style="padding-top: 5%; height: 90vh;">
 					<div class="col-md-12" style="padding: 0; margin: 2% auto 3% auto">
 						<div class="col-md-12" style="padding: 0;">
 							<span style="font-size: 150%">總繳金額</span>
@@ -129,9 +133,10 @@ h3 {
 						</div>
 					</div>
 				</div>
+			
 			</div>
-		</div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+		</div>
 	</div>
 
 	<script>
