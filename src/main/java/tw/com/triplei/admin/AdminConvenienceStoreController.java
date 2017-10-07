@@ -82,23 +82,14 @@ public class AdminConvenienceStoreController {
 			for(MultipartFile file:files){
 				try {
 					boolean upload= convenienceStoreService.FileUpload(file);
-					if(upload) {
-						response.setData("Sucesss");
-					}else {
-						response.setData("Fail");
-					}
+					log.debug("upload {}",upload);
 					boolean insert = convenienceStoreService.insertXlsxToDB(file);
-					if(insert) {
-						response.setData("insertSucesss");
-					}else {
-						response.setData("insertFail");
-					}
+					log.debug("insert {}",insert);
 				} catch (final Exception e) {
 					response.addException(e);
 				}
 			}
 		}
-		log.debug("{}", files);
 		
 		return "redirect:/admin/convenienceStore/list" ;
 	}

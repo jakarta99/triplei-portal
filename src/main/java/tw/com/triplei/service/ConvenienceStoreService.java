@@ -156,12 +156,18 @@ public class ConvenienceStoreService extends GenericService<ConvenienceStoreEnti
 			sheet = wb.getSheetAt(0);// 取得第一頁的資料
 
 			// 從第2排開始往下讀
+			
 			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				Row rowi = sheet.getRow(i);
-				if (rowi.getCell(0).getStringCellValue() == "") {
+				try {
+					if (rowi.getCell(0).getStringCellValue() == "") {
+						continue;
+					}
+				} catch (Exception e) {
+//					log.debug("sheet.getLastRowNum()  {}",sheet.getLastRowNum());
 					continue;
 				}
-
+//				log.debug("iiiii = {}",i);
 				ConvenienceStoreEntity convenienceStoreEntity = new ConvenienceStoreEntity();
 
 				// 廠商
@@ -179,9 +185,10 @@ public class ConvenienceStoreService extends GenericService<ConvenienceStoreEnti
 
 				// 寫進資料庫
 				ConvenienceStoreEntity convenienceStoreEntity2 = convenienceStoreDao.save(convenienceStoreEntity);
-
+//				log.debug("jjjj  {}",convenienceStoreEntity2);
 //				System.out.println(convenienceStoreEntity2);
 			}
+//			log.debug("total {}",sheet.getLastRowNum());
 		}
 
 		catch (IOException e) {
