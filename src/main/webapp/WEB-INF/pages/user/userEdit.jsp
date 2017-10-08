@@ -152,7 +152,7 @@ $(function(){
 		var birthdate = $("#birthdate").val();
 		var tel = $("#tel").val();
 		
-		if(email==""||name==""||birthdate==""||tel==""){
+		if(email==""||name==""||birthdate==""){
 			swal('資料請輸入完整喔~~')
 		}else{
 			$.put("<c:url value='/user/reset'/>", "dataForm",
