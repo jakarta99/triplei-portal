@@ -44,7 +44,7 @@ public class EmailService {
 				.append(replycontent).append("<br /><br />").append("希望以上內容對您有所幫助，若還有任何關於保險的相關問題，歡迎再次到TRIPLE I的線上客服提問，<br />")
 				.append("也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />").append("祝您順心<br /><br />")
 				.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
-				.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+				.append("<p><a href=\"http://3i-life.com.tw/product/list\">→立即試算←</a></p><br />")
 				.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>").append("</div></body></html>");
 
 		String content = sBuffer.toString();
@@ -81,7 +81,7 @@ public class EmailService {
 				.append(askContent).append("<br /><br />").append("我們會於24小時內回覆至您的信箱，謝謝!<br />")
 				.append("祝您順心<br /><br />")
 				.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
-				.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+				.append("<p><a href=\"http://3i-life.com.tw/product/list\">→立即試算←</a></p><br />")
 				.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>").append("</div></body></html>");
 		
 		String content = sBuffer.toString();
@@ -112,7 +112,7 @@ public class EmailService {
 		userService.update(entity);
 		log.debug("{}", entity);
 
-		String url = "http://13.228.177.120:80/registered/checked?uid=" + registeredCode;
+		String url = "http://3i-life.com.tw/registered/checked?uid=" + registeredCode;
 
 		StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
@@ -126,7 +126,7 @@ public class EmailService {
 				.append("<br /> 提醒您，成功認證後可至網站的會員專區，更改您的密碼及基本資料。<br /><br />")
 				.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
 				.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
-				.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+				.append("<p><a href=\"http://3i-life.com.tw/product/list\">→立即試算←</a></p><br />")
 				.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
 
 		String content = sBuffer.toString();
@@ -154,7 +154,7 @@ public class EmailService {
 		userService.update(entity);
 		log.debug("{}", entity);
 		
-		String url = "http://localhost:8080/registered/checkUid?uid=" + registeredCode;
+		String url = "http://3i-life.com.tw/registered/checkUid?uid=" + registeredCode;
 
 		StringBuffer sBuffer = new StringBuffer("<!DOCTYPE html><html>")
 				.append("<head><meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>")
@@ -169,7 +169,7 @@ public class EmailService {
 				.append("若有任何其他關於保險的問題，歡迎到TRIPLE I的線上客服提問，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
 				.append("祝您順心<br /><br />")
 				.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
-				.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+				.append("<p><a href=\"http://3i-life.com.tw/product/list\">→立即試算←</a></p><br />")
 				.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
 
 		String content = sBuffer.toString();
@@ -243,7 +243,7 @@ public class EmailService {
 				address = recipient.getConvenienceStoreEntity().getCity()
 						+ recipient.getConvenienceStoreEntity().getRegion()
 						+ recipient.getConvenienceStoreEntity().getAddress();
-				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName()+"門市";
 				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
 			} catch (Exception e1) {
 				address="無";
@@ -264,7 +264,7 @@ public class EmailService {
 					.append("訂單編號："+ orderNo +"<br />")
 					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
 					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
-					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "<br />").append("預約地點：<br />")
 					.append(" " + address + "<br /><br />").append("若還有任何關於訂單的相關問題，麻煩請與管理員聯絡!<br />")
 					.append("祝您順心<br /><br />").append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
 
@@ -339,7 +339,7 @@ public class EmailService {
 				address = recipient.getConvenienceStoreEntity().getCity()
 						+ recipient.getConvenienceStoreEntity().getRegion()
 						+ recipient.getConvenienceStoreEntity().getAddress();
-				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName()+"門市";
 				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
 			} catch (Exception e1) {
 				address="無";
@@ -360,7 +360,7 @@ public class EmailService {
 					.append("訂單編號："+ orderNo +"<br />")
 					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
 					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
-					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "<br />").append("預約地點：<br />")
 					.append(" " + address + "<br /><br />")
 					.append("祝您順心<br /><br />").append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
 
@@ -444,7 +444,7 @@ public class EmailService {
 				address = recipient.getConvenienceStoreEntity().getCity()
 						+ recipient.getConvenienceStoreEntity().getRegion()
 						+ recipient.getConvenienceStoreEntity().getAddress();
-				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName()+"門市";
 				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
 			} catch (Exception e1) {
 				address="無";
@@ -467,11 +467,11 @@ public class EmailService {
 					.append("訂單編號："+ orderNo +"<br />")
 					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
 					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
-					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "<br />").append("預約地點：<br />")
 					.append(" " + address + "<br /><br /><br />")
 					.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
 					.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
-					.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+					.append("<p><a href=\"http://3i-life.com.tw/product/list\">→立即試算←</a></p><br />")
 					.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
 
 			String content = sBuffer.toString();
@@ -542,7 +542,7 @@ public class EmailService {
 				address = recipient.getConvenienceStoreEntity().getCity()
 						+ recipient.getConvenienceStoreEntity().getRegion()
 						+ recipient.getConvenienceStoreEntity().getAddress();
-				storeName = recipient.getConvenienceStoreEntity().getStoreName();
+				storeName = recipient.getConvenienceStoreEntity().getStoreName()+"門市";
 				manufacturer = recipient.getConvenienceStoreEntity().getManufacturer();
 			} catch (Exception e1) {
 				address="無";
@@ -565,12 +565,12 @@ public class EmailService {
 					.append("訂單編號："+ orderNo +"<br />")
 					.append("商品資訊<br /> " + " 年度 :" + yearCode + "年    " + productCode + " " + productName + "<br />")
 					.append("保額：" + insureAmount + "萬     ").append("商品年期：" + payYear + "年<br /><br />")
-					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "門市<br />").append("預約地點：<br />")
+					.append("預約地點：<br />").append(" " + manufacturer + " " + storeName + "<br />").append("預約地點：<br />")
 					.append(" " + address + "<br /><br /><br />")
 					.append("<h4>請盡速指派業務員處理!!!!!!!!!</h4><br /><br /><br />")
 					.append("如有任何疑問請至網站的線上客服洽詢，也歡迎您加入TRIPLE I 粉絲專頁 關注我們的最新消息！<br /><br />")
 					.append("找不到適合自己的儲蓄險嗎？立即使用TRIPLE I的商品查詢功能吧！<br /><br />")
-					.append("<p><a href=\"http://localhost:8080/product/list\">→立即試算←</a></p><br />")
+					.append("<p><a href=\"http://3i-life.com.tw/product/list\">→立即試算←</a></p><br />")
 					.append("TRIPLE I<br />").append("最專業的儲蓄險網站<br /> </div></body></html>");
 
 			String content = sBuffer.toString();
