@@ -325,7 +325,7 @@ p{
 $(document).ready(function(){
         var wdth = $(window).width();
 		if(wdth<700){
-			$('#no2pageimg').css("height","60vh");
+			$('#no2pageimg').css("height","40vh");
 			$('#no1pageimg').css("height","40vh");
 			$('#firsth1').css("margin-top","20vh");
 			$('#first').css("height","65vh");
