@@ -497,19 +497,19 @@
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
 			<div class="col-sm-12" style="padding-left: 0px; padding-right: 0px">
-				<div class="col-sm-8" style="padding-left: 0px">
+				<div class="col-xs-12 col-sm-8" style="padding-left: 0px">
 					<h3>許願池</h3>
 					<p>
 						積點專區的商品無法滿足你的慾望嗎?別擔心,你可以在這裡告訴我們您想要的商品,TRIPLE-I會盡全力滿足您的願望!快許下願望吧</p>
 				</div>
-				<div class="col-sm-4" style="padding-right: 0px">
+				<div class="col-xs-12 col-sm-4" style="padding-right: 0px">
 					<img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png"
 						width="150" height="150">
 				</div>
 			</div>
 			<div class="col-sm-12" style="padding-left: 0px; padding-bottom: 1vh">希望增加的兌換商品：</div>
 			<form enctype="multipart/form-data" method="post" id="dataForm">
-			<div class="col-sm-3"
+			<div class="col-xs-12 col-sm-3"
 				style="border: 1px #5C8DEC solid; height: 20vh; display: flex; justify-content: center; flex-direction: column"
 				align="center">
 				<!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
@@ -519,7 +519,7 @@
 					style="border: 0px #5C8DEC solid" value="0">
 
 			</div>
-				<div class="col-sm-9">
+				<div class="col-xs-12 col-sm-9">
 					<div class="col-sm-12"
 						style="height: 9vh; border: 1px #5C8DEC solid; margin-bottom: 2vh; display: flex; justify-content: center; flex-direction: column">
 						<div style="">

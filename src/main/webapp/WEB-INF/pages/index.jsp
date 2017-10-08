@@ -32,11 +32,11 @@ p{
 <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
 <c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 	<div>
-		<div class="col-xs-12 col-sm-4" style="height: 100vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;">
+		<div class="col-xs-12 col-sm-4" style="height: 80vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;" id="first">
 		<!-- 左邊白 -->
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
-				<h1 style="font-size: 5vh; margin-top: 30vh;">最專業的保險理財</h1>
+				<h1 style="font-size: 5vh; margin-top: 30vh;" id="firsth1">最專業的保險理財</h1>
 				<h1 style="font-size: 5vh; margin-top: 10px; margin-bottom: 25px;">讓你的財富開始起飛</h1>
 					<div style="opacity: 0.8; margin-bottom: 7vh;">TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問</div>
 					<div class="col-sm-12">
@@ -47,11 +47,11 @@ p{
 					</div>
 			<div class="col-sm-1"></div>
 			</div>
-			<div class="col-xs-12 col-sm-8  text-center " style="height: 100vh; background-color: #5C8DEC; padding-right: 0px; padding-left: 0px;">
+			<div class="col-xs-12 col-sm-8  text-center " style="height: 100vh; background-color: #5C8DEC; padding-right: 0px; padding-left: 0px;" id="no1pageimg">
 				<!--右邊藍 -->
 				<div class="col-sm-12"
 					style="height: 100%; display: flex; justify-content: center; flex-direction: column;padding-left: 0px;padding-right: 0px"
-					align='center' >
+					align='center'>
 					<img alt="" src="/resources/pic/首頁/背景雲.svg" style="position: absolute;top:5vh;">
 					<div class="col-sm-12"  id="bm" style="height: 100%"></div>
 				</div>
@@ -69,7 +69,7 @@ p{
 							<img class="col-xs-3 col-sm-3" src="${hotproduct[0].insurer.imgsrc}" style="height:100%;padding:0;"/>
 							<table class="col-xs-9 col-sm-9" style="height:100%;text-align:left;padding:0;">
 								<tr style="padding:0;">
-									<td style="font-size:190%;padding-top:1vh;">${hotproduct[0].insurer.name}</td>
+									<td style="font-size:190%;padding-top:1vh;" id="asdfghjkl">${hotproduct[0].insurer.name}</td>
 								</tr>
 								<tr style="font-size:130%;">
 									<td class="align-middle" style="margin-top:-1vh;">${hotproduct[0].code} - ${hotproduct[0].localName}</td>
@@ -102,7 +102,7 @@ p{
 				</div>
 			</div>
 			<!--右半圖 -->
-			<div class="col-xs-12 col-sm-6" style="height: 100vh;;background-color: white">
+			<div class="col-xs-12 col-sm-6" style="height: 100vh;background-color: white" id="no2pageimg">
 				<div class="col-xs-12 col-sm-10" style="height: 100%; display: flex; justify-content: flex-end; flex-direction: column" align='center'>
 					<img alt="" src="/resources/pic/首頁/首頁插圖.png" style="width: 100%;">
 				</div>
@@ -322,7 +322,15 @@ p{
 // 	$('#dowebok').fullpage();
 // });
 
-
+$(document).ready(function(){
+        var wdth = $(window).width();
+		if(wdth<700){
+			$('#no2pageimg').css("height","60vh");
+			$('#no1pageimg').css("height","40vh");
+			$('#firsth1').css("margin-top","20vh");
+			$('#first').css("height","65vh");
+		}
+});
 var animation = bodymovin.loadAnimation({
 	  container: document.getElementById('bm'),
 	  renderer: 'svg',

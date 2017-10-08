@@ -20,7 +20,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding-top:9vh">
 			<form class="form-horizontal" id="dataForm">
-				<div class="col-sm-6" style="height: 100vh; padding-right: 0px; padding-left: 0px;">
+				<div class="col-sm-6" style="height: 60vh; padding-right: 0px; padding-left: 0px;">
 					<!-- 左邊白 -->
 					<div class="col-sm-1"></div>
 					<div class="col-sm-10">
@@ -71,7 +71,7 @@
 				<div class="col-sm-1"></div>
 			</div>
 			
-			<div class=" col-sm-6" style="height: 100vh; padding-right: 0px; padding-left: 0px;">
+			<div class=" col-sm-6" style="height: 60vh; padding-right: 0px; padding-left: 0px;">
 				<!--右邊白 -->
 				<div class="col-sm-1"></div>
 				
@@ -121,6 +121,7 @@
 				</div>
 				<div class="col-sm-1"></div>
 			</div>
+			<div class="col-sm-12" style="height: 18vh"></div>
 			</form>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>	

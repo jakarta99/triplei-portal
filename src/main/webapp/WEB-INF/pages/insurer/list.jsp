@@ -60,8 +60,8 @@
 				style="height: 100vh; display: table; table-layout: fixed; background-color: white;padding-right: 0px; padding-left: 0px;"><!--右半白 -->
 				<div
 					style="height: 100vh; overflow: auto; position: relative; padding-top: 15vh;" id="style-1">
-					<div class="col-xs-1 col-sm-1"></div>
-					<div class="col-xs-10 col-sm-10">
+					<div class="col-xs-0 col-sm-1"></div>
+					<div class="col-xs-12 col-sm-10">
 						<c:forEach items="${models}" var="model">
 							<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><!-- 每一個logo -->
 								<div class="text-center">
@@ -77,12 +77,12 @@
 							</div>
 						</c:forEach>
 					</div>
-					<div class="col-xs-1 col-sm-1"></div>
+					<div class="col-xs-0 col-sm-1"></div>
 
 
 					
 						<c:forEach items="${models}" var="model">
-						<div class="descriptionzone" id="${model.id}">
+						<div class="descriptionzone" id="${model.id}" style="width: 100vw">
 						<img src="${model.imgsrc}" alt="${model.shortName}" width="50" height="50" name="${model.id}" style="margin-left: 10%;margin-bottom: 5%;">
 							<a style="font-size: 25px; padding-left: 5%;font-weight:bold;">${model.shortName}</a><br>
 							<a style="padding-left: 13%">資本適足率　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.bisRatio}" /></a><br>
