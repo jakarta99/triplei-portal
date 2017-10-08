@@ -82,7 +82,7 @@
 
 					
 						<c:forEach items="${models}" var="model">
-						<div class="descriptionzone" id="${model.id}" style="width: 100vw">
+						<div class="descriptionzone" id="${model.id}">
 						<img src="${model.imgsrc}" alt="${model.shortName}" width="50" height="50" name="${model.id}" style="margin-left: 10%;margin-bottom: 5%;">
 							<a style="font-size: 25px; padding-left: 5%;font-weight:bold;">${model.shortName}</a><br>
 							<a style="padding-left: 13%">資本適足率　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.bisRatio}" /></a><br>
@@ -91,7 +91,7 @@
 							<a style="padding-left: 13%">訴訟率　　　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.litigationRatio}" /></a><br>
 							<a style="padding-left: 13%">申訴率　　　：<fmt:formatNumber type="percent" minFractionDigits="5" value="${model.appealRatio}" /></a><br>
 							<a style="padding-left: 13%">保險安定基金：<c:if test="${model.insuranceGuarantyFund=true}">已加入</c:if><c:if test="${model.insuranceGuarantyFund=false}">未加入</c:if></a><br>
-							<a style="padding-left: 13%">${model.shortName}官網：<a href="${model.description}" target="_blank">${model.description}</a></a><br>
+							<a style="padding-left: 13%">${model.shortName}官網：<br><a href="${model.description}" target="_blank"  style="padding-left: 13%">${model.description}</a></a><br>
 							<a style="padding-left: 13%">${model.description2}</a><br>
 							<a style="padding-left: 13%">${model.description3}</a><br>
 							<a style="padding-left: 13%">${model.description4}</a><br>
@@ -113,7 +113,7 @@
 				$('.descriptionzone#'+aaa).dialog({
 					resizable : true,
 					height : "auto",
-					width : 500,
+					width : 400,
 					modal : true,
 					show : {
 						effect : "blind",
