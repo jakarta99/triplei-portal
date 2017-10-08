@@ -17,7 +17,7 @@ h2{
 	color:black;
 }
 
-#content img{
+#style-1 img{
 	width:100%;
 	margin-bottom: 2%;
 	margin-top: 1%;
