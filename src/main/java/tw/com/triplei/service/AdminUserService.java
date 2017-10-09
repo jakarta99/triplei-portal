@@ -65,17 +65,17 @@ public class AdminUserService extends GenericService<UserEntity>{
 				messages.add(Message.builder().code("email").value("電子信箱為必填欄位").build());
 			}
 
-			if (StringUtils.isBlank(entity.getTel())) {
-				messages.add(Message.builder().code("tel").value("電話為必填欄位").build());
-			}
+//			if (StringUtils.isBlank(entity.getTel())) {
+//				messages.add(Message.builder().code("tel").value("電話為必填欄位").build());
+//			}
 			
 			if (StringUtils.isBlank(entity.getPassword())) {
 				messages.add(Message.builder().code("password").value("請輸入密碼").build());
 			}
 			
-			if (entity.getBirthdate() == null){
-				messages.add(Message.builder().code("birthdate").value("生日為必填欄位").build());
-			}
+//			if (entity.getBirthdate() == null){
+//				messages.add(Message.builder().code("birthdate").value("生日為必填欄位").build());
+//			}
 
 		}		
 		
@@ -90,6 +90,7 @@ public class AdminUserService extends GenericService<UserEntity>{
 	public UserEntity handleInsert(final UserEntity entity) {
 		
 		entity.setPassword(encodePasswrod(entity.getPassword()));
+		entity.setCheckPassword(""); // checkPassword 不要存密碼
 		
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);

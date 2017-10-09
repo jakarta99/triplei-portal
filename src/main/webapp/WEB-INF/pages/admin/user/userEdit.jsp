@@ -203,7 +203,7 @@ $(function(){
 				function(data) {
 					console.log(data.messages.length);
 					if (data.messages.length==0){
-						alert("SUCCESS");
+						swal("SUCCESS");
 						$btn.button("reset");
 					}	
 				}, function(data, textStatus, jqXHR) {
