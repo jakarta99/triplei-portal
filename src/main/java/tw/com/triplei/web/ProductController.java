@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -453,12 +454,12 @@ public class ProductController {
 
 	@RequestMapping(value = "getProduct/{gender}/{bDate}/{currency}/{paymentMethod}/{interestRateType}/{premium}/{year}/{yearCode}", method = RequestMethod.GET)
 	@ResponseBody
-	public Collection<ProductEntity> getProduct(@PathVariable("gender") String gender,
+	public List<ProductEntity> getProduct(@PathVariable("gender") String gender,
 			@PathVariable("bDate") String bDate, @PathVariable("currency") String currency1,
 			@PathVariable("paymentMethod") String paymentMethod,
 			@PathVariable("interestRateType") String interestRateType, @PathVariable("premium") String premium1,
 			@PathVariable("year") String year, @PathVariable("yearCode") String yearCode) {
-		Collection<ProductEntity> productss = new ArrayList<>();
+		List<ProductEntity> productss = new ArrayList<>();
 
 		Currency currency = null;
 		if (currency1.equals("TWD")) {
@@ -589,7 +590,13 @@ public class ProductController {
 			}
 
 		}
-		log.debug("商品堆{}",productss);
+		//透過IRR排序
+		Collections.sort(productss, new Comparator<ProductEntity>(){
+            public int compare(ProductEntity arg0, ProductEntity arg1) {
+                return arg1.getIrr().compareTo(arg0.getIrr());
+            }
+        });
+		log.debug("商品堆已整理{}",productss);
 		return productss;
 	}
 
