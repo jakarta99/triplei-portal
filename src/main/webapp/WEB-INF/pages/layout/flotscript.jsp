@@ -207,13 +207,14 @@ var optionbisRatio = {//資本適足率
 	    },
 	    xaxis: {
 	        axisLabel: "Price (USD/oz)",
-	        axisLabelUseCanvas: false,
+	        axisLabelUseCanvas: true,
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
 	        max: 16,min:0,
-	        tickColor: "#FFFFFF",                        
-	        color:"#FFFFFF"
+	        tickColor: "#FAF7F7",         
+	        color:"white",
+	        ticks: [] 
 	    },
 	    yaxis: {
 	        axisLabel: "Precious Metals",
@@ -263,7 +264,8 @@ var optionreturnonAssets = {//資產報酬率
 	        axisLabelPadding: 10,
 	        max: 0.04,min:-0.02,
 	        tickColor: "#FAF7F7",                        
-	        color:"black"
+	        color:"black",
+	        ticks: [] 
 	    },
 	    yaxis: {
 	        axisLabel: "Precious Metals",
@@ -313,7 +315,8 @@ var optionpersistencyRatio = {//保單繼續率
         axisLabelPadding: 10,
         max: 1.3,
         tickColor: "#FAF7F7",                        
-        color:"black"
+        color:"black",
+        ticks: [] 
     },
     yaxis: {
         axisLabel: "Precious Metals",
@@ -364,7 +367,8 @@ var optionlitigationRatio = {//訴訟率
 	        axisLabelPadding: 10,
 	        max: 0.0013,
 	        tickColor: "#FAF7F7",                        
-	        color:"black"
+	        color:"black",
+	        ticks: [] 
 	    },
 	    yaxis: {
 	        axisLabel: "Precious Metals",
@@ -414,7 +418,8 @@ var optionappealRatio = {//申訴率
 	        axisLabelPadding: 10,
 	        max: 0.0013,
 	        tickColor: "#FAF7F7",                        
-	        color:"black"
+	        color:"black",
+	        ticks: [] 
 	    },
 	    yaxis: {
 	        axisLabel: "Precious Metals",
