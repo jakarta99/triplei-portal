@@ -121,7 +121,7 @@
 									//swal("SUCCESS", "資料新增成功！", "success");
 // 									alert("Email已寄出");
 									$btn.button("reset");
-									location.replace('http://localhost:8080');
+									location.replace('http://3i-life.com.tw:80');
 								}
 							}, function(data, textStatus, jqXHR) {
 								$btn.button("reset");
