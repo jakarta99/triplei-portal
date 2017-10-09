@@ -52,10 +52,11 @@
 			<div class="col-xs-3 col-sm-0"></div>
 		</div>
 		<div class="col-lg-9" style="height: 100%; padding: 0; overflow-y: scroll; color: black;" id="style-1">
-			<div id="ArticleCarousel" class="col-md-12" style="height: 55vh; width: 100%; padding: 0;margin-top:-2vh">
+			<div id="ArticleCarousel" class="col-md-12" style="height: 70vh%; width: 100%; padding: 0;margin-top:-2vh;">
 				<div>
 					<a href="/article/readArticle/read/${bannerRotation[0].id}">
 					<img src="${bannerRotation[0].bannerImage}" title="${bannerRotation[0].title}" class="rotation"></a>
+				<img  src="${article.bannerImage}" />
 				</div>
 				<div>
 					<a href="/article/readArticle/read/${bannerRotation[1].id}">
@@ -65,8 +66,8 @@
 					<a href="/article/readArticle/read/${bannerRotation[2].id}">
 					<img src="${bannerRotation[2].bannerImage}" title="${bannerRotation[2].title}" class="rotation"></a>
 				</div>
-				</div>
-				<div class="col-md-12" id="list">
+			</div>
+				<div class="col-md-12" id="list" style="margin-top: 1%;">
 					<div class="col-sm-12" id="editorChoice"><a href="/article/editorChoice"><h3>編輯精選</h3></a>
 						<div class="col-sm-6" title="${editorChoice[0].title}">
 							<a href="/article/readArticle/read/${editorChoice[0].id}">

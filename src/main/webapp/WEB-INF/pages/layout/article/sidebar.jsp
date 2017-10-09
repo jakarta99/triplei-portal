@@ -15,7 +15,7 @@ h4{
 </style>
 </head>
 <body>
-	<h2 class="col-md-12" style="text-align:left;"><a href='/article/list' style="color:white;">文章專欄</a></h2>
+	<h2 class="col-md-12 col-sm-12" style="text-align:left;"><a href='/article/list' style="color:white;">文章專欄</a></h2>
 		<br/>
 			<div class="col-md-12" style="padding-top:7%">
 				<h4><a href='/article/editorChoice' style="color:white;">編輯精選</a></h4>
