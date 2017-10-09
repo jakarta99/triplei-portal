@@ -207,13 +207,13 @@ var optionbisRatio = {//資本適足率
 	    },
 	    xaxis: {
 	        axisLabel: "Price (USD/oz)",
-	        axisLabelUseCanvas: true,
+	        axisLabelUseCanvas: false,
 	        axisLabelFontSizePixels: 12,
 	        axisLabelFontFamily: 'Verdana, Arial',
 	        axisLabelPadding: 10,
 	        max: 16,min:0,
-	        tickColor: "#FAF7F7",                        
-	        color:"black"
+	        tickColor: "#FFFFFF",                        
+	        color:"#FFFFFF"
 	    },
 	    yaxis: {
 	        axisLabel: "Precious Metals",

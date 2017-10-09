@@ -23,6 +23,25 @@
 	border: 0px solid #e78f08;
 	background-color: white;
 }
+#dialog-wish::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+#dialog-wish::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#dialog-wish::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #9D9D9D;
+}
 </style>
 </head>
 
@@ -45,7 +64,7 @@
 						style="height: 100vh; padding-left: 0px; padding-right: 0px;">
 						<div class="col-xs-12 col-sm-12"
 							style="padding-top: 15vh; padding-bottom: 0vh">
-							<span style="font-size: 2.5em; font-family: 微軟正黑體;">T-Point</span><br/>
+							<span style="font-size: 2.5em; font-family: 微軟正黑體;">T-Point</span><br />
 							<span style="font-size: 1.5em; font-family: 微軟正黑體;">積點專區</span>
 						</div>
 						<div class="col-xs-12 col-sm-12">
@@ -83,11 +102,11 @@
 
 						<!-- 					hot items col starts here -->
 						<c:if test="${not empty modelh}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">熱門兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">熱門兌換：</span>
+							</div>
 						</c:if>
-							<div class="col-sm-12">
+						<div class="col-sm-12">
 							<c:forEach items="${modelh}" var="modelh">
 								<div class="col-sm-3"
 									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
@@ -105,29 +124,30 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelh.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>						<c:if test="${not empty modelh}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/true">查看更多...</a>
 						</div>
+						<c:if test="${not empty modelh}">
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/true">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							hot items col ends here -->
 						<!-- 					electronics col starts here -->
 						<c:if test="${not empty modele}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">家電兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">家電兌換：</span>
+							</div>
 						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modele}" var="modele">
@@ -147,12 +167,12 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modele.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
@@ -161,16 +181,16 @@
 							</c:forEach>
 						</div>
 						<c:if test="${not empty modele}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/ELECTRONICS">查看更多...</a>
-						</div>
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/ELECTRONICS">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							electronics col ends here -->
 						<!-- 					voucher col starts here -->
 						<c:if test="${not empty modelv}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">禮卷兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">禮卷兌換：</span>
+							</div>
 						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelv}" var="modelv">
@@ -190,12 +210,12 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelv.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
@@ -204,16 +224,16 @@
 							</c:forEach>
 						</div>
 						<c:if test="${not empty modelv}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a>
-						</div>
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							voucher col ends here -->
 						<!-- 					furnitures col starts here -->
 						<c:if test="${not empty modelf}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">家居、廚具兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">家居、廚具兌換：</span>
+							</div>
 						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelf}" var="modelf">
@@ -233,12 +253,12 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelf.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
@@ -247,16 +267,16 @@
 							</c:forEach>
 						</div>
 						<c:if test="${not empty modelf}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/FURNITURES">查看更多...</a>
-						</div>
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/FURNITURES">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							furnitures col ends here -->
 						<!-- 					outdoor col starts here -->
 						<c:if test="${not empty modelod}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">戶外運動商品兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">戶外運動商品兌換：</span>
+							</div>
 						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelod}" var="modelod">
@@ -276,12 +296,12 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelod.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
@@ -290,16 +310,16 @@
 							</c:forEach>
 						</div>
 						<c:if test="${not empty modelod}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/OUTDOOR">查看更多...</a>
-						</div>
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/OUTDOOR">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							furnitures col ends here -->
 						<!-- 					ladies col starts here -->
 						<c:if test="${not empty modelw}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">女仕用品兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">女仕用品兌換：</span>
+							</div>
 						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelw}" var="modelw">
@@ -319,12 +339,12 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelw.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
@@ -333,16 +353,16 @@
 							</c:forEach>
 						</div>
 						<c:if test="${not empty modelw}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/WOMAN">查看更多...</a>
-						</div>
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/WOMAN">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							ladies col ends here -->
 						<!-- 					men col starts here -->
 						<c:if test="${not empty modelm}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">男仕用品兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">男仕用品兌換：</span>
+							</div>
 						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelm}" var="modelm">
@@ -362,12 +382,12 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelm.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
@@ -376,16 +396,16 @@
 							</c:forEach>
 						</div>
 						<c:if test="${not empty modelm}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/MAN">查看更多...</a>
-						</div>
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/MAN">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							men col ends here -->
 						<!-- 					others col starts here -->
 						<c:if test="${not empty modelot}">
-						<div class="col-sm-12" style="padding-bottom: 2vh">
-							<span style="font-size: 190%">其他商品兌換：</span>
-						</div>
+							<div class="col-sm-12" style="padding-bottom: 2vh">
+								<span style="font-size: 190%">其他商品兌換：</span>
+							</div>
 						</c:if>
 						<div class="col-sm-12">
 							<c:forEach items="${modelot}" var="modelot">
@@ -405,12 +425,12 @@
 												<div class="col-sm-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points" 
+														id="points"
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelot.bonus}</span>
 												</div>
 												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
-													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+													<button id="placeOrder" class="btn btn-sm btn-primary"
+														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
@@ -419,78 +439,78 @@
 							</c:forEach>
 						</div>
 						<c:if test="${not empty modelot}">
-						<div class="col-sm-12" align="right">
-							<a href="${pageContext.request.contextPath}/gift/OTHERS">查看更多...</a>
-						</div>
+							<div class="col-sm-12" align="right">
+								<a href="${pageContext.request.contextPath}/gift/OTHERS">查看更多...</a>
+							</div>
 						</c:if>
 						<!-- 							others col ends here -->
 					</div>
 				</div>
-<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+				<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 			</div>
 		</div>
 	</div>
 
 	<div id="dialog" class="dialog-init" title="商品明細">
-		
-		<form >
-		<div class="form-group">
-			<div class="container-fluid">
-				<div class="col-md-7">
-					<div class="" style=" margin-top: 20px; font-size: 125%">
-						<label class="">積點商品名稱: </label> <span id="orderName"
-							style="text-align: center;"></span>
+
+		<form>
+			<div class="form-group">
+				<div class="container-fluid">
+					<div class="col-md-7">
+						<div class="" style="margin-top: 20px; font-size: 125%">
+							<label class="">積點商品名稱: </label> <span id="orderName"
+								style="text-align: center;"></span>
+						</div>
+						<div class="" style="margin-top: 20px; font-size: 125%">
+							<label class="">請輸入數量:</label> <input class="" type="number"
+								class="" id="quantity1" name="quantity1" min="1" value="1"
+								style="width: 20%" />
+						</div>
+						<div class="" style="margin-top: 20px; font-size: 125%">
+							<label class="">商品兌換點數: </label> <img alt=""
+								src="/resources/pic/積點專區/點數(小).png" width="20" height="20">
+							<span id="orderPoint" style="text-align: center;"></span>
+						</div>
 					</div>
-					<div class="" style=" margin-top: 20px; font-size: 125%">
-						<label class="">請輸入數量:</label> <input class=""
-							type="number" class="" id="quantity1" name="quantity1" min="1"
-							value="1" style="width: 20%"/>
-					</div>
-					<div class="" style=" margin-top: 20px; font-size: 125%">
-						<label class="">商品兌換點數: </label>
-						<img alt="" src="/resources/pic/積點專區/點數(小).png" width="20"
-							height="20"> <span id="orderPoint"
-							style="text-align: center;"></span>
+					<div class="col-md-4">
+						<img id="orderImage" style="height: 200px; width: 200px;">
 					</div>
 				</div>
-				<div class="col-md-4">
-					<img id="orderImage" style="height: 200px; width: 200px;">
+				<hr>
+				<div style="margin-top: 10px;" class="">
+					<label for="recipient" class="">收件人姓名:</label> <input type="text"
+						class="" class="" id="recipient" name="recipient"
+						style="width: 20%" />
 				</div>
-			</div>
-			<hr>
-			<div style=" margin-top: 10px;" class="">
-				<label for="recipient" class="">收件人姓名:</label> <input type="text" class=""
-					class="" id="recipient" name="recipient" style="width: 20%" />
-			</div>
-			<div style=" margin-top: 10px;" class="">
-				<label for="recipientAddress" class="">收件人地址:</label> <input class=""
-					type="text" class=""  id="recipientAddress" name="recipientAddress"
-					style="width: 60%" />
-			</div>
-			<div style=" margin-top: 10px;" class="">
-				<label for="recipientPhone" class="">收件人電話:</label> <input class=""
-					type="text" class="" maxlength="13" id="recipientPhone" name="recipientPhone"
-					style="width: 30%" />
-			</div>
-			<div style=" margin-top: 10px;" class="">
-				<label for="recipientTime" class="">希望收件時間:</label> 
-					<select id="recipientTime" name="recipientTime" class="">
+				<div style="margin-top: 10px;" class="">
+					<label for="recipientAddress" class="">收件人地址:</label> <input
+						class="" type="text" class="" id="recipientAddress"
+						name="recipientAddress" style="width: 60%" />
+				</div>
+				<div style="margin-top: 10px;" class="">
+					<label for="recipientPhone" class="">收件人電話:</label> <input class=""
+						type="text" class="" maxlength="13" id="recipientPhone"
+						name="recipientPhone" style="width: 30%" />
+				</div>
+				<div style="margin-top: 10px;" class="">
+					<label for="recipientTime" class="">希望收件時間:</label> <select
+						id="recipientTime" name="recipientTime" class="">
 						<option value="上午" selected>上午</option>
 						<option value="下午">下午</option>
 						<option value="晚上">晚上</option>
 					</select>
-			</div>
-			<div>
-				<div class="col-md-9"></div>
-				<div class="col-md-3">
-					<a href="#" class="btn btn-secondary" data-loading-text="Loading"
-						id="saveButton"
-						style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">確認購買</a>
+				</div>
+				<div>
+					<div class="col-md-9"></div>
+					<div class="col-md-3">
+						<a href="#" class="btn btn-secondary" data-loading-text="Loading"
+							id="saveButton"
+							style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">確認購買</a>
+					</div>
 				</div>
 			</div>
-		</div>
 		</form>
-		
+
 	</div>
 	<!-- 許願池dialog -->
 	<div id="dialog-wish" class="dialog-init">
@@ -509,17 +529,15 @@
 			</div>
 			<div class="col-sm-12" style="padding-left: 0px; padding-bottom: 1vh">希望增加的兌換商品：</div>
 			<form enctype="multipart/form-data" method="post" id="dataForm">
-			<div class="col-xs-12 col-sm-3"
-				style="border: 1px #5C8DEC solid; height: 20vh; display: flex; justify-content: center; flex-direction: column"
-				align="center">
-				<!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
-				<label for="image1"
-					style="background-color: white; color: #5C8DEC; font-family: 微軟正黑體;">圖片(必要):</label>
-				<input type="file" id="image1" name="image1"
-					style="border: 0px #5C8DEC solid" value="0">
-
-			</div>
-				<div class="col-xs-12 col-sm-9">
+				<div class="col-xs-12 col-sm-3"
+					style="border: 1px #5C8DEC solid; height: 20vh; display: flex; justify-content: center; flex-direction: column"
+					align="center" id="imgid">
+									<label for="image1"
+										style="background-color: white; color: #5C8DEC; font-family: 微軟正黑體;">圖片(必要):</label>
+									<input type="file" id="image1" name="image1"
+										style="border: 0px #5C8DEC solid" value="0">
+				</div>
+				<div class="col-xs-12 col-sm-9" id="imgid2">
 					<div class="col-sm-12"
 						style="height: 9vh; border: 1px #5C8DEC solid; margin-bottom: 2vh; display: flex; justify-content: center; flex-direction: column">
 						<div style="">
@@ -563,6 +581,24 @@
 
 
 	<script type="text/javascript">
+// 隨手機更改dialog寬
+		var changedialogwidth = 700;
+		var changedialogheight = 450;
+	$(document).ready(function() {
+
+		if($(window).width()<700){
+			changedialogwidth =400;
+			changedialogheight =400;
+			$('#imgid').css("border","0px #5C8DEC solid");
+			$('#dialogwish').css("border","0px #5C8DEC solid");
+			$('#imgid').css("padding-left","0px");
+			$('#imgid2').css("padding-left","0px");
+			
+		};
+	})
+	
+	
+	
 		$(function() {
 			var image;
 			var giftName;
@@ -662,8 +698,8 @@
 			var dialog1 = $('#dialog-wish').dialog({
 				autoOpen : false,
 				resizable : true,
-				height : "auto",
-				width : 700,
+				height : changedialogheight,
+				width : changedialogwidth,
 				modal : true,
 				show : {
 					effect : "blind",

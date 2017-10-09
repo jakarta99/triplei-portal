@@ -39,7 +39,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding-top:8vh">
 			<div class="col-xs-12 col-sm-3"
-				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;"><!--左半藍 -->
+				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;" id="pagefirstblue"><!--左半藍 -->
  				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 				<div class="col-xs-6 col-sm-12"
 					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
@@ -107,13 +107,20 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('.descriptionzone').hide();
+
+			var changedialogwidth = 500;
+			if($(window).width()<700){
+				changedialogwidth =350
+				$('#pagefirstblue').css("height","60vh");
+			};
+			
 			$('.insurerzone').click(function() {
 				var aaa = $(this).attr("name");
 // 				$(".intro.demo")
 				$('.descriptionzone#'+aaa).dialog({
 					resizable : true,
 					height : "auto",
-					width : 400,
+					width : changedialogwidth,
 					modal : true,
 					show : {
 						effect : "blind",

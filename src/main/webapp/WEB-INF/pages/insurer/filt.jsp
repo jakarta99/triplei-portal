@@ -32,7 +32,7 @@
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 		<div style="padding-top:8vh">
 			<div class="col-xs-12 col-sm-3"
-				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;"><!--左半藍 -->
+				style="height: 100vh; display: table; table-layout: fixed; background-color: #5C8DEC;" id="pagefirstblue"><!--左半藍 -->
  				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 				<div class="col-xs-6 col-sm-12"
 					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
@@ -56,7 +56,7 @@
 					<!--選擇框 -->
 
 					<div class="col-xs-1 col-sm-1" style="height: 100%;"></div>
-					<button id="btn" style="background-color: white; color: #5C8DEC; border: 1px #5C8DEC solid; width: 10em">篩選保險公司</button><br>
+					<button id="btn" style="background-color: white; color: #5C8DEC; border: 1px #5C8DEC solid; width: 10em">篩 選 保 險 公 司</button><br>
 					<br>
 					
 					<div class="col-xs-10 col-sm-7 col-md-4"
@@ -143,6 +143,13 @@
 <%-- 	window.document.write(${models}); --%>
 
 	<script type="text/javascript">
+
+	$(document).ready(function() {
+
+		if($(window).width()<700){
+			$('#pagefirstblue').css("height","60vh");
+		};
+	})
 		
 		$(function() {
 // 			$('#btn').one('click', function() {
