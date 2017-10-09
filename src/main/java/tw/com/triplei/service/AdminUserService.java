@@ -90,6 +90,7 @@ public class AdminUserService extends GenericService<UserEntity>{
 	public UserEntity handleInsert(final UserEntity entity) {
 		
 		entity.setPassword(encodePasswrod(entity.getPassword()));
+		entity.setCheckPassword(""); // checkPassword 不要存密碼
 		
 		LocalDateTime now = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(now);
