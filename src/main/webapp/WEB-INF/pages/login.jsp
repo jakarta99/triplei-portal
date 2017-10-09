@@ -160,5 +160,11 @@
 		autoplay : true,
 		path : '/resources/pic/registered/registered/1002/balloon.json'
 	})
+	
+	
+	if(location.href.endsWith("error")){
+		swal("資料輸入有誤!!!")
+	}
+	
 </script>
 </html>
