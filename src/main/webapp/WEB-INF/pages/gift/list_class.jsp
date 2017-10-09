@@ -5,9 +5,14 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+
 <title>Triple i</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <style>
 #mainNavbar {
 	border-color: #333333;
@@ -17,6 +22,25 @@
 .ui-widget-header {
 	border: 0px solid #e78f08;
 	background-color: white;
+}
+#dialog-wish::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+#dialog-wish::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#dialog-wish::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #9D9D9D;
 }
 </style>
 </head>
@@ -28,48 +52,47 @@
 			style="width: 100%; height: 100%; position: absolute; padding: 0">
 			<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 			<!-- 			<div style="padding:0;width:100%;height:100%;color:white;"> -->
-			<!-- 左半藍 -->
-			<div class="col-sm-3"
-				style="background-color: #5C8DEC; height: 100vh; color: white;">
+				<!-- 左半藍 -->
+				<div class="col-xs-12 col-sm-3"
+					style="background-color: #5C8DEC; height: 100vh; color: white">
 
-				<div class="col-sm-1"></div>
-				<div class="col-sm-10"
-					style="height: 100vh; padding-left: 0px; padding-right: 0px;">
-					<div class="col-sm-12"
-						style="padding-top: 15vh; padding-bottom: 0vh">
-						<span style="font-size: 2.5em; font-family: 微軟正黑體;">T-Point</span>
-						<span style="font-size: 1.5em; font-family: 微軟正黑體;">積點專區</span>
-					</div>
-					<div class="col-sm-12">
-						<img alt="" src="/resources/pic/積點專區/點數(大).png" width="50"
-							height="50"> <span id="userPoint"
-							style="font-size: 3.5em; vertical-align: middle;">${userPoint}</span>
-					</div>
-					<div class="col-sm-12">
-						<div class="col-sm-12"
-							style="height: 15vh; border: 1px white solid; border-radius: 20px; margin-top: 3vh; padding-left: 0px; padding-right: 0px;">
-							<div class="col-sm-6"
-								style="border-right: 1px white solid; height: 80%; margin-top: 5%; display: flex; justify-content: center; flex-direction: column"
-								align="center">
-								<p style="margin-top: 10%; margin-bottom: 10%;">審核中點數</p>
-								<span id="audittingPoint">${audittingPoint}</span>
-							</div>
-							<div class="col-sm-6"
-								style="height: 80%; margin-top: 5%; display: flex; justify-content: center; flex-direction: column"
-								align="center">
-								<p style="margin-top: 10%; margin-bottom: 10%">已兌換點數</p>
-								<span id="exchangedPoint">${exchangedPoint}</span>
+					<div class="col-xs-1 col-sm-1"></div>
+					<div class="col-xs-10 col-sm-10"
+						style="height: 100vh; padding-left: 0px; padding-right: 0px;">
+						<div class="col-xs-12 col-sm-12"
+							style="padding-top: 15vh; padding-bottom: 0vh">
+							<span style="font-size: 2.5em; font-family: 微軟正黑體;">T-Point</span><br />
+							<span style="font-size: 1.5em; font-family: 微軟正黑體;">積點專區</span>
+						</div>
+						<div class="col-xs-12 col-sm-12">
+							<img alt="" src="/resources/pic/積點專區/點數(大).png" width="41"
+								height="41"> <span id="userPoint"
+								style="font-size: 3.5em; vertical-align: middle;">${userPoint}</span>
+						</div>
+						<div class="col-xs-12 col-sm-12">
+							<div class="col-xs-12 col-sm-12"
+								style="height: 15vh; border: 1px white solid; border-radius: 20px; margin-top: 3vh; padding-left: 0px; padding-right: 0px;">
+								<div class="col-xs-6 col-sm-6"
+									style="border-right: 1px white solid; height: 80%; margin-top: 5%; display: flex; justify-content: center; flex-direction: column"
+									align="center">
+									<p style="margin-top: 10%; margin-bottom: 10%;">審核中點數</p>
+									<span id="audittingPoint">${audittingPoint}</span>
+								</div>
+								<div class="col-xs-6 col-sm-6"
+									style="height: 80%; margin-top: 5%; display: flex; justify-content: center; flex-direction: column"
+									align="center">
+									<p style="margin-top: 10%; margin-bottom: 10%">已兌換點數</p>
+									<span id="exchangedPoint">${exchangedPoint}</span>
+								</div>
 							</div>
 						</div>
+						<div class="col-xs-12 col-sm-12" id="bm"
+							style="width: 140%; position: relative; top: 20px; left: -50px"></div>
 					</div>
-					<div class="col-xs-12 col-sm-12" id="bm"
-						style="width: 140%; position: relative; top: 20px; left: -50px"></div>
+					<div class="col-xs-1 col-sm-1"></div>
 				</div>
-				<div class="col-sm-1"></div>
-
-			</div>
 			<div class="col-md-9"
-				style="height: 100%; padding: 3%; margin-top: 8vh; color: black; overflow-y: scroll"
+				style="height: 90%; padding: 3%; margin-top: 8vh; color: black; overflow-y: scroll"
 				id="style-1">
 		<!-- 	
 		<c:choose>
@@ -123,41 +146,39 @@
 						回上一頁</button></a>
 					</div>
 				
-<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 			</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 	</div>
 
 
 
 	<!-- 許願池dialog -->
-	<div id="dialog-wish">
+	<div id="dialog-wish" class="dialog-init">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
 			<div class="col-sm-12" style="padding-left: 0px; padding-right: 0px">
-				<div class="col-sm-8" style="padding-left: 0px">
+				<div class="col-xs-12 col-sm-8" style="padding-left: 0px">
 					<h3>許願池</h3>
 					<p>
 						積點專區的商品無法滿足你的慾望嗎?別擔心,你可以在這裡告訴我們您想要的商品,TRIPLE-I會盡全力滿足您的願望!快許下願望吧</p>
 				</div>
-				<div class="col-sm-4" style="padding-right: 0px">
+				<div class="col-xs-12 col-sm-4" style="padding-right: 0px">
 					<img id="wishpool" alt="" src="/resources/pic/積點專區/許願池.png"
 						width="150" height="150">
 				</div>
 			</div>
 			<div class="col-sm-12" style="padding-left: 0px; padding-bottom: 1vh">希望增加的兌換商品：</div>
-			<div class="col-sm-3"
-				style="border: 1px #5C8DEC solid; height: 20vh; display: flex; justify-content: center; flex-direction: column"
-				align="center">
-				<!-- <button style="background-color: white;color: #5C8DEC; border: 1px #5C8DEC solid;">上傳圖片</button> -->
-				<label for="image1"
-					style="background-color: white; color: #5C8DEC; font-family: 微軟正黑體;">圖片(必要):</label>
-				<input type="file" id="image1" name="image1"
-					style="border: 0px #5C8DEC solid">
-
-			</div>
 			<form enctype="multipart/form-data" method="post" id="dataForm">
-				<div class="col-sm-9">
+				<div class="col-xs-12 col-sm-3"
+					style="border: 1px #5C8DEC solid; height: 20vh; display: flex; justify-content: center; flex-direction: column"
+					align="center" id="imgid">
+									<label for="image1"
+										style="background-color: white; color: #5C8DEC; font-family: 微軟正黑體;">圖片(必要):</label>
+									<input type="file" id="image1" name="image1"
+										style="border: 0px #5C8DEC solid" value="0">
+				</div>
+				<div class="col-xs-12 col-sm-9" id="imgid2">
 					<div class="col-sm-12"
 						style="height: 9vh; border: 1px #5C8DEC solid; margin-bottom: 2vh; display: flex; justify-content: center; flex-direction: column">
 						<div style="">
@@ -249,6 +270,21 @@
 
 	
 	<script type="text/javascript">
+	// 隨手機更改dialog寬
+	var changedialogwidth = 700;
+	var changedialogheight = 450;
+$(document).ready(function() {
+
+	if($(window).width()<700){
+		changedialogwidth =400;
+		changedialogheight =400;
+		$('#imgid').css("border","0px #5C8DEC solid");
+		$('#dialogwish').css("border","0px #5C8DEC solid");
+		$('#imgid').css("padding-left","0px");
+		$('#imgid2').css("padding-left","0px");
+		
+	};
+})
 		$(function() {
 			var image;
 			var giftName;
@@ -348,8 +384,8 @@
 			var dialog1 = $('#dialog-wish').dialog({
 				autoOpen : false,
 				resizable : true,
-				height : "auto",
-				width : 700,
+				height : changedialogheight,
+				width : changedialogwidth,
 				modal : true,
 				show : {
 					effect : "blind",

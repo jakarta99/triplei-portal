@@ -590,7 +590,7 @@
 			changedialogwidth =400;
 			changedialogheight =400;
 			$('#imgid').css("border","0px #5C8DEC solid");
-			$('#dialogwish').css("border","0px #5C8DEC solid");
+// 			$('#dialogwish').css("border","0px #5C8DEC solid");
 			$('#imgid').css("padding-left","0px");
 			$('#imgid2').css("padding-left","0px");
 			

@@ -160,8 +160,7 @@
 					function() {
 						var email = $("#email").val();
 						var name = $("#name").val();
-						var birthdate = $("#birthdate").val();
-						if(email==""||name==""||birthdate==""){
+						if(email==""||name==""){
 							swal('資料請輸入完整喔~~')
 						}else{
 							var $btn = $(this);
