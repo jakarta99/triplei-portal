@@ -90,10 +90,8 @@ public class ArticleService extends GenericService<ArticleEntity> {
 			try {
 				bytes = file.getBytes();
 				String filePath = env.getProperty("articleFileUploadPath");
-				String path = "src/main/webapp"+filePath;
 				log.debug("Article Upload Path{} ",filePath);
-//				String path1 = "/userfiles/bannerImage";
-				File dir = new File(path);
+				File dir = new File(filePath);
 				if (!dir.exists())
 					dir.mkdirs();
 

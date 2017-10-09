@@ -108,9 +108,7 @@ public class GiftService extends GenericService<GiftEntity> {
 			bytes = file.getBytes();
 			String filePath = env.getProperty("giftFileUploadPath");
 			log.debug("Gift Upload Path{}",filePath);
-			String path = "src/main/webapp"+filePath;
-//			String path1 = "/userfiles/giftImage";
-			File dir = new File(path);
+			File dir = new File(filePath);
 			if (!dir.exists())
 				dir.mkdirs();
 
