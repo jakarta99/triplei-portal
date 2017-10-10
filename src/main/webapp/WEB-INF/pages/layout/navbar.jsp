@@ -14,6 +14,9 @@
 ul {
 	font-size: 95%;
 }
+.dropdown-menu{
+text-align:right;
+}
 </style>
 
 <!-- Fixed navbar -->
@@ -38,7 +41,7 @@ ul {
 
 		</div>
 		<div id="navbar" class="navbar-collapse collapse navbar-right"
-			style="font-size: 85%; padding: 0; position: relative;text-align:right;float:right;">
+			style="font-size: 90%; padding: 0; position: relative;text-align:right;float:right;padding-right:15px;overflow-x:hidden">
 			<ul class="nav navbar-nav navbar-right">
 				<!-- 後台 -->
 				<li class="dropdown"><sec:authorize

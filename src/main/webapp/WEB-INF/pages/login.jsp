@@ -101,11 +101,11 @@
 											<a href="/registered/forgetPassword"
 												class="btn btn-lg  btn-block" id="forgetPassword">忘記密碼</a>
 										</div>
-										<div class="col-sm-6">
+										<div class="col-sm-6" style="text-align:center">
 											<!-- <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">登入</button> -->
 											<button type="button" name="go"
 												onClick="document.normalForm.submit()"
-												style="background-color: white; width: 200px; height: 40px; border: 2px blue none">
+												style="padding:auto;margin:auto;background-color: white; width: 200px; height: 40px;border:1px blue none">
 												<img src="/resources/pic/registered/login.png" width="60%">
 											</button>
 										</div>
