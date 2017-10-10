@@ -8,7 +8,6 @@
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-
 <title>Triple i</title>
 
 <style type="text/css">
@@ -65,6 +64,8 @@ span{
 			</div>
 		</div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+
 	</div>
 </div>
 </body>

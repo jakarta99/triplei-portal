@@ -312,8 +312,10 @@ p{
 <!-- 				</div> -->
 			</div>
 		</div>
+<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 	<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
+
 
 <script type="text/javascript">
 
