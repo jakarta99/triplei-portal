@@ -15,6 +15,7 @@ import tw.com.triplei.entity.ProductEntity;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.service.ArticleService;
+import tw.com.triplei.service.GetImageService;
 import tw.com.triplei.service.ProductService;
 import tw.com.triplei.service.UserService;
 
@@ -29,14 +30,23 @@ public class IndexController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private GetImageService getImageService;
+	
 
 	@RequestMapping("/")
 	public String index(Model model) {
 		
 		List<ArticleEntity> newsList = articleService.getArticlesByHotArticle(ArticleType.NEWS, true, true);
+		for(ArticleEntity article:newsList){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("news", newsList);
 	
 		List<ArticleEntity> hotIssueList = articleService.getHotArticles(true, true);
+		for(ArticleEntity article:hotIssueList){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("hotissue", hotIssueList);
 		
 		List<ProductEntity> hotProduct = productService.getHotProduct();

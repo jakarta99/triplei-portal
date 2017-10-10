@@ -125,7 +125,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh;color:black">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${hotissue[0].id}">
-								<img style="width:100%;" src="${hotissue[0].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${hotissue[0].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${hotissue[0].title}</h4></a>
@@ -136,7 +136,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${hotissue[1].id}">
-								<img style="width:100%;" src="${hotissue[1].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${hotissue[1].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${hotissue[1].title}</h4></a>
@@ -156,7 +156,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${hotissue[2].id}">
-								<img style="width:100%;" src="${hotissue[2].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${hotissue[2].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${hotissue[2].title}</h4></a>
@@ -167,7 +167,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${hotissue[3].id}">
-								<img style="width:100%;" src="${hotissue[3].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${hotissue[3].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${hotissue[3].title}</h4></a>
@@ -194,7 +194,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh;color:black">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[0].id}">
-								<img style="width:100%;" src="${hotissue[0].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${news[0].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[0].title}</h4></a>
@@ -205,7 +205,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[1].id}">
-								<img style="width:100%;" src="${hotissue[1].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${news[1].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[1].title}</h4></a>
@@ -225,7 +225,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[2].id}">
-								<img style="width:100%;" src="${hotissue[2].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${news[2].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[2].title}</h4></a>
@@ -236,7 +236,7 @@ p{
 							<div class="col-sm-12" style="height: 25vh">
 								<div style="margin-top:7%;">
 								<a href="/article/readArticle/read/${news[3].id}">
-								<img style="width:100%;" src="${hotissue[3].bannerImage}" /></div>
+								<img style="width:100%;" src="data:image/jpg;base64,${news[3].showImage}" /></div>
 							</div>
 							<div class="col-sm-12" style="height: 12vh">
 								<h4>${news[3].title}</h4></a>
@@ -314,7 +314,6 @@ p{
 		</div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 	<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
-	
 
 <script type="text/javascript">
 
