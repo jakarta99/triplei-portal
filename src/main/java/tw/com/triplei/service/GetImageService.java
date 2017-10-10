@@ -28,7 +28,7 @@ public class GetImageService {
 		        baos.close();                                   
 		        b64 = DatatypeConverter.printBase64Binary(imageInByteArray);
 		    }catch(IOException e){
-		      System.out.println("Error: "+e);
+		    	log.debug("Error{} "+e);
 		    } 
 		 return b64;
 	}
