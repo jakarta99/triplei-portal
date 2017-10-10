@@ -142,7 +142,7 @@ text-align:right;
 
 					<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#" style="color: white">績點專區<span
+						data-toggle="dropdown" href="#" style="color: white">積點專區<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/gift/list" >績點商品列表</a></li>

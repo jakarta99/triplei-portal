@@ -50,6 +50,17 @@ public class ArticleEntity extends GenericEntity {
 
 	@Column(name = "BANNER_IMAGE")
 	private String bannerImage;
+	
+	@Column(name="SHOW_IMAGE",columnDefinition="TEXT",length=2000000)
+	private String showImage;//顯示用圖片
+
+	public String getShowImage() {
+		return showImage;
+	}
+
+	public void setShowImage(String showImage) {
+		this.showImage = showImage;
+	}
 
 	@Column(name = "PUBLISH_TIME")
 	private LocalDateTime publishTime; // 文章發布時間

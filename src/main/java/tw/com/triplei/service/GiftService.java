@@ -39,27 +39,26 @@ public class GiftService extends GenericService<GiftEntity> {
 	public GenericDao<GiftEntity> getDao() {
 		return giftDao;
 	}
-	
-	public List<GiftEntity> getByGiftType(String giftType){
+
+	public List<GiftEntity> getByGiftType(String giftType) {
 		return giftDao.findByGiftType(giftType);
 	}
-	
-	public List<GiftEntity> getTypeTop3(GiftType giftType){
+
+	public List<GiftEntity> getTypeTop3(GiftType giftType) {
 		return giftDao.findTop3ByGiftTypeOrderByBonus(giftType);
 	}
-	
-	public List<GiftEntity> getTypeHot(boolean hotGift){
+
+	public List<GiftEntity> getTypeHot(boolean hotGift) {
 		return giftDao.findByHotGift(hotGift);
 	}
-	
-	public List<GiftEntity> getTypeTop3Hot(boolean hotGift){
+
+	public List<GiftEntity> getTypeTop3Hot(boolean hotGift) {
 		return giftDao.findTop3ByHotGift(hotGift);
 	}
-	
-	public GiftEntity getByName(String name){
+
+	public GiftEntity getByName(String name) {
 		return giftDao.findByName(name);
 	}
-
 
 	@Override
 	public List<Message> validateInsert(GiftEntity entity) {
@@ -88,45 +87,44 @@ public class GiftService extends GenericService<GiftEntity> {
 	@Override
 	public GiftEntity handleUpdate(GiftEntity entity) {
 		GiftEntity dbEntity = giftDao.findOne(entity.getId());
-		
+
 		// 以資料庫資料為主, 忽略不得修改的欄位
-		BeanUtils.copyProperties(entity, dbEntity, new String[]{"id","createdBy","createdTime"});
-		
+		BeanUtils.copyProperties(entity, dbEntity, new String[] { "id", "createdBy", "createdTime" });
+
 		return dbEntity;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public GiftEntity getById(long id) {
 		return giftDao.findById(id);
 	}
-	
-	
+
 	public String imageUpload(MultipartFile file) {
 		byte[] bytes;
-		if(file.toString()!=""){
-		try {
-			bytes = file.getBytes();
-			String filePath = System.getProperty("upload.location");
-			log.debug("Gift Upload Path{}",filePath);
-			File dir = new File(filePath);
-			if (!dir.exists())
-				dir.mkdirs();
+		if (file.toString() != "") {
+			try {
+				bytes = file.getBytes();
+				String filePath = System.getProperty("upload.location");
+				String path = env.getProperty("giftFileUploadPath");
+				log.debug("Gift Upload Path{}", filePath + path);
+				File dir = new File(filePath + path);
+				if (!dir.exists())
+					dir.mkdirs();
 
-			String date = DateTimeFormatter.ofPattern("MM-dd_HHmmss").format(LocalDateTime.now());
-			File serverFile = new File(dir.getAbsolutePath() + File.separator + date + file.getOriginalFilename());
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-			String url = filePath+"/"+date+file.getOriginalFilename();
-			stream.write(bytes);
-			stream.close();
-			
-			return url;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "Upload Fail";
+				String date = DateTimeFormatter.ofPattern("MM-dd_HHmmss").format(LocalDateTime.now());
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + date + file.getOriginalFilename());
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				String url = filePath + path + "/" + date + file.getOriginalFilename();
+				stream.write(bytes);
+				stream.close();
+
+				return url;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "Upload Fail";
+			}
 		}
-		}
-			return "";
+		return "";
 	}
-	
-	
+
 }

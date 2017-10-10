@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.triplei.entity.ArticleEntity;
 import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.service.ArticleService;
+import tw.com.triplei.service.GetImageService;
 
 @Slf4j
 @Controller
@@ -22,23 +23,41 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 	
+	@Autowired
+	private GetImageService getImageService;
+	
 	/*用戶的從首頁點入到文章專區首頁 */
 	@RequestMapping("/list")
 	public String list(Model model) {
 
 		List<ArticleEntity> list= articleService.getBannerRotationArticles(true, true);
+		for(ArticleEntity article:list){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("bannerRotation",list);
 		
 		List<ArticleEntity> editorChoiceList = articleService.getArticlesByHotArticle(ArticleType.EDITOR_CHOICE, true, true);
+		for(ArticleEntity article:editorChoiceList){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("editorChoice", editorChoiceList);
 		
 		List<ArticleEntity> newsList = articleService.getArticlesByHotArticle(ArticleType.NEWS, true, true);
+		for(ArticleEntity article:newsList){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("news", newsList);
 		
 		List<ArticleEntity> goodReadList = articleService.getArticlesByHotArticle(ArticleType.GOODREAD, true, true);
+		for(ArticleEntity article:goodReadList){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("goodRead", goodReadList);
 		
 		List<ArticleEntity> investmentTipsList = articleService.getArticlesByHotArticle(ArticleType.INVESTMENT_TIPS, true, true);
+		for(ArticleEntity article:investmentTipsList){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("investmentTips", investmentTipsList);
 
 		log.debug("sortList{}",list);
@@ -49,6 +68,9 @@ public class ArticleController {
 	@RequestMapping("/goodRead")
 	public String goodRead(Model model){
 		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.GOODREAD,true);
+		for(ArticleEntity article:articles){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("articles",articles);
 
 		return "/article/goodReadSection";
@@ -58,6 +80,9 @@ public class ArticleController {
 	@RequestMapping("/news")
 	public String news(Model model){
 		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.NEWS,true);
+		for(ArticleEntity article:articles){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("articles",articles);
 		
 		return "/article/newsSection";
@@ -67,6 +92,9 @@ public class ArticleController {
 	@RequestMapping("/investmentTips")
 	public String investmentTips(Model model){
 		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.INVESTMENT_TIPS,true);
+		for(ArticleEntity article:articles){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("articles",articles);
 		
 		return "/article/investmentTipsSection";
@@ -76,6 +104,9 @@ public class ArticleController {
 	@RequestMapping("/editorChoice")
 	public String editorChoice(Model model){
 		List<ArticleEntity> articles= articleService.getArticlesByTypes(ArticleType.EDITOR_CHOICE,true);
+		for(ArticleEntity article:articles){
+			article.setShowImage(getImageService.getImage(article.getBannerImage()));
+		}
 		model.addAttribute("articles",articles);
 		
 		return "/article/editorChoiceSection";

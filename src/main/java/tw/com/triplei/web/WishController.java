@@ -29,8 +29,6 @@ public class WishController {
 	@Autowired
 	private WishService wishService;
 	
-	@Autowired
-	private ArticleService articleService;
 
 	@PostMapping
 	@ResponseBody
@@ -41,7 +39,7 @@ public class WishController {
 		try {
 			
 			if(!file.isEmpty()){
-				String location = articleService.imageUpload(file);
+				String location = wishService.imageUpload(file);
 				form.setImage1(location);
 			}else{
 				form.setImage1("");
