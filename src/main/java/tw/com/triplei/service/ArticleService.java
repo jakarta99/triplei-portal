@@ -89,7 +89,7 @@ public class ArticleService extends GenericService<ArticleEntity> {
 		if (file.toString() != "") {
 			try {
 				bytes = file.getBytes();
-				String filePath = env.getProperty("articleFileUploadPath");
+				String filePath = System.getProperty("upload.location");
 				log.debug("Article Upload Path{} ",filePath);
 				File dir = new File(filePath);
 				if (!dir.exists())

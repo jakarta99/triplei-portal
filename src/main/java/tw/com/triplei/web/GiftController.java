@@ -1,5 +1,7 @@
 package tw.com.triplei.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
+import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.enums.GiftType;
+import tw.com.triplei.service.GetImageService;
 import tw.com.triplei.service.GiftService;
 import tw.com.triplei.service.UserService;
 
@@ -24,6 +28,9 @@ public class GiftController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private GetImageService getImageService;
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -45,8 +52,14 @@ public class GiftController {
 //		model.addAttribute("modelw", giftService.getTypeTop3("WOMAN"));
 //		model.addAttribute("modelm", giftService.getTypeTop3("MAN"));
 //		model.addAttribute("modelot", giftService.getTypeTop3("OTHERS"));
+		List<GiftEntity> gifts =  giftService.getTypeTop3Hot(true);
+		
+		for(GiftEntity gift:gifts){
+			String b64 = getImageService.getImage(gift.getImage1());
+			gift.setShowImage(b64);
+		}
 
-		model.addAttribute("modelh",giftService.getTypeTop3Hot(true));
+		model.addAttribute("modelh",gifts);
 		model.addAttribute("modelv", giftService.getTypeTop3(GiftType.VOUCHERS));
 		model.addAttribute("modelf", giftService.getTypeTop3(GiftType.FURNITURES));
 		model.addAttribute("modele", giftService.getTypeTop3(GiftType.ELECTRONICS));

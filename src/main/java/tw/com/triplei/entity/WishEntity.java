@@ -46,6 +46,9 @@ public class WishEntity extends GenericEntity  {
 	
 	@Column(name = "TIME")
 	private Long time;//時間(篩選用)
+	
+	@Column(name="SHOW_IMAGE",columnDefinition="TEXT",length=2000000)
+	private String showImage;//顯示用圖片
 
 	@Override
 	public String toString() {

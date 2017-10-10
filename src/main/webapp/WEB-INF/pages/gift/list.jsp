@@ -113,7 +113,7 @@
 									<div class="col-sm-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelh.image1}"/>'>
+											src="data:image/jpg;base64,${modelh.showImage}">
 									</div>
 									<div class="col-sm-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">

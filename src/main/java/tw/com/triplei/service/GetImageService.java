@@ -20,10 +20,10 @@ public class GetImageService {
 		String b64 = new String();
 		 try{
 			 log.debug("imageName{}",imgName1);
-			 String imgName="C:/Users/LIU/Desktop/Triple-I Portal/src/main/webapp"+imgName1;
+//			 String imgName="C:/Users/LIU/Desktop/Triple-I Portal/src/main/webapp"+imgName1;
 //		      String imgName="C:/Users/LIU/Desktop/cat.jpg";
 //			 http://localhost/userfiles/bannerImage/ib20.jpg
-		      BufferedImage bImage = ImageIO.read(new File(imgName));
+		      BufferedImage bImage = ImageIO.read(new File(imgName1));
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		        ImageIO.write( bImage, "jpg", baos );
 		        baos.flush();
