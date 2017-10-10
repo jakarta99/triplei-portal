@@ -4,6 +4,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="icon" type="image/x-icon" href="/resources/pic/icon.png">
+<link href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
 <style>
 #mainNavbar {
 	border-color: #333333;
@@ -16,6 +17,10 @@ ul {
 }
 .dropdown-menu{
 text-align:right;
+}
+
+body{
+font-family: 'cwTeXYen', sans-serif;
 }
 </style>
 

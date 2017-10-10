@@ -43,14 +43,14 @@
  				<div class="col-xs-3 col-sm-0"></div><!--切版用div兩邊 -->
 				<div class="col-xs-6 col-sm-12"
 					style="display: table-cell; vertical-align: top; padding-top: 15vh;padding-left: 4vw;">
-					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;padding-bottom: 5vh">保險公司</h1>
+					<h1 style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;padding-bottom: 5vh">保險公司</h1>
 					<h4 style="margin-bottom: 5vh">
 						<a href="/insurer/list"
-							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各公司列表</a>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;">各公司列表</a>
 					</h4>
 					<h4  style="margin-bottom: 5vh">
 						<a href="/insurer/filt"
-							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;">各別項目查詢</a>
 					</h4>
 					<div id="bm" style="width: 120%;position: relative;left: -40px" ></div>
 				</div>
