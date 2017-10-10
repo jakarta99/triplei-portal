@@ -314,7 +314,7 @@ p{
 		</div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 	<!-- 		 <a src="/triplei-portal/pic/question.png" href="/question/askQuestion"></a> -->
-	<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+	
 
 <script type="text/javascript">
 

@@ -56,7 +56,7 @@
 				style="padding: 0; width: 100%; height: 100%; color: white; padding-top: 7vh">
 
 				<!-- 左半藍 -->
-				<div class="col-xs-12 col-sm-3"
+				<div class="col-xs-12 col-sm-3" id="leftLayout"
 					style="background-color: #5C8DEC; height: 100vh;">
 
 					<div class="col-xs-1 col-sm-1"></div>
@@ -98,348 +98,348 @@
 				<!-- 右半白 -->
 				<div class="col-sm-9"
 					style="height: 100%; color: black; overflow-y: auto; padding-top: 7vh">
-					<div class="col-sm-12" style="margin-top: 3vh; margin-bottom: 3vh;">
+					<div class="col-sm-12 col-xs-12" style="margin-top: 3vh; margin-bottom: 3vh;">
 
 						<!-- 					hot items col starts here -->
 						<c:if test="${not empty modelh}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">熱門兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modelh}" var="modelh">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12"> -->
+							<c:forEach items="${modelh}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelh.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modelh.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelh.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modelh}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/true">查看更多...</a>
 							</div>
 						</c:if>
 						<!-- 							hot items col ends here -->
 						<!-- 					electronics col starts here -->
 						<c:if test="${not empty modele}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">家電兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modele}" var="modele">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12"> -->
+							<c:forEach items="${modele}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modele.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modele.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modele.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modele}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/ELECTRONICS">查看更多...</a>
 							</div>
 						</c:if>
 						<!-- 							electronics col ends here -->
 						<!-- 					voucher col starts here -->
 						<c:if test="${not empty modelv}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">禮卷兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modelv}" var="modelv">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12 col-xs-12"> -->
+							<c:forEach items="${modelv}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelv.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modelv.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelv.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modelv}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/VOUCHERS">查看更多...</a>
 							</div>
 						</c:if>
 						<!-- 							voucher col ends here -->
 						<!-- 					furnitures col starts here -->
 						<c:if test="${not empty modelf}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">家居、廚具兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modelf}" var="modelf">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12"> -->
+							<c:forEach items="${modelf}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelf.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modelf.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelf.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modelf}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/FURNITURES">查看更多...</a>
 							</div>
 						</c:if>
 						<!-- 							furnitures col ends here -->
 						<!-- 					outdoor col starts here -->
 						<c:if test="${not empty modelod}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">戶外運動商品兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modelod}" var="modelod">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12"> -->
+							<c:forEach items="${modelod}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelod.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modelod.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelod.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modelod}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/OUTDOOR">查看更多...</a>
 							</div>
 						</c:if>
 						<!-- 							furnitures col ends here -->
 						<!-- 					ladies col starts here -->
 						<c:if test="${not empty modelw}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">女仕用品兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modelw}" var="modelw">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12"> -->
+							<c:forEach items="${modelw}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelw.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modelw.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelw.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modelw}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/WOMAN">查看更多...</a>
 							</div>
 						</c:if>
 						<!-- 							ladies col ends here -->
 						<!-- 					men col starts here -->
 						<c:if test="${not empty modelm}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">男仕用品兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modelm}" var="modelm">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12"> -->
+							<c:forEach items="${modelm}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelm.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modelm.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelm.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modelm}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/MAN">查看更多...</a>
 							</div>
 						</c:if>
 						<!-- 							men col ends here -->
 						<!-- 					others col starts here -->
 						<c:if test="${not empty modelot}">
-							<div class="col-sm-12" style="padding-bottom: 2vh">
+							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">其他商品兌換：</span>
 							</div>
 						</c:if>
-						<div class="col-sm-12">
-							<c:forEach items="${modelot}" var="modelot">
-								<div class="col-sm-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw;">
-									<div class="col-sm-12">
+<!-- 						<div class="col-sm-12"> -->
+							<c:forEach items="${modelot}" var="model">
+								<div class="col-sm-3 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${modelot.image1}"/>'>
+											src='<c:url value="${model.image1}"/>'>
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
-												style="font-size: 135%;">${modelot.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+												style="font-size: 135%;">${model.name}</span>
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
-														id="points"
-														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${modelot.bonus}</span>
+														id="points" 
+														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-													<button id="placeOrder" class="btn btn-sm btn-primary"
-														style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
+													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 						<c:if test="${not empty modelot}">
-							<div class="col-sm-12" align="right">
+							<div class="col-sm-12 col-xs-12" align="right">
 								<a href="${pageContext.request.contextPath}/gift/OTHERS">查看更多...</a>
 							</div>
 						</c:if>
@@ -456,7 +456,7 @@
 		<form>
 			<div class="form-group">
 				<div class="container-fluid">
-					<div class="col-md-7">
+					<div class="col-sm-7 ">
 						<div class="" style="margin-top: 20px; font-size: 125%">
 							<label class="">積點商品名稱: </label> <span id="orderName"
 								style="text-align: center;"></span>
@@ -472,8 +472,8 @@
 							<span id="orderPoint" style="text-align: center;"></span>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<img id="orderImage" style="height: 200px; width: 200px;">
+					<div class="col-sm-4 ">
+						<img class="img-responsive" id="orderImage" style="height: 200px; width: 200px;">
 					</div>
 				</div>
 				<hr>
@@ -501,8 +501,8 @@
 					</select>
 				</div>
 				<div>
-					<div class="col-md-9"></div>
-					<div class="col-md-3">
+					<div class="col-sm-9 "></div>
+					<div class="col-sm-3 ">
 						<a href="#" class="btn btn-secondary" data-loading-text="Loading"
 							id="saveButton"
 							style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">確認購買</a>
@@ -584,11 +584,13 @@
 // 隨手機更改dialog寬
 		var changedialogwidth = 700;
 		var changedialogheight = 450;
+		var changedialogheight2 = 500;
 	$(document).ready(function() {
 
 		if($(window).width()<700){
 			changedialogwidth =400;
 			changedialogheight =400;
+			changedialogheight2 =400;
 			$('#imgid').css("border","0px #5C8DEC solid");
 // 			$('#dialogwish').css("border","0px #5C8DEC solid");
 			$('#imgid').css("padding-left","0px");
@@ -633,7 +635,8 @@
 			$("#dialog").dialog({
 				autoOpen : false,
 				height : "auto",
-				width : 600,
+				height : changedialogheight2,
+				width : changedialogwidth,
 				show : {
 					effect : "blind",
 					duration : 800
@@ -668,6 +671,10 @@
 							
 							swal("購買成功" ,"" ,"success")
 							.then((value) => {
+								$("#userPoint").load(location.href + " #userPoint");
+								$("#audittingPoint").load(location.href + " #audittingPoint");
+								$("#exchangedPoint").load(location.href + " #exchangedPoint");
+// 								$("#leftLayout").load(location.href + " #leftLayout");
 								location.replace("/gift/list");
 							});
 							

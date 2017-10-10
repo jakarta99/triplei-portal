@@ -168,4 +168,10 @@ ul {
 		</div>
 		<!--/.nav-collapse -->
 	</div>
+	
+<%-- 	<c:if test="'<%=request.getRequestURL()%>''${pageContext.request.contextPath}//question/askQuestion'"> --%>
+<%-- 	<c:if test="'<%=request.getRequestURL()%>'!='${pageContext.request.contextPath}/question/askQuestion'"> --%>
+		<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+<%-- 	</c:if> --%>
 </nav>
+
