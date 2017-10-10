@@ -64,7 +64,7 @@ p {
 				<span style="color: #000079; font-weight: bold;">HOT
 				<a style="text-decoration: none; font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">本月熱搜榜</a></span>
 			</div>
-			<div class="col-xs-12 col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
+		<div class="col-xs-12 col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'>
 			<c:forEach var="hotproduct" items="${hotproduct}">
 				<div class="col-xs-12 col-sm-12" style="width: auto; height: 18vh; margin-bottom: 8vh;">
 					<a href="/product/${hotproduct.id}/Female/${year-30}-01-01/10000/10">
@@ -80,7 +80,7 @@ p {
 					</a>
 				</div>
 			</c:forEach>
-			</div>
+		</div>
 		</div>
 	</div>
 	<!--右半圖 -->
@@ -140,7 +140,6 @@ p {
 		</div>
 	<div class="col-xs-0 col-sm-1"></div>
 	</div>
-	
 	</div>
 </div>
 <!--內文結束 -->

@@ -20,11 +20,11 @@
 
 		<div style="padding-top: 9vh">
 			
-
-					<form class="form-horizontal col-md-12" id="dataForm" style="width:85%">
-								<h3 style=" margin-left: 10vh; margin-bottom: 5vh;">
+<h3 style="text-align:center;margin-bottom: 5vh;">
 									<strong>聯繫客服</strong>
 								</h3>
+					<form class="form-horizontal col-md-12" id="dataForm" style="width:85%;margin:0 auto; padding:auto">
+								
 
 								<div class="form-group required">
 									<label for="questionType" class="col-md-2 control-label">問題分類</label>

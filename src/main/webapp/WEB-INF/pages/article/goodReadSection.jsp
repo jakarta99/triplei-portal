@@ -9,7 +9,6 @@
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-
 <title>Triple i</title>
 <style type="text/css">
 
@@ -55,7 +54,7 @@ span{
 							<a href="/article/readArticle/read/${article.id}">
 								<span style="font-size: 150%">${article.title}</span>
 									<div style="width: 95%;">
-										<img style="width: 100%;margin-bottom: 2%;margin-top: 1%;" src="${article.bannerImage}" />
+										<img style="width: 100%;margin-bottom: 2%;margin-top: 1%;" src="data:image/jpg;base64,${article.showImage}"/>
 									</div>
 							</a>
 							<span>${article.introduction}</span>
@@ -65,6 +64,8 @@ span{
 			</div>
 		</div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+
 	</div>
 </div>
 </body>
