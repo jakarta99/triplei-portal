@@ -593,6 +593,7 @@
 // 			$('#dialogwish').css("border","0px #5C8DEC solid");
 			$('#imgid').css("padding-left","0px");
 			$('#imgid2').css("padding-left","0px");
+			$('#bm').css("width","120%");
 			
 		};
 	})
