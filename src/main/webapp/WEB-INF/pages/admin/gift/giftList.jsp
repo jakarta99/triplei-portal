@@ -107,7 +107,7 @@
 			            { title: '顏色/花樣', name: "colorAndType", type: "text", width: 150 },
 // 			            { title: '商品代碼', name: "code", type: "code", width: 150 },
 			            { title: '商品兌換點數', name: "bonus", type: "text", width: 150 },
-			            { title: '照片', name: "image1", type: "text", width: 150 ,itemTemplate: function(val) {return $("<img>").attr("src",val).css({ width: 80 })}},
+			            { title: '照片', name: "showImage", type: "text", width: 150 ,itemTemplate: function(val) {return $("<img>").attr("src","data:image/jpg;base64,"+val).css({ width: 80 })}},
 // 			            { title: '照片二', name: "image2", type: "text", width: 150 },
 // 			            { title: '照片三', name: "image3", type: "text", width: 150 },
 			            { title: '類別', name: "giftType", width: 150,type:"text",itemTemplate:function(data){

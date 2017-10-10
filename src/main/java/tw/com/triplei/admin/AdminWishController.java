@@ -33,6 +33,7 @@ import tw.com.triplei.commons.QueryOpType;
 import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.UserEntity;
 import tw.com.triplei.entity.WishEntity;
+import tw.com.triplei.service.GetImageService;
 import tw.com.triplei.service.WishService;
 
 @Slf4j
@@ -42,6 +43,9 @@ public class AdminWishController {
 
 	@Autowired
 	private WishService wishService;
+	
+	@Autowired
+	private GetImageService getImageService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage(Model model) {
@@ -80,6 +84,15 @@ public class AdminWishController {
 			}
 	
 			page = wishService.getByCondition(criterions, pageable);
+			
+			for(WishEntity wish:page){
+				try {
+					wish.setShowImage(getImageService.getImage(wish.getImage1()));
+				} catch (Exception e) {
+					continue;
+				}					
+				
+			}
 
 
 		} catch (final Exception e) {

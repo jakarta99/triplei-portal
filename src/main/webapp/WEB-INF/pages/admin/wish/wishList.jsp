@@ -3,7 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
+<%@page import="java.io.File"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="java.math.BigInteger"%>
+<%@page import="javax.xml.bind.DatatypeConverter"%>
+<%@page import="java.awt.image.BufferedImage"%>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -106,7 +113,7 @@
 						{name : "id",visible : true,width : 50},
 						{title : '品牌',name : "brand",type : "text",width : 150},
 						{title : '商品名稱',name : "name",type : "text",width : 400},
-						{ title: '圖片', name: "image1", width: 80,itemTemplate: function(val) {return $("<img>").attr("src",val).css({ width: 80})}},
+						{ title: '圖片', name: "showImage", width: 80,itemTemplate: function(val) {return $("<img>").attr("src","data:image/jpg;base64,"+val).css({ width: 80})}},
 						{ title: '許願時間', name: "wishTime",type : "text", width: 200}
 						
 

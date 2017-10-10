@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link rel="icon" type="image/x-icon" href="<s:url value="/resources/pic/icon.png"/>" />
+<link rel="icon" type="image/x-icon" href="/resources/pic/icon.png">
 <style>
 #mainNavbar {
 	border-color: #333333;
@@ -13,6 +13,9 @@
 
 ul {
 	font-size: 95%;
+}
+.dropdown-menu{
+text-align:right;
 }
 </style>
 
@@ -38,7 +41,7 @@ ul {
 
 		</div>
 		<div id="navbar" class="navbar-collapse collapse navbar-right"
-			style="font-size: 85%; padding: 0; position: relative;text-align:right;float:right;">
+			style="font-size: 90%; padding: 0; position: relative;text-align:right;float:right;padding-right:15px;overflow-x:hidden">
 			<ul class="nav navbar-nav navbar-right">
 				<!-- 後台 -->
 				<li class="dropdown"><sec:authorize
@@ -139,7 +142,7 @@ ul {
 
 					<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#" style="color: white">績點專區<span
+						data-toggle="dropdown" href="#" style="color: white">積點專區<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/gift/list" >績點商品列表</a></li>

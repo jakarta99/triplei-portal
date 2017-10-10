@@ -113,7 +113,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -156,7 +156,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -199,7 +199,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -242,7 +242,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -285,7 +285,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -328,7 +328,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -371,7 +371,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -414,7 +414,7 @@
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
@@ -595,7 +595,7 @@
 // 			$('#dialogwish').css("border","0px #5C8DEC solid");
 			$('#imgid').css("padding-left","0px");
 			$('#imgid2').css("padding-left","0px");
-			
+            $('#bm').css("width","120%");
 		};
 	})
 	
@@ -813,9 +813,4 @@
 	</script>
 </body>
 </html>
-
-
-
-
-
 
