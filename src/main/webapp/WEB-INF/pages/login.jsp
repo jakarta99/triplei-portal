@@ -47,8 +47,8 @@
 						style="height: 100vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;">
 						<!-- 左邊白 -->
 				<section class="login-form">
-						<div class="col-sm-1"></div>
-						<div class="col-sm-10">
+						<div class="col-sm-2"></div>
+						<div class="col-sm-8" style="padding-top: 10vh">
 
 							<div class="panel-body col-sm-12">
 
@@ -114,7 +114,7 @@
 							</div>
 
 						</div>
-						<div class="col-sm-1"></div>
+						<div class="col-sm-2"></div>
 			</section>
 					</div>
 <!-- 			</div> -->
@@ -122,17 +122,17 @@
 				<div class=" col-sm-6  text-center "
 					style="height: 100vh; background-color: #5C8DEC; padding-right: 0px; padding-left: 0px;">
 					<!--右邊藍 -->
-					<div class="col-*-1"></div>
-					<div class="col-*-10"
+					<div class="col-sm-1"></div>
+					<div class="col-sm-10"
 						style="height: 100%; display: flex; justify-content: center; flex-direction: column"
 						align='center'>
-						<div class="panel-body">
+						<div class="panel-body" style="position: relative;top: -20px">
 
 							<!-- 動圖 -->
-							<div class="col-*-12"
+							<div class="col-sm-12"
 								style="height: 100%; display: flex; justify-content: center; flex-direction: column; padding-left: 0px; padding-right: 0px"
 								align='center'>
-								<div class="col-*-12" id="bm" style="height: 100%"></div>
+								<div class="col-sm-12" id="bm" style="width: 35vw"></div>
 							</div>
 
 							<!-- 免費註冊 -->
@@ -144,7 +144,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-*-1"></div>
+					<div class="col-sm-1"></div>
 				</div>
 <!-- 			</div> -->
 <!-- 		</div> -->
