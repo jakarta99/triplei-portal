@@ -38,14 +38,7 @@ span {
 <div class="container-fluid" style="width: 100%; height: 100%; position: absolute; padding: 0">
 	<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 	<div id="content" style="padding: 0; width: 100%; height: 100%; color: white;padding-top:8vh">
-		<div class="col-lg-3" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
-		<div  class="col-xs-3 col-sm-0"></div>
-			<div class="col-xs-6 col-sm-12" style="text-align: center; margin-top: 7%; display: table">
-				<br /> <br />
-				<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
-			</div>
-			<div class="col-xs-3 col-sm-0"></div>
-		</div>
+		<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
 		<div class="col-lg-9" style="height: 100%; padding: 0; overflow-y: scroll; color: black">
 			<div class="col-md-12" id="list">
 				<div class="col-sm-12" id="editorChoice" style="padding-top: 4%;">

@@ -15,9 +15,13 @@ h4{
 </style>
 </head>
 <body>
-	<h2 class="col-md-12 col-sm-12" style="text-align:left;"><a href='/article/list' style="color:white;">文章專欄</a></h2>
+<div class="col-lg-3" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;" id="first">
+	<div  class="col-xs-1 col-sm-0"></div>
+	<div class="col-xs-10 col-sm-12" style="text-align: center; margin-top: 7%; display: table">
+	<br /> <br />
+		<h2 class="col-md-12 col-sm-12" style="text-align:left;"><a href='/article/list' style="color:white;" id="firsth1">文章專欄</a></h2>
 		<br/>
-			<div class="col-md-12" style="padding-top:7%">
+			<div class="col-md-12" style="padding-top:7%;height: 20vh;">
 				<h4><a href='/article/editorChoice' style="color:white;">編輯精選</a></h4>
 				<h4><a href='/article/news' style="color:white;">新聞專區</a></h4>
 				<h4><a href='/article/goodRead' style="color:white;">小資族必讀</a></h4>
@@ -26,6 +30,18 @@ h4{
 		<br/>
 		<br/>
 		<br/>
-<!-- 		<a href='/qa'>線上客服</a> -->
+	</div>
+	<div class="col-xs-1 col-sm-0"></div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		var wdth = $(window).width();
+		if (wdth < 700) {
+			$('#firsth1').css("margin-top", "7%");
+			$('#first').css("height", "63vh");
+		}
+	});
+</script>
 </body>
 </html>
