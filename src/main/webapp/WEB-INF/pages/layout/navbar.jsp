@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="icon" type="image/x-icon" href="/resources/pic/icon.png">
-<link href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/earlyaccess/cwtexhei.css" rel="stylesheet">
 <style>
 #mainNavbar {
 	border-color: #333333;
@@ -20,7 +20,7 @@ text-align:right;
 }
 
 body{
-font-family: 'cwTeXYen', sans-serif;
+font-family:  'cwTeXHei', sans-serif;
 }
 </style>
 
