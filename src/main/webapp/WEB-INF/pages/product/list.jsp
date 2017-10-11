@@ -129,15 +129,17 @@ padding-bottom:2vh;
 			</div>
 			<br/>
 			<div style="margin:10%"></div>
-			<div id="products" class="col-sm-12 products" style="width:100%;height:100%">
+			<div id="products">
+			<div class="col-sm-12" style="width:85%;padding-top:4vh;">
 		<div class="col-sm-4" style="padding:0;">
-		<img src="/resources/pic/product/使用教學/使用教學-1.png" style="width:100%;height:100%">
+		<img src="/resources/pic/product/使用教學/使用教學-1.png" style="width:100%;">
 		</div>
 		<div class="col-sm-4" style="padding:0;">
-		<img src="/resources/pic/product/使用教學/使用教學-2.png" style="width:100%;height:100%">
+		<img src="/resources/pic/product/使用教學/使用教學-2.png" style="width:100%;">
 		</div>
 		<div class="col-sm-4" style="padding:0;">
-		<img src="/resources/pic/product/使用教學/使用教學-3.png" style="width:100%;height:100%">
+		<img src="/resources/pic/product/使用教學/使用教學-3.png" style="width:100%;">
+		</div>
 		</div>
 			</div>
 			</div>
