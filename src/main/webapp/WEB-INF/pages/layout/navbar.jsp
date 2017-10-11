@@ -150,8 +150,8 @@ font-family: 'cwTeXYen', sans-serif;
 						data-toggle="dropdown" href="#" style="color: white">積點專區<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/gift/list" >績點商品列表</a></li>
-							<li><a href="/gift/giftOrder/list" >績點商品訂單</a></li>
+							<li><a href="/gift/list" >積點商品列表</a></li>
+							<li><a href="/gift/giftOrder/list" >積點商品訂單</a></li>
 						</ul></li>
 					</sec:authorize>
 
