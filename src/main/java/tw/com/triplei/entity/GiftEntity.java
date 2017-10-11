@@ -72,6 +72,9 @@ public class GiftEntity extends GenericEntity {
 
 	@Column(name = "REMARKS")
 	private String remarks; // 備註
+	
+	@Column(name="SHOW_IMAGE",columnDefinition="TEXT",length=2000000)
+	private String showImage;//顯示圖片
 
 	
 	@Override

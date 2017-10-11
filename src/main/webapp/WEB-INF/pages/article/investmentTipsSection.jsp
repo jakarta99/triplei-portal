@@ -9,7 +9,6 @@
 
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-
 <title>Triple i</title>
 
 <style type="text/css">
@@ -39,21 +38,7 @@ span{
 <div class="container-fluid" style="width: 100%; height: 100%; position: absolute; padding: 0">
 	<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 	<div  id="content" style="padding: 0; width: 100%; height: 100%; color: white;padding-top:8vh">
-			<div class="col-lg-3" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
-		<div  class="col-xs-3 col-sm-0"></div>
-			<div class="col-xs-6 col-sm-12" style="text-align: center; margin-top: 7%; display: table">
-				<br /> <br />
-				<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
-			</div>
-			<div class="col-xs-3 col-sm-0"></div>
-		</div>
-<!-- 		縮小手機版不置中程式碼留存 -->
-<!-- 		<div class="col-lg-3" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;"> -->
-<!-- 			<div class="col-sm-12" style="text-align: center; margin-top: 7%; display: table"> -->
-<!-- 				<br /> <br /> -->
-<%-- 				<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import> --%>
-<!-- 			</div> -->
-<!-- 		</div> -->
+	<c:import url="/WEB-INF/pages/layout/article/sidebar.jsp"></c:import>
 		<div class="col-lg-9" style="height: 100%; padding: 0; overflow-y: scroll; color: black" id="style-1">
 			<div class="col-md-12" id="list">
 				<div class="col-sm-12" id="investmentTips" style="padding-top: 4%;">
@@ -63,7 +48,7 @@ span{
 							<a href="/article/readArticle/read/${article.id}">
 								<span style="font-size: 150%">${article.title}</span>
 									<div style="width: 95%;">
-										<img style="width: 100%;margin-bottom: 2%;margin-top: 1%;" src="${article.bannerImage}" />
+										<img style="width: 100%;margin-bottom: 2%;margin-top: 1%;" src="data:image/jpg;base64,${article.showImage}"/>
 									</div>
 							</a>
 							<span>${article.introduction}</span>
@@ -73,6 +58,8 @@ span{
 			</div>
 		</div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+
 	</div>
 </div>
 </body>

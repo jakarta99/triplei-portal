@@ -35,6 +35,7 @@ import tw.com.triplei.commons.QueryOpType;
 import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.GiftEntity;
 import tw.com.triplei.enums.GiftType;
+import tw.com.triplei.service.GetImageService;
 import tw.com.triplei.service.GiftService;
 
 @Slf4j
@@ -44,6 +45,9 @@ public class AdminGiftController {
 
 	@Autowired
 	private GiftService giftService;
+	
+	@Autowired
+	private GetImageService getImageService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage(Model model) {
@@ -88,7 +92,9 @@ public class AdminGiftController {
 			}
 			
 			page = giftService.getByCondition(criterions, pageable);
-			
+			for(GiftEntity gift:page){
+				gift.setShowImage(getImageService.getImage(gift.getImage1()));
+			}
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);

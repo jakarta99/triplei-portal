@@ -109,7 +109,7 @@ padding-bottom:2vh;
 			<div class="col-sm-4" style="margin-bottom:2%;border:1px white solid">
 			<span id="dollar">金額(新台幣／年)</span><br/>
 			<span>$</span>
-			<input type="text" id="premium" placeholder="50,000" style="width:70%;border:1px black solid">
+			<input type="text" id="premium" placeholder="50000" style="width:70%;border:1px black solid">
 			</div>
 			<div class="col-sm-4">
 			<span>繳費年期(年)</span><br/>
@@ -129,10 +129,21 @@ padding-bottom:2vh;
 			</div>
 			<br/>
 			<div style="margin:10%"></div>
-			<div id="products" class="products">
-		
+			<div id="products">
+			<div class="col-sm-12" style="width:85%;padding-top:4vh;">
+		<div class="col-sm-4" style="padding:0;">
+		<img src="/resources/pic/product/使用教學/使用教學-1.png" style="width:100%;">
+		</div>
+		<div class="col-sm-4" style="padding:0;">
+		<img src="/resources/pic/product/使用教學/使用教學-2.png" style="width:100%;">
+		</div>
+		<div class="col-sm-4" style="padding:0;">
+		<img src="/resources/pic/product/使用教學/使用教學-3.png" style="width:100%;">
+		</div>
+		</div>
 			</div>
 			</div>
+<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 		</div>
@@ -238,7 +249,7 @@ padding-bottom:2vh;
 	 				}else if(row.interestRateType=="預定利率") {
 	 					var vv = parseFloat(row.predictInterestRate*100).toFixed(2);
 	 				}
-					
+					$("#products").empty();
 					$("#products").append("<div style='display:table;background-color:white;width:100%;height:1em;padding-bottom:2%;'></div><div class='col-sm-12'  style='display:table;background-color:#FAF7F7;width:100%;' ><div class='col-sm-12'  style='padding-top:2%;'><div class='col-sm-8'><div class='col-sm-1'><img width='50vw' height='auto' src='"+row.insurer.imgsrc+"'></div><div class='col-sm-11' style='padding-left:2vw'><span style='font-size:150%'>"+row.insurer.name+"</span><a href='/insurer/list'><img width='15vw' height='auto' src='/resources/pic/product/info-icon.png'></a><br/><span style='font-size:125%;'>"+row.code+"-"+row.localName+"</span></div></div><div class='col-sm-3' ><div class='col-sm-8'><span style='color:#5C8DEC;'>可獲得點數:<br/>"+(row.getPoint).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-4'><a href='/product/"+row.id+"/"+$('input[name="gender"]:checked').val()+"/"+$("#bDate").val()+"/"+$('#premium').val()+"/"+$('#yearCode').val()+"' id='interested'><input class='btn btn-secondary' name='interested' type='button' value='我有興趣' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;'></a></div></div><div class='col-sm-1'></div></div><br/><div class='col-sm-12' style='margin-top:1%;margin-bottom:1%'><div class='col-sm-2'></div><div class='col-sm-2'><span>總繳金額</span><br/><span> $"+parseFloat(row.totalPay).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-2'><span>領回金額</span><br/><span> $"+parseFloat(row.cashValue).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-2'><span>凈報酬</span><br/><span> $"+parseFloat(row.net).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-2'><span>IRR</span><br/><span>"+parseFloat(row.irr*100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"%</span></div><div class='col-sm-2'><input class='btn btn-secondary float-right moreInfo' type='button' name='#id' style='background-color:#FAF7F7;color:#5C8DEC;border:1px #5C8DEC solid;' value='+'></div></div><div class='col-sm-12 infoToggle' style='padding-bottom:6vh;'><hr/><div class='col-sm-4'><span>保額："+row.insureAmount+" 萬</span></div><div class='col-sm-4'><span>繳費折扣："+(row.discount)*100+"%</span></div><div class='col-sm-4'><span>續年保費：$"+(row.premiumAfterDiscount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-4'><span>繳別："+installment+"</span></div><div class='col-sm-4'><span>折扣後年繳保費：$"+(row.premiumAfterDiscount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-4'><span>"+row.interestRateType+"："+ vv +"%</span></div><div class='col-sm-4'><span>折扣前年繳保費：$"+(row.premium).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-4'><span>首年保費：$"+(row.premiumAfterDiscount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</span></div><div class='col-sm-4'><span>繳費方式："+row.paymentMethod+"</span></div></div></div>");
 
 	 				})

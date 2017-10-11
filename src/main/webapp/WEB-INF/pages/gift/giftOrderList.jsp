@@ -90,8 +90,8 @@
 			            { title: '商品兌換點數', name: "giftEntity.bonus", type: "text", width: 100 },
 			            { title: '數量', name: "quantity", type: "text", width: 50 },
 			            { title: '兌換日期', name: "orderTime", type: "text", width: 90, itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString();} },
-			            { title: '收件人姓名', name: "recipient", type: "text", width: 100 },
-			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 250 },
+			            { title: '收件人姓名', name: "recipient", type: "text", width: 90},
+			            { title: '收件人地址', name: "recipientAddress", type: "text", width: 180 },
 			            { title: '收件人電話', name: "recipientPhone", type: "text", width: 100 },
 			            { title: '希望收件時間', name: "recipientTime", type: "text", width: 100 },
 			            { title: '訂單處理狀態', name: "status", width: 100, itemTemplate:function(data){
@@ -157,7 +157,7 @@
 			    }
 			     
 			</script>
-
+<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 	</div>

@@ -31,6 +31,7 @@ import tw.com.triplei.commons.SpecCriterion;
 import tw.com.triplei.entity.ArticleEntity;
 import tw.com.triplei.enums.ArticleType;
 import tw.com.triplei.service.ArticleService;
+import tw.com.triplei.service.GetImageService;
 
 @Slf4j
 @Controller
@@ -39,6 +40,9 @@ public class AdminArticleController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private GetImageService getImageService;
 	
 	/*管理者登入後，從首頁點入到文章列表管理*/
 	@RequestMapping("/getArticles")
@@ -95,7 +99,9 @@ public class AdminArticleController {
 			}
 			
 			page = articleService.getByCondition(criterions, pageable);
-						
+			for(ArticleEntity article:page){
+				article.setShowImage(getImageService.getImage(article.getBannerImage()));
+			}
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);

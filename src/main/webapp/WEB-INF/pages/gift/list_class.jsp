@@ -53,7 +53,7 @@
 			<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 			<!-- 			<div style="padding:0;width:100%;height:100%;color:white;"> -->
 				<!-- 左半藍 -->
-				<div class="col-xs-12 col-sm-3"
+				<div class="col-xs-12 col-sm-3" id="leftLayout"
 					style="background-color: #5C8DEC; height: 100vh; color: white">
 
 					<div class="col-xs-1 col-sm-1"></div>
@@ -107,29 +107,29 @@
 						<span style="font-size: 190%">積點商品一覽：</span>
 					</div>
 					
-				<div class="col-sm-12">
+<!-- 				<div class="col-sm-12"> -->
 							<c:forEach items="${models}" var="model">
-								<div class="col-sm-3"
+								<div class="col-sm-3 col-xs-5"
 									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
-									<div class="col-sm-12">
+									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
-											src='<c:url value="${model.image1}"/>'>
+											src="data:image/jpg;base64,${model.showImage}">
 									</div>
-									<div class="col-sm-12"
+									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
-										<div class="col-sm-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 giftNames"
+										<div class="col-sm-12 col-xs-12" style="padding: 0;">
+											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
-											<div class="col-sm-12">
-												<div class="col-sm-8" style="padding: 0;">
+											<div class="col-sm-12 col-xs-12">
+												<div class="col-sm-8 col-xs-8" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
 														style="font-size: 125%; height: 1.5vh; color: #5C8DEC; margin-top: 1vh">${model.bonus}</span>
 												</div>
-												<div class="col-sm-4" style="padding: 0; float: right">
-												<button id="placeOrder" class="btn btn-sm btn-primary"
+												<div class="col-sm-4 col-xs-4" style="padding: 0; float: right">
+												<button id="placeOrder" class="btn btn-xs btn-sm btn-primary"
 													style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">立即兌換</button>
 												</div>
 											</div>
@@ -137,9 +137,9 @@
 									</div>
 								</div>
 							</c:forEach>
-						</div>
+<!-- 						</div> -->
 				
-					<div>
+					<div class="col-sm-12 col-xs-12">
 					<a href="<c:url value='/gift/list'/>">
 					<button class="btn btn-sm btn-primary col-sm-2"
 						style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid; margin-top: 5vh">
@@ -147,7 +147,8 @@
 					</div>
 				
 			</div>
-<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+			<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+			<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
 	</div>
 
@@ -211,7 +212,7 @@
 		<form >
 		<div class="form-group">
 			<div class="container-fluid">
-				<div class="col-md-7">
+				<div class="col-sm-7">
 					<div class="" style=" margin-top: 20px; font-size: 125%">
 						<label class="">積點商品名稱: </label> <span id="orderName"
 							style="text-align: center;"></span>
@@ -228,7 +229,7 @@
 							style="text-align: center;"></span>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-sm-4">
 					<img id="orderImage" style="height: 200px; width: 200px;">
 				</div>
 			</div>
@@ -256,8 +257,8 @@
 					</select>
 			</div>
 			<div>
-				<div class="col-md-9"></div>
-				<div class="col-md-3">
+				<div class="col-sm-9"></div>
+				<div class="col-sm-3">
 					<a href="#" class="btn btn-secondary" data-loading-text="Loading"
 						id="saveButton"
 						style="background-color: white; color: #5C8DEC; border: #5C8DEC 1px solid">確認購買</a>
@@ -273,15 +274,19 @@
 	// 隨手機更改dialog寬
 	var changedialogwidth = 700;
 	var changedialogheight = 450;
+	var changedialogheight2 = 500;
 $(document).ready(function() {
 
 	if($(window).width()<700){
 		changedialogwidth =400;
 		changedialogheight =400;
+		changedialogheight2 =400;
 		$('#imgid').css("border","0px #5C8DEC solid");
 		$('#dialogwish').css("border","0px #5C8DEC solid");
 		$('#imgid').css("padding-left","0px");
 		$('#imgid2').css("padding-left","0px");
+		$('#bm').css("width","100%");
+        $('#bm').css("left","0");
 		
 	};
 })
@@ -319,7 +324,8 @@ $(document).ready(function() {
 			$("#dialog").dialog({
 				autoOpen : false,
 				height : "auto",
-				width : 600,
+				height : changedialogheight2,
+				width : changedialogwidth,
 				show : {
 					effect : "blind",
 					duration : 800
@@ -354,6 +360,9 @@ $(document).ready(function() {
 							
 							swal("購買成功" ,"" ,"success")
 							.then((value) => {
+// 								$("#userPoint").load(location.href + " #userPoint");
+// 								$("#audittingPoint").load(location.href + " #audittingPoint");
+// 								$("#exchangedPoint").load(location.href + " #exchangedPoint");
 								location.replace("/gift/list");
 							});
 							
