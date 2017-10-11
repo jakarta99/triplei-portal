@@ -360,10 +360,10 @@ $(document).ready(function() {
 							
 							swal("購買成功" ,"" ,"success")
 							.then((value) => {
-								$("#userPoint").load(location.href + " #userPoint");
-								$("#audittingPoint").load(location.href + " #audittingPoint");
-								$("#exchangedPoint").load(location.href + " #exchangedPoint");
-// 								location.replace("/gift/list");
+// 								$("#userPoint").load(location.href + " #userPoint");
+// 								$("#audittingPoint").load(location.href + " #audittingPoint");
+// 								$("#exchangedPoint").load(location.href + " #exchangedPoint");
+								location.replace("/gift/list");
 							});
 							
 						} else if (data.剩餘點數不足) {

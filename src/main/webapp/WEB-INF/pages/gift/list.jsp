@@ -673,9 +673,9 @@
 							
 							swal("購買成功" ,"" ,"success")
 							.then((value) => {
-								$("#userPoint").load(location.href + " #userPoint");
-								$("#audittingPoint").load(location.href + " #audittingPoint");
-								$("#exchangedPoint").load(location.href + " #exchangedPoint");
+// 								$("#userPoint").load(location.href + " #userPoint");
+// 								$("#audittingPoint").load(location.href + " #audittingPoint");
+// 								$("#exchangedPoint").load(location.href + " #exchangedPoint");
 // 								$("#leftLayout").load(location.href + " #leftLayout");
 								location.replace("/gift/list");
 							});
