@@ -17,13 +17,6 @@
 			<!-- daily rollover. Make sure the path matches the one in the file element 
 				or else the rollover logs are placed in the working directory. -->
 			<fileNamePattern>log/triple-i-%d{yyyy-MM-dd}.log</fileNamePattern>
-
-			<!-- 
-			<timeBasedFileNamingAndTriggeringPolicy
-				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>5MB</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-			 -->
 			
 			<!-- keep 30 days' worth of history -->
 			<maxHistory>30</maxHistory>
@@ -34,7 +27,6 @@
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
 		</encoder>
 	</appender>
-
 
 
 	<root level="INFO">
