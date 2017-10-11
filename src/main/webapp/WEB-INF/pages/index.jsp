@@ -106,7 +106,7 @@ p {
 				<div class="col-sm-6" style="color:black">
 					<div style="margin-top:7%;">
 						<a href="/article/readArticle/read/${hotissue.id}">
-						<img style="width:100%;" src="${hotissue.bannerImage}" />
+						<img style="width:100%;" src="data:image/jpg;base64,${hotissue.showImage}" />
 						<h4>${hotissue.title}</h4></a>
 						<p>${hotissue.introduction}</p>
 					</div>
@@ -131,7 +131,7 @@ p {
 				<div class="col-sm-6" style="color:black">
 					<div style="margin-top:7%;">
 						<a href="/article/readArticle/read/${news.id}">
-						<img style="width:100%;" src="${news.bannerImage}" />
+						<img style="width:100%;" src="data:image/jpg;base64,${news.showImage}" />
 						<h4>${news.title}</h4></a>
 						<p>${news.introduction}</p>
 					</div>
