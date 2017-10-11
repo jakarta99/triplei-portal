@@ -153,6 +153,12 @@
 
 </body>
 <script type="text/javascript">
+$(document).ready(function() {
+
+	if($(window).width()<700){
+		$('#bm').css("width","100vw");
+	};
+});
 	var animation = bodymovin.loadAnimation({
 		container : document.getElementById('bm'),
 		renderer : 'svg',
