@@ -22,7 +22,14 @@ public class GetImageService {
 			 log.debug("imageName{}",imgName1);
 		      BufferedImage bImage = ImageIO.read(new File(imgName1));
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		        ImageIO.write( bImage, "jpg", baos );
+		        
+		        if(imgName1.contains(".jpg")){
+		        	ImageIO.write( bImage, "jpg", baos );
+		        } else if (imgName1.contains(".png")){
+		        	ImageIO.write( bImage, "png", baos );
+		        }
+		        
+		        	
 		        baos.flush();
 		        byte[] imageInByteArray = baos.toByteArray();
 		        baos.close();                                   
