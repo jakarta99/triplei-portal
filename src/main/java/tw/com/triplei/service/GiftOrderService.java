@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +68,10 @@ public class GiftOrderService extends GenericService<GiftOrderEntity> {
 	@Transactional(readOnly = true)
 	public GiftOrderEntity getById(long id) {
 		return giftOrderDao.findById(id);
+	}
+	@Transactional(readOnly = true)
+	public Page<GiftOrderEntity> getByCreatedBy(String createdBy, Pageable arg) {
+		return giftOrderDao.findByCreatedBy(createdBy, arg);
 	}
 	
 

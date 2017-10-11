@@ -82,8 +82,18 @@ public class GiftOrderController {
 		Page<GiftOrderEntity> page;
 
 		try {
+			
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}", userDetails);
+			
+			UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+			log.debug("getUser : {}", user);
+			
+			page = giftOrderService.getByCreatedBy(user.getAccountNumber() , pageable);
+			
+			
 
-			page = giftOrderService.getAll(new GiftOrderSpecification(), pageable);
+//			page = giftOrderService.getAll(new GiftOrderSpecification(), pageable);
 
 		} catch (final Exception e) {
 			return new GridResponse<>(e);
