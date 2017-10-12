@@ -115,13 +115,24 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('你確定要刪除這筆資料?')) {
-							$delBtn.button('loading');
-							$.delete_(BASE_URL+ "/" + row.id, function() {
-								$delBtn.button('reset');
-								$("#jsGrid").jsGrid("reset");
+						swal({
+							  title: "你確定要刪除這名會員?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							})
+							.then((willDelete) => {
+							  if (willDelete) {
+								  $delBtn.button('loading');
+		 							$.delete_(BASE_URL+ "/" + row.id, function() {
+		 								$delBtn.button('reset');
+		 								$("#jsGrid").jsGrid("reset");
+		 							});
+							    swal("刪除成功!", {
+							      icon: "success",
+							    });
+							  } 
 							});
-						}
 					});
 					
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');

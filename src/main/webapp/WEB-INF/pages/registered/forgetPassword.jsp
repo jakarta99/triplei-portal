@@ -59,6 +59,7 @@
 </body>
 </html>
 <script type="text/javascript">
+
 $(function(){
 	$("#next").bind("click", function() {
 		
@@ -69,7 +70,7 @@ $(function(){
 				function(data) {
 					
 					if (data.messages.length==0){
-						//alert("SUCCESS");
+						swal("SUCCESS","成功修改密碼!");
 						location.href = '/registered/sendPwEditLink?id=' + data.data.id
 						$btn.button("reset");
 					}	
@@ -79,6 +80,7 @@ $(function(){
 		
 		$btn.button("reset");			
 	});
+	
 })
 
 </script>

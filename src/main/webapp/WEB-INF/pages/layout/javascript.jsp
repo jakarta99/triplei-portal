@@ -27,25 +27,6 @@ log.debug("Current page is <c:out value='${pageContext.request.servletPath}' />"
 
 window.$log = log;
 
-/*SweetAlert套用*/ 
-
-window.legacyAlert = window.alert;
-
-window.alert = function(msg, title, type, params) {
-	var title = (title == null) ? '': title;
-	var type = (type == null) ? 'Warning' : type;
-	swal($.extend({
-		title: title,
-		text: msg,
-		type: type
-		}, params || {})
-		);
-	};
-
-function alertMessage(message) {
-	alert(message);
-}
-
 // 解決dialog閃一下消失
 
 $(".dialog-init").css("display","block");

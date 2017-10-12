@@ -125,14 +125,24 @@
 						$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 						
 						$delBtn.click(function() {
-							if (confirm('你確定要刪除這筆資料?')) {
-								$delBtn.button('loading');
-								$.delete_(BASE_URL+ "/" + row.id, function() {
-									$delBtn.button('reset');
-									$("#jsGrid").jsGrid("reset");
-									swal("刪除成功");
+							swal({
+								  title: "你確定要刪除這個願望?",
+								  icon: "warning",
+								  buttons: true,
+								  dangerMode: true,
+								})
+								.then((willDelete) => {
+								  if (willDelete) {
+									  $delBtn.button('loading');
+			 							$.delete_(BASE_URL+ "/" + row.id, function() {
+			 								$delBtn.button('reset');
+			 								$("#jsGrid").jsGrid("reset");
+			 							});
+								    swal("刪除成功!", {
+								      icon: "success",
+								    });
+								  } 
 								});
-							}
 						});
 						
 						// return $("<div></div>").append($editBtn);

@@ -56,10 +56,6 @@
 		          		<button id="resetBtn" class="btn btn-warning" data-loading-text="loading..." type="button" value="reset">重設</button>
 				</div>
 			</section>
-			
-			
-			
-			
 			<div style="padding-top:1vh">
 				<a href="<c:url value='/admin/article/insertArticle'/>"
 					class="btn btn-sm btn-primary" data-loading-text="Loading"> 
@@ -68,18 +64,6 @@
 			<div id="jsGrid" style="padding-top:1vh"></div>
 
 	<script>
-	window.legacyAlert = window.alert;
-
-	window.alert = function(msg, title, type, params) {
-	    	var title = (title == null) ? 'Error' : title;
-	    	var type = (type == null) ? 'Warning' : type;
-	   	 	swal($.extend({
-	            	title: title,
-	            	text: msg,
-	            	type: type
-	        	}, params || {})
-	    	);
-		};
 	
 	$("#searchBtn").bind("click",function(){
 		$("#jsGrid").jsGrid("reset");
@@ -151,14 +135,24 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('你確定要刪除這筆資料?')) {
-							
-							$delBtn.button('loading');
-							$.delete_(BASE_URL+ "/" + row.id, function() {
-								$delBtn.button('reset');
-								$("#jsGrid").jsGrid("reset");
+						swal({
+							  title: "你確定要刪除這篇文章?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							})
+							.then((willDelete) => {
+							  if (willDelete) {
+								  $delBtn.button('loading');
+		 							$.delete_(BASE_URL+ "/" + row.id, function() {
+		 								$delBtn.button('reset');
+		 								$("#jsGrid").jsGrid("reset");
+		 							});
+							    swal("刪除成功!", {
+							      icon: "success",
+							    });
+							  } 
 							});
-						}
 					});
 					
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');

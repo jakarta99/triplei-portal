@@ -130,30 +130,52 @@
 			    	$editBtn = $('');
 			    	}
 					$cancelBtn.click(function() {
-						if (confirm('您確定要取消這筆訂單嗎?')) {
-							$cancelBtn.button('loading');
-							$.ajax({
-								url:"<c:url value='/gift/giftOrder/orderCancel'/>"+ "/" + row.id, 
-								method:"PUT",
-								data:$('#status').text(),
-								success:function(data) {
-									if(data.訂單已取消){
-										swal("訂單已取消","","success")
-										.then((value) => {
-										location.replace("/gift/giftOrder/list");
-							    		});
-									}
-								$cancelBtn.button('reset');
-								$("#jsGrid").jsGrid("reset");
-								}
+						swal({
+							  title: "你確定要刪除這筆資料?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							})
+							.then((willDelete) => {
+							  if (willDelete) {
+								  $cancelBtn.button('loading');
+		 							$.ajax({
+	 								url:"<c:url value='/gift/giftOrder/orderCancel'/>"+ "/" + row.id, 
+	 								method:"PUT",
+	 								data:$('#status').text(),
+	 								success:function(data) {
+	 									if(data.訂單已取消){
+	 										swal("訂單已取消","","success")
+	 										.then((value) => {
+	 										location.replace("/gift/giftOrder/list");
+	 							    		});
+	 									}
+	 								$cancelBtn.button('reset');
+	 								$("#jsGrid").jsGrid("reset");
+	 								}
+	 							});
+							  } 
 							});
-						}
+// 						if (confirm('您確定要取消這筆訂單嗎?')) {
+// 							$cancelBtn.button('loading');
+// 							$.ajax({
+// 								url:"<c:url value='/gift/giftOrder/orderCancel'/>"+ "/" + row.id, 
+// 								method:"PUT",
+// 								data:$('#status').text(),
+// 								success:function(data) {
+// 									if(data.訂單已取消){
+// 										swal("訂單已取消","","success")
+// 										.then((value) => {
+// 										location.replace("/gift/giftOrder/list");
+// 							    		});
+// 									}
+// 								$cancelBtn.button('reset');
+// 								$("#jsGrid").jsGrid("reset");
+// 								}
+// 							});
+// 						}
 					});
-					
-					
 					return $("<div></div>").append($editBtn).append("<br/>").append($cancelBtn).append("<br/>");
-					
-			    
 			    }
 			     
 			</script>

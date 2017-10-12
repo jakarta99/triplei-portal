@@ -198,42 +198,34 @@
 							.dialog("open");
 				};
 
-				$("#detailsDialog").dialog({
-					autoOpen : false,
-					width : 400,
-					modal : true,
-					show : {
-						effect : "blind",
-						duration : 500
-					},
-					hide : {
-						effect : "blind",
-						duration : 500
-					}
-				});
-
 				function btns(value, row) {
 					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-					$delBtn
-							.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
-
+					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+					
 					$delBtn.click(function() {
-						if (confirm('你確定要刪除這筆資料?')) {
-							// 							$delBtn.button('loading');
-							$.delete_(BASE_URL + "/" + row.id, function() {
-								// 								$delBtn.button('reset');
-								$("#jsGrid").jsGrid("reset");
+						swal({
+							  title: "你確定要刪除這家超商?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							})
+							.then((willDelete) => {
+							  if (willDelete) {
+		 							$.delete_(BASE_URL+ "/" + row.id, function() {
+		 								$("#jsGrid").jsGrid("reset");
+		 							});
+							    swal("刪除成功!", {
+							      icon: "success",
+							    });
+							  } 
 							});
-						}
 					});
 
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
-					$editBtn
-							.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+					$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 
-					return $("<div></div>").append("<br/>").append($editBtn)
-							.append("<br/>").append($delBtn);
+					return $("<div></div>").append("<br/>").append($editBtn).append("<br/>").append($delBtn);
 				}
 			</script>
 

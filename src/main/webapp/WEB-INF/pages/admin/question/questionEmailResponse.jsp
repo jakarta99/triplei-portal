@@ -131,6 +131,7 @@
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");
 								});
+					
 							
 						$btn.button("reset");
 						// 			$("#emailreply").value("");

@@ -120,18 +120,38 @@
 					$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 					
 					$delBtn.click(function() {
-						if (confirm('Are You Sure Want to Delete?')) {
-							$delBtn.button('loading');
-							$.delete_(BASE_URL+ "/" + row.id, function(data) {
-								if(data.刪除成功){
-									swal("刪除成功","","success");
-								}else if(data.exception){
-									swal("非常抱歉", "修改未成功", "warning")
-								}
-								$delBtn.button('reset');
-								$("#jsGrid").jsGrid("reset");
-							});
-						}
+						$delBtn.click(function() {
+							swal({
+								  title: "你確定要刪除這筆訂單?",
+								  icon: "warning",
+								  buttons: true,
+								  dangerMode: true,
+								})
+								.then((willDelete) => {
+								  if (willDelete) {
+									  $delBtn.button('loading');
+			 							$.delete_(BASE_URL+ "/" + row.id, function() {
+			 								$delBtn.button('reset');
+			 								$("#jsGrid").jsGrid("reset");
+			 							});
+								    swal("刪除成功!", {
+								      icon: "success",
+								    });
+								  } 
+								});
+						});
+// 						if (confirm('Are You Sure Want to Delete?')) {
+// 							$delBtn.button('loading');
+// 							$.delete_(BASE_URL+ "/" + row.id, function(data) {
+// 								if(data.刪除成功){
+// 									swal("刪除成功","","success");
+// 								}else if(data.exception){
+// 									swal("非常抱歉", "修改未成功", "warning")
+// 								}
+// 								$delBtn.button('reset');
+// 								$("#jsGrid").jsGrid("reset");
+// 							});
+// 						}
 					});
 					
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');

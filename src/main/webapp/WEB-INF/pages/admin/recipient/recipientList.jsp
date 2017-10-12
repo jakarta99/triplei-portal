@@ -299,19 +299,6 @@
 						});
 
 				function btns(value, row) {
-// 					var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-// 					$delBtn
-// 							.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
-
-// 					$delBtn.click(function() {
-// 						if (confirm('你確定要刪除這筆資料?')) {
-// 							$delBtn.button('loading');
-// 							$.delete_(BASE_URL + "/" + row.id, function() {
-// 								$delBtn.button('reset');
-// 								$("#jsGrid").jsGrid("reset");
-// 							});
-// 						}
-// 					});
 
 					var $editBtn = $('<a class="btn btn-info btn-xs"></a>');
 					$editBtn.attr("href", BASE_URL + "/" + row.id);
