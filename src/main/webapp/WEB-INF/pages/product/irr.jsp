@@ -36,7 +36,7 @@ h3 {
 <body>
 	<div class="container-fluid" style="width: 100%; height: 100%; position: absolute; padding: 0">
 		<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-		<div style="padding: 0; width: 100%; height: 100%; color: white;padding-top:9vh" class="col-sm-12">
+		<div style="padding: 0; width: 100%; height: 100%; color: white;padding-top:8vh" class="col-sm-12">
 			<div class="col-sm-4" style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 				<div class="col-sm-10" style="margin-top: 7%; display: table;">
 					<h2 style="padding: 0;margin-bottom: 3vh;margin-top: 3vh">儲蓄險真正的報酬率</h2>
