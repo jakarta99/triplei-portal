@@ -19,7 +19,9 @@
 		<div style="padding-top:8vh">
 			<h3>訂單紀錄</h3>
 			<div class="text-center">			
-			<h5>你是業務員</h5>
+			<h2 style="color:red;"><strong>合作業務人員須知：</strong><br></h2>
+<h5 style="color:red;">每次接單都須支付點數，才可接單，本公司提供預借點數之服務，假如帳<br>戶內點數不足也可接單，但點數就會先從您的帳戶中扣除，帳戶餘額變成<br>負數時，需於下個月15號（緩衝時間為五日）將帳戶內的負數餘點結清。
+</h5>
 			</div>
 			
 			<section class="well">
