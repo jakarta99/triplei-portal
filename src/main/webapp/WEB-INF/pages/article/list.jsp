@@ -9,6 +9,7 @@
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
+<link rel="icon" type="image/x-icon" href="/resources/pic/icon.png">
 <script type="text/javascript" src="<c:url value="/resources/slick/slick.min.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
 

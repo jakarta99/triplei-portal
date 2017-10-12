@@ -6,12 +6,12 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta property="og:title" content="${article.title}"/>
+<meta property="og:title" content="Triple-I"/>
 <meta property="og:image" content="https://i.imgur.com/rEQ5E8X.jpg"/>
 <meta property="og:site_name" content="Triple-I"/>
 <meta property="og:url" content="3i-life.com.tw"/>
 <meta property="og:type" content="website"/>
-<meta property="og:description" content="${article.content}"/>
+<meta property="og:description" content="Triple-I 文章專區 最新儲蓄險資訊與消息就在Triple-I"/>
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
