@@ -5,7 +5,7 @@
 <a href="https://www.facebook.com/triplei.triplei/" target="_blank"><img src="/resources/pic/Footer/fb.png" border="0" style="height: 5vh"></a>
 <a href="/question/askQuestion"><img src="/resources/pic/Footer/mail.png" border="0" style="height: 5vh;margin-left: 0px"></a>
 </div>
-<div class="col-xs-9 col-sm-7" style="padding-top: 5vh;font-family: 微軟正黑體;padding-right: 0px;font-size: 1vw" id="footerfont">
+<div class="col-xs-9 col-sm-7" style="padding-top: 5vh;font-family: 微軟正黑體;padding-right: 0px;font-size: 2vh" id="footerfont">
 <!-- FB:https://www.facebook.com/triplei.triplei/<br> -->
 <!-- email:triplei@3i-life.com.tw<br> -->
 睿實科技股份有限公司<br>
@@ -18,7 +18,7 @@
 $(document).ready(function() { 
 	if ($(window).width() < 700) { 
 		$('#footerbar').find('img').css("height", "4vh");
-		$('#footerfont').css("height", "4vh");
+		$('#footerfont').css("font-size", "1vh");
  	} 
  }); 
 </script> 
