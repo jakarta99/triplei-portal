@@ -68,6 +68,18 @@
 			<div id="jsGrid" style="padding-top:1vh"></div>
 
 	<script>
+	window.legacyAlert = window.alert;
+
+	window.alert = function(msg, title, type, params) {
+	    	var title = (title == null) ? 'Error' : title;
+	    	var type = (type == null) ? 'Warning' : type;
+	   	 	swal($.extend({
+	            	title: title,
+	            	text: msg,
+	            	type: type
+	        	}, params || {})
+	    	);
+		};
 	
 	$("#searchBtn").bind("click",function(){
 		$("#jsGrid").jsGrid("reset");

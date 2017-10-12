@@ -124,15 +124,15 @@
 							function(data) {
 								if (data.messages.length == 0) {
 									$("#dataForm").trigger("reset");
-									//swal("SUCCESS", "資料新增成功！", "success");
-									alert("SUCCESS");
+									swal("SUCCESS", "資料新增成功！", "success");
+// 									alert("SUCCESS");
 									$btn.button("reset");
 								}
 							}, function(data, textStatus, jqXHR) {
 								$btn.button("reset");
 							});
 				}else{
-					alert("請確認資料填寫無誤");
+					swal("請確認資料填寫無誤");
 				}
 
 					$btn.button("reset");

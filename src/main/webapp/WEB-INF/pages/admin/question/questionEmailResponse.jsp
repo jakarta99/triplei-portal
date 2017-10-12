@@ -124,14 +124,14 @@
 								+ $("#emailreply").val() + "'/>", "dataForm",
 								function(data) {
 									if (data.messages.length == 0) {
-										//swal("SUCCESS", "問題資料更新成功", "success");
-										alert("回覆Email已寄出");
+										swal("SUCCESS", "回覆Email已寄出");
+// 										alert("回覆Email已寄出");
 										$btn.button("reset");
 									}
 								}, function(data, textStatus, jqXHR) {
 									$btn.button("reset");
 								});
-
+							
 						$btn.button("reset");
 						// 			$("#emailreply").value("");
 					});

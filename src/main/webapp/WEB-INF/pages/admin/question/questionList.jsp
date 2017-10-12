@@ -1,8 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE HTML>
 <html lang="en">
@@ -10,8 +9,7 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<script type="text/javascript"
-	src="<c:url value="/resources/jquery/moment.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <title>Triple i</title>
 <style>
@@ -46,10 +44,7 @@ border:1px black solid;
 
 		<div style="padding-top:9vh">
 			<h3>問題一覽</h3>
-<!-- 			<div> -->
-<%--           		<a href="<c:url value='/admin/question/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading"> --%>
-<!--             	<span class="glyphicon glyphicon-plus"></span>新增</a> -->
-<!--       		</div> -->
+
 			<div id="jsGrid"></div>
 			<div id="detailsDialog">
 			<span id="content" style="word-wrap:break-word"></span>

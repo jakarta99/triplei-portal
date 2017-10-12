@@ -129,8 +129,8 @@
 						$.put("<c:url value='/admin/question'/>", "dataForm",
 								function(data) {
 									if (data.messages.length == 0) {
-										//swal("SUCCESS", "問題資料更新成功", "success");
-										alert("SUCCESS");
+										swal("SUCCESS", "問題資料更新成功");
+// 										alert("SUCCESS");
 										$btn.button("reset");
 									}
 								}, function(data, textStatus, jqXHR) {
