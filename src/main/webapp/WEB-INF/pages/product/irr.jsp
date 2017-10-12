@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/resources/jquery/jquery-ui.1.11.2.css">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Triple i</title>
+<title>Triple i商品專區irr計算機</title>
 <style>
 h3 {
 	color: #5C8DEC;

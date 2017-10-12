@@ -12,7 +12,7 @@
 <script type="text/javascript" src="<c:url value="/resources/slick/slick.min.js"/>"></script>
 <link rel="stylesheet" type="text/css" href="/resources/slick/slick.css" />
 
-<title>Triple i</title>
+<title>Triple i 文章首頁</title>
 
 <style type="text/css">
 

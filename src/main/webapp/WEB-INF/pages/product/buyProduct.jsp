@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/resources/jquery/jquery-ui.1.11.2.css">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Triple i</title>
+<title>Triple i商品訂單頁面</title>
 <script type="text/javascript"
 	src='<c:url value="/resources/jquery/localization/jquery.ui.datepicker-zh-TW1.js" />'></script>
 	<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>

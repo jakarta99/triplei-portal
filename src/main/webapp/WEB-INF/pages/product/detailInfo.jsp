@@ -10,7 +10,7 @@
 	href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Triple i</title>
+<title>Triple i商品詳細資料</title>
 <script type="text/javascript" src='<c:url value="/resources/jquery/localization/jquery.ui.datepicker-zh-TW1.js" />'></script>
 <script type="text/javascript" src="/resources/flot/jquery.flot.min.js"></script>
 <script type="text/javascript" src="/resources/flot/jquery.flot.symbol.js"></script>
