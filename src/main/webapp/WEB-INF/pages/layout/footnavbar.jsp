@@ -18,7 +18,7 @@
 $(document).ready(function() { 
 	if ($(window).width() < 700) { 
 		$('#footerbar').find('img').css("height", "4vh");
-// 		$('#footerfont').css("font-size", "4vh");
+		$('#footerfont').css("font-size", "1vh");
  	} 
  }); 
 </script> 
