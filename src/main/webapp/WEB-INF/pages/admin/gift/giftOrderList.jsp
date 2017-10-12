@@ -31,10 +31,10 @@
 							<div class="col-sm-2">
 								<select id="status" name="status" class="form-control">
 									<option value="">全部</option>
+									<option value="WAITING">已收到訂單</option>
 									<option value="PROCESSING">訂單處理中</option>
-									<option value="SHIPORDER">出貨中</option>
-									<option value="DONE">處理完成</option>
-									<option value="CANCEL">退訂中</option>
+									<option value="SHIPORDER">配送中</option>
+									<option value="DONE">配送完成</option>
 									<option value="CANCELDONE">退訂完成</option>
 								</select>
 							</div>
