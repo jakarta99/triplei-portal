@@ -49,7 +49,7 @@ h3 {
 					<div id="bm" style="width: 100%;position: relative;"></div>
 				</div>
 			</div>
-			<div class="col-sm-4" style="background-color: white; height: 60vh; padding-top: 5%; color: black;">
+			<div class="col-sm-4" id="irrinput" style="background-color: white; height: 60vh; padding-top: 5%; color: black;">
 				
 				<div class="col-sm-12" style="padding-top: 0%; height: 90vh;">
 				
@@ -59,7 +59,7 @@ h3 {
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="period" name="period" type="number" min="0" value="1" style="width:300px;border: 1px solid #5C8DEC" />
-							<div style="opacity: 0.8;">
+							<div style="opacity: 0.8;font-size:2vh;">
 								<p class="explancontent" id="periodlabelcontent">保費要繳幾年?(躉繳請輸入1唷)</p>
 							</div>
 						</div>
@@ -71,7 +71,7 @@ h3 {
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="premium" type="number" min="0" value="10000" style="width:300px;border: 1px solid #5C8DEC" />
-							<div style="opacity: 0.8;">
+							<div style="opacity: 0.8;font-size:2vh;">
 								<p class="explancontent" id="premiumlabelcontent">每年繳多少錢呢?</p>
 							</div>
 						</div>
@@ -83,7 +83,7 @@ h3 {
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="times" name="times" type="number" min="0" value="1" style="width:300px;border: 1px solid #5C8DEC" />
-							<div style="opacity: 0.8;">
+							<div style="opacity: 0.8;font-size:2vh;">
 								<p class="explancontent" id="timeslabelcontent">期望在第幾年後領回?</p>
 							</div>
 						</div>
@@ -95,7 +95,7 @@ h3 {
 						</div>
 						<div class="col-md-8">
 							<input class="form-control check_change" id="expired" name="expired" type="number" min="0" value="10123" style="width:300px;border: 1px solid #5C8DEC" />
-							<div style="opacity: 0.8;">
+							<div style="opacity: 0.8;font-size:2vh;">
 								<p class="explancontent" id="expiredlabelcontent">填入的領回時間當年度的解約金額</p>
 							</div>
 						</div>
@@ -105,9 +105,9 @@ h3 {
 				
 			</div>
 			
-			<div class="col-sm-4" style="background-color: white; height: 90vh; padding-top: 5%; color: black;">
+			<div class="col-sm-4" id="irrarea" style="background-color: white; height: 90vh; padding-top: 5%; color: black;">
 			
-				<div id="showResults" class="col-sm-12" style="padding-top: 5%; height: 90vh;">
+				<div id="showResults" class="irrarea" class="col-sm-12" style="padding-top: 5%;padding-left:5%; height: 90vh;">
 					<div class="col-md-12" style="padding: 0; margin: 2% auto 3% auto">
 						<div class="col-md-12" style="padding: 0;">
 							<span style="font-size: 150%">總繳金額</span>
@@ -224,7 +224,13 @@ h3 {
 						swal("請輸入整數的年期");
 					}
 				})
-				
+	$(document).ready(function() {
+		var wdth = $(window).width();
+		if (wdth < 700) {
+			$('#irrarea').css("text-align", "center");
+			$('#irrinput').css("height", "70vh");
+		}
+	});
 			var animation = bodymovin.loadAnimation({
 			  container: document.getElementById('bm'),
 			  renderer: 'svg',
