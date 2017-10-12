@@ -20,7 +20,7 @@ text-align:right;
 }
 
 body{
-font-family:  'cwTeXHei', sans-serif;
+font-family: 微軟正黑體;
 }
 </style>
 
