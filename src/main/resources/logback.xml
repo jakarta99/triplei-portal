@@ -35,5 +35,5 @@
 	</root>
 	<logger name="org.springframework.web" level="info" />
 	<logger name="org.springframework.security" level="info" />
-	<logger name="tw.com.triplei" level="DEBUG" />
+	<logger name="tw.com.triplei" level="info" />
 </configuration>
