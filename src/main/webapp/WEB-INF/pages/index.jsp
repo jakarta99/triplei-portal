@@ -5,6 +5,16 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<meta name="copyright" content="2017 triplei Corporation.版權所有"/>
+<meta name="description" content="最專業的儲蓄險網站。讓你的財富開始起飛。TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問"/>
+<meta name="keywords" content="存錢,儲蓄險,儲蓄險比較,定存,保險,irr,報酬率,儲蓄險報酬率,美元儲蓄,美元定存,美金儲蓄,美金定存,人民幣儲蓄險,人民幣定存,澳幣儲蓄險,澳幣定存,網路投保,保險科技,金融科技,my83,推薦儲蓄險,保單計算,保單試算,儲蓄險試算,壽險"/>
+<meta name="author" content="Triple-I團隊"/>
+<meta property="og:title" content="Triple-I 最專業的儲蓄險網站"/>
+<meta property="og:image" content="https://i.imgur.com/rEQ5E8X.jpg"/>
+<meta property="og:site_name" content="Triple-I"/>
+<meta property="og:url" content="3i-life.com.tw"/>
+<meta property="og:type" content="website"/>
+<meta property="og:description" content="最專業的儲蓄險網站。讓你的財富開始起飛。TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
@@ -39,7 +49,7 @@ justtag{
 		<!-- 左邊白 -->
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
-				<h1 style="font-size: 5vh; margin-top: 30vh;" id="firsth1">最專業的保險理財</h1>
+				<h1 style="font-size: 5vh; margin-top: 30vh;" id="firsth1">最專業的儲蓄險網站</h1>
 				<h1 style="font-size: 5vh; margin-top: 10px; margin-bottom: 25px;">讓你的財富開始起飛</h1>
 				<div style="opacity: 0.8; margin-bottom: 7vh;">TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問</div>
 				<div class="col-sm-12">

@@ -6,6 +6,12 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<meta property="og:title" content="${article.title}"/>
+<meta property="og:image" content="https://i.imgur.com/rEQ5E8X.jpg"/>
+<meta property="og:site_name" content="Triple-I"/>
+<meta property="og:url" content="3i-life.com.tw"/>
+<meta property="og:type" content="website"/>
+<meta property="og:description" content="${article.content}"/>
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
