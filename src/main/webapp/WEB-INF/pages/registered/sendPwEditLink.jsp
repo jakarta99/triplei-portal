@@ -7,7 +7,7 @@
 <head>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Tripe i</title>
+<title>Tripe i重送臨時密碼</title>
 
 <style>
 #mainNavbar {

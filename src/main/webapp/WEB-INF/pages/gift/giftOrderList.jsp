@@ -11,7 +11,7 @@
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
 
-<title>Triple i</title>
+<title>Triple i積點商品訂單</title>
 
 </head>
 

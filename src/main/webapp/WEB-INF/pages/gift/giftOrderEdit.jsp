@@ -10,7 +10,7 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Triple i</title>
+<title>Triple i積點商品訂單修改</title>
 </head>
 
 <body>
