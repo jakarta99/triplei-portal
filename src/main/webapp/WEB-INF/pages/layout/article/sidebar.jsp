@@ -39,7 +39,7 @@ h4{
 		var wdth = $(window).width();
 		if (wdth < 700) {
 			$('#firsth1').css("margin-top", "7%");
-			$('#first').css("height", "63vh");
+			$('#first').css("height", "53vh");
 		}
 	});
 </script>
