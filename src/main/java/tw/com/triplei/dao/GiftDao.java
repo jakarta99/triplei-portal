@@ -21,7 +21,7 @@ public interface GiftDao extends GenericDao<GiftEntity>{
 //	@Query("SELECT g FROM GiftEntity g WHERE GIFT_TYPE = :giftType order by g.bonus")
 //	public List<GiftEntity> findByGiftTypeTop3(@Param("giftType")String giftType);
 //	 public List<GiftEntity> findTop3ByGiftTypeOrderByBonusDesc(@Param("giftType")String giftType);
-	public List<GiftEntity> findTop3ByGiftTypeOrderByBonus(GiftType giftType);
+	public List<GiftEntity> findTop4ByGiftTypeOrderByBonus(GiftType giftType);
 	
 	@Query("SELECT g FROM GiftEntity g WHERE HOT_GIFT = :hotGift")
 	public List<GiftEntity> findByHotGift(@Param("hotGift")boolean hotGift);
