@@ -275,8 +275,8 @@ padding-bottom:1vh;
 				</div>
 			</div>
 <c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
-<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>
+<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 	</div>
 	<input id="getProductId" value="${modelf.id}" style="visibility:hidden"/>
 	<input id="scorePoints" value="${modelf.getPoint}" style="visibility:hidden"/>
