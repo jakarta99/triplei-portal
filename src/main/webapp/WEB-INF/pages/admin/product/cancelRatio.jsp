@@ -61,7 +61,7 @@
 			            { title: '年齡', name: "insAge", type: "text", width: 30 },
 			            { title: '年期', name: "year", type: "text", width: 30 },
 			            <c:forEach var="num" begin="0" end="111" step="1"> 
-			            { title: '第'+${num}+'年', name: "cancelRatio_"+${num}, type: "text", width: 50 },
+			            { title: '第'+${num}+'年', name: "cancelRatio_"+${num}, type: "text", width: 100 },
 			            </c:forEach>
 			        ]
 			    })

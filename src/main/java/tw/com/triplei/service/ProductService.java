@@ -416,7 +416,13 @@ public class ProductService extends GenericService<ProductEntity> {
 				product.setPaymentMethod(rowi.getCell(8).getStringCellValue());
 
 				// 點數趴數
-				product.setBonusPoint(BigDecimal.valueOf(rowi.getCell(9).getNumericCellValue()));
+				try {
+					product.setBonusPoint(BigDecimal.valueOf(rowi.getCell(9).getNumericCellValue()));
+				} catch (Exception e1) {
+					//去掉% 再/100
+					String num =rowi.getCell(9).getStringCellValue();
+					product.setBonusPoint(BigDecimal.valueOf(Double.parseDouble(num.substring(0, num.length()-1))/100));
+				}
 
 				// 寫進資料庫
 				ProductEntity productEntity = dao.save(product);
