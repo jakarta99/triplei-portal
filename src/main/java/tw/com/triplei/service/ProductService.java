@@ -427,28 +427,33 @@ public class ProductService extends GenericService<ProductEntity> {
 				for (int j = 2; j <= sheet1.getLastRowNum(); j++) {
 					Row rowj = sheet1.getRow(j);
 
-					if (rowj.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
-							&& rowj.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
-							&& (int) (rowj.getCell(2).getNumericCellValue()) == productEntity.getYear()
-							&& rowj.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
-							&& (int) (rowj.getCell(4).getNumericCellValue()) == Integer
-									.parseInt(productEntity.getYearCode())
-							&& rowj.getCell(5).getStringCellValue().equals(productEntity.getCode())
-							&& rowj.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())) {
-						ProductPremiumRatio productPremiumRatio = new ProductPremiumRatio();
-						// 設定商品ID
-						productPremiumRatio.setProductId(productEntity.getId());
-						// 設定性別
-						productPremiumRatio.setGender(rowj.getCell(7).getStringCellValue());
-						// 設定投保年齡
-						productPremiumRatio.setInsAge((int) (rowj.getCell(8).getNumericCellValue()));
-						// 設定費率
-						productPremiumRatio.setPremiumRatio(BigDecimal.valueOf(rowj.getCell(9).getNumericCellValue()));
+					try {
+						if (rowj.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
+								&& rowj.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
+								&& (int) (rowj.getCell(2).getNumericCellValue()) == productEntity.getYear()
+								&& rowj.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
+								&& (int) (rowj.getCell(4).getNumericCellValue()) == Integer
+										.parseInt(productEntity.getYearCode())
+								&& rowj.getCell(5).getStringCellValue().equals(productEntity.getCode())
+								&& rowj.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())) {
+							ProductPremiumRatio productPremiumRatio = new ProductPremiumRatio();
+							// 設定商品ID
+							productPremiumRatio.setProductId(productEntity.getId());
+							// 設定性別
+							productPremiumRatio.setGender(rowj.getCell(7).getStringCellValue());
+							// 設定投保年齡
+							productPremiumRatio.setInsAge((int) (rowj.getCell(8).getNumericCellValue()));
+							// 設定費率
+							productPremiumRatio.setPremiumRatio(BigDecimal.valueOf(rowj.getCell(9).getNumericCellValue()));
 
-						// 寫進基本費率 table
-						productPremiumRatioDao.save(productPremiumRatio);
-						productPremiumRatioList.add(productPremiumRatio);
-					} else {
+							// 寫進基本費率 table
+							productPremiumRatioDao.save(productPremiumRatio);
+							productPremiumRatioList.add(productPremiumRatio);
+						} 
+						else {
+							continue;
+						}
+					} catch (Exception e) {
 						continue;
 					}
 				}
@@ -460,40 +465,44 @@ public class ProductService extends GenericService<ProductEntity> {
 
 				for (int k = 2; k <= sheet2.getLastRowNum(); k++) {
 					Row rowk = sheet2.getRow(k);
-					if (rowk.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
-							&& rowk.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
-							&& (int) (rowk.getCell(2).getNumericCellValue()) == productEntity.getYear()
-							&& rowk.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
-							&& (int) (rowk.getCell(4).getNumericCellValue()) == Integer
-									.parseInt(productEntity.getYearCode())
-							&& rowk.getCell(5).getStringCellValue().equals(productEntity.getCode())
-							&& rowk.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())) {
+					try {
+						if (rowk.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
+								&& rowk.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
+								&& (int) (rowk.getCell(2).getNumericCellValue()) == productEntity.getYear()
+								&& rowk.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
+								&& (int) (rowk.getCell(4).getNumericCellValue()) == Integer
+										.parseInt(productEntity.getYearCode())
+								&& rowk.getCell(5).getStringCellValue().equals(productEntity.getCode())
+								&& rowk.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())) {
 
-						ProductCancelRatio productCancelRatio = new ProductCancelRatio();
-						// 設定商品ID
-						productCancelRatio.setProductId(productEntity.getId());
-						// 違約金投保年齡
-						productCancelRatio.setInsAge((int) rowk.getCell(8).getNumericCellValue());
-						// 違約金性別
-						productCancelRatio.setGender(rowk.getCell(7).getStringCellValue());
+							ProductCancelRatio productCancelRatio = new ProductCancelRatio();
+							// 設定商品ID
+							productCancelRatio.setProductId(productEntity.getId());
+							// 違約金投保年齡
+							productCancelRatio.setInsAge((int) rowk.getCell(8).getNumericCellValue());
+							// 違約金性別
+							productCancelRatio.setGender(rowk.getCell(7).getStringCellValue());
 
-						// 0~111年的解約金費率
-						for (int x = 0; x <= 111; x++) {
-							MethodUtils methodUtils = new MethodUtils();
-							try {
-								methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_" + x,
-										BigDecimal.valueOf(rowk.getCell(x + 9).getNumericCellValue()));
-							} catch (Exception e) {
-								methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_" + x,
-										BigDecimal.valueOf(0D));
+							// 0~111年的解約金費率
+							for (int x = 0; x <= 111; x++) {
+								MethodUtils methodUtils = new MethodUtils();
+								try {
+									methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_" + x,
+											BigDecimal.valueOf(rowk.getCell(x + 9).getNumericCellValue()));
+								} catch (Exception e) {
+									methodUtils.invokeMethod(productCancelRatio, "setCancelRatio_" + x,
+											BigDecimal.valueOf(0D));
+								}
 							}
+							// 寫進違約金table
+							productCancelRatioDao.save(productCancelRatio);
+
+							productCancelRatioList.add(productCancelRatio);
+
+						} else {
+							continue;
 						}
-						// 寫進違約金table
-						productCancelRatioDao.save(productCancelRatio);
-
-						productCancelRatioList.add(productCancelRatio);
-
-					} else {
+					} catch (Exception e) {
 						continue;
 					}
 
@@ -505,30 +514,34 @@ public class ProductService extends GenericService<ProductEntity> {
 
 				for (int m = 2; m <= sheet3.getLastRowNum(); m++) {
 					Row rowm = sheet3.getRow(m);
-					if (rowm.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
-							&& rowm.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
-							&& (int) (rowm.getCell(2).getNumericCellValue()) == productEntity.getYear()
-							&& rowm.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
-							&& (int) (rowm.getCell(4).getNumericCellValue()) == Integer
-									.parseInt(productEntity.getYearCode())
-							&& rowm.getCell(5).getStringCellValue().equals(productEntity.getCode())
-							&& rowm.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())) {
-						ProductHighDiscountRatio productHighDiscountRatio = new ProductHighDiscountRatio();
-						// 高保費率商品ID
-						productHighDiscountRatio.setProductId(productEntity.getId());
-						// 折扣趴數
-						productHighDiscountRatio
-								.setDiscountRatio(BigDecimal.valueOf(rowm.getCell(7).getNumericCellValue()));
-						// 下限
-						productHighDiscountRatio.setMinValue(BigDecimal.valueOf(rowm.getCell(8).getNumericCellValue()));
-						// 上限
-						productHighDiscountRatio.setMaxValue((int) rowm.getCell(9).getNumericCellValue());
+					try {
+						if (rowm.getCell(0).getStringCellValue().equals(productEntity.getInsurer().getShortName())
+								&& rowm.getCell(1).getStringCellValue().equals(productEntity.getLocalName())
+								&& (int) (rowm.getCell(2).getNumericCellValue()) == productEntity.getYear()
+								&& rowm.getCell(3).getStringCellValue().equals(productEntity.getInterestRateType())
+								&& (int) (rowm.getCell(4).getNumericCellValue()) == Integer
+										.parseInt(productEntity.getYearCode())
+								&& rowm.getCell(5).getStringCellValue().equals(productEntity.getCode())
+								&& rowm.getCell(6).getStringCellValue().equals(rowi.getCell(5).getStringCellValue())) {
+							ProductHighDiscountRatio productHighDiscountRatio = new ProductHighDiscountRatio();
+							// 高保費率商品ID
+							productHighDiscountRatio.setProductId(productEntity.getId());
+							// 折扣趴數
+							productHighDiscountRatio
+									.setDiscountRatio(BigDecimal.valueOf(rowm.getCell(7).getNumericCellValue()));
+							// 下限
+							productHighDiscountRatio.setMinValue(BigDecimal.valueOf(rowm.getCell(8).getNumericCellValue()));
+							// 上限
+							productHighDiscountRatio.setMaxValue((int) rowm.getCell(9).getNumericCellValue());
 
-						// 寫入高保費table
-						productHighDiscountRatioDao.save(productHighDiscountRatio);
+							// 寫入高保費table
+							productHighDiscountRatioDao.save(productHighDiscountRatio);
 
-						productHighDiscountRatioList.add(productHighDiscountRatio);
-					} else {
+							productHighDiscountRatioList.add(productHighDiscountRatio);
+						} else {
+							continue;
+						}
+					} catch (Exception e) {
 						continue;
 					}
 				}
@@ -542,8 +555,9 @@ public class ProductService extends GenericService<ProductEntity> {
 				dao.save(productEntity);
 			}
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			
 			return false;
 		}
 		return true;

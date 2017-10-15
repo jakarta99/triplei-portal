@@ -184,17 +184,9 @@ public class AdminProductController {
 			for(MultipartFile file:files){
 				try {
 					boolean upload= productService.productUpload(file);
-					if(upload) {
-						response.setData("Sucesss");
-					}else {
-						response.setData("Fail");
-					}
+					log.debug("upload {}",upload);
 					boolean insert = productService.insertXlsxToDB(file);
-					if(insert) {
-						response.setData("insertSucesss");
-					}else {
-						response.setData("insertFail");
-					}
+					log.debug("insert {}",insert);
 				} catch (final Exception e) {
 					response.addException(e);
 				}
