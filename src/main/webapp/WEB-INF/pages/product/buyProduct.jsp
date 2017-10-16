@@ -28,7 +28,7 @@ select {
 		<div class="container-fluid"
 			style="width: 100%; height: 100%; position: absolute; padding: 0">
 			<c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-			<div style="padding: 0; width: 100%; height: 100%;padding-top:8vh">
+			<div class="col-sm-12" style="padding: 0; width: 100%;padding-top:15vh"></div>
 				<div class="col-sm-12" style="margin-top: 4%;">
 					<span style="font-size: 150%;width:85%;margin-left:6%;color:#5C8DEC;">基本資料及聯絡資訊</span>
 
@@ -176,7 +176,6 @@ select {
 				</div>
 				<div class="col-sm-12" style="height:5%;">
 				</div>
-			</div>
 <c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
 		</div>

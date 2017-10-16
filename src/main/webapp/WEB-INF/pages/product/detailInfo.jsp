@@ -68,7 +68,7 @@ padding-bottom:1vh;
 			
 			<div class="col-sm-12"
 				style="padding: 0; width: 100%; height: 100%; color: white;padding-top:8vh">
-				<div class="col-sm-3"
+				<div class="col-xs-12 col-sm-3"
 					style="background-color: #5C8DEC; height: 100%; overflow-y: auto;">
 					<div style="margin: 7% auto 0 auto; display: table; width: 70%;">
 						<br /> <br />
@@ -106,7 +106,7 @@ padding-bottom:1vh;
 					</div>
 				</div>
 
-				<div class="col-sm-9"
+				<div class="col-xs-12 col-sm-9"
 					style="height: 100%; padding: 3%; color: black; overflow-y: scroll;">
 					<br />
 					<div id="productDetails" class="productDetails">
@@ -273,10 +273,10 @@ padding-bottom:1vh;
 <!-- 						<a href="/recipient/add/1">我要購買</a> -->
 					</div>
 				</div>
-			</div>
 <c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
-		</div>
 <c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+			</div>
+		</div>
 	</div>
 	<input id="getProductId" value="${modelf.id}" style="visibility:hidden"/>
 	<input id="scorePoints" value="${modelf.getPoint}" style="visibility:hidden"/>
