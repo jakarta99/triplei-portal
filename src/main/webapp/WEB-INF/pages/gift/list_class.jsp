@@ -110,7 +110,7 @@
 <!-- 				<div class="col-sm-12"> -->
 							<c:forEach items="${models}" var="model">
 								<div class="col-sm-3 col-xs-5"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"

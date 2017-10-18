@@ -108,8 +108,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
 							<c:forEach items="${modelh}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px;margin-left: 2vw;  margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
@@ -151,8 +151,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
 							<c:forEach items="${modele}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
@@ -194,8 +194,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12 col-xs-12"> -->
 							<c:forEach items="${modelv}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
@@ -237,8 +237,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
 							<c:forEach items="${modelf}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
@@ -280,8 +280,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
 							<c:forEach items="${modelod}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
@@ -323,8 +323,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
 							<c:forEach items="${modelw}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
@@ -366,8 +366,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
 							<c:forEach items="${modelm}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
@@ -409,8 +409,8 @@
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
 							<c:forEach items="${modelot}" var="model">
-								<div class="col-sm-2 col-xs-3"
-									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;">
+								<div class="col-sm-2 col-xs-5"
+									style="border: #5C8DEC 1px solid; border-radius: 2px; margin-left: 2vw; margin-top:3vh;padding-left: 0px">
 									<div class="col-sm-12 col-xs-12">
 										<img id="image" class="img-responsive"
 											style="margin-top: 2vh; height: 100%; width: 100%;"
