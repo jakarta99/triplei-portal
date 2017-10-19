@@ -118,10 +118,10 @@
 									<div class="col-sm-12 col-xs-12"
 										style="padding-left: 0; margin-top: 2vh; margin-bottom: 3vh; padding-bottom: 1vh;">
 										<div class="col-sm-12 col-xs-12" style="padding: 0;">
-											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
+											<span id="giftName" class="col-sm-12 col-xs-12 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
@@ -164,7 +164,7 @@
 											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
@@ -207,7 +207,7 @@
 											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
@@ -250,7 +250,7 @@
 											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
@@ -293,7 +293,7 @@
 											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
@@ -336,7 +336,7 @@
 											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
@@ -379,7 +379,7 @@
 											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
@@ -422,7 +422,7 @@
 											<span id="giftName" class="col-sm-8 col-xs-8 giftNames"
 												style="font-size: 135%;">${model.name}</span>
 											<div class="col-sm-12 col-xs-12">
-												<div class="col-sm-8 col-xs-8" style="padding: 0;">
+												<div class="col-sm-12 col-xs-12" style="padding: 0;">
 													<img alt="" style="margin-top: -1vh; height: 2.5vh;"
 														src="/resources/pic/積點專區/點數(小).png"> <span
 														id="points" 
