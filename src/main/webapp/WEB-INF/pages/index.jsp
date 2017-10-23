@@ -31,10 +31,23 @@ p {
 	opacity: 0.8;
 }
 
-#footerbar{
-position:fixed;
+/* #footerbar{ */
+/* position:fixed; */
+/* bottom:0; */
+/* display:inline-block; */
+/* } */
+#wrapper{
+min-height:100%;
+position:relative;
+}
+#content{
+padding-bottom:13vh;
+}
+#footer{
+position:absolute;
 bottom:0;
-display:inline-block;
+width:100%;
+height:13vh;
 }
 </style>
 
@@ -45,9 +58,9 @@ display:inline-block;
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate var="year" value="${now}" pattern="yyyy" />
 <!--以下首頁頁面 -->
-<div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
+<div class="container-fluid wrapper" style="padding-right: 0px; padding-left: 0px;">
 <c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
-	<div>
+	<div class="content">
 	<!--第一頁開始 -->
 	<div class="col-xs-12 col-sm-4" style="height: 80vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;overflow:auto;" id="first">
 		<!-- 左邊白 -->
@@ -109,7 +122,7 @@ display:inline-block;
 	</div>
 	
 	<!--第三頁開始-->
-	<div class="col-sm-6 col-xs-12" style="height: 100vh;">
+	<div class="col-sm-12 col-xs-12" style="height: 100vh;">
 	<div class="col-xs-0 col-sm-1"></div>
 		<div class="col-xs-12 col-sm-10">
 			<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 1%;">
@@ -135,7 +148,7 @@ display:inline-block;
 	
 	<!-- 第四頁 -->
 	<c:if test="${not empty news}">
-	<div class="col-xs-12 col-sm-6" style="height: 100vh;padding-top:3%;">
+	<div class="col-xs-12 col-sm-12" style="height: 100vh;padding-top:3%;">
 	<div class="col-xs-0 col-sm-1"></div>
 		<div class="col-xs-12 col-sm-10">
 			<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 1%;">
@@ -160,10 +173,13 @@ display:inline-block;
 	</div>
 	</c:if>
 	</div>
+	<div class="footer">
+	<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
+	</div>
+	<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
 </div>
 <!--內文結束 -->
-	<c:import url="/WEB-INF/pages/layout/footnavbar.jsp"></c:import>
-	<c:import url="/WEB-INF/pages/layout/question.jsp"></c:import>
+	
 
 	<script type="text/javascript">
 		// $(function(){

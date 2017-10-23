@@ -146,7 +146,7 @@
 						<!-- 					electronics col starts here -->
 						<c:if test="${not empty modele}">
 							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
-								<span style="font-size: 190%">家電兌換：</span>
+								<span style="font-size: 190%">3C家電：</span>
 							</div>
 						</c:if>
 <!-- 						<div class="col-sm-12"> -->
