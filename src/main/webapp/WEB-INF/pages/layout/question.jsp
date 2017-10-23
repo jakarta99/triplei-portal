@@ -7,8 +7,8 @@
 <style>
 #AskQuestion{
     position: fixed;  /*固定在網頁上不隨卷軸移動，若要隨卷軸移動用absolute*/
-    top: 85%;  /*設置垂直位置*/
-    right: -10px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
+    top: 80%;  /*設置垂直位置*/
+    right: 0px;  /*設置水平位置，依所放的內容多寡需要自行手動調整*/
     padding: 10px 20px;
 /*     border-radius: 10px;   */
 /*     -moz-border-radius: 10px; */
@@ -22,6 +22,20 @@
 
 <!-- Fixed navbar -->
 <div id="AskQuestion">
-<a href="/question/askQuestion"><img alt="" src="/resources/pic/question.png" 
-style="height : 50px ; width: 50px"></a>
+<a href="/question/askQuestion">
+<img alt="" id="questionlogo" src="/resources/pic/question.png" style="height : 8vh ; width: 8vh"></a>
 </div>
+
+<script>
+$(document).ready(function() {
+	var wdth = $(window).width();
+	if (wdth < 700) {
+		$("#AskQuestion").css("top","73%");
+		$("#AskQuestion").css("right","-10px");
+		$("#questionlogo").css("height","11vh");
+		$("#questionlogo").css("width","11vh");
+		
+	}
+	
+});
+</script>

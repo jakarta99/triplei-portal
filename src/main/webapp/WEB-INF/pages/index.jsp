@@ -181,7 +181,7 @@ display:inline-block;
 // 				$('#asdfghjkll').find('div').css("font-size", "110%");
 				$('#asdfghjkll').find('.align-middle').css("font-size", "90%");
 				$('#asdfghjkll').find('img').css("width", "14vw");
-				$('#asdfghjkll').find('.justtag').css("font-size", "140%");
+				$('#asdfghjkll').find('.justtag').css("font-size", "140%");		
 			}
 			
 		});
