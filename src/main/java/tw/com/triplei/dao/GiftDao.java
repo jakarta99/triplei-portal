@@ -26,5 +26,5 @@ public interface GiftDao extends GenericDao<GiftEntity>{
 	@Query("SELECT g FROM GiftEntity g WHERE HOT_GIFT = :hotGift")
 	public List<GiftEntity> findByHotGift(@Param("hotGift")boolean hotGift);
 	
-	public List<GiftEntity> findTop3ByHotGift(boolean hotGift);
+	public List<GiftEntity> findTop4ByHotGift(boolean hotGift);
 }

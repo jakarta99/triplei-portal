@@ -100,7 +100,7 @@
 					style="height: 100%; color: black; overflow-y: auto; padding-top: 7vh">
 					<div class="col-sm-12 col-xs-12" style="margin-top: 3vh; margin-bottom: 3vh;">
 
-						<!-- 					hot items col starts here -->
+						<!-- hot items col starts here -->
 						<c:if test="${not empty modelh}">
 							<div class="col-sm-12 col-xs-12" style="padding-bottom: 2vh">
 								<span style="font-size: 190%">熱門兌換：</span>

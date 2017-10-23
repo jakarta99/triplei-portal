@@ -52,56 +52,56 @@ public class GiftController {
 //		model.addAttribute("modelw", giftService.getTypeTop3("WOMAN"));
 //		model.addAttribute("modelm", giftService.getTypeTop3("MAN"));
 //		model.addAttribute("modelot", giftService.getTypeTop3("OTHERS"));
-		List<GiftEntity> giftsh =  giftService.getTypeTop3Hot(true);
+		List<GiftEntity> giftsh =  giftService.getTypeTop4Hot(true);
 		for(GiftEntity gifth:giftsh){
 			String b64 = getImageService.getImage(gifth.getImage1());
 			gifth.setShowImage(b64);
 		}
 		model.addAttribute("modelh",giftsh);
 		
-		List<GiftEntity> giftsv =  giftService.getTypeTop3(GiftType.VOUCHERS);
+		List<GiftEntity> giftsv =  giftService.getTypeTop4(GiftType.VOUCHERS);
 		for(GiftEntity giftv:giftsv){
 			String b64 = getImageService.getImage(giftv.getImage1());
 			giftv.setShowImage(b64);
 		}
 		model.addAttribute("modelv",giftsv);
 		
-		List<GiftEntity> giftsf =  giftService.getTypeTop3(GiftType.FURNITURES);
+		List<GiftEntity> giftsf =  giftService.getTypeTop4(GiftType.FURNITURES);
 		for(GiftEntity giftf:giftsf){
 			String b64 = getImageService.getImage(giftf.getImage1());
 			giftf.setShowImage(b64);
 		}
 		model.addAttribute("modelf",giftsf);
 		
-		List<GiftEntity> giftse =  giftService.getTypeTop3(GiftType.ELECTRONICS);
+		List<GiftEntity> giftse =  giftService.getTypeTop4(GiftType.ELECTRONICS);
 		for(GiftEntity gifte:giftse){
 			String b64 = getImageService.getImage(gifte.getImage1());
 			gifte.setShowImage(b64);
 		}
 		model.addAttribute("modele",giftse);
 		
-		List<GiftEntity> giftsod =  giftService.getTypeTop3(GiftType.OUTDOOR);
+		List<GiftEntity> giftsod =  giftService.getTypeTop4(GiftType.OUTDOOR);
 		for(GiftEntity giftod:giftsod){
 			String b64 = getImageService.getImage(giftod.getImage1());
 			giftod.setShowImage(b64);
 		}
 		model.addAttribute("modelod",giftsod);
 		
-		List<GiftEntity> giftsw =  giftService.getTypeTop3(GiftType.WOMAN);
+		List<GiftEntity> giftsw =  giftService.getTypeTop4(GiftType.WOMAN);
 		for(GiftEntity giftw:giftsw){
 			String b64 = getImageService.getImage(giftw.getImage1());
 			giftw.setShowImage(b64);
 		}
 		model.addAttribute("modelw",giftsw);
 		
-		List<GiftEntity> giftsm =  giftService.getTypeTop3(GiftType.MAN);
+		List<GiftEntity> giftsm =  giftService.getTypeTop4(GiftType.MAN);
 		for(GiftEntity giftm:giftsm){
 			String b64 = getImageService.getImage(giftm.getImage1());
 			giftm.setShowImage(b64);
 		}
 		model.addAttribute("modelm",giftsm);
 		
-		List<GiftEntity> giftsot =  giftService.getTypeTop3(GiftType.OTHERS);
+		List<GiftEntity> giftsot =  giftService.getTypeTop4(GiftType.OTHERS);
 		for(GiftEntity giftot:giftsot){
 			String b64 = getImageService.getImage(giftot.getImage1());
 			giftot.setShowImage(b64);

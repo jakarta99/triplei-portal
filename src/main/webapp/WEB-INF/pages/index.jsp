@@ -45,7 +45,7 @@ justtag{
 <c:import url="/WEB-INF/pages/layout/navbar.jsp"></c:import>
 	<div>
 	<!--第一頁開始 -->
-	<div class="col-xs-12 col-sm-4" style="height: 80vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;" id="first">
+	<div class="col-xs-12 col-sm-4" style="height: 80vh; display: table; table-layout: fixed; padding-right: 0px; padding-left: 0px;overflow:auto;" id="first">
 		<!-- 左邊白 -->
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
@@ -55,7 +55,8 @@ justtag{
 				<div class="col-sm-12">
 					<a href="/product/list">
 						<button id="productBtn" name="productBtn" class="btn btn-md btn-primary"
-							style="background-color: white; color: #5C8DEC; border-radius: 30px;">開始篩選儲蓄險</button></a>
+							style="background-color: white; color: #5C8DEC; border-radius: 30px;" >開始篩選儲蓄險</button>
+							</a>
 				</div>
 			</div>
 			<div class="col-sm-1"></div>
@@ -104,7 +105,7 @@ justtag{
 	</div>
 	
 	<!--第三頁開始-->
-	<div class="col-sm-12" style="height: 100vh;">
+	<div class="col-sm-6 col-xs-12" style="height: 100vh;">
 	<div class="col-xs-0 col-sm-1"></div>
 		<div class="col-xs-12 col-sm-10">
 			<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 1%;">
@@ -129,7 +130,7 @@ justtag{
 	</div>
 	
 	<!-- 第四頁 -->
-	<div class="col-sm-12" style="height: 100vh;padding-top:3%;">
+	<div class="col-xs-12 col-sm-6" style="height: 100vh;padding-top:3%;">
 	<div class="col-xs-0 col-sm-1"></div>
 		<div class="col-xs-12 col-sm-10">
 			<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 1%;">
@@ -169,13 +170,14 @@ justtag{
 				$('#no2pageimg').css("height", "40vh");
 				$('#no1pageimg').css("height", "40vh");
 				$('#firsth1').css("margin-top", "20vh");
-				$('#first').css("height", "65vh");
+				$('#first').css("height", "70vh");
 // 				$('#asdfghjkll').css("font-size", "90%");
 // 				$('#asdfghjkll').find('div').css("font-size", "110%");
 				$('#asdfghjkll').find('.align-middle').css("font-size", "90%");
 				$('#asdfghjkll').find('img').css("width", "14vw");
 				$('#asdfghjkll').find('.justtag').css("font-size", "140%");
 			}
+			
 		});
 		var animation = bodymovin.loadAnimation({
 			container : document.getElementById('bm'),
@@ -184,6 +186,11 @@ justtag{
 			autoplay : true,
 			path : '/resources/pic/首頁/首頁動畫/main.json'
 		})
-	</script>
+	
+// $('#productBtn').on("click touchstart",function() {
+// 	alert("yes");
+//   window.location="/product/list";
+// });
+</script>
 </body>
 </html>
