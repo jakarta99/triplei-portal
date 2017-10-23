@@ -30,7 +30,11 @@ p {
 	font-size: 90%;
 	opacity: 0.8;
 }
-justtag{
+
+#footerbar{
+position:fixed;
+bottom:0;
+display:inline-block;
 }
 </style>
 
@@ -130,6 +134,7 @@ justtag{
 	</div>
 	
 	<!-- 第四頁 -->
+	<c:if test="${not empty news}">
 	<div class="col-xs-12 col-sm-6" style="height: 100vh;padding-top:3%;">
 	<div class="col-xs-0 col-sm-1"></div>
 		<div class="col-xs-12 col-sm-10">
@@ -153,6 +158,7 @@ justtag{
 		</div>
 	<div class="col-xs-0 col-sm-1"></div>
 	</div>
+	</c:if>
 	</div>
 </div>
 <!--內文結束 -->
@@ -187,10 +193,6 @@ justtag{
 			path : '/resources/pic/首頁/首頁動畫/main.json'
 		})
 	
-// $('#productBtn').on("click touchstart",function() {
-// 	alert("yes");
-//   window.location="/product/list";
-// });
 </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<div class="col-xs-12 col-sm-12" style="height: 13vh;background-color: #030033;margin: 0px;color: white;padding-left: 0px;padding-right: 0px" id="footerbar">
+<div class="col-xs-12 col-sm-12" style="height: 13vh;background-color: #030033;margin: 0px;margin-top:10vh;color: white;padding-left: 0px;padding-right: 0px" id="footerbar">
 <div class="col-xs-3 col-sm-5" style="border-right: 1px white solid;margin-top: 5.5vh;height: 5vh;padding-left: 0px;padding-right: 0px'" align="right" >
 <a href="https://www.facebook.com/triplei.triplei/" target="_blank"><img src="/resources/pic/Footer/fb.png" border="0" style="height: 5vh"></a>
 <a href="/question/askQuestion"><img src="/resources/pic/Footer/mail.png" border="0" style="height: 5vh;margin-left: 0px"></a>
