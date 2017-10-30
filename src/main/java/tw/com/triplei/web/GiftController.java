@@ -131,8 +131,11 @@ public class GiftController {
 		model.addAttribute("userPoint",user.getRemainPoint());
 		model.addAttribute("audittingPoint",user.getAudittingPoint());
 		model.addAttribute("exchangedPoint",user.getExchangedPoint());
-		
-		model.addAttribute("models", giftService.getByGiftType(giftType));
+		List<GiftEntity> gifts = giftService.getByGiftType(giftType);
+		for(GiftEntity gift:gifts){
+			gift.setShowImage(getImageService.getImage(gift.getImage1()));
+		}
+		model.addAttribute("models", gifts);
 
 		return "/gift/list_class";
 	}
@@ -149,8 +152,11 @@ public class GiftController {
 		model.addAttribute("userPoint",user.getRemainPoint());
 		model.addAttribute("audittingPoint",user.getAudittingPoint());
 		model.addAttribute("exchangedPoint",user.getExchangedPoint());
-		
-		model.addAttribute("models", giftService.getTypeHot(true));
+		List<GiftEntity> gifts = giftService.getTypeHot(true);
+		for(GiftEntity gift:gifts){
+			gift.setShowImage(getImageService.getImage(gift.getImage1()));
+		}
+		model.addAttribute("models", gifts);
 
 		return "/gift/list_class";
 	}

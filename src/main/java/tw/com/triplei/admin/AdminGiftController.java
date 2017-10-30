@@ -153,11 +153,11 @@ public class AdminGiftController {
 //			String formatAns = String.format(formatStr,insertResult.getId());
 //			String giftNumber = brandnum+giftnum+colorAndType+formatAns;
 //			giftEntity.setCode(giftNumber);
-			giftEntity.setCreatedTime(new Timestamp(new Date().getTime()));
+			insertResult.setCreatedTime(new Timestamp(new Date().getTime()));
 			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			log.debug("userDetails: {}",userDetails);
-			giftEntity.setCreatedBy(userDetails.getUsername());
-			final GiftEntity insertResultFinal = giftService.update(giftEntity);
+			insertResult.setCreatedBy(userDetails.getUsername());
+			final GiftEntity insertResultFinal = giftService.update(insertResult);
 			response.setData(insertResultFinal);
 
 		} catch (final ApplicationException ex) {
