@@ -88,7 +88,10 @@ padding-bottom:2vh;
 			</div>
 			
 			<div id="right-side" class="col-sm-9" style="height:100%;padding-right:3%;padding-bottom:3%;padding-left:3%;color:black;overflow-y:scroll;">
-			<br/><br/>
+			<br/>
+			<span style="padding-left: 2%;font-weight: bold;">本平台僅提供IRR相關資訊，投保人應自行做其他條件比較。本平台資訊會與實際狀況有極些微之落差，但不影響IRR之變動。</span>
+			<br/>
+			<br/>
 			<div>
 			<form id="input2">
 			<div class="col-sm-4" style="margin-bottom:2%">
