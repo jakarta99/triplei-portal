@@ -81,7 +81,7 @@
 					</div>
 								
 					<div class="form-group required">
-		    			<label for="birthdate" class="col-md-3 control-label">生日</label>
+		    			<label for="birthdate" class="col-md-3 control-label">生日<p style="color: red;">(非必填)</p></label>
 		    			<div class="col-md-8">
 		      				<input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="yyyy-mm-dd" value=""/>
 		      				<span class="help-block"><div class="text-danger"></div></span>
@@ -101,7 +101,7 @@
 					</div>
 								
 					<div class="form-group required">
-						<label for="tel" class="col-md-3 control-label">聯絡電話</label>
+						<label for="tel" class="col-md-3 control-label">聯絡電話<p style="color: red;">(非必填)</p></label>
 						<div class="col-md-8">
 							<input type="tel" class="form-control" id="tel"
 								name="tel" placeholder="+886" value="" /> 

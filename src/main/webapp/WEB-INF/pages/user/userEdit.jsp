@@ -57,7 +57,7 @@
 								</div>	
 								
 								<div class="form-group required">
-			    					<label for="birthdate" class="col-md-2 control-label">生日</label>
+			    					<label for="birthdate" class="col-md-2 control-label">生日<p style="color: red;">(非必填)</p></label>
 			    					<div class="col-md-8">
 			      						<input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="yyyy-mm-dd" value="${userDetails.birthdate}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
@@ -76,7 +76,7 @@
 								</div>
 								
 								<div class="form-group required">
-			    					<label for="tel" class="col-md-2 control-label">聯絡電話</label>
+			    					<label for="tel" class="col-md-2 control-label">聯絡電話<p style="color: red;">(非必填)</p></label>
 			    					<div class="col-md-8">
 			      						<input type="text" class="form-control" id="tel" name="tel" placeholder="+886" value="${userDetails.tel}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
@@ -86,11 +86,12 @@
 								
 								</div>								
 							</div>
-						</div>	
-		 			</form>
+		 				</form>
+					</div>	
 				</div>				
 			</div>
-
+			<div class="col-md-12" style="text-align: center;text-decoration: underline;font-style: italic;color : red;font-weight: bold;"><span>請先按儲存，再按已完成才會修改成功唷!!!</span></div>
+			<br><br>
 			<div class="row">
 				<div class="col-md-6">
 					<div>
