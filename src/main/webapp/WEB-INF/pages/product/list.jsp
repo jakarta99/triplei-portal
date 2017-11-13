@@ -260,7 +260,7 @@ padding-bottom:2vh;
 	 				
 	 				
 	 				$(".infoToggle").hide();
-	 				swal("已查詢完畢");
+	 				swal("已查詢完畢!!","您所查詢的商品為儲蓄型保險商品,並非定存或是其他投資商品");
 		$(".moreInfo").on("click",function(){
 			var moreInfoBtn = $(this).parent().parent().siblings(".infoToggle");
 			moreInfoBtn.toggle("drop",500);
