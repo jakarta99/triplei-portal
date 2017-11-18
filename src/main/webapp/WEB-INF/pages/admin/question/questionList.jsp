@@ -9,8 +9,8 @@
 <sec:csrfMetaTags />
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/jquery/moment.js"/>"></script>
 <title>Triple i</title>
 <style>
 .ui-dialog{
@@ -106,7 +106,7 @@ border:1px black solid;
 			            { title: '問題分類2', name: "questionType2", type: "text", width: 150 },
 			            { title: 'Email', name: "askerEmail", width: 200,type:"text"},
 			            { title: '問題內容', name: "content",type:"text",visible:false},
-			            { title: '提問時間', name: "postTime", width: 70,itemTemplate: function(value) {return moment({value}).format("YYYY/MM/DD").toString()} },
+			            { title: '提問時間', name: "createdTime", width: 70,itemTemplate: function(val) {return moment(new Date(val)).format("YYYY年MM月DD日 HH:mm:ss")} },
 
 			        ]
 			    });
