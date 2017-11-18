@@ -65,6 +65,7 @@
 			            { title: '公司簡稱', name: "shortName", type: "text", width: 100 },
 			            { title: '公司名稱筆畫', name: "sortNo", type: "text", width: 100 },
 			            { title: '資本適足率', name: "bisRatio", type: "number", width: 90 },
+			            { title: '資本報酬率', name: "returnonAssets", type: "number", width: 90 },
 			            { title: '保單繼續率', name: "persistencyRatio", type: "number", width: 90 },
 			            { title: '訴訟率', name: "litigationRatio", type: "number", width: 80 },
 			            { title: '投訴率', name: "complaintRatio", type: "number", width: 80 },

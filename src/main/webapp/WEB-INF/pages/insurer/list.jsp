@@ -91,10 +91,11 @@
 							<a style="padding-left: 13%">訴訟率　　　：<fmt:formatNumber type="percent" minFractionDigits="2" value="${model.litigationRatio}" /></a><br>
 							<a style="padding-left: 13%">申訴率　　　：<fmt:formatNumber type="percent" minFractionDigits="5" value="${model.appealRatio}" /></a><br>
 							<a style="padding-left: 13%">保險安定基金：<c:if test="${model.insuranceGuarantyFund=true}">已加入</c:if><c:if test="${model.insuranceGuarantyFund=false}">未加入</c:if></a><br>
-							<a style="padding-left: 13%">${model.shortName}官網：<br><a href="${model.description}" target="_blank"  style="padding-left: 13%">${model.description}</a></a><br>
+							<a style="padding-left: 13%">官方網站：<a href="${model.description}" target="_blank"  >${model.shortName}官網</a></a><br>
 							<a style="padding-left: 13%">${model.description2}</a><br>
 							<a style="padding-left: 13%">${model.description3}</a><br>
 							<a style="padding-left: 13%">${model.description4}</a><br>
+							<a style="padding-left: 13%">資料來源       ：保險業公開資訊觀測站</a><br>
 							</div>
 						</c:forEach>
 					

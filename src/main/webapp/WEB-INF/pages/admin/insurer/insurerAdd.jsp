@@ -86,6 +86,14 @@
 											class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="returnonAssets" class="col-md-2 control-label">資本報酬率</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="returnonAssets" name="returnonAssets" placeholder="returnonAssets" value="${entity.returnonAssets}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
 
 								<div class="form-group required">
 									<label for="persistencyRatio" class="col-md-2 control-label">保單繼續率</label>

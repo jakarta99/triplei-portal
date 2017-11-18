@@ -26,6 +26,7 @@
 				<div class="panel-body">
 					<form class="form-horizontal" id="dataForm">
 					<input type="hidden" id="id" name="id" value="${entity.id}"/>
+					<input type="hidden" id="imgsrc" name="imgsrc" value="${entity.imgsrc}"/>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4><span class="glyphicon glyphicon-edit"></span>&nbsp; <strong>保險公司修改</strong></h4>
@@ -67,6 +68,14 @@
 			    					<label for="bisRatio" class="col-md-2 control-label">資本適足率</label>
 			    					<div class="col-md-10">
 			      						<input type="text" class="form-control" id="bisRatio" name="bisRatio" placeholder="bisRatio" value="${entity.bisRatio}"/>
+			      						<span class="help-block"><div class="text-danger"></div></span>
+			    					</div>
+								</div>
+								
+								<div class="form-group required">								  					
+			    					<label for="returnonAssets" class="col-md-2 control-label">資本報酬率</label>
+			    					<div class="col-md-10">
+			      						<input type="text" class="form-control" id="returnonAssets" name="returnonAssets" placeholder="returnonAssets" value="${entity.returnonAssets}"/>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>
@@ -146,6 +155,7 @@
 									<h5 id="checkshort">公司簡稱:<span></span></h5>
 									<h5 id="checksortno">公司名稱筆畫:<span></span></h5>
 									<h5 id="checkbis">資本適足率:<span></span>%</h5>
+									<h5 id="checkappealReturnonAssets">資本報酬率:<span></span>%</h5>
 									<h5 id="checkpersistency">保單繼續率:<span></span>%</h5>
 									<h5 id="checklitigation">訴訟率:<span></span>%</h5>
 									<h5 id="checkcomplaint">投訴率:<span></span>%</h5>
@@ -205,6 +215,7 @@ $(function() {
 	 	$('#checklitigation span').text($('#litigationRatio').val());
 	 	$('#checkcomplaint span').text($('#complaintRatio').val());
 	 	$('#checkappeal span').text($('#appealRatio').val());
+	 	$('#checkappealReturnonAssets span').text($('#returnonAssets').val());
 
 	 	if ($('#insuranceGuarantyFund:checked').val() == "true") {
 			$('#checkigf span').text("有");
