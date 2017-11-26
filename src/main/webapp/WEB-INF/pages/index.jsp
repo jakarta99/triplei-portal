@@ -123,13 +123,13 @@ height:13vh;
 	</div>
 	
 	<!--第三頁開始-->
-	<div class="col-sm-12 col-xs-12" style="height: 140vh;">
+	<div class="col-sm-12 col-xs-12" style="height: 160vh;">
 	<div class="col-xs-0 col-sm-1"></div>
 		<div class="col-xs-12 col-sm-10">
 			<div class="col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 1%;">
 				<div class="col-sm-12" style="display: inline;">
 					<a style="color: #000079; font-weight: bold;">HOT</a>
-					<a style="font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">熱門文章</a>
+					<a style="font-size: 30px; color: #3C3C3C; font-weight: bold; padding-left: 2px;">熱門文章</a>
 					<a href="/article/list" style="color: #5C8DEC;">查看更多</a>
 				</div>
 			</div>
