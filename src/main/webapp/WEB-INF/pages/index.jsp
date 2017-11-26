@@ -93,9 +93,9 @@ height:13vh;
 		<div class="col-xs-12 col-sm-10">
 			<div class="col-xs-12 col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh">
 				<span style="color: #000079; font-weight: bold;">HOT
-				<a style="text-decoration: none; font-size: 6vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">本月熱搜榜</a></span>
+				<a style="text-decoration: none; font-size: 30px; color: #3C3C3C; font-weight: bold; padding-left: 2px;">本月熱搜榜</a></span>
 			</div>
-		<div class="col-xs-12 col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'  id="asdfghjkll">
+		<div class="col-xs-12 col-sm-12" style="height: 50vh; display: flex; flex-direction: column;" align='center'  id="asdfghjkll">
 			<c:forEach var="hotproduct" items="${hotproduct}">
 				<div class="col-xs-12 col-sm-12" style="width: auto; height: 14vh; margin-bottom: 2vh;">
 					<a href="/product/${hotproduct.id}/Female/${year-30}-01-01/10000/10">
@@ -115,9 +115,9 @@ height:13vh;
 		</div>
 	</div>
 	<!--右半圖 -->
-	<div class="col-xs-12 col-sm-6" style="height: 100vh; background-color: white" id="no2pageimg">
-		<div class="col-xs-12 col-sm-10" style="height: 100%; display: flex; justify-content: flex-end; flex-direction: column" align='center'>
-			<img alt="" src="/resources/pic/首頁/首頁插圖.png" style="width: 100%; margin-bottom: 15%">
+	<div class="col-xs-12 col-sm-6" style="height: 80vh; background-color: white" id="no2pageimg">
+		<div class="col-xs-12 col-sm-10" style="height: 110%; display: flex; justify-content: flex-end; flex-direction: column" align='center'>
+			<img alt="" src="/resources/pic/首頁/首頁插圖.png" style="width: 100%; margin-bottom: 25%">
 		</div>
 		<div class="col-xs-0 col-sm-2"></div>
 	</div>
