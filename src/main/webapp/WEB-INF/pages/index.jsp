@@ -72,7 +72,7 @@ height:13vh;
 				<div class="col-sm-12">
 					<a href="/product/list">
 						<button id="productBtn" name="productBtn" class="btn btn-md btn-primary"
-							style="background-color: white; color: #5C8DEC; border-radius: 30px;" >開始篩選儲蓄險</button>
+							style="background-color: white; color: #5C8DEC; border-radius: 30px;width:150px;height:50px;" ><span style="font-size: 18px">開始篩選儲蓄險</span></button>
 							</a>
 				</div>
 				
@@ -88,24 +88,24 @@ height:13vh;
 		</div>
 	</div>
 	<!-- 第二頁開始 -->
-	<div class="col-xs-12 col-sm-6" style="height: 100vh; background-color: white">
+	<div class="col-xs-12 col-sm-6" style="height: 80vh; background-color: white">
 		<div class="col-xs-0 col-sm-2"></div>
 		<div class="col-xs-12 col-sm-10">
 			<div class="col-xs-12 col-sm-12" style="height: 17vh; display: flex; justify-content: flex-end; flex-direction: column; padding-bottom: 3vh">
 				<span style="color: #000079; font-weight: bold;">HOT
-				<a style="text-decoration: none; font-size: 2vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">本月熱搜榜</a></span>
+				<a style="text-decoration: none; font-size: 6vw; color: #3C3C3C; font-weight: bold; padding-left: 2px;">本月熱搜榜</a></span>
 			</div>
 		<div class="col-xs-12 col-sm-12" style="height: 80vh; display: flex; flex-direction: column;" align='center'  id="asdfghjkll">
 			<c:forEach var="hotproduct" items="${hotproduct}">
-				<div class="col-xs-12 col-sm-12" style="width: auto; height: 18vh; margin-bottom: 8vh;">
+				<div class="col-xs-12 col-sm-12" style="width: auto; height: 14vh; margin-bottom: 2vh;">
 					<a href="/product/${hotproduct.id}/Female/${year-30}-01-01/10000/10">
 					<img class="col-xs-3 col-sm-3" src="${hotproduct.insurer.imgsrc}" style="width: 6vw; padding: 0;" />
-						<div class="col-xs-9 col-sm-9" style="height: 100%; text-align: left; padding: 0;">
+						<div class="col-xs-9 col-sm-9" style="height: 100%; text-align: left; padding-left: 2px;">
 							<div style="padding: 0;">
 								<div style="font-size: 190%; padding-top: 1vh;" id="asdfghjkl" class="justtag">${hotproduct.insurer.name}</div>
 							</div>
 							<div >
-								<div class="align-middle" style="font-size: 130%;margin-top: -1vh;">${hotproduct.code} - ${hotproduct.localName}</div>
+								<div class="align-middle" style="font-size: 130%;margin-top: 0vh;">${hotproduct.code} - ${hotproduct.localName}</div>
 							</div>
 						</div>
 					</a>
