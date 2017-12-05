@@ -138,10 +138,10 @@ font-family: 微軟正黑體;
 					<!-- 前台 -->
 					<li><a href="/insurer/list" style="color: white">各公司資訊</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#" style="color: white">商品專區<span
+						data-toggle="dropdown" href="#" style="color: white">儲蓄險專區<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/product/list">商品列表</a></li>
+							<li><a href="/product/list">儲蓄險比較</a></li>
 							<li><a href="/product/irr">IRR計算機</a></li>
 						</ul></li>
 

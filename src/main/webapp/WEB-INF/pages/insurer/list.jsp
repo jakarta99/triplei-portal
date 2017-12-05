@@ -50,7 +50,7 @@
 					</h4>
 					<h4  style="margin-bottom: 5vh">
 						<a href="/insurer/filt"
-							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;">各別項目查詢</a>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;">各公司資訊比較</a>
 					</h4>
 					<div id="bm" style="width: 120%;position: relative;left: -40px" ></div>
 				</div>

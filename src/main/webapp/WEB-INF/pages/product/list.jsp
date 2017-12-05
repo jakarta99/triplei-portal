@@ -35,10 +35,10 @@ width:70%;
 height:120%;
 }
 #input2 span{
-font-size:100%;
+font-size:120%;
 }
 #right-side span{
-font-size:100%;
+font-size:120%;
 color:#444444;
 }
 
@@ -63,10 +63,10 @@ padding-bottom:2vh;
 				<div style="margin-top: 0px">
 				<span style="margin-bottom: 3vh;">性別</span>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Female"><img class="genderImage female" data-toggle="tooltip" title="女生" alt="女" name="female" src="/resources/pic/product/female.png">
+				<input type="radio" id="f" class="gender" name="gender" value="Female" checked="checked"><img class="genderImage female" data-toggle="tooltip" title="女生" alt="女" name="female" src="/resources/pic/product/female.png">
 				</label>
 				<label>
-				<input type="radio" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男" data-toggle="tooltip" title="男生"  name="male" src="/resources/pic/product/male.png">
+				<input type="radio" id="m" class="gender" name="gender" value="Male"><img class="genderImage male" alt="男" data-toggle="tooltip" title="男生"  name="male" src="/resources/pic/product/male.png">
 				</label>
 				</div >
 				<div style="margin-top: 0px">
@@ -112,7 +112,7 @@ padding-bottom:2vh;
 			<div class="col-sm-4" style="margin-bottom:2%;border:1px white solid">
 			<span id="dollar">金額(新台幣／年)</span><br/>
 			<span>$</span>
-			<input type="text" id="premium" placeholder="50000" style="width:70%;border:1px black solid">
+			<input type="text" id="premium" placeholder="例:50000" style="width:70%;border:1px black solid">
 			</div>
 			<div class="col-sm-4">
 			<span>繳費年期(年)</span><br/>
@@ -122,7 +122,7 @@ padding-bottom:2vh;
 			</div>
 			<div class="col-sm-4" style="margin-bottom:2%;border:1px white solid">
 			<span>預計領回時間(年)</span><br/>
-			<input type="text" id="yearCode" placeholder="10" style="width:70%;border:1px black solid;">
+			<input type="text" id="yearCode" placeholder="例:10" style="width:70%;border:1px black solid;">
 			</div>
 			<div class="col-sm-4">
 			<br/>
@@ -173,6 +173,10 @@ padding-bottom:2vh;
 	},function(){
 		$(this).attr("src","/resources/pic/product/"+gender+".png");
 	});
+	
+	if($('#f').is(':checked')) 
+	{ $(".female").attr("src","/resources/pic/product/female-hover.png");
+	}
 	$(".genderImage").on("click",function(){
 		var gender = $(this).attr("name");
 		$(".genderImage").off();

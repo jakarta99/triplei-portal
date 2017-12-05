@@ -72,7 +72,7 @@ height:13vh;
 				<div class="col-sm-12">
 					<a href="/product/list">
 						<button id="productBtn" name="productBtn" class="btn btn-md btn-primary"
-							style="background-color: white; color: #5C8DEC; border-radius: 30px;width:150px;height:50px;" ><span style="font-size: 18px">開始篩選儲蓄險</span></button>
+							style="background-color: white; color: #5C8DEC; border-radius: 30px;width:150px;height:50px;" ><span style="font-size: 18px">開始比較儲蓄險</span></button>
 							</a>
 				</div>
 				

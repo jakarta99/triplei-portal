@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<title>Triple i公司各項目查詢</title>
+<title>Triple i各公司資訊比較</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -43,7 +43,7 @@
 					</h4>
 					<h4 style="margin-bottom: 5vh">
 						<a href="/insurer/filt"
-							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各別項目查詢</a>
+							style="margin-top: 0;text-align: left;font-weight: normal;opacity: 0.8;color: white;font-family: 微軟正黑體;">各公司資訊比較</a>
 					</h4>
 					<div id="bm" style="width: 120%;position: relative;left: -40px" ></div>
 				</div>
@@ -56,7 +56,7 @@
 					<!--選擇框 -->
 
 					<div class="col-xs-1 col-sm-1" style="height: 100%;"></div>
-					<button id="btn" style="background-color: white; color: #5C8DEC; border: 1px #5C8DEC solid; width: 10em">篩 選 保 險 公 司</button><br>
+					<button id="btn" style="background-color: white; color: #5C8DEC; border: 1px #5C8DEC solid; width: 15em; height;font-size: 150%">篩 選 保 險 公 司</button><br>
 					<br>
 					
 					<div class="col-xs-10 col-sm-7 col-md-4"
@@ -81,8 +81,8 @@
 							<button style="visibility: hidden;">比較</button>
 						</div>
 <!-- 					XX率button區 -->
-					<button id="bisratioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;padding-top: 1vh">資本適足率▽</button><br>
-					<div class="col-xs-12" style="width: 60vw; display: none;" id="bisratiooo">
+					<button id="bisratioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;padding-top: 1vh;font-size: 160%">資本適足率▽</button><br>
+					<div class="col-xs-12" style="width: 80vw; display: none;" id="bisratiooo">
 					◎資本適足率可以看出公司穩定程度<br>
 					&#160;&#160;&#160;&#160;資本適足：指保險業資本適足率達本法第一百四十三之四第一項規定之百分之二百。<br>
 					&#160;&#160;&#160;&#160;資本不足：指保險業資本適足率在百分之一百五十以上，未達百分之二百。<br>
@@ -93,7 +93,7 @@
 						<div id="flot-bisratioo" class="col-xs-12"
 							style="width: 60vw; height: 100vh; display: none;"></div>
 					</div>
-					<button id="returnonAssetss" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;" >資產報酬率▽</button><br>
+					<button id="returnonAssetss" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;font-size: 160%" >資產報酬率▽</button><br>
 					<div class="col-xs-12" style="width: 60vw; display: none;" id="returnonAssetsss" >
 					◎是企業資本總額中平均每百元所能獲得的純利潤。它是用以衡量公司運用所有資本所獲經營成效的指標資本報酬率越高<br>
 					&#160;&#160;&#160;&#160;表明公司資本的利用率越高，反之則資本未能得到充分利用。<br><br>
@@ -103,7 +103,7 @@
 						<div id="flot-returnonAssetss" class="col-xs-12"
 							style="width: 60vw; height: 100vh; display: none;"></div>
 					</div>
-					<button id="persistencyRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">保單繼續率▽</button><br>
+					<button id="persistencyRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;font-size: 160%">保單繼續率▽</button><br>
 					<div class="col-xs-12" style="width: 60vw; display: none;" id="persistencyRatiooo">
 					◎指要保人持續繳納保費的比率，通常做為評估保險公司招攬業務品質高低的一個指標。<br>
 					
@@ -112,7 +112,7 @@
 						<div id="flot-placeholder" class="col-xs-12"
 							style="width: 60vw; height: 100vh; display: none;"></div>
 					</div>
-					<button id="litigationRatioo" style="background-color: #FAF7F7;  color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">訴訟率▽</button><br>
+					<button id="litigationRatioo" style="background-color: #FAF7F7;  color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;font-size: 160%">訴訟率▽</button><br>
 					<div  class="col-xs-12" style="width: 60vw; display: none;" id="litigationRatiooo">
 					◎訴訟率=理賠訴訟件數/申請理賠件數，也就是「保戶對保險理賠內容不滿意，申請訴訟的機率」<br>
 					&#160;&#160;&#160;&#160;可以用來評斷該保險公司對「後續理賠服務」，是否專業且積極<br>
@@ -123,7 +123,7 @@
 						<div id="flot-litigationRatioo" class="col-xs-12"
 							style="width: 60vw; height: 100vh; display: none;"></div>
 					</div>
-					<button id="appealRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;">申訴率▽</button><br>
+					<button id="appealRatioo" style="background-color: #FAF7F7; color:#5E5E5E;opacity: 0.8; border: 0px #5C8DEC solid; width: 10em;text-align: left;font-size: 160%">申訴率▽</button><br>
 					<div  class="col-xs-12" style="width: 60vw; display: none;" id="appealRatiooo">
 					◎申訴率=(申訴件數/簽單契約總件數)*10000，也可以用來評斷該保險公司對「後續理賠服務」<br>
 					&#160;&#160;&#160;&#160;是否專業且積極，比率較低則可能表示該公司較站在保戶的立場，積極爭取權益。<br>
