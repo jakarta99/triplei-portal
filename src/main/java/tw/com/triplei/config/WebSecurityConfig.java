@@ -37,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.hasAnyRole("ADMIN","USER","NORMAL")
 		.and().formLogin().loginPage("/login").permitAll();
 		
-		http.authorizeRequests().antMatchers("/gift/**")
-		.hasAnyRole("ADMIN","USER","NORMAL")
-		.and().formLogin().loginPage("/login").permitAll();
+//		http.authorizeRequests().antMatchers("/gift/**")
+//		.hasAnyRole("ADMIN","USER","NORMAL")
+//		.and().formLogin().loginPage("/login").permitAll();
 		
 		//訂單ajax下拉
 		http.authorizeRequests().antMatchers("/admin/convenienceStore/**")
@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/userfiles/**",
                 		"/insurer/**", 
                 		"/product/**", 
-//                		"/gift/**", 
+                		"/gift/**", 
                 		"/article/**",
                 		"/jolokia/**",
                 		"/registered/**",

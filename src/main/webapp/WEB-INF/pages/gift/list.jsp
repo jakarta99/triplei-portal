@@ -612,6 +612,12 @@
 			// 	var exchangedPoint = $.('#exchangedPoint');
 
 			$('button#placeOrder').on('click',function() {
+				var user = "${users}";
+				if(user=="not null"){
+					setTimeout("location.href = '/login'",0);
+				}else{
+					
+				
 						// 	   image =  $(this).parents().parents().find("#image").attr("src");
 // 						image = $(this).parent().parent().parent().siblings()
 // 								.find("#image").attr("src");
@@ -631,7 +637,9 @@
 						$("#orderPoint").text(points);
 						$("#totalPoints").text(points*count);
 						$("#dialog").dialog("open");
+				}
 					});
+			
 
 			$("#dialog").hide();
 			$("#dialog").dialog({
@@ -750,6 +758,11 @@
 			// 				},
 			// 			})
 			$('#bm').on("click", function() {
+				var user = "${users}";
+				if(user=="not null"){
+					setTimeout("location.href = '/login'",0);
+				}else{
+				
 				dialog1.dialog("open");
 				//<!-- Save -->
 				$("#wishButton").bind("click", function() {
@@ -795,6 +808,7 @@
 					})
 					$btn.button("reset");
 				});
+			}
 			});
 
 		});

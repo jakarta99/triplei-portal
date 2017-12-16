@@ -35,15 +35,22 @@ public class GiftController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 		
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		log.debug("userDetails: {}", userDetails);
-		
-		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
-		log.debug("getUser : {}", user);
-		
-		model.addAttribute("userPoint",user.getRemainPoint());
-		model.addAttribute("audittingPoint",user.getAudittingPoint());
-		model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		try {
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}", userDetails);
+			
+			UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+			log.debug("getUser : {}", user);
+			
+			model.addAttribute("userPoint",user.getRemainPoint());
+			model.addAttribute("audittingPoint",user.getAudittingPoint());
+			model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		} catch (Exception e) {
+			model.addAttribute("userPoint",0);
+			model.addAttribute("audittingPoint",0);
+			model.addAttribute("exchangedPoint",0);
+			model.addAttribute("users","not null");
+		}
 		
 //		model.addAttribute("modelv", giftService.getTypeTop3("VOUCHERS"));
 //		model.addAttribute("modelf", giftService.getTypeTop3("FURNITURES"));
@@ -122,15 +129,22 @@ public class GiftController {
 	@RequestMapping("/{giftType}")
 	public String list_Vouchers(@PathVariable("giftType") String giftType, Model model) {
 
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		log.debug("userDetails: {}", userDetails);
-		
-		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
-		log.debug("getUser : {}", user);
-		
-		model.addAttribute("userPoint",user.getRemainPoint());
-		model.addAttribute("audittingPoint",user.getAudittingPoint());
-		model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		try {
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}", userDetails);
+			
+			UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+			log.debug("getUser : {}", user);
+			
+			model.addAttribute("userPoint",user.getRemainPoint());
+			model.addAttribute("audittingPoint",user.getAudittingPoint());
+			model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		} catch (Exception e) {
+			model.addAttribute("userPoint",0);
+			model.addAttribute("audittingPoint",0);
+			model.addAttribute("exchangedPoint",0);
+			model.addAttribute("users","not null");
+		}
 		List<GiftEntity> gifts = giftService.getByGiftType(giftType);
 		for(GiftEntity gift:gifts){
 			gift.setShowImage(getImageService.getImage(gift.getImage1()));
@@ -143,15 +157,22 @@ public class GiftController {
 	@RequestMapping("/true")
 	public String list_Hot(Model model) {
 
-		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		log.debug("userDetails: {}", userDetails);
-		
-		UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
-		log.debug("getUser : {}", user);
-		
-		model.addAttribute("userPoint",user.getRemainPoint());
-		model.addAttribute("audittingPoint",user.getAudittingPoint());
-		model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		try {
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			log.debug("userDetails: {}", userDetails);
+			
+			UserEntity user = userService.getDao().findByAccountNumber(userDetails.getUsername());
+			log.debug("getUser : {}", user);
+			
+			model.addAttribute("userPoint",user.getRemainPoint());
+			model.addAttribute("audittingPoint",user.getAudittingPoint());
+			model.addAttribute("exchangedPoint",user.getExchangedPoint());
+		} catch (Exception e) {
+			model.addAttribute("userPoint",0);
+			model.addAttribute("audittingPoint",0);
+			model.addAttribute("exchangedPoint",0);
+			model.addAttribute("users","not null");
+		}
 		List<GiftEntity> gifts = giftService.getTypeHot(true);
 		for(GiftEntity gift:gifts){
 			gift.setShowImage(getImageService.getImage(gift.getImage1()));

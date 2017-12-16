@@ -299,6 +299,11 @@ $(document).ready(function() {
 			// 	var exchangedPoint = $.('#exchangedPoint');
 
 			$('button#placeOrder').on('click',function() {
+				var user = "${users}";
+				if(user == "not null"){
+					setTimeout("location.href = '/login'",0);
+				}else{
+					
 						// 	   image =  $(this).parents().parents().find("#image").attr("src");
 // 						image = $(this).parent().parent().parent().siblings()
 // 								.find("#image").attr("src");
@@ -318,6 +323,7 @@ $(document).ready(function() {
 						$("#orderPoint").text(points);
 						$("#totalPoints").text(points*count);
 						$("#dialog").dialog("open");
+				}
 					});
 
 			$("#dialog").hide();
@@ -436,6 +442,10 @@ $(document).ready(function() {
 			// 				},
 			// 			})
 			$('#bm').on("click", function() {
+				var user = "${users}";
+				if(user=="not null"){
+					setTimeout("location.href = '/login'",0);
+				}else{
 				dialog1.dialog("open");
 				//<!-- Save -->
 				$("#wishButton").bind("click", function() {
@@ -481,6 +491,7 @@ $(document).ready(function() {
 					})
 					$btn.button("reset");
 				});
+			}
 			});
 
 		});

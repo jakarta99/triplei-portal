@@ -145,15 +145,15 @@ font-family: 微軟正黑體;
 							<li><a href="/product/irr">IRR計算機</a></li>
 						</ul></li>
 
-					<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#" style="color: white">積點專區<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/gift/list" >積點商品列表</a></li>
+					<sec:authorize access="!hasRole('ROLE_ANONYMOUS')">
 							<li><a href="/gift/giftOrder/list" >積點商品訂單</a></li>
-						</ul></li>
 					</sec:authorize>
+						</ul></li>
 
 					<li><a href="/article/list" style="color: white">文章專欄</a></li>
 					<li><a href="/question/askQuestion" style="color: white">聯絡客服</a></li>
