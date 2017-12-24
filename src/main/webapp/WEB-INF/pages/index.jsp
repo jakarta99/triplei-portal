@@ -5,6 +5,16 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111578916-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111578916-1');
+</script>
+
 <meta name="copyright" content="2017 triplei Corporation.版權所有"/>
 <meta name="description" content="最專業的儲蓄險網站。讓你的財富開始起飛。TRIPLE-I為您準備了簡易的商品比較及公開透明的資訊，讓您輕鬆篩選商品，並擁有專業的保險團隊提供相關知識，即時為您解決理賠問題或保險疑問"/>
 <meta name="keywords" content="存錢,儲蓄險,儲蓄險比較,定存,保險,irr,報酬率,儲蓄險報酬率,美元儲蓄,美元定存,美金儲蓄,美金定存,人民幣儲蓄險,人民幣定存,澳幣儲蓄險,澳幣定存,網路投保,保險科技,金融科技,my83,推薦儲蓄險,保單計算,保單試算,儲蓄險試算,壽險"/>

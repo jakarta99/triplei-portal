@@ -5,6 +5,16 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111578916-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111578916-1');
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/resources/jquery/jquery-ui.1.11.2.css">
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
