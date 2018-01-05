@@ -87,6 +87,9 @@ padding-bottom:1vh;
 </head>
 
 <body>
+<script>
+  fbq('track', 'ViewContent');
+</script>
 
 	<div id="wrap">
 		<div class="container-fluid"
