@@ -108,11 +108,18 @@ public class ProductController {
 								.setScale(0, BigDecimal.ROUND_HALF_UP));
 						log.debug("折扣後保費:{}", form.getPremiumAfterDiscount());
 						// 可獲得點數
-						form.setGetPoint(BigDecimal
-								.valueOf(form.getBonusPoint().doubleValue()
-										* form.getPremiumAfterDiscount().doubleValue())
-								.setScale(0, BigDecimal.ROUND_FLOOR));
-						log.debug("可獲得點數{}", form.getGetPoint());
+						Double getPoint = BigDecimal.valueOf(form.getBonusPoint().doubleValue() * form.getPremiumAfterDiscount().doubleValue()).setScale(0, BigDecimal.ROUND_FLOOR).doubleValue();
+						log.info("getPoint{}",getPoint);
+						int point = 0;
+						if(getPoint < 100000){
+							double x = getPoint/5000;
+							point = (int)x * 5000;
+						}else{
+							double x = getPoint/10000;
+							point = (int)x * 10000;
+						}
+						form.setGetPoint(BigDecimal.valueOf(point));
+						log.info("可獲得點數{}", form.getGetPoint());
 
 						// 總繳金額
 						if (yearMoneyBack <= form.getYear()) {
@@ -358,13 +365,22 @@ public class ProductController {
 							product.setTotalPay(BigDecimal.valueOf(product.getPremiumAfterDiscount().doubleValue()*product.getYear()));
 						}
 						// 可獲點數
-						product.setGetPoint(
-								BigDecimal
-										.valueOf(insureAmount.doubleValue()
-												* productPremiumRatio.getPremiumRatio().doubleValue()
-												* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())
-												* product.getBonusPoint().doubleValue())
-										.setScale(0, BigDecimal.ROUND_FLOOR));
+						double getPoint = insureAmount.doubleValue()
+								* productPremiumRatio.getPremiumRatio().doubleValue()
+								* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())
+								* product.getBonusPoint().doubleValue();
+						log.info("getPoint::{}",getPoint);
+						int point = 0;
+						if(getPoint < 100000){
+							double x = getPoint/5000;
+							point = (int)x * 5000;
+						}else{
+							double x = getPoint/10000;
+							point = (int)x * 10000;
+						}
+						log.info("point::{}",point);
+						product.setGetPoint(BigDecimal.valueOf(point));
+						
 						log.debug("可獲點數{}", product.getGetPoint());
 						
 						Iterator ic = product.getCancelRatios().iterator();
@@ -562,7 +578,17 @@ public class ProductController {
 				product.setNet(BigDecimal.valueOf(cancelRatio - product.getTotalPay().doubleValue()));// 淨賺
 				log.debug("淨賺:{}", cancelRatio - product.getTotalPay().doubleValue());
 				double getPoint = product.getBonusPoint().doubleValue() * product.getPremiumAfterDiscount().doubleValue();
-				product.setGetPoint(BigDecimal.valueOf(getPoint).setScale(0, BigDecimal.ROUND_DOWN));// 獲得點數
+				log.info("getPoint=={}",getPoint);
+				int point = 0;
+				if(getPoint < 100000){
+					double x = getPoint/5000;
+					point = (int)x * 5000;
+				}else{
+					double x = getPoint/10000;
+					point = (int)x * 10000;
+				}
+				log.info("point=={}",point);
+				product.setGetPoint(BigDecimal.valueOf(point));// 獲得點數
 																										// 保費*點數趴數
 
 				double period = (double) yearINT;
