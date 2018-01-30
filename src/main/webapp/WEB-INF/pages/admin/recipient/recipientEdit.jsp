@@ -192,6 +192,9 @@
 
 									<input type="hidden" class="form-control" id="createdBy"
 										name="createdBy" value="${entity.createdBy}" /> <span
+										class="help-block"></span>
+										<input type="hidden" class="form-control" id="salesRemovePoint"
+										name="salesRemovePoint" value="${entity.salesRemovePoint}" /> <span
 										class="help-block"></span> <input type="hidden"
 										readonly="readonly" class="form-control" id="canGetPoint"
 										name="canGetPoint" value="${entity.canGetPoint}" /> <span

@@ -61,12 +61,6 @@ public class ProductController {
 		int premiumPerYear = Integer.parseInt(premium);
 		int yearMoneyBack = Integer.parseInt(yearCode);
 		ProductEntity form = productService.findProduct(idLong);
-		log.debug("form{}", form);
-		log.debug("商品ID:{}", idLong);
-		log.debug("年齡:{}", age);
-		log.debug("第幾年領回:{}", yearMoneyBack);
-		log.debug("大約年繳保費:{}", premiumPerYear);
-		log.debug("性別:{}", gender1);
 		String gender;
 		if (gender1.equals("Female")) {
 			gender = "F";
@@ -109,7 +103,7 @@ public class ProductController {
 						log.debug("折扣後保費:{}", form.getPremiumAfterDiscount());
 						// 可獲得點數
 						Double getPoint = BigDecimal.valueOf(form.getBonusPoint().doubleValue() * form.getPremiumAfterDiscount().doubleValue()).setScale(0, BigDecimal.ROUND_FLOOR).doubleValue();
-						log.info("getPoint{}",getPoint);
+						log.debug("getPoint{}",getPoint);
 						int point = 0;
 						if(getPoint < 100000){
 							double x = getPoint/5000;
@@ -119,7 +113,7 @@ public class ProductController {
 							point = (int)x * 10000;
 						}
 						form.setGetPoint(BigDecimal.valueOf(point));
-						log.info("可獲得點數{}", form.getGetPoint());
+						log.debug("可獲得點數{}", form.getGetPoint());
 
 						// 總繳金額
 						if (yearMoneyBack <= form.getYear()) {
@@ -315,17 +309,17 @@ public class ProductController {
 		}else{
 			gender = "F";
 		}
-		log.debug("gender{}", gender);
+//		log.debug("gender{}", gender);
 		long id = Integer.parseInt(idS);
-		log.debug("id{}", id);
+//		log.debug("id{}", id);
 		BigDecimal insureAmount = BigDecimal.valueOf(Double.parseDouble(insureAmountS));
-		log.debug("insureAmount{}", insureAmount);
+//		log.debug("insureAmount{}", insureAmount);
 		int age = productService.bDateToInt(bDate);
-		log.debug("age{}", age);
+//		log.debug("age{}", age);
 		int yearMoneyBack = Integer.parseInt(yearCode);
-		log.debug("yearMoneyBack{}", yearMoneyBack);
+//		log.debug("yearMoneyBack{}", yearMoneyBack);
 		ProductEntity product = productService.getOneAll(id);
-		log.debug("product{}", product);
+//		log.debug("product{}", product);
 		//傳進來的保額 若是小數 則判斷是哪一種幣別 4捨5入
 		if(product.getCurr()==Currency.TWD){
 			product.setInsureAmount(insureAmount.setScale(0, BigDecimal.ROUND_HALF_UP));
@@ -369,7 +363,7 @@ public class ProductController {
 								* productPremiumRatio.getPremiumRatio().doubleValue()
 								* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())
 								* product.getBonusPoint().doubleValue();
-						log.info("getPoint::{}",getPoint);
+						log.debug("getPoint::{}",getPoint);
 						int point = 0;
 						if(getPoint < 100000){
 							double x = getPoint/5000;
@@ -378,7 +372,7 @@ public class ProductController {
 							double x = getPoint/10000;
 							point = (int)x * 10000;
 						}
-						log.info("point::{}",point);
+						log.debug("point::{}",point);
 						product.setGetPoint(BigDecimal.valueOf(point));
 						
 						log.debug("可獲點數{}", product.getGetPoint());
@@ -506,27 +500,19 @@ public class ProductController {
 		} else {
 			interestRateType = "預定利率";
 		}
-		System.out.println("yearINT= " + yearINT);
-		System.out.println("insAge= " + insAge);
-		System.out.println("gender= " + gender);
 		List<ProductEntity> products = productService.search(gender, insAge, currency, interestRateType, yearINT);
 		for (ProductEntity product : products) {
 			try {
-				System.out.println("id = " + product.getId());
 				double premiumRatio = product.getPremiumRatios().iterator().next().getPremiumRatio().doubleValue();
 				// double premiumRatio =
 				// productService.getPremiumRatio(product);
-				System.out.println("premiumRatio= " + premiumRatio);
 				BigDecimal insureAmount = BigDecimal.valueOf(costPerYear / premiumRatio);
 				if (product.getCurr() == Currency.TWD) {
 					insureAmount = insureAmount.setScale(0, BigDecimal.ROUND_HALF_UP);// 4捨5入到整數
-					System.out.println("insureAmount= " + insureAmount);
 				} else if (product.getCurr() == Currency.AUD) {
 					insureAmount = insureAmount.setScale(1, BigDecimal.ROUND_HALF_UP);// 4捨5入到小數點後一位
-					System.out.println("insureAmount= " + insureAmount);
 				} else if (product.getCurr() == Currency.USD || product.getCurr() == Currency.RMB) {
 					insureAmount = insureAmount.setScale(2, BigDecimal.ROUND_HALF_UP);// 4捨5入到小數點後二位
-					System.out.println("insureAmount= " + insureAmount);
 				}
 				product.setInsureAmount(insureAmount);// 算出保額
 				for (ProductHighDiscountRatio productHighDiscountRatio : product.getHighDiscountRatios()) {
@@ -534,8 +520,6 @@ public class ProductController {
 					double min = productHighDiscountRatio.getMinValue().doubleValue();
 					double max = productHighDiscountRatio.getMaxValue();
 					double percentOff = productHighDiscountRatio.getDiscountRatio().doubleValue();
-					System.out.println("min= " + min);
-					System.out.println("max= " + max);
 					if (insureAmount.doubleValue() >= min && insureAmount.doubleValue() <= max) {
 						product.setPremium(// 計算原本保費
 								BigDecimal.valueOf(insureAmount.doubleValue() * premiumRatio).setScale(0,
@@ -551,7 +535,6 @@ public class ProductController {
 							product.setTotalPay(BigDecimal.valueOf(
 									insureAmount.doubleValue() * premiumRatio * (1 - percentOff) * yearCodeInt));
 						}
-						System.out.println("premium= " + product.getPremium().doubleValue());
 						log.debug("總額:{}", product.getTotalPay().doubleValue());
 						break;
 					} else {
@@ -572,13 +555,12 @@ public class ProductController {
 						"getCancelRatio_" + yearCodeInt, null);
 
 				double cancelRatio = cancelRatiob.doubleValue() * insureAmount.doubleValue();
-				System.out.println("cancelRatio= " + cancelRatio);
 
 				product.setCashValue(BigDecimal.valueOf(cancelRatio));// 解約金
 				product.setNet(BigDecimal.valueOf(cancelRatio - product.getTotalPay().doubleValue()));// 淨賺
 				log.debug("淨賺:{}", cancelRatio - product.getTotalPay().doubleValue());
 				double getPoint = product.getBonusPoint().doubleValue() * product.getPremiumAfterDiscount().doubleValue();
-				log.info("getPoint=={}",getPoint);
+				log.debug("getPoint=={}",getPoint);
 				int point = 0;
 				if(getPoint < 100000){
 					double x = getPoint/5000;
@@ -587,7 +569,7 @@ public class ProductController {
 					double x = getPoint/10000;
 					point = (int)x * 10000;
 				}
-				log.info("point=={}",point);
+				log.debug("point=={}",point);
 				product.setGetPoint(BigDecimal.valueOf(point));// 獲得點數
 																										// 保費*點數趴數
 
@@ -604,7 +586,6 @@ public class ProductController {
 
 				if (product.getPremium().doubleValue() == -1) {// 如果保額不在上下限範圍之內 則不顯示這張表單
 					product = null;
-					log.debug("沒東西RRR{}");
 					continue; 
 				} else {
 					productss.add(product);

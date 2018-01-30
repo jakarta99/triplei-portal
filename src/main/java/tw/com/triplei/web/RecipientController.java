@@ -103,7 +103,8 @@ public class RecipientController {
 			@RequestParam("date_3_3") String date_3_3, @RequestParam("address") String address,
 			@RequestParam("pid") String pid, @RequestParam("insureAmount") String insureAmountS,
 			@RequestParam("premiumAfterDiscount") String premiumAfterDiscountS,
-			@RequestParam("getPoint") String getPointS) {
+			@RequestParam("getPoint") String getPointS, 
+			@RequestParam("salesPoint") String salesPoint) {
 
 		AjaxResponse<RecipientEntity> response = new AjaxResponse<RecipientEntity>();
 		try {
@@ -125,6 +126,8 @@ public class RecipientController {
 			form.setBookedTime_3(date_3_1 + " " + date_3_2 + " " + date_3_3);
 			form.setProduct(productEntity);
 			form.setCanGetPoint((int) productEntity.getGetPoint().doubleValue());
+			form.setSalesRemovePoint(Integer.valueOf(salesPoint));
+			log.debug("form.getSalesRemovePoint():{}",form.getSalesRemovePoint());
 			ConvenienceStoreEntity convenienceStoreEntity = convenienceStoreDao.findByAddress(address);
 			log.debug("convenienceStoreEntity: {}", convenienceStoreEntity);
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
@@ -177,10 +180,8 @@ public class RecipientController {
 		} catch (final ApplicationException ex) {
 			ex.printStackTrace();
 			response.addMessages(ex.getMessages());
-			log.debug("~~~~~~~~~~{}");
 		} catch (final Exception e) {
 			response.addException(e);
-			log.debug("---------------{}");
 		}
 
 //		 log.debug("{}", response);
@@ -261,7 +262,11 @@ public class RecipientController {
 		product.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
 		product.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
 		product.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
-
+		double salesPoint = Double.parseDouble(premiumAfterDiscountS) * product.getBonusPoint().doubleValue() * 0.93023D * 7 / 6;
+		log.debug("salesPointBefore: {}",salesPoint);
+		salesPoint = BigDecimal.valueOf(salesPoint).setScale(-1, BigDecimal.ROUND_CEILING).doubleValue();
+		log.debug("salesPointAfter: {}",salesPoint);
+		model.addAttribute("salesPoint",salesPoint);
 		model.addAttribute("age", age);
 		model.addAttribute("gender", gender);
 		model.addAttribute("model", product);

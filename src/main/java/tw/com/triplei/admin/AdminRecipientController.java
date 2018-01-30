@@ -79,7 +79,6 @@ public class AdminRecipientController {
 	public String editPage(@PathVariable("id") final Long id, Model model) {
 
 		RecipientEntity dbEntity = recipientService.getOne(id);
-		log.debug("!!!{}", dbEntity.getCreatedBy());
 		model.addAttribute("entity", dbEntity);
 		List<UserEntity> saleUsers = new ArrayList<>();
 		List<UserEntity> users = userDao.findAll();
@@ -162,6 +161,11 @@ public class AdminRecipientController {
 				}
 			}
 			log.debug("業務員後{}",form.getUser().getName());
+			if(form.getOrderStatus().equals("未見面")){
+				UserEntity sales = userDao.findByAccountNumber(form.getUser().getAccountNumber());
+				sales.setRemainPoint(sales.getRemainPoint()-3000);
+				userDao.save(sales);
+			}
 			form.setConvenienceStoreEntity(convenienceStoreEntity);
 			form.setProduct(productEntity);
 			form.setModifiedTime(new Timestamp(new Date().getTime()));
@@ -170,15 +174,14 @@ public class AdminRecipientController {
 			log.debug("可獲得點數: {}", form.getCanGetPoint());
 			form.setModifiedBy(userDetails.getUsername());
 
-			
 			if (form.getOrderStatus().equals("已完成(含派送點數)") && !form.getAlreadyGetPoint()) {
 				UserEntity owner = userDao.findByAccountNumber(form.getCreatedBy());
 					int remainPoint = owner.getRemainPoint();
 					owner.setAudittingPoint(owner.getAudittingPoint() - form.getCanGetPoint());
 					owner.setRemainPoint(remainPoint + form.getCanGetPoint());
 					form.setAlreadyGetPoint(true);
+				double iii = form.getSalesRemovePoint().doubleValue();
 				UserEntity sales = userDao.findByAccountNumber(form.getUser().getAccountNumber());
-				double iii = form.getCanGetPoint().doubleValue()*1.17D;
 				sales.setRemainPoint(sales.getRemainPoint()-(int)BigDecimal.valueOf(iii).setScale(0,BigDecimal.ROUND_HALF_UP).doubleValue());
 				userDao.save(owner);
 				userDao.save(sales);

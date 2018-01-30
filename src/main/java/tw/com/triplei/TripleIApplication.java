@@ -33,7 +33,6 @@ public class TripleIApplication {
 
 		result = result.replaceAll("([a-z])\\.", "$1\\_"); //*增加把 "." 變成 "_" 避免 elasticSearch json mapping 的誤會*
 
-		System.out.println(result);
 
 		Index index = new Index.Builder(result).index("metrics").type("metric").id(UUID.randomUUID().toString())
 				.build();

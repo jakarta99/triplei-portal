@@ -62,6 +62,9 @@ public class RecipientEntity extends GenericEntity {
 	@Column(name="CAN_GET_POINT")
 	private Integer canGetPoint; //可獲得點數
 	
+	@Column(name="SALES_REMOVE_POINT")
+	private Integer salesRemovePoint; //業務員扣的點數
+	
 	@Column(name = "ALREADY_GET_POINT")
 	private Boolean alreadyGetPoint; //是否已得到點數
 	
