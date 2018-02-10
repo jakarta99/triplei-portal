@@ -548,11 +548,17 @@ public class ProductController {
 				// productService.toCancelRatio(yearCodeInt,
 				// product).doubleValue()
 				// * insureAmount.doubleValue();
-				ProductCancelRatio productCancelRatio = product.getCancelRatios().iterator().next();
+				ProductCancelRatio productCancelRatio = null;
+				try {
+					productCancelRatio = product.getCancelRatios().iterator().next();
+				} catch (Exception e) {
+					
+				}
 
 				MethodUtils methodUtils = new MethodUtils();
 				BigDecimal cancelRatiob = (BigDecimal) methodUtils.invokeMethod(productCancelRatio,
 						"getCancelRatio_" + yearCodeInt, null);
+				
 
 				double cancelRatio = cancelRatiob.doubleValue() * insureAmount.doubleValue();
 
@@ -561,6 +567,7 @@ public class ProductController {
 				log.debug("淨賺:{}", cancelRatio - product.getTotalPay().doubleValue());
 				double getPoint = product.getBonusPoint().doubleValue() * product.getPremiumAfterDiscount().doubleValue();
 				log.debug("getPoint=={}",getPoint);
+				
 				int point = 0;
 				if(getPoint < 100000){
 					double x = getPoint/5000;
@@ -591,9 +598,9 @@ public class ProductController {
 					productss.add(product);
 				}
 			} catch (final ApplicationException ex) {
-				ex.printStackTrace();
+				log.debug(ex.toString());
 			} catch (final Exception e) {
-				e.printStackTrace();
+				log.debug(e.toString());
 			}
 
 		}

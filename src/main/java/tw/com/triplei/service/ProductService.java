@@ -227,7 +227,6 @@ public class ProductService extends GenericService<ProductEntity> {
 					productCancelRatioDao.findByProductIdAndInsAgeAndGender(product.getId(), insAge, gender));
 			productss.add(product);
 		}
-		System.out.println("productss" + productss);
 		return productss;
 	}
 
