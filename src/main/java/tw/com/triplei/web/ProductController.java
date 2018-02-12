@@ -102,7 +102,7 @@ public class ProductController {
 								.setScale(0, BigDecimal.ROUND_HALF_UP));
 						log.debug("折扣後保費:{}", form.getPremiumAfterDiscount());
 						// 可獲得點數
-						Double getPoint = BigDecimal.valueOf(form.getBonusPoint().doubleValue() * form.getPremiumAfterDiscount().doubleValue()).setScale(0, BigDecimal.ROUND_FLOOR).doubleValue();
+						Double getPoint = BigDecimal.valueOf(form.getBonusPoint().doubleValue() * form.getPremiumAfterDiscount().doubleValue()).setScale(0, BigDecimal.ROUND_FLOOR).doubleValue()*0.93023D;
 						log.debug("getPoint{}",getPoint);
 						int point = 0;
 						if(getPoint < 100000){
@@ -362,7 +362,7 @@ public class ProductController {
 						double getPoint = insureAmount.doubleValue()
 								* productPremiumRatio.getPremiumRatio().doubleValue()
 								* (1 - productHighDiscountRatio.getDiscountRatio().doubleValue())
-								* product.getBonusPoint().doubleValue();
+								* product.getBonusPoint().doubleValue()*0.93023D;
 						log.debug("getPoint::{}",getPoint);
 						int point = 0;
 						if(getPoint < 100000){
@@ -565,7 +565,7 @@ public class ProductController {
 				product.setCashValue(BigDecimal.valueOf(cancelRatio));// 解約金
 				product.setNet(BigDecimal.valueOf(cancelRatio - product.getTotalPay().doubleValue()));// 淨賺
 				log.debug("淨賺:{}", cancelRatio - product.getTotalPay().doubleValue());
-				double getPoint = product.getBonusPoint().doubleValue() * product.getPremiumAfterDiscount().doubleValue();
+				double getPoint = product.getBonusPoint().doubleValue() * product.getPremiumAfterDiscount().doubleValue()*0.93023D;
 				log.debug("getPoint=={}",getPoint);
 				
 				int point = 0;
