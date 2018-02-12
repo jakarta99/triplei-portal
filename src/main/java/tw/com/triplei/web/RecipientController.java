@@ -262,7 +262,7 @@ public class RecipientController {
 		product.setInsureAmount(BigDecimal.valueOf(Double.parseDouble(insureAmountS)));
 		product.setPremiumAfterDiscount(BigDecimal.valueOf(Double.parseDouble(premiumAfterDiscountS)));
 		product.setGetPoint(BigDecimal.valueOf(Double.parseDouble(getPointS)));
-		double salesPoint = Double.parseDouble(premiumAfterDiscountS) * product.getBonusPoint().doubleValue() * 0.93023D * 7 / 6;
+		double salesPoint = Double.parseDouble(premiumAfterDiscountS) * product.getBonusPoint().doubleValue() * 0.93023D * 1.1667D;
 		log.debug("salesPointBefore: {}",salesPoint);
 		salesPoint = BigDecimal.valueOf(salesPoint).setScale(-1, BigDecimal.ROUND_CEILING).doubleValue();
 		log.debug("salesPointAfter: {}",salesPoint);

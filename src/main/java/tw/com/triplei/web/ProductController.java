@@ -102,7 +102,7 @@ public class ProductController {
 								.setScale(0, BigDecimal.ROUND_HALF_UP));
 						log.debug("折扣後保費:{}", form.getPremiumAfterDiscount());
 						// 可獲得點數
-						Double getPoint = BigDecimal.valueOf(form.getBonusPoint().doubleValue() * form.getPremiumAfterDiscount().doubleValue()).setScale(0, BigDecimal.ROUND_FLOOR).doubleValue()*0.93023D;
+						Double getPoint = BigDecimal.valueOf(form.getBonusPoint().doubleValue() * form.getPremiumAfterDiscount().doubleValue()*0.93023D).setScale(0, BigDecimal.ROUND_FLOOR).doubleValue();
 						log.debug("getPoint{}",getPoint);
 						int point = 0;
 						if(getPoint < 100000){
