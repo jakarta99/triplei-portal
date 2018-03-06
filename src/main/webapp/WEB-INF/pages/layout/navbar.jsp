@@ -136,7 +136,7 @@ font-family: 微軟正黑體;
 
 
 					<!-- 前台 -->
-					<li><a href="/insurer/list" style="color: white">各公司資訊</a></li>
+<!-- 					<li><a href="/insurer/list" style="color: white">各公司資訊</a></li> -->
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#" style="color: white">儲蓄險專區<span
 							class="caret"></span></a>
